@@ -1,28 +1,27 @@
-# Frontend 
+# Frontend
 
-* react 
-use localhost:3000 port
+- react
+  use localhost:3000 port
 
 📦src
- ┣ 📂assets
- ┃ ┗ 📜README.md
- ┣ 📂components
- ┃ ┗ 📜README.md
- ┣ 📂modules
- ┃ ┗ 📜README.md
- ┣ 📂routers
- ┃ ┣ 📂pages
- ┃ ┗ 📜README.md
- ┣ 📜App.css
- ┣ 📜App.test.tsx
- ┣ 📜App.tsx
- ┣ 📜index.css
- ┣ 📜index.tsx
- ┣ 📜logo.svg
- ┣ 📜react-app-env.d.ts
- ┣ 📜reportWebVitals.ts
- ┗ 📜setupTests.ts
-
+┣ 📂assets
+┃ ┗ 📜README.md
+┣ 📂components
+┃ ┗ 📜README.md
+┣ 📂modules
+┃ ┗ 📜README.md
+┣ 📂routers
+┃ ┣ 📂pages
+┃ ┗ 📜README.md
+┣ 📜App.css
+┣ 📜App.test.tsx
+┣ 📜App.tsx
+┣ 📜index.css
+┣ 📜index.tsx
+┣ 📜logo.svg
+┣ 📜react-app-env.d.ts
+┣ 📜reportWebVitals.ts
+┗ 📜setupTests.ts
 
 ```json
 {
@@ -44,17 +43,10 @@ use localhost:3000 port
     "web-vitals": "^2.1.4"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": ["react-app", "react-app/jest"]
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -67,7 +59,8 @@ use localhost:3000 port
     "redux": "^4.2.0"
   }
 }
-
 ```
+
+## 프로젝트 폴더 구조 예시
 
 ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb2MH60%2FbtqTJSnP0gC%2F7Hqmns25Do7LXDGKhX6uAk%2Fimg.png)
