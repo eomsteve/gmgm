@@ -3,6 +3,7 @@
 - react
   use localhost:3000 port
 
+```
 📦src
 ┣ 📂assets
 ┃ ┗ 📜README.md
@@ -22,6 +23,7 @@
 ┣ 📜react-app-env.d.ts
 ┣ 📜reportWebVitals.ts
 ┗ 📜setupTests.ts
+```
 
 ```json
 {
