@@ -16,11 +16,11 @@ public class Product {
 
     private String name;
 
-    private int unit;
+    private Integer unit;
 
     private String measure;
 
-    private double weight;
+    private Double weight;
 
     private String img;
 
@@ -29,12 +29,12 @@ public class Product {
     private Category category;
 
     @OneToMany(mappedBy = "product")
-    private List<Goods> goods=new ArrayList<>();
+    private final List<Goods> goods=new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
-    private List<ProductPrice> productPrices=new ArrayList<>();
+    private final List<ProductPrice> productPrices=new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
-    private List<ChecklistBasicItem> checklistBasicItems=new ArrayList<>();
+    private final List<ChecklistBasicItem> checklistBasicItems=new ArrayList<>();
 
 }

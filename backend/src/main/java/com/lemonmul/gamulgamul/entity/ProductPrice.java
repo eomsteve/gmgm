@@ -3,7 +3,7 @@ package com.lemonmul.gamulgamul.entity;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -13,10 +13,11 @@ public class ProductPrice {
     @Id
     private Long id;
 
-    private double price;
+    private Double price;
 
-    private LocalDateTime researchDate;
+    private LocalDate researchDate;
 
+    @Enumerated(EnumType.STRING)
     private DateType dateType;
 
     @ManyToOne(fetch = FetchType.LAZY)

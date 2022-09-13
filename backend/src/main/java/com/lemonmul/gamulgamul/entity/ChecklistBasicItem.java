@@ -8,8 +8,9 @@ import javax.persistence.*;
 @Getter
 public class ChecklistBasicItem {
 
-    @Column(name = "checklist_basic_item")
+    @Column(name = "checklist_basic_item_id")
     @Id
+    @GeneratedValue
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

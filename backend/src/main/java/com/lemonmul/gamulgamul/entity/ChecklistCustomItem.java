@@ -8,8 +8,9 @@ import javax.persistence.*;
 @Getter
 public class ChecklistCustomItem {
 
-    @Column(name = "checklist_custom_item")
+    @Column(name = "checklist_custom_item_id")
     @Id
+    @GeneratedValue
     private Long id;
 
     private String name;

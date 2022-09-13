@@ -3,7 +3,6 @@ package com.lemonmul.gamulgamul.entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
 
 import javax.persistence.*;
 
@@ -19,11 +18,11 @@ public class FavoriteGoods {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private Users userId;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "goods_id")
-    private Goods goodsId;
+    private Goods goods;
 
 
 }

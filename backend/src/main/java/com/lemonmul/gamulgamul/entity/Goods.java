@@ -18,11 +18,11 @@ public class Goods {
 
     private String img;
 
-    private int capacity;
+    private Integer capacity;
 
     private String measure;
 
-    private int ea;
+    private Integer ea;
 
     private String cheapUrl;
 
@@ -31,9 +31,9 @@ public class Goods {
     private Product product;
 
     @OneToMany(mappedBy = "goods")
-    private List<GoodsPrice> goodsPrices=new ArrayList<>();
+    private final List<GoodsPrice> goodsPrices=new ArrayList<>();
 
     @OneToMany(mappedBy = "goods")
-    private List<FavoriteGoods> favoriteGoods=new ArrayList<>();
+    private final List<FavoriteGoods> favoriteGoods=new ArrayList<>();
 
 }

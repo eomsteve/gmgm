@@ -19,11 +19,11 @@ public class FavoriteTotalPrice {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private Users userId;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "business_id")
-    private Business businessId;
+    private Business business;
 
     private Double totalPrice;
 
