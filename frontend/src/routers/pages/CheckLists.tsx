@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-interface MainProps {}
+interface CheckListsProps {}
 
-const Main: FunctionComponent<MainProps> = () => {
+const  CheckLists: FunctionComponent<CheckListsProps> = () => {
   return (
     <main className="flex h-screen w-full flex-col items-center justify-center bg-[white]">
-      this is main page
+      this is  CheckLists page
     </main>
   );
 };
 
-export default Main;
+export default  CheckLists;
