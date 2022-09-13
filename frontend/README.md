@@ -63,6 +63,13 @@
 }
 ```
 
+### tailwind css with CRA
+
+```
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
 ## 프로젝트 폴더 구조 예시
 
 ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb2MH60%2FbtqTJSnP0gC%2F7Hqmns25Do7LXDGKhX6uAk%2Fimg.png)
