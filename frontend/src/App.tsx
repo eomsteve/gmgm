@@ -7,6 +7,7 @@ import CheckLists from './routers/pages/CheckLists';
 import NotFound from './routers/pages/NotFound';
 import NavBtn from './routers/NavBtn';
 import SignUp from './routers/pages/SignUpPage';
+import LogInPage from './routers/pages/LogIn';
 
 interface AppProps {}
 
@@ -21,6 +22,7 @@ const App: React.FunctionComponent<AppProps> = () => {
         <Route path="*" element={<NotFound />}></Route>
         </Route>
         <Route path="/SignUp" element={<SignUp />}></Route>
+        <Route path="/LogIn" element={<LogInPage />}></Route>
       </Routes>
     </BrowserRouter>
   );

@@ -5,16 +5,17 @@ interface SignUpProps {}
 
 const SignUp: FunctionComponent<SignUpProps> = () => {
   return (
-    <div className="flex min-h-screen flex-col bg-stone-100">
+    <form className="flex min-h-screen flex-col bg-gray-50">
       <div className="container mx-auto flex max-w-sm flex-1 flex-col items-center justify-center px-2">
         <div className="w-full rounded bg-white px-6 py-8 text-black shadow-md">
-          <h1 className="mb-8 text-center text-3xl">Sign up</h1>
+          <h1 className="text-xl mb-4 font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">Sign up</h1>
           <input
             id="FullName"
             type="text"
             className="mb-4 block w-full rounded border border-stone-200 p-3"
             name="fullname"
             placeholder="Full Name"
+            required
           />
 
           <input
@@ -23,6 +24,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
             className="mb-4 block w-full rounded border border-stone-200 p-3"
             name="email"
             placeholder="Email"
+            required
           />
 
           <input
@@ -31,6 +33,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
             className="mb-4 block w-full rounded border border-stone-200 p-3"
             name="password"
             placeholder="Password"
+            required
           />
           <input
             id="Password2"
@@ -38,6 +41,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
             className="mb-4 block w-full rounded border border-stone-200 p-3"
             name="confirm_password"
             placeholder="Confirm Password"
+            required
           />
           <input
             id="Birth"
@@ -59,7 +63,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
                 id="male"
               />
               <label
-                className="flex cursor-pointer rounded-lg border border-gray-300 bg-white p-3 hover:bg-gray-50 focus:outline-none peer-checked:border-transparent peer-checked:ring-2 peer-checked:bg-blue-400"
+                className="flex text-gray-600 cursor-pointer rounded-lg border border-gray-300 bg-white p-3 hover:bg-gray-50 focus:outline-none peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-stone-700"
                 htmlFor="male"
               >
                 Male
@@ -69,7 +73,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
                 👍
               </div> */}
             </div>
-            <div>
+            <div >
               <input
                 className="peer sr-only"
                 type="radio"
@@ -78,7 +82,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
                 id="female"
               />
               <label
-                className="flex cursor-pointer rounded-lg border border-gray-300 bg-white p-3 hover:bg-gray-50 focus:text-gray-600 focus:outline-none peer-checked:border-transparent peer-checked:ring-2 peer-checked:bg-blue-400"
+                className="flex  cursor-pointer rounded-lg border border-gray-300 bg-white p-3 hover:bg-gray-50 focus:text-gray-600 focus:outline-none peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-stone-700"
                 htmlFor="female"
               >
                 Female
@@ -92,7 +96,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
           {/* input box end */}
           <button
             type="submit"
-            className="my-1 w-full rounded bg-[green] py-3 text-center text-white hover:bg-green-800 focus:outline-none"
+            className="my-1 w-full rounded bg-green-400 py-3 text-center text-white hover:bg-green-800 focus:outline-none"
           >
             Create Account
           </button>
@@ -118,7 +122,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
         <div className="mt-6 text-stone-600">
           Already have an account?
           <a
-            className="border-b border-[blue] text-[blue] no-underline"
+            className="text-blue-600 dark:text-primary-500 font-medium hover:underline"
             href="../login/"
           >
             Log in
@@ -126,7 +130,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
           .
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 
