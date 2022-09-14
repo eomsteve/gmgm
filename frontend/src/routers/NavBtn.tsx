@@ -4,10 +4,14 @@ import MainBtn from '../components/NavBtn/NavMainButton';
 import HomeBtn from '../components/NavBtn/NavHomeBtn';
 import CheckListBtn from '../components/NavBtn/NavCheckListBtn';
 import FavBtn from '../components/NavBtn/NavFavBtn'
+
+import { Outlet } from 'react-router-dom';
 interface NavBtnProps {}
 
 const NavBtn: FunctionComponent<NavBtnProps> = () => {
   return (
+    <>
+    <Outlet />
     <nav className="nav-btn">
       <MainBtn />
       <Link to="/"><HomeBtn /></Link>
@@ -16,6 +20,7 @@ const NavBtn: FunctionComponent<NavBtnProps> = () => {
       {/* <Link to="/fav">favorite</Link>
     <Link to="/checkLists">check lists</Link> */}
     </nav>
+    </>
   );
 };
 
