@@ -8,8 +8,8 @@ input[id='cb']{
 width: 60px;
 height: 60px;
 position: absolute;
-right: 5%;
-bottom: 5%;
+right: 10vw;
+bottom: 5vh;
 
 background: url("../../../public/logoimg.png"), #FFFFFF;
 background-repeat: no-repeat;
@@ -28,8 +28,8 @@ height: 33px;
 /* Ellipse 13 */
 
 position: absolute;
-right: 25%;
-bottom: 5%;
+right: 28vw;
+bottom: 5vh;
 
 background: #FFFFFF;
 border-radius: 50%;
@@ -47,8 +47,8 @@ height: 33px;
 /* Ellipse 13 */
 
 position: absolute;
-right: 20%;
-bottom: 13%;
+right: 22vw;
+bottom: 12vh;
 
 background: #FFFFFF;
 border-radius: 50%;
@@ -66,8 +66,8 @@ height: 33px;
 /* Ellipse 13 */
 
 position: absolute;
-right: 5%;
-bottom: 16%;
+right: 10vw;
+bottom: 15vh;
 
 background: #FFFFFF;
 border-radius: 50%;

@@ -24,3 +24,6 @@ input[type='date']:focus::before,
 input[type='date']:valid::before {
   display: none;
 }
+html {
+  margin: 0;
+}
