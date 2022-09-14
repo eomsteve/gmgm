@@ -17,8 +17,6 @@ const NavBtn: FunctionComponent<NavBtnProps> = () => {
       <Link to="/"><HomeBtn /></Link>
       <Link to="/checkLists"><CheckListBtn /></Link>
       <Link to="/favorite"><FavBtn/></Link>
-      {/* <Link to="/fav">favorite</Link>
-    <Link to="/checkLists">check lists</Link> */}
     </nav>
     </>
   );
