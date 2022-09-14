@@ -20,10 +20,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm run watch:css && react-scripts start",
+    "build": "npm run build:css && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:css": "postcss src/index.css",
+    "watch:css": "postcss src/index.css"
   },
   "eslintConfig": {
     "extends": [
@@ -47,13 +49,14 @@
     "@reduxjs/toolkit": "^1.8.5",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
-    "autoprefixer": "^10.4.9",
+    "autoprefixer": "^10.4.10",
     "chart.js": "^3.9.1",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.6",
     "postcss": "^8.4.16",
+    "postcss-cli": "^10.0.0",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
     "react-chartjs-2": "^4.3.1",

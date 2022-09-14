@@ -6,7 +6,7 @@ interface NavMainProps {}
 const NavMain: FunctionComponent<NavMainProps> = () => {
   return (
     <>
-      <label htmlFor="cb" className="gm-nav-main">
+      <label htmlFor="cb" className="fixed gm-nav-main">
       </label>
       <input id="cb" type="checkbox" />
     </>
