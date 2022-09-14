@@ -18,8 +18,8 @@ const App: React.FunctionComponent<AppProps> = () => {
         <Route path="/" element={<NavBtn />}>
           <Route index element={<Main />}></Route>
           <Route path="/favorite" element={<Favorite />}></Route>
-        <Route path="/checkLists" element={<CheckLists />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
+          <Route path="/checkLists" element={<CheckLists />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Route>
         <Route path="/SignUp" element={<SignUp />}></Route>
         <Route path="/LogIn" element={<LogInPage />}></Route>
