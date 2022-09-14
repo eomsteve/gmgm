@@ -1,4 +1,4 @@
-import { useState, useCallback,FunctionComponent } from 'react';
+import React, { useState, useCallback,FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
@@ -10,6 +10,8 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
 const [email, setEmail] = useState<string>('')
 const [password, setPassword] = useState<string>('')
 const [passwordConfirm, setPasswordConfirm] = useState<string>('')
+const [date, setDate] = useState<string>('')
+const [gender, setGender] = useState<string>('')
 
 const [nameMessage, setNameMessage] = useState<string>('')
 const [emailMessage, setEmailMessage] = useState<string>('')
@@ -20,6 +22,8 @@ const [isName, setIsName] = useState<boolean>(false)
 const [isEmail, setIsEmail] = useState<boolean>(false)
 const [isPassword, setIsPassword] = useState<boolean>(false)
 const [isPasswordConfirm, setIsPasswordConfirm] = useState<boolean>(false)
+const [isDate, setIsDate] = useState<boolean>(false)
+const [isGender, setIsGender] = useState<boolean>(false)
 
 const [isNameBlur, setIsNameBlur] = useState<boolean>(true)
 const [isEmailBlur, setIsEmailBlur] = useState<boolean>(true)
@@ -84,6 +88,20 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     [password]
   )
   
+  // 날짜 입력 확인
+  const onChangeDatePicker = useCallback((e : React.ChangeEvent<HTMLInputElement>)=>{
+    const date = e.target.value;
+    setDate(date)
+    setIsDate(true)
+  },[])
+
+
+  // 성별 입력 확인
+  const onChangeGender = useCallback((e : React.ChangeEvent<HTMLInputElement>)=>{
+    const gender = e.target.value;
+    setGender(gender)
+    setIsGender(true)
+  },[])
 // const onSubmit = useCallback(
 //   async (e: React.FormEvent<HTMLFormElement>) => {
 //     e.preventDefault()
@@ -104,7 +122,7 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 //       console.error(err)
 //     }
 //   },
-//   [email, name, password, router]
+//   [email, name, password, date, gender, router]
 // )
   return (
     <form className="flex min-h-screen flex-col bg-gray-50" onSubmit={()=>{console.log('onSubmit')}}>
@@ -156,11 +174,12 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
             required
           />
           {passwordConfirm.length > 0 && (
-            <span className={`text-[0.7rem] ${isPasswordConfirm ? 'text-blue-400' : 'text-gray-500'}`}>{passwordConfirmMessage}</span>
+            <span className={`text-[0.7rem] ${(isPasswordConfirm) ? 'text-blue-400' : 'text-gray-500'}`}>{passwordConfirmMessage}</span>
           )}
           <input
             id="Birth"
             type="date"
+            onChange={onChangeDatePicker}
             data-placeholder="Birthday"
             required
             aria-required="true"
@@ -176,6 +195,7 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
                 value="Male"
                 name="gender"
                 id="male"
+                onChange={onChangeGender}
               />
               <label
                 className="flex text-gray-600 cursor-pointer rounded-lg border border-gray-300 bg-white p-3 hover:bg-gray-50 focus:outline-none peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-stone-700"
@@ -192,6 +212,7 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
                 value="Female"
                 name="gender"
                 id="female"
+                onChange={onChangeGender}
               />
               <label
                 className="flex  cursor-pointer rounded-lg border border-gray-300 bg-white p-3 hover:bg-gray-50 focus:text-gray-600 focus:outline-none peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-stone-700"
@@ -206,8 +227,8 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
           {/* input box end */}
           <button
             type="submit"
-            className={`my-1 w-full rounded ${!(isName && isEmail && isPassword && isPasswordConfirm) ? 'bg-gray-400' : 'bg-blue-400'} py-3 text-center text-white focus:outline-none`}
-            disabled={!(isName && isEmail && isPassword && isPasswordConfirm)}
+            className={`my-1 w-full rounded ${!(isName && isEmail && isPassword&& isGender && isPasswordConfirm && isDate) ? 'bg-gray-400' : 'bg-blue-400'} py-3 text-center text-white focus:outline-none`}
+            disabled={!(isName && isEmail && isPassword && isPasswordConfirm && isDate && isGender)}
           >
             Create Account
           </button>
