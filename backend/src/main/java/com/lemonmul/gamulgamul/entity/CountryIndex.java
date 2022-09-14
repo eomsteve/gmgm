@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @NoArgsConstructor
-@DiscriminatorValue("country")
+@DiscriminatorValue("c")
 public class CountryIndex extends PriceIndex{
 
     public CountryIndex(LocalDate researchDate, Double value) {

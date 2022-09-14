@@ -1,5 +1,5 @@
 package com.lemonmul.gamulgamul.entity;
 
-public enum Gender {
-    f, m
+public enum Role {
+    a, u
 }

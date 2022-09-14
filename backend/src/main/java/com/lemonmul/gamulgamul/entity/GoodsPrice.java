@@ -11,6 +11,7 @@ public class GoodsPrice {
 
     @Column(name = "goods_price_id")
     @Id
+    @GeneratedValue
     private Long id;
 
     private Double price;
@@ -20,9 +21,5 @@ public class GoodsPrice {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "goods_id")
     private Goods goods;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_id")
-    private Business business;
 
 }

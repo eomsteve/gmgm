@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @NoArgsConstructor
-@DiscriminatorValue("favorite")
+@DiscriminatorValue("f")
 public class FavoriteIndex extends PriceIndex{
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -21,10 +21,6 @@ public class FavoriteTotalPrice {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_id")
-    private Business business;
-
     private Double totalPrice;
 
     private LocalDate researchDate;
