@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import SignUp from '../../components/users/SignUpComponent';
+import SignUp from '../../../components/users/SignUpComponent';
 
 interface SignUpPageProps {}
 

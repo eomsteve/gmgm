@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import TestChart from '../../components/charts/TestChart'
+import TestChart from '../../../components/charts/TestChart'
 
-interface FavoritePageProps {}
+interface FavoriteIndexPageProps {}
 
-const FavoritePage: FunctionComponent<FavoritePageProps> = () => {
+const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
   return (
     <main className="flex h-screen w-full flex-col bg-[white]">
       <TestChart />
@@ -13,4 +13,4 @@ const FavoritePage: FunctionComponent<FavoritePageProps> = () => {
   );
 };
 
-export default FavoritePage;
+export default FavoriteIndexPage;
