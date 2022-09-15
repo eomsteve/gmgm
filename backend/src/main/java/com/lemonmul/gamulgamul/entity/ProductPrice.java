@@ -11,6 +11,7 @@ public class ProductPrice {
 
     @Column(name = "product_price_id")
     @Id
+    @GeneratedValue
     private Long id;
 
     private Double price;

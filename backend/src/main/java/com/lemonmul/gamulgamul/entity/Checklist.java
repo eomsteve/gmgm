@@ -18,6 +18,8 @@ public class Checklist {
 
     private LocalDate regDate;
 
+    private Boolean status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

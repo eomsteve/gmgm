@@ -17,7 +17,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    @Column(name="user_id")
+    @Column(name = "user_id")
     private Long id;
 
     private String email;
@@ -31,6 +31,11 @@ public class User {
 
     private LocalDate birthday;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    private Boolean status;
+
     @OneToMany(mappedBy = "user")
     private final List<Checklist> checklists = new ArrayList<>();
 
@@ -42,4 +47,18 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private final List<FavoriteGoods> favoriteGoods = new ArrayList<>();
+
+    public User(String email, String pwd, String name, Gender gender, LocalDate birthday, Role role, Boolean status) {
+        this.email = email;
+        this.pwd = pwd;
+        this.name = name;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.role = role;
+        this.status = status;
+    }
+
+    public static User createUser(String email, String pwd, String name, Gender gender, LocalDate birthday, Role role) {
+        return new User(email, pwd, name, gender, birthday, role, true);
+    }
 }

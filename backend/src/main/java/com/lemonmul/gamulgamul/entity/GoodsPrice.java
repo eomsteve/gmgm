@@ -11,18 +11,17 @@ public class GoodsPrice {
 
     @Column(name = "goods_price_id")
     @Id
+    @GeneratedValue
     private Long id;
 
     private Double price;
 
     private LocalDate researchDate;
 
+    @Enumerated(EnumType.STRING)
+    private BusinessType businessType;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "goods_id")
     private Goods goods;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_id")
-    private Business business;
-
 }

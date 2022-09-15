@@ -1,5 +1,7 @@
 package com.lemonmul.gamulgamul.entity;
 
 public enum Gender {
-    FEMALE, MALE
+    // 여: female -> f
+    // 남: male -> m
+    f, m
 }

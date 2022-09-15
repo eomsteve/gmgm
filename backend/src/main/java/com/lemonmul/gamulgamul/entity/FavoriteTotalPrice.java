@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Getter
-@NoArgsConstructor(access= AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FavoriteTotalPrice {
 
     @Id
@@ -21,11 +21,10 @@ public class FavoriteTotalPrice {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_id")
-    private Business business;
-
     private Double totalPrice;
 
     private LocalDate researchDate;
+
+    @Enumerated(EnumType.STRING)
+    private BusinessType businessType;
 }

@@ -10,8 +10,8 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @NoArgsConstructor
-@DiscriminatorValue("gmgm")
-public class GMGMIndex extends PriceIndex{
+@DiscriminatorValue("g")
+public class GMGMIndex extends PriceIndex {
 
     public GMGMIndex(LocalDate researchDate, Double value) {
         super(researchDate, value);
