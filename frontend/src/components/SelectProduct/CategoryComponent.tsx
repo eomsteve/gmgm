@@ -106,7 +106,7 @@ const CategorySlider: FC<CategorySliderProps> = () => {
       <Slider {...settings}>
         {data &&
           testArray.map((row, idx) => {
-            console.log(idx, row);
+            // console.log(idx, row);
             return (
               <div onClick={() => handle(row)} key={0}>
                 <Category img="http://placekitten.com/75/75" />
