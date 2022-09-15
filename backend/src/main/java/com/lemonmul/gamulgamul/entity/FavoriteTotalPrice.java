@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Getter
-@NoArgsConstructor(access= AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FavoriteTotalPrice {
 
     @Id
@@ -24,4 +24,7 @@ public class FavoriteTotalPrice {
     private Double totalPrice;
 
     private LocalDate researchDate;
+
+    @Enumerated(EnumType.STRING)
+    private BusinessType businessType;
 }

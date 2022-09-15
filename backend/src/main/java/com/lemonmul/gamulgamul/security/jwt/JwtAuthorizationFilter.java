@@ -17,46 +17,46 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
-	
-	private final UserRepo userRepo;
+public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
-	@Autowired
-	public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserRepo userRepo) {
-		super(authenticationManager);
-		this.userRepo = userRepo;
-	}
-	
-	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		String header = request.getHeader(JwtProperties.HEADER_STRING);
-		if(header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
-			chain.doFilter(request, response);
-                        return;
-		}
+    private final UserRepo userRepo;
 
-		String token = request.getHeader(JwtProperties.HEADER_STRING)
-				.replace(JwtProperties.TOKEN_PREFIX, "");
+    @Autowired
+    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserRepo userRepo) {
+        super(authenticationManager);
+        this.userRepo = userRepo;
+    }
 
-		String username = Jwts.parser().setSigningKey(JwtProperties.SECRET).parseClaimsJws(token).getBody().getSubject();
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        String header = request.getHeader(JwtProperties.HEADER_STRING);
+        if (header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
+            chain.doFilter(request, response);
+            return;
+        }
 
-		// TODO: 강의 듣고 예외처리 해야함
-		if(username != null) {	
-			User user = userRepo.findByEmail(username).orElseThrow();
+        String token = request.getHeader(JwtProperties.HEADER_STRING)
+                .replace(JwtProperties.TOKEN_PREFIX, "");
 
-			PrincipalDetails principalDetails = new PrincipalDetails(user);
+        String email = Jwts.parser().setSigningKey(JwtProperties.SECRET).parseClaimsJws(token).getBody().getSubject();
 
-			Authentication authentication =
-					new UsernamePasswordAuthenticationToken(
-							principalDetails,
-							null,
-							principalDetails.getAuthorities());
-			
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-		}
-	
-		chain.doFilter(request, response);
-	}
-	
+        // TODO: 강의 듣고 예외처리 해야함
+        if (email != null) {
+            User user = userRepo.findByEmail(email).orElseThrow();
+
+            PrincipalDetails principalDetails = new PrincipalDetails(user);
+
+            Authentication authentication =
+                    new UsernamePasswordAuthenticationToken(
+                            principalDetails,
+                            null,
+                            principalDetails.getAuthorities());
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }
+
+        chain.doFilter(request, response);
+    }
+
 }

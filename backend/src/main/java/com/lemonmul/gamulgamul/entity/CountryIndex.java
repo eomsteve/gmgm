@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @DiscriminatorValue("c")
-public class CountryIndex extends PriceIndex{
+public class CountryIndex extends PriceIndex {
 
     public CountryIndex(LocalDate researchDate, Double value) {
         super(researchDate, value);

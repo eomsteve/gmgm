@@ -29,12 +29,12 @@ public class Product {
     private Category category;
 
     @OneToMany(mappedBy = "product")
-    private final List<Goods> goods=new ArrayList<>();
+    private final List<Goods> goods = new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
-    private final List<ProductPrice> productPrices=new ArrayList<>();
+    private final List<ProductPrice> productPrices = new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
-    private final List<ChecklistBasicItem> checklistBasicItems=new ArrayList<>();
+    private final List<ChecklistBasicItem> checklistBasicItems = new ArrayList<>();
 
 }

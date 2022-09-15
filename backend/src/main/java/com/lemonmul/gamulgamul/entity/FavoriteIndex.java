@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @DiscriminatorValue("f")
-public class FavoriteIndex extends PriceIndex{
+public class FavoriteIndex extends PriceIndex {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

@@ -31,9 +31,9 @@ public class Goods {
     private Product product;
 
     @OneToMany(mappedBy = "goods")
-    private final List<GoodsPrice> goodsPrices=new ArrayList<>();
+    private final List<GoodsPrice> goodsPrices = new ArrayList<>();
 
     @OneToMany(mappedBy = "goods")
-    private final List<FavoriteGoods> favoriteGoods=new ArrayList<>();
+    private final List<FavoriteGoods> favoriteGoods = new ArrayList<>();
 
 }

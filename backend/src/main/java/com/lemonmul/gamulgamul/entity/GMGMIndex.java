@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @DiscriminatorValue("g")
-public class GMGMIndex extends PriceIndex{
+public class GMGMIndex extends PriceIndex {
 
     public GMGMIndex(LocalDate researchDate, Double value) {
         super(researchDate, value);

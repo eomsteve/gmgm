@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
-public class PrincipalDetails implements UserDetails{
+public class PrincipalDetails implements UserDetails {
 
-	private User user;
+    private User user;
 
     @Override
     public String getPassword() {
@@ -47,8 +47,8 @@ public class PrincipalDetails implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
-    
-	@Override
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<String> list = new ArrayList<>();
         list.add("ROLE_" + this.user.getRole().name());

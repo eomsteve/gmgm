@@ -18,8 +18,10 @@ public class GoodsPrice {
 
     private LocalDate researchDate;
 
+    @Enumerated(EnumType.STRING)
+    private BusinessType businessType;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "goods_id")
     private Goods goods;
-
 }

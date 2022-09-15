@@ -15,10 +15,8 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Date;
 
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
@@ -34,7 +32,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
         // TODO: 강의 듣고 예외처리 다시 해야함
-        if(!request.getMethod().equals("POST")) {
+        if (!request.getMethod().equals("POST")) {
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
@@ -71,6 +69,6 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
                 .signWith(SignatureAlgorithm.HS256, JwtProperties.SECRET)
                 .compact();
 
-        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX+jwtToken);
+        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
     }
 }
