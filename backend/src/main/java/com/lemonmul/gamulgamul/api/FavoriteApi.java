@@ -147,6 +147,25 @@ public class FavoriteApi {
         return true;
     }
 
+    @GetMapping("/business/{businessType}")
+    public List<FavoriteItemResponseDto> getFavoriteGoodsSelectedBusinessType(@PathVariable String businessType, @RequestHeader HttpHeaders headers) {
+        Long userId = getUserIdFromJwtToken(headers);
+
+        List<FavoriteGoods> favoriteGoodsList = favoriteGoodsService.getFavoriteGoodsList(userId);
+        List<FavoriteItemResponseDto> favoriteItemResponseDtos = new ArrayList<>();
+        List<GoodsPrice> goodsPrices;
+        // 최근 가격 변동 계산을 위해 가격 정보 중에서 가장 최근 가격 정보 둘의 차를 구함(업태는 대형마트가 default)
+        Double priceGap;
+        for (FavoriteGoods favoriteGoods : favoriteGoodsList) {
+            goodsPrices = goodsPriceService.getGoodsPrices(favoriteGoods.getGoods().getId(), BusinessType.valueOf(businessType));
+            priceGap = goodsPrices.get(goodsPrices.size() - 1).getPrice() - goodsPrices.get(goodsPrices.size() - 2).getPrice();
+
+            favoriteItemResponseDtos.add(new FavoriteItemResponseDto(favoriteGoods.getGoods(), priceGap));
+        }
+
+        return favoriteItemResponseDtos;
+    }
+
     // 지수 직접 추가용으로 만든 임시 api
     @PostMapping("/addtest")
     public boolean addPriceIndex(@RequestBody AddPriceIndexDto addPriceIndexDto) {
