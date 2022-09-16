@@ -24,4 +24,9 @@ public class GoodsPriceService {
 
         return goodsPriceRepo.findAllByGoodsAndBusinessType(goods, businessType);
     }
+
+    // 리스트에 들어있는 상품들과 업태 타입으로 상품 가격을 받아오는 함수
+    public List<GoodsPrice> getGoodsPricesInList(List<Goods> goodsList, BusinessType businessType) {
+        return goodsPriceRepo.findAllByBusinessTypeAndGoodsIn(businessType, goodsList);
+    }
 }

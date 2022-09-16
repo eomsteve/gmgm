@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -51,7 +53,7 @@ public class FavoriteApi {
 
         // 업태 종류
         ArrayList<BusinessTypeResponseDto> businessTypesResponseDtos = new ArrayList<>();
-        for(BusinessType businessType: BusinessType.values()) {
+        for (BusinessType businessType : BusinessType.values()) {
             businessTypesResponseDtos.add(new BusinessTypeResponseDto(businessType, businessType.getKrName()));
         }
 
@@ -61,7 +63,7 @@ public class FavoriteApi {
         List<GoodsPrice> goodsPrices;
         // 최근 가격 변동 계산을 위해 가격 정보 중에서 가장 최근 가격 정보 둘의 차를 구함(업태는 대형마트가 default)
         Double priceGap;
-        for(FavoriteGoods favoriteGoods: favoriteGoodsList) {
+        for (FavoriteGoods favoriteGoods : favoriteGoodsList) {
             goodsPrices = goodsPriceService.getGoodsPrices(favoriteGoods.getGoods().getId(), BusinessType.m);
             priceGap = goodsPrices.get(goodsPrices.size() - 1).getPrice() - goodsPrices.get(goodsPrices.size() - 2).getPrice();
 
@@ -69,9 +71,9 @@ public class FavoriteApi {
         }
 
         // 즐겨찾기 상품 총합
-        List<FavoriteTotalPrice> favoriteTotalPrices = favoriteTotalPriceService.getFavoriteTotalPrices(userId, BusinessType.m, today);
+        List<FavoriteTotalPriceResponseDto> favoriteTotalPriceResponseDtos = favoriteTotalPriceService.getFavoriteTotalPrices(userId, BusinessType.m, today).stream().map(FavoriteTotalPriceResponseDto::new).collect(Collectors.toList());
 
-        return new FavoritePageResponseDto(countryIndices, favoriteIndices, businessTypesResponseDtos, favoriteItemResponseDtos, favoriteTotalPrices);
+        return new FavoritePageResponseDto(countryIndices, favoriteIndices, businessTypesResponseDtos, favoriteItemResponseDtos, favoriteTotalPriceResponseDtos);
     }
 
     /**
@@ -93,6 +95,7 @@ public class FavoriteApi {
 
     /**
      * 즐겨찾기 목록 갱신
+     * 되긴 하는데 엄청 오래걸림...코드를 뜯어 고쳐야 할 것 같음
      */
     @PostMapping("/")
     public boolean updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) {
@@ -111,13 +114,13 @@ public class FavoriteApi {
         Long goodsId;
         // 일단 사용자의 즐겨찾기 목록을 전부 삭제할 목록에 넣어두고
         // 반복문을 돌면서 남겨둘 항목은 삭제할 목록에서 제거
-        for(int i = 0; i < deleteFavoriteGoodsList.size(); i++) {
+        for (int i = 0; i < deleteFavoriteGoodsList.size(); i++) {
             favoriteGoods = deleteFavoriteGoodsList.get(i);
 
-            for(int j = 0; j < goodsIds.size(); j++) {
+            for (int j = 0; j < goodsIds.size(); j++) {
                 goodsId = goodsIds.get(j);
 
-                if(favoriteGoods.getGoods().getId().equals(goodsId)) {
+                if (favoriteGoods.getGoods().getId().equals(goodsId)) {
                     deleteFavoriteGoodsList.remove(i);
                     // 입력으로 받은 것들 중에서 이미 존재하는 것에는 exist를 체크
                     exists[j] = true;
@@ -127,14 +130,21 @@ public class FavoriteApi {
         }
 
         // exist가 false인 항목들만 새로 추가
-        for(int i = 0; i < exists.length; i++) {
-            if(!exists[i]) {
+        for (int i = 0; i < exists.length; i++) {
+            if (!exists[i]) {
                 goods = goodsService.getGoodsById(goodsIds.get(i));
                 addFavoriteGoodsList.add(new FavoriteGoods(user, goods));
             }
         }
 
-        return favoriteGoodsService.updateFavoriteGoodsList(addFavoriteGoodsList, deleteFavoriteGoodsList);
+        // 즐겨찾기 목록 갱신
+        favoriteGoodsService.updateFavoriteGoodsList(addFavoriteGoodsList, deleteFavoriteGoodsList);
+
+        // 즐겨찾기 총합 계산
+        updateFavoriteTotalPrice(user);
+
+
+        return true;
     }
 
     // 지수 직접 추가용으로 만든 임시 api
@@ -154,6 +164,63 @@ public class FavoriteApi {
         String token = headers.get(JwtProperties.HEADER_STRING).get(0).replace(JwtProperties.TOKEN_PREFIX, "");
         String email = JwtTokenProvider.getEmail(token);
         return userService.getUserInfoByEmail(email);
+    }
+
+    // 즐겨찾기 총합 계산하는 함수
+    private boolean updateFavoriteTotalPrice(User user) {
+        // 사용자의 즐겨찾기 목록을 가져옴
+        List<FavoriteGoods> favoriteGoodsList = favoriteGoodsService.getFavoriteGoodsList(user.getId());
+
+        // 즐겨찾기 목록을 이용해서 상품을 리스트에 저장
+        List<Goods> goodsList = new ArrayList<>();
+        for (FavoriteGoods favoriteGoodsIter : favoriteGoodsList) {
+            goodsList.add(favoriteGoodsIter.getGoods());
+        }
+
+        List<GoodsPrice> goodsPriceList;
+        List<FavoriteTotalPrice> favoriteTotalPrices = new ArrayList<>();
+        // 각 업태 별로 나눠서 계산
+        for (BusinessType businessType : BusinessType.values()) {
+            // 즐겨찾기 목록에 있는 상품들의 해당 업태 가격들을 가져옴
+            goodsPriceList = goodsPriceService.getGoodsPricesInList(goodsList, businessType);
+
+            // 날짜를 key값으로 각 날짜의 상품 가격 총합을 저장
+            Map<LocalDate, Double> dateTotalPrices = new HashMap<>();
+            Double cur;
+            for (GoodsPrice goodsPrice : goodsPriceList) {
+                cur = 0.0;
+
+                if (dateTotalPrices.containsKey(goodsPrice.getResearchDate()))
+                    cur = dateTotalPrices.get(goodsPrice.getResearchDate());
+
+                dateTotalPrices.put(goodsPrice.getResearchDate(), cur + goodsPrice.getPrice());
+            }
+
+            // 계산한 총합을 리스트에 추가
+            FavoriteTotalPrice favoriteTotalPrice;
+            for (LocalDate key : dateTotalPrices.keySet()) {
+                favoriteTotalPrice = FavoriteTotalPrice.createFavoriteTotalPrice(user, dateTotalPrices.get(key), key, businessType);
+                favoriteTotalPrices.add(favoriteTotalPrice);
+            }
+        }
+
+        return favoriteTotalPriceService.updateFavoriteTotalPrice(user, favoriteTotalPrices);
+    }
+
+    private boolean updateFavoriteIndex(User user) {
+        // 사용자의 즐겨찾기 목록을 가져옴
+        List<FavoriteGoods> favoriteGoodsList = favoriteGoodsService.getFavoriteGoodsList(user.getId());
+
+        // 즐겨찾기 목록을 이용해서 상품을 리스트에 저장
+        List<Goods> goodsList = new ArrayList<>();
+        for (FavoriteGoods favoriteGoods : favoriteGoodsList) {
+            goodsList.add(favoriteGoods.getGoods());
+        }
+
+
+        // 지수 계산식
+
+        return true;
     }
 
     // 지수 직접 추가에 사용하는 임시 dto

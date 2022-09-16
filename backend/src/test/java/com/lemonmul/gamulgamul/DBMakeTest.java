@@ -54,6 +54,9 @@ class DBMakeTest {
     GoodsPriceRepo goodsPriceRepo;
 
     @Autowired
+    FavoriteTotalPriceRepo favoriteTotalPriceRepo;
+
+    @Autowired
     EntityManager em;
 
     @Autowired
@@ -74,7 +77,7 @@ class DBMakeTest {
     }
 
     private void createCategoryTable() {
-        Category category = null;
+        Category category;
 
         for(Long i = 1L; i <= 12; i++) {
             category = Category.createCategory(i, "category" + i, "temp img");
@@ -83,8 +86,8 @@ class DBMakeTest {
     }
 
     private void createProductTable() {
-        Product product = null;
-        Long productId = 0L;
+        Product product;
+        Long productId;
 
         for(Long i = 1L; i <= 12; i++) {
             for(Long j = 1L; j <= 10; j++) {
@@ -101,9 +104,9 @@ class DBMakeTest {
     }
 
     private void createProductPriceTable() {
-        ProductPrice productPrice = null;
-        Product product = null;
-        LocalDate start = null;
+        ProductPrice productPrice;
+        Product product;
+        LocalDate start;
 
         for(Long i = 1L; i <= 120; i++) {
             product = productRepo.findById(i).get();
@@ -127,9 +130,9 @@ class DBMakeTest {
     }
 
     private void createGoodsTable() {
-        Goods goods = null;
-        Product product = null;
-        Long goodsId = 0L;
+        Goods goods;
+        Product product;
+        Long goodsId;
 
         for(Long i = 1L; i <= 120; i++) {
             product = productRepo.findById(i).get();
@@ -144,9 +147,9 @@ class DBMakeTest {
     }
 
     private void createGoodsPriceTable() {
-        GoodsPrice goodsPrice = null;
-        Goods goods = null;
-        LocalDate start = null;
+        GoodsPrice goodsPrice;
+        Goods goods;
+        LocalDate start;
 
         for(Long i = 1L; i <= 600; i++) {
             goods = goodsRepo.findById(i).get();
@@ -163,7 +166,7 @@ class DBMakeTest {
     }
 
     private void createPriceIndexTable() {
-        PriceIndex priceIndex = null;
+        PriceIndex priceIndex;
         LocalDate start = LocalDate.of(2012, 9, 1);
 
         for(int i = 0; i < 120; i++) {
@@ -176,7 +179,7 @@ class DBMakeTest {
     }
 
     private void createUserTable() {
-        User user = null;
+        User user;
 
         LocalDate start = LocalDate.of(1990, 1, 1);
 
@@ -190,8 +193,8 @@ class DBMakeTest {
     private void createFavoriteGoodsTable() {
         List<User> users = userRepo.findAll();
         User user = users.get(0);
-        Goods goods = null;
-        FavoriteGoods favoriteGoods = null;
+        Goods goods;
+        FavoriteGoods favoriteGoods;
 
         for(Long i = 1L; i < 10; i++) {
             goods = goodsRepo.findById(i * 10).get();
@@ -201,37 +204,44 @@ class DBMakeTest {
         }
     }
 
-    private void createFavoriteTotalPriceTable() {
-        List<User> users = userRepo.findAll();
-        User user = users.get(0);
+    private void updateFavoriteTotalPrice(User user) {
+        // 사용자의 즐겨찾기 목록을 가져옴
+        List<FavoriteGoods> favoriteGoodsList = favoriteGoodsRepo.findAllByUserId(user.getId());
 
-        List<FavoriteGoods> favoriteGoodsList = favoriteGoodsRepo.findAllByUserId(1L);
+        // 즐겨찾기 목록을 이용해서 상품을 리스트에 저장
         List<Goods> goodsList = new ArrayList<>();
-        for(FavoriteGoods favoriteGoodsIter: favoriteGoodsList) {
+        for (FavoriteGoods favoriteGoodsIter : favoriteGoodsList) {
             goodsList.add(favoriteGoodsIter.getGoods());
         }
 
         List<GoodsPrice> goodsPriceList;
-        for(BusinessType businessType: BusinessType.values()) {
-
+        List<FavoriteTotalPrice> favoriteTotalPrices = new ArrayList<>();
+        // 각 업태 별로 나눠서 계산
+        for (BusinessType businessType : BusinessType.values()) {
+            // 즐겨찾기 목록에 있는 상품들의 해당 업태 가격들을 가져옴
             goodsPriceList = goodsPriceRepo.findAllByBusinessTypeAndGoodsIn(businessType, goodsList);
 
+            // 날짜를 key값으로 각 날짜의 상품 가격 총합을 저장
             Map<LocalDate, Double> dateTotalPrices = new HashMap<>();
             Double cur;
-            for(GoodsPrice goodsPrice: goodsPriceList) {
+            for (GoodsPrice goodsPrice : goodsPriceList) {
                 cur = 0.0;
 
-                if(dateTotalPrices.containsKey(goodsPrice.getResearchDate()))
+                if (dateTotalPrices.containsKey(goodsPrice.getResearchDate()))
                     cur = dateTotalPrices.get(goodsPrice.getResearchDate());
 
                 dateTotalPrices.put(goodsPrice.getResearchDate(), cur + goodsPrice.getPrice());
             }
 
-            FavoriteTotalPrice favoriteTotalPrice = null;
-            for(LocalDate key: dateTotalPrices.keySet()) {
+            // 계산한 총합을 리스트에 추가
+            FavoriteTotalPrice favoriteTotalPrice;
+            for (LocalDate key : dateTotalPrices.keySet()) {
                 favoriteTotalPrice = FavoriteTotalPrice.createFavoriteTotalPrice(user, dateTotalPrices.get(key), key, businessType);
-//                em.persist(favoriteTotalPrice);
+                favoriteTotalPrices.add(favoriteTotalPrice);
             }
         }
+
+        for(FavoriteTotalPrice favoriteTotalPrice: favoriteTotalPrices)
+            em.persist(favoriteTotalPrice);
     }
 }

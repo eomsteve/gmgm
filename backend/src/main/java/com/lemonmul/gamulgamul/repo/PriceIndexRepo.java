@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface PriceIndexRepo extends JpaRepository<PriceIndex, Long> {
-    List<PriceIndex> findAllByDtypeAndResearchDateBetween(String dtype, LocalDate start, LocalDate end);
+    List<PriceIndex> findAllByDtypeAndResearchDateBetweenOrderByResearchDate(String dtype, LocalDate start, LocalDate end);
 
     @Query("from FavoriteIndex")
-    List<PriceIndex> findAllByDtypeAndUserIdAndResearchDateBetween(String dtype, Long userId, LocalDate start, LocalDate end);
+    List<PriceIndex> findAllByDtypeAndUserIdAndResearchDateBetweenOrderByResearchDate(String dtype, Long userId, LocalDate start, LocalDate end);
 }

@@ -19,14 +19,14 @@ public class PriceIndexService {
 
     private final PriceIndexRepo priceIndexRepo;
 
-    // 지정한 날부터 1달 간격으로 국가 지수나 공통 지수를 받아오는 함수
+    // 지정한 날부터 국가 지수나 공통 지수를 받아오는 함수
     public List<PriceIndex> getIndices(String dtype, LocalDate date) {
-        return priceIndexRepo.findAllByDtypeAndResearchDateBetween(dtype, date.minusYears(1), date);
+        return priceIndexRepo.findAllByDtypeAndResearchDateBetweenOrderByResearchDate(dtype, date.minusYears(10), date);
     }
 
-    // 지정한 날부터 1달 간격으로 즐겨찾기 지수를 받아오는 함수
+    // 지정한 날부터 즐겨찾기 지수를 받아오는 함수
     public List<PriceIndex> getFavoriteIndices(Long userId, LocalDate date) {
-        return priceIndexRepo.findAllByDtypeAndUserIdAndResearchDateBetween("f", userId, date.minusYears(1), date);
+        return priceIndexRepo.findAllByDtypeAndUserIdAndResearchDateBetweenOrderByResearchDate("f", userId, date.minusYears(10), date);
     }
 
     // 지수 정보를 추가하는 함수(즐겨찾기 지수 제외)
