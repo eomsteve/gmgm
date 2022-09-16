@@ -1,18 +1,18 @@
 import { FC } from 'react';
-interface ProductCardProps {
+interface GoodsCardProps {
   img: string;
 }
 
-const ProductCard: FC<ProductCardProps> = props => {
+const GoodsCard: FC<GoodsCardProps> = props => {
   const { img } = props;
   console.log("card");
   
   return (
     <div className="m-4 flex flex-col items-center justify-center p-0">
       <img className="border p-0" src={img} />
-      <p> product </p>
+      <p> goods </p>
     </div>
   );
 };
 
-export default ProductCard;
+export default GoodsCard;

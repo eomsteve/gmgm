@@ -21,13 +21,13 @@ const App: React.FunctionComponent<AppProps> = () => {
           <Route index element={<Main />}></Route>
           <Route path="favorite"  element={<Favorite />} >
             <Route index element={<FavoriteIndexPage />}></Route>
-            <Route path="selection" element={<FavoriteListSelection />}></Route>
           </Route>
           <Route path="checkLists" element={<CheckLists />}>
-            
+
           </Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
+        <Route path="/favorite/selection" element={<FavoriteListSelection />}></Route>
         <Route path="/SignUp" element={<SignUp />}></Route>
         <Route path="/LogIn" element={<LogInPage />}></Route>
       </Routes>

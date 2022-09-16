@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import Category from './UI/CategoryPicker';
 
-import SubjectComponent from './SubjectComponent';
+import ProductComponent from './ProductComponent';
 
 interface CategorySliderProps {}
 
@@ -31,41 +31,41 @@ const CategorySlider: FC<CategorySliderProps> = () => {
     console.log('axios here to get Category List and SubJectData');
     const TempData = {
       Category: [
-        { subject1: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-        { subject2: [1, 2, 3, 4, 5, 6, 7, 8] },
-        { subject3: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-        { subject4: [1, 2, 3, 4, 5, 6, 7, 8, 9] },
-        { subject5: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] },
-        { subject6: [1, 2, 3, 4, 5, 6, 7] },
-        { subject7: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
-        { subject8: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-        { subject9: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-        { subject10: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-        { subject11: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-        { subject12: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
+        { product1: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
+        { product2: [1, 2, 3, 4, 5, 6, 7, 8] },
+        { product3: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
+        { product4: [1, 2, 3, 4, 5, 6, 7, 8, 9] },
+        { product5: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] },
+        { product6: [1, 2, 3, 4, 5, 6, 7] },
+        { product7: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
+        { product8: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
+        { product9: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
+        { product10: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
+        { product11: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
+        { product12: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
       ],
     };
     console.log('data', TempData.Category);
     setData(TempData.Category);
   }, []);
   const [data, setData] = useState({});
-  let [SubjectList, setSubjectList] = useState<string[]>([]);
+  let [ProductList, setProductList] = useState<string[]>([]);
   const testArray = [
     {
-      name: 'subject1',
-      subject: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+      name: 'product1',
+      product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
     },
-    { name: 'subject2', subject: [1, 2, 3, 4, 5, 6, 7, 8] },
-    { name: 'subject3', subject: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-    { name: 'subject4', subject: [1, 2, 3, 4, 5, 6, 7, 8, 9] },
-    { name: 'subject5', subject: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] },
-    { name: 'subject6', subject: [1, 2, 3, 4, 5, 6, 7] },
-    { name: 'subject7', subject: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
-    { name: 'subject8', subject: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-    { name: 'subject9', subject: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-    { name: 'subject10', subject: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-    { name: 'subject11', subject: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-    { name: 'subject12', subject: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
+    { name: 'product2', product: [1, 2, 3, 4, 5, 6, 7, 8] },
+    { name: 'product3', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
+    { name: 'product4', product: [1, 2, 3, 4, 5, 6, 7, 8, 9] },
+    { name: 'product5', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] },
+    { name: 'product6', product: [1, 2, 3, 4, 5, 6, 7] },
+    { name: 'product7', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
+    { name: 'product8', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
+    { name: 'product9', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
+    { name: 'product10', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
+    { name: 'product11', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
+    { name: 'product12', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
   ];
   const settings = {
     className: 'center',
@@ -95,9 +95,9 @@ const CategorySlider: FC<CategorySliderProps> = () => {
   }
 
   async function handle(sub: any) {
-    // onClick시 subjectlist값을 세팅하면 누를때마다 sublist가 바뀌고 재 랜덜링 될것,
+    // onClick시 productlist값을 세팅하면 누를때마다 sublist가 바뀌고 재 랜덜링 될것,
     console.log(sub?.name);
-    setSubjectList(sub.subject);
+    setProductList(sub.product);
   }
 
   return (
@@ -114,7 +114,7 @@ const CategorySlider: FC<CategorySliderProps> = () => {
             );
           })}
       </Slider>
-      <SubjectComponent subjectList={SubjectList}/>
+      <ProductComponent productList={ProductList}/>
     </div>
   );
 };

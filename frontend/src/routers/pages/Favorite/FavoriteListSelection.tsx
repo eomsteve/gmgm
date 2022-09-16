@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import Category from '../../../components/SelectProduct/CategoryComponent'
-import Subject from '../../../components/SelectProduct/SubjectComponent'
+import Product from '../../../components/SelectProduct/ProductComponent'
 export interface FavoriteSelectionPageProps {
 }
  
 const FavoriteSelectionPage: FC<FavoriteSelectionPageProps> = () => {
   return ( <>
   <Category />
-  {/* <Subject /> */}
+  {/* <Product /> */}
   </> );
 }
  
