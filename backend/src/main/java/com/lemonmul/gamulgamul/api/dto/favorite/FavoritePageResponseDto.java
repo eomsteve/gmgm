@@ -18,5 +18,5 @@ public class FavoritePageResponseDto {
 
     private List<FavoriteItemResponseDto> favoriteItemResponseDtos;
 
-    private List<FavoriteTotalPrice> favoriteTotalPrices;
+    private List<FavoriteTotalPriceResponseDto> favoriteTotalPrices;
 }
