@@ -3,6 +3,7 @@ package com.lemonmul.gamulgamul.service;
 import com.lemonmul.gamulgamul.entity.priceindex.CountryIndex;
 import com.lemonmul.gamulgamul.entity.priceindex.GMGMIndex;
 import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
+import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.repo.PriceIndexRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,14 @@ public class PriceIndexService {
     // 지정한 날부터 즐겨찾기 지수를 받아오는 함수
     public List<PriceIndex> getFavoriteIndices(Long userId, LocalDate date) {
         return priceIndexRepo.findAllByDtypeAndUserIdAndResearchDateBetweenOrderByResearchDate("f", userId, date.minusYears(10), date);
+    }
+
+    @Transactional
+    public boolean updateFavoriteIndex(User user, List<PriceIndex> priceIndices) {
+        priceIndexRepo.deleteByUser(user);
+        priceIndexRepo.saveAll(priceIndices);
+
+        return true;
     }
 
     // 지수 정보를 추가하는 함수(즐겨찾기 지수 제외)

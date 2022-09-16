@@ -7,6 +7,10 @@ import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
 import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
+import com.lemonmul.gamulgamul.entity.priceindex.FavoriteIndex;
+import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
+import com.lemonmul.gamulgamul.entity.product.Product;
+import com.lemonmul.gamulgamul.entity.product.ProductPrice;
 import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
 import com.lemonmul.gamulgamul.service.*;
@@ -18,10 +22,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -37,6 +38,8 @@ public class FavoriteApi {
     private final CategoryService categoryService;
     private final GoodsService goodsService;
     private final GoodsPriceService goodsPriceService;
+    private final ProductPriceService productPriceService;
+    private final ProductService productService;
 
     /**
      * 즐겨찾기 페이지에 보여줄 정보들
@@ -142,7 +145,7 @@ public class FavoriteApi {
         for(int i = 0; i < exists.length; i++) {
             if(!exists[i]) {
                 goods = goodsService.getGoodsById(goodsIds.get(i));
-                addFavoriteGoodsList.add(new FavoriteGoods(user, goods));
+                addFavoriteGoodsList.add(FavoriteGoods.createFavoriteGoods(user, goods));
             }
         }
 
@@ -152,6 +155,8 @@ public class FavoriteApi {
         // 즐겨찾기 총합 계산
         updateFavoriteTotalPrice(user);
 
+        // 즐겨찾기 지수 계산
+        updateFavoriteIndex(user);
 
         return true;
     }
@@ -205,11 +210,12 @@ public class FavoriteApi {
             Double cur;
             for (GoodsPrice goodsPrice : goodsPriceList) {
                 cur = 0.0;
+                LocalDate date = goodsPrice.getResearchDate();
 
-                if (dateTotalPrices.containsKey(goodsPrice.getResearchDate()))
-                    cur = dateTotalPrices.get(goodsPrice.getResearchDate());
+                if (dateTotalPrices.containsKey(date))
+                    cur = dateTotalPrices.get(date);
 
-                dateTotalPrices.put(goodsPrice.getResearchDate(), cur + goodsPrice.getPrice());
+                dateTotalPrices.put(date, cur + goodsPrice.getPrice());
             }
 
             // 계산한 총합을 리스트에 추가
@@ -228,13 +234,42 @@ public class FavoriteApi {
         List<FavoriteGoods> favoriteGoodsList = favoriteGoodsService.getFavoriteGoodsList(user.getId());
 
         // 즐겨찾기 목록을 이용해서 상품을 리스트에 저장
-        List<Goods> goodsList = new ArrayList<>();
+        Set<Long> productIds = new HashSet<>();
+
         for (FavoriteGoods favoriteGoods : favoriteGoodsList) {
-            goodsList.add(favoriteGoods.getGoods());
+            long productId = favoriteGoods.getGoods().getProduct().getId();
+            productIds.add(productId);
+
+            Map<LocalDate, Double> dateFavoriteIndex = new HashMap<>();
+            List<ProductPrice> productPrices;
+            Double cur, productIndex;
+            for(Long id: productIds) {
+                Product product = productService.getProductById(id);
+                productPrices = productPriceService.getMonthProductPrice(product);
+
+                for(ProductPrice productPrice: productPrices) {
+                    cur = 0.0;
+                    LocalDate date = productPrice.getResearchDate();
+                    productIndex = productPrice.getPrice() * product.getWeight();
+
+                    if(dateFavoriteIndex.containsKey(date))
+                        cur = dateFavoriteIndex.get(date);
+
+                    dateFavoriteIndex.put(date, cur + productIndex);
+                }
+
+            }
+
+            Double div = dateFavoriteIndex.get(LocalDate.of(2020, 1, 1));
+            FavoriteIndex favoriteIndex;
+            List<PriceIndex> favoriteIndices = new ArrayList<>();
+            for(LocalDate key: dateFavoriteIndex.keySet()) {
+                favoriteIndex = FavoriteIndex.createFavoriteIndex(key, dateFavoriteIndex.get(key) / div, user);
+                favoriteIndices.add(favoriteIndex);
+            }
+
+            priceIndexService.updateFavoriteIndex(user, favoriteIndices);
         }
-
-
-        // 지수 계산식
 
         return true;
     }

@@ -11,5 +11,5 @@ import java.util.List;
 public interface FavoriteTotalPriceRepo extends JpaRepository<FavoriteTotalPrice, Long> {
     List<FavoriteTotalPrice> findAllByUserIdAndBusinessTypeAndResearchDateBetweenOrderByResearchDate(Long userId, BusinessType businessType, LocalDate start, LocalDate end);
 
-    Integer deleteByUser(User user);
+    void deleteByUser(User user);
 }
