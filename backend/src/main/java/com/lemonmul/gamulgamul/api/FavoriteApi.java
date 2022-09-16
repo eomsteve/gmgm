@@ -95,7 +95,8 @@ public class FavoriteApi {
      * 즐겨찾기 목록 갱신
      */
     @PostMapping("/")
-    public boolean updateFavoriteGoods(@RequestBody List<Integer> goodsIds, @RequestHeader HttpHeaders headers) {
+    public boolean updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) {
+        List<Long> goodsIds = favoriteUpdateRequestDto.getGoodsIds();
         User user = getUserFromJwtToken(headers);
         Goods goods;
 
@@ -114,7 +115,7 @@ public class FavoriteApi {
             favoriteGoods = deleteFavoriteGoodsList.get(i);
 
             for(int j = 0; j < goodsIds.size(); j++) {
-                goodsId = (long)goodsIds.get(j);
+                goodsId = goodsIds.get(j);
 
                 if(favoriteGoods.getGoods().getId().equals(goodsId)) {
                     deleteFavoriteGoodsList.remove(i);
@@ -128,7 +129,7 @@ public class FavoriteApi {
         // exist가 false인 항목들만 새로 추가
         for(int i = 0; i < exists.length; i++) {
             if(!exists[i]) {
-                goods = goodsService.getGoodsById((long)goodsIds.get(i));
+                goods = goodsService.getGoodsById(goodsIds.get(i));
                 addFavoriteGoodsList.add(new FavoriteGoods(user, goods));
             }
         }
