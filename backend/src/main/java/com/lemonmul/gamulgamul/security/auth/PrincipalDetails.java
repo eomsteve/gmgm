@@ -1,6 +1,6 @@
 package com.lemonmul.gamulgamul.security.auth;
 
-import com.lemonmul.gamulgamul.entity.User;
+import com.lemonmul.gamulgamul.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package com.lemonmul.gamulgamul.entity;
+package com.lemonmul.gamulgamul.entity.user;
 
 public enum Gender {
     // 여: female -> f

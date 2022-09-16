@@ -1,4 +1,4 @@
-package com.lemonmul.gamulgamul.entity;
+package com.lemonmul.gamulgamul.entity.checklist;
 
 import lombok.Getter;
 

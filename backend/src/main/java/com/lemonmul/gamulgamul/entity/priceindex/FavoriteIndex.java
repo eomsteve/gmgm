@@ -1,5 +1,6 @@
-package com.lemonmul.gamulgamul.entity;
+package com.lemonmul.gamulgamul.entity.priceindex;
 
+import com.lemonmul.gamulgamul.entity.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,13 +17,12 @@ public class FavoriteIndex extends PriceIndex {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public FavoriteIndex(LocalDate researchDate, Double value) {
+    public FavoriteIndex(LocalDate researchDate, Double value, User user) {
         super(researchDate, value);
+        this.user = user;
     }
 
-    public FavoriteIndex createFavoriteIndex(LocalDate researchDate, Double value, User user) {
-        FavoriteIndex favoriteIndex = new FavoriteIndex(researchDate, value);
-        this.user = user;
-        return favoriteIndex;
+    public static FavoriteIndex createFavoriteIndex(LocalDate researchDate, Double value, User user) {
+        return new FavoriteIndex(researchDate, value, user);
     }
 }

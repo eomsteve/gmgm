@@ -1,4 +1,4 @@
-package com.lemonmul.gamulgamul.entity;
+package com.lemonmul.gamulgamul.entity.user;
 
 public enum Role {
     // 관리자: admin -> a

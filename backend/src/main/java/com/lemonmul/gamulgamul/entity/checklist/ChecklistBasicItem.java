@@ -1,5 +1,6 @@
-package com.lemonmul.gamulgamul.entity;
+package com.lemonmul.gamulgamul.entity.checklist;
 
+import com.lemonmul.gamulgamul.entity.product.Product;
 import lombok.Getter;
 
 import javax.persistence.*;

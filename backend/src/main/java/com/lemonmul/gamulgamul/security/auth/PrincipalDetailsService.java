@@ -1,6 +1,6 @@
 package com.lemonmul.gamulgamul.security.auth;
 
-import com.lemonmul.gamulgamul.entity.User;
+import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
