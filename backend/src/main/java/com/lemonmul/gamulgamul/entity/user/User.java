@@ -1,5 +1,9 @@
-package com.lemonmul.gamulgamul.entity;
+package com.lemonmul.gamulgamul.entity.user;
 
+import com.lemonmul.gamulgamul.entity.checklist.Checklist;
+import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
+import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
+import com.lemonmul.gamulgamul.entity.priceindex.FavoriteIndex;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.lemonmul.gamulgamul.service;
 
-import com.lemonmul.gamulgamul.entity.User;
+import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,5 +24,10 @@ public class UserService {
         userRepo.save(user);
 
         return true;
+    }
+
+    // TODO: 강의 듣고 예외처리 해야함
+    public User getUserInfoByEmail(String email) {
+        return userRepo.findByEmail(email).orElseThrow();
     }
 }

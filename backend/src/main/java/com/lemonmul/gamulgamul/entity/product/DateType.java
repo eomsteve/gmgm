@@ -1,4 +1,4 @@
-package com.lemonmul.gamulgamul.entity;
+package com.lemonmul.gamulgamul.entity.product;
 
 public enum DateType {
     // 월 데이터: month -> m

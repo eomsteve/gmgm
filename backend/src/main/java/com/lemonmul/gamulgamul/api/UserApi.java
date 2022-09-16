@@ -1,8 +1,8 @@
 package com.lemonmul.gamulgamul.api;
 
-import com.lemonmul.gamulgamul.entity.Gender;
-import com.lemonmul.gamulgamul.entity.Role;
-import com.lemonmul.gamulgamul.entity.User;
+import com.lemonmul.gamulgamul.entity.user.Gender;
+import com.lemonmul.gamulgamul.entity.user.Role;
+import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;

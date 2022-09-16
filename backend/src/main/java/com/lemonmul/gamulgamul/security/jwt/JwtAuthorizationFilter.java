@@ -1,6 +1,6 @@
 package com.lemonmul.gamulgamul.security.jwt;
 
-import com.lemonmul.gamulgamul.entity.User;
+import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.repo.UserRepo;
 import com.lemonmul.gamulgamul.security.auth.PrincipalDetails;
 import io.jsonwebtoken.Jwts;
