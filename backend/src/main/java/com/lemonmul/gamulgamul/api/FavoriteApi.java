@@ -1,13 +1,13 @@
 package com.lemonmul.gamulgamul.api;
 
 import com.lemonmul.gamulgamul.api.dto.favorite.*;
-import com.lemonmul.gamulgamul.entity.*;
+import com.lemonmul.gamulgamul.entity.BusinessType;
+import com.lemonmul.gamulgamul.entity.Category;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
 import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
 import com.lemonmul.gamulgamul.entity.user.User;
-import com.lemonmul.gamulgamul.security.jwt.JwtProperties;
 import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
 import com.lemonmul.gamulgamul.service.*;
 import lombok.AllArgsConstructor;
@@ -39,7 +39,7 @@ public class FavoriteApi {
      */
     @GetMapping("/")
     public FavoritePageResponseDto getFavoritePage(@RequestHeader HttpHeaders headers) {
-        Long userId = getUserIdFromJwtToken(headers);
+        Long userId = JwtTokenProvider.getUserIdFromJwtToken(userService,headers);
 
         LocalDate today = LocalDate.now();
 
@@ -60,7 +60,7 @@ public class FavoriteApi {
         List<FavoriteItemResponseDto> favoriteItemResponseDtos = new ArrayList<>();
         List<GoodsPrice> goodsPrices;
         // 최근 가격 변동 계산을 위해 가격 정보 중에서 가장 최근 가격 정보 둘의 차를 구함(업태는 대형마트가 default)
-        Double priceGap;
+        double priceGap;
         for(FavoriteGoods favoriteGoods: favoriteGoodsList) {
             goodsPrices = goodsPriceService.getGoodsPrices(favoriteGoods.getGoods().getId(), BusinessType.m);
             priceGap = goodsPrices.get(goodsPrices.size() - 1).getPrice() - goodsPrices.get(goodsPrices.size() - 2).getPrice();
@@ -97,7 +97,7 @@ public class FavoriteApi {
     @PostMapping("/")
     public boolean updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) {
         List<Long> goodsIds = favoriteUpdateRequestDto.getGoodsIds();
-        User user = getUserFromJwtToken(headers);
+        User user = JwtTokenProvider.getUserFromJwtToken(userService,headers);
         Goods goods;
 
         // TODO: 쿼리가 너무 많이 나갈 것 같음...
@@ -141,19 +141,6 @@ public class FavoriteApi {
     @PostMapping("/addtest")
     public boolean addPriceIndex(@RequestBody AddPriceIndexDto addPriceIndexDto) {
         return priceIndexService.addIndex(addPriceIndexDto.dtype, addPriceIndexDto.date, addPriceIndexDto.value);
-    }
-
-    private Long getUserIdFromJwtToken(HttpHeaders headers) {
-        String token = headers.get(JwtProperties.HEADER_STRING).get(0).replace(JwtProperties.TOKEN_PREFIX, "");
-        String email = JwtTokenProvider.getEmail(token);
-        User user = userService.getUserInfoByEmail(email);
-        return user.getId();
-    }
-
-    private User getUserFromJwtToken(HttpHeaders headers) {
-        String token = headers.get(JwtProperties.HEADER_STRING).get(0).replace(JwtProperties.TOKEN_PREFIX, "");
-        String email = JwtTokenProvider.getEmail(token);
-        return userService.getUserInfoByEmail(email);
     }
 
     // 지수 직접 추가에 사용하는 임시 dto
