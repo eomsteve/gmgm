@@ -4,7 +4,7 @@ WORKDIR /var/jenkins_home/workspace/gamulgamul/backend
 
 COPY ./ ./
 
-RUN gradle clean build --no -daemon
+RUN gradle clean build --no-daemon
 
 
 FROM openjdk:17-jdk
