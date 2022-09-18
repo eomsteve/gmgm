@@ -10,8 +10,8 @@ interface GoodsScrollProps {
 
 const GoodsScroll: FC<GoodsScrollProps> = props => {
   
-  const count = useSelector((state: RootState) => state.counter.value)
-  const dispatch = useDispatch()
+  // const count = useSelector((state: RootState) => state.counter.value)
+  // const dispatch = useDispatch()
 
   const { goodsList } = props;
   console.log(goodsList);
