@@ -40,15 +40,15 @@ export const data = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
+      label: '삼다수 5개 묶음',
       //라벨의 길이만큼 data 넣기,, 빈 데이터는??
-      data: [1, 2, 3, 4, 5, 6, 7],
+      data: [1, 2, null, 4, 5, 4, 7],
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
     },
     {
       label: 'Dataset 2',
-      data: [3, 6, 5, 4, 2, 3, 1],
+      data: [3, 6, null, 4, 2, 3, 1],
       borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
