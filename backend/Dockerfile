@@ -1,7 +1,5 @@
 FROM gradle:7.5
 
-VOLUME ["/var/log"]
-
 WORKDIR /var/jenkins_home/workspace/gamulgamul/backend
 
 COPY ./ ./
