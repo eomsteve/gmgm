@@ -6,4 +6,4 @@ COPY ./ ./
 
 RUN gradle clean build --no-daemon
 
-CMD ["java", "-jar", "build/libs/*.jar"]
+CMD java -jar ./build/libs/gamulgamul-0.0.1-SNAPSHOT.jar
