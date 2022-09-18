@@ -79,3 +79,7 @@ compileQuerydsl {
 test{
 	exclude '**/*'
 }
+
+jar {
+	enabled = false
+}
