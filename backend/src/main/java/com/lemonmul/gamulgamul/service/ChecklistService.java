@@ -36,13 +36,14 @@ public class ChecklistService {
 
     /**
      * 체크리스트 조회
+     * todo status=true인 체크리스트인지 확인 필요?
      */
     public Checklist checklist(Long checklistId){
-        Optional<Checklist> optionalChecklist = checklistRepo.findById(checklistId);
-        if(optionalChecklist.isPresent()){
-            return optionalChecklist.get();
+        Optional<Checklist> optional = checklistRepo.findById(checklistId);
+        if(optional.isPresent()){
+            return optional.get();
         }else{
-            //todo 더 적절한 예외 있으면 바꾸기
+            //todo 더 적절한 예외 있으면 바꾸기, 아니면 사용자 예외 만들기
             throw new IllegalArgumentException();
         }
     }
@@ -57,8 +58,9 @@ public class ChecklistService {
             Checklist checklist = optionalChecklist.get();
             checklist.setStatus(false);
         }else{
-            //todo 더 적절한 예외 있으면 바꾸기
+            //todo 더 적절한 예외 있으면 바꾸기, 아니면 사용자 예외 만들기
             throw new IllegalArgumentException();
         }
     }
+
 }

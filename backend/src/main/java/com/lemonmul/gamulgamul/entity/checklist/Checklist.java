@@ -36,8 +36,8 @@ public class Checklist {
 
     private Checklist(User user) {
         this.regDate = LocalDate.now();
-        this.status = true;
-        this.user = user;
+        setStatus(true);
+        setUser(user);
     }
 
     public static Checklist of(User user){
@@ -46,5 +46,10 @@ public class Checklist {
 
     public void setStatus(boolean status){
         this.status=status;
+    }
+
+    public void setUser(User user){
+        this.user=user;
+        user.getChecklists().add(this);
     }
 }

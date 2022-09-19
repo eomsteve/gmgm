@@ -7,11 +7,11 @@ import java.time.LocalDate;
 
 @Data
 public class ChecklistListDto {
-    private Long id;
+    private Long checklistId;
     private LocalDate regDate;
 
     public ChecklistListDto(Checklist checklist) {
-        id= checklist.getId();
+        checklistId = checklist.getId();
         regDate=checklist.getRegDate();
     }
 }

@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChecklistCustomItemRequestDto {
-    private String name;
+    private String productName;
 }
