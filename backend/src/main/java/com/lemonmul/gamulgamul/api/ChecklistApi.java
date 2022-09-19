@@ -6,6 +6,8 @@ import com.lemonmul.gamulgamul.entity.checklist.ChecklistBasicItem;
 import com.lemonmul.gamulgamul.entity.checklist.ChecklistCustomItem;
 import com.lemonmul.gamulgamul.entity.product.Product;
 import com.lemonmul.gamulgamul.entity.user.User;
+import com.lemonmul.gamulgamul.repo.ChecklistBasicItemRepo;
+import com.lemonmul.gamulgamul.repo.ChecklistCustomItemRepo;
 import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
 import com.lemonmul.gamulgamul.service.CategoryService;
 import com.lemonmul.gamulgamul.service.ChecklistService;
@@ -16,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,6 +30,8 @@ public class ChecklistApi {
     private final UserService userService;
     private final CategoryService categoryService;
     private final ProductService productService;
+    private final ChecklistBasicItemRepo basicItemRepo;
+    private final ChecklistCustomItemRepo customItemRepo;
 
     /**
      * 체크리스트 리스트 조회
@@ -110,32 +115,25 @@ public class ChecklistApi {
 
     /**
      * 체크리스트 수정 - 기본 아이템 채우기
-     * todo db에 flush 안되는거 해결하기
      */
-    private void fillBasicItem(List<ChecklistBasicItemRequestDto> basicItem, Checklist checklist) {
-        List<ChecklistBasicItem> checklistBasicItems = checklist.getChecklistBasicItems();
-        if(!checklistBasicItems.isEmpty()){
-            checklistBasicItems.clear();
-        }
+    private void fillBasicItem(List<ChecklistBasicItemRequestDto> basicItems, Checklist checklist) {
+        basicItemRepo.deleteByChecklist(checklist);
 
-        for (ChecklistBasicItemRequestDto item : basicItem) {
+        for (ChecklistBasicItemRequestDto item : basicItems) {
             Product product = productService.product(item.getProductId());
-            checklistBasicItems.add(ChecklistBasicItem.of(checklist,product));
+            basicItemRepo.save(ChecklistBasicItem.of(checklist, product));
         }
     }
 
     /**
      * 체크리스트 수정 - 커스텀 아이템 채우기
-     * todo db에 flush 안되는거 해결하기
      */
-    private void fillCustomItem(List<ChecklistCustomItemRequestDto> customItem, Checklist checklist) {
-        List<ChecklistCustomItem> checklistCustomItems = checklist.getChecklistCustomItems();
-        if(!checklistCustomItems.isEmpty()){
-            checklistCustomItems.clear();
-        }
+    private void fillCustomItem(List<ChecklistCustomItemRequestDto> customItems, Checklist checklist) {
+        customItemRepo.deleteByChecklist(checklist);
 
-        for (ChecklistCustomItemRequestDto item : customItem) {
-            checklistCustomItems.add(ChecklistCustomItem.of(item.getProductName(), checklist));
+        for (ChecklistCustomItemRequestDto item : customItems) {
+            String name = item.getProductName();
+            customItemRepo.save(ChecklistCustomItem.of(name, checklist));
         }
     }
 }
