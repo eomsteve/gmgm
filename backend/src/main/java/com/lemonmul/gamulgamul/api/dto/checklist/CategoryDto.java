@@ -8,15 +8,15 @@ import java.util.stream.Collectors;
 
 @Data
 public class CategoryDto {
-    private Long id;
-    private String name;
-    private String img;
+    private Long categoryId;
+    private String categoryName;
+    private String categoryImg;
     private List<ProductDto> products;
 
     public CategoryDto(Category category) {
-        id= category.getId();
-        name= category.getName();
-        img= category.getImg();
+        categoryId= category.getId();
+        categoryName = category.getName();
+        categoryImg = category.getImg();
         products =category.getProducts().stream().map(ProductDto::new).collect(Collectors.toList());
     }
 }

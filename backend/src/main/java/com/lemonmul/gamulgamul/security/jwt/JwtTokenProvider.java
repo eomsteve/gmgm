@@ -36,7 +36,7 @@ public class JwtTokenProvider {
         return user.getId();
     }
 
-    public static User getUserFromJwtToken(UserService userService,HttpHeaders headers) {
+    public static User getUserFromJwtToken(UserService userService,HttpHeaders headers) throws NullPointerException{
         String token = headers.get(JwtProperties.HEADER_STRING).get(0).replace(JwtProperties.TOKEN_PREFIX, "");
         String email = JwtTokenProvider.getEmail(token);
         return userService.getUserInfoByEmail(email);
