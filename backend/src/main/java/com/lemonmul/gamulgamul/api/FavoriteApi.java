@@ -2,6 +2,7 @@ package com.lemonmul.gamulgamul.api;
 
 import com.lemonmul.gamulgamul.api.dto.CategoryDto;
 import com.lemonmul.gamulgamul.api.dto.favorite.*;
+import com.lemonmul.gamulgamul.api.dto.EmailResponseDto;
 import com.lemonmul.gamulgamul.entity.BusinessType;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
@@ -98,7 +99,7 @@ public class FavoriteApi {
     // TODO: return 값 수정(DTO)
     // TODO: 들어올 때 user pk랑 즐겨찾기 개수 log, 나갈 때 합산 및 지수 최신값 log
     @PostMapping("/")
-    public boolean updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) {
+    public EmailResponseDto updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) {
         List<Long> goodsIds = favoriteUpdateRequestDto.getGoodsIds();
         User user = JwtTokenProvider.getUserFromJwtToken(userService,headers);
         Goods goods;
@@ -146,7 +147,7 @@ public class FavoriteApi {
         // 즐겨찾기 지수 계산
         updateFavoriteIndex(user);
 
-        return true;
+        return new EmailResponseDto(user.getEmail());
     }
 
     @GetMapping("/business/{businessType}")

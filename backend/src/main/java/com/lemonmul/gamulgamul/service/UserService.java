@@ -14,16 +14,14 @@ public class UserService {
     private final UserRepo userRepo;
 
     // TODO: 강의 듣고 예외처리 해야함
-    public boolean emailCheck(String email) {
-        return userRepo.findByEmail(email).isEmpty();
+    public User emailCheck(String email) {
+        return userRepo.findByEmail(email).orElseThrow();
     }
 
     // TODO: 강의 듣고 예외처리 해야함
     @Transactional
-    public boolean signUp(User user) {
-        userRepo.save(user);
-
-        return true;
+    public User signUp(User user) {
+        return userRepo.save(user);
     }
 
     // TODO: 강의 듣고 예외처리 해야함
