@@ -37,9 +37,9 @@ public class PriceIndexService {
         PriceIndex priceIndex = null;
 
         if("c".equals(dtype))
-            priceIndex = CountryIndex.createCountryIndex(localDate, value);
+            priceIndex = CountryIndex.of(localDate, value);
         else if("g".equals(dtype))
-            priceIndex = GMGMIndex.createGMGMIndex(localDate, value);
+            priceIndex = GMGMIndex.of(localDate, value);
 
         priceIndexRepo.save(priceIndex);
 

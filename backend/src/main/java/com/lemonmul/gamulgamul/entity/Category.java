@@ -27,13 +27,13 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private final List<Product> products = new ArrayList<>();
 
-    public Category(Long id, String name, String img) {
+    private Category(Long id, String name, String img) {
         this.id = id;
         this.name = name;
         this.img = img;
     }
 
-    public static Category createCategory(Long id ,String name, String img) {
+    public static Category of(Long id , String name, String img) {
         return new Category(id, name, img);
     }
 }

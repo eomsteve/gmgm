@@ -40,7 +40,7 @@ public class Goods {
     @OneToMany(mappedBy = "goods")
     private final List<FavoriteGoods> favoriteGoods = new ArrayList<>();
 
-    public Goods(Long id, String name, String img, Integer capacity, String measure, Integer ea, String cheapUrl, Product product) {
+    private Goods(Long id, String name, String img, Integer capacity, String measure, Integer ea, String cheapUrl, Product product) {
         this.id = id;
         this.name = name;
         this.img = img;
@@ -51,7 +51,7 @@ public class Goods {
         this.product = product;
     }
 
-    public static Goods createGoods(Long id, String name, String img, Integer capacity, String measure, Integer ea, String cheapUrl, Product product) {
+    public static Goods of(Long id, String name, String img, Integer capacity, String measure, Integer ea, String cheapUrl, Product product) {
         return new Goods(id, name, img, capacity, measure, ea, cheapUrl, product);
     }
 }

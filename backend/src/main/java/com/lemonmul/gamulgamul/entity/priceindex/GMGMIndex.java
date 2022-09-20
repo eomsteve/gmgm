@@ -13,11 +13,11 @@ import java.time.LocalDate;
 @DiscriminatorValue("g")
 public class GMGMIndex extends PriceIndex {
 
-    public GMGMIndex(LocalDate researchDate, Double value) {
+    private GMGMIndex(LocalDate researchDate, Double value) {
         super(researchDate, value);
     }
 
-    public static GMGMIndex createGMGMIndex(LocalDate researchDate, Double value) {
+    public static GMGMIndex of(LocalDate researchDate, Double value) {
         return new GMGMIndex(researchDate, value);
     }
 }

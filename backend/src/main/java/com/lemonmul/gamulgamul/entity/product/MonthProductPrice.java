@@ -13,11 +13,11 @@ import java.time.LocalDate;
 @DiscriminatorValue("m")
 public class MonthProductPrice extends ProductPrice{
 
-    public MonthProductPrice(Double price, LocalDate researchDate, Product product) {
+    private MonthProductPrice(Double price, LocalDate researchDate, Product product) {
         super(price, researchDate, product);
     }
 
-    public static MonthProductPrice createMonthProductPrice(Double price, LocalDate researchDate, Product product) {
+    public static MonthProductPrice of(Double price, LocalDate researchDate, Product product) {
         return new MonthProductPrice(price, researchDate, product);
     }
 }

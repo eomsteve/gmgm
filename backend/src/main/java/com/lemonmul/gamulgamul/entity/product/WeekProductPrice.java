@@ -19,12 +19,12 @@ public class WeekProductPrice extends ProductPrice{
     @Enumerated(EnumType.STRING)
     private BusinessType businessType;
 
-    public WeekProductPrice(Double price, LocalDate researchDate, Product product, BusinessType businessType) {
+    private WeekProductPrice(Double price, LocalDate researchDate, Product product, BusinessType businessType) {
         super(price, researchDate, product);
         this.businessType = businessType;
     }
 
-    public static WeekProductPrice createWeekProductPrice(Double price, LocalDate researchDate, Product product, BusinessType businessType) {
+    public static WeekProductPrice of(Double price, LocalDate researchDate, Product product, BusinessType businessType) {
         return new WeekProductPrice(price, researchDate, product, businessType);
     }
 }
