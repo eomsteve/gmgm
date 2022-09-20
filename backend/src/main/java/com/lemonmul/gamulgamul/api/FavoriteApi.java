@@ -42,7 +42,7 @@ public class FavoriteApi {
     // TODO: 들어올 때 user pk, 나갈 때 list에 담긴 갯수 log
     @GetMapping("/")
     public FavoritePageResponseDto getFavoritePage(@RequestHeader HttpHeaders headers) {
-        Long userId = JwtTokenProvider.getUserIdFromJwtToken(userService,headers);
+        User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
 
         LocalDate today = LocalDate.now();
 
@@ -50,7 +50,7 @@ public class FavoriteApi {
         List<PriceIndexResponseDto> countryIndices = priceIndexService.getIndices("c", today).stream().map(PriceIndexResponseDto::new).collect(Collectors.toList());
 
         // 즐겨찾기 지수
-        List<PriceIndexResponseDto> favoriteIndices = priceIndexService.getFavoriteIndices(userId, today).stream().map(PriceIndexResponseDto::new).collect(Collectors.toList());
+        List<PriceIndexResponseDto> favoriteIndices = priceIndexService.getFavoriteIndices(user, today).stream().map(PriceIndexResponseDto::new).collect(Collectors.toList());
 
         // 업태 종류
         ArrayList<BusinessTypeResponseDto> businessTypesResponseDtos = new ArrayList<>();
@@ -59,22 +59,12 @@ public class FavoriteApi {
         }
 
         // 즐겨찾기 상품 목록
-        List<FavoriteGoods> favoriteGoodsList = favoriteGoodsService.getFavoriteGoodsList(userId);
-        List<FavoriteItemResponseDto> favoriteItemResponseDtos = new ArrayList<>();
-        List<GoodsPrice> goodsPrices;
-        // 최근 가격 변동 계산을 위해 가격 정보 중에서 가장 최근 가격 정보 둘의 차를 구함(업태는 대형마트가 default)
-        double priceGap;
-        for(FavoriteGoods favoriteGoods: favoriteGoodsList) {
-            goodsPrices = goodsPriceService.getGoodsPrices(favoriteGoods.getGoods().getId(), BusinessType.m);
-            priceGap = goodsPrices.get(goodsPrices.size() - 1).getPrice() - goodsPrices.get(goodsPrices.size() - 2).getPrice();
-
-            favoriteItemResponseDtos.add(new FavoriteItemResponseDto(favoriteGoods.getGoods(), priceGap));
-        }
+        List<FavoriteItemResponseDto> favoriteItemResponseDtos = getFavoriteGoods(user, BusinessType.m);
 
         // 즐겨찾기 상품 총합
-        List<FavoriteTotalPrice> favoriteTotalPrices = favoriteTotalPriceService.getFavoriteTotalPrices(userId, BusinessType.m, today);
+        List<FavoriteTotalPriceResponseDto> favoriteTotalPriceResponseDtos = favoriteTotalPriceService.getFavoriteTotalPrices(user, BusinessType.m, today).stream().map(FavoriteTotalPriceResponseDto::new).collect(Collectors.toList());
 
-        return new FavoritePageResponseDto(countryIndices, favoriteIndices, businessTypesResponseDtos, favoriteItemResponseDtos, favoriteTotalPrices);
+        return new FavoritePageResponseDto(countryIndices, favoriteIndices, businessTypesResponseDtos, favoriteItemResponseDtos, favoriteTotalPriceResponseDtos);
     }
 
     /**
@@ -144,6 +134,22 @@ public class FavoriteApi {
         }
 
         return favoriteGoodsService.updateFavoriteGoodsList(addFavoriteGoodsList, deleteFavoriteGoodsList);
+    }
+
+    private List<FavoriteItemResponseDto> getFavoriteGoods(User user, BusinessType businessType) {
+        List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();
+        List<FavoriteItemResponseDto> favoriteItemResponseDtos = new ArrayList<>();
+        List<GoodsPrice> goodsPrices;
+        // 최근 가격 변동 계산을 위해 가격 정보 중에서 가장 최근 가격 정보 둘의 차를 구함
+        double priceGap;
+        for (FavoriteGoods favoriteGoods : favoriteGoodsList) {
+            goodsPrices = goodsPriceService.getGoodsPrices(favoriteGoods.getGoods(), businessType);
+            priceGap = goodsPrices.get(goodsPrices.size() - 1).getPrice() - goodsPrices.get(goodsPrices.size() - 2).getPrice();
+
+            favoriteItemResponseDtos.add(new FavoriteItemResponseDto(favoriteGoods.getGoods(), priceGap));
+        }
+
+        return favoriteItemResponseDtos;
     }
 
     // 지수 직접 추가용으로 만든 임시 api
