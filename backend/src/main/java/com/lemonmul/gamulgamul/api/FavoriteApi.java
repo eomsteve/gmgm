@@ -1,5 +1,6 @@
 package com.lemonmul.gamulgamul.api;
 
+import com.lemonmul.gamulgamul.api.dto.checklist.CategoryDto;
 import com.lemonmul.gamulgamul.api.dto.favorite.*;
 import com.lemonmul.gamulgamul.entity.BusinessType;
 import com.lemonmul.gamulgamul.entity.Category;
@@ -7,6 +8,7 @@ import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
 import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
+import com.lemonmul.gamulgamul.entity.product.Product;
 import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
 import com.lemonmul.gamulgamul.service.*;
@@ -35,6 +37,7 @@ public class FavoriteApi {
     private final CategoryService categoryService;
     private final GoodsService goodsService;
     private final GoodsPriceService goodsPriceService;
+    private final ProductService productService;
 
     /**
      * 즐겨찾기 페이지에 보여줄 정보들
@@ -68,24 +71,22 @@ public class FavoriteApi {
     }
 
     /**
-     * 상품 선택 페이지에 띄울 카테고리 목록
+     * 상품 선택 페이지에 띄울 카테고리와 품목들
      */
-    // TODO: 카테고리 및 품목으로 변경
     // TODO: 리스트 개수 log
     @GetMapping("/select")
-    public List<GoodsSelectCategoryResponseDto> getAllCategories() {
-        return categoryService.getAllCategories().stream().map(GoodsSelectCategoryResponseDto::new).collect(Collectors.toList());
+    public List<CategoryDto> getAllCategoryProducts() {
+        return categoryService.getAllCategories().stream().map(CategoryDto::new).collect(Collectors.toList());
     }
 
     /**
-     * 카테고리 선택 시, 해당 카테고리의 품목들과 상품들
+     * 품목 선택 시, 해당 품목의 상품들
      */
-    // TODO: 상품으로 변경
     // TODO: 품목 pk와 상품 리스트 개수 log
-    @GetMapping("/select/category/{categoryId}")
-    public List<GoodsSelectProductResponseDto> getCategoryProducts(@PathVariable Long categoryId) {
-        Category category = categoryService.getCategory(categoryId);
-        return category.getProducts().stream().map(GoodsSelectProductResponseDto::new).collect(Collectors.toList());
+    @GetMapping("/select/product/{productId}")
+    public List<GoodsDto> getGoods(@PathVariable Long productId) {
+        Product product = productService.product(productId);
+        return product.getGoods().stream().map(GoodsDto::new).collect(Collectors.toList());
     }
 
     /**
