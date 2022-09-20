@@ -11,7 +11,6 @@ import java.util.List;
 
 public interface ProductPriceRepo extends JpaRepository<ProductPrice, Long> {
 
-    //선택 업태의 품목 가격 정보
-    @Query("select p from WeekProductPrice p where p.product=:product and p.business=:business order by p.researchDate")
-    List<ProductPrice> findWeekProductPrice(@Param(value = "product") Product product, @Param(value = "business") BusinessType business);
+   //선택 업태의 품목 가격 정보
+    List<ProductPrice> findByProductAndBusinessOrderByResearchDate(Product product,BusinessType business);
 }

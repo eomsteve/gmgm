@@ -28,14 +28,14 @@ public class GoodsPrice {
     @JoinColumn(name = "goods_id")
     private Goods goods;
 
-    public GoodsPrice(Double price, LocalDate researchDate, BusinessType business, Goods goods) {
+    private GoodsPrice(Double price, LocalDate researchDate, BusinessType business, Goods goods) {
         this.price = price;
         this.researchDate = researchDate;
         this.business = business;
         this.goods = goods;
     }
 
-    public static GoodsPrice createGoodsPrice(Double price, LocalDate researchDate, BusinessType business, Goods goods) {
+    public static GoodsPrice of(Double price, LocalDate researchDate, BusinessType business, Goods goods) {
         return new GoodsPrice(price, researchDate, business, goods);
     }
 }

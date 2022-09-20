@@ -43,7 +43,7 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private final List<ChecklistBasicItem> checklistBasicItems = new ArrayList<>();
 
-    public Product(Long id, Category category, String name, Integer unit, String measure, Double weight, String img) {
+    private Product(Long id, Category category, String name, Integer unit, String measure, Double weight, String img) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -53,7 +53,7 @@ public class Product {
         this.img = img;
     }
 
-    public static Product createProduct(Long id, Category category, String name, Integer unit, String measure, Double weight, String img) {
+    public static Product of(Long id, Category category, String name, Integer unit, String measure, Double weight, String img) {
         return new Product(id, category, name, unit, measure, weight, img);
     }
 }

@@ -54,7 +54,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private final List<FavoriteGoods> favoriteGoods = new ArrayList<>();
 
-    public User(String email, String pwd, String name, Gender gender, LocalDate birthday, Role role, Boolean status) {
+    private User(String email, String pwd, String name, Gender gender, LocalDate birthday, Role role, Boolean status) {
         this.email = email;
         this.pwd = pwd;
         this.name = name;
@@ -64,7 +64,7 @@ public class User {
         this.status = status;
     }
 
-    public static User createUser(String email, String pwd, String name, Gender gender, LocalDate birthday, Role role) {
+    public static User of(String email, String pwd, String name, Gender gender, LocalDate birthday, Role role) {
         return new User(email, pwd, name, gender, birthday, role, true);
     }
 }

@@ -18,6 +18,6 @@ public class ProductPriceService {
     private final ProductPriceRepo productPriceRepo;
 
     public List<ProductPrice> productPricesByBusinessType(Product product, BusinessType businessType){
-        return productPriceRepo.findWeekProductPrice(product,businessType);
+        return productPriceRepo.findByProductAndBusinessOrderByResearchDate(product,businessType);
     }
 }

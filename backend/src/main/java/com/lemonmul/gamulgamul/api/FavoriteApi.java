@@ -139,7 +139,7 @@ public class FavoriteApi {
         for(int i = 0; i < exists.length; i++) {
             if(!exists[i]) {
                 goods = goodsService.getGoodsById(goodsIds.get(i));
-                addFavoriteGoodsList.add(new FavoriteGoods(user, goods));
+                addFavoriteGoodsList.add(FavoriteGoods.of(user, goods));
             }
         }
 
