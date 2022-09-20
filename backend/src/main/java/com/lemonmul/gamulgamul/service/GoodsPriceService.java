@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -19,9 +20,13 @@ public class GoodsPriceService {
     private final GoodsRepo goodsRepo;
 
     // 상품Id와 업태 타입으로 상품 가격을 받아오는 함수
-    public List<GoodsPrice> getGoodsPrices(Long goodsId, BusinessType businessType) {
-        Goods goods = goodsRepo.findById(goodsId).get();
-
-        return goodsPriceRepo.findAllByGoodsAndBusinessType(goods, businessType);
+    public List<GoodsPrice> getGoodsPrices(Long goodsId, BusinessType business) {
+        Optional<Goods> optional = goodsRepo.findById(goodsId);
+        if(optional.isPresent()) {
+            return goodsPriceRepo.findAllByGoodsAndBusinessType(optional.get(), business);
+        }else{
+            //todo
+            throw new NullPointerException();
+        }
     }
 }

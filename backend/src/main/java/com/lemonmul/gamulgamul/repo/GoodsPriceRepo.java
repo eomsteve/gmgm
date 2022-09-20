@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface GoodsPriceRepo extends JpaRepository<GoodsPrice, Long> {
-    List<GoodsPrice> findAllByBusinessTypeAndGoodsIn(BusinessType businessType, List<Goods> goodsList);
+    List<GoodsPrice> findAllByBusinessTypeAndGoodsIn(BusinessType business, List<Goods> goodsList);
 
-    List<GoodsPrice> findAllByGoodsAndBusinessType(Goods goods, BusinessType businessType);
+    List<GoodsPrice> findAllByGoodsAndBusinessType(Goods goods, BusinessType business);
 }

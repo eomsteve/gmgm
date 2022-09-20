@@ -28,16 +28,16 @@ public class FavoriteTotalPrice {
     private LocalDate researchDate;
 
     @Enumerated(EnumType.STRING)
-    private BusinessType businessType;
+    private BusinessType business;
 
-    public FavoriteTotalPrice(User user, Double totalPrice, LocalDate researchDate, BusinessType businessType) {
+    public FavoriteTotalPrice(User user, Double totalPrice, LocalDate researchDate, BusinessType business) {
         this.user = user;
         this.totalPrice = totalPrice;
         this.researchDate = researchDate;
-        this.businessType = businessType;
+        this.business = business;
     }
 
-    public static FavoriteTotalPrice createFavoriteTotalPrice(User user, Double totalPrice, LocalDate researchDate, BusinessType businessType) {
-        return new FavoriteTotalPrice(user, totalPrice, researchDate, businessType);
+    public static FavoriteTotalPrice createFavoriteTotalPrice(User user, Double totalPrice, LocalDate researchDate, BusinessType business) {
+        return new FavoriteTotalPrice(user, totalPrice, researchDate, business);
     }
 }

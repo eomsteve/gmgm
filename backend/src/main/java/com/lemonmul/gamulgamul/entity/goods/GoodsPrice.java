@@ -22,20 +22,20 @@ public class GoodsPrice {
     private LocalDate researchDate;
 
     @Enumerated(EnumType.STRING)
-    private BusinessType businessType;
+    private BusinessType business;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "goods_id")
     private Goods goods;
 
-    public GoodsPrice(Double price, LocalDate researchDate, BusinessType businessType, Goods goods) {
+    public GoodsPrice(Double price, LocalDate researchDate, BusinessType business, Goods goods) {
         this.price = price;
         this.researchDate = researchDate;
-        this.businessType = businessType;
+        this.business = business;
         this.goods = goods;
     }
 
-    public static GoodsPrice createGoodsPrice(Double price, LocalDate researchDate, BusinessType businessType, Goods goods) {
-        return new GoodsPrice(price, researchDate, businessType, goods);
+    public static GoodsPrice createGoodsPrice(Double price, LocalDate researchDate, BusinessType business, Goods goods) {
+        return new GoodsPrice(price, researchDate, business, goods);
     }
 }
