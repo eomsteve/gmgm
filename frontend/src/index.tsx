@@ -4,17 +4,54 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { store } from './modules/store'
-import { Provider } from 'react-redux'
+//redux persist : localhost
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react';
+import storage from "redux-persist/lib/storage";
 
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import favoriteProductListReducer from './modules/FavoriteProductList'
+
+const persistConfig = {
+  key: "root",
+  storage: storage,
+};
+const favoriteGoodsListReducer = persistReducer(persistConfig, favoriteProductListReducer);
+
+const store = configureStore({
+  reducer :{
+    favoriteGoodsListReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
+
+let persistor = persistStore(store);
+
+console.log(store.getState());
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <Provider store={store}>
-  <App />
-</Provider>,
-
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
+  </Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function
