@@ -1,19 +1,14 @@
-package com.lemonmul.gamulgamul.api.dto.product;
+package com.lemonmul.gamulgamul.api.dto.detail;
 
-import com.lemonmul.gamulgamul.entity.BusinessType;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
 import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
 import lombok.Data;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Data
 public class GoodsDto {
-    private Long goodsId;
-
     private String goodsName;
     private String goodsImg;
     private double cheapPrice;
@@ -26,7 +21,6 @@ public class GoodsDto {
     private List<PriceDto> goodsPrices;
 
     public GoodsDto(Goods goods,double price,List<GoodsPrice> prices) {
-        goodsId=goods.getId();
         goodsName=goods.getName();
         goodsImg=goods.getImg();
         cheapPrice=price;

@@ -1,6 +1,5 @@
-package com.lemonmul.gamulgamul.api.dto.product;
+package com.lemonmul.gamulgamul.api.dto.detail;
 
-import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
 import com.lemonmul.gamulgamul.entity.product.Product;
 import com.lemonmul.gamulgamul.entity.product.ProductPrice;
 import lombok.Data;
@@ -13,15 +12,14 @@ public class ProductDto {
     private String productName;
     private int unit;
     private String measure;
-
+    private List<GoodsInfoDto> goodsInfo;
     private List<PriceDto> productPrices;
-    private List<GoodsDto> goods;
 
-    public ProductDto(Product product, List<ProductPrice> prices,List<GoodsDto> goodsDtos) {
+    public ProductDto(Product product, List<ProductPrice> prices) {
         productName=product.getName();
         unit= product.getUnit();
         measure=product.getMeasure();
+        goodsInfo=product.getGoods().stream().map(GoodsInfoDto::new).collect(Collectors.toList());
         productPrices=prices.stream().map(PriceDto::new).collect(Collectors.toList());
-        goods=goodsDtos;
     }
 }
