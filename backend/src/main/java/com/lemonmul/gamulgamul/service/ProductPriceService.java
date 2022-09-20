@@ -20,4 +20,8 @@ public class ProductPriceService {
     public List<ProductPrice> productPricesByBusinessType(Product product, BusinessType businessType){
         return productPriceRepo.findByProductAndBusinessType(product,businessType);
     }
+
+    public List<ProductPrice> getMonthProductPrice(Product product) {
+        return productPriceRepo.findAllByProductAndDtype(product, "m");
+    }
 }

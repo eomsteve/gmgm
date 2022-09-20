@@ -22,12 +22,20 @@ public class PriceIndexService {
 
     // 지정한 날부터 1달 간격으로 국가 지수나 공통 지수를 받아오는 함수
     public List<PriceIndex> getIndices(String dtype, LocalDate date) {
-        return priceIndexRepo.findAllByDtypeAndResearchDateBetween(dtype, date.minusYears(1), date);
+        return priceIndexRepo.findAllByDtypeAndResearchDateBetweenOrderByResearchDate(dtype, date.minusYears(1), date);
     }
 
     // 지정한 날부터 1달 간격으로 즐겨찾기 지수를 받아오는 함수
     public List<PriceIndex> getFavoriteIndices(User user, LocalDate date) {
-        return priceIndexRepo.findAllByDtypeAndUserIdAndResearchDateBetween("f", user, date.minusYears(1), date);
+        return priceIndexRepo.findAllByUserAndResearchDateBetweenOrderByResearchDate(user, date.minusYears(1), date);
+    }
+
+    @Transactional
+    public boolean updateFavoriteIndex(User user, List<PriceIndex> priceIndices) {
+        priceIndexRepo.deleteByUser(user);
+        priceIndexRepo.saveAll(priceIndices);
+
+        return true;
     }
 
     // 지수 정보를 추가하는 함수(즐겨찾기 지수 제외)

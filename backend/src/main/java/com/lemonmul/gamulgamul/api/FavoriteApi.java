@@ -1,5 +1,6 @@
 package com.lemonmul.gamulgamul.api;
 
+import com.lemonmul.gamulgamul.api.dto.EmailResponseDto;
 import com.lemonmul.gamulgamul.api.dto.checklist.CategoryDto;
 import com.lemonmul.gamulgamul.api.dto.favorite.*;
 import com.lemonmul.gamulgamul.entity.BusinessType;
@@ -8,7 +9,10 @@ import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
 import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
+import com.lemonmul.gamulgamul.entity.priceindex.FavoriteIndex;
+import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import com.lemonmul.gamulgamul.entity.product.Product;
+import com.lemonmul.gamulgamul.entity.product.ProductPrice;
 import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
 import com.lemonmul.gamulgamul.service.*;
@@ -20,8 +24,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -38,6 +41,7 @@ public class FavoriteApi {
     private final GoodsService goodsService;
     private final GoodsPriceService goodsPriceService;
     private final ProductService productService;
+    private final ProductPriceService productPriceService;
 
     /**
      * 즐겨찾기 페이지에 보여줄 정보들
@@ -95,7 +99,7 @@ public class FavoriteApi {
     // TODO: return 값 수정(DTO)
     // TODO: 들어올 때 user pk랑 즐겨찾기 개수 log, 나갈 때 합산 및 지수 최신값 log
     @PostMapping("/")
-    public boolean updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) {
+    public EmailResponseDto updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) {
         List<Long> goodsIds = favoriteUpdateRequestDto.getGoodsIds();
         User user = JwtTokenProvider.getUserFromJwtToken(userService,headers);
         Goods goods;
@@ -134,7 +138,101 @@ public class FavoriteApi {
             }
         }
 
-        return favoriteGoodsService.updateFavoriteGoodsList(addFavoriteGoodsList, deleteFavoriteGoodsList);
+        // 즐겨찾기 목록 갱신
+        favoriteGoodsService.updateFavoriteGoodsList(addFavoriteGoodsList, deleteFavoriteGoodsList);
+
+        // 즐겨찾기 총합 계산
+        updateFavoriteTotalPrice(user);
+
+        // 즐겨찾기 지수 계산
+        updateFavoriteIndex(user);
+
+        return new EmailResponseDto(user.getEmail());
+    }
+
+    // 즐겨찾기 총합 계산하는 함수
+    private boolean updateFavoriteTotalPrice(User user) {
+        // 사용자의 즐겨찾기 목록을 가져옴
+        List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();
+
+        // 즐겨찾기 목록을 이용해서 상품을 리스트에 저장
+        List<Goods> goodsList = new ArrayList<>();
+        for (FavoriteGoods favoriteGoodsIter : favoriteGoodsList) {
+            goodsList.add(favoriteGoodsIter.getGoods());
+        }
+
+        List<GoodsPrice> goodsPriceList;
+        List<FavoriteTotalPrice> favoriteTotalPrices = new ArrayList<>();
+        // 각 업태 별로 나눠서 계산
+        for (BusinessType businessType : BusinessType.values()) {
+            // 즐겨찾기 목록에 있는 상품들의 해당 업태 가격들을 가져옴
+            goodsPriceList = goodsPriceService.getGoodsPricesInList(goodsList, businessType);
+
+            // 날짜를 key값으로 각 날짜의 상품 가격 총합을 저장
+            Map<LocalDate, Double> dateTotalPrices = new HashMap<>();
+            Double cur;
+            for (GoodsPrice goodsPrice : goodsPriceList) {
+                cur = 0.0;
+                LocalDate date = goodsPrice.getResearchDate();
+
+                if (dateTotalPrices.containsKey(date))
+                    cur = dateTotalPrices.get(date);
+
+                dateTotalPrices.put(date, cur + goodsPrice.getPrice());
+            }
+
+            // 계산한 총합을 리스트에 추가
+            FavoriteTotalPrice favoriteTotalPrice;
+            for (LocalDate key : dateTotalPrices.keySet()) {
+                favoriteTotalPrice = FavoriteTotalPrice.of(user, dateTotalPrices.get(key), key, businessType);
+                favoriteTotalPrices.add(favoriteTotalPrice);
+            }
+        }
+
+        return favoriteTotalPriceService.updateFavoriteTotalPrice(user, favoriteTotalPrices);
+    }
+
+    // 즐겨찾기 지수를 갱신하는 함수
+    private boolean updateFavoriteIndex(User user) {
+        // 사용자의 즐겨찾기 목록을 가져옴
+        List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();
+
+        // 즐겨찾기 목록을 이용해서 상품을 리스트에 저장
+        Set<Product> products = new HashSet<>();
+
+        for (FavoriteGoods favoriteGoods : favoriteGoodsList) {
+            products.add(favoriteGoods.getGoods().getProduct());
+
+            Map<LocalDate, Double> dateFavoriteIndex = new HashMap<>();
+            List<ProductPrice> productPrices;
+            Double cur, productIndex;
+            for(Product product: products) {
+                productPrices = productPriceService.getMonthProductPrice(product);
+
+                for(ProductPrice productPrice: productPrices) {
+                    cur = 0.0;
+                    LocalDate date = productPrice.getResearchDate();
+                    productIndex = productPrice.getPrice() * product.getWeight();
+
+                    if(dateFavoriteIndex.containsKey(date))
+                        cur = dateFavoriteIndex.get(date);
+
+                    dateFavoriteIndex.put(date, cur + productIndex);
+                }
+            }
+
+            Double div = dateFavoriteIndex.get(LocalDate.of(2020, 1, 1));
+            FavoriteIndex favoriteIndex;
+            List<PriceIndex> favoriteIndices = new ArrayList<>();
+            for(LocalDate key: dateFavoriteIndex.keySet()) {
+                favoriteIndex = FavoriteIndex.of(key, dateFavoriteIndex.get(key) / div, user);
+                favoriteIndices.add(favoriteIndex);
+            }
+
+            priceIndexService.updateFavoriteIndex(user, favoriteIndices);
+        }
+
+        return true;
     }
 
     private List<FavoriteItemResponseDto> getFavoriteGoods(User user, BusinessType businessType) {
@@ -170,4 +268,6 @@ public class FavoriteApi {
 
         private double value;
     }
+
+
 }

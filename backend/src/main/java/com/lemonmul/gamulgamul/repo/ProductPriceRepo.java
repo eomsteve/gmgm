@@ -14,4 +14,6 @@ public interface ProductPriceRepo extends JpaRepository<ProductPrice, Long> {
     //선택 업태의 품목 가격 정보
     @Query("from WeekProductPrice")
     List<ProductPrice> findByProductAndBusinessType(Product product, BusinessType businessType);
+
+    List<ProductPrice> findAllByProductAndDtype(Product product, String dtype);
 }

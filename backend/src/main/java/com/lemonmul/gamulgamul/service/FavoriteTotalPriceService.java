@@ -20,6 +20,14 @@ public class FavoriteTotalPriceService {
 
     // 즐겨찾기 가격 총합을 받아오는 함수(아직 제대로 동작하는지 확인 못함)
     public List<FavoriteTotalPrice> getFavoriteTotalPrices(User user, BusinessType businessType, LocalDate date) {
-        return favoriteTotalPriceRepo.findAllByUserIdAndBusinessTypeAndResearchDateBetween(user, businessType, date.minusYears(1), date);
+        return favoriteTotalPriceRepo.findAllByUserAndBusinessTypeAndResearchDateBetweenOrderByResearchDate(user, businessType, date.minusYears(1), date);
+    }
+
+    @Transactional
+    public boolean updateFavoriteTotalPrice(User user, List<FavoriteTotalPrice> favoriteTotalPrices) {
+        favoriteTotalPriceRepo.deleteByUser(user);
+        favoriteTotalPriceRepo.saveAll(favoriteTotalPrices);
+
+        return true;
     }
 }
