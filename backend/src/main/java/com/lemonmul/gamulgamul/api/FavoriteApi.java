@@ -46,10 +46,13 @@ public class FavoriteApi {
     /**
      * 즐겨찾기 페이지에 보여줄 정보들
      */
-    // TODO: 들어올 때 user pk, 나갈 때 list에 담긴 갯수 log
     @GetMapping("/")
     public FavoritePageResponseDto getFavoritePage(@RequestHeader HttpHeaders headers) {
+        log.info("[Starting request]");
+
         User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
+
+        log.info("userId: {}", user.getId());
 
         LocalDate today = LocalDate.now();
 
@@ -71,6 +74,17 @@ public class FavoriteApi {
         // 즐겨찾기 상품 총합
         List<FavoriteTotalPriceResponseDto> favoriteTotalPriceResponseDtos = favoriteTotalPriceService.getFavoriteTotalPrices(user, BusinessType.m, today).stream().map(FavoriteTotalPriceResponseDto::new).collect(Collectors.toList());
 
+        log.info("countryIndices size: {}", countryIndices.size());
+        log.info("facoriteIndices size: {}", favoriteIndices.size());
+        log.info("businessTypesResponseDtos size: [\n");
+        for(int i = 0; i < businessTypesResponseDtos.size(); i++) {
+            log.info("{}\n", businessTypesResponseDtos.get(0));
+        }
+        log.info("]");
+        log.info("favoriteItemResponseDtos size: {}", favoriteItemResponseDtos.size());
+        log.info("favoriteTotalPriceDtos size: {}", favoriteTotalPriceResponseDtos.size());
+
+        log.info("[Finished request]");
         return new FavoritePageResponseDto(countryIndices, favoriteIndices, businessTypesResponseDtos, favoriteItemResponseDtos, favoriteTotalPriceResponseDtos);
     }
 
@@ -80,7 +94,14 @@ public class FavoriteApi {
     // TODO: 리스트 개수 log
     @GetMapping("/select")
     public List<CategoryDto> getAllCategoryProducts() {
-        return categoryService.getAllCategories().stream().map(CategoryDto::new).collect(Collectors.toList());
+        log.info("[Starting request]");
+
+        List<CategoryDto> categoryDtos = categoryService.getAllCategories().stream().map(CategoryDto::new).collect(Collectors.toList());
+
+        log.info("categoryDtos size: {}", categoryDtos.size());
+
+        log.info("[Finished request]");
+        return categoryDtos;
     }
 
     /**
@@ -89,8 +110,17 @@ public class FavoriteApi {
     // TODO: 품목 pk와 상품 리스트 개수 log
     @GetMapping("/select/product/{productId}")
     public List<GoodsDto> getGoods(@PathVariable Long productId) {
+        log.info("[Starting request]");
+
+        log.info("productId: {}", productId);
+
         Product product = productService.product(productId);
-        return product.getGoods().stream().map(GoodsDto::new).collect(Collectors.toList());
+        List<GoodsDto> goodsDtos = product.getGoods().stream().map(GoodsDto::new).collect(Collectors.toList());
+
+        log.info("goodsDtos size: {}", goodsDtos.size());
+
+        log.info("[Finished request]");
+        return goodsDtos;
     }
 
     /**
@@ -100,9 +130,14 @@ public class FavoriteApi {
     // TODO: 들어올 때 user pk랑 즐겨찾기 개수 log, 나갈 때 합산 및 지수 최신값 log
     @PostMapping("/")
     public EmailResponseDto updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) {
+        log.info("[Starting request]");
+
         List<Long> goodsIds = favoriteUpdateRequestDto.getGoodsIds();
         User user = JwtTokenProvider.getUserFromJwtToken(userService,headers);
         Goods goods;
+
+        log.info("userId: {}", user.getId());
+        log.info("favoriteUpdateRequestDtos: {}", favoriteUpdateRequestDto.getGoodsIds().size());
 
         // TODO: 쿼리가 너무 많이 나갈 것 같음...
         // 즐겨찾기 목록에서 삭제할 항목들
@@ -147,15 +182,24 @@ public class FavoriteApi {
         // 즐겨찾기 지수 계산
         updateFavoriteIndex(user);
 
+        log.info("Finished request");
         return new EmailResponseDto(user.getEmail());
     }
 
     @GetMapping("/business/{businessType}")
     public List<FavoriteItemResponseDto> getFavoriteGoods(@PathVariable BusinessType businessType, @RequestHeader HttpHeaders headers) {
+        log.info("[Starting request]");
+
         User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
+
+        log.info("userId: {}", user.getId());
+        log.info("businessType: {}", businessType);
 
         List<FavoriteItemResponseDto> favoriteItemResponseDtos = getFavoriteGoods(user, businessType);
 
+        log.info("favoriteItemResponseDtos size: {}", favoriteItemResponseDtos.size());
+
+        log.info("Finished request");
         return favoriteItemResponseDtos;
     }
 
@@ -199,6 +243,8 @@ public class FavoriteApi {
             }
         }
 
+        log.info("recent FavoriteTotalPrice: {}", favoriteTotalPrices.get(favoriteTotalPrices.size() - 1));
+
         return favoriteTotalPriceService.updateFavoriteTotalPrice(user, favoriteTotalPrices);
     }
 
@@ -208,40 +254,45 @@ public class FavoriteApi {
         // 사용자의 즐겨찾기 목록을 가져옴
         List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();
 
-        // 즐겨찾기 목록을 이용해서 상품을 리스트에 저장
         Set<Product> products = new HashSet<>();
+        Map<LocalDate, Double> dateFavoriteIndex = new HashMap<>();
 
+        Product product;
+        List<ProductPrice> productPrices;
+        Double cur, productIndex;
         for (FavoriteGoods favoriteGoods : favoriteGoodsList) {
-            products.add(favoriteGoods.getGoods().getProduct());
+            product = favoriteGoods.getGoods().getProduct();
 
-            Map<LocalDate, Double> dateFavoriteIndex = new HashMap<>();
-            List<ProductPrice> productPrices;
-            Double cur, productIndex;
-            for(Product product: products) {
-                productPrices = productPriceService.getMonthProductPrice(product);
+            if(products.contains(product))
+                continue;
+            else
+                products.add(product);
 
-                for(ProductPrice productPrice: productPrices) {
-                    cur = 0.0;
-                    LocalDate date = productPrice.getResearchDate();
-                    productIndex = productPrice.getPrice() * product.getWeight();
+            productPrices = productPriceService.getMonthProductPrice(product);
 
-                    if(dateFavoriteIndex.containsKey(date))
-                        cur = dateFavoriteIndex.get(date);
+            for(ProductPrice productPrice: productPrices) {
+                cur = 0.0;
+                LocalDate date = productPrice.getResearchDate();
+                productIndex = productPrice.getPrice() * product.getWeight();
 
-                    dateFavoriteIndex.put(date, cur + productIndex);
-                }
+                if(dateFavoriteIndex.containsKey(date))
+                    cur = dateFavoriteIndex.get(date);
+
+                dateFavoriteIndex.put(date, cur + productIndex);
             }
-
-            Double div = dateFavoriteIndex.get(LocalDate.of(2020, 1, 1));
-            FavoriteIndex favoriteIndex;
-            List<PriceIndex> favoriteIndices = new ArrayList<>();
-            for(LocalDate key: dateFavoriteIndex.keySet()) {
-                favoriteIndex = FavoriteIndex.of(key, dateFavoriteIndex.get(key) / div, user);
-                favoriteIndices.add(favoriteIndex);
-            }
-
-            priceIndexService.updateFavoriteIndex(user, favoriteIndices);
         }
+
+        FavoriteIndex favoriteIndex;
+        List<PriceIndex> favoriteIndices = new ArrayList<>();
+        Double div = dateFavoriteIndex.get(LocalDate.of(2020, 1, 1));
+        for(LocalDate key: dateFavoriteIndex.keySet()) {
+            favoriteIndex = FavoriteIndex.of(key, dateFavoriteIndex.get(key) / div, user);
+            favoriteIndices.add(favoriteIndex);
+        }
+
+        priceIndexService.updateFavoriteIndex(user, favoriteIndices);
+
+        log.info("recent FavoriteIndex: {}", favoriteIndices.get(favoriteIndices.size() - 1));
 
         return true;
     }
@@ -279,6 +330,4 @@ public class FavoriteApi {
 
         private double value;
     }
-
-
 }
