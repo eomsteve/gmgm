@@ -1,13 +1,29 @@
-import { Component, FC, CSSProperties, useState } from 'react';
+import { Component, FC, CSSProperties, useState, useCallback } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import SubText from './UI/ProductPicker';
-
 import Goods from './GoodsComponent';
+
+
 
 interface ProductListsProps {
   productList: string[];
+}
+type GoodsPrice = {
+  price : number;
+  researchDate : string;
+}
+export type GoodsItem = {
+  goodsId : number;
+  goodsName : string;
+  goodsImg? : string;
+  cheapPrice? : string;
+  cheapUrl? : string;
+  capacity? : string;
+  measure? : string;
+  ea? : string;
+  goodsPrice? : GoodsPrice[];
 }
 
 interface NextArrowProps {
@@ -21,7 +37,7 @@ interface PrevArrowProps {
 
 const ProductLists: FC<ProductListsProps> = props => {
   const { productList } = props;
-  let [goodsList, setGoodsList] = useState<number[]>([]);
+  let [goodsList, setGoodsList] = useState<GoodsItem[]>([]);
   const testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
   const settings = {
     className: 'center',
@@ -44,12 +60,12 @@ const ProductLists: FC<ProductListsProps> = props => {
     );
   }
 
-  async function handle(sub: any) {
+  const handle= useCallback((sub: any) => {
     // onClick시 goods 가져오기 ??? 이게 맞아??
     console.log(sub);
     // axios 통신을 누를때마다 합니다? 그래서 useState에 값을 저장하고 반영해서 반복문 돌림
-    setGoodsList([1, 2, 3, 4, 5, 6, 7, 8]);
-  }
+    setGoodsList([{ goodsId: 1, goodsName: 'apple' }]);
+  },[]);
 
   return (
     <>
@@ -57,7 +73,7 @@ const ProductLists: FC<ProductListsProps> = props => {
         <Slider {...settings}>
           {productList.map(row => {
             // console.log(row);
-            
+
             return (
               <div onClick={() => handle(row)} key={0}>
                 <SubText />
@@ -66,7 +82,7 @@ const ProductLists: FC<ProductListsProps> = props => {
           })}
         </Slider>
       </div>
-      <Goods goodsList={goodsList}/>
+      <Goods goodsList={goodsList} />
     </>
   );
 };
