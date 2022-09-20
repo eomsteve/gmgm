@@ -13,6 +13,7 @@ import com.lemonmul.gamulgamul.service.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/favorite")
 @RequiredArgsConstructor
+@Slf4j
 public class FavoriteApi {
 
     private final UserService userService;
@@ -37,6 +39,7 @@ public class FavoriteApi {
     /**
      * 즐겨찾기 페이지에 보여줄 정보들
      */
+    // TODO: 들어올 때 user pk, 나갈 때 list에 담긴 갯수 log
     @GetMapping("/")
     public FavoritePageResponseDto getFavoritePage(@RequestHeader HttpHeaders headers) {
         Long userId = JwtTokenProvider.getUserIdFromJwtToken(userService,headers);
@@ -77,6 +80,8 @@ public class FavoriteApi {
     /**
      * 상품 선택 페이지에 띄울 카테고리 목록
      */
+    // TODO: 카테고리 및 품목으로 변경
+    // TODO: 리스트 개수 log
     @GetMapping("/select")
     public List<GoodsSelectCategoryResponseDto> getAllCategories() {
         return categoryService.getAllCategories().stream().map(GoodsSelectCategoryResponseDto::new).collect(Collectors.toList());
@@ -85,6 +90,8 @@ public class FavoriteApi {
     /**
      * 카테고리 선택 시, 해당 카테고리의 품목들과 상품들
      */
+    // TODO: 상품으로 변경
+    // TODO: 품목 pk와 상품 리스트 개수 log
     @GetMapping("/select/category/{categoryId}")
     public List<GoodsSelectProductResponseDto> getCategoryProducts(@PathVariable Long categoryId) {
         Category category = categoryService.getCategory(categoryId);
@@ -94,6 +101,8 @@ public class FavoriteApi {
     /**
      * 즐겨찾기 목록 갱신
      */
+    // TODO: return 값 수정(DTO)
+    // TODO: 들어올 때 user pk랑 즐겨찾기 개수 log, 나갈 때 합산 및 지수 최신값 log
     @PostMapping("/")
     public boolean updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) {
         List<Long> goodsIds = favoriteUpdateRequestDto.getGoodsIds();
@@ -138,6 +147,7 @@ public class FavoriteApi {
     }
 
     // 지수 직접 추가용으로 만든 임시 api
+
     @PostMapping("/addtest")
     public boolean addPriceIndex(@RequestBody AddPriceIndexDto addPriceIndexDto) {
         return priceIndexService.addIndex(addPriceIndexDto.dtype, addPriceIndexDto.date, addPriceIndexDto.value);

@@ -14,6 +14,7 @@ import com.lemonmul.gamulgamul.service.ChecklistService;
 import com.lemonmul.gamulgamul.service.ProductService;
 import com.lemonmul.gamulgamul.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/checklist")
 @RequiredArgsConstructor
+@Slf4j
 public class ChecklistApi {
 
     private final ChecklistService checklistService;
@@ -37,6 +39,7 @@ public class ChecklistApi {
     /**
      * 체크리스트 리스트 조회
      */
+    // TODO: 들어올 때 user pk, 나갈 때 list 개수 log
     @GetMapping("/list")
     public List<ChecklistListDto> checklistList(@RequestHeader HttpHeaders headers){
         User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
@@ -47,6 +50,7 @@ public class ChecklistApi {
     /**
      * 빈 체크리스트 생성
      */
+    // TODO: 들어올 때 user pk, 나갈 때 check list pk log
     @PostMapping()
     public ChecklistResponseDto createChecklist(@RequestHeader HttpHeaders headers){
         User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
@@ -56,6 +60,7 @@ public class ChecklistApi {
     /**
      * 체크리스트 품목 선택 페이지
      */
+    // TODO: 들어올 때 list 개수 log
     @GetMapping("/select")
     public List<CategoryDto> checklistProductSelect(){
         return categoryService.getAllCategories().stream().map(CategoryDto::new).collect(Collectors.toList());
@@ -63,8 +68,8 @@ public class ChecklistApi {
 
     /**
      * 체크리스트 수정
-     * todo 해당 유저의 체크리스트인지 확인 필요
      */
+    // TODO: 들어올 때 user pk, checklist pk , 나갈 때 list 개수 log (basic, custom 나눠서)
     @PutMapping("/{checklistId}")
     public ChecklistResponseDto modifyChecklist(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId,
                                                 @RequestBody ChecklistRequestDto checklistRequestDto){
@@ -80,8 +85,8 @@ public class ChecklistApi {
 
     /**
      * 체크리스트 조회
-     * todo 체크리스트 수정 작성 후 동작 확인 필요
      */
+    // TODO: 들어올 때 user pk, checklist pk, 나갈 때 checklist 개수 log
     @GetMapping("/{checklistId}")
     public ChecklistDto checklist(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId){
         User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
@@ -94,6 +99,7 @@ public class ChecklistApi {
     /**
      * 체크리스트 삭제
      */
+    // TODO: 들어올 때 user pk, checklist pk, 나갈 때 '요청 종료' log
     @DeleteMapping("/{checklistId}")
     public ChecklistResponseDto deleteChecklist(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId){
         User user = JwtTokenProvider.getUserFromJwtToken(userService,headers);
