@@ -160,6 +160,7 @@ public class FavoriteApi {
     }
 
     // 즐겨찾기 총합 계산하는 함수
+    // TODO: 반환값 고민
     private boolean updateFavoriteTotalPrice(User user) {
         // 사용자의 즐겨찾기 목록을 가져옴
         List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();
@@ -202,6 +203,7 @@ public class FavoriteApi {
     }
 
     // 즐겨찾기 지수를 갱신하는 함수
+    // TODO: 반환값 고민
     private boolean updateFavoriteIndex(User user) {
         // 사용자의 즐겨찾기 목록을 가져옴
         List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();

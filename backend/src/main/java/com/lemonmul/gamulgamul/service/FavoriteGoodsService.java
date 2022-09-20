@@ -15,12 +15,7 @@ public class FavoriteGoodsService {
 
     private final FavoriteGoodsRepo favoriteGoodsRepo;
 
-    // UserId로 즐겨찾기 목록을 받아오는 함수
-    public List<FavoriteGoods> getFavoriteGoodsList(Long userId) {
-        return favoriteGoodsRepo.findAllByUserId(userId);
-    }
-
-    // 즐겨찾기 목록을 갱신하는 함수(아직 제대로 동작하는지 확인 못함)
+    // 즐겨찾기 목록을 갱신하는 함수
     @Transactional
     public boolean updateFavoriteGoodsList(List<FavoriteGoods> addList, List<FavoriteGoods> deleteList) {
         favoriteGoodsRepo.saveAll(addList);

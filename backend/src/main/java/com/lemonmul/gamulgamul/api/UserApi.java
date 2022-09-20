@@ -1,5 +1,6 @@
 package com.lemonmul.gamulgamul.api;
 
+import com.lemonmul.gamulgamul.api.dto.EmailResponseDto;
 import com.lemonmul.gamulgamul.entity.user.Gender;
 import com.lemonmul.gamulgamul.entity.user.Role;
 import com.lemonmul.gamulgamul.entity.user.User;
@@ -26,16 +27,15 @@ public class UserApi {
     // TODO: 강의 듣고 예외처리 해야함
     // TODO: email log 찍기
     @GetMapping("/check/{email}")
-    public boolean emailCheck(@PathVariable String email) {
-
-        return userService.emailCheck(email);
+    public EmailResponseDto emailCheck(@PathVariable String email) {
+        return new EmailResponseDto(userService.emailCheck(email).getEmail());
     }
 
     // TODO: 강의 듣고 예외처리 해야함
     // TODO: pwd는 다 ***, name은 홍*동, 나머지는 그대로 log
     @PostMapping("/signup")
-    public boolean signUp(@RequestBody SignupRequestDto signupRequestDto) {
-        return userService.signUp(signupRequestDto.toUser());
+    public EmailResponseDto signUp(@RequestBody SignupRequestDto signupRequestDto) {
+        return new EmailResponseDto(userService.signUp(signupRequestDto.toUser()).getEmail());
     }
 
     // TODO: JWT 에서 email 까서  log

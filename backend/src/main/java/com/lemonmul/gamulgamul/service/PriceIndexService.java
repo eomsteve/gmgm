@@ -1,5 +1,6 @@
 package com.lemonmul.gamulgamul.service;
 
+import com.lemonmul.gamulgamul.api.dto.EmailResponseDto;
 import com.lemonmul.gamulgamul.entity.priceindex.CountryIndex;
 import com.lemonmul.gamulgamul.entity.priceindex.GMGMIndex;
 import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
@@ -31,11 +32,9 @@ public class PriceIndexService {
     }
 
     @Transactional
-    public boolean updateFavoriteIndex(User user, List<PriceIndex> priceIndices) {
+    public List<PriceIndex> updateFavoriteIndex(User user, List<PriceIndex> priceIndices) {
         priceIndexRepo.deleteByUser(user);
-        priceIndexRepo.saveAll(priceIndices);
-
-        return true;
+        return priceIndexRepo.saveAll(priceIndices);
     }
 
     // 지수 정보를 추가하는 함수(즐겨찾기 지수 제외)

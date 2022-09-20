@@ -22,6 +22,6 @@ public class ProductPriceService {
     }
 
     public List<ProductPrice> getMonthProductPrice(Product product) {
-        return productPriceRepo.findAllByProductAndDtype(product, "m");
+        return productPriceRepo.findAllByProduct(product);
     }
 }
