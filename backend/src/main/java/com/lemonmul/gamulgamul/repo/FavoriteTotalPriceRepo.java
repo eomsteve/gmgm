@@ -8,5 +8,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface FavoriteTotalPriceRepo extends JpaRepository<FavoriteTotalPrice, Long> {
-    List<FavoriteTotalPrice> findAllByUserIdAndBusinessTypeAndResearchDateBetween(Long userId, BusinessType business, LocalDate start, LocalDate end);
+    List<FavoriteTotalPrice> findAllByUserIdAndBusinessAndResearchDateBetween(Long userId, BusinessType business, LocalDate start, LocalDate end);
 }

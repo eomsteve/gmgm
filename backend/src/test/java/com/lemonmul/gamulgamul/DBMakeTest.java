@@ -214,7 +214,7 @@ class DBMakeTest {
         List<GoodsPrice> goodsPriceList;
         for(BusinessType businessType: BusinessType.values()) {
 
-            goodsPriceList = goodsPriceRepo.findAllByBusinessTypeAndGoodsIn(businessType, goodsList);
+            goodsPriceList = goodsPriceRepo.findAllByBusinessAndGoodsIn(businessType, goodsList);
 
             Map<LocalDate, Double> dateTotalPrices = new HashMap<>();
             Double cur;

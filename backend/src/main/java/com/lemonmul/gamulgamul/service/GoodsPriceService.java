@@ -22,8 +22,28 @@ public class GoodsPriceService {
     // 상품Id와 업태 타입으로 상품 가격을 받아오는 함수
     public List<GoodsPrice> getGoodsPrices(Long goodsId, BusinessType business) {
         Optional<Goods> optional = goodsRepo.findById(goodsId);
-        if(optional.isPresent()) {
-            return goodsPriceRepo.findAllByGoodsAndBusinessType(optional.get(), business);
+        if (optional.isPresent()) {
+            return goodsPriceRepo.findByGoodsAndBusinessOrderByResearchDate(optional.get(), business);
+        } else {
+            //todo
+            throw new NullPointerException();
+        }
+    }
+
+    /**
+     * 선택 품목, 업태의 상품 가격 정보 (날짜 오름차순)
+     */
+    public List<GoodsPrice> goodsPricesByBusinessType(Goods goods,BusinessType business){
+        return goodsPriceRepo.findByGoodsAndBusinessOrderByResearchDate(goods,business);
+    }
+
+    /**
+     * 선택 품목, 온라인 업태의 상품 최신 가격 정보
+     */
+    public GoodsPrice goodsCheapPrice(Goods goods){
+        Optional<GoodsPrice> optional = goodsPriceRepo.findFirstByGoodsAndBusinessOrderByResearchDateDesc(goods,BusinessType.o);
+        if(optional.isPresent()){
+            return optional.get();
         }else{
             //todo
             throw new NullPointerException();
