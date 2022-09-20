@@ -175,9 +175,7 @@ public class FavoriteApi {
         return favoriteItemResponseDtos;
     }
 
-    // 즐겨찾기 총합을 갱신하는 함수
     // 지수 직접 추가용으로 만든 임시 api
-
     @PostMapping("/addtest")
     public boolean addPriceIndex(@RequestBody AddPriceIndexDto addPriceIndexDto) {
         return priceIndexService.addIndex(addPriceIndexDto.dtype, addPriceIndexDto.date, addPriceIndexDto.value);
