@@ -1,5 +1,6 @@
 package com.lemonmul.gamulgamul.entity.product;
 
+import com.lemonmul.gamulgamul.entity.BusinessType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dtype")
+@DiscriminatorColumn(name = "dateType")
 public class ProductPrice {
 
     @Column(name = "product_price_id")
@@ -24,7 +25,8 @@ public class ProductPrice {
     private LocalDate researchDate;
 
     @Column(insertable = false, updatable = false)
-    private String dtype;
+    @Enumerated(EnumType.STRING)
+    private DateType dateType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
