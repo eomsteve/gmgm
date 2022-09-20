@@ -79,24 +79,24 @@ class DBMakeTest {
     private void createCategoryTable() {
         Category category;
 
-        for(Long i = 1L; i <= 12; i++) {
-            category = Category.createCategory(i, "category" + i, "temp img");
+        for(long i = 1L; i <= 12; i++) {
+            category = Category.of(i, "category" + i, "temp img");
             em.persist(category);
         }
     }
 
     private void createProductTable() {
         Product product;
-        Long productId;
+        long productId;
 
         for(Long i = 1L; i <= 12; i++) {
-            for(Long j = 1L; j <= 10; j++) {
+            for(long j = 1L; j <= 10; j++) {
                 productId = (i - 1L) * 10 + j;
 
                 if(productId % 2 == 0)
-                    product = new Product(productId, categoryRepo.findById(i).get(), "product" + productId, 10, "g", 0.1 * productId, "temp img");
+                    product = Product.of(productId, categoryRepo.findById(i).get(), "product" + productId, 10, "g", 0.1 * productId, "temp img");
                 else
-                    product = new Product(productId, categoryRepo.findById(i).get(), "product" + productId, 100, "ml", 0.1 * productId, "temp img");
+                    product = Product.of(productId, categoryRepo.findById(i).get(), "product" + productId, 100, "ml", 0.1 * productId, "temp img");
 
                 em.persist(product);
             }
@@ -108,12 +108,12 @@ class DBMakeTest {
         Product product;
         LocalDate start;
 
-        for(Long i = 1L; i <= 120; i++) {
+        for(long i = 1L; i <= 120; i++) {
             product = productRepo.findById(i).get();
 
             start = LocalDate.of(2012, 9, 1);
             for(int j = 0; j <= 120; j++) {
-                productPrice = MonthProductPrice.createMonthProductPrice(i * 100.0 + j * 10.0, start.plusMonths(j), product);
+                productPrice = MonthProductPrice.of(i * 100.0 + j * 10.0, start.plusMonths(j), product);
 
                 em.persist(productPrice);
             }
@@ -121,7 +121,7 @@ class DBMakeTest {
             start = LocalDate.of(2021, 9, 15);
             for(BusinessType businessType: BusinessType.values()) {
                 for(int j = 0; j < 53; j++) {
-                    productPrice = WeekProductPrice.createWeekProductPrice(i * 100.0 + j * 20.0, start.plusWeeks(j), product, businessType);
+                    productPrice = WeekProductPrice.of(i * 100.0 + j * 20.0, start.plusWeeks(j), product, businessType);
 
                     em.persist(productPrice);
                 }
@@ -132,14 +132,14 @@ class DBMakeTest {
     private void createGoodsTable() {
         Goods goods;
         Product product;
-        Long goodsId;
+        long goodsId;
 
-        for(Long i = 1L; i <= 120; i++) {
+        for(long i = 1L; i <= 120; i++) {
             product = productRepo.findById(i).get();
-            for(Long j = 1L; j <= 5; j++) {
+            for(long j = 1L; j <= 5; j++) {
                 goodsId = (i - 1L) * 5 + j;
 
-                goods = Goods.createGoods(goodsId, "goods" + goodsId, "temp img", (int)(j * 100), product.getMeasure(), (int)(i / 12 + j), "temp url", product);
+                goods = Goods.of(goodsId, "goods" + goodsId, "temp img", (int)(j * 100), product.getMeasure(), (int)(i / 12 + j), "temp url", product);
 
                 em.persist(goods);
             }
@@ -151,13 +151,13 @@ class DBMakeTest {
         Goods goods;
         LocalDate start;
 
-        for(Long i = 1L; i <= 600; i++) {
+        for(long i = 1L; i <= 600; i++) {
             goods = goodsRepo.findById(i).get();
 
             start = LocalDate.of(2021, 9, 15);
             for(BusinessType businessType: BusinessType.values()) {
                 for(int j = 0; j < 53; j++) {
-                    goodsPrice = GoodsPrice.createGoodsPrice(i * 100.0 + j * 20.0, start.plusWeeks(j), businessType, goods);
+                    goodsPrice = GoodsPrice.of(i * 100.0 + j * 20.0, start.plusWeeks(j), businessType, goods);
 
                     em.persist(goodsPrice);
                 }
@@ -170,10 +170,10 @@ class DBMakeTest {
         LocalDate start = LocalDate.of(2012, 9, 1);
 
         for(int i = 0; i < 120; i++) {
-            priceIndex = CountryIndex.createCountryIndex(start.plusMonths(i), i * 0.7);
+            priceIndex = CountryIndex.of(start.plusMonths(i), i * 0.7);
             em.persist(priceIndex);
 
-            priceIndex = GMGMIndex.createGMGMIndex(start.plusMonths(i), i * 0.9);
+            priceIndex = GMGMIndex.of(start.plusMonths(i), i * 0.9);
             em.persist(priceIndex);
         }
     }
@@ -184,7 +184,7 @@ class DBMakeTest {
         LocalDate start = LocalDate.of(1990, 1, 1);
 
         for(int i = 1; i < 10; i++) {
-            user = User.createUser("email" + i + "@xx.xx", bCryptPasswordEncoder.encode("1234"), "name" + i, Gender.m, start.plusYears(i), Role.u);
+            user = User.of("email" + i + "@xx.xx", bCryptPasswordEncoder.encode("1234"), "name" + i, Gender.m, start.plusYears(i), Role.u);
 
             em.persist(user);
         }
@@ -196,9 +196,9 @@ class DBMakeTest {
         Goods goods;
         FavoriteGoods favoriteGoods;
 
-        for(Long i = 1L; i < 10; i++) {
+        for(long i = 1L; i < 10; i++) {
             goods = goodsRepo.findById(i * 10).get();
-            favoriteGoods = FavoriteGoods.createFavoriteGoods(user, goods);
+            favoriteGoods = FavoriteGoods.of(user, goods);
 
             em.persist(favoriteGoods);
         }
@@ -206,7 +206,7 @@ class DBMakeTest {
 
     private void updateFavoriteTotalPrice(User user) {
         // 사용자의 즐겨찾기 목록을 가져옴
-        List<FavoriteGoods> favoriteGoodsList = favoriteGoodsRepo.findAllByUserId(user.getId());
+        List<FavoriteGoods> favoriteGoodsList = favoriteGoodsRepo.findAllByUser(user);
 
         // 즐겨찾기 목록을 이용해서 상품을 리스트에 저장
         List<Goods> goodsList = new ArrayList<>();
@@ -236,7 +236,7 @@ class DBMakeTest {
             // 계산한 총합을 리스트에 추가
             FavoriteTotalPrice favoriteTotalPrice;
             for (LocalDate key : dateTotalPrices.keySet()) {
-                favoriteTotalPrice = FavoriteTotalPrice.createFavoriteTotalPrice(user, dateTotalPrices.get(key), key, businessType);
+                favoriteTotalPrice = FavoriteTotalPrice.of(user, dateTotalPrices.get(key), key, businessType);
                 favoriteTotalPrices.add(favoriteTotalPrice);
             }
         }

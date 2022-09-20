@@ -1,6 +1,7 @@
 package com.lemonmul.gamulgamul.service;
 
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
+import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.repo.FavoriteGoodsRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,6 @@ import java.util.List;
 public class FavoriteGoodsService {
 
     private final FavoriteGoodsRepo favoriteGoodsRepo;
-
-    // UserId로 즐겨찾기 목록을 받아오는 함수
-    public List<FavoriteGoods> getFavoriteGoodsList(Long userId) {
-        return favoriteGoodsRepo.findAllByUserId(userId);
-    }
 
     // 즐겨찾기 목록을 갱신하는 함수
     @Transactional

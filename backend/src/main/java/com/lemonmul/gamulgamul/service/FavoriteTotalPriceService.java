@@ -19,8 +19,8 @@ public class FavoriteTotalPriceService {
     private final FavoriteTotalPriceRepo favoriteTotalPriceRepo;
 
     // 즐겨찾기 가격 총합을 받아오는 함수
-    public List<FavoriteTotalPrice> getFavoriteTotalPrices(Long userId, BusinessType businessType, LocalDate date) {
-        return favoriteTotalPriceRepo.findAllByUserIdAndBusinessTypeAndResearchDateBetweenOrderByResearchDate(userId, businessType, date.minusYears(1), date);
+    public List<FavoriteTotalPrice> getFavoriteTotalPrices(User user, BusinessType businessType, LocalDate date) {
+        return favoriteTotalPriceRepo.findAllByUserAndBusinessTypeAndResearchDateBetweenOrderByResearchDate(user, businessType, date.minusYears(1), date);
     }
 
     // 즐겨찾기 가격 총합을 갱신하는 함수

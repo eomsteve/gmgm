@@ -4,10 +4,9 @@ import com.lemonmul.gamulgamul.entity.goods.Goods;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-// 상품 선택 페이지에 상품 정보를 반환하는 Dto
 @Data
 @AllArgsConstructor
-public class GoodsSelectGoodsResponseDto {
+public class GoodsDto {
     private Long id;
 
     private String name;
@@ -20,7 +19,7 @@ public class GoodsSelectGoodsResponseDto {
 
     private Integer ea;
 
-    public GoodsSelectGoodsResponseDto(Goods goods) {
+    public GoodsDto(Goods goods) {
         this.id = goods.getId();
         this.name = goods.getName();
         this.img = goods.getImg();

@@ -26,8 +26,8 @@ public class PriceIndexService {
     }
 
     // 지정한 날부터 즐겨찾기 지수를 받아오는 함수
-    public List<PriceIndex> getFavoriteIndices(Long userId, LocalDate date) {
-        return priceIndexRepo.findAllByDtypeAndUserIdAndResearchDateBetweenOrderByResearchDate("f", userId, date.minusYears(10), date);
+    public List<PriceIndex> getFavoriteIndices(User user, LocalDate date) {
+        return priceIndexRepo.findAllByUserAndResearchDateBetweenOrderByResearchDate(user, date.minusYears(10), date);
     }
 
     @Transactional
@@ -46,9 +46,9 @@ public class PriceIndexService {
         PriceIndex priceIndex = null;
 
         if("c".equals(dtype))
-            priceIndex = CountryIndex.createCountryIndex(localDate, value);
+            priceIndex = CountryIndex.of(localDate, value);
         else if("g".equals(dtype))
-            priceIndex = GMGMIndex.createGMGMIndex(localDate, value);
+            priceIndex = GMGMIndex.of(localDate, value);
 
         priceIndexRepo.save(priceIndex);
 

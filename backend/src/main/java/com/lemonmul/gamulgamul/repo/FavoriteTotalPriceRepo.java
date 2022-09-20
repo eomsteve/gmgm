@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface FavoriteTotalPriceRepo extends JpaRepository<FavoriteTotalPrice, Long> {
-    List<FavoriteTotalPrice> findAllByUserIdAndBusinessTypeAndResearchDateBetweenOrderByResearchDate(Long userId, BusinessType businessType, LocalDate start, LocalDate end);
+    List<FavoriteTotalPrice> findAllByUserAndBusinessTypeAndResearchDateBetweenOrderByResearchDate(User user, BusinessType businessType, LocalDate start, LocalDate end);
 
     void deleteByUser(User user);
 }

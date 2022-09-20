@@ -17,12 +17,12 @@ public class FavoriteIndex extends PriceIndex {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public FavoriteIndex(LocalDate researchDate, Double value, User user) {
+    private FavoriteIndex(LocalDate researchDate, Double value, User user) {
         super(researchDate, value);
         this.user = user;
     }
 
-    public static FavoriteIndex createFavoriteIndex(LocalDate researchDate, Double value, User user) {
+    public static FavoriteIndex of(LocalDate researchDate, Double value, User user) {
         return new FavoriteIndex(researchDate, value, user);
     }
 }

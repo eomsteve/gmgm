@@ -99,7 +99,7 @@ public class UserApi {
 
             pwd = bCryptPasswordEncoder.encode(pwd);
 
-            return User.createUser(email, pwd, name, genderEnum, localDate, roleEnum);
+            return User.of(email, pwd, name, genderEnum, localDate, roleEnum);
         }
     }
 

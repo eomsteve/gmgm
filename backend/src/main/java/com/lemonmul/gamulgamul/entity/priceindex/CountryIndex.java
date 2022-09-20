@@ -13,11 +13,11 @@ import java.time.LocalDate;
 @DiscriminatorValue("c")
 public class CountryIndex extends PriceIndex {
 
-    public CountryIndex(LocalDate researchDate, Double value) {
+    private CountryIndex(LocalDate researchDate, Double value) {
         super(researchDate, value);
     }
 
-    public static CountryIndex createCountryIndex(LocalDate researchDate, Double value) {
+    public static CountryIndex of(LocalDate researchDate, Double value) {
         return new CountryIndex(researchDate, value);
     }
 }

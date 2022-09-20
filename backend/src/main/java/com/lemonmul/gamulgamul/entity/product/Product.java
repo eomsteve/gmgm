@@ -3,6 +3,7 @@ package com.lemonmul.gamulgamul.entity.product;
 import com.lemonmul.gamulgamul.entity.Category;
 import com.lemonmul.gamulgamul.entity.checklist.ChecklistBasicItem;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Product {
 
     @Column(name = "product_id")
@@ -43,7 +45,7 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private final List<ChecklistBasicItem> checklistBasicItems = new ArrayList<>();
 
-    public Product(Long id, Category category, String name, Integer unit, String measure, Double weight, String img) {
+    private Product(Long id, Category category, String name, Integer unit, String measure, Double weight, String img) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -53,7 +55,7 @@ public class Product {
         this.img = img;
     }
 
-    public static Product createProduct(Long id, Category category, String name, Integer unit, String measure, Double weight, String img) {
+    public static Product of(Long id, Category category, String name, Integer unit, String measure, Double weight, String img) {
         return new Product(id, category, name, unit, measure, weight, img);
     }
 }

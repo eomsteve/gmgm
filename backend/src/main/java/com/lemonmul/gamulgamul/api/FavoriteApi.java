@@ -1,8 +1,8 @@
 package com.lemonmul.gamulgamul.api;
 
+import com.lemonmul.gamulgamul.api.dto.CategoryDto;
 import com.lemonmul.gamulgamul.api.dto.favorite.*;
 import com.lemonmul.gamulgamul.entity.BusinessType;
-import com.lemonmul.gamulgamul.entity.Category;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
@@ -47,7 +47,7 @@ public class FavoriteApi {
     // TODO: 들어올 때 user pk, 나갈 때 list에 담긴 갯수 log
     @GetMapping("/")
     public FavoritePageResponseDto getFavoritePage(@RequestHeader HttpHeaders headers) {
-        Long userId = JwtTokenProvider.getUserIdFromJwtToken(userService,headers);
+        User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
 
         LocalDate today = LocalDate.now();
 
@@ -55,7 +55,7 @@ public class FavoriteApi {
         List<PriceIndexResponseDto> countryIndices = priceIndexService.getIndices("c", today).stream().map(PriceIndexResponseDto::new).collect(Collectors.toList());
 
         // 즐겨찾기 지수
-        List<PriceIndexResponseDto> favoriteIndices = priceIndexService.getFavoriteIndices(userId, today).stream().map(PriceIndexResponseDto::new).collect(Collectors.toList());
+        List<PriceIndexResponseDto> favoriteIndices = priceIndexService.getFavoriteIndices(user, today).stream().map(PriceIndexResponseDto::new).collect(Collectors.toList());
 
         // 업태 종류
         ArrayList<BusinessTypeResponseDto> businessTypesResponseDtos = new ArrayList<>();
@@ -64,43 +64,31 @@ public class FavoriteApi {
         }
 
         // 즐겨찾기 상품 목록
-        List<FavoriteGoods> favoriteGoodsList = favoriteGoodsService.getFavoriteGoodsList(userId);
-        List<FavoriteItemResponseDto> favoriteItemResponseDtos = new ArrayList<>();
-        List<GoodsPrice> goodsPrices;
-        // 최근 가격 변동 계산을 위해 가격 정보 중에서 가장 최근 가격 정보 둘의 차를 구함(업태는 대형마트가 default)
-        double priceGap;
-        for(FavoriteGoods favoriteGoods: favoriteGoodsList) {
-            goodsPrices = goodsPriceService.getGoodsPrices(favoriteGoods.getGoods().getId(), BusinessType.m);
-            priceGap = goodsPrices.get(goodsPrices.size() - 1).getPrice() - goodsPrices.get(goodsPrices.size() - 2).getPrice();
-
-            favoriteItemResponseDtos.add(new FavoriteItemResponseDto(favoriteGoods.getGoods(), priceGap));
-        }
+        List<FavoriteItemResponseDto> favoriteItemResponseDtos = getFavoriteGoods(user, BusinessType.m);
 
         // 즐겨찾기 상품 총합
-        List<FavoriteTotalPriceResponseDto> favoriteTotalPriceResponseDtos = favoriteTotalPriceService.getFavoriteTotalPrices(userId, BusinessType.m, today).stream().map(FavoriteTotalPriceResponseDto::new).collect(Collectors.toList());
+        List<FavoriteTotalPriceResponseDto> favoriteTotalPriceResponseDtos = favoriteTotalPriceService.getFavoriteTotalPrices(user, BusinessType.m, today).stream().map(FavoriteTotalPriceResponseDto::new).collect(Collectors.toList());
 
         return new FavoritePageResponseDto(countryIndices, favoriteIndices, businessTypesResponseDtos, favoriteItemResponseDtos, favoriteTotalPriceResponseDtos);
     }
 
     /**
-     * 상품 선택 페이지에 띄울 카테고리 목록
+     * 상품 선택 페이지에 띄울 카테고리와 품목들
      */
-    // TODO: 카테고리 및 품목으로 변경
     // TODO: 리스트 개수 log
     @GetMapping("/select")
-    public List<GoodsSelectCategoryResponseDto> getAllCategories() {
-        return categoryService.getAllCategories().stream().map(GoodsSelectCategoryResponseDto::new).collect(Collectors.toList());
+    public List<CategoryDto> getAllCategories() {
+        return categoryService.getAllCategories().stream().map(CategoryDto::new).collect(Collectors.toList());
     }
 
     /**
-     * 카테고리 선택 시, 해당 카테고리의 품목들과 상품들
+     * 품목 선택 시, 해당 품목의 상품들
      */
-    // TODO: 상품으로 변경
     // TODO: 품목 pk와 상품 리스트 개수 log
-    @GetMapping("/select/category/{categoryId}")
-    public List<GoodsSelectProductResponseDto> getCategoryProducts(@PathVariable Long categoryId) {
-        Category category = categoryService.getCategory(categoryId);
-        return category.getProducts().stream().map(GoodsSelectProductResponseDto::new).collect(Collectors.toList());
+    @GetMapping("/select/product/{productId}")
+    public List<GoodsDto> getCategoryProducts(@PathVariable Long productId) {
+        Product product = productService.product(productId);
+        return product.getGoods().stream().map(GoodsDto::new).collect(Collectors.toList());
     }
 
     /**
@@ -145,7 +133,7 @@ public class FavoriteApi {
         for(int i = 0; i < exists.length; i++) {
             if(!exists[i]) {
                 goods = goodsService.getGoodsById(goodsIds.get(i));
-                addFavoriteGoodsList.add(FavoriteGoods.createFavoriteGoods(user, goods));
+                addFavoriteGoodsList.add(FavoriteGoods.of(user, goods));
             }
         }
 
@@ -162,16 +150,22 @@ public class FavoriteApi {
     }
 
     @GetMapping("/business/{businessType}")
-    public List<FavoriteItemResponseDto> getFavoriteGoodsSelectedBusinessType(@PathVariable String businessType, @RequestHeader HttpHeaders headers) {
-        Long userId = getUserIdFromJwtToken(headers);
+    public List<FavoriteItemResponseDto> getFavoriteGoods(@PathVariable String businessType, @RequestHeader HttpHeaders headers) {
+        User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
 
-        List<FavoriteGoods> favoriteGoodsList = favoriteGoodsService.getFavoriteGoodsList(userId);
+        List<FavoriteItemResponseDto> favoriteItemResponseDtos = getFavoriteGoods(user, BusinessType.valueOf(businessType));
+
+        return favoriteItemResponseDtos;
+    }
+
+    private List<FavoriteItemResponseDto> getFavoriteGoods(User user, BusinessType businessType) {
+        List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();
         List<FavoriteItemResponseDto> favoriteItemResponseDtos = new ArrayList<>();
         List<GoodsPrice> goodsPrices;
-        // 최근 가격 변동 계산을 위해 가격 정보 중에서 가장 최근 가격 정보 둘의 차를 구함(업태는 대형마트가 default)
-        Double priceGap;
+        // 최근 가격 변동 계산을 위해 가격 정보 중에서 가장 최근 가격 정보 둘의 차를 구함
+        double priceGap;
         for (FavoriteGoods favoriteGoods : favoriteGoodsList) {
-            goodsPrices = goodsPriceService.getGoodsPrices(favoriteGoods.getGoods().getId(), BusinessType.valueOf(businessType));
+            goodsPrices = goodsPriceService.getGoodsPrices(favoriteGoods.getGoods(), businessType);
             priceGap = goodsPrices.get(goodsPrices.size() - 1).getPrice() - goodsPrices.get(goodsPrices.size() - 2).getPrice();
 
             favoriteItemResponseDtos.add(new FavoriteItemResponseDto(favoriteGoods.getGoods(), priceGap));
@@ -180,6 +174,7 @@ public class FavoriteApi {
         return favoriteItemResponseDtos;
     }
 
+    // 즐겨찾기 총합을 갱신하는 함수
     // 지수 직접 추가용으로 만든 임시 api
 
     @PostMapping("/addtest")
@@ -190,7 +185,7 @@ public class FavoriteApi {
     // 즐겨찾기 총합 계산하는 함수
     private boolean updateFavoriteTotalPrice(User user) {
         // 사용자의 즐겨찾기 목록을 가져옴
-        List<FavoriteGoods> favoriteGoodsList = favoriteGoodsService.getFavoriteGoodsList(user.getId());
+        List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();
 
         // 즐겨찾기 목록을 이용해서 상품을 리스트에 저장
         List<Goods> goodsList = new ArrayList<>();
@@ -221,7 +216,7 @@ public class FavoriteApi {
             // 계산한 총합을 리스트에 추가
             FavoriteTotalPrice favoriteTotalPrice;
             for (LocalDate key : dateTotalPrices.keySet()) {
-                favoriteTotalPrice = FavoriteTotalPrice.createFavoriteTotalPrice(user, dateTotalPrices.get(key), key, businessType);
+                favoriteTotalPrice = FavoriteTotalPrice.of(user, dateTotalPrices.get(key), key, businessType);
                 favoriteTotalPrices.add(favoriteTotalPrice);
             }
         }
@@ -229,22 +224,21 @@ public class FavoriteApi {
         return favoriteTotalPriceService.updateFavoriteTotalPrice(user, favoriteTotalPrices);
     }
 
+    // 즐겨찾기 지수를 갱신하는 함수
     private boolean updateFavoriteIndex(User user) {
         // 사용자의 즐겨찾기 목록을 가져옴
-        List<FavoriteGoods> favoriteGoodsList = favoriteGoodsService.getFavoriteGoodsList(user.getId());
+        List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();
 
         // 즐겨찾기 목록을 이용해서 상품을 리스트에 저장
-        Set<Long> productIds = new HashSet<>();
+        Set<Product> products = new HashSet<>();
 
         for (FavoriteGoods favoriteGoods : favoriteGoodsList) {
-            long productId = favoriteGoods.getGoods().getProduct().getId();
-            productIds.add(productId);
+            products.add(favoriteGoods.getGoods().getProduct());
 
             Map<LocalDate, Double> dateFavoriteIndex = new HashMap<>();
             List<ProductPrice> productPrices;
             Double cur, productIndex;
-            for(Long id: productIds) {
-                Product product = productService.getProductById(id);
+            for(Product product: products) {
                 productPrices = productPriceService.getMonthProductPrice(product);
 
                 for(ProductPrice productPrice: productPrices) {
@@ -257,14 +251,13 @@ public class FavoriteApi {
 
                     dateFavoriteIndex.put(date, cur + productIndex);
                 }
-
             }
 
             Double div = dateFavoriteIndex.get(LocalDate.of(2020, 1, 1));
             FavoriteIndex favoriteIndex;
             List<PriceIndex> favoriteIndices = new ArrayList<>();
             for(LocalDate key: dateFavoriteIndex.keySet()) {
-                favoriteIndex = FavoriteIndex.createFavoriteIndex(key, dateFavoriteIndex.get(key) / div, user);
+                favoriteIndex = FavoriteIndex.of(key, dateFavoriteIndex.get(key) / div, user);
                 favoriteIndices.add(favoriteIndex);
             }
 

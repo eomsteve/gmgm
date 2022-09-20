@@ -19,9 +19,7 @@ public class GoodsPriceService {
     private final GoodsRepo goodsRepo;
 
     // 상품Id와 업태 타입으로 상품 가격을 받아오는 함수
-    public List<GoodsPrice> getGoodsPrices(Long goodsId, BusinessType businessType) {
-        Goods goods = goodsRepo.findById(goodsId).get();
-
+    public List<GoodsPrice> getGoodsPrices(Goods goods, BusinessType businessType) {
         return goodsPriceRepo.findAllByGoodsAndBusinessType(goods, businessType);
     }
 

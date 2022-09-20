@@ -13,7 +13,7 @@ public interface PriceIndexRepo extends JpaRepository<PriceIndex, Long> {
     List<PriceIndex> findAllByDtypeAndResearchDateBetweenOrderByResearchDate(String dtype, LocalDate start, LocalDate end);
 
     @Query("from FavoriteIndex order by researchDate")
-    List<PriceIndex> findAllByDtypeAndUserIdAndResearchDateBetweenOrderByResearchDate(String dtype, Long userId, LocalDate start, LocalDate end);
+    List<PriceIndex> findAllByUserAndResearchDateBetweenOrderByResearchDate(User user, LocalDate start, LocalDate end);
 
     @Modifying
     @Query("delete from FavoriteIndex")
