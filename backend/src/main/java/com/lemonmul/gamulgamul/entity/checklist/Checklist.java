@@ -1,7 +1,9 @@
 package com.lemonmul.gamulgamul.entity.checklist;
 
 import com.lemonmul.gamulgamul.entity.user.User;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Checklist {
 
     @Column(name = "checklist_id")
@@ -30,4 +33,23 @@ public class Checklist {
 
     @OneToMany(mappedBy = "checklist")
     private final List<ChecklistCustomItem> checklistCustomItems = new ArrayList<>();
+
+    private Checklist(User user) {
+        this.regDate = LocalDate.now();
+        setStatus(true);
+        setUser(user);
+    }
+
+    public static Checklist of(User user){
+        return new Checklist(user);
+    }
+
+    public void setStatus(boolean status){
+        this.status=status;
+    }
+
+    public void setUser(User user){
+        this.user=user;
+        user.getChecklists().add(this);
+    }
 }
