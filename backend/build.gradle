@@ -79,3 +79,8 @@ compileQuerydsl {
 test{
 	exclude '**/*'
 }
+
+//exclude plain file when build
+jar {
+	enabled = false
+}
