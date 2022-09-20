@@ -150,6 +150,15 @@ public class FavoriteApi {
         return new EmailResponseDto(user.getEmail());
     }
 
+    @GetMapping("/business/{businessType}")
+    public List<FavoriteItemResponseDto> getFavoriteGoods(@PathVariable BusinessType businessType, @RequestHeader HttpHeaders headers) {
+        User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
+
+        List<FavoriteItemResponseDto> favoriteItemResponseDtos = getFavoriteGoods(user, businessType);
+
+        return favoriteItemResponseDtos;
+    }
+
     // 즐겨찾기 총합 계산하는 함수
     private boolean updateFavoriteTotalPrice(User user) {
         // 사용자의 즐겨찾기 목록을 가져옴
