@@ -11,8 +11,6 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dateType")
 public class ProductPrice {
 
     @Column(name = "product_price_id")
@@ -24,17 +22,37 @@ public class ProductPrice {
 
     private LocalDate researchDate;
 
-    @Column(insertable = false, updatable = false)
     @Enumerated(EnumType.STRING)
     private DateType dateType;
+
+    @Enumerated(EnumType.STRING)
+    private BusinessType business;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    protected ProductPrice(Double price, LocalDate researchDate, Product product) {
+    private ProductPrice(Double price, LocalDate researchDate, Product product) {
         this.price = price;
         this.researchDate = researchDate;
         this.product = product;
+
+        this.dateType=DateType.m;
+        this.business=null;
+    }
+
+    private ProductPrice(Double price, LocalDate researchDate, BusinessType business, Product product) {
+        this(price, researchDate, product);
+
+        this.dateType=DateType.w;
+        this.business = business;
+    }
+
+    public static ProductPrice of(Double price, LocalDate researchDate, Product product){
+        return new ProductPrice(price,researchDate,product);
+    }
+
+    public static ProductPrice of(Double price, LocalDate researchDate, BusinessType business, Product product){
+        return new ProductPrice(price,researchDate,business,product);
     }
 }

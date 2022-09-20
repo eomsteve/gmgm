@@ -1,6 +1,7 @@
 package com.lemonmul.gamulgamul.service;
 
 import com.lemonmul.gamulgamul.entity.BusinessType;
+import com.lemonmul.gamulgamul.entity.product.DateType;
 import com.lemonmul.gamulgamul.entity.product.Product;
 import com.lemonmul.gamulgamul.entity.product.ProductPrice;
 import com.lemonmul.gamulgamul.repo.ProductPriceRepo;
@@ -18,10 +19,10 @@ public class ProductPriceService {
     private final ProductPriceRepo productPriceRepo;
 
     public List<ProductPrice> productPricesByBusinessType(Product product, BusinessType businessType){
-        return productPriceRepo.findByProductAndBusinessType(product,businessType);
+        return productPriceRepo.findByProductAndBusinessOrderByResearchDate(product,businessType);
     }
 
     public List<ProductPrice> getMonthProductPrice(Product product) {
-        return productPriceRepo.findAllByProduct(product);
+        return productPriceRepo.findByProductAndDateTypeOrderByResearchDate(product, DateType.m);
     }
 }

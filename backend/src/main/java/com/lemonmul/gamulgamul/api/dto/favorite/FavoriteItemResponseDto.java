@@ -8,7 +8,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class FavoriteItemResponseDto {
-    private Long id;
+    private Long goodsId;
+
+    private Long productId;
 
     private String name;
 
@@ -23,7 +25,8 @@ public class FavoriteItemResponseDto {
     private Double priceGap;
 
     public FavoriteItemResponseDto(Goods goods, Double priceGap) {
-        this.id = goods.getId();
+        this.goodsId = goods.getId();
+        this.productId = goods.getProduct().getId();
         this.name = goods.getName();
         this.img = goods.getImg();
         this.capacity = goods.getCapacity();
