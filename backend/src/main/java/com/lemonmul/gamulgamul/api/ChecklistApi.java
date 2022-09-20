@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -119,10 +120,12 @@ public class ChecklistApi {
     private void fillBasicItem(List<ChecklistBasicItemRequestDto> basicItems, Checklist checklist) {
         basicItemRepo.deleteByChecklist(checklist);
 
+        List<ChecklistBasicItem> basicItemList=new ArrayList<>();
         for (ChecklistBasicItemRequestDto item : basicItems) {
             Product product = productService.product(item.getProductId());
-            basicItemRepo.save(ChecklistBasicItem.of(checklist, product));
+            basicItemList.add(ChecklistBasicItem.of(checklist, product));
         }
+        basicItemRepo.saveAll(basicItemList);
     }
 
     /**
@@ -131,9 +134,11 @@ public class ChecklistApi {
     private void fillCustomItem(List<ChecklistCustomItemRequestDto> customItems, Checklist checklist) {
         customItemRepo.deleteByChecklist(checklist);
 
+        List<ChecklistCustomItem> customItemList=new ArrayList<>();
         for (ChecklistCustomItemRequestDto item : customItems) {
             String name = item.getProductName();
-            customItemRepo.save(ChecklistCustomItem.of(name, checklist));
+            customItemList.add(ChecklistCustomItem.of(name, checklist));
         }
+        customItemRepo.saveAll(customItemList);
     }
 }
