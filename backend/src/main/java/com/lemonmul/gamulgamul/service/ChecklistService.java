@@ -31,15 +31,14 @@ public class ChecklistService {
      *  해당 유저의 체크리스트들을 작성일 내림차순으로 반환
      */
     public List<Checklist> checklistList(User user){
-        return checklistRepo.findByUserAndStatusOrderByRegDateDescIdDesc(user,true);
+        return checklistRepo.findByUserAndIsDeletedOrderByRegDateDescIdDesc(user,false);
     }
 
     /**
      * 체크리스트 조회
-     * todo status=true인 체크리스트인지 확인 필요?
      */
     public Checklist checklist(Long checklistId){
-        Optional<Checklist> optional = checklistRepo.findById(checklistId);
+        Optional<Checklist> optional = checklistRepo.findByIdAndIsDeleted(checklistId,false);
         if(optional.isPresent()){
             return optional.get();
         }else{
@@ -56,7 +55,7 @@ public class ChecklistService {
         Optional<Checklist> optionalChecklist = checklistRepo.findById(checklistId);
         if(optionalChecklist.isPresent()){
             Checklist checklist = optionalChecklist.get();
-            checklist.setStatus(false);
+            checklist.setIsDeleted(true);
         }else{
             //todo 더 적절한 예외 있으면 바꾸기, 아니면 사용자 예외 만들기
             throw new IllegalArgumentException();

@@ -22,7 +22,7 @@ public class Checklist {
 
     private LocalDate regDate;
 
-    private Boolean status;
+    private Boolean isDeleted;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -36,7 +36,7 @@ public class Checklist {
 
     private Checklist(User user) {
         this.regDate = LocalDate.now();
-        setStatus(true);
+        setIsDeleted(true);
         setUser(user);
     }
 
@@ -44,8 +44,8 @@ public class Checklist {
         return new Checklist(user);
     }
 
-    public void setStatus(boolean status){
-        this.status=status;
+    public void setIsDeleted(boolean isDeleted){
+        this.isDeleted =isDeleted;
     }
 
     public void setUser(User user){

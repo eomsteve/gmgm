@@ -8,10 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ChecklistBasicItemDto {
     private Long id;
+    private Long productId;
     private String name;
 
     public ChecklistBasicItemDto(ChecklistBasicItem checklistBasicItem) {
         id= checklistBasicItem.getId();
+        //todo fetch join 적용하기
+        productId=checklistBasicItem.getProduct().getId();
         name=checklistBasicItem.getProduct().getName();
     }
 }

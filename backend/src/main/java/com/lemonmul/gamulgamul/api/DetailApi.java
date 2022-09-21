@@ -13,16 +13,14 @@ import com.lemonmul.gamulgamul.service.ProductPriceService;
 import com.lemonmul.gamulgamul.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/detail")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 @Slf4j
 public class DetailApi {
 
