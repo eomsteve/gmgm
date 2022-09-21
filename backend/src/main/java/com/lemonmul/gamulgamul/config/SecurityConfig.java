@@ -6,6 +6,7 @@ import com.lemonmul.gamulgamul.security.jwt.JwtAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -47,6 +48,7 @@ public class SecurityConfig {
                 .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class))), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtAuthorizationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), userRepo), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
+                .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/user/signup").permitAll()
                 .antMatchers("/user/check/**").permitAll()
                 .anyRequest().authenticated();
