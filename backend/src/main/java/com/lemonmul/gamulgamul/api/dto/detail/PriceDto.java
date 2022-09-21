@@ -1,4 +1,4 @@
-package com.lemonmul.gamulgamul.api.dto.product;
+package com.lemonmul.gamulgamul.api.dto.detail;
 
 import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
 import com.lemonmul.gamulgamul.entity.product.ProductPrice;

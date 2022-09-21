@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -15,6 +17,12 @@ public class GoodsService {
 
     // 상품Id로 상품 정보를 받아오는 함수
     public Goods getGoodsById(Long goodsId) {
-        return goodsRepo.findById(goodsId).get();
+        Optional<Goods> optional = goodsRepo.findById(goodsId);
+        if(optional.isPresent()) {
+            return optional.get();
+        }else{
+            //todo
+            throw new NullPointerException();
+        }
     }
 }

@@ -17,7 +17,7 @@ public class ProductPriceService {
 
     private final ProductPriceRepo productPriceRepo;
 
-    public List<ProductPrice> productPricesByBusinessType(Product product, BusinessType businessType){
+    public List<ProductPrice> productPricesByBusiness(Product product, BusinessType businessType){
         return productPriceRepo.findByProductAndBusinessOrderByResearchDate(product,businessType);
     }
 }
