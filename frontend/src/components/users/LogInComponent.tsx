@@ -1,8 +1,19 @@
 import { FC } from 'react';
+import { LogInUserREQ, logInApi } from '../../routers/APIs/userApi'
 
-interface LoginProps {}
-
-const LogIn: FC<LoginProps> = () => {
+const LogIn: FC = () => {
+  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+    console.log('handleSubmit');
+    
+    e.preventDefault();
+    const logInFormData = new FormData(e.currentTarget);
+    const logInform : LogInUserREQ = {
+      email : logInFormData.get('email') as string,
+      pwd : logInFormData.get('pwd') as string
+    }
+    const logInRes = await logInApi(logInform);
+    console.log(logInRes);
+  }
   return (
     <section className="flex min-h-screen flex-col bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto flex max-w-sm flex-1 flex-col items-center justify-center px-2 md:h-screen lg:py-0">
@@ -11,7 +22,9 @@ const LogIn: FC<LoginProps> = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form className="space-y-4 md:space-y-6" 
+              onSubmit={handleSubmit}
+            >
               <div>
                 <label
                   htmlFor="email"
