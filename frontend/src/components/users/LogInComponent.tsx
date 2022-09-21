@@ -9,7 +9,7 @@ const LogIn: FC = () => {
     const logInFormData = new FormData(e.currentTarget);
     const logInform : LogInUserREQ = {
       email : logInFormData.get('email') as string,
-      pwd : logInFormData.get('pwd') as string
+      pwd : logInFormData.get('password') as string
     }
     const logInRes = await logInApi(logInform);
     console.log(logInRes);
