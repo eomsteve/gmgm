@@ -40,7 +40,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private Boolean status;
+    private Boolean isDeleted;
 
     @OneToMany(mappedBy = "user")
     private final List<Checklist> checklists = new ArrayList<>();
@@ -54,17 +54,17 @@ public class User {
     @OneToMany(mappedBy = "user")
     private final List<FavoriteGoods> favoriteGoods = new ArrayList<>();
 
-    private User(String email, String pwd, String name, Gender gender, LocalDate birthday, Role role, Boolean status) {
+    private User(String email, String pwd, String name, Gender gender, LocalDate birthday, Role role) {
         this.email = email;
         this.pwd = pwd;
         this.name = name;
         this.gender = gender;
         this.birthday = birthday;
         this.role = role;
-        this.status = status;
+        this.isDeleted = false;
     }
 
     public static User of(String email, String pwd, String name, Gender gender, LocalDate birthday, Role role) {
-        return new User(email, pwd, name, gender, birthday, role, true);
+        return new User(email, pwd, name, gender, birthday, role);
     }
 }

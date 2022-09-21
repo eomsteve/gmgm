@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/checklist")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 @Slf4j
 public class ChecklistApi {
 

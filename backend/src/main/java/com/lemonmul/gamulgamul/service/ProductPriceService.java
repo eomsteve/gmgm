@@ -18,8 +18,8 @@ public class ProductPriceService {
 
     private final ProductPriceRepo productPriceRepo;
 
-    public List<ProductPrice> productPricesByBusinessType(Product product, BusinessType businessType){
-        return productPriceRepo.findByProductAndBusinessOrderByResearchDate(product,businessType);
+    public List<ProductPrice> productPricesByBusiness(Product product, BusinessType businessType){
+        return productPriceRepo.findByProductAndBusinessAndDateTypeOrderByResearchDate(product,businessType,DateType.w);
     }
 
     public List<ProductPrice> getMonthProductPrice(Product product) {
