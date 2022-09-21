@@ -38,6 +38,7 @@ public class SecurityConfig {
         http
 //                .addFilter(corsConfig.corsFilter())
                 .csrf().disable()
+                .cors().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .formLogin().disable()

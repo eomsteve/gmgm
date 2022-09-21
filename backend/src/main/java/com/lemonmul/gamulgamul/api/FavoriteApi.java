@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/favorite")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin("*")
 public class FavoriteApi {
 
     private final UserService userService;
@@ -46,7 +47,7 @@ public class FavoriteApi {
     /**
      * 즐겨찾기 페이지에 보여줄 정보들
      */
-    @GetMapping("/")
+    @GetMapping
     public FavoritePageResponseDto getFavoritePage(@RequestHeader HttpHeaders headers) {
         log.info("[Starting request]");
 
@@ -128,7 +129,7 @@ public class FavoriteApi {
      */
     // TODO: return 값 수정(DTO)
     // TODO: 들어올 때 user pk랑 즐겨찾기 개수 log, 나갈 때 합산 및 지수 최신값 log
-    @PostMapping("/")
+    @PostMapping
     public EmailResponseDto updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) {
         log.info("[Starting request]");
 
