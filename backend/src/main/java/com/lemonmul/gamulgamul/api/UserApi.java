@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin("*")
+@CrossOrigin
 public class UserApi {
     // TODO: 시간 날 때 컨트롤러, 서비스 주석 달기
 

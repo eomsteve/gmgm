@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/favorite")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin("*")
+@CrossOrigin
 public class FavoriteApi {
 
     private final UserService userService;

@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/detail")
 @RequiredArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin
 @Slf4j
 public class DetailApi {
 
