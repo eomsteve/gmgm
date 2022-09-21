@@ -19,15 +19,14 @@ public class GoodsPriceService {
     private final GoodsPriceRepo goodsPriceRepo;
     private final GoodsRepo goodsRepo;
 
-    // 상품Id와 업태 타입으로 상품 가격을 받아오는 함수
-    public List<GoodsPrice> getGoodsPrices(Long goodsId, BusinessType business) {
-        Optional<Goods> optional = goodsRepo.findById(goodsId);
-        if (optional.isPresent()) {
-            return goodsPriceRepo.findByGoodsAndBusinessOrderByResearchDate(optional.get(), business);
-        } else {
-            //todo
-            throw new NullPointerException();
-        }
+    // 상품과 업태 타입으로 상품 가격을 받아오는 함수
+    public List<GoodsPrice> getGoodsPrices(Goods goods, BusinessType business) {
+        return goodsPriceRepo.findByGoodsAndBusinessOrderByResearchDate(goods, business);
+    }
+
+    // 리스트에 들어있는 상품들과 업태 타입으로 상품 가격을 받아오는 함수
+    public List<GoodsPrice> getGoodsPricesInList(List<Goods> goodsList, BusinessType businessType) {
+        return goodsPriceRepo.findAllByBusinessAndGoodsIn(businessType, goodsList);
     }
 
     /**

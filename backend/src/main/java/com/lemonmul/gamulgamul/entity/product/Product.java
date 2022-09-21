@@ -3,6 +3,7 @@ package com.lemonmul.gamulgamul.entity.product;
 import com.lemonmul.gamulgamul.entity.Category;
 import com.lemonmul.gamulgamul.entity.checklist.ChecklistBasicItem;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Product {
 
     @Column(name = "product_id")

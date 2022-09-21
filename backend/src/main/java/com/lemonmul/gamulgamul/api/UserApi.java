@@ -1,5 +1,7 @@
 package com.lemonmul.gamulgamul.api;
 
+import com.lemonmul.gamulgamul.api.dto.EmailResponseDto;
+import com.lemonmul.gamulgamul.api.dto.user.SignupRequestDto;
 import com.lemonmul.gamulgamul.entity.user.Gender;
 import com.lemonmul.gamulgamul.entity.user.Role;
 import com.lemonmul.gamulgamul.entity.user.User;
@@ -18,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin("*")
 public class UserApi {
     // TODO: 시간 날 때 컨트롤러, 서비스 주석 달기
 
@@ -26,16 +29,34 @@ public class UserApi {
     // TODO: 강의 듣고 예외처리 해야함
     // TODO: email log 찍기
     @GetMapping("/check/{email}")
-    public boolean emailCheck(@PathVariable String email) {
+    public EmailResponseDto emailCheck(@PathVariable String email) {
+        log.info("Starting request");
 
-        return userService.emailCheck(email);
+        log.info("email: {}", email);
+
+        log.info("Finished request");
+        return new EmailResponseDto(userService.emailCheck(email).getEmail());
     }
 
     // TODO: 강의 듣고 예외처리 해야함
     // TODO: pwd는 다 ***, name은 홍*동, 나머지는 그대로 log
     @PostMapping("/signup")
-    public boolean signUp(@RequestBody SignupRequestDto signupRequestDto) {
-        return userService.signUp(signupRequestDto.toUser());
+    public EmailResponseDto signUp(@RequestBody SignupRequestDto signupRequestDto) {
+        log.info("Starting request");
+
+        log.info("email: {}", signupRequestDto.getEmail());
+        log.info("pwd: {}", signupRequestDto.getPwd().replaceAll(".", "*"));
+        StringBuilder logName = new StringBuilder(signupRequestDto.getName().replaceAll(".", "*"));
+        logName.setCharAt(0, signupRequestDto.getName().charAt(0));
+        logName.setLength(logName.length() - 1);
+        logName.append(signupRequestDto.getName().charAt(signupRequestDto.getName().length() - 1));
+        log.info("name: {}", logName);
+        log.info("gender: {}", signupRequestDto.getGender());
+        log.info("birthday: {}", signupRequestDto.getBirthday());
+        log.info("role: {}", signupRequestDto.getRole());
+
+        log.info("Finished request");
+        return new EmailResponseDto(userService.signUp(signupRequestDto.toUser()).getEmail());
     }
 
     // TODO: JWT 에서 email 까서  log
@@ -73,35 +94,6 @@ public class UserApi {
 //	public boolean logout() {
 //
 //	}
-
-    @Data
-    @AllArgsConstructor
-    private static class SignupRequestDto {
-        private String email;
-
-        private String pwd;
-
-        private String name;
-
-        private String gender;
-
-        private String birthday;
-
-        private String role;
-
-        public User toUser() {
-            // TODO: @Bean으로 등록된 걸 가져오고 싶은데 방법을 모르겠음
-            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-
-            Gender genderEnum = Gender.valueOf(gender);
-            LocalDate localDate = LocalDate.parse(birthday, DateTimeFormatter.ISO_DATE);
-            Role roleEnum = Role.valueOf(role);
-
-            pwd = bCryptPasswordEncoder.encode(pwd);
-
-            return User.of(email, pwd, name, genderEnum, localDate, roleEnum);
-        }
-    }
 
     @Data
     @AllArgsConstructor
