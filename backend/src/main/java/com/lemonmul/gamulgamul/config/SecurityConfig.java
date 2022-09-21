@@ -49,6 +49,7 @@ public class SecurityConfig {
                 .addFilterBefore(new JwtAuthorizationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), userRepo), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/**").permitAll()
                 .antMatchers("/user/signup").permitAll()
                 .antMatchers("/user/check/**").permitAll()
                 .anyRequest().authenticated();
