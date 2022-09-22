@@ -1,4 +1,4 @@
-package com.lemonmul.gamulgamul.api.dto.checklist;
+package com.lemonmul.gamulgamul.api.dto;
 
 import com.lemonmul.gamulgamul.entity.product.Product;
 import lombok.Data;

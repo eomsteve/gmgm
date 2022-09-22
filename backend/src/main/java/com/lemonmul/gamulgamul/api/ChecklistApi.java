@@ -1,5 +1,6 @@
 package com.lemonmul.gamulgamul.api;
 
+import com.lemonmul.gamulgamul.api.dto.CategoryDto;
 import com.lemonmul.gamulgamul.api.dto.checklist.*;
 import com.lemonmul.gamulgamul.entity.checklist.Checklist;
 import com.lemonmul.gamulgamul.entity.checklist.ChecklistBasicItem;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController

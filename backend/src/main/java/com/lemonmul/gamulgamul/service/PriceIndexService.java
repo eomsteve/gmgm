@@ -20,12 +20,12 @@ public class PriceIndexService {
 
     // 지정한 날부터 1달 간격으로 국가 지수나 공통 지수를 받아오는 함수
     public List<PriceIndex> getIndices(IndexType indexType, LocalDate date) {
-        return priceIndexRepo.findAllByIndexTypeAndResearchDateBetweenOrderByResearchDate(indexType, date.minusYears(1), date);
+        return priceIndexRepo.findAllByIndexTypeAndResearchDateBetweenOrderByResearchDate(indexType, date.minusYears(10), date);
     }
 
     // 지정한 날부터 1달 간격으로 즐겨찾기 지수를 받아오는 함수
     public List<PriceIndex> getFavoriteIndices(User user, LocalDate date) {
-        return priceIndexRepo.findAllByUserAndIndexTypeAndResearchDateBetweenOrderByResearchDate(user, IndexType.f, date.minusYears(1), date);
+        return priceIndexRepo.findAllByUserAndIndexTypeAndResearchDateBetweenOrderByResearchDate(user, IndexType.f, date.minusYears(10), date);
     }
 
     @Transactional

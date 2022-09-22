@@ -1,7 +1,7 @@
 package com.lemonmul.gamulgamul.api;
 
 import com.lemonmul.gamulgamul.api.dto.EmailResponseDto;
-import com.lemonmul.gamulgamul.api.dto.checklist.CategoryDto;
+import com.lemonmul.gamulgamul.api.dto.CategoryDto;
 import com.lemonmul.gamulgamul.api.dto.favorite.*;
 import com.lemonmul.gamulgamul.entity.BusinessType;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
@@ -15,8 +15,6 @@ import com.lemonmul.gamulgamul.entity.product.ProductPrice;
 import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
 import com.lemonmul.gamulgamul.service.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -72,17 +70,18 @@ public class FavoriteApi {
         List<FavoriteItemResponseDto> favoriteItemResponseDtos = getFavoriteGoods(user, BusinessType.m);
 
         // 즐겨찾기 상품 총합
-        List<FavoriteTotalPriceResponseDto> favoriteTotalPriceResponseDtos = favoriteTotalPriceService.getFavoriteTotalPrices(user, BusinessType.m, today).stream().map(FavoriteTotalPriceResponseDto::new).collect(Collectors.toList());
+        List<FavoriteTotalPrice> favoriteTotalPrices = favoriteTotalPriceService.getFavoriteTotalPrices(user, BusinessType.m, today);
+        List<FavoriteTotalPriceResponseDto> favoriteTotalPriceResponseDtos = favoriteTotalPrices.stream().map(FavoriteTotalPriceResponseDto::new).collect(Collectors.toList());
 
         log.info("countryIndices size: {}", countryIndices.size());
         log.info("facoriteIndices size: {}", favoriteIndices.size());
-        log.info("businessTypesResponseDtos size: [\n");
-        for(int i = 0; i < businessTypesResponseDtos.size(); i++) {
-            log.info("{}\n", businessTypesResponseDtos.get(0));
+        log.info("businessTypesResponseDtos size: [");
+        for(BusinessTypeResponseDto response: businessTypesResponseDtos) {
+            log.info("\t{}, {}", response.getBusinessType(), response.getKrName());
         }
         log.info("]");
         log.info("favoriteItemResponseDtos size: {}", favoriteItemResponseDtos.size());
-        log.info("favoriteTotalPriceDtos size: {}", favoriteTotalPriceResponseDtos.size());
+        log.info("recent favoriteTotalPrice: {}", favoriteTotalPriceResponseDtos.get(favoriteTotalPriceResponseDtos.size() - 1).getTotalPrice());
 
         log.info("[Finished request]");
         return new FavoritePageResponseDto(countryIndices, favoriteIndices, businessTypesResponseDtos, favoriteItemResponseDtos, favoriteTotalPriceResponseDtos);
@@ -186,21 +185,26 @@ public class FavoriteApi {
         return new EmailResponseDto(user.getEmail());
     }
 
-    @GetMapping("/business/{businessType}")
-    public List<FavoriteItemResponseDto> getFavoriteGoods(@PathVariable BusinessType businessType, @RequestHeader HttpHeaders headers) {
+    @GetMapping("/business/{business}")
+    public FavoriteBusinessSelectDto getFavoriteGoods(@PathVariable BusinessType business, @RequestHeader HttpHeaders headers) {
         log.info("[Starting request]");
 
         User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
 
         log.info("userId: {}", user.getId());
-        log.info("businessType: {}", businessType);
+        log.info("business: {}", business);
 
-        List<FavoriteItemResponseDto> favoriteItemResponseDtos = getFavoriteGoods(user, businessType);
+        List<FavoriteItemResponseDto> favoriteItemResponseDtos = getFavoriteGoods(user, business);
+        List<FavoriteTotalPrice> favoriteTotalPrices = favoriteTotalPriceService.getFavoriteTotalPrices(user, business, LocalDate.now());
+        List<FavoriteTotalPriceResponseDto> favoriteTotalPriceResponseDtos = favoriteTotalPrices.stream().map(FavoriteTotalPriceResponseDto::new).collect(Collectors.toList());
+
+        FavoriteBusinessSelectDto favoriteBusinessSelectDtos = new FavoriteBusinessSelectDto(favoriteItemResponseDtos, favoriteTotalPriceResponseDtos);
 
         log.info("favoriteItemResponseDtos size: {}", favoriteItemResponseDtos.size());
+        log.info("recent favoriteTotalPrice: {}", favoriteTotalPriceResponseDtos.get(favoriteTotalPriceResponseDtos.size() - 1).getTotalPrice());
 
         log.info("Finished request");
-        return favoriteItemResponseDtos;
+        return favoriteBusinessSelectDtos;
     }
 
     // 즐겨찾기 총합 계산하는 함수
