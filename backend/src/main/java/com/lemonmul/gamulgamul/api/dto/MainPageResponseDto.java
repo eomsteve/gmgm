@@ -1,6 +1,7 @@
 package com.lemonmul.gamulgamul.api.dto;
 
 import com.lemonmul.gamulgamul.api.dto.checklist.ChecklistListDto;
+import com.lemonmul.gamulgamul.api.dto.favorite.PriceIndexResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -11,11 +12,11 @@ import java.util.List;
 public class MainPageResponseDto {
     private String username;
 
-    private Double GMGMIndex;
+    private PriceIndexResponseDto GMGMIndex;
 
-    private Double cpi;
+    private PriceIndexResponseDto cpi;
 
-    private Double favoriteIndex;
+    private PriceIndexResponseDto favoriteIndex;
 
     private List<ChecklistListDto> checklistListDto;
 
