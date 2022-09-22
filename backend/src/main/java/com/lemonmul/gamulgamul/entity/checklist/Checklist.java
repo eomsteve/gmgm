@@ -36,7 +36,7 @@ public class Checklist {
 
     private Checklist(User user) {
         this.regDate = LocalDate.now();
-        setIsDeleted(true);
+        setIsDeleted(false);
         setUser(user);
     }
 
