@@ -42,10 +42,6 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private final List<ProductPrice> productPrices = new ArrayList<>();
 
-    //todo 이거 굳이 필요한가..?
-    @OneToMany(mappedBy = "product")
-    private final List<ChecklistBasicItem> checklistBasicItems = new ArrayList<>();
-
     private Product(Long id, Category category, String name, Integer unit, String measure, Double weight, String img) {
         this.id = id;
         this.category = category;

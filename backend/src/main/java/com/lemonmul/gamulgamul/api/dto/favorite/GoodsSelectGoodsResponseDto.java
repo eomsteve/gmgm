@@ -14,18 +14,12 @@ public class GoodsSelectGoodsResponseDto {
 
     private String img;
 
-    private Integer capacity;
-
     private String measure;
-
-    private Integer ea;
 
     public GoodsSelectGoodsResponseDto(Goods goods) {
         this.id = goods.getId();
         this.name = goods.getName();
         this.img = goods.getImg();
-        this.capacity = goods.getCapacity();
         this.measure = goods.getMeasure();
-        this.ea = goods.getEa();
     }
 }

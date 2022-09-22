@@ -16,11 +16,7 @@ public class FavoriteItemResponseDto {
 
     private String img;
 
-    private Integer capacity;
-
     private String measure;
-
-    private Integer ea;
 
     private Double priceGap;
 
@@ -29,9 +25,7 @@ public class FavoriteItemResponseDto {
         this.productId = goods.getProduct().getId();
         this.name = goods.getName();
         this.img = goods.getImg();
-        this.capacity = goods.getCapacity();
         this.measure = goods.getMeasure();
-        this.ea = goods.getEa();
         this.priceGap = priceGap;
     }
 }

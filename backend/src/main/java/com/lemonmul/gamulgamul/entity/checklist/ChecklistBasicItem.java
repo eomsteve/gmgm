@@ -38,10 +38,4 @@ public class ChecklistBasicItem {
         this.checklist=checklist;
         checklist.getChecklistBasicItems().add(this);
     }
-
-    //todo 이거 굳이 필요한가..?
-    public void setProduct(Product product){
-        this.product=product;
-        product.getChecklistBasicItems().add(this);
-    }
 }
