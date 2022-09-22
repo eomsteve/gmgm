@@ -7,7 +7,6 @@ export interface FavoriteSelectionPageProps {
 const FavoriteSelectionPage: FC<FavoriteSelectionPageProps> = () => {
   return ( <>
   <Category />
-  {/* <Product /> */}
   </> );
 }
  
