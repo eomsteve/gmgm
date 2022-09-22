@@ -35,8 +35,13 @@ public class DetailApi {
      */
     @GetMapping("/product/{productId}/business/{business}")
     public ProductDto productDetail(@PathVariable Long productId, @PathVariable BusinessType business){
+        log.info("[Starting request] GET /detail/product/{}/business/{}",productId,business);
+
         Product product = productService.product(productId);
         List<ProductPrice> productPrices = productPriceService.productPricesByBusiness(product, business);
+        log.info("goods size: {}, productPrices size: {}",product.getGoods().size(),productPrices.size());
+
+        log.info("[Finished request] GET /detail/product/{}/business/{}",productId,business);
         return new ProductDto(product, productPrices);
     }
 
@@ -46,9 +51,14 @@ public class DetailApi {
      */
     @GetMapping("/goods/{goodsId}/business/{business}")
     public GoodsDto goodsDetail(@PathVariable Long goodsId, @PathVariable BusinessType business){
+        log.info("[Starting request] GET /detail/goods/{}/business/{}",goodsId,business);
+
         Goods goods = goodsService.getGoodsById(goodsId);
         Double cheapPrice = goodsPriceService.goodsCheapPrice(goods).getPrice();
         List<GoodsPrice> goodsPrices = goodsPriceService.goodsPricesByBusinessType(goods, business);
+        log.info("goodsPrices size: {}",goodsPrices.size());
+
+        log.info("[Finished request] GET /detail/goods/{}/business/{}",goodsId,business);
         return new GoodsDto(goods,cheapPrice,goodsPrices);
     }
 }
