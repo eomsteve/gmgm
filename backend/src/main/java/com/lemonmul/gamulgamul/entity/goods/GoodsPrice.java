@@ -17,6 +17,8 @@ public class GoodsPrice {
     @GeneratedValue
     private Long id;
 
+    private Double unitPrice;
+
     private Double price;
 
     private LocalDate researchDate;
@@ -28,14 +30,15 @@ public class GoodsPrice {
     @JoinColumn(name = "goods_id")
     private Goods goods;
 
-    private GoodsPrice(Double price, LocalDate researchDate, BusinessType business, Goods goods) {
+    private GoodsPrice(Double unitPrice, Double price, LocalDate researchDate, BusinessType business, Goods goods) {
+        this.unitPrice=unitPrice;
         this.price = price;
         this.researchDate = researchDate;
         this.business = business;
         this.goods = goods;
     }
 
-    public static GoodsPrice of(Double price, LocalDate researchDate, BusinessType business, Goods goods) {
-        return new GoodsPrice(price, researchDate, business, goods);
+    public static GoodsPrice of(Double unitPrice, Double price, LocalDate researchDate, BusinessType business, Goods goods) {
+        return new GoodsPrice(unitPrice, price, researchDate, business, goods);
     }
 }

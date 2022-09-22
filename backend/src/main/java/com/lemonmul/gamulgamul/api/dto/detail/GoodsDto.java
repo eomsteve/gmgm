@@ -13,10 +13,7 @@ public class GoodsDto {
     private String goodsImg;
     private double cheapPrice;
     private String cheapUrl;
-
-    private int capacity;
     private String measure;
-    private int ea;
 
     private List<PriceDto> goodsPrices;
 
@@ -25,9 +22,7 @@ public class GoodsDto {
         goodsImg=goods.getImg();
         cheapPrice=price;
         cheapUrl=goods.getCheapUrl();
-        capacity=goods.getCapacity();
         measure=goods.getMeasure();
-        ea=goods.getEa();
         goodsPrices=prices.stream().map(PriceDto::new).collect(Collectors.toList());
     }
 }

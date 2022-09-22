@@ -22,11 +22,7 @@ public class Goods {
 
     private String img;
 
-    private Integer capacity;
-
     private String measure;
-
-    private Integer ea;
 
     private String cheapUrl;
 
@@ -40,18 +36,16 @@ public class Goods {
     @OneToMany(mappedBy = "goods")
     private final List<FavoriteGoods> favoriteGoods = new ArrayList<>();
 
-    private Goods(Long id, String name, String img, Integer capacity, String measure, Integer ea, String cheapUrl, Product product) {
+    private Goods(Long id, String name, String img, String measure, String cheapUrl, Product product) {
         this.id = id;
         this.name = name;
         this.img = img;
-        this.capacity = capacity;
         this.measure = measure;
-        this.ea = ea;
         this.cheapUrl = cheapUrl;
         this.product = product;
     }
 
-    public static Goods of(Long id, String name, String img, Integer capacity, String measure, Integer ea, String cheapUrl, Product product) {
-        return new Goods(id, name, img, capacity, measure, ea, cheapUrl, product);
+    public static Goods of(Long id, String name, String img, String measure, String cheapUrl, Product product) {
+        return new Goods(id, name, img, measure, cheapUrl, product);
     }
 }
