@@ -3,7 +3,7 @@ package com.lemonmul.gamulgamul.entity.user;
 import com.lemonmul.gamulgamul.entity.checklist.Checklist;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
-import com.lemonmul.gamulgamul.entity.priceindex.FavoriteIndex;
+import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -46,7 +46,7 @@ public class User {
     private final List<Checklist> checklists = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private final List<FavoriteIndex> favoriteIndices = new ArrayList<>();
+    private final List<PriceIndex> favoriteIndices = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private final List<FavoriteTotalPrice> favoriteTotalPrices = new ArrayList<>();

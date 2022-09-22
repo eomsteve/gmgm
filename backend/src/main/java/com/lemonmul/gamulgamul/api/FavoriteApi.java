@@ -4,12 +4,11 @@ import com.lemonmul.gamulgamul.api.dto.EmailResponseDto;
 import com.lemonmul.gamulgamul.api.dto.checklist.CategoryDto;
 import com.lemonmul.gamulgamul.api.dto.favorite.*;
 import com.lemonmul.gamulgamul.entity.BusinessType;
-import com.lemonmul.gamulgamul.entity.Category;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
 import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
-import com.lemonmul.gamulgamul.entity.priceindex.FavoriteIndex;
+import com.lemonmul.gamulgamul.entity.priceindex.IndexType;
 import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import com.lemonmul.gamulgamul.entity.product.Product;
 import com.lemonmul.gamulgamul.entity.product.ProductPrice;
@@ -58,7 +57,7 @@ public class FavoriteApi {
         LocalDate today = LocalDate.now();
 
         // 국가 지수
-        List<PriceIndexResponseDto> countryIndices = priceIndexService.getIndices("c", today).stream().map(PriceIndexResponseDto::new).collect(Collectors.toList());
+        List<PriceIndexResponseDto> countryIndices = priceIndexService.getIndices(IndexType.c, today).stream().map(PriceIndexResponseDto::new).collect(Collectors.toList());
 
         // 즐겨찾기 지수
         List<PriceIndexResponseDto> favoriteIndices = priceIndexService.getFavoriteIndices(user, today).stream().map(PriceIndexResponseDto::new).collect(Collectors.toList());
@@ -283,17 +282,17 @@ public class FavoriteApi {
             }
         }
 
-        FavoriteIndex favoriteIndex;
-        List<PriceIndex> favoriteIndices = new ArrayList<>();
+        PriceIndex priceIndex;
+        List<PriceIndex> priceIndices = new ArrayList<>();
         Double div = dateFavoriteIndex.get(LocalDate.of(2020, 1, 1));
         for(LocalDate key: dateFavoriteIndex.keySet()) {
-            favoriteIndex = FavoriteIndex.of(key, dateFavoriteIndex.get(key) / div, user);
-            favoriteIndices.add(favoriteIndex);
+            priceIndex = PriceIndex.of(key, dateFavoriteIndex.get(key) / div, user);
+            priceIndices.add(priceIndex);
         }
 
-        priceIndexService.updateFavoriteIndex(user, favoriteIndices);
+        priceIndexService.updateFavoriteIndex(user, priceIndices);
 
-        log.info("recent FavoriteIndex: {}", favoriteIndices.get(favoriteIndices.size() - 1));
+        log.info("recent FavoriteIndex: {}", priceIndices.get(priceIndices.size() - 1));
 
         return true;
     }
@@ -312,23 +311,5 @@ public class FavoriteApi {
         }
 
         return favoriteItemResponseDtos;
-    }
-
-    // 지수 직접 추가용으로 만든 임시 api
-
-    @PostMapping("/addtest")
-    public boolean addPriceIndex(@RequestBody AddPriceIndexDto addPriceIndexDto) {
-        return priceIndexService.addIndex(addPriceIndexDto.dtype, addPriceIndexDto.date, addPriceIndexDto.value);
-    }
-
-    // 지수 직접 추가에 사용하는 임시 dto
-    @Data
-    @AllArgsConstructor
-    private static class AddPriceIndexDto {
-        private String dtype;
-
-        private String date;
-
-        private double value;
     }
 }

@@ -1,5 +1,6 @@
 package com.lemonmul.gamulgamul.entity.priceindex;
 
+import com.lemonmul.gamulgamul.entity.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,8 +9,6 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dtype")
 public class PriceIndex {
 
     @Column(name = "price_index_id")
@@ -21,11 +20,29 @@ public class PriceIndex {
 
     private Double value;
 
-    @Column(insertable = false, updatable = false)
-    private String dtype;
+    @Enumerated(EnumType.STRING)
+    private IndexType indexType;
 
-    protected PriceIndex(LocalDate researchDate, Double value) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private PriceIndex(LocalDate researchDate, Double value, IndexType indexType) {
         this.researchDate = researchDate;
         this.value = value;
+        this.indexType = indexType;
+    }
+
+    private PriceIndex(LocalDate researchDate, Double value, User user) {
+        this(researchDate, value, IndexType.f);
+        this.user = user;
+    }
+
+    public static PriceIndex of(LocalDate researchDate, Double value, IndexType indexType) {
+        return new PriceIndex(researchDate, value, indexType);
+    }
+
+    public static PriceIndex of(LocalDate researchDate, Double value, User user) {
+        return new PriceIndex(researchDate, value, user);
     }
 }
