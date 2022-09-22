@@ -21,9 +21,9 @@ const EmptySelectBox: FC<SelectBoxProps> = props => {
         defaultValue="m"
         name="mySelectBox"
         className="form-select form-select-sm
-    m-0
+    m-3
     block
-    w-full
+    w-[20vw]
     appearance-none
     rounded
     border

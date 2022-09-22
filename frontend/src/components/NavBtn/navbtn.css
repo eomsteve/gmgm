@@ -7,7 +7,7 @@ input[id='cb']{
 
 width: 60px;
 height: 60px;
-position: absolute;
+position: fixed ;
 right: 10vw;
 bottom: 5vh;
 
@@ -27,7 +27,7 @@ height: 33px;
 
 /* Ellipse 13 */
 
-position: absolute;
+position: fixed ;
 right: 28vw;
 bottom: 5vh;
 
@@ -46,7 +46,7 @@ height: 33px;
 
 /* Ellipse 13 */
 
-position: absolute;
+position: fixed ;
 right: 22vw;
 bottom: 12vh;
 
@@ -65,7 +65,7 @@ height: 33px;
 
 /* Ellipse 13 */
 
-position: absolute;
+position: fixed ;
 right: 10vw;
 bottom: 15vh;
 
