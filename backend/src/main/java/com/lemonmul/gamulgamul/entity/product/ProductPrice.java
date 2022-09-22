@@ -18,7 +18,7 @@ public class ProductPrice {
     @GeneratedValue
     private Long id;
 
-    private Double price;
+    private Double unitPrice;
 
     private LocalDate researchDate;
 
@@ -32,8 +32,8 @@ public class ProductPrice {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    private ProductPrice(Double price, LocalDate researchDate, Product product) {
-        this.price = price;
+    private ProductPrice(Double unitPrice, LocalDate researchDate, Product product) {
+        this.unitPrice = unitPrice;
         this.researchDate = researchDate;
         this.product = product;
 
@@ -41,8 +41,8 @@ public class ProductPrice {
         this.business=null;
     }
 
-    private ProductPrice(Double price, LocalDate researchDate, BusinessType business, Product product) {
-        this(price, researchDate, product);
+    private ProductPrice(Double unitPrice, LocalDate researchDate, BusinessType business, Product product) {
+        this(unitPrice, researchDate, product);
 
         this.dateType=DateType.w;
         this.business = business;

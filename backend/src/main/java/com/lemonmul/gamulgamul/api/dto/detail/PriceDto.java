@@ -12,7 +12,7 @@ public class PriceDto {
     private LocalDate researchDate;
 
     public PriceDto(ProductPrice productPrice) {
-        price=productPrice.getPrice();
+        price=productPrice.getUnitPrice();
         researchDate=productPrice.getResearchDate();
     }
 

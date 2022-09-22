@@ -277,7 +277,7 @@ public class FavoriteApi {
             for(ProductPrice productPrice: productPrices) {
                 cur = 0.0;
                 LocalDate date = productPrice.getResearchDate();
-                productIndex = productPrice.getPrice() * product.getWeight();
+                productIndex = productPrice.getUnitPrice() * product.getWeight();
 
                 if(dateFavoriteIndex.containsKey(date))
                     cur = dateFavoriteIndex.get(date);
