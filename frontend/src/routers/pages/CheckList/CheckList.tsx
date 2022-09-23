@@ -1,4 +1,5 @@
 import {FC} from 'react'
+import BusinessSelector from '../../../components/checkList/BusinessSelector'
 
 interface CheckListProps {
   
@@ -7,9 +8,9 @@ interface CheckListProps {
 const CheckList: FC<CheckListProps> = () => {
   return (<>
   <main
-        className="my-[5rem] grid p-5
-    w-full grid-cols-3 content-start bg-[white]"
+        className="flex w-full mb-[5rem] flex-col justify-center p-5 bg-[white]"
       >
+        <BusinessSelector optionList={['']}/>
        this is check list page
       </main>
   </>);

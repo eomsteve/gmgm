@@ -49,7 +49,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
+      <div className="max-w-[500px]">
+
       <App />
+      </div>
     </PersistGate>
   </Provider>,
 );
