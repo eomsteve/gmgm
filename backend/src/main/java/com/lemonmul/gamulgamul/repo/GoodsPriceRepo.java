@@ -12,6 +12,9 @@ import java.util.Optional;
 public interface GoodsPriceRepo extends JpaRepository<GoodsPrice, Long> {
     List<GoodsPrice> findAllByBusinessAndGoodsIn(BusinessType business, List<Goods> goodsList);
 
+    //선택 품목, 선택 업태의 최신 상품 가격 정보 2개
+    List<GoodsPrice> findTop2ByGoodsAndBusinessOrderByResearchDateDesc(Goods goods, BusinessType business);
+
     //선택 품목, 선택 업태의 상품 가격 정보
     List<GoodsPrice> findByGoodsAndBusinessAndResearchDateBetweenOrderByResearchDate(
             Goods goods, BusinessType business, LocalDate start,LocalDate end);

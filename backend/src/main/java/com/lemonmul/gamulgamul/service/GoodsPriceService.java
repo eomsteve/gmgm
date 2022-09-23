@@ -21,8 +21,8 @@ public class GoodsPriceService {
     private final GoodsRepo goodsRepo;
 
     // 상품과 업태 타입으로 상품 가격을 받아오는 함수
-    public List<GoodsPrice> getGoodsPrices(Goods goods, BusinessType business) {
-        return goodsPriceRepo.findByGoodsAndBusinessOrderByResearchDate(goods, business);
+    public List<GoodsPrice> getRecentGoodsPrices(Goods goods, BusinessType business) {
+        return goodsPriceRepo.findTop2ByGoodsAndBusinessOrderByResearchDateDesc(goods, business);
     }
 
     // 리스트에 들어있는 상품들과 업태 타입으로 상품 가격을 받아오는 함수
