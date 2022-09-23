@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -56,6 +57,19 @@ public class SecurityConfig {
     }
 
     @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return web -> {
+            web.ignoring()
+                    .antMatchers(
+                            "/user/signup",
+                            "/user/check/**",
+                            "/main",
+                            "/refresh"
+                    );
+        };
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
@@ -73,6 +87,7 @@ public class SecurityConfig {
                 .antMatchers("/user/signup").permitAll()
                 .antMatchers("/user/check/**").permitAll()
                 .antMatchers("/main").permitAll()
+                .antMatchers("/refresh").permitAll()
                 .anyRequest().authenticated();
 
         return http.build();
