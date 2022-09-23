@@ -13,5 +13,9 @@ public interface PriceIndexRepo extends JpaRepository<PriceIndex, Long> {
 
     List<PriceIndex> findAllByUserAndIndexTypeAndResearchDateBetweenOrderByResearchDate(User user, IndexType indexType, LocalDate start, LocalDate end);
 
+    PriceIndex findTopByIndexTypeOrderByResearchDateDesc(IndexType indexType);
+
+    PriceIndex findTopByUserAndIndexTypeOrderByResearchDateDesc(User user, IndexType indexType);
+
     void deleteByUserAndIndexType(User user, IndexType indexType);
 }
