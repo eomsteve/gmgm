@@ -55,7 +55,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private final List<FavoriteGoods> favoriteGoods = new ArrayList<>();
 
-    @OneToMany(mappedBy = "favoriteRecommends")
+    @OneToMany(mappedBy = "user")
     private final List<FavoriteRecommend> favoriteRecommends=new ArrayList<>();
 
     private User(String email, String pwd, String name, Gender gender, LocalDate birthday, Role role) {
