@@ -3,8 +3,11 @@ package com.lemonmul.gamulgamul.api;
 import com.lemonmul.gamulgamul.api.dto.MainPageResponseDto;
 import com.lemonmul.gamulgamul.api.dto.checklist.ChecklistListDto;
 import com.lemonmul.gamulgamul.api.dto.favorite.PriceIndexResponseDto;
+import com.lemonmul.gamulgamul.entity.checklist.Checklist;
 import com.lemonmul.gamulgamul.entity.priceindex.IndexType;
+import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import com.lemonmul.gamulgamul.entity.user.User;
+import com.lemonmul.gamulgamul.security.jwt.JwtProperties;
 import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
 import com.lemonmul.gamulgamul.service.MainService;
 import com.lemonmul.gamulgamul.service.UserService;
@@ -39,17 +42,17 @@ public class MainApi {
 
     @GetMapping()
     public MainPageResponseDto getMainPage(@RequestHeader HttpHeaders headers) {
-        log.info("[starting request]");
+        log.info("[Starting request]");
 //        log.info("{}", headers);
-        LocalDate today = LocalDate.now();
+//        LocalDate today = LocalDate.now();
 
-        PriceIndexResponseDto countryIndex = new PriceIndexResponseDto(mainService.getIndex(IndexType.c, today));
-        PriceIndexResponseDto gmgmIndex = new PriceIndexResponseDto(mainService.getIndex(IndexType.g, today));
+        PriceIndexResponseDto countryIndex = new PriceIndexResponseDto(mainService.getIndex(IndexType.c));
+        PriceIndexResponseDto gmgmIndex = new PriceIndexResponseDto(mainService.getIndex(IndexType.g));
         PriceIndexResponseDto favoriteIndex = null;
         List<ChecklistListDto> checklists = null;
         String news = null;
 
-        if (!headers.containsKey("authorization")){
+        if (!headers.containsKey(JwtProperties.HEADER_STRING)){
             log.info("user is not logged in");
             String user = null;
             log.info("[Finished request]");
@@ -58,8 +61,14 @@ public class MainApi {
         else{
             User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
             log.info("user {} has made a request", user.getId());
-            favoriteIndex = new PriceIndexResponseDto(mainService.getFavoriteIndex(user, IndexType.f, today));
-            checklists = mainService.getRecentChecklists(user).stream().map(ChecklistListDto::new).collect(Collectors.toList());
+            PriceIndex userFavoriteIndex = mainService.getFavoriteIndex(user, IndexType.f);
+            if (userFavoriteIndex != null) {
+                favoriteIndex = new PriceIndexResponseDto(userFavoriteIndex);
+            }
+            List<Checklist> userChecklists = mainService.getRecentChecklists(user);
+            if (!userChecklists.isEmpty()){
+                checklists = userChecklists.stream().map(ChecklistListDto::new).collect(Collectors.toList());
+            }
             log.info("[Finished request]");
             return new MainPageResponseDto(user.getName(), gmgmIndex, countryIndex, favoriteIndex, checklists, news);
         }

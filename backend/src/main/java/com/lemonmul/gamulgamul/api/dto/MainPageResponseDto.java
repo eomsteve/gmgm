@@ -12,13 +12,13 @@ import java.util.List;
 public class MainPageResponseDto {
     private String username;
 
-    private PriceIndexResponseDto GMGMIndex;
+    private PriceIndexResponseDto gmgmIndex;
 
     private PriceIndexResponseDto cpi;
 
     private PriceIndexResponseDto favoriteIndex;
 
-    private List<ChecklistListDto> checklistListDto;
+    private List<ChecklistListDto> checklistList;
 
     // TODO: 추후에 news dto로 만들기
     private String news;

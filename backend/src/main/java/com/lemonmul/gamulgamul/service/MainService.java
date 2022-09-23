@@ -23,22 +23,15 @@ public class MainService {
     /**
      * 국가, 가물가물 최신 index 조회
      * */
-    public PriceIndex getIndex(IndexType indexType, LocalDate date){
-        // DB 업데이트가 늦어질 수 있으니까 두달분 가져와서 제일 최신 index 반환
-        List<PriceIndex> priceIndices = priceIndexRepo.findAllByIndexTypeAndResearchDateBetweenOrderByResearchDate(indexType, date.minusMonths(2), date);
-        if (priceIndices.isEmpty())
-            return null;
-        return priceIndices.get(priceIndices.size() - 1);
+    public PriceIndex getIndex(IndexType indexType){
+        return priceIndexRepo.findTopByIndexTypeOrderByResearchDateDesc(indexType);
     }
 
     /**
      * 즐겨찾기 지수 최신 index 조회
      */
-    public PriceIndex getFavoriteIndex(User user, IndexType indexType, LocalDate date){
-        List<PriceIndex> priceIndices = priceIndexRepo.findAllByUserAndIndexTypeAndResearchDateBetweenOrderByResearchDate(user, indexType, date.minusMonths(2), date);
-        if (priceIndices.isEmpty())
-            return null;
-        return priceIndices.get(priceIndices.size() - 1);
+    public PriceIndex getFavoriteIndex(User user, IndexType indexType){
+        return priceIndexRepo.findTopByUserAndIndexTypeOrderByResearchDateDesc(user, indexType);
     }
 
     /**
