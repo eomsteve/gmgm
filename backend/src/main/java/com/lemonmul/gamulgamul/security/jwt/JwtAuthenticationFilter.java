@@ -1,7 +1,9 @@
 package com.lemonmul.gamulgamul.security.jwt;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lemonmul.gamulgamul.api.dto.LoginRequestDto;
+import com.lemonmul.gamulgamul.api.dto.LoginResponseDto;
 import com.lemonmul.gamulgamul.security.auth.PrincipalDetails;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -14,6 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -50,11 +53,20 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-                                            Authentication authResult) {
+                                            Authentication authResult) throws IOException {
+
+        ObjectMapper ob = new ObjectMapper();
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
 
         PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
         String jwtToken = JwtTokenProvider.createToken(principalDetails);
+        jwtToken = JwtProperties.TOKEN_PREFIX + jwtToken;
 
-        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
+        LoginResponseDto loginResponseDto = new LoginResponseDto(jwtToken);
+        String loginResponse = ob.writeValueAsString(loginResponseDto);
+
+        response.getWriter().write(loginResponse);
     }
 }
