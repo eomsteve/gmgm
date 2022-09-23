@@ -2,6 +2,7 @@ package com.lemonmul.gamulgamul.entity.goods;
 
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.product.Product;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Goods {
 
     @Column(name = "goods_id")

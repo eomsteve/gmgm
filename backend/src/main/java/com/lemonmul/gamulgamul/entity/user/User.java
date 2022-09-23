@@ -2,6 +2,7 @@ package com.lemonmul.gamulgamul.entity.user;
 
 import com.lemonmul.gamulgamul.entity.checklist.Checklist;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
+import com.lemonmul.gamulgamul.entity.favorite.FavoriteRecommend;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import lombok.AccessLevel;
@@ -53,6 +54,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private final List<FavoriteGoods> favoriteGoods = new ArrayList<>();
+
+    @OneToMany(mappedBy = "favoriteRecommends")
+    private final List<FavoriteRecommend> favoriteRecommends=new ArrayList<>();
 
     private User(String email, String pwd, String name, Gender gender, LocalDate birthday, Role role) {
         this.email = email;

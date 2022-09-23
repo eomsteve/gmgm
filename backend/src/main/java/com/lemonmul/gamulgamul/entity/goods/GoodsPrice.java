@@ -1,6 +1,7 @@
 package com.lemonmul.gamulgamul.entity.goods;
 
 import com.lemonmul.gamulgamul.entity.BusinessType;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class GoodsPrice {
 
     @Column(name = "goods_price_id")
