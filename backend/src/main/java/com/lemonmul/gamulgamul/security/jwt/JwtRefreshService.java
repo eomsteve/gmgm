@@ -23,7 +23,7 @@ public class JwtRefreshService {
             throw new Exception("refresh 토큰 만료");
         PrincipalDetails principalDetails = new PrincipalDetails(userRepo.findByEmail(email).orElseThrow());
         String accessToken = JwtTokenProvider.createToken(principalDetails, JwtProperties.ACCESS_EXPIRATION_TIME);
-        accessToken = JwtProperties.HEADER_STRING + accessToken;
+        accessToken = JwtProperties.TOKEN_PREFIX + accessToken;
         return new LoginResponseDto(accessToken, refreshToken);
     }
 }

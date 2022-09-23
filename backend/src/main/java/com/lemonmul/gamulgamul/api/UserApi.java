@@ -1,20 +1,15 @@
 package com.lemonmul.gamulgamul.api;
 
 import com.lemonmul.gamulgamul.api.dto.EmailResponseDto;
+import com.lemonmul.gamulgamul.api.dto.LogoutRequestDto;
 import com.lemonmul.gamulgamul.api.dto.user.SignupRequestDto;
-import com.lemonmul.gamulgamul.entity.user.Gender;
-import com.lemonmul.gamulgamul.entity.user.Role;
-import com.lemonmul.gamulgamul.entity.user.User;
+import com.lemonmul.gamulgamul.security.redis.RedisService;
 import com.lemonmul.gamulgamul.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/user")
@@ -25,6 +20,7 @@ public class UserApi {
     // TODO: 시간 날 때 컨트롤러, 서비스 주석 달기
 
     private final UserService userService;
+    private final RedisService redisService;
 
     // TODO: 강의 듣고 예외처리 해야함
     // TODO: email log 찍기
@@ -90,10 +86,13 @@ public class UserApi {
      * 		-> 어느 쪽으로 하든 지금 상황에서 refresh 토큰은 추가로 구현해야 할 것 같음
      */
     // TODO: JWT 까서 email log
-//	@GetMapping("/logout")
-//	public boolean logout() {
-//
-//	}
+    // TODO: 반환값
+	@PostMapping("/logout")
+	public boolean logout(@RequestBody LogoutRequestDto logoutRequestDto) {
+        redisService.deleteValues(logoutRequestDto.getEmail());
+
+        return true;
+	}
 
     @Data
     @AllArgsConstructor

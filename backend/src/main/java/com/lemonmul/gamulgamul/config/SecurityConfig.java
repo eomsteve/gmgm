@@ -58,15 +58,15 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> {
+        return web ->
             web.ignoring()
                     .antMatchers(
                             "/user/signup",
                             "/user/check/**",
+                            "/user/logout",
                             "/main",
                             "/refresh"
                     );
-        };
     }
 
     @Bean
@@ -86,6 +86,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/user/signup").permitAll()
                 .antMatchers("/user/check/**").permitAll()
+                .antMatchers("/user/logout").permitAll()
                 .antMatchers("/main").permitAll()
                 .antMatchers("/refresh").permitAll()
                 .anyRequest().authenticated();
