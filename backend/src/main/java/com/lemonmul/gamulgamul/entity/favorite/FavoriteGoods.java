@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -14,7 +15,7 @@ import javax.persistence.*;
 public class FavoriteGoods {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "favorite_goods_id")
     private Long id;
 
@@ -26,9 +27,12 @@ public class FavoriteGoods {
     @JoinColumn(name = "goods_id")
     private Goods goods;
 
+    private LocalDate regDate;
+
     private FavoriteGoods(User user, Goods goods) {
         this.user = user;
         this.goods = goods;
+        this.regDate = LocalDate.now();
     }
 
     public static FavoriteGoods of(User user, Goods goods) {

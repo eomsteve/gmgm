@@ -17,10 +17,8 @@ public class FavoriteGoodsService {
 
     // 즐겨찾기 목록을 갱신하는 함수
     @Transactional
-    public boolean updateFavoriteGoodsList(List<FavoriteGoods> addList, List<FavoriteGoods> deleteList) {
-        favoriteGoodsRepo.saveAll(addList);
-        favoriteGoodsRepo.deleteAll(deleteList);
-
-        return true;
+    public List<FavoriteGoods> updateFavoriteGoodsList(List<FavoriteGoods> addList, List<FavoriteGoods> deleteList) {
+        favoriteGoodsRepo.deleteIn(deleteList);
+        return favoriteGoodsRepo.saveAll(addList);
     }
 }

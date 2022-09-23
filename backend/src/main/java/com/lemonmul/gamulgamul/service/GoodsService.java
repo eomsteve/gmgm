@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,5 +25,9 @@ public class GoodsService {
             //todo
             throw new NullPointerException();
         }
+    }
+
+    public List<Goods> getGoodsList(List<Long> goodsIds) {
+        return goodsRepo.findAllById(goodsIds);
     }
 }
