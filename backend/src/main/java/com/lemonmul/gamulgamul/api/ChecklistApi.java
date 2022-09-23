@@ -166,10 +166,12 @@ public class ChecklistApi {
         basicItemRepo.deleteByChecklist(checklist);
 
         List<ChecklistBasicItem> basicItemList=new ArrayList<>();
-        for (ChecklistBasicItemRequestDto item : basicItems) {
-            Product product = productService.product(item.getProductId());
-            basicItemList.add(ChecklistBasicItem.of(checklist, product));
+        List<Product> products=productService.productList(basicItems.stream()
+                .map(ChecklistBasicItemRequestDto::getProductId).collect(Collectors.toList()));
+        for (Product product : products) {
+            basicItemList.add(ChecklistBasicItem.of(checklist,product));
         }
+
         basicItemRepo.saveAll(basicItemList);
     }
 
