@@ -33,8 +33,10 @@ public class GoodsPriceService {
     /**
      * 선택 품목, 업태의 상품 가격 정보 (날짜 오름차순)
      */
-    public List<GoodsPrice> goodsPricesByBusinessType(Goods goods,BusinessType business){
-        return goodsPriceRepo.findByGoodsAndBusinessOrderByResearchDate(goods,business);
+    public List<GoodsPrice> goodsPricesFor1yearByBusinessType(Goods goods, BusinessType business){
+        LocalDate today = LocalDate.now();
+        return goodsPriceRepo.findByGoodsAndBusinessAndResearchDateBetweenOrderByResearchDate(
+                goods, business, today.minusYears(1), today);
     }
 
     /**

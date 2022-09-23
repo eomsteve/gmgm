@@ -74,7 +74,7 @@ public class DetailApi {
      */
     private ProductDto getProductDto(Long productId, BusinessType business) {
         Product product = productService.product(productId);
-        List<ProductPrice> productPrices = productPriceService.productPricesByBusiness(product, business);
+        List<ProductPrice> productPrices = productPriceService.productPricesFor1yearByBusiness(product, business);
         log.info("goods size: {}, productPrices size: {}",product.getGoods().size(),productPrices.size());
         return new ProductDto(product, productPrices);
     }
@@ -85,7 +85,7 @@ public class DetailApi {
     private GoodsDto getGoodsDto(Long goodsId, BusinessType business) {
         Goods goods = goodsService.getGoodsById(goodsId);
         Double cheapPrice = goodsPriceService.goodsCheapPrice(goods).getPrice();
-        List<GoodsPrice> goodsPrices = goodsPriceService.goodsPricesByBusinessType(goods, business);
+        List<GoodsPrice> goodsPrices = goodsPriceService.goodsPricesFor1yearByBusinessType(goods, business);
         log.info("goodsPrices size: {}",goodsPrices.size());
         return new GoodsDto(goods, cheapPrice, goodsPrices);
     }
