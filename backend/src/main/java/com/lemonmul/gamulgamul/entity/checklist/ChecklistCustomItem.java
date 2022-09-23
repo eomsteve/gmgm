@@ -13,7 +13,7 @@ public class ChecklistCustomItem {
 
     @Column(name = "checklist_custom_item_id")
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

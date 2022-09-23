@@ -13,7 +13,7 @@ public class PriceIndex {
 
     @Column(name = "price_index_id")
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDate researchDate;

@@ -14,7 +14,7 @@ public class GoodsPrice {
 
     @Column(name = "goods_price_id")
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Double unitPrice;
