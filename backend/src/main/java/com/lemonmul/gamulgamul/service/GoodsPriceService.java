@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,11 +42,6 @@ public class GoodsPriceService {
      */
     public GoodsPrice goodsCheapPrice(Goods goods){
         Optional<GoodsPrice> optional = goodsPriceRepo.findFirstByGoodsAndBusinessOrderByResearchDateDesc(goods,BusinessType.o);
-        if(optional.isPresent()){
-            return optional.get();
-        }else{
-            //todo
-            throw new NullPointerException();
-        }
+        return optional.orElseGet(() -> GoodsPrice.of(-1.0, -1.0, LocalDate.now(), BusinessType.o, goods));
     }
 }
