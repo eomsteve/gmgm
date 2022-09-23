@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lemonmul.gamulgamul.api.dto.LoginRequestDto;
 import com.lemonmul.gamulgamul.api.dto.LoginResponseDto;
 import com.lemonmul.gamulgamul.security.auth.PrincipalDetails;
+import com.lemonmul.gamulgamul.security.redis.RedisService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,14 +18,17 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.Duration;
 
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     private final AuthenticationManager authenticationManager;
+    private final RedisService redisService;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, RedisService redisService) {
         super(new AntPathRequestMatcher("/user/login"));
         this.authenticationManager = authenticationManager;
+        this.redisService = redisService;
     }
 
     @Override
@@ -61,10 +65,14 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         response.setCharacterEncoding("utf-8");
 
         PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
-        String jwtToken = JwtTokenProvider.createToken(principalDetails);
-        jwtToken = JwtProperties.TOKEN_PREFIX + jwtToken;
+        String accessToken = JwtTokenProvider.createToken(principalDetails, JwtProperties.ACCESS_EXPIRATION_TIME);
+        accessToken = JwtProperties.TOKEN_PREFIX + accessToken;
 
-        LoginResponseDto loginResponseDto = new LoginResponseDto(jwtToken);
+        String refreshToken = JwtTokenProvider.createToken(principalDetails, JwtProperties.REFRESH_EXPIRATION_TIME);
+        refreshToken = JwtProperties.TOKEN_PREFIX + refreshToken;
+        redisService.setValues(principalDetails.getUsername(), refreshToken, Duration.ofMillis(JwtProperties.REFRESH_EXPIRATION_TIME));
+
+        LoginResponseDto loginResponseDto = new LoginResponseDto(accessToken, refreshToken);
         String loginResponse = ob.writeValueAsString(loginResponseDto);
 
         response.getWriter().write(loginResponse);

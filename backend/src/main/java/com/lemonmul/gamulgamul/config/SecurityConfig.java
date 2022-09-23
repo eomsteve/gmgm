@@ -3,6 +3,7 @@ package com.lemonmul.gamulgamul.config;
 import com.lemonmul.gamulgamul.repo.UserRepo;
 import com.lemonmul.gamulgamul.security.jwt.JwtAuthenticationFilter;
 import com.lemonmul.gamulgamul.security.jwt.JwtAuthorizationFilter;
+import com.lemonmul.gamulgamul.security.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,9 @@ public class SecurityConfig {
 
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private RedisService redisService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -63,7 +67,7 @@ public class SecurityConfig {
                 .formLogin().disable()
                 .httpBasic().disable()
 
-                .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class))), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), redisService), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtAuthorizationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), userRepo), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/user/signup").permitAll()

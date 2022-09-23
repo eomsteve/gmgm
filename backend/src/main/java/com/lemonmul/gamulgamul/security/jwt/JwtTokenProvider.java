@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class JwtTokenProvider {
 
-    public static String createToken(PrincipalDetails principalDetails) {
+    public static String createToken(PrincipalDetails principalDetails, long tokenInvalidTime) {
         Claims claims = Jwts.claims().setSubject(principalDetails.getUsername());
         claims.put("roles", principalDetails.getAuthorities());
         Date now = new Date();
@@ -20,7 +20,7 @@ public class JwtTokenProvider {
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + JwtProperties.EXPIRATION_TIME))
+                .setExpiration(new Date(now.getTime() + tokenInvalidTime))
                 .signWith(SignatureAlgorithm.HS256, JwtProperties.SECRET)
                 .compact();
     }
