@@ -2,6 +2,7 @@ package com.lemonmul.gamulgamul.api;
 
 import com.lemonmul.gamulgamul.api.dto.CategoryDto;
 import com.lemonmul.gamulgamul.api.dto.checklist.*;
+import com.lemonmul.gamulgamul.entity.Category;
 import com.lemonmul.gamulgamul.entity.checklist.Checklist;
 import com.lemonmul.gamulgamul.entity.checklist.ChecklistBasicItem;
 import com.lemonmul.gamulgamul.entity.checklist.ChecklistCustomItem;
@@ -40,74 +41,111 @@ public class ChecklistApi {
     /**
      * 체크리스트 리스트 조회
      */
-    // TODO: 들어올 때 user pk, 나갈 때 list 개수 log
     @GetMapping("/list")
     public List<ChecklistListDto> checklistList(@RequestHeader HttpHeaders headers){
+        log.info("[Starting request] GET /checklist/list");
+
         User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
+        log.info("userId: {}",user.getId());
+
         List<Checklist> checklists = checklistService.checklistList(user);
+        log.info("checklists size: {}",checklists.size());
+
+        log.info("[Finished request] GET /checklist/list");
         return checklists.stream().map(ChecklistListDto::new).collect(Collectors.toList());
     }
 
     /**
      * 빈 체크리스트 생성
      */
-    // TODO: 들어올 때 user pk, 나갈 때 check list pk log
     @PostMapping()
     public ChecklistResponseDto createChecklist(@RequestHeader HttpHeaders headers){
+        log.info("[Starting request] POST /checklist");
+
         User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
-        return new ChecklistResponseDto(checklistService.createChecklist(user));
+        log.info("userId: {}",user.getId());
+
+        Long checklistId = checklistService.createChecklist(user);
+        log.info("checklistId: {}",checklistId);
+
+        log.info("[Finished request] POST /checklist");
+        return new ChecklistResponseDto(checklistId);
     }
 
     /**
      * 체크리스트 품목 선택 페이지
      */
-    // TODO: 들어올 때 list 개수 log
     @GetMapping("/select")
     public List<CategoryDto> checklistProductSelect(){
-        return categoryService.getAllCategories().stream().map(CategoryDto::new).collect(Collectors.toList());
+        log.info("[Starting request] GET /checklist/select");
+
+        List<Category> categories = categoryService.getAllCategories();
+        log.info("categories size: {}",categories.size());
+
+        log.info("[Finished request] GET /checklist/select");
+        return categories.stream().map(CategoryDto::new).collect(Collectors.toList());
     }
 
     /**
      * 체크리스트 수정
      */
-    // TODO: 들어올 때 user pk, checklist pk , 나갈 때 list 개수 log (basic, custom 나눠서)
     @PutMapping("/{checklistId}")
     public ChecklistResponseDto modifyChecklist(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId,
                                                 @RequestBody ChecklistRequestDto checklistRequestDto){
+        log.info("[Starting request] PUT /checklist/{}",checklistId);
+
         User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
+        log.info("userId: {}",user.getId());
+
         Checklist checklist = checklistService.checklist(checklistId);
         checkOwnership(user,checklist);
 
-        fillBasicItem(checklistRequestDto.getChecklistBasicItem(), checklist);
-        fillCustomItem(checklistRequestDto.getChecklistCustomItem(), checklist);
+        List<ChecklistBasicItemRequestDto> basicItem = checklistRequestDto.getChecklistBasicItem();
+        List<ChecklistCustomItemRequestDto> customItem = checklistRequestDto.getChecklistCustomItem();
+        log.info("basicItem size: {}, customItem size: {}",basicItem.size(),customItem.size());
 
+        fillBasicItem(basicItem, checklist);
+        fillCustomItem(customItem, checklist);
+
+        log.info("[Finished request] PUT /checklist/{}",checklistId);
         return new ChecklistResponseDto(checklistId);
     }
 
     /**
      * 체크리스트 조회
      */
-    // TODO: 들어올 때 user pk, checklist pk, 나갈 때 checklist 개수 log
     @GetMapping("/{checklistId}")
     public ChecklistDto checklist(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId){
+        log.info("[Starting request] GET /checklist/{}",checklistId);
+
         User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
+        log.info("userId: {}",user.getId());
+
         Checklist checklist = checklistService.checklist(checklistId);
+        log.info("checklist size: {}",checklist.getChecklistBasicItems().size()+checklist.getChecklistCustomItems().size());
+
         checkOwnership(user,checklist);
 
+        log.info("[Finished request] GET /checklist/{}",checklistId);
         return new ChecklistDto(checklist);
     }
 
     /**
      * 체크리스트 삭제
      */
-    // TODO: 들어올 때 user pk, checklist pk, 나갈 때 '요청 종료' log
     @DeleteMapping("/{checklistId}")
     public ChecklistResponseDto deleteChecklist(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId){
+        log.info("[Starting request] DELETE /checklist/{}",checklistId);
+
         User user = JwtTokenProvider.getUserFromJwtToken(userService,headers);
+        log.info("userId: {}",user.getId());
+
         Checklist checklist = checklistService.checklist(checklistId);
         checkOwnership(user, checklist);
 
         checklistService.deleteChecklist(checklistId);
+
+        log.info("[Finished request] DELETE /checklist/{}",checklistId);
         return new ChecklistResponseDto(checklistId);
     }
 
