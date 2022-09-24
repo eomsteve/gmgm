@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import SumPriceChart from '../charts/SumPriceChart'
+import OnlineCard from './OnlineCard'
 
 interface CalculatorProps {}
 
@@ -23,15 +24,15 @@ const Calculator: FC<CalculatorProps> = () => {
     e.preventDefault();
     setUsingCalculator(true)
     console.log(goodsPrice, goodsMeasure);
-    
+    return setCalculatorData(goodsPrice);
   }
   return (
     <>
-    <div className="my-5">
+    <div className="mt-1">
 
-    <SumPriceChart />
+    <SumPriceChart calculatorData={calculatorData}  />
     </div>
-      <div className="flex w-full flex-col px-3 py-4 shadow-md">
+      <div className="flex w-full my-5 flex-col px-3 py-4 shadow-md">
         <span className="text-[0.8rem]">계산기</span>
         <p className="my-3 text-[0.8rem]">
           비교를 원하는 상품 가격과 용량을 입력해주세요.
@@ -71,6 +72,7 @@ const Calculator: FC<CalculatorProps> = () => {
           가격이 계산되었습니다. 그래프를 확인해 주세요.
         </div>}
       </div>
+      <OnlineCard/>
     </>
   );
 };

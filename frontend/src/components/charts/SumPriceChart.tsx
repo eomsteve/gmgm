@@ -36,11 +36,11 @@ export const options = {
 
 interface SumPriceChartProps {
   // productData : [];
-  // calculatorData?: [];
+  calculatorData?: number;
   // goodsData?:[];
 }
 
-const SumPriceChart: FunctionComponent<SumPriceChartProps> = () => {
+const SumPriceChart: FunctionComponent<SumPriceChartProps> = props => {
   // 라벨의 길이만큼 만들기
   const labels = [
     'January',
@@ -52,6 +52,23 @@ const SumPriceChart: FunctionComponent<SumPriceChartProps> = () => {
     'July',
   ];
 
+  const { calculatorData } = props;
+  const data2 = labels.map(() => {
+    return calculatorData;
+  })
+  let calculatorDataset = {};
+  
+  if (calculatorData) {
+    const data2 = labels.map(() => {
+      return calculatorData;
+    })
+    calculatorDataset = {
+      // label: '계산결과',
+      data: data2,
+      borderColor: 'rgb(255, 99, 13)',
+      backgroundColor: 'rgba(255, 99, 13, 0.5)',
+    };
+  }
   const data = {
     labels,
     datasets: [
@@ -62,13 +79,21 @@ const SumPriceChart: FunctionComponent<SumPriceChartProps> = () => {
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
+      {
+        label: '계산결과',
+        data: data2,
+        borderColor: 'rgb(255, 99, 13)',
+        backgroundColor: 'rgba(255, 99, 13, 0.5)',
+        borderDash :[5],
+        fill : false,
+        pointRadius: 3,
+      }
     ],
   };
   return (
-  <div className="shadow-md">
-
-  <Line options={options} data={data} />
-  </div>
+    <div className="shadow-md">
+      <Line options={options} data={data} />
+    </div>
   );
 };
 

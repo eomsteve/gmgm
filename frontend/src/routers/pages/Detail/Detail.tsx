@@ -7,7 +7,7 @@ interface DetailPageProps {
  
 const DetailPage: FC<DetailPageProps> = () => {
   return (
-    <main className="flex  w-full flex-col p-3 pb-[5rem] bg-[white]">
+    <main className="flex  w-full flex-col p-3 mt-5 mb-[8rem] bg-[white]">
       
       <DetailSelectBox />
     </main>
