@@ -7,6 +7,7 @@ import FavoriteIndexPage from './routers/pages/Favorite/FavoriteIndex';
 import FavoriteListSelection from './routers/pages/Favorite/FavoriteListSelection';
 import CheckLists from './routers/pages/CheckList/CheckLists';
 import CheckList from './routers/pages/CheckList/CheckList';
+import DetailPage from './routers/pages/Detail/Detail'
 
 import NotFound from './routers/NotFound';
 import NavBtn from './routers/NavBtn';
@@ -26,6 +27,7 @@ const App: React.FunctionComponent<AppProps> = () => {
           </Route>
           <Route path="checkLists" element={<CheckLists />}></Route>
           <Route path="checkLists/:checklistId" element={<CheckList />}></Route>
+          <Route path="detail" element={<DetailPage />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
         <Route
