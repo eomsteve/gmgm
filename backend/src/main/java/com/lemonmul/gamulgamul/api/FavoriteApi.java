@@ -85,7 +85,7 @@ public class FavoriteApi {
         log.info("]");
         log.info("favoriteItemResponseDtos size: {}", favoriteItemResponseDtos.size());
         // TODO: log 점검
-        log.info("recent favoriteTotalPrice: {}", favoriteTotalPriceResponseDtos.get(favoriteTotalPriceResponseDtos.size() - 1).getTotalPrice());
+//        log.info("recent favoriteTotalPrice: {}", favoriteTotalPriceResponseDtos.get(favoriteTotalPriceResponseDtos.size() - 1).getTotalPrice());
 
         log.info("[Finished request]");
         return new FavoritePageResponseDto(countryIndices, favoriteIndices, businessTypesResponseDtos, favoriteItemResponseDtos, favoriteTotalPriceResponseDtos);
@@ -198,7 +198,7 @@ public class FavoriteApi {
         FavoriteBusinessSelectDto favoriteBusinessSelectDtos = new FavoriteBusinessSelectDto(favoriteItemResponseDtos, favoriteTotalPriceResponseDtos);
 
         log.info("favoriteItemResponseDtos size: {}", favoriteItemResponseDtos.size());
-        log.info("recent favoriteTotalPrice: {}", favoriteTotalPriceResponseDtos.get(favoriteTotalPriceResponseDtos.size() - 1).getTotalPrice());
+//        log.info("recent favoriteTotalPrice: {}", favoriteTotalPriceResponseDtos.get(favoriteTotalPriceResponseDtos.size() - 1).getTotalPrice());
 
         log.info("Finished request");
         return favoriteBusinessSelectDtos;
