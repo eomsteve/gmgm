@@ -42,6 +42,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         String email = Jwts.parser().setSigningKey(JwtProperties.SECRET).parseClaimsJws(token).getBody().getSubject();
 
         // TODO: 강의 듣고 예외처리 해야함
+        //      token은 db를 보지 않는게 장점인데 db를 확인하는게 맞나...?
         if (email != null) {
             User user = userRepo.findByEmail(email).orElseThrow();
 

@@ -3,6 +3,7 @@ package com.lemonmul.gamulgamul.config;
 import com.lemonmul.gamulgamul.repo.UserRepo;
 import com.lemonmul.gamulgamul.security.jwt.JwtAuthenticationFilter;
 import com.lemonmul.gamulgamul.security.jwt.JwtAuthorizationFilter;
+import com.lemonmul.gamulgamul.security.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -26,6 +28,9 @@ public class SecurityConfig {
 
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private RedisService redisService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -52,6 +57,19 @@ public class SecurityConfig {
     }
 
     @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return web ->
+            web.ignoring()
+                    .antMatchers(
+                            "/user/signup",
+                            "/user/check/**",
+                            "/user/logout",
+                            "/main",
+                            "/refresh"
+                    );
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
@@ -63,12 +81,14 @@ public class SecurityConfig {
                 .formLogin().disable()
                 .httpBasic().disable()
 
-                .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class))), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), redisService), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtAuthorizationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), userRepo), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/user/signup").permitAll()
                 .antMatchers("/user/check/**").permitAll()
+                .antMatchers("/user/logout").permitAll()
                 .antMatchers("/main").permitAll()
+                .antMatchers("/refresh").permitAll()
                 .anyRequest().authenticated();
 
         return http.build();
