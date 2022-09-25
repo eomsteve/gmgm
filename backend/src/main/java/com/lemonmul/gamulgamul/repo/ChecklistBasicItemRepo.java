@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ChecklistBasicItemRepo extends JpaRepository<ChecklistBasicItem,Long> {
@@ -18,4 +19,6 @@ public interface ChecklistBasicItemRepo extends JpaRepository<ChecklistBasicItem
     @Modifying
     @Query("delete from ChecklistBasicItem where checklist=:checklist")
     void deleteByChecklist(@Param("checklist") Checklist checklist);
+
+    List<ChecklistBasicItem> findByChecklist(Checklist checklist);
 }
