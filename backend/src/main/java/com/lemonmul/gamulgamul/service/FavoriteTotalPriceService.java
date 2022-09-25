@@ -23,12 +23,8 @@ public class FavoriteTotalPriceService {
         return favoriteTotalPriceRepo.findAllByUserAndBusinessAndResearchDateBetweenOrderByResearchDate(user, business, date.minusYears(1), date);
     }
 
-    // 즐겨찾기 가격 총합을 갱신하는 함수
     @Transactional
-    public boolean updateFavoriteTotalPrice(User user, List<FavoriteTotalPrice> favoriteTotalPrices) {
+    public void deleteFavoriteTotalPrice(User user) {
         favoriteTotalPriceRepo.deleteByUser(user);
-        favoriteTotalPriceRepo.saveAll(favoriteTotalPrices);
-
-        return true;
     }
 }

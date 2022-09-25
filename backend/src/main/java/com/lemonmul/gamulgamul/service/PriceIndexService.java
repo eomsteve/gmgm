@@ -29,8 +29,7 @@ public class PriceIndexService {
     }
 
     @Transactional
-    public List<PriceIndex> updateFavoriteIndex(User user, List<PriceIndex> priceIndices) {
+    public void deleteFavoriteIndex(User user) {
         priceIndexRepo.deleteByUserAndIndexType(user, IndexType.f);
-        return priceIndexRepo.saveAll(priceIndices);
     }
 }

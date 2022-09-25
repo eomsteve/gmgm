@@ -1,7 +1,9 @@
 package com.lemonmul.gamulgamul.api;
 
-import com.lemonmul.gamulgamul.api.dto.EmailResponseDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lemonmul.gamulgamul.api.dto.CategoryDto;
+import com.lemonmul.gamulgamul.api.dto.ParamDto;
 import com.lemonmul.gamulgamul.api.dto.favorite.*;
 import com.lemonmul.gamulgamul.entity.BusinessType;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
@@ -9,16 +11,17 @@ import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
 import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
 import com.lemonmul.gamulgamul.entity.priceindex.IndexType;
-import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import com.lemonmul.gamulgamul.entity.product.Product;
-import com.lemonmul.gamulgamul.entity.product.ProductPrice;
 import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
 import com.lemonmul.gamulgamul.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -81,6 +84,7 @@ public class FavoriteApi {
         }
         log.info("]");
         log.info("favoriteItemResponseDtos size: {}", favoriteItemResponseDtos.size());
+        // TODO: log 점검
         log.info("recent favoriteTotalPrice: {}", favoriteTotalPriceResponseDtos.get(favoriteTotalPriceResponseDtos.size() - 1).getTotalPrice());
 
         log.info("[Finished request]");
@@ -128,12 +132,11 @@ public class FavoriteApi {
     // TODO: return 값 수정(DTO)
     // TODO: 들어올 때 user pk랑 즐겨찾기 개수 log, 나갈 때 합산 및 지수 최신값 log
     @PostMapping
-    public EmailResponseDto updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) {
+    public boolean updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) throws JsonProcessingException {
         log.info("[Starting request]");
 
         List<Long> goodsIds = favoriteUpdateRequestDto.getGoodsIds();
         User user = JwtTokenProvider.getUserFromJwtToken(userService,headers);
-        Goods goods;
 
         log.info("userId: {}", user.getId());
         log.info("favoriteUpdateRequestDtos: {}", favoriteUpdateRequestDto.getGoodsIds().size());
@@ -145,17 +148,16 @@ public class FavoriteApi {
         List<FavoriteGoods> addFavoriteGoodsList = new ArrayList<>();
         boolean[] exists = new boolean[goodsIds.size()];
 
+        List<Goods> goodsList = goodsService.getGoodsList(goodsIds);
+
         FavoriteGoods favoriteGoods;
-        Long goodsId;
         // 일단 사용자의 즐겨찾기 목록을 전부 삭제할 목록에 넣어두고
         // 반복문을 돌면서 남겨둘 항목은 삭제할 목록에서 제거
-        for(int i = 0; i < deleteFavoriteGoodsList.size(); i++) {
+        for(int i = deleteFavoriteGoodsList.size() - 1; i >= 0; i--) {
             favoriteGoods = deleteFavoriteGoodsList.get(i);
 
-            for(int j = 0; j < goodsIds.size(); j++) {
-                goodsId = goodsIds.get(j);
-
-                if(favoriteGoods.getGoods().getId().equals(goodsId)) {
+            for(int j = 0; j < goodsList.size(); j++) {
+                if(favoriteGoods.getGoods().equals(goodsList.get(j))) {
                     deleteFavoriteGoodsList.remove(i);
                     // 입력으로 받은 것들 중에서 이미 존재하는 것에는 exist를 체크
                     exists[j] = true;
@@ -166,23 +168,18 @@ public class FavoriteApi {
 
         // exist가 false인 항목들만 새로 추가
         for(int i = 0; i < exists.length; i++) {
-            if(!exists[i]) {
-                goods = goodsService.getGoodsById(goodsIds.get(i));
-                addFavoriteGoodsList.add(FavoriteGoods.of(user, goods));
-            }
+            if(!exists[i])
+                addFavoriteGoodsList.add(FavoriteGoods.of(user, goodsList.get(i)));
         }
 
         // 즐겨찾기 목록 갱신
         favoriteGoodsService.updateFavoriteGoodsList(addFavoriteGoodsList, deleteFavoriteGoodsList);
 
-        // 즐겨찾기 총합 계산
-        updateFavoriteTotalPrice(user);
-
-        // 즐겨찾기 지수 계산
-        updateFavoriteIndex(user);
+        // 즐겨찾기 총합, 지수 계산
+        favoriteCalc(user);
 
         log.info("Finished request");
-        return new EmailResponseDto(user.getEmail());
+        return true;
     }
 
     @GetMapping("/business/{business}")
@@ -207,96 +204,38 @@ public class FavoriteApi {
         return favoriteBusinessSelectDtos;
     }
 
-    // 즐겨찾기 총합 계산하는 함수
+    // 즐겨찾기 총합과 지수 계산을 Spark에 요청하는 함수
     // TODO: 반환값 고민
-    private boolean updateFavoriteTotalPrice(User user) {
-        // 사용자의 즐겨찾기 목록을 가져옴
-        List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();
+    private boolean favoriteCalc(User user) throws JsonProcessingException {
+        // 기존 즐겨찾기 총합과 지수 삭제
+        favoriteTotalPriceService.deleteFavoriteTotalPrice(user);
+        priceIndexService.deleteFavoriteIndex(user);
 
-        // 즐겨찾기 목록을 이용해서 상품을 리스트에 저장
-        List<Goods> goodsList = new ArrayList<>();
-        for (FavoriteGoods favoriteGoodsIter : favoriteGoodsList) {
-            goodsList.add(favoriteGoodsIter.getGoods());
-        }
+        // API 요청에 사용하는 객체
+        RestTemplate restTemplate = new RestTemplate();
 
-        List<GoodsPrice> goodsPriceList;
-        List<FavoriteTotalPrice> favoriteTotalPrices = new ArrayList<>();
-        // 각 업태 별로 나눠서 계산
-        for (BusinessType businessType : BusinessType.values()) {
-            // 즐겨찾기 목록에 있는 상품들의 해당 업태 가격들을 가져옴
-            goodsPriceList = goodsPriceService.getGoodsPricesInList(goodsList, businessType);
+        // JSON 생성에 사용하는 객체
+        ObjectMapper ob = new ObjectMapper();
 
-            // 날짜를 key값으로 각 날짜의 상품 가격 총합을 저장
-            Map<LocalDate, Double> dateTotalPrices = new HashMap<>();
-            Double cur;
-            for (GoodsPrice goodsPrice : goodsPriceList) {
-                cur = 0.0;
-                LocalDate date = goodsPrice.getResearchDate();
+        // Zeppelin paragraph url
+        String url = "http://3.36.106.26:8081/api/notebook/run/2HG47WXRQ/paragraph_1663754976707_2131716080";
 
-                if (dateTotalPrices.containsKey(date))
-                    cur = dateTotalPrices.get(date);
+        // 요청 header 설정
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-                dateTotalPrices.put(date, cur + goodsPrice.getPrice());
-            }
+        // 요청에 사용할 JSON 생성
+        SparkUpdateDto sparkUpdateDto = new SparkUpdateDto(new ParamDto(user.getId().toString()));
+        String request = ob.writeValueAsString(sparkUpdateDto);
 
-            // 계산한 총합을 리스트에 추가
-            FavoriteTotalPrice favoriteTotalPrice;
-            for (LocalDate key : dateTotalPrices.keySet()) {
-                favoriteTotalPrice = FavoriteTotalPrice.of(user, dateTotalPrices.get(key), key, businessType);
-                favoriteTotalPrices.add(favoriteTotalPrice);
-            }
-        }
+        log.info("JSON: {}", request);
 
-        log.info("recent FavoriteTotalPrice: {}", favoriteTotalPrices.get(favoriteTotalPrices.size() - 1));
+        // 요청 메세지 설정
+        HttpEntity<?> requestMessage = new HttpEntity<>(request, httpHeaders);
 
-        return favoriteTotalPriceService.updateFavoriteTotalPrice(user, favoriteTotalPrices);
-    }
-
-    // 즐겨찾기 지수를 갱신하는 함수
-    // TODO: 반환값 고민
-    private boolean updateFavoriteIndex(User user) {
-        // 사용자의 즐겨찾기 목록을 가져옴
-        List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();
-
-        Set<Product> products = new HashSet<>();
-        Map<LocalDate, Double> dateFavoriteIndex = new HashMap<>();
-
-        Product product;
-        List<ProductPrice> productPrices;
-        Double cur, productIndex;
-        for (FavoriteGoods favoriteGoods : favoriteGoodsList) {
-            product = favoriteGoods.getGoods().getProduct();
-
-            if(products.contains(product))
-                continue;
-            else
-                products.add(product);
-
-            productPrices = productPriceService.getMonthProductPrice(product);
-
-            for(ProductPrice productPrice: productPrices) {
-                cur = 0.0;
-                LocalDate date = productPrice.getResearchDate();
-                productIndex = productPrice.getUnitPrice() * product.getWeight();
-
-                if(dateFavoriteIndex.containsKey(date))
-                    cur = dateFavoriteIndex.get(date);
-
-                dateFavoriteIndex.put(date, cur + productIndex);
-            }
-        }
-
-        PriceIndex priceIndex;
-        List<PriceIndex> priceIndices = new ArrayList<>();
-        Double div = dateFavoriteIndex.get(LocalDate.of(2020, 1, 1));
-        for(LocalDate key: dateFavoriteIndex.keySet()) {
-            priceIndex = PriceIndex.of(key, dateFavoriteIndex.get(key) / div, user);
-            priceIndices.add(priceIndex);
-        }
-
-        priceIndexService.updateFavoriteIndex(user, priceIndices);
-
-        log.info("recent FavoriteIndex: {}", priceIndices.get(priceIndices.size() - 1));
+        // POST 요청 전송
+        HttpEntity<String> response = restTemplate.postForEntity(url, requestMessage, String.class);
+        log.info("POST Request Result: {}", response);
 
         return true;
     }
