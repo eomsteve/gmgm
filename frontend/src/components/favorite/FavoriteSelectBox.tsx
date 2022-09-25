@@ -1,7 +1,8 @@
 import { FC, useState, useEffect } from 'react';
 import FavoriteCard from './FavoriteCard';
+import { getFavoriteSelect } from '../../routers/APIs/favoriteApi'
 import GotoSelectionButton from './GotoSelection';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 interface FavoriteSelectBoxProps {
   optionList: string[];
 }
@@ -13,13 +14,13 @@ const businessData: { [key: string]: string } = {
 };
 
 const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
-  const navigate = useNavigate();
-
+  // const [category,]
   const optionList = ['m', 's', 'o'];
   const [optionState, setOption] = useState<string>('m');
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOption(e.target.value)
   };
+  const navigate = useNavigate();
 
   return (
     <>

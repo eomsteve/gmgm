@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import FavoriteIndexCart from '../../../components/charts/FavoriteIndexChart'
 import SelectBox from '../../../components/favorite/FavoriteSelectBox'
 import PriceChart from '../../../components/favorite/PriceChart'
-import { getFavoriteSelect } from '../../APIs/favoriteApi'
+import { getFavoriteItems } from '../../APIs/favoriteApi'
 import {useSelector} from 'react-redux'
 import type { RootState } from '../../../modules/store';
 interface FavoriteIndexPageProps {}
@@ -12,14 +12,10 @@ interface FavoriteIndexPageProps {}
 
 const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
   const data = useSelector((state : RootState)=>{
-    console.log(state.persistedReducer.authTokenReducer.authToken);
-    
+    // console.log(state.persistedReducer.authTokenReducer.authToken);
   })
   useEffect(() =>{
-    console.log();
-    
-    getFavoriteSelect()
-    
+    // getFavoriteItems('m');
   },[])
   return (
     <main className="flex w-full flex-col justify-center p-0 bg-[white]">

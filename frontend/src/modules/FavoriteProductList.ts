@@ -3,31 +3,35 @@ import { stat } from 'fs/promises';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface SelectedGoods {
-  goodsId: number;
-  goodsName: string;
-};
+  id: number;
+  name: string;
+}
 
-interface Initial{
-  goods : SelectedGoods[];
+interface Initial {
+  goods: SelectedGoods[];
 }
 
 const initialState: Initial = {
-  goods : [],
-
+  goods: [],
 };
 
 export const favoriteGoodsSlice = createSlice({
   name: 'favoriteGoods',
   initialState,
   reducers: {
-    addGoods: (
-      state,
-      action: PayloadAction<SelectedGoods>,
-    ) => {
-      state.goods.push( {goodsId: action.payload.goodsId, goodsName: action.payload.goodsName} );
+    addGoods: (state, action: PayloadAction<SelectedGoods>) => {
+      const isDuplicate = state.goods.find((goods : {id : number, name: string}) => goods.id == action.payload.id);
+      if (isDuplicate) {
+        console.log('중복');
+      }else{
+        state.goods.push({ id: action.payload.id, name: action.payload.name });
+      }
     },
-    removeGoods: (state, action: PayloadAction<{ goodsId: number }>) => {
-      console.log(action.payload.goodsId)
+    removeGoods: (state, action: PayloadAction<{ id: number }>) => {
+      const data = state.goods.filter((goods : {id : number, name: string}) => {
+        return goods.id != action.payload.id;
+      });
+      state.goods = data;
     },
   },
 });
