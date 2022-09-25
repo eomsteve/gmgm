@@ -14,7 +14,7 @@ public class ChecklistBasicItem {
 
     @Column(name = "checklist_basic_item_id")
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -17,7 +17,7 @@ public class Checklist {
 
     @Column(name = "checklist_id")
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDate regDate;
