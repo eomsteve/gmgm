@@ -1,10 +1,21 @@
 import { FC } from 'react';
 import { LogInUserREQ, logInApi } from '../../routers/APIs/userApi'
 
+import type { RootState } from '../../modules/store';
+import { setAuthToken} from '../../modules/Auth'
+import { useDispatch, useSelector } from 'react-redux';
+
 const LogIn: FC = () => {
+  const authToken = useSelector((state : RootState) => {
+    console.log(state.persistedReducer.authTokenReducer.authToken);
+    
+  })
+  // console.log(authToken);
+  
+
+  const dispatch = useDispatch();
   const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
     console.log('handleSubmit');
-    
     e.preventDefault();
     const logInFormData = new FormData(e.currentTarget);
     const logInform : LogInUserREQ = {
@@ -12,6 +23,7 @@ const LogIn: FC = () => {
       pwd : logInFormData.get('password') as string
     }
     const logInRes = await logInApi(logInform);
+    dispatch(setAuthToken(logInRes));
     console.log(logInRes);
   }
   return (
