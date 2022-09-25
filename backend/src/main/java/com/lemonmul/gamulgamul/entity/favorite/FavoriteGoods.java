@@ -35,8 +35,18 @@ public class FavoriteGoods {
         this.regDate = LocalDate.now();
     }
 
+    private FavoriteGoods(User user, Goods goods, int dateGap) {
+        this.user = user;
+        this.goods = goods;
+        this.regDate = LocalDate.now().minusDays(dateGap);
+    }
+
     public static FavoriteGoods of(User user, Goods goods) {
         return new FavoriteGoods(user, goods);
+    }
+
+    public static FavoriteGoods of(User user, Goods goods, int dateGap) {
+        return new FavoriteGoods(user, goods, dateGap);
     }
 
 }
