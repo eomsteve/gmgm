@@ -16,7 +16,7 @@ public class FavoriteTotalPrice {
 
     @Id
     @Column(name = "favorite_total_price_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

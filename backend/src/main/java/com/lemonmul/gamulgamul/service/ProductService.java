@@ -1,12 +1,12 @@
 package com.lemonmul.gamulgamul.service;
 
-import com.lemonmul.gamulgamul.entity.checklist.Checklist;
 import com.lemonmul.gamulgamul.entity.product.Product;
 import com.lemonmul.gamulgamul.repo.ProductRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,4 +29,10 @@ public class ProductService {
         }
     }
 
+    /**
+     * 품목 리스트 조회
+     */
+    public List<Product> productList(List<Long> productIds){
+        return productRepo.findByIdIn(productIds);
+    }
 }

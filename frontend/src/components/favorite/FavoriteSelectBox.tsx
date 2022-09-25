@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import FavoriteCard from './FavoriteCard';
 import GotoSelectionButton from './GotoSelection';
 import { useNavigate } from 'react-router-dom'
-interface SelectBoxProps {
+interface FavoriteSelectBoxProps {
   optionList: string[];
 }
 
@@ -12,7 +12,7 @@ const businessData: { [key: string]: string } = {
   o: '온라인',
 };
 
-const EmptySelectBox: FC<SelectBoxProps> = props => {
+const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
   const navigate = useNavigate();
 
   const optionList = ['m', 's', 'o'];
@@ -63,10 +63,11 @@ const EmptySelectBox: FC<SelectBoxProps> = props => {
         <FavoriteCard img={'img'} goodsName={'호랑이'} priceGap={0} goodsPrice={0} />
         <div onClick={()=>{navigate('/favorite/selection')}}>
         <GotoSelectionButton />
+        
         </div>
       </div>
     </>
   );
 };
 
-export default EmptySelectBox;
+export default FavoriteSelectBox;

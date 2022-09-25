@@ -15,7 +15,7 @@ public class ProductPrice {
 
     @Column(name = "product_price_id")
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Double unitPrice;
@@ -44,7 +44,7 @@ public class ProductPrice {
     private ProductPrice(Double unitPrice, LocalDate researchDate, BusinessType business, Product product) {
         this(unitPrice, researchDate, product);
 
-        this.dateType=DateType.w;
+        this.dateType=DateType.d;
         this.business = business;
     }
 

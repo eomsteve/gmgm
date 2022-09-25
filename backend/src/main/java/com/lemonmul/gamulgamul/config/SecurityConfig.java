@@ -68,6 +68,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/user/signup").permitAll()
                 .antMatchers("/user/check/**").permitAll()
+                .antMatchers("/main").permitAll()
                 .anyRequest().authenticated();
 
         return http.build();

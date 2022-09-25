@@ -245,10 +245,11 @@ public class FavoriteApi {
         List<FavoriteItemResponseDto> favoriteItemResponseDtos = new ArrayList<>();
         List<GoodsPrice> goodsPrices;
         // 최근 가격 변동 계산을 위해 가격 정보 중에서 가장 최근 가격 정보 둘의 차를 구함
-        double priceGap;
+        double priceGap=0.0;
         for (FavoriteGoods favoriteGoods : favoriteGoodsList) {
-            goodsPrices = goodsPriceService.getGoodsPrices(favoriteGoods.getGoods(), businessType);
-            priceGap = goodsPrices.get(goodsPrices.size() - 1).getPrice() - goodsPrices.get(goodsPrices.size() - 2).getPrice();
+            goodsPrices = goodsPriceService.getRecentGoodsPrices(favoriteGoods.getGoods(), businessType);
+            if(goodsPrices.size()>1)
+                priceGap = goodsPrices.get(1).getPrice() - goodsPrices.get(0).getPrice();
 
             favoriteItemResponseDtos.add(new FavoriteItemResponseDto(favoriteGoods.getGoods(), priceGap));
         }

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,8 +19,10 @@ public class ProductPriceService {
 
     private final ProductPriceRepo productPriceRepo;
 
-    public List<ProductPrice> productPricesByBusiness(Product product, BusinessType businessType){
-        return productPriceRepo.findByProductAndBusinessAndDateTypeOrderByResearchDate(product,businessType,DateType.w);
+    public List<ProductPrice> productPricesFor1yearByBusiness(Product product, BusinessType businessType){
+        LocalDate today = LocalDate.now();
+        return productPriceRepo.findByProductAndBusinessAndDateTypeAndResearchDateBetweenOrderByResearchDate(
+                product,businessType,DateType.d, today.minusYears(1), today);
     }
 
     public List<ProductPrice> getMonthProductPrice(Product product) {
