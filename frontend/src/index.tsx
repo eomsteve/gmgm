@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
+import authHeader from './routers/APIs/authHeader';
 
 //redux persist : localhost
 import {
@@ -14,25 +16,32 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist'
+} from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-import storage from "redux-persist/lib/storage";
+import storage from 'redux-persist/lib/storage';
 
-import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import favoriteProductListReducer from './modules/FavoriteProductList'
+import { Provider, useSelector } from 'react-redux';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import favoriteProductListReducer from './modules/FavoriteProductList';
+import authTokenReducer from './modules/Auth'
 
+axios.defaults.withCredentials = true;
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage: storage,
 };
-const favoriteGoodsListReducer = persistReducer(persistConfig, favoriteProductListReducer);
 
+const rootReducer = combineReducers({
+  favoriteProductListReducer,
+  authTokenReducer
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
-  reducer :{
-    favoriteGoodsListReducer,
+  reducer: {
+    persistedReducer,
   },
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
@@ -42,17 +51,23 @@ const store = configureStore({
 
 let persistor = persistStore(store);
 
-console.log(store.getState());
+console.log(localStorage.getItem('persist:null'));
+
+
+if (localStorage.jwtToken) {
+  authHeader(localStorage.jwtToken);
+  const token = localStorage.jwtToken
+}
+
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
+
 root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <div className="max-w-[500px]">
-
-      <App />
-      </div>
+        <App />
     </PersistGate>
   </Provider>,
 );

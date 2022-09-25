@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const API_URL = 'http://j7d108.p.ssafy.io:8080/api/favorite';
 const AUTH_TOKEN = 'token';
 
@@ -39,5 +38,15 @@ export const  getFavoriteItems = async (businessType : string) => {
     })
   }catch(error){
 
+  }
+}
+
+export const getFavoriteSelect = async () => {
+  try {
+    const {data} = await axios.get(API_URL + '/select');
+    console.log(data);
+    
+  } catch (error) {
+    
   }
 }

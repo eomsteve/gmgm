@@ -1,6 +1,7 @@
 import axios from 'axios';
-
+import AuthHeader from './authHeader';
 const API_URL = 'http://j7d108.p.ssafy.io:8080/api/user';
+
 
 export type SignUpUserREQ = {
   email: string;
@@ -18,6 +19,7 @@ export type LogInUserREQ = {
 export const signUpApi = async (signUpForm: SignUpUserREQ) => {
   try {
     const { data } = await axios.post(API_URL + '/signup', signUpForm);
+    
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -42,7 +44,8 @@ export const signUpApi = async (signUpForm: SignUpUserREQ) => {
 export const logInApi = async (logInForm: LogInUserREQ) => {
   try {
     const { data } = await axios.post(API_URL + '/login', logInForm);
-    console.log(data.headers);
+    localStorage.setItem("jwtToken", data.accessToken);
+    return data.accessToken;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log(error.message);

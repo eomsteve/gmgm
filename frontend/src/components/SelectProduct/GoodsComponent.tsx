@@ -11,11 +11,12 @@ interface GoodsScrollProps {
 
 const GoodsScroll: FC<GoodsScrollProps> = props => {
   const {goods} = useSelector((state : RootState) => {
+    
     console.log('-start-');
     console.log(state);
     console.log('-end-');
     return ({
-      goods : state.favoriteGoodsListReducer.goods
+      goods : state.persistedReducer.favoriteGoodsListReducer.goods
     })
   });
 
