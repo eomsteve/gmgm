@@ -6,6 +6,8 @@ import Category from './UI/CategoryPicker';
 
 import ProductComponent from './ProductComponent';
 
+import { getFavoriteSelect } from '../../routers/APIs/favoriteApi';
+
 interface CategorySliderProps {}
 
 interface NextArrowProps {
@@ -17,56 +19,31 @@ interface PrevArrowProps {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-// interface AxiosData {
-//   tempData : {
-//     string : object[
-//       string : ``
-//     ];
-//   }
-// }
+export type Product = {
+  productId : number,
+  productName : string,
+  productImg?: string;
+}
+interface CateGoryLoad {
+  categoryId : number;
+  categoryName : string;
+  categoryImg : string;
+  products : Product[];
+}
 
 const CategorySlider: FC<CategorySliderProps> = () => {
   //after axios, useEffect
+  const [data, setData] = useState<CateGoryLoad[]>([]);
   useEffect(() => {
-    console.log('axios here to get Category List and SubJectData');
-    const TempData = {
-      Category: [
-        { product1: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-        { product2: [1, 2, 3, 4, 5, 6, 7, 8] },
-        { product3: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-        { product4: [1, 2, 3, 4, 5, 6, 7, 8, 9] },
-        { product5: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] },
-        { product6: [1, 2, 3, 4, 5, 6, 7] },
-        { product7: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
-        { product8: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-        { product9: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-        { product10: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-        { product11: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-        { product12: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-      ],
+    const categoryLoad = async () => {
+      const fetchData = await getFavoriteSelect();
+      setData(fetchData);
     };
-    console.log('data', TempData.Category);
-    setData(TempData.Category);
+    categoryLoad();
   }, []);
-  const [data, setData] = useState({});
-  let [ProductList, setProductList] = useState<string[]>([]);
-  const testArray = [
-    {
-      name: 'product1',
-      product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-    },
-    { name: 'product2', product: [1, 2, 3, 4, 5, 6, 7, 8] },
-    { name: 'product3', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-    { name: 'product4', product: [1, 2, 3, 4, 5, 6, 7, 8, 9] },
-    { name: 'product5', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] },
-    { name: 'product6', product: [1, 2, 3, 4, 5, 6, 7] },
-    { name: 'product7', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
-    { name: 'product8', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-    { name: 'product9', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-    { name: 'product10', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-    { name: 'product11', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-    { name: 'product12', product: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
-  ];
+
+  console.log(data);
+  let [ProductList, setProductList] = useState<Product[]>([]);
   const settings = {
     className: 'center',
     infinite: true,
@@ -86,18 +63,11 @@ const CategorySlider: FC<CategorySliderProps> = () => {
       </span>
     );
   }
-  function PrevArrow({ onClick }: PrevArrowProps) {
-    return (
-      <div className="prev-arrow" onClick={onClick}>
-        난 어디에 있는가?
-      </div>
-    );
-  }
 
-  async function handle(sub: any) {
+  async function handle(product: Product[]) {
     // onClick시 productlist값을 세팅하면 누를때마다 sublist가 바뀌고 재 랜덜링 될것,
-    console.log(sub?.name);
-    setProductList(sub.product);
+    console.log(product);
+    setProductList(product);
   }
 
   return (
@@ -105,16 +75,24 @@ const CategorySlider: FC<CategorySliderProps> = () => {
       <h2>즐겨찾기 리스트 추가하기</h2>
       <Slider {...settings}>
         {data &&
-          testArray.map((row, idx) => {
-            // console.log(idx, row);
+          data.map(category => {
+            const categoryItem = category;
+            // console.log(categoryItem.categoryId);
+
             return (
-              <div onClick={() => handle(row)} key={0}>
-                <Category img="http://placekitten.com/75/75" />
+              <div
+                onClick={() => handle(categoryItem.products)}
+                key={categoryItem.categoryId}
+              >
+                <Category
+                  categoryImg={categoryItem.categoryImg}
+                  categoryName={categoryItem.categoryName}
+                />
               </div>
             );
           })}
       </Slider>
-      <ProductComponent productList={ProductList}/>
+      <ProductComponent productList={ProductList} />
     </div>
   );
 };

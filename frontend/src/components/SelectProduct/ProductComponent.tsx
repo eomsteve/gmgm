@@ -1,25 +1,24 @@
-import { Component, FC, CSSProperties, useState, useCallback } from 'react';
+import { useEffect, FC, CSSProperties, useState, useCallback } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import SubText from './UI/ProductPicker';
 import Goods from './GoodsComponent';
-
+import type { Product } from './CategoryComponent'
+import { getGoodsDataByProductId } from '../../routers/APIs/favoriteApi'
 
 
 interface ProductListsProps {
-  productList: string[];
+  productList: Product[];
 }
 type GoodsPrice = {
   price : number;
   researchDate : string;
 }
 export type GoodsItem = {
-  goodsId : number;
-  goodsName : string;
-  goodsImg? : string;
-  cheapPrice? : string;
-  cheapUrl? : string;
+  id : number;
+  name : string;
+  img? : string;
   capacity? : string;
   measure? : string;
   ea? : string;
@@ -31,14 +30,9 @@ interface NextArrowProps {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-interface PrevArrowProps {
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-}
-
 const ProductLists: FC<ProductListsProps> = props => {
   const { productList } = props;
   let [goodsList, setGoodsList] = useState<GoodsItem[]>([]);
-  const testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
   const settings = {
     className: 'center',
     infinite: true,
@@ -51,6 +45,9 @@ const ProductLists: FC<ProductListsProps> = props => {
     // PrevArrow : <PrevArrow />,
     // nextArrow: <NextArrow />,
   };
+  useEffect(()=>{
+    setGoodsList([])
+  },[productList])
 
   function NextArrow({ style, onClick }: NextArrowProps) {
     return (
@@ -60,29 +57,30 @@ const ProductLists: FC<ProductListsProps> = props => {
     );
   }
 
-  const handle= useCallback((sub: any) => {
-    // onClick시 goods 가져오기 ??? 이게 맞아??
-    console.log(sub);
+  const handle= useCallback((productId: number) => {
+    const loadGoodsData = async(productId : number) => {
+      const goodsData  = await getGoodsDataByProductId(productId);
+      setGoodsList(goodsData);
+    }
+    
+    loadGoodsData(productId)
     // axios 통신을 누를때마다 합니다? 그래서 useState에 값을 저장하고 반영해서 반복문 돌림
-    setGoodsList([{ goodsId: 1, goodsName: 'apple' }]);
   },[]);
 
   return (
     <>
       <div className="my-10">
         <Slider {...settings}>
-          {productList.map(row => {
-            // console.log(row);
-
+          {productList.map(product => {
             return (
-              <div onClick={() => handle(row)} key={0}>
-                <SubText />
+              <div onClick={() => handle(product.productId)} key={product.productId}>
+                <SubText productId={product.productId} productName={product.productName} />
               </div>
             );
           })}
         </Slider>
       </div>
-      <Goods goodsList={goodsList} />
+      {goodsList && <Goods goodsList={goodsList} />}
     </>
   );
 };
