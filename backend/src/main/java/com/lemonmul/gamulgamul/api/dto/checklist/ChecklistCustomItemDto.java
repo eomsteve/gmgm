@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 public class ChecklistCustomItemDto {
     private Long id;
     private String name;
-
     private boolean status;
 
     public ChecklistCustomItemDto(ChecklistCustomItem checklistCustomItem) {

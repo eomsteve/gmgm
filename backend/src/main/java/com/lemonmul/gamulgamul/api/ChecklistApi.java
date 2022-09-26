@@ -41,6 +41,7 @@ public class ChecklistApi {
 
     /**
      * 체크리스트 리스트 조회
+     * todo isEmpty 추가
      */
     @GetMapping("/list")
     public List<ChecklistListDto> checklistList(@RequestHeader HttpHeaders headers){
@@ -101,8 +102,8 @@ public class ChecklistApi {
         Checklist checklist = checklistService.checklist(checklistId);
         checkOwnership(user,checklist);
 
-        List<ChecklistBasicItemRequestDto> basicItem = checklistRequestDto.getChecklistBasicItem();
-        List<ChecklistCustomItemRequestDto> customItem = checklistRequestDto.getChecklistCustomItem();
+        List<ChecklistBasicItemRequestDto> basicItem = checklistRequestDto.getChecklistBasicItems();
+        List<ChecklistCustomItemRequestDto> customItem = checklistRequestDto.getChecklistCustomItems();
         log.info("basicItem size: {}, customItem size: {}",basicItem.size(),customItem.size());
 
         fillBasicItem(basicItem, checklist);
@@ -145,8 +146,8 @@ public class ChecklistApi {
         Checklist checklist = checklistService.checklist(checklistId);
         checkOwnership(user,checklist);
 
-        List<ChecklistBasicItemDto> basicItem = checklistDto.getChecklistBasicItem();
-        List<ChecklistCustomItemDto> customItem = checklistDto.getChecklistCustomItem();
+        List<ChecklistBasicItemDto> basicItem = checklistDto.getChecklistBasicItems();
+        List<ChecklistCustomItemDto> customItem = checklistDto.getChecklistCustomItems();
         log.info("basicItem size: {}, customItem size: {}",basicItem.size(),customItem.size());
 
         basicItemService.updateStatus(checklist, basicItem);
