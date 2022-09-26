@@ -2,11 +2,13 @@ package com.lemonmul.gamulgamul.service;
 
 import com.lemonmul.gamulgamul.api.dto.news.ItemDto;
 import com.lemonmul.gamulgamul.api.dto.news.SearchResultDto;
+import com.lemonmul.gamulgamul.entity.News;
 import com.lemonmul.gamulgamul.entity.checklist.Checklist;
 import com.lemonmul.gamulgamul.entity.priceindex.IndexType;
 import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.repo.ChecklistRepo;
+import com.lemonmul.gamulgamul.repo.NewsRepo;
 import com.lemonmul.gamulgamul.repo.PriceIndexRepo;
 import com.lemonmul.gamulgamul.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +21,12 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
+import java.beans.Transient;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,6 +35,8 @@ public class MainService {
 
     private final PriceIndexRepo priceIndexRepo;
     private final ChecklistRepo checklistRepo;
+
+    private final NewsRepo newsRepo;
 
     /**
      * 국가, 가물가물 최신 index 조회
@@ -66,12 +75,14 @@ public class MainService {
      * TODO: Cron도 ..해야지..ㅎ...
      * */
     public void apiProcess(){
+//    public List<News> apiProcess(){
         // 요청한 api 내용 받아 오는 함수 호출
-        SearchResultDto news = getNews();
+        SearchResultDto newsApi = getNews();
 
         // TODO: db에 기존에 있던 기사 삭제하고 저장하는 함수 호출
+        saveNews(newsApi.getItems());
 
-        //
+//        return news;
 
     }
 
@@ -93,7 +104,7 @@ public class MainService {
 
         // URI 빌드
         String keyword = "물가";
-        Integer size = 10;
+        Integer size = 20;
         UriComponents uri = UriComponentsBuilder.newInstance()
                 .scheme("https").host("openapi.naver.com").path(("/v1/search/news.json"))
                 .query("query={keyword}").query("display={size}")
@@ -109,9 +120,29 @@ public class MainService {
     /**
      * DB 저장 함수
      * */
+    @Transactional
     public void saveNews(List<ItemDto> items){
+//    public List<News> saveNews(List<ItemDto> items){
         // TODO: Dto 에 있는 정보 뽑아서 entity 생성해서 넣어주기
-        // ? 하나씩 따로따로 저장 vs List 만들어서 entity 때려 담은 후에 save all ?
+        // List 만들어서 entity 때려 담은 후에 save all
+        List<News> newsList = new ArrayList<>();
+
+        ItemDto itemDto;
+
+        for (ItemDto item : items) {
+            itemDto = item;
+            String dateStr = itemDto.getPubDate();
+//            System.out.printf(dateStr);
+
+            // Mon, 26 Sep 2022 14:48:00 +0900
+
+            LocalDateTime dateTime = LocalDateTime.parse(dateStr, DateTimeFormatter.RFC_1123_DATE_TIME);
+            newsList.add(News.of(itemDto.getTitle(), itemDto.getLink(), dateTime));
+        }
+
+
+//        return newsList;
+        newsRepo.saveAll(newsList);
 
 
     }
