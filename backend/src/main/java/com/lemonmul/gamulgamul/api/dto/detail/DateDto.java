@@ -7,14 +7,15 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class PriceDto {
-    private double price;
+public class DateDto {
 
-    public PriceDto(ProductPrice productPrice) {
-        price=productPrice.getUnitPrice();
+    private LocalDate researchDate;
+
+    public DateDto(ProductPrice price) {
+        researchDate=price.getResearchDate();
     }
 
-    public PriceDto(GoodsPrice goodsPrice) {
-        price=goodsPrice.getPrice();
+    public DateDto(GoodsPrice price) {
+        researchDate=price.getResearchDate();
     }
 }
