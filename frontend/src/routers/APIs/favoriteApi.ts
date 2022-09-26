@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL = 'http://j7d108.p.ssafy.io:8080/api/favorite';
+const API_URL = 'https://j7d108.p.ssafy.io/api/favorite';
 const AUTH_TOKEN = 'token';
 
 type ChartData = {
