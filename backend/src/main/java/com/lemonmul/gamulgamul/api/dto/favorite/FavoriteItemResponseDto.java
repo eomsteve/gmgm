@@ -12,7 +12,7 @@ public class FavoriteItemResponseDto {
 
     private Long productId;
 
-    private String name;
+    private String goodsName;
 
     private String img;
 
@@ -23,7 +23,7 @@ public class FavoriteItemResponseDto {
     public FavoriteItemResponseDto(Goods goods, Double priceGap) {
         this.goodsId = goods.getId();
         this.productId = goods.getProduct().getId();
-        this.name = goods.getName();
+        this.goodsName = goods.getName();
         this.img = goods.getImg();
         this.measure = goods.getMeasure();
         this.priceGap = priceGap;

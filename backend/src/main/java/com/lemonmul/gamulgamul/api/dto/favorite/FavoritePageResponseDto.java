@@ -16,7 +16,7 @@ public class FavoritePageResponseDto {
 
     private List<BusinessTypeResponseDto> businessTypes;
 
-    private List<FavoriteItemResponseDto> favoriteItemResponseDtos;
+    private List<FavoriteItemResponseDto> favoriteItems;
 
     private List<FavoriteTotalPriceResponseDto> favoriteTotalPrices;
 }
