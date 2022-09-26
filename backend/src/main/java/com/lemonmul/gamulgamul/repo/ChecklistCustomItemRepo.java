@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ChecklistCustomItemRepo extends JpaRepository<ChecklistCustomItem,Long> {
@@ -17,4 +18,6 @@ public interface ChecklistCustomItemRepo extends JpaRepository<ChecklistCustomIt
     @Modifying
     @Query("delete from ChecklistCustomItem where checklist=:checklist")
     void deleteByChecklist(@Param("checklist") Checklist checklist);
+
+    List<ChecklistCustomItem> findByChecklist(Checklist checklist);
 }

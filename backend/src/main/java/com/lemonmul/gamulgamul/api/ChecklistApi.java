@@ -11,17 +11,16 @@ import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.repo.ChecklistBasicItemRepo;
 import com.lemonmul.gamulgamul.repo.ChecklistCustomItemRepo;
 import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
-import com.lemonmul.gamulgamul.service.CategoryService;
-import com.lemonmul.gamulgamul.service.ChecklistService;
-import com.lemonmul.gamulgamul.service.ProductService;
-import com.lemonmul.gamulgamul.service.UserService;
+import com.lemonmul.gamulgamul.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -37,6 +36,8 @@ public class ChecklistApi {
     private final ProductService productService;
     private final ChecklistBasicItemRepo basicItemRepo;
     private final ChecklistCustomItemRepo customItemRepo;
+    private final ChecklistBasicItemService basicItemService;
+    private final ChecklistCustomItemService customItemService;
 
     /**
      * 체크리스트 리스트 조회
@@ -128,6 +129,34 @@ public class ChecklistApi {
 
         log.info("[Finished request] GET /checklist/{}",checklistId);
         return new ChecklistDto(checklist);
+    }
+
+    /**
+     * 체크리스트 체크 여부 수정
+     */
+    @PutMapping("/status/{checklistId}")
+    public Map<String, Integer> checklistStatus(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId,
+                                                @RequestBody ChecklistDto checklistDto){
+        log.info("[Starting request] PUT /checklist/status/{}",checklistId);
+
+        User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
+        log.info("userId: {}",user.getId());
+
+        Checklist checklist = checklistService.checklist(checklistId);
+        checkOwnership(user,checklist);
+
+        List<ChecklistBasicItemDto> basicItem = checklistDto.getChecklistBasicItem();
+        List<ChecklistCustomItemDto> customItem = checklistDto.getChecklistCustomItem();
+        log.info("basicItem size: {}, customItem size: {}",basicItem.size(),customItem.size());
+
+        basicItemService.updateStatus(checklist, basicItem);
+        customItemService.updateStatus(checklist, customItem);
+
+        Map<String,Integer> response=new HashMap<>();
+        response.put("basicItemSize",basicItem.size());
+        response.put("customItemSize",customItem.size());
+        log.info("[Finished request] PUT /checklist/status/{}",checklistId);
+        return response;
     }
 
     /**
