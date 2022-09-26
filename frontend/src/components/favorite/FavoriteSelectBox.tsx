@@ -32,7 +32,7 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
         className="form-select form-select-sm
     m-3
     block
-    max-w-[25vw]
+    max-w-[95%]
     rounded
     border
     border-solid

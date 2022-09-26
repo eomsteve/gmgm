@@ -36,7 +36,7 @@ const GoodsScroll: FC<GoodsScrollProps> = props => {
   // console.log(goodsList);
 
   return (
-    <div className="grid h-[30vh] w-[100vw] grid-cols-2 overflow-scroll border">
+    <div className="grid h-[30vh] w-full grid-cols-2 overflow-scroll border">
       {goodsList.map((goods, idx) => {
         return (
           <div key={idx} onClick={()=>{addList(goods)}}>
