@@ -9,7 +9,7 @@ const Main: FunctionComponent<MainProps> = () => {
   return (
     <>
     <MainUserCard />
-    <main className="mx-0 flex h-[90vh] w-[97vw] flex-col items-center justify-center bg-[white]">
+    <main className="mx-0 flex h-[90vh] w-full flex-col items-center justify-center bg-[white]">
 
       this is main page
     </main>

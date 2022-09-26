@@ -10,7 +10,7 @@ const FavoriteCard : FC<FavoriteCardProps> = (props) =>{
   const {img , goodsName , priceGap, goodsPrice} = props;
   return (
     <>
-      <div className="m-3 p-1 my-1 shadow-md container center grid grid-cols-6 w-[90vw] px-2 lg:py-0 border-black ">
+      <div className="m-3 p-1 my-1 shadow-md container center grid grid-cols-6 w-[95%] px-2 lg:py-0 border-black ">
       <div className="flex flex-rows justify-center">
         <img src="http://placekitten.com/50/50" />
       </div>
