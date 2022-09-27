@@ -1,11 +1,12 @@
 import { FC, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import BasicBanner from './UI/BasicBanner';
 import CustomBanner from './UI/CustomBanner';
 import GotoCheckListSelection from './UI/GotoCheckListSelection';
 import CheckListCard from './UI/CheckListCard';
 import CustomInput from './UI/InputCustom';
 import ConfirmButton from './UI/ConFirmButton';
+import { getCheckList } from '@apis/checkList.Api'
 
 interface CheckListSelectBoxProps {
   optionList: string[];
@@ -18,6 +19,19 @@ const businessData: { [key: string]: string } = {
 };
 
 const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
+  const { checklistId } = useParams();
+  useEffect(() => {
+    const fetchData = async(checklistId ?: string) => {
+      const data = await getCheckList(checklistId);
+      if (data.empty){
+        console.log('empty checklist');
+        
+      }
+    } 
+    fetchData(checklistId)
+    console.log(checklistId);
+  },[])
+  
   const navigate = useNavigate();
   const optionList = ['m', 's', 'o'];
   const [optionState, setOption] = useState<string>('m');

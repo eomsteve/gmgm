@@ -4,8 +4,9 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import SubText from './UI/ProductPicker';
 import Goods from './GoodsComponent';
+import './UI/product-slick.css'
 import type { Product } from './CategoryComponent'
-import { getGoodsDataByProductId } from '../../routers/APIs/favoriteApi'
+import { getGoodsDataByProductId } from '@routers/APIs/favoriteApi'
 
 
 interface ProductListsProps {
@@ -16,8 +17,8 @@ type GoodsPrice = {
   researchDate : string;
 }
 export type GoodsItem = {
-  id : number;
-  name : string;
+  goodsId : number;
+  goodsName : string;
   img? : string;
   capacity? : string;
   measure? : string;
@@ -42,24 +43,17 @@ const ProductLists: FC<ProductListsProps> = props => {
     dots: true,
     slidesPerRow: 4,
     arrows: false,
-    // PrevArrow : <PrevArrow />,
-    // nextArrow: <NextArrow />,
   };
   useEffect(()=>{
     setGoodsList([])
   },[productList])
 
-  function NextArrow({ style, onClick }: NextArrowProps) {
-    return (
-      <span className="next-arrow flex bg-red-200" onClick={onClick}>
-        누르면 넘어감
-      </span>
-    );
-  }
 
   const handle= useCallback((productId: number) => {
     const loadGoodsData = async(productId : number) => {
       const goodsData  = await getGoodsDataByProductId(productId);
+      console.log(goodsData);
+      
       setGoodsList(goodsData);
     }
     

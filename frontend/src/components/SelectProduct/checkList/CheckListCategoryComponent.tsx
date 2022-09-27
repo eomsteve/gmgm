@@ -2,12 +2,12 @@ import { FC, CSSProperties, useState, useEffect } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
-import Category from './UI/CategoryPicker';
+import Category from '../UI/CategoryPicker';
 
-import ProductComponent from './ProductComponent';
+import ProductComponent from './CheckListProductComponent';
 
-import { getFavoriteSelect } from '../../routers/APIs/favoriteApi';
-
+import { getFavoriteSelect } from '@apis/favoriteApi';
+import type {BasicProduct} from '@modules/CheckListProductList'
 interface CategorySliderProps {}
 
 interface NextArrowProps {
@@ -19,21 +19,17 @@ interface PrevArrowProps {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export type Product = {
-  productId : number,
-  productName : string,
-  productImg?: string;
-}
-interface CateGoryLoad {
+
+interface CategoryLoad {
   categoryId : number;
   categoryName : string;
   categoryImg : string;
-  products : Product[];
+  products : BasicProduct[];
 }
 
 const CategorySlider: FC<CategorySliderProps> = () => {
   //after axios, useEffect
-  const [data, setData] = useState<CateGoryLoad[]>([]);
+  const [data, setData] = useState<CategoryLoad[]>([]);
   useEffect(() => {
     const categoryLoad = async () => {
       const fetchData = await getFavoriteSelect();
@@ -43,7 +39,7 @@ const CategorySlider: FC<CategorySliderProps> = () => {
   }, []);
 
   console.log(data);
-  let [ProductList, setProductList] = useState<Product[]>([]);
+  let [ProductList, setProductList] = useState<BasicProduct[]>([]);
   const settings = {
     className: 'center',
     infinite: true,
@@ -64,7 +60,7 @@ const CategorySlider: FC<CategorySliderProps> = () => {
     );
   }
 
-  async function handle(product: Product[]) {
+  async function handle(product: BasicProduct[]) {
     // onClick시 productlist값을 세팅하면 누를때마다 sublist가 바뀌고 재 랜덜링 될것,
     console.log(product);
     setProductList(product);
@@ -72,13 +68,11 @@ const CategorySlider: FC<CategorySliderProps> = () => {
 
   return (
     <div>
-      <h2>즐겨찾기 리스트 추가하기</h2>
+      <h2>체크리스트 추가하기</h2>
       <Slider {...settings}>
         {data &&
           data.map(category => {
             const categoryItem = category;
-            // console.log(categoryItem.categoryId);
-
             return (
               <div
                 onClick={() => handle(categoryItem.products)}

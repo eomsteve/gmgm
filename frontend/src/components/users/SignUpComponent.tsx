@@ -32,8 +32,8 @@ const [isPasswordConfirmBlur, setIsPasswordConfirmBlur] = useState<boolean>(true
 
 const onChangeName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
   setName(e.target.value)
-  if (e.target.value.length < 2 || e.target.value.length > 5) {
-    setNameMessage('2글자 이상 5글자 미만으로 입력해주세요.')
+  if (e.target.value.length < 2 || e.target.value.length > 12) {
+    setNameMessage('2글자 이상 12글자 미만으로 입력해주세요.')
     setIsName(false)
   } else {
     setNameMessage('올바른 이름 형식입니다 :)')
@@ -58,7 +58,7 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 
   // 비밀번호
   const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-?_~])(?=.*[0-9]).{8,15}$/
     const passwordCurrent = e.target.value
     setPassword(passwordCurrent)
 
@@ -102,28 +102,7 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setGender(gender)
     setIsGender(true)
   },[])
-// const onSubmit = useCallback(
-//   async (e: React.FormEvent<HTMLFormElement>) => {
-//     e.preventDefault()
-//     try {
-//       await axios
-//         .post(REGISTER_USERS_URL, {
-//           username: name,
-//           password: password,
-//           email: email,
-//         })
-//         .then((res) => {
-//           console.log('response:', res)
-//           if (res.status === 200) {
-//             router.push('/sign_up/profile_start')
-//           }
-//         })
-//     } catch (err) {
-//       console.error(err)
-//     }
-//   },
-//   [email, name, password, date, gender, router]
-// )
+
   return (
     <form className="flex min-h-screen flex-col bg-gray-50" onSubmit={()=>{console.log('onSubmit')}}>
       <div className="container mx-auto flex max-w-sm flex-1 flex-col items-center justify-center px-2">

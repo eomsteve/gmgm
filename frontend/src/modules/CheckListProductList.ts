@@ -2,14 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import { stat } from 'fs/promises';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-interface BasicProduct {
-  id?: number;
+export interface BasicProduct {
   basicProductId: number;
-  basicProductName?: string;
+  basicProductName: string;
   status?: boolean;
 }
 
-interface CustomItem {
+export interface CustomProduct {
   id?: number;
   customProductName: string;
   status?: boolean;
@@ -17,7 +16,7 @@ interface CustomItem {
 
 interface Initial {
   checklistBasicItems: BasicProduct[];
-  checklistCustomItems: CustomItem[];
+  checklistCustomItems: CustomProduct[];
 }
 
 const initialState: Initial = {
@@ -30,16 +29,38 @@ export const checkListProductsSlice = createSlice({
   initialState,
   reducers: {
     addBasicProducts: (state, action: PayloadAction<BasicProduct>) => {
-      // state.checklistBasicItems.push( {productsId: action.payload.productsId, productsName: action.payload.productsName} );
+      const isDuplicate = state.checklistBasicItems.find((products) => products.basicProductId == action.payload.basicProductId);
+      if (isDuplicate) {
+        console.log('중복');
+      }else{
+        state.checklistBasicItems.push({ basicProductId: action.payload.basicProductId, basicProductName: action.payload.basicProductName, status: action.payload.status });
+      }
     },
     removeBasicProducts: (
       state,
-      action: PayloadAction<{ productsId: number }>,
+      action: PayloadAction<BasicProduct>,
     ) => {
-      console.log(action.payload.productsId);
+      const data = state.checklistBasicItems.filter((products) => {
+        return products.basicProductId != action.payload.basicProductId;
+      });
+      state.checklistBasicItems = data;
     },
+    addCustomProducts: (state, action : PayloadAction<CustomProduct>)=>{
+      const isDuplicate = state.checklistCustomItems.find((products) => products.id == action.payload.id);
+      if (isDuplicate) {
+        console.log('중복');
+      }else{
+        state.checklistCustomItems.push({ id: action.payload.id, customProductName: action.payload.customProductName, status: action.payload.status });
+      }
+    },
+    removeCustomProducts: (state, action : PayloadAction<CustomProduct>)=>{
+      const data = state.checklistCustomItems.filter((products) => {
+        return products.id != action.payload.id;
+      });
+      state.checklistCustomItems = data;
+    }
   },
 });
 
-// export const { addProducts, removeProducts } = checkListProductsSlice.actions;
+export const { addBasicProducts, removeBasicProducts, addCustomProducts, removeCustomProducts } = checkListProductsSlice.actions;
 export default checkListProductsSlice.reducer;

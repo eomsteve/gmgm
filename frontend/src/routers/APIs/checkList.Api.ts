@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_URL = 'http://j7d108.p.ssafy.io:8080/api/checklist';
+const API_URL = 'https://j7d108.p.ssafy.io/api/checklist';
 const AUTH_TOKEN = 'token';
 
-type CheckList = {
-  "chekclistId" : number,
+export type CheckList = {
+  "checklistId" : number,
   "regDate" : string
 }
 
@@ -16,10 +16,9 @@ type CheckList = {
 */
 export const getCheckLists = async () => {
   try {
-    const { data } = await axios.get<CheckList[]>(API_URL + '/list', {
-      headers: { Authorization: AUTH_TOKEN, },
-    });
+    const { data } = await axios.get(API_URL + '/list');
     console.log('getCheckLists : ', data);
+    return data;
   } catch (error) {
     
   }
@@ -33,11 +32,7 @@ export const getCheckLists = async () => {
 */
 export const makeEmptyCheckList = async () => {
   try {
-    const { data } = await axios.post<string>(API_URL + '/',{
-      Headers: {
-        Authorization: AUTH_TOKEN
-      }
-    });
+    const { data } = await axios.post<string>(API_URL + '/');
     console.log('makeEmptyCheckList : ', data);
   } catch (error) {
     
@@ -47,7 +42,7 @@ export const makeEmptyCheckList = async () => {
 /**
 * ! get
 * ? hhhhhhh
-* TODO: gkfdlf
+* TODO: 
 * * 체크리스트 품목 선택 페이지 이동시 useEffect호출
 * @parm : none;
 * @return : none;
@@ -55,4 +50,15 @@ export const makeEmptyCheckList = async () => {
 
 export const checkListSelection = async () => {
 
+};
+
+
+export const getCheckList = async (checkListId ?: string) => {
+  try {
+    const {data} = await axios.get(API_URL + `/${checkListId}`);
+    console.log("get CheckList by id : ", data);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 };

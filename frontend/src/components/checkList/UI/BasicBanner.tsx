@@ -9,7 +9,7 @@ const EmptyCard: FC = () => {
     <>
       <div
         onClick={() => {
-          navigate('/favorite/selection');
+          navigate('/checklist/selection');
         }}
         className="m-3 ml-3 flex 
         w-[90vw] flex-col items-center justify-center 

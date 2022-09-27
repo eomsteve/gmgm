@@ -1,8 +1,8 @@
 import { Component, FC, CSSProperties, useState, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal } from 'react';
 import GoodsCard from './UI/GoodsCard';
 
-import type { RootState } from '../../modules/store';
 import type { GoodsItem } from './ProductComponent';
+import type { RootState } from '../../modules/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { addGoods, removeGoods } from '../../modules/FavoriteProductList';
 interface GoodsScrollProps {
@@ -21,13 +21,13 @@ const GoodsScroll: FC<GoodsScrollProps> = props => {
 
   const dispatch = useDispatch();
 
-  const addList = (goodsItem : { id : number, name : string }) => {
+  const addList = (goodsItem : { goodsId : number, goodsName : string }) => {
     dispatch(addGoods(goodsItem))
     console.log('굿즈 추가');
     
   }
 
-  const removeList = (goodsItem : { id : number })=>{
+  const removeList = (goodsItem : { goodsId : number })=>{
     dispatch(removeGoods(goodsItem))
     console.log('굿즈 삭제');
   }
@@ -40,7 +40,7 @@ const GoodsScroll: FC<GoodsScrollProps> = props => {
       {goodsList.map((goods, idx) => {
         return (
           <div key={idx} onClick={()=>{addList(goods)}}>
-            <GoodsCard id={goods.id} name={goods.name} img={'http://placekitten.com/175/175'} />
+            <GoodsCard goodsId={goods.goodsId} goodsName={goods.goodsName} img={'http://placekitten.com/175/175'} />
           </div>
         );
       })}
