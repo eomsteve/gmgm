@@ -10,7 +10,6 @@ import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.repo.ChecklistRepo;
 import com.lemonmul.gamulgamul.repo.NewsRepo;
 import com.lemonmul.gamulgamul.repo.PriceIndexRepo;
-import com.lemonmul.gamulgamul.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -22,8 +21,6 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
-import java.beans.Transient;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -80,6 +77,9 @@ public class MainService {
         SearchResultDto newsApi = getNews();
 
         // TODO: db에 기존에 있던 기사 삭제하고 저장하는 함수 호출
+        if (newsRepo.count() > 0)
+            newsRepo.deleteAll();
+
         saveNews(newsApi.getItems());
 
 //        return news;
@@ -96,7 +96,7 @@ public class MainService {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        // 네이버 API 요청 시 headr에 넣어야 하는 정보 추가
+        // 네이버 API 요청 시 header에 넣어야 하는 정보 추가
         HttpHeaders header = new HttpHeaders();
         header.add("X-Naver-Client-Id", clientId);
         header.add("X-Naver-Client-Secret", clientSecret);
@@ -104,7 +104,7 @@ public class MainService {
 
         // URI 빌드
         String keyword = "물가";
-        Integer size = 20;
+        Integer size = 3;
         UriComponents uri = UriComponentsBuilder.newInstance()
                 .scheme("https").host("openapi.naver.com").path(("/v1/search/news.json"))
                 .query("query={keyword}").query("display={size}")

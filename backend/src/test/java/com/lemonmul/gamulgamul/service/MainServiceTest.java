@@ -16,7 +16,7 @@ import java.util.List;
 
 @SpringBootTest
 @AutoConfigureWebMvc
-@Rollback
+//@Rollback
 public class MainServiceTest {
 
     @Autowired
