@@ -21,10 +21,12 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import java.security.cert.TrustAnchor;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -64,6 +66,20 @@ public class MainService {
     /**
      * 물가 관련 뉴스 조회
      * */
+    public List<News> getNewsList(){
+        Random random = new Random();
+        List<News> randomNews = new ArrayList<>();
+        List<News> allNews = newsRepo.findAll();
+
+        // 랜덤으로 뉴스 3개 반환
+        while (randomNews.size() < 3){
+            News news = allNews.get(random.nextInt(20));
+            if (!randomNews.contains(news)){
+                randomNews.add(news);
+            }
+        }
+        return randomNews;
+    }
 
 
 
@@ -76,7 +92,7 @@ public class MainService {
         // 요청한 api 내용 받아 오는 함수 호출
         SearchResultDto newsApi = getNews();
 
-        // TODO: db에 기존에 있던 기사 삭제하고 저장하는 함수 호출
+        // db에 기존에 있던 기사 삭제하고 저장하는 함수 호출
         if (newsRepo.count() > 0)
             newsRepo.deleteAll();
 
@@ -104,7 +120,7 @@ public class MainService {
 
         // URI 빌드
         String keyword = "물가";
-        Integer size = 3;
+        Integer size = 20;
         UriComponents uri = UriComponentsBuilder.newInstance()
                 .scheme("https").host("openapi.naver.com").path(("/v1/search/news.json"))
                 .query("query={keyword}").query("display={size}")
@@ -123,7 +139,6 @@ public class MainService {
     @Transactional
     public void saveNews(List<ItemDto> items){
 //    public List<News> saveNews(List<ItemDto> items){
-        // TODO: Dto 에 있는 정보 뽑아서 entity 생성해서 넣어주기
         // List 만들어서 entity 때려 담은 후에 save all
         List<News> newsList = new ArrayList<>();
 

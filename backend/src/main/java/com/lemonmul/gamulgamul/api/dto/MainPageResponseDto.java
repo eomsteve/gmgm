@@ -21,7 +21,7 @@ public class MainPageResponseDto {
 
     private List<ChecklistListDto> checklistList;
 
-    private String news;
-//    private List<News> newsList;
+//    private String news;
+    private List<News> newsList;
 
 }

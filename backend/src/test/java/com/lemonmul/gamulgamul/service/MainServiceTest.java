@@ -16,7 +16,7 @@ import java.util.List;
 
 @SpringBootTest
 @AutoConfigureWebMvc
-//@Rollback
+@Rollback
 public class MainServiceTest {
 
     @Autowired
@@ -28,12 +28,12 @@ public class MainServiceTest {
     @Test
     public void 데이터저장(){
 //        List<News> news = mainService.apiProcess();
-        System.out.printf("========== time parsing 시작 ==========");
+        System.out.println("========== time parsing 시작 ==========");
 //        System.out.printf(news.get(0).getPubDate().toString());
         mainService.apiProcess();
         List<News> news = newsRepo.findAll();
         System.out.println(news);
-        System.out.printf("========== time parsing 종료 ==========");
+        System.out.println("========== time parsing 종료 ==========");
     }
 
     @Test
@@ -51,5 +51,15 @@ public class MainServiceTest {
 //        }
         System.out.println("===================API TEST 종료===================");
 
+    }
+
+    @Test
+    public void 뉴스조회(){
+        System.out.println("=============뉴스 Test 시작=============");
+        List<News> randomNews = mainService.getNewsList();
+        for (News news : randomNews){
+            System.out.println(news.getTitle());
+        }
+        System.out.println("=============뉴스 Test 종료=============");
     }
 }

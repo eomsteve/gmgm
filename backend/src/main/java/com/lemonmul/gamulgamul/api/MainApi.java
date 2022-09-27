@@ -3,10 +3,12 @@ package com.lemonmul.gamulgamul.api;
 import com.lemonmul.gamulgamul.api.dto.MainPageResponseDto;
 import com.lemonmul.gamulgamul.api.dto.checklist.ChecklistListDto;
 import com.lemonmul.gamulgamul.api.dto.favorite.PriceIndexResponseDto;
+import com.lemonmul.gamulgamul.entity.News;
 import com.lemonmul.gamulgamul.entity.checklist.Checklist;
 import com.lemonmul.gamulgamul.entity.priceindex.IndexType;
 import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import com.lemonmul.gamulgamul.entity.user.User;
+import com.lemonmul.gamulgamul.repo.NewsRepo;
 import com.lemonmul.gamulgamul.security.jwt.JwtProperties;
 import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
 import com.lemonmul.gamulgamul.service.MainService;
@@ -32,6 +34,7 @@ public class MainApi {
     private final UserService userService;
     private final MainService mainService;
 
+
     /**
      * 메인페이지 정보 조회
      * TODO: JWT 까서 user 있으면 이름 정보 보내주고, 아니면 user에 empty 정보 log
@@ -50,11 +53,13 @@ public class MainApi {
         PriceIndexResponseDto gmgmIndex = new PriceIndexResponseDto(mainService.getIndex(IndexType.g));
         PriceIndexResponseDto favoriteIndex = null;
         List<ChecklistListDto> checklists = null;
-        String news = null;
+        List<News> news = mainService.getNewsList();
+
 
         if (!headers.containsKey(JwtProperties.HEADER_STRING)){
             log.info("user is not logged in");
             String user = null;
+            log.info("{}", news);
             log.info("[Finished request]");
             return new MainPageResponseDto(user, gmgmIndex, countryIndex, favoriteIndex, checklists, news);
         }
@@ -69,6 +74,7 @@ public class MainApi {
             if (!userChecklists.isEmpty()){
                 checklists = userChecklists.stream().map(ChecklistListDto::new).collect(Collectors.toList());
             }
+            log.info("{}", news);
             log.info("[Finished request]");
             return new MainPageResponseDto(user.getName(), gmgmIndex, countryIndex, favoriteIndex, checklists, news);
         }
