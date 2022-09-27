@@ -11,6 +11,7 @@ import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
 import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
 import com.lemonmul.gamulgamul.entity.priceindex.IndexType;
+import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import com.lemonmul.gamulgamul.entity.product.Product;
 import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
@@ -58,37 +59,39 @@ public class FavoriteApi {
         LocalDate today = LocalDate.now();
 
         // 국가 지수
-        List<PriceIndexResponseDto> countryIndices = priceIndexService.getIndices(IndexType.c, today).stream().map(PriceIndexResponseDto::new).collect(Collectors.toList());
+        List<PriceIndex> countryIndices = priceIndexService.getIndices(IndexType.c, today);
+        PriceIndexResponseDto countryIndexDto = new PriceIndexResponseDto(countryIndices);
 
         // 즐겨찾기 지수
-        List<PriceIndexResponseDto> favoriteIndices = priceIndexService.getFavoriteIndices(user, today).stream().map(PriceIndexResponseDto::new).collect(Collectors.toList());
+        List<PriceIndex> favoriteIndices = priceIndexService.getFavoriteIndices(user, today);
+        PriceIndexResponseDto favoriteIndexDto = new PriceIndexResponseDto(favoriteIndices);
 
         // 업태 종류
-        ArrayList<BusinessTypeResponseDto> businessTypesResponseDtos = new ArrayList<>();
+        List<BusinessTypeResponseDto> businessTypes = new ArrayList<>();
         for(BusinessType businessType: BusinessType.values()) {
-            businessTypesResponseDtos.add(new BusinessTypeResponseDto(businessType, businessType.getKrName()));
+            businessTypes.add(new BusinessTypeResponseDto(businessType, businessType.getKrName()));
         }
 
         // 즐겨찾기 상품 목록
-        List<FavoriteItemResponseDto> favoriteItemResponseDtos = getFavoriteGoods(user, BusinessType.m);
+        List<FavoriteItemResponseDto> favoriteItems = getFavoriteGoods(user, BusinessType.m);
 
         // 즐겨찾기 상품 총합
         List<FavoriteTotalPrice> favoriteTotalPrices = favoriteTotalPriceService.getFavoriteTotalPrices(user, BusinessType.m, today);
-        List<FavoriteTotalPriceResponseDto> favoriteTotalPriceResponseDtos = favoriteTotalPrices.stream().map(FavoriteTotalPriceResponseDto::new).collect(Collectors.toList());
+        FavoriteTotalPriceResponseDto favoriteTotalPriceResponseDto = new FavoriteTotalPriceResponseDto(favoriteTotalPrices);
 
         log.info("countryIndices size: {}", countryIndices.size());
-        log.info("facoriteIndices size: {}", favoriteIndices.size());
-        log.info("businessTypesResponseDtos size: [");
-        for(BusinessTypeResponseDto response: businessTypesResponseDtos) {
+        log.info("favoriteIndices size: {}", favoriteIndices.size());
+        log.info("businessTypes size: [");
+        for(BusinessTypeResponseDto response: businessTypes) {
             log.info("\t{}, {}", response.getBusinessType(), response.getKrName());
         }
         log.info("]");
-        log.info("favoriteItemResponseDtos size: {}", favoriteItemResponseDtos.size());
+        log.info("favoriteItems size: {}", favoriteItems.size());
         // TODO: log 점검
 //        log.info("recent favoriteTotalPrice: {}", favoriteTotalPriceResponseDtos.get(favoriteTotalPriceResponseDtos.size() - 1).getTotalPrice());
 
         log.info("[Finished request]");
-        return new FavoritePageResponseDto(countryIndices, favoriteIndices, businessTypesResponseDtos, favoriteItemResponseDtos, favoriteTotalPriceResponseDtos);
+        return new FavoritePageResponseDto(countryIndexDto, favoriteIndexDto, businessTypes, favoriteItems, favoriteTotalPriceResponseDto);
     }
 
     /**
@@ -191,17 +194,17 @@ public class FavoriteApi {
         log.info("userId: {}", user.getId());
         log.info("business: {}", business);
 
-        List<FavoriteItemResponseDto> favoriteItemResponseDtos = getFavoriteGoods(user, business);
+        List<FavoriteItemResponseDto> favoriteItems = getFavoriteGoods(user, business);
         List<FavoriteTotalPrice> favoriteTotalPrices = favoriteTotalPriceService.getFavoriteTotalPrices(user, business, LocalDate.now());
-        List<FavoriteTotalPriceResponseDto> favoriteTotalPriceResponseDtos = favoriteTotalPrices.stream().map(FavoriteTotalPriceResponseDto::new).collect(Collectors.toList());
+        FavoriteTotalPriceResponseDto favoriteTotalPriceResponseDto = new FavoriteTotalPriceResponseDto(favoriteTotalPrices);
 
-        FavoriteBusinessSelectDto favoriteBusinessSelectDtos = new FavoriteBusinessSelectDto(favoriteItemResponseDtos, favoriteTotalPriceResponseDtos);
+        FavoriteBusinessSelectDto favoriteBusinessSelectDto = new FavoriteBusinessSelectDto(favoriteItems, favoriteTotalPriceResponseDto);
 
-        log.info("favoriteItemResponseDtos size: {}", favoriteItemResponseDtos.size());
-//        log.info("recent favoriteTotalPrice: {}", favoriteTotalPriceResponseDtos.get(favoriteTotalPriceResponseDtos.size() - 1).getTotalPrice());
+        log.info("favoriteItemResponseDto size: {}", favoriteItems.size());
+//        log.info("recent favoriteTotalPrice: {}", favoriteTotalPriceResponseDto.get(favoriteTotalPriceResponseDtos.size() - 1).getTotalPrice());
 
         log.info("Finished request");
-        return favoriteBusinessSelectDtos;
+        return favoriteBusinessSelectDto;
     }
 
     // 즐겨찾기 총합과 지수 계산을 Spark에 요청하는 함수

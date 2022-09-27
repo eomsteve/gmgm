@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChecklistRequestDto {
-    List<ChecklistBasicItemRequestDto> checklistBasicItem;
-    List<ChecklistCustomItemRequestDto> checklistCustomItem;
+public class RequestDto {
+    List<BasicItemDto> checklistBasicItems;
+    List<CustomItemDto> checklistCustomItems;
 }

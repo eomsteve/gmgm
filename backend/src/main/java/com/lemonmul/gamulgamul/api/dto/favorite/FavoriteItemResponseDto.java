@@ -9,15 +9,10 @@ import lombok.Data;
 @AllArgsConstructor
 public class FavoriteItemResponseDto {
     private Long goodsId;
-
     private Long productId;
-
     private String goodsName;
-
     private String img;
-
     private String measure;
-
     private Double priceGap;
 
     public FavoriteItemResponseDto(Goods goods, Double priceGap) {

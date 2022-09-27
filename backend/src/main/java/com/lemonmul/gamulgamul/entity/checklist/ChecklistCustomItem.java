@@ -22,9 +22,12 @@ public class ChecklistCustomItem {
     @JoinColumn(name = "checklist_id")
     private Checklist checklist;
 
+    private boolean status;
+
     private ChecklistCustomItem(String name, Checklist checklist) {
         this.name = name;
         setChecklist(checklist);
+        setStatus(false);
     }
 
     public static ChecklistCustomItem of(String name, Checklist checklist){
@@ -34,5 +37,9 @@ public class ChecklistCustomItem {
     public void setChecklist(Checklist checklist){
         this.checklist=checklist;
         checklist.getChecklistCustomItems().add(this);
+    }
+
+    public void setStatus(boolean status){
+        this.status=status;
     }
 }

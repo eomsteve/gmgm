@@ -1,8 +1,8 @@
 package com.lemonmul.gamulgamul.api;
 
 import com.lemonmul.gamulgamul.api.dto.MainPageResponseDto;
-import com.lemonmul.gamulgamul.api.dto.checklist.ChecklistListDto;
-import com.lemonmul.gamulgamul.api.dto.favorite.PriceIndexResponseDto;
+import com.lemonmul.gamulgamul.api.dto.PriceIndexDto;
+import com.lemonmul.gamulgamul.api.dto.checklist.ListDto;
 import com.lemonmul.gamulgamul.entity.News;
 import com.lemonmul.gamulgamul.entity.checklist.Checklist;
 import com.lemonmul.gamulgamul.entity.priceindex.IndexType;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,7 +32,6 @@ public class MainApi {
 
     private final UserService userService;
     private final MainService mainService;
-
 
     /**
      * 메인페이지 정보 조회
@@ -49,10 +47,10 @@ public class MainApi {
 //        log.info("{}", headers);
 //        LocalDate today = LocalDate.now();
 
-        PriceIndexResponseDto countryIndex = new PriceIndexResponseDto(mainService.getIndex(IndexType.c));
-        PriceIndexResponseDto gmgmIndex = new PriceIndexResponseDto(mainService.getIndex(IndexType.g));
-        PriceIndexResponseDto favoriteIndex = null;
-        List<ChecklistListDto> checklists = null;
+        PriceIndexDto countryIndex = new PriceIndexDto(mainService.getIndex(IndexType.c));
+        PriceIndexDto gmgmIndex = new PriceIndexDto(mainService.getIndex(IndexType.g));
+        PriceIndexDto favoriteIndex = null;
+        List<ListDto> checklists = null;
         List<News> news = mainService.getNewsList();
 
 
@@ -68,11 +66,11 @@ public class MainApi {
             log.info("user {} has made a request", user.getId());
             PriceIndex userFavoriteIndex = mainService.getFavoriteIndex(user, IndexType.f);
             if (userFavoriteIndex != null) {
-                favoriteIndex = new PriceIndexResponseDto(userFavoriteIndex);
+                favoriteIndex = new PriceIndexDto(userFavoriteIndex);
             }
             List<Checklist> userChecklists = mainService.getRecentChecklists(user);
             if (!userChecklists.isEmpty()){
-                checklists = userChecklists.stream().map(ChecklistListDto::new).collect(Collectors.toList());
+                checklists = userChecklists.stream().map(ListDto::new).collect(Collectors.toList());
             }
             log.info("{}", news);
             log.info("[Finished request]");
