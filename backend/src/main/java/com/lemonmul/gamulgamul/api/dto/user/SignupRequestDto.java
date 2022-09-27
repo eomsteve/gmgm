@@ -5,36 +5,45 @@ import com.lemonmul.gamulgamul.entity.user.Role;
 import com.lemonmul.gamulgamul.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class SignupRequestDto {
+    @Email
+    @NotEmpty
     private String email;
 
+    // 8자 이상 ~ 15자 이하, 영어 소문자, 숫자, 특수문자(!@#$%^*+=-?_~) 1개 이상
+    @NotEmpty
     private String pwd;
 
+    // 1자 이상 ~ 12자 미만
+    @NotEmpty
     private String name;
 
-    private String gender;
+    @NotNull
+    private Gender gender;
 
-    private String birthday;
+    @NotNull
+    private LocalDate birthday;
 
-    private String role;
+    @NotNull
+    private Role role;
 
     public User toUser() {
         // TODO: @Bean으로 등록된 걸 가져오고 싶은데 방법을 모르겠음
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-        Gender genderEnum = Gender.valueOf(gender);
-        LocalDate localDate = LocalDate.parse(birthday, DateTimeFormatter.ISO_DATE);
-        Role roleEnum = Role.valueOf(role);
-
         pwd = bCryptPasswordEncoder.encode(pwd);
 
-        return User.of(email, pwd, name, genderEnum, localDate, roleEnum);
+        return User.of(email, pwd, name, gender, birthday, role);
     }
 }

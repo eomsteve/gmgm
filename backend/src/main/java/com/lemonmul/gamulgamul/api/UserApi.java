@@ -9,13 +9,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.Email;
 
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
 @Slf4j
 @CrossOrigin
+@Validated
 public class UserApi {
     // TODO: 시간 날 때 컨트롤러, 서비스 주석 달기
 
@@ -25,7 +30,7 @@ public class UserApi {
     // TODO: 강의 듣고 예외처리 해야함
     // TODO: email log 찍기
     @GetMapping("/check/{email}")
-    public boolean emailCheck(@PathVariable String email) {
+    public Object emailCheck(@PathVariable @Email String email) {
         log.info("Starting request");
 
         log.info("email: {}", email);
@@ -39,8 +44,12 @@ public class UserApi {
     // TODO: 강의 듣고 예외처리 해야함
     // TODO: pwd는 다 ***, name은 홍*동, 나머지는 그대로 log
     @PostMapping("/signup")
-    public boolean signUp(@RequestBody SignupRequestDto signupRequestDto) {
+    public Object signUp(@Validated @RequestBody SignupRequestDto signupRequestDto, BindingResult bindingResult) {
         log.info("Starting request");
+
+        if(bindingResult.hasErrors()) {
+            return bindingResult.getAllErrors();
+        }
 
         log.info("email: {}", signupRequestDto.getEmail());
         log.info("pwd: {}", signupRequestDto.getPwd().replaceAll(".", "*"));
@@ -88,7 +97,7 @@ public class UserApi {
     // TODO: JWT 까서 email log
     // TODO: 반환값
 	@PostMapping("/logout")
-	public boolean logout(@RequestBody LogoutRequestDto logoutRequestDto) {
+	public boolean logout(@Validated @RequestBody LogoutRequestDto logoutRequestDto) {
         redisService.deleteValues(logoutRequestDto.getEmail());
 
         return true;
