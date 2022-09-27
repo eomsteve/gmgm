@@ -25,9 +25,12 @@ public class ChecklistBasicItem {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    private boolean status;
+
     private ChecklistBasicItem(Checklist checklist, Product product) {
         setChecklist(checklist);
         this.product = product;
+        setStatus(false);
     }
 
     public static ChecklistBasicItem of(Checklist checklist,Product product){
@@ -37,5 +40,9 @@ public class ChecklistBasicItem {
     public void setChecklist(Checklist checklist){
         this.checklist=checklist;
         checklist.getChecklistBasicItems().add(this);
+    }
+
+    public void setStatus(boolean status){
+        this.status=status;
     }
 }

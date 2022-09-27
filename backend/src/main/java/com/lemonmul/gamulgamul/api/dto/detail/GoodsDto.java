@@ -16,6 +16,7 @@ public class GoodsDto {
     private String measure;
 
     private List<PriceDto> goodsPrices;
+    private List<DateDto> researchDates;
 
     public GoodsDto(Goods goods,double price,List<GoodsPrice> prices) {
         goodsName=goods.getName();
@@ -24,5 +25,6 @@ public class GoodsDto {
         cheapUrl=goods.getCheapUrl();
         measure=goods.getMeasure();
         goodsPrices=prices.stream().map(PriceDto::new).collect(Collectors.toList());
+        researchDates=prices.stream().map(DateDto::new).collect(Collectors.toList());
     }
 }

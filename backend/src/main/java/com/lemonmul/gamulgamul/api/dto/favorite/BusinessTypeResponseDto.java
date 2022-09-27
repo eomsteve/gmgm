@@ -9,6 +9,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class BusinessTypeResponseDto {
     private BusinessType businessType;
-
     private String krName;
 }

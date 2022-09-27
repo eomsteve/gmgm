@@ -9,6 +9,5 @@ import java.util.List;
 @AllArgsConstructor
 public class FavoriteBusinessSelectDto {
     List<FavoriteItemResponseDto> favoriteItems;
-
-    List<FavoriteTotalPriceResponseDto> favoriteTotalPrices;
+    FavoriteTotalPriceResponseDto favoriteTotalPrices;
 }
