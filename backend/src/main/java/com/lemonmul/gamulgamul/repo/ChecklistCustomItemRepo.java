@@ -13,11 +13,5 @@ import java.util.Optional;
 
 public interface ChecklistCustomItemRepo extends JpaRepository<ChecklistCustomItem,Long> {
 
-    //해당 체크리스트의 커스텀 아이템 삭제
-    @Transactional
-    @Modifying
-    @Query("delete from ChecklistCustomItem where checklist=:checklist")
-    void deleteByChecklist(@Param("checklist") Checklist checklist);
-
     List<ChecklistCustomItem> findByChecklist(Checklist checklist);
 }

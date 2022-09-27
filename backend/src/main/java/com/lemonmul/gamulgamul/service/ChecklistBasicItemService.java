@@ -31,7 +31,7 @@ public class ChecklistBasicItemService {
         List<Long> deleteIds=new ArrayList<>();
         for (ChecklistBasicItem item : items) {
             Optional<BasicItemDto> optional = itemDto.stream()
-                    .filter(i -> i.getId().equals(item.getId())).findAny();
+                    .filter(i -> item.getId().equals(i.getId())).findAny();
             //체크리스트에서 없어진 아이템 제거
             if(optional.isEmpty()){
                 deleteIds.add(item.getId());

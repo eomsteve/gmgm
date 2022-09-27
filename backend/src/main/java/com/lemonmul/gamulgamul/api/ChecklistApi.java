@@ -9,8 +9,10 @@ import com.lemonmul.gamulgamul.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +33,6 @@ public class ChecklistApi {
 
     /**
      * 체크리스트 리스트 조회
-     * todo isEmpty 추가
      */
     @GetMapping("/list")
     public List<ListDto> checklistList(@RequestHeader HttpHeaders headers){
@@ -103,7 +104,7 @@ public class ChecklistApi {
      */
     @PutMapping("/{checklistId}")
     public ChecklistDto modifyChecklist(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId,
-                                                @RequestBody RequestDto requestDto){
+                                                @RequestBody @Valid RequestDto requestDto){
         log.info("[Starting request] PUT /checklist/{}",checklistId);
 
         User user = getUserFromJwtToken(userService, headers);
