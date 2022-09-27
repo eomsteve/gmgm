@@ -213,7 +213,7 @@ public class ChecklistApi {
 
         List<ChecklistCustomItem> customItemList=new ArrayList<>();
         for (ChecklistCustomItemRequestDto item : customItems) {
-            String name = item.getProductName();
+            String name = item.getCustomProductName();
             customItemList.add(ChecklistCustomItem.of(name, checklist));
         }
         customItemRepo.saveAll(customItemList);

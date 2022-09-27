@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ChecklistCustomItemDto {
     private Long id;
-    private String name;
+    private String customProductName;
     private boolean status;
 
     public ChecklistCustomItemDto(ChecklistCustomItem checklistCustomItem) {
         id=checklistCustomItem.getId();
-        name= checklistCustomItem.getName();
+        customProductName = checklistCustomItem.getName();
         status= checklistCustomItem.isStatus();
     }
 }

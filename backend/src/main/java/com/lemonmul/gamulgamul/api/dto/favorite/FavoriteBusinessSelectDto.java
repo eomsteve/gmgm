@@ -8,7 +8,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class FavoriteBusinessSelectDto {
-    List<FavoriteItemResponseDto> favoriteItemResponseDtos;
-
-    List<FavoriteTotalPriceResponseDto> favoriteTotalPriceResponseDtos;
+    List<FavoriteItemResponseDto> favoriteItems;
+    FavoriteTotalPriceResponseDto favoriteTotalPrices;
 }

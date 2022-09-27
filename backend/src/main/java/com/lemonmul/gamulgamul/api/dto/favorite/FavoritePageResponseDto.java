@@ -10,13 +10,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class FavoritePageResponseDto {
-    private List<PriceIndexResponseDto> countryIndices;
-
-    private List<PriceIndexResponseDto> favoriteIndices;
-
+    private PriceIndexResponseDto countryIndices;
+    private PriceIndexResponseDto favoriteIndices;
     private List<BusinessTypeResponseDto> businessTypes;
-
-    private List<FavoriteItemResponseDto> favoriteItemResponseDtos;
-
-    private List<FavoriteTotalPriceResponseDto> favoriteTotalPrices;
+    private List<FavoriteItemResponseDto> favoriteItems;
+    private FavoriteTotalPriceResponseDto favoriteTotalPrices;
 }

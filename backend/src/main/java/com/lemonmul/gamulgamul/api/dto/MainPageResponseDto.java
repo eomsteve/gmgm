@@ -12,11 +12,11 @@ import java.util.List;
 public class MainPageResponseDto {
     private String username;
 
-    private PriceIndexResponseDto gmgmIndex;
+    private PriceIndexDto gmgmIndex;
 
-    private PriceIndexResponseDto cpi;
+    private PriceIndexDto cpi;
 
-    private PriceIndexResponseDto favoriteIndex;
+    private PriceIndexDto favoriteIndex;
 
     private List<ChecklistListDto> checklistList;
 

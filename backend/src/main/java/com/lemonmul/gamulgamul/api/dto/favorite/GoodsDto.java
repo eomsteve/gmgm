@@ -8,11 +8,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class GoodsDto {
     private Long id;
-
     private String name;
-
     private String img;
-
     private String measure;
 
     public GoodsDto(Goods goods) {

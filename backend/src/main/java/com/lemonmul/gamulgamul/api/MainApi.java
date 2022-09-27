@@ -1,6 +1,7 @@
 package com.lemonmul.gamulgamul.api;
 
 import com.lemonmul.gamulgamul.api.dto.MainPageResponseDto;
+import com.lemonmul.gamulgamul.api.dto.PriceIndexDto;
 import com.lemonmul.gamulgamul.api.dto.checklist.ChecklistListDto;
 import com.lemonmul.gamulgamul.api.dto.favorite.PriceIndexResponseDto;
 import com.lemonmul.gamulgamul.entity.checklist.Checklist;
@@ -46,9 +47,9 @@ public class MainApi {
 //        log.info("{}", headers);
 //        LocalDate today = LocalDate.now();
 
-        PriceIndexResponseDto countryIndex = new PriceIndexResponseDto(mainService.getIndex(IndexType.c));
-        PriceIndexResponseDto gmgmIndex = new PriceIndexResponseDto(mainService.getIndex(IndexType.g));
-        PriceIndexResponseDto favoriteIndex = null;
+        PriceIndexDto countryIndex = new PriceIndexDto(mainService.getIndex(IndexType.c));
+        PriceIndexDto gmgmIndex = new PriceIndexDto(mainService.getIndex(IndexType.g));
+        PriceIndexDto favoriteIndex = null;
         List<ChecklistListDto> checklists = null;
         String news = null;
 
@@ -63,7 +64,7 @@ public class MainApi {
             log.info("user {} has made a request", user.getId());
             PriceIndex userFavoriteIndex = mainService.getFavoriteIndex(user, IndexType.f);
             if (userFavoriteIndex != null) {
-                favoriteIndex = new PriceIndexResponseDto(userFavoriteIndex);
+                favoriteIndex = new PriceIndexDto(userFavoriteIndex);
             }
             List<Checklist> userChecklists = mainService.getRecentChecklists(user);
             if (!userChecklists.isEmpty()){

@@ -1,5 +1,6 @@
 package com.lemonmul.gamulgamul.api.dto.detail;
 
+import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
 import com.lemonmul.gamulgamul.entity.product.ProductPrice;
 import lombok.Data;
@@ -10,11 +11,15 @@ import java.time.LocalDate;
 public class PriceDto {
     private double price;
 
-    public PriceDto(ProductPrice productPrice) {
-        price=productPrice.getUnitPrice();
+    public PriceDto(ProductPrice price) {
+        this.price=price.getUnitPrice();
     }
 
-    public PriceDto(GoodsPrice goodsPrice) {
-        price=goodsPrice.getPrice();
+    public PriceDto(GoodsPrice price) {
+        this.price=price.getPrice();
+    }
+
+    public PriceDto(FavoriteTotalPrice price) {
+        this.price=price.getTotalPrice();
     }
 }
