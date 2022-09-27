@@ -2,8 +2,7 @@ package com.lemonmul.gamulgamul.api;
 
 import com.lemonmul.gamulgamul.api.dto.MainPageResponseDto;
 import com.lemonmul.gamulgamul.api.dto.PriceIndexDto;
-import com.lemonmul.gamulgamul.api.dto.checklist.ChecklistListDto;
-import com.lemonmul.gamulgamul.api.dto.favorite.PriceIndexResponseDto;
+import com.lemonmul.gamulgamul.api.dto.checklist.ListDto;
 import com.lemonmul.gamulgamul.entity.checklist.Checklist;
 import com.lemonmul.gamulgamul.entity.priceindex.IndexType;
 import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,7 +48,7 @@ public class MainApi {
         PriceIndexDto countryIndex = new PriceIndexDto(mainService.getIndex(IndexType.c));
         PriceIndexDto gmgmIndex = new PriceIndexDto(mainService.getIndex(IndexType.g));
         PriceIndexDto favoriteIndex = null;
-        List<ChecklistListDto> checklists = null;
+        List<ListDto> checklists = null;
         String news = null;
 
         if (!headers.containsKey(JwtProperties.HEADER_STRING)){
@@ -68,7 +66,7 @@ public class MainApi {
             }
             List<Checklist> userChecklists = mainService.getRecentChecklists(user);
             if (!userChecklists.isEmpty()){
-                checklists = userChecklists.stream().map(ChecklistListDto::new).collect(Collectors.toList());
+                checklists = userChecklists.stream().map(ListDto::new).collect(Collectors.toList());
             }
             log.info("[Finished request]");
             return new MainPageResponseDto(user.getName(), gmgmIndex, countryIndex, favoriteIndex, checklists, news);

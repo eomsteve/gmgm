@@ -1,28 +1,56 @@
 package com.lemonmul.gamulgamul.service;
 
-import com.lemonmul.gamulgamul.api.dto.checklist.ChecklistBasicItemDto;
-import com.lemonmul.gamulgamul.api.dto.checklist.ChecklistCustomItemDto;
+import com.lemonmul.gamulgamul.api.dto.checklist.CustomItemDto;
 import com.lemonmul.gamulgamul.entity.checklist.Checklist;
-import com.lemonmul.gamulgamul.entity.checklist.ChecklistBasicItem;
 import com.lemonmul.gamulgamul.entity.checklist.ChecklistCustomItem;
 import com.lemonmul.gamulgamul.repo.ChecklistCustomItemRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ChecklistCustomItemService {
 
-    private final ChecklistCustomItemRepo customItemRepo;
+    private final ChecklistCustomItemRepo itemRepo;
 
-    public void updateStatus(Checklist checklist, List<ChecklistCustomItemDto> checklistCustomItem) {
-        List<ChecklistCustomItem> customItems = customItemRepo.findByChecklist(checklist);
+    /**
+     * 체크리스트 수정 - 커스텀 아이템 업데이트
+     */
+    @Transactional
+    public void updateItems(Checklist checklist,List<CustomItemDto> itemDto){
+        List<ChecklistCustomItem> items = itemRepo.findByChecklist(checklist);
+        List<Long> deleteIds=new ArrayList<>();
+        for (ChecklistCustomItem item : items) {
+            Optional<CustomItemDto> optional = itemDto.stream()
+                    .filter(i -> i.getId().equals(item.getId())).findAny();
+            //체크리스트에서 없어진 아이템 제거
+            if(optional.isEmpty()){
+                deleteIds.add(item.getId());
+            }
+        }
+        itemRepo.deleteAllById(deleteIds);
+
+        //체크리스트에 새로 추가된 아이템들
+        List<CustomItemDto> updatedItemDto = itemDto
+                .stream().filter(i -> i.getId() < 0).toList();
+        List<ChecklistCustomItem> updatedItems=new ArrayList<>();
+        for (CustomItemDto dto : updatedItemDto) {
+            updatedItems.add(ChecklistCustomItem.of(dto.getCustomProductName(),checklist));
+        }
+        itemRepo.saveAll(updatedItems);
+    }
+
+    @Transactional
+    public void updateStatus(Checklist checklist, List<CustomItemDto> checklistCustomItem) {
+        List<ChecklistCustomItem> customItems = itemRepo.findByChecklist(checklist);
         for (ChecklistCustomItem customItem : customItems) {
-            Optional<ChecklistCustomItemDto> optional = checklistCustomItem
+            Optional<CustomItemDto> optional = checklistCustomItem
                     .stream().filter(i -> i.getId().equals(customItem.getId())).findAny();
             if(optional.isPresent()){
                 customItem.setStatus(optional.get().isStatus());

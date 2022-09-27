@@ -14,11 +14,5 @@ import java.util.Optional;
 
 public interface ChecklistBasicItemRepo extends JpaRepository<ChecklistBasicItem,Long> {
 
-    //해당 체크리스트의 기본 아이템 삭제
-    @Transactional
-    @Modifying
-    @Query("delete from ChecklistBasicItem where checklist=:checklist")
-    void deleteByChecklist(@Param("checklist") Checklist checklist);
-
     List<ChecklistBasicItem> findByChecklist(Checklist checklist);
 }

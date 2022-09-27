@@ -10,13 +10,15 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 public class ChecklistDto {
-    List<ChecklistBasicItemDto> checklistBasicItems;
-    List<ChecklistCustomItemDto> checklistCustomItems;
+    boolean empty;
+    List<BasicItemDto> checklistBasicItems;
+    List<CustomItemDto> checklistCustomItems;
 
-    public ChecklistDto(Checklist checklist) {
+    public ChecklistDto(int checklistSize,Checklist checklist) {
+        empty = checklistSize <= 0;
         checklistBasicItems =checklist.getChecklistBasicItems()
-                .stream().map(ChecklistBasicItemDto::new).collect(Collectors.toList());
+                .stream().map(BasicItemDto::new).collect(Collectors.toList());
         checklistCustomItems =checklist.getChecklistCustomItems()
-                .stream().map(ChecklistCustomItemDto::new).collect(Collectors.toList());
+                .stream().map(CustomItemDto::new).collect(Collectors.toList());
     }
 }

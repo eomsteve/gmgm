@@ -1,7 +1,6 @@
 package com.lemonmul.gamulgamul.api.dto;
 
-import com.lemonmul.gamulgamul.api.dto.checklist.ChecklistListDto;
-import com.lemonmul.gamulgamul.api.dto.favorite.PriceIndexResponseDto;
+import com.lemonmul.gamulgamul.api.dto.checklist.ListDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -18,7 +17,7 @@ public class MainPageResponseDto {
 
     private PriceIndexDto favoriteIndex;
 
-    private List<ChecklistListDto> checklistList;
+    private List<ListDto> checklistList;
 
     // TODO: 추후에 news dto로 만들기
     private String news;

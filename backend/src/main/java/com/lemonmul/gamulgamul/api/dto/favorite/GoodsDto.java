@@ -7,15 +7,15 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class GoodsDto {
-    private Long id;
-    private String name;
-    private String img;
+    private Long goodsId;
+    private String goodsName;
+    private String goodsImg;
     private String measure;
 
     public GoodsDto(Goods goods) {
-        this.id = goods.getId();
-        this.name = goods.getName();
-        this.img = goods.getImg();
+        this.goodsId = goods.getId();
+        this.goodsName = goods.getName();
+        this.goodsImg = goods.getImg();
         this.measure = goods.getMeasure();
     }
 }
