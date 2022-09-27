@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Data
@@ -11,5 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 public class RequestDto {
     List<BasicItemDto> checklistBasicItems;
+    @Valid
     List<CustomItemDto> checklistCustomItems;
 }

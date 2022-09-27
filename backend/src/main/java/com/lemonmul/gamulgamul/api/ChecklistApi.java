@@ -9,7 +9,7 @@ import com.lemonmul.gamulgamul.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -96,16 +96,21 @@ public class ChecklistApi {
         checkOwnership(user,checklist);
 
         log.info("[Finished request] GET /checklist/{}",checklistId);
-        return new ChecklistDto(checklistSize,checklist);
+        return new ChecklistDto(checklist);
     }
 
     /**
      * 체크리스트 수정
      */
     @PutMapping("/{checklistId}")
-    public ChecklistDto modifyChecklist(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId,
-                                                @RequestBody @Valid RequestDto requestDto){
+    public Object modifyChecklist(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId,
+                                        @RequestBody @Valid RequestDto requestDto, BindingResult bindingResult){
         log.info("[Starting request] PUT /checklist/{}",checklistId);
+
+        if(bindingResult.hasErrors()){
+            log.info("validation error: {}",bindingResult);
+            return new ErrorResponseDto(requestDto,bindingResult);
+        }
 
         User user = getUserFromJwtToken(userService, headers);
         log.info("userId: {}",user.getId());
@@ -126,7 +131,7 @@ public class ChecklistApi {
         log.info("(updated) basicItem size: {}, customItem size: {}", basicItemSize, customItemSize);
 
         log.info("[Finished request] PUT /checklist/{}",checklistId);
-        return new ChecklistDto(basicItemSize+customItemSize, updatedChecklist);
+        return new ChecklistDto(updatedChecklist);
     }
 
     /**
