@@ -1,8 +1,8 @@
 package com.lemonmul.gamulgamul.api;
 
-import com.lemonmul.gamulgamul.api.dto.EmailResponseDto;
 import com.lemonmul.gamulgamul.api.dto.LogoutRequestDto;
 import com.lemonmul.gamulgamul.api.dto.user.SignupRequestDto;
+import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.security.redis.RedisService;
 import com.lemonmul.gamulgamul.service.UserService;
 import lombok.AllArgsConstructor;
@@ -25,19 +25,21 @@ public class UserApi {
     // TODO: 강의 듣고 예외처리 해야함
     // TODO: email log 찍기
     @GetMapping("/check/{email}")
-    public EmailResponseDto emailCheck(@PathVariable String email) {
+    public boolean emailCheck(@PathVariable String email) {
         log.info("Starting request");
 
         log.info("email: {}", email);
 
+        User findUser = userService.emailCheck(email);
+
         log.info("Finished request");
-        return new EmailResponseDto(userService.emailCheck(email).getEmail());
+        return findUser == null;
     }
 
     // TODO: 강의 듣고 예외처리 해야함
     // TODO: pwd는 다 ***, name은 홍*동, 나머지는 그대로 log
     @PostMapping("/signup")
-    public EmailResponseDto signUp(@RequestBody SignupRequestDto signupRequestDto) {
+    public boolean signUp(@RequestBody SignupRequestDto signupRequestDto) {
         log.info("Starting request");
 
         log.info("email: {}", signupRequestDto.getEmail());
@@ -51,8 +53,10 @@ public class UserApi {
         log.info("birthday: {}", signupRequestDto.getBirthday());
         log.info("role: {}", signupRequestDto.getRole());
 
+        User signUpUser = userService.signUp(signupRequestDto.toUser());
+
         log.info("Finished request");
-        return new EmailResponseDto(userService.signUp(signupRequestDto.toUser()).getEmail());
+        return signUpUser != null;
     }
 
     // TODO: JWT 에서 email 까서  log
@@ -79,11 +83,7 @@ public class UserApi {
 //	}
 
     /**
-     * TODO: JWT는 기본적으로 서버에서 로그아웃 시킬 수 없음
-     * 		-> 토큰의 유효기간을 바꿀 수 없기 때문
-     * 		그래서 주로 토큰 시간을 아주 짧게(5분 정도) 설정하는 방법과
-     * 		redis로 토큰 블랙리스트를 만드는 방법이 있는 것 같음
-     * 		-> 어느 쪽으로 하든 지금 상황에서 refresh 토큰은 추가로 구현해야 할 것 같음
+     * 로그아웃
      */
     // TODO: JWT 까서 email log
     // TODO: 반환값

@@ -25,7 +25,7 @@ const LogIn: FC = () => {
     }
     const logInRes = await logInApi(logInform);
     dispatch(setAuthToken(logInRes));
-    navigate('/')
+    // navigate('/')
   }
   return (
     <section className="flex min-h-screen flex-col bg-gray-50 dark:bg-gray-900">
