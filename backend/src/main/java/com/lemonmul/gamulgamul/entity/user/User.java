@@ -71,4 +71,8 @@ public class User {
     public static User of(String email, String pwd, String name, Gender gender, LocalDate birthday, Role role) {
         return new User(email, pwd, name, gender, birthday, role);
     }
+
+    public static User empty(){
+        return new User("","","",Gender.m,LocalDate.MIN,Role.u);
+    }
 }

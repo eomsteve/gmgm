@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,31 +36,25 @@ public class MainApi {
 
     /**
      * 메인페이지 정보 조회
-     * TODO: JWT 까서 user 있으면 이름 정보 보내주고, 아니면 user에 empty 정보 log
-     * TODO: 국가 지수, 공통 지수, 즐겨찾기 지수(user 없을 경우 얘도 empty)
-     * TODO: 체크리스트가 생길 경우 체크리스트 id (3개였으면 좋겠다) log
-     * TODO: 기사가 들어갈 경우는 추후 논의
      */
-
     @GetMapping()
     public MainPageResponseDto getMainPage(@RequestHeader HttpHeaders headers) {
         log.info("[Starting request]");
-//        log.info("{}", headers);
-//        LocalDate today = LocalDate.now();
 
+        //todo 있으면 있는걸로 없으면 없는걸로
+        User user=User.empty();
         PriceIndexDto countryIndex = new PriceIndexDto(mainService.getIndex(IndexType.c));
         PriceIndexDto gmgmIndex = new PriceIndexDto(mainService.getIndex(IndexType.g));
-        PriceIndexDto favoriteIndex = null;
+//        PriceIndexDto favoriteIndex = null;
         List<ListDto> checklists = null;
         List<News> news = mainService.getNewsList();
 
 
         if (!headers.containsKey(JwtProperties.HEADER_STRING)){
             log.info("user is not logged in");
-            String user = null;
-            log.info("{}", news);
+            PriceIndexDto favoriteIndex = new PriceIndexDto(mainService.getFavoriteIndex(user, IndexType.f));
             log.info("[Finished request]");
-            return new MainPageResponseDto(user, gmgmIndex, countryIndex, favoriteIndex, checklists, news);
+            return new MainPageResponseDto(user.getName(), gmgmIndex, countryIndex, favoriteIndex, new ArrayList<>(), news);
         }
         else{
             User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
@@ -72,7 +67,6 @@ public class MainApi {
             if (!userChecklists.isEmpty()){
                 checklists = userChecklists.stream().map(ListDto::new).collect(Collectors.toList());
             }
-            log.info("{}", news);
             log.info("[Finished request]");
             return new MainPageResponseDto(user.getName(), gmgmIndex, countryIndex, favoriteIndex, checklists, news);
         }
