@@ -16,12 +16,14 @@ public class ScheduledTasks {
 
     private final MainService mainService;
 
-
-    // 초 분 시간 일 월 요일(0, 7이 일이욜)
-    @Scheduled(cron = "0 0/5 5 * * *")
+    /**
+     * Naver News API 검색 스케줄링
+     * 매 4시, 12시, 20시에 갱신
+     * */
+    @Scheduled(cron = "0 0 0/8 3 * *")
     public void renewNews(){
         final long startTime = System.currentTimeMillis();
-        log.info("[Starting request]");
+        log.info("[Starting request] request to Naver API");
         mainService.apiProcess();
         final long endTime = System.currentTimeMillis();
         log.info("[Finished request]: {} millis", (endTime - startTime));
