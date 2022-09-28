@@ -12,6 +12,5 @@ import java.util.List;
 @AllArgsConstructor
 public class RequestDto {
     List<BasicItemDto> checklistBasicItems;
-    @Valid
     List<CustomItemDto> checklistCustomItems;
 }

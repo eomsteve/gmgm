@@ -104,13 +104,8 @@ public class ChecklistApi {
      */
     @PutMapping("/{checklistId}")
     public Object modifyChecklist(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId,
-                                        @RequestBody @Valid RequestDto requestDto, BindingResult bindingResult){
+                                        @RequestBody RequestDto requestDto){
         log.info("[Starting request] PUT /checklist/{}",checklistId);
-
-        if(bindingResult.hasErrors()){
-            log.info("validation error: {}",bindingResult);
-            return new ErrorResponseDto(requestDto,bindingResult);
-        }
 
         User user = getUserFromJwtToken(userService, headers);
         log.info("userId: {}",user.getId());
@@ -183,7 +178,6 @@ public class ChecklistApi {
      */
     private void checkOwnership(User user, Checklist checklist) {
         if(!checklist.getUser().equals(user)){
-            //todo 더 적절한 예외 있으면 바꾸기, 아니면 사용자 예외 만들기
             throw new IllegalArgumentException();
         }
     }

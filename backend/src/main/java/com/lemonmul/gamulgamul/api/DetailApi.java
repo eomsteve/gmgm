@@ -95,7 +95,6 @@ public class DetailApi {
      */
     private void checkGoodsInProduct(Long goodsId, ProductDto productDto) {
         if (productDto.getGoodsInfos().stream().filter(g->goodsId.equals(g.getGoodsId())).findAny().isEmpty()){
-            //todo
             throw new IllegalArgumentException();
         }
     }
