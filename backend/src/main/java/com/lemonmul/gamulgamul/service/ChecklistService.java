@@ -38,12 +38,8 @@ public class ChecklistService {
      * 체크리스트 조회
      */
     public Checklist checklist(Long checklistId){
-        Optional<Checklist> optional = checklistRepo.findByIdAndIsDeleted(checklistId,false);
-        if(optional.isPresent()){
-            return optional.get();
-        }else{
-            throw new IllegalArgumentException();
-        }
+        return checklistRepo.findByIdAndIsDeleted(checklistId,false)
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     /**
@@ -51,13 +47,8 @@ public class ChecklistService {
      */
     @Transactional
     public void deleteChecklist(Long checklistId){
-        Optional<Checklist> optionalChecklist = checklistRepo.findById(checklistId);
-        if(optionalChecklist.isPresent()){
-            Checklist checklist = optionalChecklist.get();
-            checklist.setIsDeleted(true);
-        }else{
-            throw new IllegalArgumentException();
-        }
+        Checklist checklist = checklistRepo.findById(checklistId).orElseThrow(IllegalArgumentException::new);
+        checklist.setIsDeleted(true);
     }
 
 }
