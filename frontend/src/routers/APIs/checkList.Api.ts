@@ -60,14 +60,20 @@ export const getCheckList = async (checkListId?: string) => {
 };
 
 export const updateCheckLists = async ( checklistBasicItems : BasicProduct[], checklistCustomItems : CustomProduct[], checkListId?: string ) => {
-  const { data } = await axios({
-    url: API_URL + `/${checkListId}`,
-    method: 'put',
-    data: {
-      checklistBasicItems,
-      checklistCustomItems,
-    },
+  try {
+    
+    const { data } = await axios({
+      url: API_URL + `/${checkListId}`,
+      method: 'put',
+      data: {
+        checklistBasicItems,
+        checklistCustomItems,
+      },
   });
-  console.log(data);
+  console.log('updated to:', data)
+  return data;
+} catch (error) {
+  
+}
   
 };

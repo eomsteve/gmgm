@@ -6,12 +6,13 @@ import GotoCheckListSelection from './UI/GotoCheckListSelection';
 import CheckListCard from './UI/CheckListCard';
 import CustomInput from './UI/InputCustom';
 import ConfirmButton from './UI/ConFirmButton';
-import { getCheckList } from '@apis/checkList.Api'
+import { getCheckList, updateCheckLists } from '@apis/checkList.Api'
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import type {CustomProduct, BasicProduct } from '@modules/CheckListProductList'
 import type { RootState } from '@modules/store';
-
+import { logInApi } from '@src/routers/APIs/userApi';
+// 리덕스 
 
 interface CheckListSelectBoxProps {
   optionList: string[];
@@ -19,30 +20,44 @@ interface CheckListSelectBoxProps {
 
 const businessData: { [key: string]: string } = {
   m: '대형마트',
-  s: '슈퍼마켓',
   o: '온라인',
 };
 
 const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   const { checklistId } = useParams();
+  const [isEdit, setIsEdit] = useState(false);
+  
   useEffect(() => {
     const fetchData = async(checklistId ?: string) => {
       const data = await getCheckList(checklistId);
       if (data.empty){
-        console.log('empty checklist');        
+        console.log('empty checklist');
+        setIsEdit(()=>true);
+      }else{
+        
       }
     } 
     fetchData(checklistId)
     console.log(checklistId);
   },[])
+  const dispatch  = useDispatch();
   const { checklistCustomItems,checklistBasicItems } = useSelector((state: RootState) => {
     console.log(state);
-    
     return {checklistCustomItems : state.persistedReducer.CheckListProductsReducer.checklistCustomItems ,checklistBasicItems : state.persistedReducer.CheckListProductsReducer.checklistBasicItems  }
   })
+  
+  const saveCheckList = async () => {
+    if (typeof checklistId =='string'){
+      const { data } = await updateCheckLists(checklistBasicItems, checklistCustomItems, checklistId);
+      console.log(data);
+    }
+    
+
+  }
   const navigate = useNavigate();
-  const optionList = ['m', 's', 'o'];
+  const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
+
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOption(e.target.value);
   };
@@ -67,7 +82,9 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
           </option>
         ))}
       </select>
-          <ConfirmButton checkListId={checklistId} checklistCustomItems={checklistCustomItems} checklistBasicItems={checklistBasicItems}/>
+      <div onClick={()=>saveCheckList()}>
+          <ConfirmButton />
+      </div>
         </div>
       <div className="flex w-full flex-col items-center justify-center p-0">
         { !!!checklistBasicItems && <BasicBanner />}
