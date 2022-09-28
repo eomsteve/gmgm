@@ -18,12 +18,7 @@ public class GoodsService {
 
     // 상품Id로 상품 정보를 받아오는 함수
     public Goods getGoodsById(Long goodsId) {
-        Optional<Goods> optional = goodsRepo.findById(goodsId);
-        if(optional.isPresent()) {
-            return optional.get();
-        }else{
-            throw new IllegalArgumentException();
-        }
+        return goodsRepo.findById(goodsId).orElseThrow(IllegalArgumentException::new);
     }
 
     public List<Goods> getGoodsList(List<Long> goodsIds) {

@@ -94,8 +94,8 @@ public class DetailApi {
      * goodsId가 product 안에 있는지 확인
      */
     private void checkGoodsInProduct(Long goodsId, ProductDto productDto) {
-        if (productDto.getGoodsInfos().stream().filter(g->goodsId.equals(g.getGoodsId())).findAny().isEmpty()){
-            throw new IllegalArgumentException();
-        }
+        productDto.getGoodsInfos().stream()
+                .filter(g->goodsId.equals(g.getGoodsId())).findAny()
+                .orElseThrow(IllegalArgumentException::new);
     }
 }

@@ -19,9 +19,4 @@ public class CategoryService {
     public List<Category> getAllCategories() {
         return categoryRepo.findAll();
     }
-
-    // 카테고리Id로 카테고리를 받아오는 함수
-    public Category getCategory(Long categoryId) {
-        return categoryRepo.findById(categoryId).orElseThrow();
-    }
 }
