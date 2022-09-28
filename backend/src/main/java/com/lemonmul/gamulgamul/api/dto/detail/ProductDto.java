@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Data
 public class ProductDto {
-    private String productName;
+    private String basicProductName;
     private int unit;
     private String measure;
     private List<GoodsInfoDto> goodsInfos;
@@ -17,7 +17,7 @@ public class ProductDto {
     private List<DateDto> researchDates;
 
     public ProductDto(Product product, List<ProductPrice> prices) {
-        productName=product.getName();
+        basicProductName =product.getName();
         unit= product.getUnit();
         measure=product.getMeasure();
         goodsInfos =product.getGoods().stream().map(GoodsInfoDto::new).collect(Collectors.toList());

@@ -5,13 +5,13 @@ import lombok.Data;
 
 @Data
 public class ProductDto {
-    private Long productId;
-    private String productName;
+    private Long basicProductId;
+    private String basicProductName;
     private String productImg;
 
     public ProductDto(Product product) {
-        productId = product.getId();
-        productName = product.getName();
+        basicProductId = product.getId();
+        basicProductName = product.getName();
         productImg = product.getImg();
     }
 }
