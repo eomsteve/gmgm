@@ -23,9 +23,13 @@ const LogIn: FC = () => {
       email : logInFormData.get('email') as string,
       pwd : logInFormData.get('password') as string
     }
-    const logInRes = await logInApi(logInform);
-    dispatch(setAuthToken(logInRes));
-    // navigate('/')
+    const logInRes : string | { status : boolean, data : string} = await logInApi(logInform);
+    if (typeof(logInRes) !== 'string'){
+      dispatch(setAuthToken(logInRes.data));
+      navigate('/')
+    }else{
+      alert("실패 : 이메일과 비밀번호를 확인해 주세요");
+    }
   }
   return (
     <section className="flex min-h-screen flex-col bg-gray-50 dark:bg-gray-900">
