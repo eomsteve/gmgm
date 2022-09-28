@@ -19,22 +19,18 @@ public class SignupRequestDto {
 
     private String name;
 
-    private String gender;
+    private Gender gender;
 
-    private String birthday;
+    private LocalDate birthday;
 
-    private String role;
+    private Role role;
 
     public User toUser() {
         // TODO: @Bean으로 등록된 걸 가져오고 싶은데 방법을 모르겠음
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-        Gender genderEnum = Gender.valueOf(gender);
-        LocalDate localDate = LocalDate.parse(birthday, DateTimeFormatter.ISO_DATE);
-        Role roleEnum = Role.valueOf(role);
-
         pwd = bCryptPasswordEncoder.encode(pwd);
 
-        return User.of(email, pwd, name, genderEnum, localDate, roleEnum);
+        return User.of(email, pwd, name, gender, birthday, role);
     }
 }

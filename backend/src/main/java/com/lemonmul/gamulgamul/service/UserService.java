@@ -15,7 +15,7 @@ public class UserService {
 
     // TODO: 강의 듣고 예외처리 해야함
     public User emailCheck(String email) {
-        return userRepo.findByEmail(email).orElseThrow();
+        return userRepo.findByEmail(email).orElse(null);
     }
 
     // TODO: 강의 듣고 예외처리 해야함
