@@ -22,8 +22,7 @@ public class GoodsService {
         if(optional.isPresent()) {
             return optional.get();
         }else{
-            //todo
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         }
     }
 

@@ -59,7 +59,6 @@ public class ChecklistBasicItemService {
             if(optional.isPresent()){
                 basicItem.setStatus(optional.get().isStatus());
             }else{
-                //todo
                 throw new IllegalArgumentException();
             }
         }

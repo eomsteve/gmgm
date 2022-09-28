@@ -41,7 +41,11 @@ public class ChecklistCustomItemService {
                 .stream().filter(i -> i.getId() < 0).toList();
         List<ChecklistCustomItem> updatedItems=new ArrayList<>();
         for (CustomItemDto dto : updatedItemDto) {
-            updatedItems.add(ChecklistCustomItem.of(dto.getCustomProductName(),checklist));
+            String customProductName = dto.getCustomProductName();
+            //품목 이름 공백이면 버리기
+            if(!customProductName.isBlank()) {
+                updatedItems.add(ChecklistCustomItem.of(customProductName, checklist));
+            }
         }
         itemRepo.saveAll(updatedItems);
     }
@@ -55,7 +59,6 @@ public class ChecklistCustomItemService {
             if(optional.isPresent()){
                 customItem.setStatus(optional.get().isStatus());
             }else {
-                //todo
                 throw new IllegalArgumentException();
             }
         }

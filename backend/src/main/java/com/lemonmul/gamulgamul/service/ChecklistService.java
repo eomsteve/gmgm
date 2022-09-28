@@ -42,7 +42,6 @@ public class ChecklistService {
         if(optional.isPresent()){
             return optional.get();
         }else{
-            //todo 더 적절한 예외 있으면 바꾸기, 아니면 사용자 예외 만들기
             throw new IllegalArgumentException();
         }
     }
@@ -57,7 +56,6 @@ public class ChecklistService {
             Checklist checklist = optionalChecklist.get();
             checklist.setIsDeleted(true);
         }else{
-            //todo 더 적절한 예외 있으면 바꾸기, 아니면 사용자 예외 만들기
             throw new IllegalArgumentException();
         }
     }

@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class CustomItemDto {
     private Long id;
-    @NotBlank
     private String customProductName;
     private boolean status;
 
