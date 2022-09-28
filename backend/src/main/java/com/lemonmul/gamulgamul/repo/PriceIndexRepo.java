@@ -10,15 +10,16 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface PriceIndexRepo extends JpaRepository<PriceIndex, Long> {
     List<PriceIndex> findAllByIndexTypeAndResearchDateBetweenOrderByResearchDate(IndexType indexType, LocalDate start, LocalDate end);
 
     List<PriceIndex> findAllByUserAndIndexTypeAndResearchDateBetweenOrderByResearchDate(User user, IndexType indexType, LocalDate start, LocalDate end);
 
-    PriceIndex findTopByIndexTypeOrderByResearchDateDesc(IndexType indexType);
+    Optional<PriceIndex> findTopByIndexTypeOrderByResearchDateDesc(IndexType indexType);
 
-    PriceIndex findTopByUserAndIndexTypeOrderByResearchDateDesc(User user, IndexType indexType);
+    Optional<PriceIndex> findTopByUserAndIndexTypeOrderByResearchDateDesc(User user, IndexType indexType);
 
     @Modifying
     @Query("delete from PriceIndex where user=:user and indexType=:indexType")

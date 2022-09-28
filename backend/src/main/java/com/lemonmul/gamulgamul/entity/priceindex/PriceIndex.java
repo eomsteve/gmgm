@@ -45,4 +45,8 @@ public class PriceIndex {
     public static PriceIndex of(LocalDate researchDate, Double value, User user) {
         return new PriceIndex(researchDate, value, user);
     }
+
+    public static PriceIndex empty(IndexType indexType) {
+        return new PriceIndex(LocalDate.MIN,-1.0,indexType);
+    }
 }
