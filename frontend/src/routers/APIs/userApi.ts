@@ -46,7 +46,7 @@ export const logInApi = async (logInForm: LogInUserREQ) => {
   try {
     const { data } = await axios.post(API_URL + '/login', logInForm);
     localStorage.setItem("jwtToken", data.accessToken);
-    return data.accessToken;
+    return {status : true, data : data.accessToken};
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log(error.message);
