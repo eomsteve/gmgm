@@ -38,3 +38,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Naver Api ###
+application-API-KEY.properties

@@ -11,6 +11,7 @@ import com.lemonmul.gamulgamul.repo.ChecklistRepo;
 import com.lemonmul.gamulgamul.repo.NewsRepo;
 import com.lemonmul.gamulgamul.repo.PriceIndexRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,12 +22,11 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
-import java.security.cert.TrustAnchor;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 @Service
 @RequiredArgsConstructor
@@ -34,8 +34,11 @@ public class MainService {
 
     private final PriceIndexRepo priceIndexRepo;
     private final ChecklistRepo checklistRepo;
-
     private final NewsRepo newsRepo;
+    @Value("${clientId}")
+    private String clientId;
+    @Value("${clientSecret}")
+    private String clientSecret;
 
     /**
      * 국가, 가물가물 최신 index 조회
@@ -67,18 +70,7 @@ public class MainService {
      * 물가 관련 뉴스 조회
      * */
     public List<News> getNewsList(){
-        Random random = new Random();
-        List<News> randomNews = new ArrayList<>();
-        List<News> allNews = newsRepo.findAll();
-
-        // 랜덤으로 뉴스 3개 반환
-        while (randomNews.size() < 3){
-            News news = allNews.get(random.nextInt(20));
-            if (!randomNews.contains(news)){
-                randomNews.add(news);
-            }
-        }
-        return randomNews;
+        return newsRepo.findRandomNews(3);
     }
 
 
@@ -107,8 +99,6 @@ public class MainService {
     * ? private으로 바꿔야 하지 않을까?
     * */
     public SearchResultDto getNews(){
-        String clientId = "8dsQLQwo_ame0XieXqz0";
-        String clientSecret = "09sRAUGzaj";
 
         RestTemplate restTemplate = new RestTemplate();
 
