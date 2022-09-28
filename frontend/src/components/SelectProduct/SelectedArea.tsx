@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeGoods } from '../../modules/FavoriteProductList';
-import type { RootState } from '../../modules/store';
+import { removeGoods } from '@modules/FavoriteProductList';
+import type { RootState } from '@modules/store';
 interface SelectedAreaProps {
   
 }

@@ -3,15 +3,16 @@ import { stat } from 'fs/promises';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface BasicProduct {
+  id:number;
   basicProductId: number;
   basicProductName: string;
-  status?: boolean;
+  status: boolean;
 }
 
 export interface CustomProduct {
-  id?: number;
+  id: number;
   customProductName: string;
-  status?: boolean;
+  status: boolean;
 }
 
 interface Initial {
@@ -33,7 +34,7 @@ export const checkListProductsSlice = createSlice({
       if (isDuplicate) {
         console.log('중복');
       }else{
-        state.checklistBasicItems.push({ basicProductId: action.payload.basicProductId, basicProductName: action.payload.basicProductName, status: action.payload.status });
+        state.checklistBasicItems.push({id:-1, basicProductId: action.payload.basicProductId, basicProductName: action.payload.basicProductName, status: false });
       }
     },
     removeBasicProducts: (
@@ -45,8 +46,18 @@ export const checkListProductsSlice = createSlice({
       });
       state.checklistBasicItems = data;
     },
+    updateBasicProducts : (state, action: PayloadAction<BasicProduct>) => {
+      const data = state.checklistBasicItems.find((products) => { 
+        return products.basicProductName == action.payload.basicProductName;
+      });
+      if (typeof(data) !== "undefined") {
+        data.status = !data?.status;
+      }else{
+        console.error("없다는게말이됨?")
+      }
+    },
     addCustomProducts: (state, action : PayloadAction<CustomProduct>)=>{
-      const isDuplicate = state.checklistCustomItems.find((products) => products.id == action.payload.id);
+      const isDuplicate = state.checklistCustomItems.find((products) => products.customProductName == action.payload.customProductName);
       if (isDuplicate) {
         console.log('중복');
       }else{
@@ -55,9 +66,19 @@ export const checkListProductsSlice = createSlice({
     },
     removeCustomProducts: (state, action : PayloadAction<CustomProduct>)=>{
       const data = state.checklistCustomItems.filter((products) => {
-        return products.id != action.payload.id;
+        return products.customProductName != action.payload.customProductName;
       });
       state.checklistCustomItems = data;
+    },
+    updateCustomProductStatus: (state, action : PayloadAction<CustomProduct>)=>{
+      const data = state.checklistCustomItems.find((products) => { 
+        return products.customProductName == action.payload.customProductName;
+      });
+      if (typeof(data) !== "undefined") {
+        data.status = !data?.status;
+      }else{
+        console.error("없다는게말이됨?")
+      }
     }
   },
 });

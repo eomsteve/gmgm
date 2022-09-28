@@ -25,7 +25,10 @@ const CheckLists: FunctionComponent<CheckListsProps> = () => {
 
         {
           checkListItems.map((checkList)=>{
-            return <CheckListItem checklistId={checkList.checklistId} regDate={checkList.regDate} />
+            return(<div key={checkList.checklistId}>
+
+             <CheckListItem checklistId={checkList.checklistId} regDate={checkList.regDate} />
+            </div>)
           })
         }
       </main>
