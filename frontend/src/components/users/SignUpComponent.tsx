@@ -164,6 +164,8 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
             aria-required="true"
             className="my-2 block w-full rounded border border-stone-200 p-3 text-gray-400"
             name="birthday"
+            max="1899-12-31"
+            min="2022-12-31"
           />
           {/* gender selectors */}
           <div className="mx-auto mb-4 grid max-w-md grid-cols-2 gap-x-3 required">

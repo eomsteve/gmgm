@@ -8,6 +8,11 @@ import CustomInput from './UI/InputCustom';
 import ConfirmButton from './UI/ConFirmButton';
 import { getCheckList } from '@apis/checkList.Api'
 
+import { useSelector } from 'react-redux';
+import type {CustomProduct, BasicProduct } from '@modules/CheckListProductList'
+import type { RootState } from '@modules/store';
+
+
 interface CheckListSelectBoxProps {
   optionList: string[];
 }
@@ -24,14 +29,17 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
     const fetchData = async(checklistId ?: string) => {
       const data = await getCheckList(checklistId);
       if (data.empty){
-        console.log('empty checklist');
-        
+        console.log('empty checklist');        
       }
     } 
     fetchData(checklistId)
     console.log(checklistId);
   },[])
-  
+  const { checklistCustomItems,checklistBasicItems } = useSelector((state: RootState) => {
+    console.log(state);
+    
+    return {checklistCustomItems : state.persistedReducer.CheckListProductsReducer.checklistCustomItems ,checklistBasicItems : state.persistedReducer.CheckListProductsReducer.checklistBasicItems  }
+  })
   const navigate = useNavigate();
   const optionList = ['m', 's', 'o'];
   const [optionState, setOption] = useState<string>('m');
@@ -59,21 +67,21 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
           </option>
         ))}
       </select>
-          <ConfirmButton/>
+          <ConfirmButton checkListId={checklistId} checklistCustomItems={checklistCustomItems} checklistBasicItems={checklistBasicItems}/>
         </div>
       <div className="flex w-full flex-col items-center justify-center p-0">
-        <BasicBanner />
-        {testList.map((test, index) => {
+        { !!!checklistBasicItems && <BasicBanner />}
+        {checklistBasicItems.map((products : BasicProduct) => {
           return (
-            <div key={index}>
-              <CheckListCard test={test} />
+            <div key={products.basicProductId}>
+              <CheckListCard customProductName={products.basicProductName} />
             </div>
           );
         })}
         {/* <CheckListCard /> */}
         <div
           onClick={() => {
-            navigate('/favorite/selection');
+            navigate('/checklist/selection');
           }}
         >
           {/* <GotoCheckListSelection /> */}
@@ -84,8 +92,13 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
             setIsCustom(true);
           }}
         >
-          <CustomBanner />
+          {!!!checklistCustomItems && <CustomBanner />}
         </div>
+        {
+          checklistCustomItems.map((product : CustomProduct) => {
+            return <CheckListCard customProductName={product.customProductName}  />
+          })
+        }
         {isCustom && <CustomInput />}
       </div>
     </>

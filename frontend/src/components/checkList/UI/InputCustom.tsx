@@ -14,8 +14,13 @@ const CustomInput: FC<CustomInputProps> = () => {
     setInputValue(()=>e.target.value)
   }
   const handelInput = (e: React.KeyboardEvent<HTMLInputElement>) =>{
-    if(e.key === 'Enter') {
+    if(e.key === 'Enter' && (inputValue !== '')) {
       console.log(inputValue);
+      dispatch(addCustomProducts({
+        id: -1,
+        customProductName: inputValue,
+        status: false,
+      }))
       setInputValue('')
     }
     // dispatch(addCustomProducts)
@@ -23,7 +28,6 @@ const CustomInput: FC<CustomInputProps> = () => {
   return (<>
     <div className="m-3 py-5 ml-3 shadow-md container center flex justify-center items-center w-[90vw] px-2 lg:py-0 border-black ">
       <input value={inputValue} onChange={getInputValue} onKeyPress={handelInput} id="customInput" className="w-[100%] border-[1px] border-black" type="text" />
-    
   </div>
   </>);
 }
