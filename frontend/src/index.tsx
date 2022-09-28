@@ -22,7 +22,8 @@ import storage from 'redux-persist/lib/storage';
 
 import { Provider, useSelector } from 'react-redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import favoriteProductListReducer from './modules/FavoriteProductList';
+import favoriteProductListReducer from '@modules/FavoriteProductList';
+import CheckListProductsReducer from '@modules/CheckListProductList';
 import authTokenReducer from './modules/Auth'
 
 axios.defaults.withCredentials = true;
@@ -33,7 +34,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   favoriteProductListReducer,
-  authTokenReducer
+  authTokenReducer,
+  CheckListProductsReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -14,11 +14,11 @@ public class ChecklistDto {
     List<BasicItemDto> checklistBasicItems;
     List<CustomItemDto> checklistCustomItems;
 
-    public ChecklistDto(int checklistSize,Checklist checklist) {
-        empty = checklistSize <= 0;
+    public ChecklistDto(Checklist checklist) {
         checklistBasicItems =checklist.getChecklistBasicItems()
                 .stream().map(BasicItemDto::new).collect(Collectors.toList());
         checklistCustomItems =checklist.getChecklistCustomItems()
                 .stream().map(CustomItemDto::new).collect(Collectors.toList());
+        empty = checklistBasicItems.size()+checklistCustomItems.size() <= 0;
     }
 }

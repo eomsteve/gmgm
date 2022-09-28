@@ -1,0 +1,4 @@
+div.slick-slide.slick-active > div{
+  display:flex;
+  align-items: center;
+}

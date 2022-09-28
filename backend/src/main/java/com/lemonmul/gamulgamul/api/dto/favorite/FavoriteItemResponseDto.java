@@ -9,7 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class FavoriteItemResponseDto {
     private Long goodsId;
-    private Long productId;
+    private Long basicProductId;
     private String goodsName;
     private String img;
     private String measure;
@@ -17,7 +17,7 @@ public class FavoriteItemResponseDto {
 
     public FavoriteItemResponseDto(Goods goods, Double priceGap) {
         this.goodsId = goods.getId();
-        this.productId = goods.getProduct().getId();
+        this.basicProductId = goods.getProduct().getId();
         this.goodsName = goods.getName();
         this.img = goods.getImg();
         this.measure = goods.getMeasure();

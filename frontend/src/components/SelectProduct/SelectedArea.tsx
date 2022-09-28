@@ -15,15 +15,15 @@ const SelectedArea: FC<SelectedAreaProps> = () => {
     })
   });
   const dispatch = useDispatch();
-  const removeList = (goodsItem : { id : number })=>{
+  const removeList = (goodsItem : { goodsId : number })=>{
     dispatch(removeGoods(goodsItem))
   }
   return (<>
-  <div className="overflow-auto bg-blue-200 h-[10rem] w-full p-5 my-5">
-    {goods && goods.map((x : { id : number, name : string }, idx : number) =>{
+  <div className="overflow-auto flex flex-wrap bg-blue-200 h-[10rem] w-full p-5 my-5">
+    {goods && goods.map((x : { goodsId : number, goodsName : string }, idx : number) =>{
         return (
-          <span className="w-[100%] m-1  p-0 text-sm border-[1px] border-black" key={idx} onClick={()=>{removeList(x)}}>
-            {x.name}
+          <span className="m-1 bg-white p-1 text-xs border-[1px] border-black" key={idx} onClick={()=>{removeList(x)}}>
+            {x.goodsName}
           </span>
         )
       })}

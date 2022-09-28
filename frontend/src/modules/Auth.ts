@@ -3,6 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
   authToken: '',
+  isLogin : false,
 };
 
 export const userAuthSlice = createSlice({
@@ -15,6 +16,9 @@ export const userAuthSlice = createSlice({
     removeAuthToken: state => {
       state.authToken = '';
     },
+    isLogin : state => {
+      state.isLogin = true;
+    }
   },
 });
 

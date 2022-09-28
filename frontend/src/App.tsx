@@ -7,6 +7,7 @@ import FavoriteIndexPage from './routers/pages/Favorite/FavoriteIndex';
 import FavoriteListSelection from './routers/pages/Favorite/FavoriteListSelection';
 import CheckLists from './routers/pages/CheckList/CheckLists';
 import CheckList from './routers/pages/CheckList/CheckList';
+import CheckListSelection from '@pages/CheckList/CheckListSelection';
 import DetailPage from './routers/pages/Detail/Detail'
 
 import NotFound from './routers/NotFound';
@@ -33,6 +34,10 @@ const App: React.FunctionComponent<AppProps> = () => {
         <Route
           path="/favorite/selection"
           element={<FavoriteListSelection />}
+        ></Route>
+        <Route
+          path="/checklist/selection"
+          element={<CheckListSelection />}
         ></Route>
         <Route path="/SignUp" element={<SignUp />}></Route>
         <Route path="/LogIn" element={<LogInPage />}></Route>
