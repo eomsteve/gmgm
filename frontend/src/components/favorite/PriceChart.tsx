@@ -2,17 +2,23 @@ import {FunctionComponent} from 'react';
 import SumPriceChart from '../charts/SumPriceChart'
 
 interface PriceChartProps {
-  
+  favoriteTotalPrices:  {
+    totalPrices : {price : number}[],
+    researchDates : {researchDate : string}[]
+  }
 }
  
-const PriceChart: FunctionComponent<PriceChartProps> = () => {
+const PriceChart: FunctionComponent<PriceChartProps> = (props) => {
+  const {  favoriteTotalPrices } = props;
+  console.log(favoriteTotalPrices.totalPrices.at(-1)?.price);
+  
   return (<>
     <div className="mb-[20vh] ">
       <div className="flex justify-between m-3">
       <span>총 가격 변동 그래프</span>
-      <span> total price</span>
+      <span>{favoriteTotalPrices.totalPrices.at(-1)?.price}</span>
       </div>
-    <SumPriceChart />
+    <SumPriceChart favoriteTotalPrices={favoriteTotalPrices}/>
     </div>
   </>);
 }

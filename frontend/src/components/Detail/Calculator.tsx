@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import SumPriceChart from '../charts/SumPriceChart'
+import SumPriceChart from '../charts/CalculatorChart'
 import OnlineCard from './OnlineCard'
 
 interface CalculatorProps {}

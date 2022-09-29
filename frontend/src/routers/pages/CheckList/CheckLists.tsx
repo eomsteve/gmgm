@@ -11,7 +11,7 @@ const CheckLists: FunctionComponent<CheckListsProps> = () => {
   useEffect(() => {
     const getCheckListsData = async () => {
       const data = await getCheckLists();
-      setCheckListItems(data)
+      setCheckListItems(data);
     };
     getCheckListsData();
   }, []);
@@ -23,14 +23,16 @@ const CheckLists: FunctionComponent<CheckListsProps> = () => {
       >
         <AddCheckList />
 
-        {
-          checkListItems.map((checkList)=>{
-            return(<div key={checkList.checklistId}>
-
-             <CheckListItem checklistId={checkList.checklistId} regDate={checkList.regDate} />
-            </div>)
-          })
-        }
+        {checkListItems.map(checkList => {
+          return (
+            <div key={checkList.checklistId}>
+              <CheckListItem
+                checklistId={checkList.checklistId}
+                regDate={checkList.regDate}
+              />
+            </div>
+          );
+        })}
       </main>
     </>
   );

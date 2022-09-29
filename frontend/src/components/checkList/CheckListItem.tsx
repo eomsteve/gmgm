@@ -23,7 +23,7 @@ const CheckListItem: FC<CheckListItemProps> = props => {
       >
         <div className="flex flex-col items-center justify-center ">
           <div className="text-[#428BC1] text-[2rem]"><FontAwesomeIcon icon={faBasketShopping} /></div>
-          <div className="text-black text-[0.8rem]">{`${date.getMonth()+1}월 ${date.getDay()}일`}</div>
+          <div className="text-black text-[0.8rem]">{`${date.getMonth()+1}월 ${date.getDate()}일`}</div>
         </div>
       </div>
     </>
