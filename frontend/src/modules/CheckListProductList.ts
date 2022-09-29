@@ -18,11 +18,13 @@ export interface CustomProduct {
 interface Initial {
   checklistBasicItems: BasicProduct[];
   checklistCustomItems: CustomProduct[];
+  tempList :BasicProduct [],
 }
 
 const initialState: Initial = {
   checklistBasicItems: [],
   checklistCustomItems: [],
+  tempList : [],
 };
 
 export const checkListProductsSlice = createSlice({
@@ -79,9 +81,19 @@ export const checkListProductsSlice = createSlice({
       }else{
         console.error("없다는게말이됨?")
       }
+    },
+    setInitialState: (state, action : PayloadAction<Initial>) => {
+      console.log('set initialState', action.payload.checklistBasicItems, action.payload.checklistCustomItems);
+      
+      state.checklistBasicItems = action.payload.checklistBasicItems;
+      state.checklistCustomItems = action.payload.checklistCustomItems;
+    },
+    setInitialStateWhenUnMounted: (state) => {
+      state.checklistBasicItems = [];
+      state.checklistCustomItems = [];
     }
   },
 });
 
-export const { addBasicProducts, removeBasicProducts, addCustomProducts, removeCustomProducts } = checkListProductsSlice.actions;
+export const { addBasicProducts, removeBasicProducts, addCustomProducts,updateBasicProducts,updateCustomProductStatus, removeCustomProducts, setInitialState,setInitialStateWhenUnMounted } = checkListProductsSlice.actions;
 export default checkListProductsSlice.reducer;

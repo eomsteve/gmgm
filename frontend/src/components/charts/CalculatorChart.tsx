@@ -35,32 +35,59 @@ export const options = {
 };
 
 interface SumPriceChartProps {
-  favoriteTotalPrices:  {
-    totalPrices : {price : number}[],
-    researchDates : {researchDate : string}[]
-  }
+  // productData : [];
+  calculatorData?: number;
+  // goodsData?:[];
 }
 
 const SumPriceChart: FunctionComponent<SumPriceChartProps> = props => {
   // 라벨의 길이만큼 만들기
+  const labels = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+  ];
+
+  const { calculatorData } = props;
+  const data2 = labels.map(() => {
+    return calculatorData;
+  })
+  let calculatorDataset = {};
   
-  const { favoriteTotalPrices } = props;
-  const labels = favoriteTotalPrices.researchDates.map((data) => {
-    return data.researchDate;
-  })
-  const totalPrices = favoriteTotalPrices.totalPrices.map((data)=>{
-    return data.price
-  })
+  if (calculatorData) {
+    const data2 = labels.map(() => {
+      return calculatorData;
+    })
+    calculatorDataset = {
+      // label: '계산결과',
+      data: data2,
+      borderColor: 'rgb(255, 99, 13)',
+      backgroundColor: 'rgba(255, 99, 13, 0.5)',
+    };
+  }
   const data = {
     labels,
     datasets: [
       {
         label: 'prices',
         //라벨의 길이만큼 data 넣기,, 빈 데이터는??
-        data: totalPrices,
+        data: [3123, 12312, 54345, 21314.42, 87643, 101000, 89000],
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
+      {
+        label: '계산결과',
+        data: data2,
+        borderColor: 'rgb(255, 99, 13)',
+        backgroundColor: 'rgba(255, 99, 13, 0.5)',
+        borderDash :[5],
+        fill : false,
+        pointRadius: 3,
+      }
     ],
   };
   return (

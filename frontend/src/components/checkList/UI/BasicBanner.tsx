@@ -8,9 +8,6 @@ const EmptyCard: FC = () => {
   return (
     <>
       <div
-        onClick={() => {
-          navigate('/checklist/selection');
-        }}
         className="m-3 ml-3 flex 
         w-[90vw] flex-col items-center justify-center 
       border-black py-7 px-2 lg:py-0

@@ -1,27 +1,28 @@
 import { FC, useState, useEffect } from 'react';
 import FavoriteCard from './FavoriteCard';
-import { getFavoriteSelect } from '../../routers/APIs/favoriteApi'
+import { getFavoriteSelect,getFavoritePageData } from '@apis/favoriteApi'
 import GotoSelectionButton from './GotoSelection';
 import { useNavigate } from 'react-router-dom';
+import type { FavoritePageData, FavoriteItem } from '@apis/favoriteApi'
 interface FavoriteSelectBoxProps {
-  optionList: string[];
+  pageData: FavoriteItem[];
 }
 
 const businessData: { [key: string]: string } = {
   m: '대형마트',
-  s: '슈퍼마켓',
   o: '온라인',
 };
 
+
 const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
-  // const [category,]
-  const optionList = ['m', 's', 'o'];
+  const selectBoxPage = props.pageData;
+  const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
+  const [pageData , setPageData]  = useState<FavoriteItem[]>(selectBoxPage)
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOption(e.target.value)
   };
   const navigate = useNavigate();
-
   return (
     <>
       <select
@@ -53,15 +54,16 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
         ))}
       </select>
       <div className="flex w-full flex-col items-center justify-center p-0">
-        <FavoriteCard
-          img={'img'}
-          goodsName={businessData[optionState]}
-          priceGap={0}
-          goodsPrice={0}
-        />
-        <FavoriteCard img={'img'} goodsName={'고양이'} priceGap={0} goodsPrice={0} />
-        <FavoriteCard img={'img'} goodsName={'사자'} priceGap={0} goodsPrice={0} />
-        <FavoriteCard img={'img'} goodsName={'호랑이'} priceGap={0} goodsPrice={0} />
+        {pageData && 
+          pageData.map((favoriteItem, index) =>{
+            return (
+              <div key={favoriteItem.goodsId}>
+
+              <FavoriteCard img={favoriteItem.img} goodsName={favoriteItem.goodsName} priceGap={favoriteItem.priceGap} goodsPrice={123} />
+              </div>
+            )
+          })
+        }
         <div onClick={()=>{navigate('/favorite/selection')}}>
         <GotoSelectionButton />
         

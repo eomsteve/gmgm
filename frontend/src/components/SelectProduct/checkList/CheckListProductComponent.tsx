@@ -38,7 +38,7 @@ const ProductLists: FC<ProductListsProps> = props => {
             );
           })}
       </div>
-      <SelectedArea />
+      {/* <SelectedArea /> */}
     </>
   );
 };
