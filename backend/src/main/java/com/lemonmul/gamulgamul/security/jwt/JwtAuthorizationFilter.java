@@ -1,6 +1,6 @@
 package com.lemonmul.gamulgamul.security.jwt;
 
-import com.lemonmul.gamulgamul.entity.user.User;
+import com.lemonmul.gamulgamul.entity.user.Role;
 import com.lemonmul.gamulgamul.repo.UserRepo;
 import com.lemonmul.gamulgamul.security.auth.PrincipalDetails;
 import io.jsonwebtoken.Jwts;
@@ -19,12 +19,9 @@ import java.io.IOException;
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
-    private final UserRepo userRepo;
-
     @Autowired
-    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserRepo userRepo) {
+    public JwtAuthorizationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
-        this.userRepo = userRepo;
     }
 
     @Override
@@ -39,23 +36,17 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(JwtProperties.HEADER_STRING)
                 .replace(JwtProperties.TOKEN_PREFIX, "");
 
-        String email = Jwts.parser().setSigningKey(JwtProperties.SECRET).parseClaimsJws(token).getBody().getSubject();
+        Role role = Role.valueOf((String)Jwts.parser().setSigningKey(JwtProperties.SECRET).parseClaimsJws(token).getBody().get("role"));
+        PrincipalDetails principalDetails = new PrincipalDetails(role);
 
         // TODO: 강의 듣고 예외처리 해야함
-        //      token은 db를 보지 않는게 장점인데 db를 확인하는게 맞나...?
-        if (email != null) {
-            User user = userRepo.findByEmail(email).orElseThrow();
+        Authentication authentication =
+                new UsernamePasswordAuthenticationToken(
+                        null,
+                        null,
+                        principalDetails.getAuthorities());
 
-            PrincipalDetails principalDetails = new PrincipalDetails(user);
-
-            Authentication authentication =
-                    new UsernamePasswordAuthenticationToken(
-                            principalDetails,
-                            null,
-                            principalDetails.getAuthorities());
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
         chain.doFilter(request, response);
     }
