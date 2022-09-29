@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import { stat } from 'fs/promises';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
@@ -7,6 +7,7 @@ export interface BasicProduct {
   basicProductId: number;
   basicProductName: string;
   status: boolean;
+  productImg?: string;
 }
 
 export interface CustomProduct {
@@ -18,11 +19,13 @@ export interface CustomProduct {
 interface Initial {
   checklistBasicItems: BasicProduct[];
   checklistCustomItems: CustomProduct[];
+  tempList :BasicProduct [],
 }
 
 const initialState: Initial = {
   checklistBasicItems: [],
   checklistCustomItems: [],
+  tempList : [],
 };
 
 export const checkListProductsSlice = createSlice({
@@ -46,14 +49,19 @@ export const checkListProductsSlice = createSlice({
       });
       state.checklistBasicItems = data;
     },
-    updateBasicProducts : (state, action: PayloadAction<BasicProduct>) => {
+    updateBasicProductsStatus : (state, action: PayloadAction<string>) => {
+      console.log('update');
+      
       const data = state.checklistBasicItems.find((products) => { 
-        return products.basicProductName == action.payload.basicProductName;
+        console.log(products.basicProductName, action.payload);
+        return products.basicProductName == action.payload;
       });
+      console.log(current(data));
+      
       if (typeof(data) !== "undefined") {
         data.status = !data?.status;
       }else{
-        console.error("없다는게말이됨?")
+        console.error("error")
       }
     },
     addCustomProducts: (state, action : PayloadAction<CustomProduct>)=>{
@@ -77,11 +85,21 @@ export const checkListProductsSlice = createSlice({
       if (typeof(data) !== "undefined") {
         data.status = !data?.status;
       }else{
-        console.error("없다는게말이됨?")
+        console.error("error")
       }
+    },
+    setInitialState: (state, action : PayloadAction<Initial>) => {
+      console.log('set initialState', action.payload.checklistBasicItems, action.payload.checklistCustomItems);
+      
+      state.checklistBasicItems = action.payload.checklistBasicItems;
+      state.checklistCustomItems = action.payload.checklistCustomItems;
+    },
+    setInitialStateWhenUnMounted: (state) => {
+      state.checklistBasicItems = [];
+      state.checklistCustomItems = [];
     }
   },
 });
 
-export const { addBasicProducts, removeBasicProducts, addCustomProducts, removeCustomProducts } = checkListProductsSlice.actions;
+export const { addBasicProducts, removeBasicProducts, addCustomProducts,updateBasicProductsStatus,updateCustomProductStatus, removeCustomProducts, setInitialState,setInitialStateWhenUnMounted } = checkListProductsSlice.actions;
 export default checkListProductsSlice.reducer;

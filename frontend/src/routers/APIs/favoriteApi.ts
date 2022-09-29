@@ -3,25 +3,38 @@ const API_URL = 'https://j7d108.p.ssafy.io/api/favorite';
 const AUTH_TOKEN = 'token';
 
 type ChartData = {
-  researchDate: string;
-  value: number;
+  values : {value : number}[],
+  researchDates : {researchDate : string}[]
 };
 
 type BusinessType = {
   businessType: string;
   krName: string;
 };
-interface FavoritePageData {
-  countryIndices: ChartData[];
-  favoriteIndices: ChartData[];
+
+export type FavoriteItem = {
+  goodsId : number;
+  basicProductId : number;
+  goodsName : string;
+  img : string;
+  measure : string;
+  priceGap: number;
+}
+export interface FavoritePageData {
   businessTypes: BusinessType[];
-  favoriteItemResponseDtos?: [];
-  favoriteTotalPrices?: [];
+  countryIndices: ChartData;
+  favoriteIndices: ChartData;
+  favoriteItems: FavoriteItem[];
+  favoriteTotalPrices:  {
+    totalPrices : {price : number}[],
+    researchDates : {researchDate : string}[]
+  };
 }
 export const getFavoritePageData = async () => {
   try {
     const { data } = await axios.get<FavoritePageData>(API_URL + '/');
-    console.log(data);
+    // console.log(data);
+    return data;
   } catch (error) {
     console.log(error);
   }
@@ -34,6 +47,7 @@ export const  getFavoriteItems = async (businessType : string) => {
         Authorization : AUTH_TOKEN
       }
     })
+    return data;
   }catch(error){
 
   }

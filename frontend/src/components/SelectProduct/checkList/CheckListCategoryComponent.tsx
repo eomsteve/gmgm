@@ -3,11 +3,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import Category from '../UI/CategoryPicker';
-
+import {useLocation} from 'react-router-dom'
 import ProductComponent from './CheckListProductComponent';
 
 import { getFavoriteSelect } from '@apis/favoriteApi';
 import type {BasicProduct} from '@modules/CheckListProductList'
+import SelectedArea from './SelectedArea'
 interface CategorySliderProps {}
 
 interface NextArrowProps {
@@ -28,14 +29,20 @@ interface CategoryLoad {
 }
 
 const CategorySlider: FC<CategorySliderProps> = () => {
+
   //after axios, useEffect
   const [data, setData] = useState<CategoryLoad[]>([]);
+  const location = useLocation();
+  const params = location.state as { isEdit : boolean, checklistId : string };
+  console.log(params.isEdit);
+  
   useEffect(() => {
     const categoryLoad = async () => {
       const fetchData = await getFavoriteSelect();
       setData(fetchData);
     };
     categoryLoad();
+
   }, []);
 
   console.log(data);
@@ -87,6 +94,7 @@ const CategorySlider: FC<CategorySliderProps> = () => {
           })}
       </Slider>
       <ProductComponent productList={ProductList} />
+      <SelectedArea isEdit={params.isEdit} checklistId={params.checklistId}/>
     </div>
   );
 };

@@ -26,19 +26,20 @@ const ProductLists: FC<ProductListsProps> = props => {
 
   return (
     <>
-      <div className="my-10">
+      <div className="my-10 flex flex-wrap">
           {productList.map(product => {
             return (
-              <div
+              <div className="p-1 bg-blue-500 border-2 m-1"
                 onClick={() => addProduct(product)}
                 key={product.basicProductId}
               >
+                <img src={product.productImg} alt="" />
                 {product.basicProductName}
               </div>
             );
           })}
       </div>
-      <SelectedArea />
+      {/* <SelectedArea /> */}
     </>
   );
 };

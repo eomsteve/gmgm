@@ -1,16 +1,20 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeBasicProducts } from '@modules/CheckListProductList';
 import type { BasicProduct } from '@modules/CheckListProductList';
 import type { RootState } from '@modules/store';
 interface SelectedAreaProps {
-  
+  isEdit: boolean;
+  checklistId : string;
 }
  
-const SelectedArea: FC = () => {
+const SelectedArea: FC <SelectedAreaProps> = (props) => {
+  const  { isEdit, checklistId } = props;
+  const navigate = useNavigate();
   const {checklistBasicItems} = useSelector((state : RootState) => {
     
-    console.log(state);
+    console.log(state, checklistId);
     return ({
       checklistBasicItems : state.persistedReducer.CheckListProductsReducer.checklistBasicItems
     })
@@ -28,6 +32,7 @@ const SelectedArea: FC = () => {
           </span>
         )
       })}
+      <div onClick={()=>{navigate(`/checklists/${checklistId}`, {state: {isEdit, checklistId}})}} className="border-black border-2"> 추가 완료 </div>
   </div>
   </>);
 }

@@ -49,6 +49,11 @@ export const makeEmptyCheckList = async () => {
 
 export const checkListSelection = async () => {};
 
+/**
+ * * 체크리스트 조회, 수정페이지
+ * @param checkListId 
+ * @returns 
+ */
 export const getCheckList = async (checkListId?: string) => {
   try {
     const { data } = await axios.get(API_URL + `/${checkListId}`);
@@ -61,7 +66,6 @@ export const getCheckList = async (checkListId?: string) => {
 
 export const updateCheckLists = async ( checklistBasicItems : BasicProduct[], checklistCustomItems : CustomProduct[], checkListId?: string ) => {
   try {
-    
     const { data } = await axios({
       url: API_URL + `/${checkListId}`,
       method: 'put',
@@ -71,9 +75,57 @@ export const updateCheckLists = async ( checklistBasicItems : BasicProduct[], ch
       },
   });
   console.log('updated to:', data)
+  checklistBasicItems = data.checklistBasicItems;
   return data;
 } catch (error) {
   
 }
-  
 };
+
+export const updateCheckListStatus = async (checklistBasicItems : BasicProduct[], checklistCustomItems : CustomProduct[], checklistId?: string ) => {
+  console.log('????');
+  
+  try {
+    const { data } = await axios({
+      url : API_URL + `/status/${checklistId}`,
+      method : 'put',
+      data: {
+        checklistBasicItems,
+        checklistCustomItems,
+      }
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+    
+  }
+  
+}
+
+export const addCheckList = async () => {
+  try {
+    const { data } = await axios({
+      url: API_URL + `/`,
+      method: 'post',
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    
+  }
+}
+
+
+export const deleteCheckList = async (checkListId?: string) => {
+  try {
+    const { data } = await axios({
+      url: API_URL +  `/${checkListId}`,
+      method: 'delete',
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    
+  }
+}
