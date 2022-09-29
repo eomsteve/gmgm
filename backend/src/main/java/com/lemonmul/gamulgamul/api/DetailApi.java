@@ -5,15 +5,17 @@ import com.lemonmul.gamulgamul.api.dto.detail.GoodsDto;
 import com.lemonmul.gamulgamul.api.dto.detail.ProductDto;
 import com.lemonmul.gamulgamul.entity.BusinessType;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
+import com.lemonmul.gamulgamul.entity.goods.GoodsLog;
 import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
 import com.lemonmul.gamulgamul.entity.product.Product;
 import com.lemonmul.gamulgamul.entity.product.ProductPrice;
-import com.lemonmul.gamulgamul.service.GoodsPriceService;
-import com.lemonmul.gamulgamul.service.GoodsService;
-import com.lemonmul.gamulgamul.service.ProductPriceService;
-import com.lemonmul.gamulgamul.service.ProductService;
+import com.lemonmul.gamulgamul.entity.user.User;
+import com.lemonmul.gamulgamul.repo.GoodsLogRepo;
+import com.lemonmul.gamulgamul.security.jwt.JwtTokenProvider;
+import com.lemonmul.gamulgamul.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +31,8 @@ public class DetailApi {
     private final ProductPriceService productPriceService;
     private final GoodsService goodsService;
     private final GoodsPriceService goodsPriceService;
+    private final UserService userService;
+    private final GoodsLogRepo goodsLogRepo;
 
     /**
      * 체크리스트 -> 품목 세부 페이지 진입
@@ -46,10 +50,12 @@ public class DetailApi {
      *  해당 상품 정보, 상품 가격 변동 정보
      */
     @GetMapping("/goods/{goodsId}/business/{business}")
-    public GoodsDto goodsDetail(@PathVariable Long goodsId, @PathVariable BusinessType business){
+    public GoodsDto goodsDetail(@PathVariable Long goodsId, @PathVariable BusinessType business,
+                                @RequestHeader HttpHeaders headers){
         log.info("[Starting request] GET /detail/goods/{}/business/{}",goodsId,business);
+        User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
         log.info("[Finished request] GET /detail/goods/{}/business/{}",goodsId,business);
-        return getGoodsDto(goodsId, business);
+        return getGoodsDto(goodsId, business,user);
     }
 
     /**
@@ -58,12 +64,15 @@ public class DetailApi {
      */
     @GetMapping("/product/{productId}/goods/{goodsId}/business/{business}")
     public FavoriteDto productAndGoodsDetail(
-            @PathVariable Long productId,@PathVariable Long goodsId,@PathVariable BusinessType business){
+            @PathVariable Long productId,@PathVariable Long goodsId,@PathVariable BusinessType business,
+            @RequestHeader HttpHeaders headers){
         log.info("[Starting request] GET /detail/product/{}/goods/{}/business/{}",productId,goodsId,business);
 
         ProductDto productDto = getProductDto(productId,business);
         checkGoodsInProduct(goodsId, productDto);
-        GoodsDto goodsDto = getGoodsDto(goodsId,business);
+
+        User user=JwtTokenProvider.getUserFromJwtToken(userService,headers);
+        GoodsDto goodsDto = getGoodsDto(goodsId,business,user);
 
         log.info("[Finished request] GET /detail/product/{}/goods/{}/business/{}",productId,goodsId,business);
         return new FavoriteDto(productDto,goodsDto);
@@ -82,11 +91,14 @@ public class DetailApi {
     /**
      * GoodsDto 생성
      */
-    private GoodsDto getGoodsDto(Long goodsId, BusinessType business) {
+    private GoodsDto getGoodsDto(Long goodsId, BusinessType business, User user) {
         Goods goods = goodsService.getGoodsById(goodsId);
         Double cheapPrice = goodsPriceService.goodsCheapPrice(goods).getPrice();
         List<GoodsPrice> goodsPrices = goodsPriceService.goodsPricesFor1yearByBusinessType(goods, business);
         log.info("goodsPrices size: {}",goodsPrices.size());
+
+        //사용자의 상품 클릭 이력 저장
+        goodsLogRepo.save(GoodsLog.of(user,goods));
         return new GoodsDto(goods, cheapPrice, goodsPrices);
     }
 

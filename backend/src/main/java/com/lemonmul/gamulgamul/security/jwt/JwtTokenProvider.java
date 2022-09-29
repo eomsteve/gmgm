@@ -9,6 +9,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.http.HttpHeaders;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class JwtTokenProvider {
 
@@ -29,15 +30,8 @@ public class JwtTokenProvider {
         return Jwts.parser().setSigningKey(JwtProperties.SECRET).parseClaimsJws(token).getBody().getSubject();
     }
 
-    public static Long getUserIdFromJwtToken(UserService userService,HttpHeaders headers) {
-        String token = headers.get(JwtProperties.HEADER_STRING).get(0).replace(JwtProperties.TOKEN_PREFIX, "");
-        String email = JwtTokenProvider.getEmail(token);
-        User user = userService.getUserInfoByEmail(email);
-        return user.getId();
-    }
-
-    public static User getUserFromJwtToken(UserService userService,HttpHeaders headers) throws NullPointerException{
-        String token = headers.get(JwtProperties.HEADER_STRING).get(0).replace(JwtProperties.TOKEN_PREFIX, "");
+    public static User getUserFromJwtToken(UserService userService,HttpHeaders headers){
+        String token = Objects.requireNonNull(headers.get(JwtProperties.HEADER_STRING)).get(0).replace(JwtProperties.TOKEN_PREFIX, "");
         String email = JwtTokenProvider.getEmail(token);
         return userService.getUserInfoByEmail(email);
     }
