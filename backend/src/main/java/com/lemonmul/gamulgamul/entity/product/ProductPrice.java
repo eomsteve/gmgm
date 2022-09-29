@@ -20,6 +20,8 @@ public class ProductPrice {
 
     private Double unitPrice;
 
+    private Double price;
+
     private LocalDate researchDate;
 
     @Enumerated(EnumType.STRING)
@@ -34,6 +36,7 @@ public class ProductPrice {
 
     private ProductPrice(Double unitPrice, LocalDate researchDate, Product product) {
         this.unitPrice = unitPrice;
+        this.price = null;
         this.researchDate = researchDate;
         this.product = product;
 
@@ -41,9 +44,10 @@ public class ProductPrice {
         this.business=null;
     }
 
-    private ProductPrice(Double unitPrice, LocalDate researchDate, BusinessType business, Product product) {
+    private ProductPrice(Double unitPrice, Double price, LocalDate researchDate, BusinessType business, Product product) {
         this(unitPrice, researchDate, product);
 
+        this.price = price;
         this.dateType=DateType.d;
         this.business = business;
     }
@@ -52,7 +56,7 @@ public class ProductPrice {
         return new ProductPrice(price,researchDate,product);
     }
 
-    public static ProductPrice of(Double price, LocalDate researchDate, BusinessType business, Product product){
-        return new ProductPrice(price,researchDate,business,product);
+    public static ProductPrice of(Double unitPrice, Double price, LocalDate researchDate, BusinessType business, Product product){
+        return new ProductPrice(unitPrice, price,researchDate,business,product);
     }
 }
