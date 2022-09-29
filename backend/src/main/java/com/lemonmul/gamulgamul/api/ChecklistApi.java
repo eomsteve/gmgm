@@ -51,6 +51,24 @@ public class ChecklistApi {
     }
 
     /**
+     * 체크리스트 리스트 조회 v2
+     *  상단 아이템 정보 미리보기 표시
+     */
+    @GetMapping("/list/info")
+    public List<ListInfoDto> checklistInfoList(@RequestHeader HttpHeaders headers){
+        log.info("[Starting request] GET /checklist/list/info");
+
+        User user = getUserFromJwtToken(userService, headers);
+        log.info("userId: {}",user.getId());
+
+        List<Checklist> checklists = checklistService.checklistList(user);
+        log.info("checklists size: {}",checklists.size());
+
+        log.info("[Finished request] GET /checklist/list/info");
+        return checklists.stream().map(ListInfoDto::new).collect(Collectors.toList());
+    }
+
+    /**
      * 빈 체크리스트 생성
      */
     @PostMapping()
