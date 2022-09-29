@@ -3,10 +3,7 @@ package com.lemonmul.gamulgamul.entity.product;
 import com.lemonmul.gamulgamul.entity.Category;
 import com.lemonmul.gamulgamul.entity.checklist.ChecklistBasicItem;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -32,9 +29,17 @@ public class Product {
 
     private String img;
 
-    private double priceGapOff;
+    @Setter
+    private Double recentPriceOff;
 
-    private double priceGapOn;
+    @Setter
+    private Double recentPriceOn;
+
+    @Setter
+    private Double priceGapOff;
+
+    @Setter
+    private Double priceGapOn;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
