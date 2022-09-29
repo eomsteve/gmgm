@@ -6,7 +6,12 @@ import GotoCheckListSelection from './UI/GotoCheckListSelection';
 import CheckListCard from './UI/CheckListCard';
 import CustomInput from './UI/InputCustom';
 import ConfirmButton from './UI/ConFirmButton';
-import { getCheckList, updateCheckLists } from '@apis/checkList.Api';
+import {
+  getCheckList,
+  updateCheckLists,
+  deleteCheckList,
+  updateCheckListStatus,
+} from '@apis/checkList.Api';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -36,7 +41,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   const { checklistId } = useParams();
   const location = useLocation();
   const [isEmpty, setIsEmpty] = useState<boolean>();
-  const params = location.state as { isEdit : boolean, checklistId : string };
+  const params = location.state as { isEdit: boolean; checklistId: string };
   const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
   const { checklistCustomItems, checklistBasicItems } = useSelector(
@@ -50,22 +55,25 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       };
     },
   );
+  const preventClose = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    e.returnValue = ''; //Chrome에서 동작하도록; deprecated
+  };
+  
   useEffect(() => {
-    console.log(location);
-    
-  },[location])
-
-  useEffect(() => {
-    if (params && params.isEdit){
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+    })();
+    if (params && params.isEdit) {
       console.log('이전 페이지에서 오신듯함 ㅎ');
-      setIsEdit(()=> params.isEdit)
-    }else{
+      setIsEdit(() => params.isEdit);
+    } else {
       const fetchData = async (checklistId?: string) => {
         const data = await getCheckList(checklistId);
         if (data.empty) {
           console.log('empty checklist');
           dispatch(setInitialStateWhenUnMounted());
-          setIsEmpty(()=> true);
+          setIsEmpty(() => true);
           setIsEdit(() => true);
         } else {
           console.log();
@@ -74,27 +82,58 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       };
       fetchData(checklistId);
     }
-      console.log(checklistId);
-    return () => {
-      if(isEdit) {
+    console.log(checklistId);
+
+    const saveCheckListWhenUnmounted = async () =>{
+      console.log('status save function work');
+      
+      const response = await updateCheckListStatus(
+        checklistBasicItems,
+        checklistCustomItems,
+        checklistId,
+      );
+    }
+    return  () => {
+      window.removeEventListener('beforeunload', preventClose);
+      if (isEdit) {
         console.log('unMounted');
         dispatch(setInitialStateWhenUnMounted());
-      }else{
+      } else {
+        saveCheckListWhenUnmounted()
         console.log('unMounted22');
         // dispatch(setInitialStateWhenUnMounted());
       }
     };
   }, []);
-
+  // useEffect(() => {
+  //   (() => {
+  //     window.addEventListener('beforeunload', preventClose);
+  //   })();
+  //   const saveCheckListWhenUnmounted = async () =>{
+  //     console.log('status save function work');
+      
+  //     const response = await updateCheckListStatus(
+  //       checklistBasicItems,
+  //       checklistCustomItems,
+  //       checklistId,
+  //     );
+  //   }
+  //   return () => {
+  //     saveCheckListWhenUnmounted()
+  //     console.log('unMounted33');
+  //     window.removeEventListener('beforeunload', preventClose);
+  //   };
+  // }, []);
+  
   const saveCheckList = async () => {
     if (typeof checklistId == 'string') {
       await updateCheckLists(
         checklistBasicItems,
         checklistCustomItems,
         checklistId,
-      ).then((data)=>{
+      ).then(data => {
         console.log(data);
-        dispatch(setInitialState(data))
+        dispatch(setInitialState(data));
       });
       setIsEdit(() => !isEdit);
     }
@@ -136,37 +175,59 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
               {' '}
               🔨수정{' '}
             </span>
-            <span className="text-sm"> ⛔삭제 </span>
+            <span
+              onClick={() => {
+                deleteCheckList(checklistId);
+                navigate(-1);
+              }}
+              className="text-sm"
+            >
+              {' '}
+              ⛔삭제{' '}
+            </span>
           </div>
         )}
       </div>
       <div className="flex w-full flex-col items-center justify-center p-0">
-        {isEmpty && <div onClick={() => {
-            console.log(checklistId);
-            
-            navigate('/checklist/selection',{state : {isEdit, checklistId,}});
-          }} ><BasicBanner /></div>}
+        {isEmpty && (
+          <div
+            onClick={() => {
+              console.log(checklistId);
+
+              navigate('/checklist/selection', {
+                state: { isEdit, checklistId },
+              });
+            }}
+          >
+            <BasicBanner />
+          </div>
+        )}
         {checklistBasicItems.map((products: BasicProduct) => {
           return (
             <div key={products.basicProductId}>
               <CheckListCard
                 basicProductName={products.basicProductName}
                 isEdit={isEdit}
+                status={products.status}
               />
             </div>
           );
         })}
-        {(isEdit && !isEmpty && checklistBasicItems) && <div
-          onClick={() => {
-            console.log(checklistId);
-            
-            navigate('/checklist/selection',{state : {isEdit, checklistId,}});
-          }}
-        >
-          <div className="m-0 text-[1.5rem]">
-            <FontAwesomeIcon icon={faPlus} />
+        {isEdit && !isEmpty && checklistBasicItems && (
+          <div
+            onClick={() => {
+              console.log(checklistId);
+
+              navigate('/checklist/selection', {
+                state: { isEdit, checklistId },
+              });
+            }}
+          >
+            <div className="m-0 text-[1.5rem]">
+              <FontAwesomeIcon icon={faPlus} />
+            </div>
           </div>
-        </div>}
+        )}
         {!!isEdit ? (
           <div className="m-2 w-[90vw] border-t-2 border-dashed border-black"></div>
         ) : (
@@ -184,6 +245,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
             <CheckListCard
               customProductName={product.customProductName}
               isEdit={isEdit}
+              status={product.status}
             />
           );
         })}

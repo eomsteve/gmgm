@@ -82,11 +82,46 @@ export const updateCheckLists = async ( checklistBasicItems : BasicProduct[], ch
 }
 };
 
+export const updateCheckListStatus = async (checklistBasicItems : BasicProduct[], checklistCustomItems : CustomProduct[], checklistId?: string ) => {
+  console.log('????');
+  
+  try {
+    const { data } = await axios({
+      url : API_URL + `/status/${checklistId}`,
+      method : 'put',
+      data: {
+        checklistBasicItems,
+        checklistCustomItems,
+      }
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+    
+  }
+  
+}
+
 export const addCheckList = async () => {
   try {
     const { data } = await axios({
       url: API_URL + `/`,
       method: 'post',
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    
+  }
+}
+
+
+export const deleteCheckList = async (checkListId?: string) => {
+  try {
+    const { data } = await axios({
+      url: API_URL +  `/${checkListId}`,
+      method: 'delete',
     });
     console.log(data);
     return data;
