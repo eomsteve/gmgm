@@ -14,7 +14,7 @@ public class JwtTokenProvider {
 
     public static String createToken(PrincipalDetails principalDetails, long tokenInvalidTime) {
         Claims claims = Jwts.claims().setSubject(principalDetails.getUsername());
-        claims.put("roles", principalDetails.getAuthorities());
+        claims.put("role", principalDetails.getRole().name());
         Date now = new Date();
 
         return Jwts.builder()
