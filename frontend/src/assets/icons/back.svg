@@ -1,0 +1,23 @@
+<svg id="arrow" xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #838383;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #606060;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 10px;
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: #888;
+      }
+    </style>
+  </defs>
+  <path id="Line_1" data-name="Line 1" class="cls-1" d="M180.045,15.731L55.521,124.236Z"/>
+  <path id="Line_1_copy" data-name="Line 1 copy" class="cls-2" d="M177.7,238.733L55.141,128.013Z"/>
+</svg>
