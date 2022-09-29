@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class ChecklistDto {
     boolean empty;
+    boolean basicEmpty;
+    boolean customEmpty;
     List<BasicItemDto> checklistBasicItems;
     List<CustomItemDto> checklistCustomItems;
 
@@ -19,6 +21,8 @@ public class ChecklistDto {
                 .stream().map(BasicItemDto::new).collect(Collectors.toList());
         checklistCustomItems =checklist.getChecklistCustomItems()
                 .stream().map(CustomItemDto::new).collect(Collectors.toList());
-        empty = checklistBasicItems.size()+checklistCustomItems.size() <= 0;
+        basicEmpty=checklistBasicItems.size()<=0;
+        customEmpty=checklistCustomItems.size()<=0;
+        empty = basicEmpty&&customEmpty;
     }
 }

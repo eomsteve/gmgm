@@ -32,6 +32,10 @@ public class Product {
 
     private String img;
 
+    private double priceGapOff;
+
+    private double priceGapOn;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;

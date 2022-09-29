@@ -27,6 +27,10 @@ public class Goods {
 
     private String cheapUrl;
 
+    private double priceGapOff;
+
+    private double priceGapOn;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
