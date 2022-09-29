@@ -54,13 +54,10 @@ public class ChecklistBasicItemService {
     public void updateStatus(Checklist checklist, List<BasicItemDto> checklistBasicItem){
         List<ChecklistBasicItem> basicItems = itemRepo.findByChecklist(checklist);
         for (ChecklistBasicItem basicItem : basicItems) {
-            Optional<BasicItemDto> optional = checklistBasicItem.stream()
-                    .filter(i -> i.getId().equals(basicItem.getId())).findAny();
-            if(optional.isPresent()){
-                basicItem.setStatus(optional.get().isStatus());
-            }else{
-                throw new IllegalArgumentException();
-            }
+            BasicItemDto itemDto = checklistBasicItem.stream()
+                    .filter(i -> i.getId().equals(basicItem.getId())).findAny()
+                    .orElseThrow();
+            basicItem.setStatus(itemDto.isStatus());
         }
     }
 }

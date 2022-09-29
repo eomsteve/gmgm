@@ -54,13 +54,10 @@ public class ChecklistCustomItemService {
     public void updateStatus(Checklist checklist, List<CustomItemDto> checklistCustomItem) {
         List<ChecklistCustomItem> customItems = itemRepo.findByChecklist(checklist);
         for (ChecklistCustomItem customItem : customItems) {
-            Optional<CustomItemDto> optional = checklistCustomItem
-                    .stream().filter(i -> i.getId().equals(customItem.getId())).findAny();
-            if(optional.isPresent()){
-                customItem.setStatus(optional.get().isStatus());
-            }else {
-                throw new IllegalArgumentException();
-            }
+            CustomItemDto itemDto = checklistCustomItem.stream()
+                    .filter(i -> i.getId().equals(customItem.getId())).findAny()
+                    .orElseThrow();
+            customItem.setStatus(itemDto.isStatus());
         }
     }
 }

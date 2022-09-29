@@ -42,4 +42,8 @@ public class GoodsPrice {
     public static GoodsPrice of(Double unitPrice, Double price, LocalDate researchDate, BusinessType business, Goods goods) {
         return new GoodsPrice(unitPrice, price, researchDate, business, goods);
     }
+
+    public static GoodsPrice empty(Goods goods){
+        return new GoodsPrice(-1.0, -1.0, LocalDate.MIN, BusinessType.o, goods);
+    }
 }

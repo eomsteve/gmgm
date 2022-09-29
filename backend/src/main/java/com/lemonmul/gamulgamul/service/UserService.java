@@ -24,7 +24,6 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    // TODO: 강의 듣고 예외처리 해야함
     public User getUserInfoByEmail(String email) {
         return userRepo.findByEmail(email).orElseThrow();
     }

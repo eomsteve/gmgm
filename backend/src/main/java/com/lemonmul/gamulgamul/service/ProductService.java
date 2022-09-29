@@ -20,19 +20,6 @@ public class ProductService {
      * 품목 조회
      */
     public Product product(Long productId){
-        Optional<Product> optional = productRepo.findById(productId);
-        if(optional.isPresent()){
-            return optional.get();
-        }else{
-            //todo 더 적절한 예외 있으면 바꾸기, 아니면 사용자 예외 만들기
-            throw new IllegalArgumentException();
-        }
-    }
-
-    /**
-     * 품목 리스트 조회
-     */
-    public List<Product> productList(List<Long> productIds){
-        return productRepo.findByIdIn(productIds);
+        return productRepo.findById(productId).orElseThrow(IllegalArgumentException::new);
     }
 }
