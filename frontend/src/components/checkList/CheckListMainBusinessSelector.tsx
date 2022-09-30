@@ -107,29 +107,9 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       } else {
         saveCheckListWhenUnmounted()
         console.log('unMounted22');
-        // dispatch(setInitialStateWhenUnMounted());
       }
     };
   }, []);
-  // useEffect(() => {
-  //   (() => {
-  //     window.addEventListener('beforeunload', preventClose);
-  //   })();
-  //   const saveCheckListWhenUnmounted = async () =>{
-  //     console.log('status save function work');
-      
-  //     const response = await updateCheckListStatus(
-  //       checklistBasicItems,
-  //       checklistCustomItems,
-  //       checklistId,
-  //     );
-  //   }
-  //   return () => {
-  //     saveCheckListWhenUnmounted()
-  //     console.log('unMounted33');
-  //     window.removeEventListener('beforeunload', preventClose);
-  //   };
-  // }, []);
   
   const saveCheckList = async () => {
     if (typeof checklistId == 'string') {
@@ -159,8 +139,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       <div className="flex items-center justify-between">
         <select
           onChange={handleSelection}
-          // 여기 props 로 받아와야함.
-          // defaultValue="m"
           name="selectBox"
           className="form-select form-select-sm my-3 block w-[100px] max-w-[25vw] rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-2 py-1 text-xs font-normal text-gray-700 shadow-md transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
           aria-label=".form-select-sm example"
@@ -195,7 +173,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
         )}
       </div>
       <div className="flex w-full flex-col items-center justify-center p-0">
-        {basicEmpty && (
+        {isEdit && basicEmpty && (
           <div
             onClick={() => {
               console.log(checklistId);
@@ -258,7 +236,11 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
             />
           );
         })}
-        {isCustom && <CustomInput />}
+
+        {isEdit && !customEmpty && <div onClick={() => {setIsCustom(true);}}className="m-0 text-[1.5rem]">
+              <FontAwesomeIcon icon={faPlus} />
+            </div>}
+        {isCustom && isEdit &&  <CustomInput />}
       </div>
     </>
   );

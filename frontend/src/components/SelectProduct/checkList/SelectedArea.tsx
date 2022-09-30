@@ -21,7 +21,7 @@ const SelectedArea: FC <SelectedAreaProps> = (props) => {
   });
   const dispatch = useDispatch();
   const removeList = (product : BasicProduct)=>{
-    dispatch(removeBasicProducts(product))
+    dispatch(removeBasicProducts(product.basicProductId))
   }
   return (<>
   <div className="overflow-auto flex flex-wrap bg-blue-200 h-[10rem] w-full p-5 my-5">

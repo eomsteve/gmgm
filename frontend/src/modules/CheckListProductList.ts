@@ -42,10 +42,10 @@ export const checkListProductsSlice = createSlice({
     },
     removeBasicProducts: (
       state,
-      action: PayloadAction<BasicProduct>,
+      action: PayloadAction<number | undefined>,
     ) => {
       const data = state.checklistBasicItems.filter((products) => {
-        return products.basicProductId != action.payload.basicProductId;
+        return products.basicProductId != action.payload;
       });
       state.checklistBasicItems = data;
     },

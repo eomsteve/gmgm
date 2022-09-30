@@ -25,7 +25,7 @@ const ProductLists: FC<ProductListsProps> = props => {
   };
 
   const removeProducts = (product: BasicProduct) => {
-    dispatch(removeBasicProducts(product));
+    dispatch(removeBasicProducts(product.basicProductId));
   };
 
   return (
