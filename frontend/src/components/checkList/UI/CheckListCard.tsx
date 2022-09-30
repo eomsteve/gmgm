@@ -1,6 +1,6 @@
 import  React, { FC, useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { updateBasicProductsStatus,removeBasicProducts, removeCustomProducts } from '@modules/CheckListProductList'
+import { updateCustomProductStatus,updateBasicProductsStatus,removeBasicProducts, removeCustomProducts } from '@modules/CheckListProductList'
 import {useDispatch, useSelector} from 'react-redux'
 import type { RootState } from '@modules/store';
 import { atCheckList } from '@apis/detail'
@@ -34,7 +34,11 @@ const CheckListCard : FC<CheckListProps> = (props) =>{
   );
   const handleCheckState = (e : React.ChangeEvent<HTMLInputElement>)=>{
     setIsChecked(!isChecked);
-    dispatch(updateBasicProductsStatus(e.target.id))
+    if(basicProductName != undefined){
+      dispatch(updateBasicProductsStatus(e.target.id))
+    }else{
+      dispatch(updateCustomProductStatus(e.target.id))
+    }
   }
   useEffect(() => {
     setIsChecked(status)
