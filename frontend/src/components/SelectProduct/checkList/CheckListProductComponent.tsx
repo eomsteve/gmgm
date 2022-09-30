@@ -25,12 +25,12 @@ const ProductLists: FC<ProductListsProps> = props => {
   };
 
   const removeProducts = (product: BasicProduct) => {
-    dispatch(removeBasicProducts(product));
+    dispatch(removeBasicProducts(product.basicProductId));
   };
 
   return (
     <>
-      <div className="block my-10 mx-3 flex flex-wrap shadow-inner scroll-auto h-96 overflow-auto">
+      <div className="my-10 mx-3 flex flex-wrap shadow-inner scroll-auto h-96 overflow-auto">
         {productList.map(product => {
           return (
             <div
