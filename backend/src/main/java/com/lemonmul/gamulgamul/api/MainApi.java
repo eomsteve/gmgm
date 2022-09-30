@@ -14,10 +14,7 @@ import com.lemonmul.gamulgamul.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +24,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/main")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin
 public class MainApi {
 
     private final UserService userService;
@@ -37,7 +35,7 @@ public class MainApi {
      */
     @GetMapping()
     public MainPageResponseDto getMainPage(@RequestHeader HttpHeaders headers) {
-        log.info("[Starting request]");
+        log.info("[Starting request] GET /main");
 
         PriceIndexDto countryIndex = new PriceIndexDto(mainService.getIndex(IndexType.c));
         PriceIndexDto gmgmIndex = new PriceIndexDto(mainService.getIndex(IndexType.g));
@@ -58,7 +56,7 @@ public class MainApi {
             log.info("user is not logged in");
         }
         List<News> news = mainService.getNewsList();
-        log.info("[Finished request]");
+        log.info("[Finished request] GET /main");
         return new MainPageResponseDto(userName,gmgmIndex,countryIndex,favoriteIndex,checklists,news);
     }
 }

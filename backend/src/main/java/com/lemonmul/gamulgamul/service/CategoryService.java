@@ -15,7 +15,9 @@ public class CategoryService {
 
     private final CategoryRepo categoryRepo;
 
-    // 모든 카테고리 목록을 받아오는 함수
+    /**
+     * 모든 카테고리 목록을 받아오는 함수
+     */
     public List<Category> getAllCategories() {
         return categoryRepo.findAll();
     }

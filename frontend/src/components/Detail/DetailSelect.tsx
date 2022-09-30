@@ -1,11 +1,13 @@
 import { FC, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Calculator from './Calculator'
+import { atCheckList } from '@apis/detail'
 
 interface DetailSelectBoxProps {
 
 }
 const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
+  const { productId, businessType} = useParams();
   let goodsList: string[] = [];
   let goodsInfo: { goodsId: number; goodsName: string }[] =  [
     {
@@ -18,12 +20,19 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
     }
 ];
   let productPrices: { price: number; researchDate: string }[] = [];
-  const loadData = useEffect(() => {
+  useEffect(() => {
     // get data
+    const getData = async() =>{
+      const { data } = await atCheckList(productId, businessType);
+      console.log(data);
+      
+    }
+
+    getData()
     //goodsList = loadData.goodsList
   }, []);
   const navigate = useNavigate();
-  const optionList = ['m', 's', 'o'];
+  const optionList = ['m',  'o'];
   const [optionState, setOption] = useState<string>('m');
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOption(e.target.value);

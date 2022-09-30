@@ -16,11 +16,16 @@ public class GoodsService {
 
     private final GoodsRepo goodsRepo;
 
-    // 상품Id로 상품 정보를 받아오는 함수
+    /**
+     * 상품 id로 상품을 받아오는 함수
+     */
     public Goods getGoodsById(Long goodsId) {
         return goodsRepo.findById(goodsId).orElseThrow(IllegalArgumentException::new);
     }
 
+    /**
+     * 상품 id 리스트로 상품 리스트를 받아오는 함수
+     */
     public List<Goods> getGoodsList(List<Long> goodsIds) {
         return goodsRepo.findAllById(goodsIds);
     }

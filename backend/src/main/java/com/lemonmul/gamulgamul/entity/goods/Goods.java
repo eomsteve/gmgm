@@ -5,6 +5,7 @@ import com.lemonmul.gamulgamul.entity.product.Product;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,9 +28,17 @@ public class Goods {
 
     private String cheapUrl;
 
-    private double priceGapOff;
+    @Setter
+    private Double recentPriceOff;
 
-    private double priceGapOn;
+    @Setter
+    private Double recentPriceOn;
+
+    @Setter
+    private Double priceGapOff;
+
+    @Setter
+    private Double priceGapOn;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")

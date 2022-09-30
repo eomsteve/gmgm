@@ -28,7 +28,7 @@ const App: React.FunctionComponent<AppProps> = () => {
           </Route>
           <Route path="checkLists" element={<CheckLists />}></Route>
           <Route path="checkLists/:checklistId" element={<CheckList />}></Route>
-          <Route path="detail" element={<DetailPage />}></Route>
+          <Route path="/detail/product/:productId/business/:businessType" element={<DetailPage />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
         <Route

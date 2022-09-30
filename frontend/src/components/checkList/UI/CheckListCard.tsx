@@ -1,8 +1,9 @@
 import  React, { FC, useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { updateBasicProductsStatus } from '@modules/CheckListProductList'
+import { updateBasicProductsStatus,removeBasicProducts, removeCustomProducts } from '@modules/CheckListProductList'
 import {useDispatch, useSelector} from 'react-redux'
 import type { RootState } from '@modules/store';
+import { atCheckList } from '@apis/detail'
 import type {
   CustomProduct,
   BasicProduct,
@@ -12,9 +13,11 @@ interface CheckListProps{
   customProductName?: string;
   basicProductName?: string;
   status: boolean;
+  productId? : number;
+  businessType : string;
 }
 const CheckListCard : FC<CheckListProps> = (props) =>{
-  const {customProductName, basicProductName, isEdit, status} = props;
+  const {customProductName, basicProductName, isEdit, status, businessType, productId} = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -44,9 +47,9 @@ const CheckListCard : FC<CheckListProps> = (props) =>{
       <div onClick={()=>{navigate('/')}} className="flex items-center justify-center">
         {basicProductName && <span> 추세 </span>}
       </div>
-      <div onClick={()=>{navigate('/')}} className="flex items-center justify-center">
-        {basicProductName && (isEdit ? <span> ⛔ </span> :<span> 📈 </span>)}
-        {customProductName && isEdit && <span> ⛔ </span>}
+      <div className="flex items-center justify-center">
+        {basicProductName && (isEdit ? <span onClick={()=>{dispatch(removeBasicProducts(productId))}} > ⛔ </span> : <span onClick={()=>{navigate(`/detail/product/${productId}/business/${businessType}`)}}> 📈 </span>)}
+        {customProductName && isEdit && <span onClick={()=>{dispatch(removeCustomProducts(customProductName))}}> ⛔ </span>}
       </div>
     </div>
     </>

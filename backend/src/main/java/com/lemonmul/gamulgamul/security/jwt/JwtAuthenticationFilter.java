@@ -1,6 +1,5 @@
 package com.lemonmul.gamulgamul.security.jwt;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lemonmul.gamulgamul.api.dto.LoginRequestDto;
 import com.lemonmul.gamulgamul.api.dto.LoginResponseDto;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Objects;
 
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -49,7 +49,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(
-                        loginRequestDto.getEmail(),
+                        Objects.requireNonNull(loginRequestDto).getEmail(),
                         loginRequestDto.getPwd());
 
         return authenticationManager.authenticate(authenticationToken);

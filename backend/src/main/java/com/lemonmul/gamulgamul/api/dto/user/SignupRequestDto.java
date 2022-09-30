@@ -5,12 +5,13 @@ import com.lemonmul.gamulgamul.entity.user.Role;
 import com.lemonmul.gamulgamul.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class SignupRequestDto {
     private String email;

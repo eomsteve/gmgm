@@ -9,7 +9,6 @@ import com.lemonmul.gamulgamul.entity.BusinessType;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
-import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
 import com.lemonmul.gamulgamul.entity.priceindex.IndexType;
 import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import com.lemonmul.gamulgamul.entity.product.Product;
@@ -41,19 +40,16 @@ public class FavoriteApi {
     private final PriceIndexService priceIndexService;
     private final CategoryService categoryService;
     private final GoodsService goodsService;
-    private final GoodsPriceService goodsPriceService;
     private final ProductService productService;
-    private final ProductPriceService productPriceService;
 
     /**
      * 즐겨찾기 페이지에 보여줄 정보들
      */
     @GetMapping
     public FavoritePageResponseDto getFavoritePage(@RequestHeader HttpHeaders headers) {
-        log.info("[Starting request]");
+        log.info("[Starting request] GET /favorite");
 
         User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
-
         log.info("userId: {}", user.getId());
 
         LocalDate today = LocalDate.now();
@@ -61,71 +57,57 @@ public class FavoriteApi {
         // 국가 지수
         List<PriceIndex> countryIndices = priceIndexService.getIndices(IndexType.c, today);
         PriceIndexResponseDto countryIndexDto = new PriceIndexResponseDto(countryIndices);
+        log.info("countryIndices size: {}", countryIndices.size());
 
         // 즐겨찾기 지수
         List<PriceIndex> favoriteIndices = priceIndexService.getFavoriteIndices(user, today);
         PriceIndexResponseDto favoriteIndexDto = new PriceIndexResponseDto(favoriteIndices);
-
-        // 업태 종류
-        List<BusinessTypeResponseDto> businessTypes = new ArrayList<>();
-        for(BusinessType businessType: BusinessType.values()) {
-            businessTypes.add(new BusinessTypeResponseDto(businessType, businessType.getKrName()));
-        }
+        log.info("favoriteIndices size: {}", favoriteIndices.size());
 
         // 즐겨찾기 상품 목록
-        List<FavoriteItemResponseDto> favoriteItems = getFavoriteGoods(user, BusinessType.m);
+        List<FavoriteItemResponseDto> favoriteItems = getFavoriteGoods(user);
+        log.info("favoriteItems size: {}", favoriteItems.size());
 
         // 즐겨찾기 상품 총합
         List<FavoriteTotalPrice> favoriteTotalPrices = favoriteTotalPriceService.getFavoriteTotalPrices(user, BusinessType.m, today);
         FavoriteTotalPriceResponseDto favoriteTotalPriceResponseDto = new FavoriteTotalPriceResponseDto(favoriteTotalPrices);
+        if (favoriteTotalPrices.isEmpty())
+            log.info("favoriteTotalPrices is empty");
+        else
+            log.info("recent favoriteTotalPrice: {}", favoriteTotalPrices.get(favoriteTotalPrices.size() - 1).getTotalPrice());
 
-        log.info("countryIndices size: {}", countryIndices.size());
-        log.info("favoriteIndices size: {}", favoriteIndices.size());
-        log.info("businessTypes size: [");
-        for(BusinessTypeResponseDto response: businessTypes) {
-            log.info("\t{}, {}", response.getBusinessType(), response.getKrName());
-        }
-        log.info("]");
-        log.info("favoriteItems size: {}", favoriteItems.size());
-        // TODO: log 점검
-//        log.info("recent favoriteTotalPrice: {}", favoriteTotalPriceResponseDtos.get(favoriteTotalPriceResponseDtos.size() - 1).getTotalPrice());
-
-        log.info("[Finished request]");
-        return new FavoritePageResponseDto(countryIndexDto, favoriteIndexDto, businessTypes, favoriteItems, favoriteTotalPriceResponseDto);
+        log.info("[Finished request] GET /favorite");
+        return new FavoritePageResponseDto(countryIndexDto, favoriteIndexDto, favoriteItems, favoriteTotalPriceResponseDto);
     }
 
     /**
      * 상품 선택 페이지에 띄울 카테고리와 품목들
      */
-    // TODO: 리스트 개수 log
     @GetMapping("/select")
     public List<CategoryDto> getAllCategoryProducts() {
-        log.info("[Starting request]");
+        log.info("[Starting request] GET /select");
 
         List<CategoryDto> categoryDtos = categoryService.getAllCategories().stream().map(CategoryDto::new).collect(Collectors.toList());
-
         log.info("categoryDtos size: {}", categoryDtos.size());
 
-        log.info("[Finished request]");
+        log.info("[Finished request] GET /select");
         return categoryDtos;
     }
 
     /**
      * 품목 선택 시, 해당 품목의 상품들
      */
-    // TODO: 품목 pk와 상품 리스트 개수 log
     @GetMapping("/select/product/{productId}")
     public List<GoodsDto> getGoods(@PathVariable Long productId) {
-        log.info("[Starting request]");
+        log.info("[Starting request] GET /favorite/select/product/{}", productId);
 
         log.info("productId: {}", productId);
 
         Product product = productService.product(productId);
         List<GoodsDto> goodsDtos = product.getGoods().stream().map(GoodsDto::new).collect(Collectors.toList());
-
         log.info("goodsDtos size: {}", goodsDtos.size());
 
-        log.info("[Finished request]");
+        log.info("[Finished request] GET /favorite/select/product/{}", productId);
         return goodsDtos;
     }
 
@@ -133,14 +115,12 @@ public class FavoriteApi {
      * 즐겨찾기 목록 갱신
      */
     // TODO: return 값 수정(DTO)
-    // TODO: 들어올 때 user pk랑 즐겨찾기 개수 log, 나갈 때 합산 및 지수 최신값 log
     @PostMapping
     public boolean updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) throws JsonProcessingException {
-        log.info("[Starting request]");
+        log.info("[Starting request] POST /favorite");
 
         List<Long> goodsIds = favoriteUpdateRequestDto.getGoodsIds();
         User user = JwtTokenProvider.getUserFromJwtToken(userService,headers);
-
         log.info("userId: {}", user.getId());
         log.info("favoriteUpdateRequestDtos: {}", favoriteUpdateRequestDto.getGoodsIds().size());
 
@@ -175,39 +155,22 @@ public class FavoriteApi {
                 addFavoriteGoodsList.add(FavoriteGoods.of(user, goodsList.get(i)));
         }
 
+        log.info("addFavoriteGoodsList size: {}", addFavoriteGoodsList.size());
+        log.info("deleteFavoriteGoodsList size: {}", deleteFavoriteGoodsList.size());
+
         // 즐겨찾기 목록 갱신
         favoriteGoodsService.updateFavoriteGoodsList(addFavoriteGoodsList, deleteFavoriteGoodsList);
 
         // 즐겨찾기 총합, 지수 계산
-        favoriteCalc(user);
+        boolean result = favoriteCalc(user);
 
-        log.info("Finished request");
-        return true;
+        log.info("[Finished request] POST /favorite");
+        return result;
     }
 
-    @GetMapping("/business/{business}")
-    public FavoriteBusinessSelectDto getFavoriteGoods(@PathVariable BusinessType business, @RequestHeader HttpHeaders headers) {
-        log.info("[Starting request]");
-
-        User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
-
-        log.info("userId: {}", user.getId());
-        log.info("business: {}", business);
-
-        List<FavoriteItemResponseDto> favoriteItems = getFavoriteGoods(user, business);
-        List<FavoriteTotalPrice> favoriteTotalPrices = favoriteTotalPriceService.getFavoriteTotalPrices(user, business, LocalDate.now());
-        FavoriteTotalPriceResponseDto favoriteTotalPriceResponseDto = new FavoriteTotalPriceResponseDto(favoriteTotalPrices);
-
-        FavoriteBusinessSelectDto favoriteBusinessSelectDto = new FavoriteBusinessSelectDto(favoriteItems, favoriteTotalPriceResponseDto);
-
-        log.info("favoriteItemResponseDto size: {}", favoriteItems.size());
-//        log.info("recent favoriteTotalPrice: {}", favoriteTotalPriceResponseDto.get(favoriteTotalPriceResponseDtos.size() - 1).getTotalPrice());
-
-        log.info("Finished request");
-        return favoriteBusinessSelectDto;
-    }
-
-    // 즐겨찾기 총합과 지수 계산을 Spark에 요청하는 함수
+    /**
+     * 즐겨찾기 총합과 지수 계산을 spark에 요청하는 함수
+     */
     // TODO: 반환값 고민
     private boolean favoriteCalc(User user) throws JsonProcessingException {
         // 기존 즐겨찾기 총합과 지수 삭제
@@ -236,6 +199,7 @@ public class FavoriteApi {
         // 요청 메세지 설정
         HttpEntity<?> requestMessage = new HttpEntity<>(request, httpHeaders);
 
+        // TODO: api 요청 결과에 따라 true or false
         // POST 요청 전송
         HttpEntity<String> response = restTemplate.postForEntity(url, requestMessage, String.class);
         log.info("POST Request Result: {}", response);
@@ -243,20 +207,18 @@ public class FavoriteApi {
         return true;
     }
 
-    private List<FavoriteItemResponseDto> getFavoriteGoods(User user, BusinessType businessType) {
+    /**
+     * 즐겨찾기 목록을 받아오는 함수
+     */
+    private List<FavoriteItemResponseDto> getFavoriteGoods(User user) {
         List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();
-        List<FavoriteItemResponseDto> favoriteItemResponseDtos = new ArrayList<>();
-        List<GoodsPrice> goodsPrices;
-        // 최근 가격 변동 계산을 위해 가격 정보 중에서 가장 최근 가격 정보 둘의 차를 구함
-        double priceGap=0.0;
-        for (FavoriteGoods favoriteGoods : favoriteGoodsList) {
-            goodsPrices = goodsPriceService.getRecentGoodsPrices(favoriteGoods.getGoods(), businessType);
-            if(goodsPrices.size()>1)
-                priceGap = goodsPrices.get(1).getPrice() - goodsPrices.get(0).getPrice();
+        List<Goods> goodsList = new ArrayList<>();
 
-            favoriteItemResponseDtos.add(new FavoriteItemResponseDto(favoriteGoods.getGoods(), priceGap));
-        }
+        // 즐겨찾기 상품에 들어있는 상품들을 가져옴
+        for (FavoriteGoods favoriteGoods : favoriteGoodsList)
+            goodsList.add(favoriteGoods.getGoods());
 
-        return favoriteItemResponseDtos;
+        // 상품들을 즐겨찾기 리스트에 들어가는 형식에 맞게 변환해서 반환
+        return goodsList.stream().map(FavoriteItemResponseDto::new).collect(Collectors.toList());
     }
 }

@@ -21,7 +21,7 @@ const SelectedArea: FC <SelectedAreaProps> = (props) => {
   });
   const dispatch = useDispatch();
   const removeList = (product : BasicProduct)=>{
-    dispatch(removeBasicProducts(product))
+    dispatch(removeBasicProducts(product.basicProductId))
   }
   return (<>
   <div className="w-full h-full bg-[#b3d1e6] flex flex-col">

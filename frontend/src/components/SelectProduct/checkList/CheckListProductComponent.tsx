@@ -25,12 +25,11 @@ const ProductLists: FC<ProductListsProps> = props => {
   };
 
   const removeProducts = (product: BasicProduct) => {
-    dispatch(removeBasicProducts(product));
+    dispatch(removeBasicProducts(product.basicProductId));
   };
 
   return (
     <>
-    {/* 세로길이 반응형...만들어 줘..... */}
       <div className="h-full flex flex-wrap justify-center content-start items-start flex-wrap overflow-auto scroll-auto mx-3 shadow-inner">
         {productList.map(product => {
           return (

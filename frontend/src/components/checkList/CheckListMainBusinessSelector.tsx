@@ -41,6 +41,8 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   const { checklistId } = useParams();
   const location = useLocation();
   const [isEmpty, setIsEmpty] = useState<boolean>();
+  const [customEmpty, setCustomEmpty] = useState<boolean>();
+  const [basicEmpty, setBasicEmpty] = useState<boolean>();
   const params = location.state as { isEdit: boolean; checklistId: string };
   const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
@@ -71,12 +73,16 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       const fetchData = async (checklistId?: string) => {
         const data = await getCheckList(checklistId);
         if (data.empty) {
-          console.log('empty checklist');
+          console.log('empty checklist',data.customEmpty);
           dispatch(setInitialStateWhenUnMounted());
           setIsEmpty(() => true);
+          setCustomEmpty(() => data.customEmpty);
+          setBasicEmpty(()=> data.basicEmpty);
           setIsEdit(() => true);
         } else {
           console.log();
+          setCustomEmpty(() => data.customEmpty);
+          setBasicEmpty(()=> data.basicEmpty);
           dispatch(setInitialState(data));
         }
       };
@@ -101,29 +107,9 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       } else {
         saveCheckListWhenUnmounted()
         console.log('unMounted22');
-        // dispatch(setInitialStateWhenUnMounted());
       }
     };
   }, []);
-  // useEffect(() => {
-  //   (() => {
-  //     window.addEventListener('beforeunload', preventClose);
-  //   })();
-  //   const saveCheckListWhenUnmounted = async () =>{
-  //     console.log('status save function work');
-      
-  //     const response = await updateCheckListStatus(
-  //       checklistBasicItems,
-  //       checklistCustomItems,
-  //       checklistId,
-  //     );
-  //   }
-  //   return () => {
-  //     saveCheckListWhenUnmounted()
-  //     console.log('unMounted33');
-  //     window.removeEventListener('beforeunload', preventClose);
-  //   };
-  // }, []);
   
   const saveCheckList = async () => {
     if (typeof checklistId == 'string') {
@@ -153,8 +139,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       <div className="flex items-center justify-between">
         <select
           onChange={handleSelection}
-          // 여기 props 로 받아와야함.
-          // defaultValue="m"
           name="selectBox"
           className="form-select form-select-sm my-3 block w-[100px] max-w-[25vw] rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-2 py-1 text-xs font-normal text-gray-700 shadow-md transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
           aria-label=".form-select-sm example"
@@ -189,7 +173,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
         )}
       </div>
       <div className="flex w-full flex-col items-center justify-center p-0">
-        {isEmpty && (
+        {isEdit && basicEmpty && (
           <div
             onClick={() => {
               console.log(checklistId);
@@ -209,6 +193,8 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
                 basicProductName={products.basicProductName}
                 isEdit={isEdit}
                 status={products.status}
+                productId={products.basicProductId}
+                businessType={optionState}
               />
             </div>
           );
@@ -238,7 +224,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
             setIsCustom(true);
           }}
         >
-          {isEmpty && <CustomBanner />}
+          {isEdit &&customEmpty && <CustomBanner />}
         </div>
         {checklistCustomItems.map((product: CustomProduct) => {
           return (
@@ -246,10 +232,15 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
               customProductName={product.customProductName}
               isEdit={isEdit}
               status={product.status}
+              businessType={optionState}
             />
           );
         })}
-        {isCustom && <CustomInput />}
+
+        {isEdit && !customEmpty && <div onClick={() => {setIsCustom(true);}}className="m-0 text-[1.5rem]">
+              <FontAwesomeIcon icon={faPlus} />
+            </div>}
+        {isCustom && isEdit &&  <CustomInput />}
       </div>
     </>
   );
