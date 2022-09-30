@@ -1,12 +1,10 @@
 package com.lemonmul.gamulgamul.api.dto.favorite;
 
 import com.lemonmul.gamulgamul.api.dto.detail.DateDto;
-import com.lemonmul.gamulgamul.api.dto.detail.PriceDto;
 import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 

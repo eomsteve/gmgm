@@ -15,10 +15,12 @@ public class FavoriteGoodsService {
 
     private final FavoriteGoodsRepo favoriteGoodsRepo;
 
-    // 즐겨찾기 목록을 갱신하는 함수
+    /**
+     * 즐겨찾기 목록을 갱신하는 함수
+     */
     @Transactional
-    public List<FavoriteGoods> updateFavoriteGoodsList(List<FavoriteGoods> addList, List<FavoriteGoods> deleteList) {
+    public void updateFavoriteGoodsList(List<FavoriteGoods> addList, List<FavoriteGoods> deleteList) {
         favoriteGoodsRepo.deleteIn(deleteList);
-        return favoriteGoodsRepo.saveAll(addList);
+        favoriteGoodsRepo.saveAll(addList);
     }
 }

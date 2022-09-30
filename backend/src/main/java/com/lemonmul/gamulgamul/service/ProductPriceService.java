@@ -24,8 +24,4 @@ public class ProductPriceService {
         return productPriceRepo.findByProductAndBusinessAndDateTypeAndResearchDateBetweenOrderByResearchDate(
                 product,businessType,DateType.d, today.minusYears(1), today);
     }
-
-    public List<ProductPrice> getMonthProductPrice(Product product) {
-        return productPriceRepo.findByProductAndDateTypeOrderByResearchDate(product, DateType.m);
-    }
 }

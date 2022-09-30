@@ -22,25 +22,30 @@ public class UserApi {
     private final UserService userService;
     private final RedisService redisService;
 
+    /**
+     * 이메일 중복 여부 체크
+     */
     // TODO: 강의 듣고 예외처리 해야함
-    // TODO: email log 찍기
     @GetMapping("/check/{email}")
     public boolean emailCheck(@PathVariable String email) {
-        log.info("Starting request");
+        log.info("[Starting request] GET /user/check/{}", email);
 
         log.info("email: {}", email);
 
         User findUser = userService.emailCheck(email);
+        log.info("findUser: {}", findUser);
 
-        log.info("Finished request");
+        log.info("[Finished request] GET /user/check/{}", email);
         return findUser == null;
     }
 
+    /**
+     * 회원가입
+     */
     // TODO: 강의 듣고 예외처리 해야함
-    // TODO: pwd는 다 ***, name은 홍*동, 나머지는 그대로 log
     @PostMapping("/signup")
     public boolean signUp(@RequestBody SignupRequestDto signupRequestDto) {
-        log.info("Starting request");
+        log.info("[Starting request] POST /user/signup");
 
         log.info("email: {}", signupRequestDto.getEmail());
         log.info("pwd: {}", signupRequestDto.getPwd().replaceAll(".", "*"));
@@ -55,7 +60,7 @@ public class UserApi {
 
         User signUpUser = userService.signUp(signupRequestDto.toUser());
 
-        log.info("Finished request");
+        log.info("[Finished request] POST /user/signup");
         return signUpUser != null;
     }
 
@@ -85,12 +90,14 @@ public class UserApi {
     /**
      * 로그아웃
      */
-    // TODO: JWT 까서 email log
-    // TODO: 반환값
 	@PostMapping("/logout")
 	public boolean logout(@RequestBody LogoutRequestDto logoutRequestDto) {
+        log.info("[Starting request] POST /user/logout");
+
+        log.info("email: {}", logoutRequestDto.getEmail());
         redisService.deleteValues(logoutRequestDto.getEmail());
 
+        log.info("[Finished request] POST /user/logout");
         return true;
 	}
 

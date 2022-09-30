@@ -21,4 +21,6 @@ public interface GoodsPriceRepo extends JpaRepository<GoodsPrice, Long> {
 
     //선택 품목, 온라인 업태의 상품 최신 가격
     Optional<GoodsPrice> findFirstByGoodsAndBusinessOrderByResearchDateDesc(Goods goods, BusinessType business);
+
+    List<GoodsPrice> findByResearchDateAndBusinessOrderByGoods(LocalDate researchDate, BusinessType business);
 }
