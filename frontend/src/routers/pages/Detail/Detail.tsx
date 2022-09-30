@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import DetailSelectBox from '../../../components/Detail/DetailSelect'
+import DetailSelectBox from '@components/Detail/DetailSelect'
 
 interface DetailPageProps {
   

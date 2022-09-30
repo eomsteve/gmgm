@@ -41,6 +41,8 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   const { checklistId } = useParams();
   const location = useLocation();
   const [isEmpty, setIsEmpty] = useState<boolean>();
+  const [customEmpty, setCustomEmpty] = useState<boolean>();
+  const [basicEmpty, setBasicEmpty] = useState<boolean>();
   const params = location.state as { isEdit: boolean; checklistId: string };
   const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
@@ -71,12 +73,16 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       const fetchData = async (checklistId?: string) => {
         const data = await getCheckList(checklistId);
         if (data.empty) {
-          console.log('empty checklist');
+          console.log('empty checklist',data.customEmpty);
           dispatch(setInitialStateWhenUnMounted());
           setIsEmpty(() => true);
+          setCustomEmpty(() => data.customEmpty);
+          setBasicEmpty(()=> data.basicEmpty);
           setIsEdit(() => true);
         } else {
           console.log();
+          setCustomEmpty(() => data.customEmpty);
+          setBasicEmpty(()=> data.basicEmpty);
           dispatch(setInitialState(data));
         }
       };
@@ -189,7 +195,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
         )}
       </div>
       <div className="flex w-full flex-col items-center justify-center p-0">
-        {isEmpty && (
+        {basicEmpty && (
           <div
             onClick={() => {
               console.log(checklistId);
@@ -209,6 +215,8 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
                 basicProductName={products.basicProductName}
                 isEdit={isEdit}
                 status={products.status}
+                productId={products.basicProductId}
+                businessType={optionState}
               />
             </div>
           );
@@ -238,7 +246,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
             setIsCustom(true);
           }}
         >
-          {isEmpty && <CustomBanner />}
+          {isEdit &&customEmpty && <CustomBanner />}
         </div>
         {checklistCustomItems.map((product: CustomProduct) => {
           return (
@@ -246,6 +254,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
               customProductName={product.customProductName}
               isEdit={isEdit}
               status={product.status}
+              businessType={optionState}
             />
           );
         })}

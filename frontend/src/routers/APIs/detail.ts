@@ -1,20 +1,30 @@
 import axios from 'axios';
 
-const API_URL = 'http://j7d108.p.ssafy.io:8080/api/';
-// 가지고 있다 치고 
-const AUTH_TOKEN = 'token';
+const API_URL = 'https://j7d108.p.ssafy.io/api/detail';
 
-type CheckList = {
-  "chekclistId" : number,
-  "regDate" : string
-}
 
-const getCheckLists = async () => {
+
+export const atCheckList  = async (productId : string | undefined, businessType : string | undefined) => {
   try {
-    const { data } = await axios.get<CheckList[]>(API_URL + '/list', {
-      headers: { Authorization: AUTH_TOKEN, },
-    });
+    if (productId && businessType){
+      const { data } = await axios({
+        url : API_URL + `/product/${productId}/business/${businessType}/`,
+        method : 'GET',
+      });
+      console.log(data);
+      return data;
+    }else{
+      console.error(productId, businessType);
+      
+    }
+  } catch (error) {
+    
+  }
+};
 
+export const detailSelectBoxChange = async () => {
+  try {
+    
   } catch (error) {
     
   }
