@@ -78,9 +78,9 @@ export const checkListProductsSlice = createSlice({
       });
       state.checklistCustomItems = data;
     },
-    updateCustomProductStatus: (state, action : PayloadAction<CustomProduct>)=>{
+    updateCustomProductStatus: (state, action : PayloadAction<string>)=>{
       const data = state.checklistCustomItems.find((products) => { 
-        return products.customProductName == action.payload.customProductName;
+        return products.customProductName == action.payload;
       });
       if (typeof(data) !== "undefined") {
         data.status = !data?.status;
