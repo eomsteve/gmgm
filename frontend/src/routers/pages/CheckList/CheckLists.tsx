@@ -4,6 +4,7 @@ import AddCheckList from '@components/checkList/AddCheckList';
 import CheckListItem from '@components/checkList/CheckListItem';
 import { getCheckLists } from '@apis/checkList.Api';
 import type { CheckList } from '@apis/checkList.Api';
+import ChecklistHeader from '@components/EmptyHeader';
 interface CheckListsProps {}
 
 const CheckLists: FunctionComponent<CheckListsProps> = () => {
@@ -17,8 +18,9 @@ const CheckLists: FunctionComponent<CheckListsProps> = () => {
   }, []);
   return (
     <>
+      <ChecklistHeader title="장보기 내역" />
       <main
-        className="my-[5rem] grid w-full
+        className="grid w-full
     grid-cols-3 content-start bg-[white] p-5"
       >
         <AddCheckList />
