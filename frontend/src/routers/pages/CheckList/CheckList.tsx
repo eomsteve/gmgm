@@ -1,19 +1,16 @@
-import {FC} from 'react'
-import BusinessSelector from '@src/components/checkList/CheckListMainBusinessSelector'
+import { FC } from 'react';
+import BusinessSelector from '@src/components/checkList/CheckListMainBusinessSelector';
 
-interface CheckListProps {
-  
-}
- 
+interface CheckListProps {}
+
 const CheckList: FC<CheckListProps> = () => {
-  return (<>
-  <main
-        className="flex w-full mb-[5rem] flex-col justify-center p-5 bg-[white]"
-      >
-        <BusinessSelector optionList={['']}/>
-
+  return (
+    <>
+      <main className="mb-[5rem] flex w-full flex-col justify-center bg-[white] p-0">
+        <BusinessSelector optionList={['']} />
       </main>
-  </>);
-}
- 
+    </>
+  );
+};
+
 export default CheckList;

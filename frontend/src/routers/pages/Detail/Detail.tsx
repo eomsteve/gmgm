@@ -1,17 +1,18 @@
 import { FC } from 'react';
-import DetailSelectBox from '@components/Detail/DetailSelect'
+import DetailSelectBox from '@components/Detail/DetailSelect';
+import DetailHeader from '@components/EmptyHeader';
 
-interface DetailPageProps {
-  
-}
- 
+interface DetailPageProps {}
+
 const DetailPage: FC<DetailPageProps> = () => {
   return (
-    <main className="flex  w-full flex-col p-3 mt-5 mb-[8rem] bg-[white]">
-      
-      <DetailSelectBox />
-    </main>
+    <>
+      <DetailHeader title="가격 비교" />
+      <main className="mb-[8rem] flex w-full flex-col bg-[white] p-3">
+        <DetailSelectBox />
+      </main>
+    </>
   );
-}
- 
+};
+
 export default DetailPage;

@@ -27,6 +27,8 @@ import { logInApi } from '@src/routers/APIs/userApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 // 리덕스
+import ChecklistHeader from '@components/EmptyHeader';
+import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 
 interface CheckListSelectBoxProps {
   optionList: string[];
@@ -61,7 +63,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
     e.preventDefault();
     e.returnValue = ''; //Chrome에서 동작하도록; deprecated
   };
-  
+
   useEffect(() => {
     (() => {
       window.addEventListener('beforeunload', preventClose);
@@ -73,16 +75,16 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       const fetchData = async (checklistId?: string) => {
         const data = await getCheckList(checklistId);
         if (data.empty) {
-          console.log('empty checklist',data.customEmpty);
+          console.log('empty checklist', data.customEmpty);
           dispatch(setInitialStateWhenUnMounted());
           setIsEmpty(() => true);
           setCustomEmpty(() => data.customEmpty);
-          setBasicEmpty(()=> data.basicEmpty);
+          setBasicEmpty(() => data.basicEmpty);
           setIsEdit(() => true);
         } else {
           console.log();
           setCustomEmpty(() => data.customEmpty);
-          setBasicEmpty(()=> data.basicEmpty);
+          setBasicEmpty(() => data.basicEmpty);
           dispatch(setInitialState(data));
         }
       };
@@ -90,22 +92,22 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
     }
     console.log(checklistId);
 
-    const saveCheckListWhenUnmounted = async () =>{
+    const saveCheckListWhenUnmounted = async () => {
       console.log('status save function work');
-      
+
       const response = await updateCheckListStatus(
         checklistBasicItems,
         checklistCustomItems,
         checklistId,
       );
-    }
-    return  () => {
+    };
+    return () => {
       window.removeEventListener('beforeunload', preventClose);
       if (isEdit) {
         console.log('unMounted');
         dispatch(setInitialStateWhenUnMounted());
       } else {
-        saveCheckListWhenUnmounted()
+        saveCheckListWhenUnmounted();
         console.log('unMounted22');
         // dispatch(setInitialStateWhenUnMounted());
       }
@@ -117,7 +119,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   //   })();
   //   const saveCheckListWhenUnmounted = async () =>{
   //     console.log('status save function work');
-      
+
   //     const response = await updateCheckListStatus(
   //       checklistBasicItems,
   //       checklistCustomItems,
@@ -130,7 +132,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   //     window.removeEventListener('beforeunload', preventClose);
   //   };
   // }, []);
-  
+
   const saveCheckList = async () => {
     if (typeof checklistId == 'string') {
       await updateCheckLists(
@@ -156,7 +158,13 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      {isEdit ? (
+        <ChecklistHeader title="장보기 리스트 만들기" />
+      ) : (
+        <ChecklistHeader title="장보기 리스트" />
+      )}
+
+      <div className="flex items-center justify-between p-5">
         <select
           onChange={handleSelection}
           // 여기 props 로 받아와야함.
@@ -177,9 +185,15 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
           </div>
         ) : (
           <div>
-            <span className="text-sm" onClick={() => setIsEdit(() => !isEdit)}>
+            {/* <span className="text-sm" onClick={() => setIsEdit(() => !isEdit)}>
               {' '}
               🔨수정{' '}
+              </span> */}
+            <span className="text-sm" onClick={() => setIsEdit(() => !isEdit)}>
+              <span className="grid grid-cols-2">
+                <Edit width="1rem" height="1rem" />
+                수정
+              </span>
             </span>
             <span
               onClick={() => {
@@ -246,7 +260,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
             setIsCustom(true);
           }}
         >
-          {isEdit &&customEmpty && <CustomBanner />}
+          {isEdit && customEmpty && <CustomBanner />}
         </div>
         {checklistCustomItems.map((product: CustomProduct) => {
           return (
