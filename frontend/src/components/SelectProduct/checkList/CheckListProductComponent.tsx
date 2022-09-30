@@ -30,24 +30,24 @@ const ProductLists: FC<ProductListsProps> = props => {
 
   return (
     <>
-      <div className="block my-10 mx-3 flex flex-wrap shadow-inner scroll-auto h-96 overflow-auto">
+    {/* 세로길이 반응형...만들어 줘..... */}
+      <div className="h-full flex flex-wrap justify-center content-start items-start flex-wrap overflow-auto scroll-auto mx-3 shadow-inner">
         {productList.map(product => {
           return (
             <div
-              className="mx-1.5 p-3 h-20 grid grid-cols-2 content-center rounded-lg shadow-lg"
+              className="w-[150px] h-[100px] grid grid-cols-2 mx-1.5 p-3 rounded-lg shadow-lg"
               onClick={() => addProduct(product)}
               key={product.basicProductId}
             >
-              <div
-                className="w-[100px] flex justify-center content-center">
+              <div className="flex content-center mt-3">
                 <img
                   src={product.productImg}
                   alt=""
-                  className="w-20 bg-white rounded-lg"
+                  className="w-[70px] h-[70px] bg-white rounded-lg "
                 />
-                  <div className="w-20 text-center">
-                    {product.basicProductName}
-                  </div>
+                <div className="w-[80px] min-w-[80px] flex items-center justify-center p-1 text-sm">
+                  {product.basicProductName}
+                </div>
               </div>
             </div>
           );
