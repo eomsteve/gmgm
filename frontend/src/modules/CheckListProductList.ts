@@ -72,9 +72,9 @@ export const checkListProductsSlice = createSlice({
         state.checklistCustomItems.push({ id: action.payload.id, customProductName: action.payload.customProductName, status: action.payload.status });
       }
     },
-    removeCustomProducts: (state, action : PayloadAction<CustomProduct>)=>{
+    removeCustomProducts: (state, action : PayloadAction<string>)=>{
       const data = state.checklistCustomItems.filter((products) => {
-        return products.customProductName != action.payload.customProductName;
+        return products.customProductName != action.payload;
       });
       state.checklistCustomItems = data;
     },
