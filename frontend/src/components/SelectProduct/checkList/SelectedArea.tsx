@@ -24,15 +24,24 @@ const SelectedArea: FC <SelectedAreaProps> = (props) => {
     dispatch(removeBasicProducts(product.basicProductId))
   }
   return (<>
-  <div className="overflow-auto flex flex-wrap bg-blue-200 h-[10rem] w-full p-5 my-5">
-    {checklistBasicItems && checklistBasicItems.map((x : BasicProduct) => {
-        return (
-          <span className="m-1 bg-white p-1 text-xs border-[1px] border-black" key={x.basicProductId} onClick={()=>{removeList(x)}}>
-            {x.basicProductName}
-          </span>
-        )
-      })}
-      <div onClick={()=>{navigate(`/checklists/${checklistId}`, {state: {isEdit, checklistId}})}} className="border-black border-2"> 추가 완료 </div>
+  <div className="w-full h-full bg-[#b3d1e6] flex flex-col">
+    <div className="mt-3 mx-3 text-lg font-bold">
+      나의 즐겨찾기 리스트
+    </div>
+    <div className="w-screen h-1/2 flex flex-wrap overflow-auto items-start p-3">
+      {checklistBasicItems && checklistBasicItems.map((x : BasicProduct) => {
+          return (
+            <span className="bg-white m-1 px-2 py-1 rounded-full text-sm" key={x.basicProductId} onClick={()=>{removeList(x)}}>
+              {x.basicProductName}
+            </span>
+          )
+        })}
+    </div>
+    <span 
+      onClick={()=>{navigate(`/checklists/${checklistId}`, {state: {isEdit, checklistId}})}}
+      className="relate bottom-0 right-0 self-end w-auto bg-white mb-2 mx-2 px-3 py-1 border border-black rounded-full"> 
+      다음 &gt;
+    </span>
   </div>
   </>);
 }
