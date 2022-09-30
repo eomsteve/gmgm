@@ -15,5 +15,5 @@ public interface ProductPriceRepo extends JpaRepository<ProductPrice, Long> {
     List<ProductPrice> findByProductAndBusinessAndDateTypeAndResearchDateBetweenOrderByResearchDate(
             Product product, BusinessType business, DateType dateType, LocalDate start, LocalDate end);
 
-    List<ProductPrice> findByProductAndDateTypeOrderByResearchDate(Product product, DateType dateType);
+    List<ProductPrice> findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType dateType, LocalDate researchDate, BusinessType business);
 }

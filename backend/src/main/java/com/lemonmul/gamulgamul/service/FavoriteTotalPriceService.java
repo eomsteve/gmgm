@@ -18,11 +18,16 @@ public class FavoriteTotalPriceService {
 
     private final FavoriteTotalPriceRepo favoriteTotalPriceRepo;
 
-    // 즐겨찾기 가격 총합을 받아오는 함수
+    /**
+     * 사용자, 업태, 날짜를 기준으로 1년치 즐겨찾기 총합 리스트는 받아오는 함수
+     */
     public List<FavoriteTotalPrice> getFavoriteTotalPrices(User user, BusinessType business, LocalDate date) {
         return favoriteTotalPriceRepo.findAllByUserAndBusinessAndResearchDateBetweenOrderByResearchDate(user, business, date.minusYears(1), date);
     }
 
+    /**
+     * 사용자의 즐겨찾기 총합을 전부 삭제하는 함수
+     */
     @Transactional
     public void deleteFavoriteTotalPrice(User user) {
         favoriteTotalPriceRepo.deleteByUser(user);

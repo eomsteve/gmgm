@@ -13,14 +13,20 @@ public class FavoriteItemResponseDto {
     private String goodsName;
     private String img;
     private String measure;
-    private Double priceGap;
+    private Double recentPriceOff;
+    private Double recentPriceOn;
+    private Double priceGapOff;
+    private Double priceGapOn;
 
-    public FavoriteItemResponseDto(Goods goods, Double priceGap) {
+    public FavoriteItemResponseDto(Goods goods) {
         this.goodsId = goods.getId();
         this.basicProductId = goods.getProduct().getId();
         this.goodsName = goods.getName();
         this.img = goods.getImg();
         this.measure = goods.getMeasure();
-        this.priceGap = priceGap;
+        this.recentPriceOff = goods.getRecentPriceOff();
+        this.recentPriceOn = goods.getRecentPriceOn();
+        this.priceGapOff = goods.getPriceGapOff();
+        this.priceGapOn = goods.getPriceGapOn();
     }
 }

@@ -12,7 +12,6 @@ import java.util.List;
 public class FavoritePageResponseDto {
     private PriceIndexResponseDto countryIndices;
     private PriceIndexResponseDto favoriteIndices;
-    private List<BusinessTypeResponseDto> businessTypes;
     private List<FavoriteItemResponseDto> favoriteItems;
     private FavoriteTotalPriceResponseDto favoriteTotalPrices;
 }

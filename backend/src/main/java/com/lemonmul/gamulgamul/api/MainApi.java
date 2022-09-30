@@ -35,7 +35,7 @@ public class MainApi {
      */
     @GetMapping()
     public MainPageResponseDto getMainPage(@RequestHeader HttpHeaders headers) {
-        log.info("[Starting request]");
+        log.info("[Starting request] GET /main");
 
         PriceIndexDto countryIndex = new PriceIndexDto(mainService.getIndex(IndexType.c));
         PriceIndexDto gmgmIndex = new PriceIndexDto(mainService.getIndex(IndexType.g));
@@ -56,7 +56,7 @@ public class MainApi {
             log.info("user is not logged in");
         }
         List<News> news = mainService.getNewsList();
-        log.info("[Finished request]");
+        log.info("[Finished request] GET /main");
         return new MainPageResponseDto(userName,gmgmIndex,countryIndex,favoriteIndex,checklists,news);
     }
 }
