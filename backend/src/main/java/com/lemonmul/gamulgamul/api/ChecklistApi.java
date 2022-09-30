@@ -190,7 +190,7 @@ public class ChecklistApi {
      * 체크리스트 체크 여부 수정
      */
     @PutMapping("/status/{checklistId}")
-    public StatusResponseDto checklistStatus(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId,
+    public ChecklistDto checklistStatus(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId,
                                              @RequestBody ChecklistDto checklistDto){
         log.info("[Starting request] PUT /checklist/status/{}",checklistId);
 
@@ -207,9 +207,31 @@ public class ChecklistApi {
         basicItemService.updateStatus(checklist, basicItem);
         customItemService.updateStatus(checklist, customItem);
 
+        Checklist updatedChecklist = checklistService.checklist(checklistId);
+
         log.info("[Finished request] PUT /checklist/status/{}",checklistId);
-        return new StatusResponseDto(basicItem,customItem);
+        return new ChecklistDto(updatedChecklist);
     }
+//    public StatusResponseDto checklistStatus(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId,
+//                                             @RequestBody ChecklistDto checklistDto){
+//        log.info("[Starting request] PUT /checklist/status/{}",checklistId);
+//
+//        User user = getUserFromJwtToken(userService, headers);
+//        log.info("userId: {}",user.getId());
+//
+//        Checklist checklist = checklistService.checklist(checklistId);
+//        checkOwnership(user,checklist);
+//
+//        List<BasicItemDto> basicItem = checklistDto.getChecklistBasicItems();
+//        List<CustomItemDto> customItem = checklistDto.getChecklistCustomItems();
+//        log.info("basicItem size: {}, customItem size: {}",basicItem.size(),customItem.size());
+//
+//        basicItemService.updateStatus(checklist, basicItem);
+//        customItemService.updateStatus(checklist, customItem);
+//
+//        log.info("[Finished request] PUT /checklist/status/{}",checklistId);
+//        return new StatusResponseDto(basicItem,customItem);
+//    }
 
     /**
      * 체크리스트 삭제
