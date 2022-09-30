@@ -93,8 +93,15 @@ const CategorySlider: FC<CategorySliderProps> = () => {
             );
           })}
       </Slider>
-      <ProductComponent productList={ProductList} />
-      <SelectedArea isEdit={params.isEdit} checklistId={params.checklistId}/>
+      <div className="mt-[25px]">
+        품목 선택하기
+      </div>
+      <div className='h-[30vh] mb-10'>
+        <ProductComponent productList={ProductList} />
+      </div>
+      <div className='h-[25vh]'>
+        <SelectedArea isEdit={params.isEdit} checklistId={params.checklistId}/>
+      </div>
     </div>
   );
 };
