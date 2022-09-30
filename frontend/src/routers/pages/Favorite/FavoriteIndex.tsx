@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '../../../modules/store';
 import { getFavoriteSelect,getFavoritePageData } from '@apis/favoriteApi'
 import type { FavoritePageData } from '@apis/favoriteApi'
+import FavHeader from '@components/EmptyHeader'
 interface FavoriteIndexPageProps {}
 
 const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
@@ -27,8 +28,9 @@ const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
 
   },[])
   return (
+
     <main className="flex w-full flex-col justify-center bg-[white] p-0">
-      <h1>즐겨찾기 페이지</h1>
+      <FavHeader title={"즐겨찾기"}/>
       {favoritePageData && <FavoriteIndexCart countryIndices={favoritePageData?.countryIndices} favoriteIndices={favoritePageData?.favoriteIndices}/>}
       {favoritePageData && <SelectBox pageData={favoritePageData.favoriteItems} />}
       {favoritePageData && <PriceChart favoriteTotalPrices={favoritePageData.favoriteTotalPrices}/>}

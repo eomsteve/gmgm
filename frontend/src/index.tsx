@@ -26,7 +26,7 @@ import favoriteProductListReducer from '@modules/FavoriteProductList';
 import CheckListProductsReducer from '@modules/CheckListProductList';
 import authTokenReducer from './modules/Auth'
 
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 const persistConfig = {
   key: 'root',
   storage: storage,
@@ -57,6 +57,8 @@ let persistor = persistStore(store);
 
 
 if (localStorage.jwtToken) {
+  console.log('add auth token');
+  
   authHeader(localStorage.jwtToken);
   const token = localStorage.jwtToken
   // console.log(token);
