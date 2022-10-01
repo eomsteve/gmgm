@@ -1,5 +1,6 @@
 package com.lemonmul.gamulgamul.config;
 
+import com.lemonmul.gamulgamul.security.CustomAuthenticationEntryPoint;
 import com.lemonmul.gamulgamul.security.jwt.JwtAuthenticationFilter;
 import com.lemonmul.gamulgamul.security.jwt.JwtAuthorizationFilter;
 import com.lemonmul.gamulgamul.security.redis.RedisService;
@@ -85,7 +86,10 @@ public class SecurityConfig {
                 .antMatchers("/user/logout").permitAll()
                 .antMatchers("/main").permitAll()
                 .antMatchers("/refresh").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint());
 
         return http.build();
     }
