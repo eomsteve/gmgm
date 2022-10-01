@@ -52,7 +52,9 @@ const CheckListCustomItems: FC<CheckListCustomItemsProps> = props => {
           />
         );
       })}
-
+      {!isEdit && isEmpty && <div>
+      비어있습니다.
+    </div>}
       {isEdit && !isEmpty && (
         <div
           onClick={() => {

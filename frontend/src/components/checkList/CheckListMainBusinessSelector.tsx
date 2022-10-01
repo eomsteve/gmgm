@@ -33,6 +33,7 @@ import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 
 import BasicProductCheckList from './CheckListBasicItems';
 import CustomProductCheckList from './CheckListCustomItems';
+import CheckListCustomItems from './CheckListCustomItems';
 interface CheckListSelectBoxProps {
   optionList: string[];
 }
@@ -160,7 +161,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
             <ConfirmButton />
           </div>
         ) : (
-          <div className="justfy-center m-3 grid grid-cols-2 items-center">
+          <div className="justify-center m-3 grid grid-cols-2 items-center">
             <span className="text-sm" onClick={() => setIsEdit(() => !isEdit)}>
               <span className="grid grid-cols-2">
                 <Edit width="1rem" height="1rem" />
@@ -182,65 +183,22 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
           </div>
         )}
       </div>
-      <div className="flex w-full flex-col items-center justify-center">
-        <span>가격 정보를 볼 수 있어요 🥰</span>
-        {isEdit && basicEmpty && (
-          <div
-            onClick={() => {
-              console.log(checklistId);
-
       <div className="flex w-full flex-col items-center justify-center p-0">
+        <span>가격 정보를 볼 수 있어요 🥰</span>
         <BasicProductCheckList
           isEdit={isEdit}
           BusinessType={optionState}
           isEmpty={basicEmpty}
+          checklistId={checklistId}
         />
 
-              navigate('/checklist/selection', {
-                state: { isEdit, checklistId },
-              });
-            }}
-          >
-            <div className="m-0 text-[1.5rem]">
-              <FontAwesomeIcon icon={faPlus} />
-            </div>
-          </div>
-        )}
         {isEdit ? (
           <div className="m-3 w-[86vw] border-t-2 border-dashed border-gray-300"></div>
         ) : (
           <br />
         )}
         <span>가격 정보를 볼 수 없어요 😥</span>
-        <div
-          onClick={() => {
-            setIsCustom(true);
-          }}
-        >
-          {isEdit && customEmpty && <CustomBanner />}
-        </div>
-        {checklistCustomItems.map((product: CustomProduct) => {
-          return (
-            <CheckListCard
-              customProductName={product.customProductName}
-              isEdit={isEdit}
-              status={product.status}
-              businessType={optionState}
-            />
-          );
-        })}
-
-        {isEdit && !customEmpty && (
-          <div
-            onClick={() => {
-              setIsCustom(true);
-            }}
-            className="m-0 text-[1.5rem]"
-          >
-            <FontAwesomeIcon icon={faPlus} />
-          </div>
-        )}
-        {isCustom && isEdit && <CustomInput />}
+        <CheckListCustomItems BusinessType={optionState} isEdit={isEdit} isEmpty={customEmpty}/>
       </div>
     </>
   );

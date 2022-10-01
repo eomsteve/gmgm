@@ -32,7 +32,7 @@ const CategorySlider: FC<CategorySliderProps> = () => {
   const [data, setData] = useState<CategoryLoad[]>([]);
   const location = useLocation();
   const params = location.state as { isEdit: boolean; checklistId: string };
-  console.log(params.isEdit);
+  console.log(params.checklistId);
 
   useEffect(() => {
     const categoryLoad = async () => {
