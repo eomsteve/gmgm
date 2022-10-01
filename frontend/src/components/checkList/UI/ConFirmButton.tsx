@@ -35,7 +35,7 @@ const ConfirmButton: FC = props => {
         // }
         className="flex items-center justify-center"
       >
-        <span className="rounded-full border-[1px] border-black p-1 px-3 text-xs font-normal">
+        <span className="m-3 rounded-full border-[1px] border-gray-600 p-1 px-3 text-xs font-normal">
           완료
         </span>
       </button>

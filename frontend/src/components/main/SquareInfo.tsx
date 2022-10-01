@@ -1,13 +1,13 @@
 import { FC } from 'react';
 
-interface SquareInfoProps {
-  
-}
- 
+interface SquareInfoProps {}
+
 const SSquareInfo: FC<SquareInfoProps> = () => {
-  return (<>
-    
-  </>);
-}
- 
+  return (
+    <>
+      <div>aaa</div>
+    </>
+  );
+};
+
 export default SSquareInfo;

@@ -11,7 +11,7 @@ const Header: FC<HeaderProps> = props => {
   const navigate = useNavigate();
   return (
     <>
-      <header className="center grid h-[4rem] grid-cols-8 justify-center border-b p-2">
+      <header className="center grid h-16 grid-cols-8 justify-center border-b p-2">
         <div className="flex items-center justify-center">
           {title == '홈' ? (
             <div></div>

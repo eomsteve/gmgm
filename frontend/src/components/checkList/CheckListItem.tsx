@@ -20,7 +20,7 @@ const CheckListItem: FC<CheckListItemProps> = props => {
     <>
       <div
         onClick={() => navigate(`/checklists/${checklistId}`)}
-        className="checklist-item flex-column m-5 flex h-[130px] w-[90px] items-center justify-center shadow-md"
+        className="checklist-item flex-column m-5 flex h-[130px] w-[90px] items-center justify-center rounded border border-gray-300"
       >
         <div className="flex flex-col items-center justify-center ">
           {/* <div className="text-[#428BC1] text-[2rem]"><FontAwesomeIcon icon={faBasketShopping} /></div> */}
