@@ -2,11 +2,9 @@ FROM node:16.15.0 as build-stage
 
 WORKDIR /var/jenkins_home/workspace/frontend/frontend
 
-COPY package.json ./
+COPY . .
 
 RUN npm install --force
-
-COPY . .
 
 RUN npm run build
 
