@@ -20,8 +20,8 @@ interface PrevArrowProps {
 }
 
 export type Product = {
-  productId : number,
-  productName : string,
+  basicProductId : number,
+  basicProductName : string,
   productImg?: string;
 }
 interface CateGoryLoad {

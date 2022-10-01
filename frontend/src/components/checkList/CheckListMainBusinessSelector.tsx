@@ -31,6 +31,8 @@ import ChecklistHeader from '@components/EmptyHeader';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 
+import BasicProductCheckList from './CheckListBasicItems';
+import CustomProductCheckList from './CheckListCustomItems';
 interface CheckListSelectBoxProps {
   optionList: string[];
 }
@@ -43,7 +45,6 @@ const businessData: { [key: string]: string } = {
 const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   const { checklistId } = useParams();
   const location = useLocation();
-  const [isEmpty, setIsEmpty] = useState<boolean>();
   const [customEmpty, setCustomEmpty] = useState<boolean>();
   const [basicEmpty, setBasicEmpty] = useState<boolean>();
   const params = location.state as { isEdit: boolean; checklistId: string };
@@ -78,7 +79,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
         if (data.empty) {
           console.log('empty checklist', data.customEmpty);
           dispatch(setInitialStateWhenUnMounted());
-          setIsEmpty(() => true);
           setCustomEmpty(() => data.customEmpty);
           setBasicEmpty(() => data.basicEmpty);
           setIsEdit(() => true);
@@ -95,7 +95,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
 
     const saveCheckListWhenUnmounted = async () => {
       console.log('status save function work');
-
       const response = await updateCheckListStatus(
         checklistBasicItems,
         checklistCustomItems,
@@ -127,6 +126,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       setIsEdit(() => !isEdit);
     }
   };
+
   const navigate = useNavigate();
   const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
@@ -134,9 +134,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOption(e.target.value);
   };
-
-  const [isCustom, setIsCustom] = useState<boolean>(false);
-
   return (
     <>
       {isEdit ? (
@@ -192,31 +189,12 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
             onClick={() => {
               console.log(checklistId);
 
-              navigate('/checklist/selection', {
-                state: { isEdit, checklistId },
-              });
-            }}
-          >
-            <BasicBanner />
-          </div>
-        )}
-        {checklistBasicItems.map((products: BasicProduct) => {
-          return (
-            <div key={products.basicProductId}>
-              <CheckListCard
-                basicProductName={products.basicProductName}
-                isEdit={isEdit}
-                status={products.status}
-                productId={products.basicProductId}
-                businessType={optionState}
-              />
-            </div>
-          );
-        })}
-        {isEdit && !isEmpty && checklistBasicItems && (
-          <div
-            onClick={() => {
-              console.log(checklistId);
+      <div className="flex w-full flex-col items-center justify-center p-0">
+        <BasicProductCheckList
+          isEdit={isEdit}
+          BusinessType={optionState}
+          isEmpty={basicEmpty}
+        />
 
               navigate('/checklist/selection', {
                 state: { isEdit, checklistId },
