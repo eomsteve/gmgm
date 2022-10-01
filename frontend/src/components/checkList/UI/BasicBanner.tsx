@@ -8,17 +8,17 @@ const EmptyCard: FC = () => {
   return (
     <>
       <div
-        className="m-3 ml-3 flex 
-        w-[90vw] flex-col items-center justify-center 
-      border-black py-7 px-2 lg:py-0
-        shadow-md
+        className="my-3 mx-5 flex 
+        w-[86vw] flex-col items-center justify-center 
+      rounded border border-gray-300 py-7 px-2 lg:py-0
+        
       "
       >
         <h3>품목 추가</h3>
-        <div className="text-[1.5rem] m-0">
+        <div className="my-2 text-[1.5rem]">
           <FontAwesomeIcon icon={faPlus} />
         </div>
-        <div className="text-sm">가격 비교 서비스를 사용할 수 있습니다🥰</div>
+        {/* <div className="text-sm">가격 비교 서비스를 사용할 수 있습니다 🥰</div> */}
       </div>
     </>
   );

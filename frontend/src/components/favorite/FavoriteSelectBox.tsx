@@ -1,9 +1,9 @@
 import { FC, useState, useEffect } from 'react';
 import FavoriteCard from './FavoriteCard';
-import { getFavoriteSelect,getFavoritePageData } from '@apis/favoriteApi'
+import { getFavoriteSelect, getFavoritePageData } from '@apis/favoriteApi';
 import GotoSelectionButton from './GotoSelection';
 import { useNavigate } from 'react-router-dom';
-import type { FavoritePageData, FavoriteItem } from '@apis/favoriteApi'
+import type { FavoritePageData, FavoriteItem } from '@apis/favoriteApi';
 interface FavoriteSelectBoxProps {
   pageData: FavoriteItem[];
 }
@@ -13,18 +13,18 @@ const businessData: { [key: string]: string } = {
   o: '온라인',
 };
 
-
 const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
   const selectBoxPage = props.pageData;
   const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
-  const [pageData , setPageData]  = useState<FavoriteItem[]>(selectBoxPage)
+  const [pageData, setPageData] = useState<FavoriteItem[]>(selectBoxPage);
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOption(e.target.value)
+    setOption(e.target.value);
   };
   const navigate = useNavigate();
   return (
-    <>
+    <div className="mb-5">
+      <span>즐겨찾기 리스트</span>
       <select
         onChange={handleSelection}
         // 여기 props 로 받아와야함.
@@ -33,6 +33,7 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
         className="form-select form-select-sm
     m-3
     block
+    min-w-[25%]
     max-w-[95%]
     rounded
     border
@@ -54,22 +55,28 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
         ))}
       </select>
       <div className="flex w-full flex-col items-center justify-center p-0">
-        {pageData && 
-          pageData.map((favoriteItem, index) =>{
+        {pageData &&
+          pageData.map((favoriteItem, index) => {
             return (
               <div key={favoriteItem.goodsId}>
-
-              <FavoriteCard img={favoriteItem.img} goodsName={favoriteItem.goodsName} priceGap={favoriteItem.priceGap} goodsPrice={123} />
+                <FavoriteCard
+                  img={favoriteItem.img}
+                  goodsName={favoriteItem.goodsName}
+                  priceGap={favoriteItem.priceGap}
+                  goodsPrice={123}
+                />
               </div>
-            )
-          })
-        }
-        <div onClick={()=>{navigate('/favorite/selection')}}>
-        <GotoSelectionButton />
-        
+            );
+          })}
+        <div
+          onClick={() => {
+            navigate('/favorite/selection');
+          }}
+        >
+          <GotoSelectionButton />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

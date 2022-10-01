@@ -67,8 +67,8 @@ const ProductLists: FC<ProductListsProps> = props => {
         <Slider {...settings}>
           {productList.map(product => {
             return (
-              <div onClick={() => handle(product.productId)} key={product.productId}>
-                <SubText productId={product.productId} productName={product.productName} />
+              <div onClick={() => handle(product.basicProductId)} key={product.basicProductId}>
+                <SubText basicProductId={product.basicProductId} basicProductName={product.basicProductName} />
               </div>
             );
           })}

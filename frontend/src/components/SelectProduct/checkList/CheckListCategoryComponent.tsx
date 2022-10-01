@@ -3,12 +3,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import Category from '../UI/CategoryPicker';
-import {useLocation} from 'react-router-dom'
+import { useLocation } from 'react-router-dom';
 import ProductComponent from './CheckListProductComponent';
 
 import { getFavoriteSelect } from '@apis/favoriteApi';
-import type {BasicProduct} from '@modules/CheckListProductList'
-import SelectedArea from './SelectedArea'
+import type { BasicProduct } from '@modules/CheckListProductList';
+import SelectedArea from './SelectedArea';
 interface CategorySliderProps {}
 
 interface NextArrowProps {
@@ -20,29 +20,26 @@ interface PrevArrowProps {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-
 interface CategoryLoad {
-  categoryId : number;
-  categoryName : string;
-  categoryImg : string;
-  products : BasicProduct[];
+  categoryId: number;
+  categoryName: string;
+  categoryImg: string;
+  products: BasicProduct[];
 }
 
 const CategorySlider: FC<CategorySliderProps> = () => {
-
   //after axios, useEffect
   const [data, setData] = useState<CategoryLoad[]>([]);
   const location = useLocation();
-  const params = location.state as { isEdit : boolean, checklistId : string };
-  console.log(params.isEdit);
-  
+  const params = location.state as { isEdit: boolean; checklistId: string };
+  console.log(params.checklistId);
+
   useEffect(() => {
     const categoryLoad = async () => {
       const fetchData = await getFavoriteSelect();
       setData(fetchData);
     };
     categoryLoad();
-
   }, []);
 
   console.log(data);
@@ -74,27 +71,40 @@ const CategorySlider: FC<CategorySliderProps> = () => {
   }
 
   return (
-    <div>
-      <h2>체크리스트 추가하기</h2>
-      <Slider {...settings}>
-        {data &&
-          data.map(category => {
-            const categoryItem = category;
-            return (
-              <div
-                onClick={() => handle(categoryItem.products)}
-                key={categoryItem.categoryId}
-              >
-                <Category
-                  categoryImg={categoryItem.categoryImg}
-                  categoryName={categoryItem.categoryName}
-                />
-              </div>
-            );
-          })}
-      </Slider>
-      <ProductComponent productList={ProductList} />
-      <SelectedArea isEdit={params.isEdit} checklistId={params.checklistId}/>
+    <div className="h-full">
+      <div className="mx-5 h-[28vh]">
+        <div className="mt-5 mb-0 text-lg">
+          카테고리
+          <span className="ml-2 text-xs">
+            카테고리를 선택해서 품목을 확인하세요
+          </span>
+        </div>
+        <div className=" h-[28vh]">
+          <Slider {...settings}>
+            {data &&
+              data.map(category => {
+                const categoryItem = category;
+                return (
+                  <div
+                    onClick={() => handle(categoryItem.products)}
+                    key={categoryItem.categoryId}
+                  >
+                    <Category
+                      categoryImg={categoryItem.categoryImg}
+                      categoryName={categoryItem.categoryName}
+                    />
+                  </div>
+                );
+              })}
+          </Slider>
+        </div>
+      </div>
+      <div className="mb-2 h-[33vh]">
+        <ProductComponent productList={ProductList} />
+      </div>
+      <div className="h-[28vh]">
+        <SelectedArea isEdit={params.isEdit} checklistId={params.checklistId} />
+      </div>
     </div>
   );
 };

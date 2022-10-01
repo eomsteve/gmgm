@@ -42,10 +42,10 @@ export const checkListProductsSlice = createSlice({
     },
     removeBasicProducts: (
       state,
-      action: PayloadAction<BasicProduct>,
+      action: PayloadAction<number | undefined>,
     ) => {
       const data = state.checklistBasicItems.filter((products) => {
-        return products.basicProductId != action.payload.basicProductId;
+        return products.basicProductId != action.payload;
       });
       state.checklistBasicItems = data;
     },
@@ -72,15 +72,15 @@ export const checkListProductsSlice = createSlice({
         state.checklistCustomItems.push({ id: action.payload.id, customProductName: action.payload.customProductName, status: action.payload.status });
       }
     },
-    removeCustomProducts: (state, action : PayloadAction<CustomProduct>)=>{
+    removeCustomProducts: (state, action : PayloadAction<string>)=>{
       const data = state.checklistCustomItems.filter((products) => {
-        return products.customProductName != action.payload.customProductName;
+        return products.customProductName != action.payload;
       });
       state.checklistCustomItems = data;
     },
-    updateCustomProductStatus: (state, action : PayloadAction<CustomProduct>)=>{
+    updateCustomProductStatus: (state, action : PayloadAction<string>)=>{
       const data = state.checklistCustomItems.find((products) => { 
-        return products.customProductName == action.payload.customProductName;
+        return products.customProductName == action.payload;
       });
       if (typeof(data) !== "undefined") {
         data.status = !data?.status;

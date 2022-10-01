@@ -25,33 +25,34 @@ const ProductLists: FC<ProductListsProps> = props => {
   };
 
   const removeProducts = (product: BasicProduct) => {
-    dispatch(removeBasicProducts(product));
+    dispatch(removeBasicProducts(product.basicProductId));
   };
 
   return (
     <>
-      <div className="block my-10 mx-3 flex flex-wrap shadow-inner scroll-auto h-96 overflow-auto">
-        {productList.map(product => {
-          return (
-            <div
-              className="mx-1.5 p-3 h-20 grid grid-cols-2 content-center rounded-lg shadow-lg"
-              onClick={() => addProduct(product)}
-              key={product.basicProductId}
-            >
+      <div className="mx-5 h-full">
+        <div className="my-2 mt-[1vh] text-lg">
+          품목
+          <span className="ml-2 text-xs">
+            품목을 선택해서 리스트에 추가하세요
+          </span>
+        </div>
+        <div className="flex grid h-5/6 grid-cols-2 flex-wrap content-start overflow-auto scroll-auto">
+          {productList.map(product => {
+            return (
               <div
-                className="w-[100px] flex justify-center content-center">
-                <img
-                  src={product.productImg}
-                  alt=""
-                  className="w-20 bg-white rounded-lg"
-                />
-                  <div className="w-20 text-center">
-                    {product.basicProductName}
-                  </div>
+                className="m-2 grid grid-cols-3 items-center rounded-lg border border-gray-300 p-3"
+                onClick={() => addProduct(product)}
+                key={product.basicProductId}
+              >
+                <div className="flex h-12 w-12 justify-center">
+                  <img src={product.productImg} alt="" className="bg-white" />
+                </div>
+                <div className="col-span-2 p-1">{product.basicProductName}</div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
       {/* <SelectedArea /> */}
     </>

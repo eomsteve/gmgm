@@ -6,35 +6,61 @@ import type { BasicProduct } from '@modules/CheckListProductList';
 import type { RootState } from '@modules/store';
 interface SelectedAreaProps {
   isEdit: boolean;
-  checklistId : string;
+  checklistId: string;
 }
- 
-const SelectedArea: FC <SelectedAreaProps> = (props) => {
-  const  { isEdit, checklistId } = props;
+
+const SelectedArea: FC<SelectedAreaProps> = props => {
+  const { isEdit, checklistId } = props;
   const navigate = useNavigate();
-  const {checklistBasicItems} = useSelector((state : RootState) => {
-    
+  const { checklistBasicItems } = useSelector((state: RootState) => {
     console.log(state, checklistId);
-    return ({
-      checklistBasicItems : state.persistedReducer.CheckListProductsReducer.checklistBasicItems
-    })
+    return {
+      checklistBasicItems:
+        state.persistedReducer.CheckListProductsReducer.checklistBasicItems,
+    };
   });
   const dispatch = useDispatch();
-  const removeList = (product : BasicProduct)=>{
-    dispatch(removeBasicProducts(product))
-  }
-  return (<>
-  <div className="overflow-auto flex flex-wrap bg-blue-200 h-[10rem] w-full p-5 my-5">
-    {checklistBasicItems && checklistBasicItems.map((x : BasicProduct) => {
-        return (
-          <span className="m-1 bg-white p-1 text-xs border-[1px] border-black" key={x.basicProductId} onClick={()=>{removeList(x)}}>
-            {x.basicProductName}
+  const removeList = (product: BasicProduct) => {
+    dispatch(removeBasicProducts(product.basicProductId));
+  };
+  return (
+    <>
+      <div className="flex h-full w-full flex-col bg-[#b4d2e6]">
+        <div className="my-3 mx-5 text-lg">
+          나의 장보기 리스트
+          <span className="ml-2 text-xs">
+            품목을 선택하면 리스트에서 제거할 수 있어요
           </span>
-        )
-      })}
-      <div onClick={()=>{navigate(`/checklists/${checklistId}`, {state: {isEdit, checklistId}})}} className="border-black border-2"> 추가 완료 </div>
-  </div>
-  </>);
-}
- 
+        </div>
+        <div className="flex h-full flex-wrap content-start items-start overflow-auto scroll-auto p-3">
+          {checklistBasicItems &&
+            checklistBasicItems.map((x: BasicProduct) => {
+              return (
+                <span
+                  className="m-1 rounded-full bg-white px-2 py-1 text-sm"
+                  key={x.basicProductId}
+                  onClick={() => {
+                    removeList(x);
+                  }}
+                >
+                  {x.basicProductName}
+                </span>
+              );
+            })}
+        </div>
+        <span
+          onClick={() => {
+            navigate(`/checklists/${checklistId}`, {
+              state: { isEdit, checklistId },
+            });
+          }}
+          className="relate bottom-0 right-0 m-3 w-auto self-end rounded-full border border-gray-600 bg-white px-3 py-1"
+        >
+          다음 &gt;
+        </span>
+      </div>
+    </>
+  );
+};
+
 export default SelectedArea;

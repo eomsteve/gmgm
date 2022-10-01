@@ -5,11 +5,10 @@ import com.lemonmul.gamulgamul.api.dto.LoginRequestDto;
 import com.lemonmul.gamulgamul.api.dto.LoginResponseDto;
 import com.lemonmul.gamulgamul.security.auth.PrincipalDetails;
 import com.lemonmul.gamulgamul.security.redis.RedisService;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -32,27 +31,45 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException {
 
         // TODO: 강의 듣고 예외처리 다시 해야함
         if (!request.getMethod().equals("POST")) {
-            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
+            request.setAttribute("exception", "AuthenticationServiceException");
+            throw new AuthenticationServiceException("msg");
         }
 
         ObjectMapper om = new ObjectMapper();
-        LoginRequestDto loginRequestDto = null;
-        try {
-            loginRequestDto = om.readValue(request.getInputStream(), LoginRequestDto.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        UsernamePasswordAuthenticationToken authenticationToken =
+        LoginRequestDto loginRequestDto = om.readValue(request.getInputStream(), LoginRequestDto.class);
+
+        Authentication authenticationToken =
                 new UsernamePasswordAuthenticationToken(
                         Objects.requireNonNull(loginRequestDto).getEmail(),
                         loginRequestDto.getPwd());
 
-        return authenticationManager.authenticate(authenticationToken);
+        try {
+            return authenticationManager.authenticate(authenticationToken);
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+            request.setAttribute("exception", "AuthenticationException");
+
+            if (e instanceof BadCredentialsException) {
+                throw new BadCredentialsException("msg");
+            } else if (e instanceof UsernameNotFoundException) {
+                throw new UsernameNotFoundException("msg");
+            } else if (e instanceof AccountExpiredException) {
+                throw new AccountExpiredException("msg");
+            } else if (e instanceof CredentialsExpiredException) {
+                throw new CredentialsExpiredException("msg");
+            } else if (e instanceof DisabledException) {
+                throw new DisabledException("msg");
+            } else if (e instanceof LockedException) {
+                throw new LockedException("msg");
+            } else {
+                throw new IOException("msg");
+            }
+        }
     }
 
     @Override
