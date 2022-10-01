@@ -13,5 +13,6 @@ public class FavoritePageResponseDto {
     private PriceIndexResponseDto countryIndices;
     private PriceIndexResponseDto favoriteIndices;
     private List<FavoriteItemResponseDto> favoriteItems;
+    private List<FavoriteRecommendDto> favoriteRecommends;
     private FavoriteTotalPriceResponseDto favoriteTotalPrices;
 }

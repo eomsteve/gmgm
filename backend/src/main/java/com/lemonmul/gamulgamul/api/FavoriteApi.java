@@ -41,6 +41,7 @@ public class FavoriteApi {
     private final CategoryService categoryService;
     private final GoodsService goodsService;
     private final ProductService productService;
+    private final FavoriteRecommendService favoriteRecommendService;
 
     /**
      * 즐겨찾기 페이지에 보여줄 정보들
@@ -68,6 +69,11 @@ public class FavoriteApi {
         List<FavoriteItemResponseDto> favoriteItems = getFavoriteGoods(user);
         log.info("favoriteItems size: {}", favoriteItems.size());
 
+        // 즐겨찾기 상품 추천
+        List<Long> goodsIds = favoriteItems.stream().map(FavoriteItemResponseDto::getGoodsId).toList();
+        List<FavoriteRecommendDto> favoriteRecommends = favoriteRecommendService.getFavoriteRecommends(user, goodsIds);
+        log.info("favoriteRecommends size: {}", favoriteRecommends.size());
+
         // 즐겨찾기 상품 총합
         List<FavoriteTotalPrice> favoriteTotalPrices = favoriteTotalPriceService.getFavoriteTotalPrices(user, BusinessType.m, today);
         FavoriteTotalPriceResponseDto favoriteTotalPriceResponseDto = new FavoriteTotalPriceResponseDto(favoriteTotalPrices);
@@ -77,7 +83,7 @@ public class FavoriteApi {
             log.info("recent favoriteTotalPrice: {}", favoriteTotalPrices.get(favoriteTotalPrices.size() - 1).getTotalPrice());
 
         log.info("[Finished request] GET /favorite");
-        return new FavoritePageResponseDto(countryIndexDto, favoriteIndexDto, favoriteItems, favoriteTotalPriceResponseDto);
+        return new FavoritePageResponseDto(countryIndexDto, favoriteIndexDto, favoriteItems, favoriteRecommends, favoriteTotalPriceResponseDto);
     }
 
     /**

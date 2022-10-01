@@ -55,7 +55,7 @@ public class ChecklistBasicItemService {
         List<ChecklistBasicItem> basicItems = itemRepo.findByChecklist(checklist);
         for (ChecklistBasicItem basicItem : basicItems) {
             BasicItemDto itemDto = checklistBasicItem.stream()
-                    .filter(i -> i.getId().equals(basicItem.getId())).findAny()
+                    .filter(i -> basicItem.getId().equals(i.getId())).findAny()
                     .orElseThrow();
             basicItem.setStatus(itemDto.isStatus());
         }
