@@ -98,7 +98,12 @@ const FavoriteIndexChart: FunctionComponent<
   };
   return (
     <div className="mb-5">
-      <span className="mb-2">지수 그래프</span>
+      <span className="mb-2 text-lg">
+        지수 그래프
+        <span className="ml-2 text-xs text-gray-500">
+          즐겨찾기 목록으로 만들어진 지수를 CPI와 함께 볼 수 있어요.
+        </span>
+      </span>
       <div className="flex h-[35vh] w-auto items-center justify-center">
         <Line options={options} data={data} />
       </div>

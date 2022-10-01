@@ -9,6 +9,13 @@ module.exports = {
       fontFamily: {
         dohyeon: ['Do Hyeon'],
       },
+      colors: {
+        deepsky: '#639DEB',
+        lightsky: '#9ADCFF',
+        lemon: '#FFF89A',
+        peach: '#FFB2A6',
+        rouge: '#FF8AAE',
+      },
     },
   },
   plugins: [require('flowbite/plugin')],

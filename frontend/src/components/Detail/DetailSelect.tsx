@@ -40,11 +40,16 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
   // }
   return (
     <>
-      <span>가격 변동 그래프</span>
+      <span className="text-lg">
+        가격 변동 그래프
+        <span className="ml-2 text-xs text-gray-500">
+          선택한 상품의 가격 정보를 제공합니다.
+        </span>
+      </span>
       <div className="flex items-center">
         <select
           onChange={handleSelection}
-          className="form-select form-select-sm m-3 block max-w-[25vw] rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-2 py-1 text-xs font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+          className="form-select form-select-sm m-2 block max-w-[25vw] rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-2 py-1 text-xs font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
           aria-label=".form-select-sm example"
         >
           {goodsInfo.map(goods => (
@@ -53,7 +58,6 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
             </option>
           ))}
         </select>
-        <p className="text-[0.9rem]">선택한 상품의 가격 정보를 제공합니다.</p>
       </div>
       <Calculator />
       <OnlineCard />

@@ -24,7 +24,12 @@ const Main: FunctionComponent<MainProps> = () => {
       <HeaderComponent title="홈" />
       <MainUserCard />
       <main className="mx-0 flex h-[90vh] w-full flex-col bg-[white]">
-        <EmptySquare />
+        <div className="mx-5 grid grid-cols-2 grid-rows-4">
+          <EmptySquare bgColor="bg-lightsky" textColor="text-white" />
+          <EmptySquare bgColor="bg-lemon" textColor="text-gray-500" />
+          <EmptySquare bgColor="bg-peach" textColor="text-white" />
+          <EmptySquare bgColor="bg-rouge" textColor="text-white" />
+        </div>
         this is main page
       </main>
     </>

@@ -24,7 +24,12 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
   const navigate = useNavigate();
   return (
     <div className="mb-5">
-      <span>즐겨찾기 리스트</span>
+      <span className="text-lg">
+        즐겨찾기 목록
+        <span className="ml-2 text-xs text-gray-500">
+          즐겨 사는 상품 정보를 한 눈에 볼 수 있어요.
+        </span>
+      </span>
       <select
         onChange={handleSelection}
         // 여기 props 로 받아와야함.
@@ -37,7 +42,6 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
     max-w-[95%]
     rounded
     border
-    border-solid
     border-gray-300
     bg-white bg-clip-padding bg-no-repeat
     px-2 py-1 text-xs

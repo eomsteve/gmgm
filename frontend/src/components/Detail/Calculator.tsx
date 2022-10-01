@@ -30,14 +30,19 @@ const Calculator: FC<CalculatorProps> = () => {
       <div className="mb-3">
         <SumPriceChart calculatorData={calculatorData} />
       </div>
-      <div className="my-5 flex w-full flex-col">
-        <span>계산기</span>
-        <div className="mx-3">
-          <p className="my-3 text-[0.9rem]">
+      <div className="mt-5 flex w-full flex-col">
+        <span className="text-lg">
+          계산기
+          <span className="ml-2 text-xs text-gray-500">
             비교를 원하는 상품 가격과 용량을 입력해주세요.
-          </p>
-          <form onSubmit={calculate} className="flex-rows flex text-sm">
-            <div className="flex w-[40%] flex-col ">
+          </span>
+        </span>
+        <div className="m-2">
+          <form
+            onSubmit={calculate}
+            className="flex-rows flex grid grid-cols-5 text-sm"
+          >
+            <div className="col-span-2 flex grid grid-rows-2 flex-col ">
               <span className="m-1">상품 가격</span>
               <div className="flex items-center justify-start">
                 <input
@@ -50,7 +55,7 @@ const Calculator: FC<CalculatorProps> = () => {
                 <span className="mx-2 text-sm">원</span>
               </div>
             </div>
-            <div className="flex w-[40%] flex-col">
+            <div className="col-span-2 flex grid grid-rows-2 flex-col">
               <span className="m-1">용량</span>
               <div className="flex items-center">
                 <input
@@ -63,12 +68,12 @@ const Calculator: FC<CalculatorProps> = () => {
                 <span className="mx-2">{'용량'}</span>
               </div>
             </div>
-            <button className="rounded border border-gray-700 px-2 sm:text-[0.9rem]">
+            <button className="my-2 rounded border border-gray-700 p-2 sm:text-[0.9rem]">
               계산하기
             </button>
           </form>
           {usingCalculator && (
-            <div className="mt-5 text-center text-[0.9rem]">
+            <div className="mt-5 text-center">
               가격이 계산되었습니다. 그래프를 확인해주세요.
             </div>
           )}

@@ -138,9 +138,9 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   return (
     <>
       {isEdit ? (
-        <ChecklistHeader title="장보기 리스트 만들기" />
+        <ChecklistHeader title="장보기 목록 만들기" />
       ) : (
-        <ChecklistHeader title="장보기 리스트" />
+        <ChecklistHeader title="장보기 목록" />
       )}
 
       <div className="m-5 flex items-center justify-between">
@@ -161,7 +161,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
             <ConfirmButton />
           </div>
         ) : (
-          <div className="justify-center m-3 grid grid-cols-2 items-center">
+          <div className="m-3 grid grid-cols-2 items-center justify-center">
             <span className="text-sm" onClick={() => setIsEdit(() => !isEdit)}>
               <span className="grid grid-cols-2">
                 <Edit width="1rem" height="1rem" />
@@ -198,7 +198,11 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
           <br />
         )}
         <span>가격 정보를 볼 수 없어요 😥</span>
-        <CheckListCustomItems BusinessType={optionState} isEdit={isEdit} isEmpty={customEmpty}/>
+        <CheckListCustomItems
+          BusinessType={optionState}
+          isEdit={isEdit}
+          isEmpty={customEmpty}
+        />
       </div>
     </>
   );
