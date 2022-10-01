@@ -19,14 +19,25 @@ const SelectedArea: FC<SelectedAreaProps> = () => {
     dispatch(removeGoods(goodsItem))
   }
   return (<>
-  <div className="overflow-auto flex flex-wrap bg-blue-200 h-[10rem] w-full p-5 my-5">
-    {goods && goods.map((x : { goodsId : number, goodsName : string }, idx : number) =>{
+  <div className="flex h-full w-full flex-col bg-[#b3d1e6]">
+    <div className="my-3 mx-5 text-lg">
+      즐겨찾기 목록
+      <span className="ml-2 text-xs text-gray-500">
+        상품을 선택하면 목록에서 제거할 수 있어요.
+      </span>
+    </div>
+    <div className="flex h-full flex-wrap content-start items-start overflow-auto scroll-auto p-3">
+      {goods && goods.map((x : { goodsId : number, goodsName : string }, idx : number) =>{
         return (
-          <span className="m-1 bg-white p-1 text-xs border-[1px] border-black" key={idx} onClick={()=>{removeList(x)}}>
+          <span className="m-1 rounded-full bg-white px-2 py-1 text-sm" key={idx} onClick={()=>{removeList(x)}}>
             {x.goodsName}
           </span>
-        )
-      })}
+          )
+        })}
+    </div>
+    <span className="relate bottom-0 right-0 m-3 w-auto self-end rounded-full border border-gray-600 bg-white px-3 py-1">
+      다음 &gt;
+    </span>
   </div>
   </>);
 }

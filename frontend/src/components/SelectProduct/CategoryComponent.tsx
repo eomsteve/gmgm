@@ -71,28 +71,39 @@ const CategorySlider: FC<CategorySliderProps> = () => {
   }
 
   return (
-    <div>
-      <h2>즐겨찾기 리스트 추가하기</h2>
-      <Slider {...settings}>
-        {data &&
-          data.map(category => {
-            const categoryItem = category;
-            // console.log(categoryItem.categoryId);
+    <div className="h-full">
+      <div className="mx-5 h-[28vh]">
+        <div className="mt-5 mb-0 text-lg">
+          카테고리
+          <span className="ml-2 text-xs text-gray-500">
+            카테고리를 선택해서 품목을 확인하세요.
+          </span>
+        </div>
+        <div className="h-[28vh]">
+          <Slider {...settings}>
+            {data &&
+              data.map(category => {
+                const categoryItem = category;
+                // console.log(categoryItem.categoryId);
 
-            return (
-              <div
-                onClick={() => handle(categoryItem.products)}
-                key={categoryItem.categoryId}
-              >
-                <Category
-                  categoryImg={categoryItem.categoryImg}
-                  categoryName={categoryItem.categoryName}
-                />
-              </div>
-            );
-          })}
-      </Slider>
-      <ProductComponent productList={ProductList} />
+                return (
+                  <div
+                    onClick={() => handle(categoryItem.products)}
+                    key={categoryItem.categoryId}
+                  >
+                    <Category
+                      categoryImg={categoryItem.categoryImg}
+                      categoryName={categoryItem.categoryName}
+                    />
+                  </div>
+                );
+              })}
+          </Slider>
+        </div>
+      </div>
+      <div className="mb-2 h-[37vh]">
+        <ProductComponent productList={ProductList} />
+      </div>
     </div>
   );
 };

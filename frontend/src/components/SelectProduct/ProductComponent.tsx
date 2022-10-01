@@ -19,7 +19,7 @@ type GoodsPrice = {
 export type GoodsItem = {
   goodsId : number;
   goodsName : string;
-  img? : string;
+  goodsImg? : string;
   capacity? : string;
   measure? : string;
   ea? : string;
@@ -63,7 +63,13 @@ const ProductLists: FC<ProductListsProps> = props => {
 
   return (
     <>
-      <div className="my-10">
+      <div className="my-9 mx-5">
+        <div className="my-2 mt-[1vh] text-lg">
+          품목
+          <span className="ml-2 text-xs text-gray-500">
+            품목을 선택해서 상품을 확인하세요.
+          </span>
+        </div>
         <Slider {...settings}>
           {productList.map(product => {
             return (

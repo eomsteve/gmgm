@@ -7,8 +7,12 @@ const FavoriteSelectionPage: FC = () => {
   return (
     <>
       <FavHeader title="즐겨찾기 상품 추가하기" />
-      <Category />
-      <SelectedArea />
+      <div className="h-[72.5vh]">
+        <Category />
+      </div>
+      <div className="h-[25vh]">
+        <SelectedArea/>
+      </div>
     </>
   );
 };
