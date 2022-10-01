@@ -83,7 +83,8 @@ export const updateCheckLists = async ( checklistBasicItems : BasicProduct[], ch
 };
 
 export const updateCheckListStatus = async (checklistBasicItems : BasicProduct[], checklistCustomItems : CustomProduct[], checklistId?: string ) => {
-  console.log('????');
+  console.log('????', checklistBasicItems,
+  checklistCustomItems);
   
   try {
     const { data } = await axios({
@@ -98,7 +99,6 @@ export const updateCheckListStatus = async (checklistBasicItems : BasicProduct[]
     return data;
   } catch (error) {
     console.log(error);
-    
   }
   
 }

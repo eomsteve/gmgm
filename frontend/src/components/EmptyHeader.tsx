@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { ReactComponent as Back } from '../assets/icons/back.svg';
 import { useNavigate } from 'react-router-dom';
+import { updateCheckListStatus } from '@apis/checkList.Api'
 
 interface HeaderProps {
   title: string;
@@ -17,8 +18,8 @@ const Header: FC<HeaderProps> = props => {
             <div></div>
           ) : (
             <div
-              onClick={() => {
-                navigate(-1);
+              onClick={(title == '장보기 리스트') ? ()=>{navigate('/checkLists')} : () => {
+                navigate( -1 );
               }}
             >
               <Back width="1.2rem" height="1.2rem" />

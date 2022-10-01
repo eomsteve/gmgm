@@ -24,7 +24,6 @@ const CheckListCustomItems: FC<CheckListCustomItemsProps> = props => {
   const navigate = useNavigate();
   const [isCustom, setIsCustom] = useState<boolean>();
   const { checklistCustomItems } = useSelector((state: RootState) => {
-    console.log(state);
     return {
       checklistCustomItems:
         state.persistedReducer.CheckListProductsReducer.checklistCustomItems,
