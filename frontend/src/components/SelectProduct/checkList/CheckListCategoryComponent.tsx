@@ -71,12 +71,12 @@ const CategorySlider: FC<CategorySliderProps> = () => {
   }
 
   return (
-    <div className="h-full">
+    <div className="">
       <div className="mx-5 h-[28vh]">
         <div className="mt-5 mb-0 text-lg">
           카테고리
-          <span className="ml-2 text-xs">
-            카테고리를 선택해서 품목을 확인하세요
+          <span className="ml-2 text-xs text-gray-500">
+            카테고리를 선택해서 품목을 확인하세요.
           </span>
         </div>
         <div className=" h-[28vh]">

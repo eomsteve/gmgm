@@ -25,11 +25,11 @@ const SelectedArea: FC<SelectedAreaProps> = props => {
   };
   return (
     <>
-      <div className="flex h-full w-full flex-col bg-[#b4d2e6]">
+      <div className="flex h-full w-full flex-col bg-blue-200">
         <div className="my-3 mx-5 text-lg">
           나의 장보기 리스트
-          <span className="ml-2 text-xs">
-            품목을 선택하면 리스트에서 제거할 수 있어요
+          <span className="ml-2 text-xs text-gray-500">
+            품목을 선택하면 리스트에서 제거할 수 있어요.
           </span>
         </div>
         <div className="flex h-full flex-wrap content-start items-start overflow-auto scroll-auto p-3">
