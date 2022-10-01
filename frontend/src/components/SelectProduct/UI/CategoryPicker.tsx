@@ -1,15 +1,15 @@
 import { FC } from 'react';
 interface CategoryPickerProps {
   categoryImg: string;
-  categoryName : string;
+  categoryName: string;
 }
 
 const CategoryPicker: FC<CategoryPickerProps> = props => {
   const { categoryImg, categoryName } = props;
   return (
-    <div className="flex flex-col justify-center items-center p-2">
-      <img className="rounded-full p-0 border h-[80px]" src={categoryImg} />
-      <p>{ categoryName }</p>
+    <div className="flex flex-col items-center justify-center p-2">
+      <img className="h-[7vh] rounded-full p-0" src={categoryImg} />
+      <p>{categoryName}</p>
     </div>
   );
 };
