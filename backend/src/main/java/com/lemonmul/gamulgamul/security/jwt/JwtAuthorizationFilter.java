@@ -1,9 +1,10 @@
 package com.lemonmul.gamulgamul.security.jwt;
 
 import com.lemonmul.gamulgamul.entity.user.Role;
-import com.lemonmul.gamulgamul.repo.UserRepo;
 import com.lemonmul.gamulgamul.security.auth.PrincipalDetails;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,20 +34,38 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             return;
         }
 
-        String token = request.getHeader(JwtProperties.HEADER_STRING)
-                .replace(JwtProperties.TOKEN_PREFIX, "");
+        String token = header.replace(JwtProperties.TOKEN_PREFIX, "");
 
-        Role role = Role.valueOf((String)Jwts.parser().setSigningKey(JwtProperties.SECRET).parseClaimsJws(token).getBody().get("role"));
-        PrincipalDetails principalDetails = new PrincipalDetails(role);
+        try {
+            Role role = Role.valueOf((String)Jwts.parser().setSigningKey(JwtProperties.SECRET).parseClaimsJws(token).getBody().get("role"));
+            PrincipalDetails principalDetails = new PrincipalDetails(role);
 
-        // TODO: 강의 듣고 예외처리 해야함
-        Authentication authentication =
-                new UsernamePasswordAuthenticationToken(
-                        null,
-                        null,
-                        principalDetails.getAuthorities());
+            Authentication authentication =
+                    new UsernamePasswordAuthenticationToken(
+                            null,
+                            null,
+                            principalDetails.getAuthorities());
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            request.setAttribute("exception", "IllegalArgumentException");
+        } catch (SignatureException e) {
+            e.printStackTrace();
+            request.setAttribute("exception", "SignatureException");
+        } catch (ExpiredJwtException e) {
+            e.printStackTrace();
+            request.setAttribute("exception", "ExpiredJwtException");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            request.setAttribute("exception", "NullPointerException");
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+            request.setAttribute("exception", "ClassCastException");
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("exception", "Exception");
+        }
 
         chain.doFilter(request, response);
     }

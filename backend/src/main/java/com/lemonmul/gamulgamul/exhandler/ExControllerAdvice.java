@@ -1,10 +1,8 @@
 package com.lemonmul.gamulgamul.exhandler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -31,18 +29,6 @@ public class ExControllerAdvice {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({ExpiredJwtException.class})
-    public ErrorResult tokenExpiredExHandler(Exception e){
-        log.error("[Exception Handler] ex",e);
-        return ErrorResult.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message("만료된 토큰입니다.")
-                .build();
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({HttpMessageConversionException.class, JsonProcessingException.class})
     public ErrorResult jsonParseExHandler(Exception e){
         log.error("[Exception Handler] ex",e);
@@ -51,18 +37,6 @@ public class ExControllerAdvice {
                 .status(HttpStatus.BAD_REQUEST.value())
                 .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .message("Json 생성에 실패했습니다.")
-                .build();
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler
-    public ErrorResult authenticationServiceExHandler(AuthenticationServiceException e){
-        log.error("[Exception Handler] ex",e);
-        return ErrorResult.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message("인증에 실패했습니다.")
                 .build();
     }
 
