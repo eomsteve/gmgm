@@ -29,6 +29,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 // 리덕스
 import ChecklistHeader from '@components/EmptyHeader';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
+import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 
 interface CheckListSelectBoxProps {
   optionList: string[];
@@ -112,7 +113,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       }
     };
   }, []);
-  
+
   const saveCheckList = async () => {
     if (typeof checklistId == 'string') {
       await updateCheckLists(
@@ -144,11 +145,11 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
         <ChecklistHeader title="장보기 리스트" />
       )}
 
-      <div className="flex items-center justify-between p-5">
+      <div className="m-5 flex items-center justify-between">
         <select
           onChange={handleSelection}
           name="selectBox"
-          className="form-select form-select-sm my-3 block w-[100px] max-w-[25vw] rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-2 py-1 text-xs font-normal text-gray-700 shadow-md transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+          className="form-select form-select-sm m-3 block w-[100px] max-w-[25vw] rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-2 py-1 text-xs font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
           aria-label=".form-select-sm example"
         >
           {optionList.map((option, index) => (
@@ -162,11 +163,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
             <ConfirmButton />
           </div>
         ) : (
-          <div>
-            {/* <span className="text-sm" onClick={() => setIsEdit(() => !isEdit)}>
-              {' '}
-              🔨수정{' '}
-              </span> */}
+          <div className="justfy-center m-3 grid grid-cols-2 items-center">
             <span className="text-sm" onClick={() => setIsEdit(() => !isEdit)}>
               <span className="grid grid-cols-2">
                 <Edit width="1rem" height="1rem" />
@@ -180,13 +177,16 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
               }}
               className="text-sm"
             >
-              {' '}
-              ⛔삭제{' '}
+              <span className="ml-2 grid grid-cols-2">
+                <Delete width="1rem" height="1rem" />
+                삭제
+              </span>
             </span>
           </div>
         )}
       </div>
-      <div className="flex w-full flex-col items-center justify-center p-0">
+      <div className="flex w-full flex-col items-center justify-center">
+        <span>가격 정보를 볼 수 있어요 🥰</span>
         {isEdit && basicEmpty && (
           <div
             onClick={() => {
@@ -228,11 +228,12 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
             </div>
           </div>
         )}
-        {!!isEdit ? (
-          <div className="m-2 w-[90vw] border-t-2 border-dashed border-black"></div>
+        {isEdit ? (
+          <div className="m-3 w-[86vw] border-t-2 border-dashed border-gray-300"></div>
         ) : (
           <br />
         )}
+        <span>가격 정보를 볼 수 없어요 😥</span>
         <div
           onClick={() => {
             setIsCustom(true);
@@ -251,10 +252,17 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
           );
         })}
 
-        {isEdit && !customEmpty && <div onClick={() => {setIsCustom(true);}}className="m-0 text-[1.5rem]">
-              <FontAwesomeIcon icon={faPlus} />
-            </div>}
-        {isCustom && isEdit &&  <CustomInput />}
+        {isEdit && !customEmpty && (
+          <div
+            onClick={() => {
+              setIsCustom(true);
+            }}
+            className="m-0 text-[1.5rem]"
+          >
+            <FontAwesomeIcon icon={faPlus} />
+          </div>
+        )}
+        {isCustom && isEdit && <CustomInput />}
       </div>
     </>
   );

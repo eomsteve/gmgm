@@ -30,27 +30,29 @@ const ProductLists: FC<ProductListsProps> = props => {
 
   return (
     <>
-      <div className="h-full flex flex-wrap justify-center content-start items-start flex-wrap overflow-auto scroll-auto mx-3 shadow-inner">
-        {productList.map(product => {
-          return (
-            <div
-              className="w-[150px] h-[100px] grid grid-cols-2 mx-1.5 p-3 rounded-lg shadow-lg"
-              onClick={() => addProduct(product)}
-              key={product.basicProductId}
-            >
-              <div className="flex content-center mt-3">
-                <img
-                  src={product.productImg}
-                  alt=""
-                  className="w-[70px] h-[70px] bg-white rounded-lg "
-                />
-                <div className="w-[80px] min-w-[80px] flex items-center justify-center p-1 text-sm">
-                  {product.basicProductName}
+      <div className="mx-5 h-full">
+        <div className="my-2 mt-[1vh] text-lg">
+          품목
+          <span className="ml-2 text-xs">
+            품목을 선택해서 리스트에 추가하세요
+          </span>
+        </div>
+        <div className="flex grid h-5/6 grid-cols-2 flex-wrap content-start overflow-auto scroll-auto">
+          {productList.map(product => {
+            return (
+              <div
+                className="m-2 grid grid-cols-3 items-center rounded-lg border border-gray-300 p-3"
+                onClick={() => addProduct(product)}
+                key={product.basicProductId}
+              >
+                <div className="flex h-12 w-12 justify-center">
+                  <img src={product.productImg} alt="" className="bg-white" />
                 </div>
+                <div className="col-span-2 p-1">{product.basicProductName}</div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
       {/* <SelectedArea /> */}
     </>

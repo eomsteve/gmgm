@@ -23,13 +23,27 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: 'top' as const,
+      fontFamily: 'Do Hyeon',
     },
     title: {
       display: false,
       text: 'Chart.js Line Chart',
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      grid: {
+        display: true,
+      },
     },
   },
 };
@@ -55,13 +69,13 @@ const SumPriceChart: FunctionComponent<SumPriceChartProps> = props => {
   const { calculatorData } = props;
   const data2 = labels.map(() => {
     return calculatorData;
-  })
+  });
   let calculatorDataset = {};
-  
+
   if (calculatorData) {
     const data2 = labels.map(() => {
       return calculatorData;
-    })
+    });
     calculatorDataset = {
       // label: '계산결과',
       data: data2,
@@ -78,20 +92,21 @@ const SumPriceChart: FunctionComponent<SumPriceChartProps> = props => {
         data: [3123, 12312, 54345, 21314.42, 87643, 101000, 89000],
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        pointRadius: 0,
       },
       {
         label: '계산결과',
         data: data2,
         borderColor: 'rgb(255, 99, 13)',
         backgroundColor: 'rgba(255, 99, 13, 0.5)',
-        borderDash :[5],
-        fill : false,
-        pointRadius: 3,
-      }
+        borderDash: [5],
+        fill: false,
+        pointRadius: 0,
+      },
     ],
   };
   return (
-    <div className="shadow-md">
+    <div className="flex h-[30vh] w-auto items-center justify-center">
       <Line options={options} data={data} />
     </div>
   );

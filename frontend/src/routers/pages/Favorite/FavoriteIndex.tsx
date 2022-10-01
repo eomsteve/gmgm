@@ -27,24 +27,26 @@ const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
     getPageData();
   }, []);
   return (
-    <main className="flex w-full flex-col justify-center bg-[white] p-0">
+    <>
       <FavHeader title={'즐겨찾기'} />
-      {favoritePageData && (
-        <FavoriteIndexCart
-          countryIndices={favoritePageData?.countryIndices}
-          favoriteIndices={favoritePageData?.favoriteIndices}
-        />
-      )}
-      {favoritePageData && (
-        <SelectBox pageData={favoritePageData.favoriteItems} />
-      )}
-      {favoritePageData && (
-        <PriceChart
-          favoriteTotalPrices={favoritePageData.favoriteTotalPrices}
-        />
-      )}
-      <div className="p-2"></div>
-    </main>
+      <main className="flex w-full flex-col justify-center bg-[white] p-5">
+        {favoritePageData && (
+          <FavoriteIndexCart
+            countryIndices={favoritePageData?.countryIndices}
+            favoriteIndices={favoritePageData?.favoriteIndices}
+          />
+        )}
+        {favoritePageData && (
+          <SelectBox pageData={favoritePageData.favoriteItems} />
+        )}
+        {favoritePageData && (
+          <PriceChart
+            favoriteTotalPrices={favoritePageData.favoriteTotalPrices}
+          />
+        )}
+        <div className="p-2"></div>
+      </main>
+    </>
   );
 };
 

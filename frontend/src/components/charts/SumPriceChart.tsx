@@ -23,6 +23,7 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: 'top' as const,
@@ -32,25 +33,37 @@ export const options = {
       text: 'Chart.js Line Chart',
     },
   },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      grid: {
+        display: true,
+      },
+    },
+  },
 };
 
 interface SumPriceChartProps {
-  favoriteTotalPrices:  {
-    totalPrices : {price : number}[],
-    researchDates : {researchDate : string}[]
-  }
+  favoriteTotalPrices: {
+    totalPrices: { price: number }[];
+    researchDates: { researchDate: string }[];
+  };
 }
 
 const SumPriceChart: FunctionComponent<SumPriceChartProps> = props => {
   // 라벨의 길이만큼 만들기
-  
+
   const { favoriteTotalPrices } = props;
-  const labels = favoriteTotalPrices.researchDates.map((data) => {
+  const labels = favoriteTotalPrices.researchDates.map(data => {
     return data.researchDate;
-  })
-  const totalPrices = favoriteTotalPrices.totalPrices.map((data)=>{
-    return data.price
-  })
+  });
+  const totalPrices = favoriteTotalPrices.totalPrices.map(data => {
+    return data.price;
+  });
   const data = {
     labels,
     datasets: [
@@ -60,11 +73,12 @@ const SumPriceChart: FunctionComponent<SumPriceChartProps> = props => {
         data: totalPrices,
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        pointRadius: 0,
       },
     ],
   };
   return (
-    <div className="shadow-md">
+    <div className="flex h-[30vh] w-auto justify-center">
       <Line options={options} data={data} />
     </div>
   );

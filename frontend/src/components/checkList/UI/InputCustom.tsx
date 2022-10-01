@@ -1,35 +1,43 @@
-import  { Component, FC, CSSProperties, useState, useEffect} from 'react';
+import { Component, FC, CSSProperties, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCustomProducts } from '@modules/CheckListProductList'
-interface CustomInputProps {
-  
-}
- 
+import { addCustomProducts } from '@modules/CheckListProductList';
+interface CustomInputProps {}
 
 const CustomInput: FC<CustomInputProps> = () => {
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState('');
   const dispatch = useDispatch();
-  const getInputValue = (e : React.ChangeEvent<HTMLInputElement>) =>{
+  const getInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     // console.log(e.target.value);
-    setInputValue(()=>e.target.value)
-  }
-  const handelInput = (e: React.KeyboardEvent<HTMLInputElement>) =>{
-    if(e.key === 'Enter' && (inputValue !== '')) {
+    setInputValue(() => e.target.value);
+  };
+  const handelInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && inputValue !== '') {
       console.log(inputValue);
-      dispatch(addCustomProducts({
-        id: -1,
-        customProductName: inputValue,
-        status: false,
-      }))
-      setInputValue('')
+      dispatch(
+        addCustomProducts({
+          id: -1,
+          customProductName: inputValue,
+          status: false,
+        }),
+      );
+      setInputValue('');
     }
     // dispatch(addCustomProducts)
-  } 
-  return (<>
-    <div className="m-3 py-5 ml-3 shadow-md container center flex justify-center items-center w-[90vw] px-2 lg:py-0 border-black ">
-      <input value={inputValue} onChange={getInputValue} onKeyPress={handelInput} id="customInput" className="w-[100%] border-[1px] border-black" type="text" />
-  </div>
-  </>);
-}
- 
+  };
+  return (
+    <>
+      <div className="center container m-3 flex w-[86vw] items-center justify-center rounded border border-gray-300 border-black p-3 lg:py-0 ">
+        <input
+          value={inputValue}
+          onChange={getInputValue}
+          onKeyPress={handelInput}
+          id="customInput"
+          className="w-[100%] rounded border border-gray-600"
+          type="text"
+        />
+      </div>
+    </>
+  );
+};
+
 export default CustomInput;
