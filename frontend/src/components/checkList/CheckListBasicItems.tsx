@@ -20,7 +20,6 @@ const CheckListBasicItems: FC<CheckListBasicItemsProps> = props => {
   const navigate = useNavigate();
   const { checklistBasicItems } = useSelector(
     (state: RootState) => {
-      console.log(state);
       return {
         checklistCustomItems:
           state.persistedReducer.CheckListProductsReducer.checklistCustomItems,
@@ -29,6 +28,7 @@ const CheckListBasicItems: FC<CheckListBasicItemsProps> = props => {
       };
     },
   );
+  
   const { isEdit, BusinessType, isEmpty, checklistId  } = props;
   return (<>
   {isEdit && isEmpty && (

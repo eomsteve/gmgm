@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import BasicBanner from './UI/BasicBanner';
 import CustomBanner from './UI/CustomBanner';
@@ -12,17 +12,19 @@ import {
   deleteCheckList,
   updateCheckListStatus,
 } from '@apis/checkList.Api';
-
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setInitialState,
   setInitialStateWhenUnMounted,
+  updateCustomProductStatus,
+  updateBasicProductsStatus,
+  getCheckLists,
 } from '@modules/CheckListProductList';
 import type {
   CustomProduct,
   BasicProduct,
 } from '@modules/CheckListProductList';
-import type { RootState } from '@modules/store';
+import type { RootState, AppDispatch } from '@modules/store';
 import { logInApi } from '@src/routers/APIs/userApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -46,14 +48,18 @@ const businessData: { [key: string]: string } = {
 const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   const { checklistId } = useParams();
   const location = useLocation();
+  const params = location.state as { isEdit: boolean; checklistId: string };
   const [customEmpty, setCustomEmpty] = useState<boolean>();
   const [basicEmpty, setBasicEmpty] = useState<boolean>();
-  const params = location.state as { isEdit: boolean; checklistId: string };
   const [isEdit, setIsEdit] = useState(false);
-  const dispatch = useDispatch();
+  const [isModified, setIsModified] = useState<boolean>(false);
+  // const [checklistCustomItems, setChecklistCustomItems] = useState<CustomProduct[]>([]);
+  // const [checklistBasicItems, setChecklistBasicItems] = useState<BasicProduct[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
   const { checklistCustomItems, checklistBasicItems } = useSelector(
+
     (state: RootState) => {
-      console.log(state);
+      
       return {
         checklistCustomItems:
           state.persistedReducer.CheckListProductsReducer.checklistCustomItems,
@@ -62,54 +68,58 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       };
     },
   );
+  console.log(checklistCustomItems, checklistBasicItems);
+  
+  
   const preventClose = (e: BeforeUnloadEvent) => {
     e.preventDefault();
     e.returnValue = ''; //Chrome에서 동작하도록; deprecated
   };
-
+  
+  const basicRef = useRef();
+  const customRef = useRef();
+  useEffect(() => {
+    return () => {
+      setIsModified(true);
+      basicRef.current = checklistBasicItems
+      customRef.current =checklistCustomItems
+      console.log('update', basicRef.current, customRef.current);
+    }
+  },[checklistBasicItems, checklistCustomItems])
   useEffect(() => {
     (() => {
       window.addEventListener('beforeunload', preventClose);
     })();
+    const fetchData = async (checklistId?: string) => {
+      const data = await dispatch(getCheckLists(checklistId)).unwrap();
+      if (data.empty) {
+        console.log('empty checklist', data.customEmpty);
+        setCustomEmpty(() => data.customEmpty);
+        setBasicEmpty(() => data.basicEmpty);
+        setIsEdit(() => true);
+      } else {
+        setCustomEmpty(() => data.customEmpty);
+        setBasicEmpty(() => data.basicEmpty);
+        console.log(data);
+      }
+    };
     if (params && params.isEdit) {
       console.log('이전 페이지에서 오신듯함 ㅎ');
       setIsEdit(() => params.isEdit);
+      // console.log(checklistBasicItems);
     } else {
-      const fetchData = async (checklistId?: string) => {
-        const data = await getCheckList(checklistId);
-        if (data.empty) {
-          console.log('empty checklist', data.customEmpty);
-          dispatch(setInitialStateWhenUnMounted());
-          setCustomEmpty(() => data.customEmpty);
-          setBasicEmpty(() => data.basicEmpty);
-          setIsEdit(() => true);
-        } else {
-          console.log();
-          setCustomEmpty(() => data.customEmpty);
-          setBasicEmpty(() => data.basicEmpty);
-          dispatch(setInitialState(data));
-        }
-      };
       fetchData(checklistId);
     }
-    console.log(checklistId);
-
-    const saveCheckListWhenUnmounted = async () => {
-      console.log('status save function work');
-      const response = await updateCheckListStatus(
-        checklistBasicItems,
-        checklistCustomItems,
-        checklistId,
-      );
-    };
     return () => {
       window.removeEventListener('beforeunload', preventClose);
       if (isEdit) {
         console.log('unMounted');
         dispatch(setInitialStateWhenUnMounted());
       } else {
-        saveCheckListWhenUnmounted();
-        console.log('unMounted22');
+        console.log('unMounted22',basicRef.current, customRef.current, isModified);
+        if (basicRef.current !== undefined && customRef.current !== undefined) {
+          updateCheckListStatus(basicRef.current,  customRef.current, checklistId)
+        }
       }
     };
   }, []);
@@ -127,6 +137,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       setIsEdit(() => !isEdit);
     }
   };
+
 
   const navigate = useNavigate();
   const optionList = ['m', 'o'];
