@@ -164,7 +164,7 @@ public class FavoriteApi {
 
         // 즐겨찾기 목록 갱신
         favoriteGoodsService.updateFavoriteGoodsList(addFavoriteGoodsList, deleteFavoriteGoodsList);
-        List<FavoriteItemResponseDto> newFavoriteGoodsList = favoriteGoodsService.getFavoriteGoods(user).stream().map(FavoriteItemResponseDto::new).collect(Collectors.toList());
+        List<FavoriteItemResponseDto> newFavoriteGoodsList = favoriteGoodsService.existFavoriteGoods(user).stream().map(FavoriteItemResponseDto::new).collect(Collectors.toList());
         log.info("newFavoriteGoodsList size: {}", newFavoriteGoodsList.size());
 
         // 즐겨찾기 총합, 지수 계산
@@ -179,7 +179,7 @@ public class FavoriteApi {
     /**
      * 즐겨찾기 목록 갱신 v2
      */
-    @PostMapping("/info")
+    @PostMapping("/update")
     public List<FavoriteItemResponseDto> updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDtoV2 favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) throws Exception {
         log.info("[Starting request] POST /favorite");
 
@@ -222,12 +222,39 @@ public class FavoriteApi {
 
         // 즐겨찾기 목록 갱신
         favoriteGoodsService.updateFavoriteGoodsList(addFavoriteGoodsList, deleteFavoriteGoodsList);
-        List<FavoriteItemResponseDto> newFavoriteGoodsList = favoriteGoodsService.getFavoriteGoods(user).stream().map(FavoriteItemResponseDto::new).collect(Collectors.toList());
+        List<FavoriteItemResponseDto> newFavoriteGoodsList = favoriteGoodsService.existFavoriteGoods(user).stream().map(FavoriteItemResponseDto::new).collect(Collectors.toList());
         log.info("newFavoriteGoodsList size: {}", newFavoriteGoodsList.size());
 
         // 즐겨찾기 총합, 지수 계산
         if(favoriteCalc(user)) {
             log.info("[Finished request] POST /favorite");
+            return newFavoriteGoodsList;
+        } else {
+            throw new Exception();
+        }
+    }
+
+    /**
+     * 해당 상품을 사용자의 즐겨찾기 목록에 추가
+     */
+    @PostMapping("/goods/{goodsId}")
+    public List<FavoriteItemResponseDto> addFavoriteGoods(@PathVariable Long goodsId, @RequestHeader HttpHeaders headers) throws Exception {
+        log.info("[Starting request] POST /add/{goodsId}");
+
+        User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
+        Goods goods = goodsService.getGoodsById(goodsId);
+        log.info("userId: {}", user.getId());
+        log.info("goodsId: {}", goodsId);
+
+        if(favoriteGoodsService.existFavoriteGoods(user, goods))
+            throw new IllegalArgumentException();
+
+        favoriteGoodsService.addFavoriteGoods(user, goods);
+        List<FavoriteItemResponseDto> newFavoriteGoodsList = favoriteGoodsService.existFavoriteGoods(user).stream().map(FavoriteItemResponseDto::new).collect(Collectors.toList());
+        log.info("newFavoriteGoodsList size: {}", newFavoriteGoodsList.size());
+
+        if(favoriteCalc(user)) {
+            log.info("[Finished request] POST /add/{goodsId}");
             return newFavoriteGoodsList;
         } else {
             throw new Exception();
