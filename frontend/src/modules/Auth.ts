@@ -3,14 +3,14 @@ import axios from 'axios';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
-  authToken : string;
+  accessToken : string;
   isLogin : boolean;
   userName : string;
   userId : number;
 }
 
 const initialState : UserState = {
-  authToken: '',
+  accessToken: '',
   isLogin : false,
   userName : '',
   userId : -1
@@ -22,15 +22,15 @@ export type LogInUserREQ = {
 };
 
 const API_URL = 'https://j7d108.p.ssafy.io/api/user';
-export const logInApiRedux = createAsyncThunk('updateFavoriteItem', async (logInForm: LogInUserREQ) => {
+export const logInApiRedux = createAsyncThunk('login', async (logInForm: LogInUserREQ) => {
   try {
     const { data } = await axios.post(API_URL + '/login', logInForm);
     localStorage.setItem("jwtToken", data.accessToken);
-    return {status : true, data : data.accessToken};
+    return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.message);
-      return error.message;
+      console.error(error.message);
+      return "error";
     } else {
       console.log(error);
       return 'unexpected error occurred';
@@ -38,20 +38,51 @@ export const logInApiRedux = createAsyncThunk('updateFavoriteItem', async (logIn
   }
 });
 
+export const logOutApiRedux = createAsyncThunk('logout', async (email: string) => {
+  try {
+    const { data } = await axios({
+      url: API_URL + `/logout`,
+      method: 'POST',
+      data :{email,
+      }
+    });
+    localStorage.removeItem('jwtToken')
+    console.log('logout');
+    return data
+  } catch (error) {
+    
+  }
+})
+
 export const userAuthSlice = createSlice({
   name: 'authHeader',
   initialState,
   reducers: {
     setAuthToken: (state, action) => {
-      state.authToken = action.payload;
+      state.accessToken = action.payload;
     },
     removeAuthToken: state => {
-      state.authToken = '';
+      state.accessToken = '';
     },
     isLogin : state => {
       state.isLogin = true;
     }
   },
+  extraReducers : (builder) =>{
+    builder.addCase(logInApiRedux.fulfilled, (state, action) => {
+      console.log('fullfiled', action.payload);
+      if (action.payload != "error"){
+        state.isLogin = true;
+        state.accessToken = action.payload.accessToken;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${action.payload.accessToken}`
+      }
+    })
+    .addCase(logOutApiRedux.fulfilled, (state,action)=>{
+      state.isLogin = false;
+      state.accessToken = '';
+      axios.defaults.headers.common['Authorization'] = ``;
+    })
+  }
 });
 
 export const { setAuthToken, removeAuthToken } = userAuthSlice.actions;

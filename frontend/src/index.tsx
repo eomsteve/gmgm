@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import authHeader from './routers/APIs/authHeader';
 
-//redux persist : localhost
 import {
   persistStore,
   persistReducer,
@@ -53,19 +52,16 @@ const store = configureStore({
 
 let persistor = persistStore(store);
 
-// console.log(localStorage.getItem('persist:null'));
-
-const isLogin = () => !!localStorage.getItem("jwtToken");
-if (!isLogin()) {
-  console.log('add auth token');
-  authHeader(localStorage.jwtToken);
-  const token = localStorage.jwtToken
-}
 
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
+
+if(localStorage.getItem('jwtToken') != null){
+  const token = localStorage.getItem('jwtToken');
+  authHeader(token);
+}
 
 root.render(
   <Provider store={store}>

@@ -22,12 +22,17 @@ const FavoriteCard: FC<FavoriteCardProps> = props => {
           {' '}
           {goodsName}
         </span>
-        
+          <div>
+
           <span className="col-span-1 flex justify-center truncate ">
             {
-              (priceGap > 0) ? <Up width="100%" height="2rem" /> : (priceGap < 0) ? <Down width="1rem" height="2rem" /> : <Equal width="1rem" height="2rem" /> 
+              (priceGap > 0) ? <Up width="1rem" height="2rem" /> : (priceGap < 0) ? <Down width="1rem" height="2rem" /> : <Equal width="1rem" height="2rem" /> 
             }
           </span>
+          <span className={`col-span-1 flex justify-center text-sm${(priceGap > 0) ? '' : ''}`} >
+            {(priceGap == 0) ? '': priceGap}
+            </span>
+            </div>
           <span className="col-span-2 flex justify-end mr-2">
             {goodsPrice}
           </span>

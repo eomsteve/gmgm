@@ -4,7 +4,7 @@ import MainBtn from '../components/NavBtn/NavMainButton';
 import HomeBtn from '../components/NavBtn/NavHomeBtn';
 import CheckListBtn from '../components/NavBtn/NavCheckListBtn';
 import FavBtn from '../components/NavBtn/NavFavBtn'
-
+import FabButton from '@src/components/NavBtn/testNav';
 import { Outlet } from 'react-router-dom';
 interface NavBtnProps {}
 
@@ -12,12 +12,7 @@ const NavBtn: FunctionComponent<NavBtnProps> = () => {
   return (
     <>
     <Outlet />
-    <nav className="nav-btn">
-      <MainBtn />
-      <Link to="/"><HomeBtn /></Link>
-      <Link to="/checkLists"><CheckListBtn /></Link>
-      <Link to="/favorite"><FavBtn/></Link>
-    </nav>
+    <FabButton />
     </>
   );
 };
