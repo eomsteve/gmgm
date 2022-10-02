@@ -51,8 +51,8 @@ const CheckListCustomItems: FC<CheckListCustomItemsProps> = props => {
           />
         );
       })}
-      {!isEdit && isEmpty && <div>
-      비어있습니다.
+      {!isEdit && isEmpty && <div className="my-10 text-gray-500 text-sm">
+      체크리스트가 비어 있어요.
     </div>}
       {isEdit && !isEmpty && (
         <div
