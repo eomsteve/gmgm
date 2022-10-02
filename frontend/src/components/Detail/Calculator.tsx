@@ -1,13 +1,15 @@
 import { FC, useState } from 'react';
 import SumPriceChart from '../charts/CalculatorChart';
 
-interface CalculatorProps {}
+interface CalculatorProps {
+  measure : string;
+}
 
-const Calculator: FC<CalculatorProps> = () => {
+const Calculator: FC<CalculatorProps> = (props) => {
+  const {measure} = props;
   const [usingCalculator, setUsingCalculator] = useState<boolean>(false);
   const [goodsPrice, setGoodsPrice] = useState<number>();
   const [goodsMeasure, setGoodsMeasure] = useState<number>();
-
   const [calculatorData, setCalculatorData] = useState<number>();
 
   const handlePriceInput = (e: React.ChangeEvent<HTMLInputElement>) => {

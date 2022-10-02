@@ -4,29 +4,39 @@ import Calculator from './Calculator';
 import { atCheckList } from '@apis/detail';
 import OnlineCard from './OnlineCard';
 
+interface GoodsInfo{
+  goodsId : number;
+  goodsName : string;
+}
+
+interface ProductData {
+  basicProductName : string;
+  unit : number;
+  measure : string;
+  goodsInfos : GoodsInfo[];
+  productPrices?:[]
+  researchDates? : []
+}
+
 interface DetailSelectBoxProps {}
 const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
   const { productId, businessType } = useParams();
+  const [goodsInfo, setGoodsInfo] = useState<GoodsInfo[]>([]);
+  const [productData, setProductData] = useState<ProductData>();
   let goodsList: string[] = [];
-  let goodsInfo: { goodsId: number; goodsName: string }[] = [
-    {
-      goodsId: 1,
-      goodsName: '듀라셀 울트라 파워체크 AAA*2입',
-    },
-    {
-      goodsId: 5,
-      goodsName: 'goods5',
-    },
-  ];
   let productPrices: { price: number; researchDate: string }[] = [];
   useEffect(() => {
     // get data
+    console.log("productId, businessType", productId, businessType);
+    
     const getData = async () => {
       const { data } = await atCheckList(productId, businessType);
-      console.log(data);
+      setProductData(data);
     };
 
     getData();
+    console.log(productData);
+    
     //goodsList = loadData.goodsList
   }, []);
   const navigate = useNavigate();
@@ -52,14 +62,14 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
           className="form-select form-select-sm m-2 block max-w-[25vw] rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-2 py-1 text-xs font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
           aria-label=".form-select-sm example"
         >
-          {goodsInfo.map(goods => (
+          {productData && productData.goodsInfos.map(goods => (
             <option value={goods.goodsName} key={goods.goodsId}>
               {goods.goodsName}
             </option>
           ))}
         </select>
       </div>
-      <Calculator />
+      {productData && <Calculator measure={productData.measure}/>}
       <OnlineCard />
     </>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useCallback,FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { signUpApi, checkEmailDuplicate } from '@apis/userApi'
 
 import axios from 'axios';
 
@@ -8,7 +9,7 @@ interface SignUpProps {}
 const SignUp: FunctionComponent<SignUpProps> = () => {
   const [name, setName] = useState<string>('')
 const [email, setEmail] = useState<string>('')
-const [password, setPassword] = useState<string>('')
+const [pwd, setPassword] = useState<string>('')
 const [passwordConfirm, setPasswordConfirm] = useState<string>('')
 const [date, setDate] = useState<string>('')
 const [gender, setGender] = useState<string>('')
@@ -20,6 +21,8 @@ const [passwordConfirmMessage, setPasswordConfirmMessage] = useState<string>('')
 
 const [isName, setIsName] = useState<boolean>(false)
 const [isEmail, setIsEmail] = useState<boolean>(false)
+const [emailDuplicate, setEmailDuplicate] = useState<boolean>(true)
+const [emailCheckState, setEmailCheckState] = useState<boolean>(false)
 const [isPassword, setIsPassword] = useState<boolean>(false)
 const [isPasswordConfirm, setIsPasswordConfirm] = useState<boolean>(false)
 const [isDate, setIsDate] = useState<boolean>(false)
@@ -49,10 +52,13 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 
   if (!emailRegex.test(emailCurrent)) {
     setEmailMessage('이메일 형식이 틀렸어요! 다시 확인해주세요 ㅜ ㅜ')
+    setEmailCheckState(false)
     setIsEmail(false)
   } else {
-    setEmailMessage('올바른 이메일 형식이에요 : )')
     setIsEmail(true)
+    setEmailCheckState(false)
+    setEmailDuplicate(true)
+    setEmailMessage('이메일 중복 확인이 필요해요!')
   }
 }, [])
 
@@ -77,7 +83,7 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
       const passwordConfirmCurrent = e.target.value
       setPasswordConfirm(passwordConfirmCurrent)
 
-      if (password === passwordConfirmCurrent) {
+      if (pwd === passwordConfirmCurrent) {
         setPasswordConfirmMessage('비밀번호를 똑같이 입력했어요 : )')
         setIsPasswordConfirm(true)
       } else {
@@ -85,7 +91,7 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setIsPasswordConfirm(false)
       }
     },
-    [password]
+    [pwd]
   )
   
   // 날짜 입력 확인
@@ -102,9 +108,42 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setGender(gender)
     setIsGender(true)
   },[])
+  const navigate = useNavigate();
+  const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(e.currentTarget);
+    console.log(email, pwd, name, gender, date );
+    const isSignUp=signUpApi({
+      email,
+      pwd,
+      name,
+      gender,
+      birthday: date,
+      role : 'u'
+    }).then((data) => {
+      console.log(data);
+      if(data){
+        navigate('/login')
+      }
+    })
+    
+  } 
+
+  const checkEmail= async (currentEmail : string)=>{
+    const status = await checkEmailDuplicate(currentEmail);
+    if (status === true){
+      setEmailCheckState(true)
+      setEmailMessage('이메일 인증이 완료되었습니다 : )')
+      setEmailDuplicate(false)
+    }else{
+      setEmailMessage('이미 가입된 이메일이에요 .. 다시한번 확인해 주세요!')
+      setEmailDuplicate(true)
+      setEmailCheckState(false)
+    }
+  }
 
   return (
-    <form className="flex min-h-screen flex-col bg-gray-50" onSubmit={()=>{console.log('onSubmit')}}>
+    <form className="flex min-h-screen flex-col bg-gray-50" onSubmit={handleSubmit}>
       <div className="container mx-auto flex max-w-sm flex-1 flex-col items-center justify-center px-2">
         <div className="w-full rounded bg-white px-6 py-8 text-black shadow-md">
           <h1 className="text-xl mb-4 font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">Sign up</h1>
@@ -129,18 +168,22 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
             onBlur={()=>{setIsEmailBlur(false)}}
             required
           />
-          { (email.length > 0) && <span className={`text-[0.7rem] ${isEmail ? 'text-blue-400' : 'text-gray-500'}`}>{emailMessage}</span>}
+          <div className="flex justify-between">
+
+          { (email.length > 0) && <span className={`text-[0.7rem] ${isEmail&& !emailDuplicate && emailCheckState? 'text-blue-400' : 'text-gray-500'}`}>{emailMessage} </span>}
+          {(isEmail && emailDuplicate) ? <span onClick={()=>{checkEmail(email)}} className="text-[0.7rem] text-blue-600">이메일 중복 확인하기</span>: ''}
+          </div>
 
           <input
             id="Password1"
             onChange={onChangePassword}
             type="password"
             className={`my-2 block w-full rounded border p-3  ${isPasswordBlur ? 'border-stone-200' : `${isPassword  ? 'border-green-600' : 'border-red-500'}`}`}
-            name="password"
+            name="pwd"
             placeholder="Password"
             required
           />
-          {password.length > 0 && (
+          {pwd.length > 0 && (
             <span className={`text-[0.7rem] ${isPassword ? 'text-blue-400' : 'text-gray-500'}`}>{passwordMessage}</span>
           )}
           <input
@@ -164,8 +207,8 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
             aria-required="true"
             className="my-2 block w-full rounded border border-stone-200 p-3 text-gray-400"
             name="birthday"
-            max="1899-12-31"
-            min="2022-12-31"
+            min="1899-12-31"
+            max="2022-12-31"
           />
           {/* gender selectors */}
           <div className="mx-auto mb-4 grid max-w-md grid-cols-2 gap-x-3 required">
@@ -173,7 +216,7 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
               <input
                 className="peer sr-only"
                 type="radio"
-                value="Male"
+                value="m"
                 name="gender"
                 id="male"
                 onChange={onChangeGender}
@@ -190,7 +233,7 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
               <input
                 className="peer sr-only"
                 type="radio"
-                value="Female"
+                value="f"
                 name="gender"
                 id="female"
                 onChange={onChangeGender}
@@ -208,8 +251,8 @@ const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
           {/* input box end */}
           <button
             type="submit"
-            className={`my-1 w-full rounded ${!(isName && isEmail && isPassword&& isGender && isPasswordConfirm && isDate) ? 'bg-gray-400' : 'bg-blue-400'} py-3 text-center text-white focus:outline-none`}
-            disabled={!(isName && isEmail && isPassword && isPasswordConfirm && isDate && isGender)}
+            className={`my-1 w-full rounded ${!(isName && isEmail && isPassword&& isGender && isPasswordConfirm && isDate && emailCheckState) ? 'bg-gray-400' : 'bg-blue-400'} py-3 text-center text-white focus:outline-none`}
+            disabled={!(isName && isEmail && isPassword && isPasswordConfirm && isDate && isGender && emailCheckState)}
           >
             Create Account
           </button>
