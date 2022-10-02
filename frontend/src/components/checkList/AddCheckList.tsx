@@ -18,7 +18,7 @@ const AddCheckList: FC<AddCheckListProps> = () => {
         onClick={() => {
           onClickHandle();
         }}
-        className="checklist-item flex-column m-5 flex h-[130px] w-[90px] items-center justify-center rounded border border-gray-300"
+        className="checklist-item flex-column m-3 flex h-36 items-center justify-center rounded border border-gray-300"
       >
         <div className="flex flex-col items-center justify-center ">
           <div className="text-[2rem]">
