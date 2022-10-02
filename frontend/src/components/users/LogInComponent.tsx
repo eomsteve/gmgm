@@ -2,14 +2,13 @@ import { FC } from 'react';
 import { LogInUserREQ, logInApi } from '../../routers/APIs/userApi'
 import {useNavigate}  from 'react-router-dom'
 import type { RootState } from '../../modules/store';
-import { setAuthToken} from '../../modules/Auth'
+import { setAuthToken,logInApiRedux } from '@modules/Auth'
 import { useDispatch, useSelector } from 'react-redux';
 
 const LogIn: FC = () => {
   const navigate = useNavigate();
   const authToken = useSelector((state : RootState) => {
     console.log(state.persistedReducer.authTokenReducer.authToken);
-    
   })
   // console.log(authToken);
   

@@ -18,11 +18,15 @@ import LogInPage from './routers/pages/user/LogIn';
 interface AppProps {}
 
 const App: React.FunctionComponent<AppProps> = () => {
+  const isLogin = () => !!localStorage.getItem("jwtToken");
+  console.log(isLogin());
+  
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<NavBtn />}>
           <Route index element={<Main />}></Route>
+          
           <Route path="favorite" element={<Favorite />}>
             <Route index element={<FavoriteIndexPage />}></Route>
           </Route>
