@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,6 +10,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+
+import type { GoodsInfo } from '@components/Detail/DetailSelect'
 
 ChartJS.register(
   CategoryScale,
@@ -51,33 +53,37 @@ export const options = {
 interface SumPriceChartProps {
   // productData : [];
   calculatorData?: number;
-  // goodsData?:[];
+  goodsData?:GoodsInfo[];
 }
 
 const SumPriceChart: FunctionComponent<SumPriceChartProps> = props => {
   // 라벨의 길이만큼 만들기
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-  ];
-
-  const { calculatorData } = props;
+  const { calculatorData, goodsData } = props;
+  const labels = [1, 2,3, 4,5]
   const data2 = labels.map(() => {
     return calculatorData;
   });
+  const data3 = labels.map(() =>{
+    return goodsData;
+  })
   let calculatorDataset = {};
+  let goodsDataset = {};
+  if(goodsData){
+    const data2 = labels.map(() => {
+      return goodsData;
+    });
+    goodsDataset = {
+      data: data3,
+      borderColor: '#639DEB',
+      backgroundColor: '#9ADCFF',
+    };
+  }
 
   if (calculatorData) {
     const data2 = labels.map(() => {
       return calculatorData;
     });
     calculatorDataset = {
-      // label: '계산결과',
       data: data2,
       borderColor: 'rgb(255, 99, 13)',
       backgroundColor: 'rgba(255, 99, 13, 0.5)',
@@ -103,6 +109,14 @@ const SumPriceChart: FunctionComponent<SumPriceChartProps> = props => {
         fill: false,
         pointRadius: 0,
       },
+      {
+        label: 'goodsData?.goodsName',
+        data: data2,
+        borderColor: '#639DEB',
+        backgroundColor: '#9ADCFF',
+        fill: false,
+        pointRadius: 0,
+      }
     ],
   };
   return (

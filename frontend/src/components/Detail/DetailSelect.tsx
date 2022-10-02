@@ -1,11 +1,16 @@
 import { FC, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Calculator from './Calculator';
-import { atCheckList } from '@apis/detail';
+import { atCheckList, detailSelectBoxChange } from '@apis/detail';
 import OnlineCard from './OnlineCard';
 
-interface GoodsInfo{
-  goodsId : number;
+export interface GoodsInfo{
+  cheapPrice : number;
+  cheapUrl ?: string;
+  goodsImg : string;
+  goodsPrices: {price: number}[];
+  measure : string;
+  researchDates : { researchDate: string}[]
   goodsName : string;
 }
 
@@ -13,7 +18,8 @@ interface ProductData {
   basicProductName : string;
   unit : number;
   measure : string;
-  goodsInfos : GoodsInfo[];
+  goodsInfos : {goodsId : number;
+    goodsName : string;}[];
   productPrices?:[]
   researchDates? : []
 }
@@ -21,33 +27,37 @@ interface ProductData {
 interface DetailSelectBoxProps {}
 const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
   const { productId, businessType } = useParams();
-  const [goodsInfo, setGoodsInfo] = useState<GoodsInfo[]>([]);
   const [productData, setProductData] = useState<ProductData>();
-  let goodsList: string[] = [];
-  let productPrices: { price: number; researchDate: string }[] = [];
   useEffect(() => {
     // get data
     console.log("productId, businessType", productId, businessType);
     
     const getData = async () => {
-      const { data } = await atCheckList(productId, businessType);
-      setProductData(data);
+      const data = await atCheckList(productId, businessType);
+      setProductData(() => data);
+      console.log(data);
     };
 
     getData();
-    console.log(productData);
     
-    //goodsList = loadData.goodsList
   }, []);
   const navigate = useNavigate();
   const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
+  const [goodsInfo, setGoodsInfo] = useState<GoodsInfo[]>([]);
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOption(e.target.value);
+    console.log(e.target.value);
+    const getGoodsDetails = async (goodsId? : string, businessType? : string) => {
+      const data = await detailSelectBoxChange(goodsId, businessType);
+      setGoodsInfo(() => data);
+      console.log(goodsInfo);
+      
+      return data;
+    }
+    getGoodsDetails(e.target.value, businessType);
+    
   };
-  // const getGoodsItemInfo = (goodsId, ) => {
 
-  // }
   return (
     <>
       <span className="text-lg">
@@ -59,17 +69,20 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
       <div className="flex items-center">
         <select
           onChange={handleSelection}
-          className="form-select form-select-sm m-2 block max-w-[25vw] rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-2 py-1 text-xs font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+          className="form-select form-select-sm m-2 block rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-3 py-1 text-xs font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
           aria-label=".form-select-sm example"
         >
+          {productData && <option value={productData.basicProductName} >
+              {productData.basicProductName}
+            </option>}
           {productData && productData.goodsInfos.map(goods => (
-            <option value={goods.goodsName} key={goods.goodsId}>
+            <option value={goods.goodsId} key={goods.goodsId}>
               {goods.goodsName}
             </option>
           ))}
         </select>
       </div>
-      {productData && <Calculator measure={productData.measure}/>}
+      {productData && <Calculator measure={productData.measure} goodsProps={goodsInfo}/>}
       <OnlineCard />
     </>
   );

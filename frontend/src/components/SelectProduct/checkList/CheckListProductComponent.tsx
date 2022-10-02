@@ -37,7 +37,7 @@ const ProductLists: FC<ProductListsProps> = props => {
             품목을 선택해서 리스트에 추가하세요.
           </span>
         </div>
-        <div className="flex grid h-5/6 grid-cols-2 flex-wrap content-start overflow-auto scroll-auto">
+        <div className="grid h-5/6 grid-cols-2 flex-wrap content-start overflow-auto scroll-auto">
           {productList.map(product => {
             return (
               <div
