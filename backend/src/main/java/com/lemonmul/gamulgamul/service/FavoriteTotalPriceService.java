@@ -26,6 +26,21 @@ public class FavoriteTotalPriceService {
     }
 
     /**
+     * 사용자, 날짜를 기준으로 1년치 즐겨찾기 총합 리스트는 받아오는 함수
+     */
+    public List<FavoriteTotalPrice> getAllFavoriteTotalPrices(User user, LocalDate date) {
+        return favoriteTotalPriceRepo.findAllByUserAndResearchDateBetweenOrderByResearchDate(user, date.minusYears(1), date);
+    }
+
+    /**
+     * 입력으로 들어온 리스트를 저장하는 함수
+     */
+    @Transactional
+    public List<FavoriteTotalPrice> addAll(List<FavoriteTotalPrice> favoriteTotalPrices) {
+        return favoriteTotalPriceRepo.saveAll(favoriteTotalPrices);
+    }
+
+    /**
      * 사용자의 즐겨찾기 총합을 전부 삭제하는 함수
      */
     @Transactional

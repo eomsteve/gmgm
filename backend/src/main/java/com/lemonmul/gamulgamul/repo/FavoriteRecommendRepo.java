@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface FavoriteRecommendRepo extends JpaRepository<FavoriteRecommend, Long> {
-    List<FavoriteRecommend> findByUserAndGoodsIdNotIn(User user, List<Long> goodsIds);
+    List<FavoriteRecommend> findTop2ByUserAndGoodsIdNotInOrderByScore(User user, List<Long> goodsIds);
 }

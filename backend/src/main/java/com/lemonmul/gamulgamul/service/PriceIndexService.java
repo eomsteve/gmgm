@@ -33,6 +33,10 @@ public class PriceIndexService {
         return priceIndexRepo.findAllByUserAndIndexTypeAndResearchDateBetweenOrderByResearchDate(user, IndexType.f, date.minusYears(10), date);
     }
 
+    public List<PriceIndex> addAll(List<PriceIndex> priceIndices) {
+        return priceIndexRepo.saveAll(priceIndices);
+    }
+
     /**
      * 사용자의 즐겨찾기 지수를 전부 삭제하는 함수
      */

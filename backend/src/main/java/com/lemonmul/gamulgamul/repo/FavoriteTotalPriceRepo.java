@@ -14,6 +14,8 @@ import java.util.List;
 public interface FavoriteTotalPriceRepo extends JpaRepository<FavoriteTotalPrice, Long> {
     List<FavoriteTotalPrice> findAllByUserAndBusinessAndResearchDateBetweenOrderByResearchDate(User user, BusinessType businessType, LocalDate start, LocalDate end);
 
+    List<FavoriteTotalPrice> findAllByUserAndResearchDateBetweenOrderByResearchDate(User user, LocalDate start, LocalDate end);
+
     @Modifying
     @Query("delete from FavoriteTotalPrice where user=:user")
     void deleteByUser(@Param("user") User user);

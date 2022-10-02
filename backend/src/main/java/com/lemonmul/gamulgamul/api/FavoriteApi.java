@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lemonmul.gamulgamul.api.dto.CategoryDto;
 import com.lemonmul.gamulgamul.api.dto.ParamDto;
+import com.lemonmul.gamulgamul.api.dto.RestResponseDto;
 import com.lemonmul.gamulgamul.api.dto.favorite.*;
 import com.lemonmul.gamulgamul.entity.BusinessType;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
@@ -118,11 +119,10 @@ public class FavoriteApi {
     }
 
     /**
-     * 즐겨찾기 목록 갱신
+     * 즐겨찾기 목록 갱신 v1
      */
-    // TODO: return 값 수정(DTO)
     @PostMapping
-    public boolean updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) throws JsonProcessingException {
+    public List<FavoriteItemResponseDto> updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDto favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) throws Exception {
         log.info("[Starting request] POST /favorite");
 
         List<Long> goodsIds = favoriteUpdateRequestDto.getGoodsIds();
@@ -130,7 +130,6 @@ public class FavoriteApi {
         log.info("userId: {}", user.getId());
         log.info("favoriteUpdateRequestDtos: {}", favoriteUpdateRequestDto.getGoodsIds().size());
 
-        // TODO: 쿼리가 너무 많이 나갈 것 같음...
         // 즐겨찾기 목록에서 삭제할 항목들
         List<FavoriteGoods> deleteFavoriteGoodsList = user.getFavoriteGoods();
         // 즐겨찾기 목록에 추가할 항목들
@@ -160,25 +159,91 @@ public class FavoriteApi {
             if(!exists[i])
                 addFavoriteGoodsList.add(FavoriteGoods.of(user, goodsList.get(i)));
         }
-
         log.info("addFavoriteGoodsList size: {}", addFavoriteGoodsList.size());
         log.info("deleteFavoriteGoodsList size: {}", deleteFavoriteGoodsList.size());
 
         // 즐겨찾기 목록 갱신
         favoriteGoodsService.updateFavoriteGoodsList(addFavoriteGoodsList, deleteFavoriteGoodsList);
+        List<FavoriteItemResponseDto> newFavoriteGoodsList = favoriteGoodsService.getFavoriteGoods(user).stream().map(FavoriteItemResponseDto::new).collect(Collectors.toList());
+        log.info("newFavoriteGoodsList size: {}", newFavoriteGoodsList.size());
 
         // 즐겨찾기 총합, 지수 계산
-        boolean result = favoriteCalc(user);
+        if(favoriteCalc(user)) {
+            log.info("[Finished request] POST /favorite");
+            return newFavoriteGoodsList;
+        } else {
+            throw new Exception();
+        }
+    }
 
-        log.info("[Finished request] POST /favorite");
-        return result;
+    /**
+     * 즐겨찾기 목록 갱신 v2
+     */
+    @PostMapping("/info")
+    public List<FavoriteItemResponseDto> updateFavoriteGoods(@RequestBody FavoriteUpdateRequestDtoV2 favoriteUpdateRequestDto, @RequestHeader HttpHeaders headers) throws Exception {
+        log.info("[Starting request] POST /favorite");
+
+        List<Long> goodsIds = favoriteUpdateRequestDto.getInputGoodsList().stream().map(GoodsDto::getGoodsId).collect(Collectors.toList());
+        User user = JwtTokenProvider.getUserFromJwtToken(userService,headers);
+        log.info("userId: {}", user.getId());
+        log.info("favoriteUpdateRequestDtos: {}", favoriteUpdateRequestDto.getInputGoodsList().size());
+
+        // 즐겨찾기 목록에서 삭제할 항목들
+        List<FavoriteGoods> deleteFavoriteGoodsList = user.getFavoriteGoods();
+        // 즐겨찾기 목록에 추가할 항목들
+        List<FavoriteGoods> addFavoriteGoodsList = new ArrayList<>();
+        boolean[] exists = new boolean[goodsIds.size()];
+
+        List<Goods> goodsList = goodsService.getGoodsList(goodsIds);
+
+        FavoriteGoods favoriteGoods;
+        // 일단 사용자의 즐겨찾기 목록을 전부 삭제할 목록에 넣어두고
+        // 반복문을 돌면서 남겨둘 항목은 삭제할 목록에서 제거
+        for(int i = deleteFavoriteGoodsList.size() - 1; i >= 0; i--) {
+            favoriteGoods = deleteFavoriteGoodsList.get(i);
+
+            for(int j = 0; j < goodsList.size(); j++) {
+                if(favoriteGoods.getGoods().equals(goodsList.get(j))) {
+                    deleteFavoriteGoodsList.remove(i);
+                    // 입력으로 받은 것들 중에서 이미 존재하는 것에는 exist를 체크
+                    exists[j] = true;
+                    break;
+                }
+            }
+        }
+
+        // exist가 false인 항목들만 새로 추가
+        for(int i = 0; i < exists.length; i++) {
+            if(!exists[i])
+                addFavoriteGoodsList.add(FavoriteGoods.of(user, goodsList.get(i)));
+        }
+        log.info("addFavoriteGoodsList size: {}", addFavoriteGoodsList.size());
+        log.info("deleteFavoriteGoodsList size: {}", deleteFavoriteGoodsList.size());
+
+        // 즐겨찾기 목록 갱신
+        favoriteGoodsService.updateFavoriteGoodsList(addFavoriteGoodsList, deleteFavoriteGoodsList);
+        List<FavoriteItemResponseDto> newFavoriteGoodsList = favoriteGoodsService.getFavoriteGoods(user).stream().map(FavoriteItemResponseDto::new).collect(Collectors.toList());
+        log.info("newFavoriteGoodsList size: {}", newFavoriteGoodsList.size());
+
+        // 즐겨찾기 총합, 지수 계산
+        if(favoriteCalc(user)) {
+            log.info("[Finished request] POST /favorite");
+            return newFavoriteGoodsList;
+        } else {
+            throw new Exception();
+        }
     }
 
     /**
      * 즐겨찾기 총합과 지수 계산을 spark에 요청하는 함수
      */
-    // TODO: 반환값 고민
     private boolean favoriteCalc(User user) throws JsonProcessingException {
+        LocalDate today = LocalDate.now();
+
+        // 기존 즐겨찾기 총합과 지수 백업
+        List<FavoriteTotalPrice> originFavoriteTotalPrices = favoriteTotalPriceService.getAllFavoriteTotalPrices(user, today);
+        List<PriceIndex> originFavoriteIndices = priceIndexService.getFavoriteIndices(user, today);
+
         // 기존 즐겨찾기 총합과 지수 삭제
         favoriteTotalPriceService.deleteFavoriteTotalPrice(user);
         priceIndexService.deleteFavoriteIndex(user);
@@ -205,10 +270,16 @@ public class FavoriteApi {
         // 요청 메세지 설정
         HttpEntity<?> requestMessage = new HttpEntity<>(request, httpHeaders);
 
-        // TODO: api 요청 결과에 따라 true or false
         // POST 요청 전송
-        HttpEntity<String> response = restTemplate.postForEntity(url, requestMessage, String.class);
-        log.info("POST Request Result: {}", response);
+        HttpEntity<RestResponseDto> response = restTemplate.postForEntity(url, requestMessage, RestResponseDto.class);
+        String code = Objects.requireNonNull(response.getBody()).getBody().getCode();
+        log.info("response code: {}", code);
+
+        if(code.equals("SUCCESS")) {
+            favoriteTotalPriceService.addAll(originFavoriteTotalPrices);
+            priceIndexService.addAll(originFavoriteIndices);
+            return false;
+        }
 
         return true;
     }

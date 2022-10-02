@@ -20,6 +20,6 @@ public class FavoriteRecommendService {
      * 이미 즐겨찾기 목록에 있는 항목을 제외한 즐겨찾기 추천 목록을 받아오는 함수
      */
     public List<FavoriteRecommendDto> getFavoriteRecommends(User user, List<Long> goodsIds) {
-        return favoriteRecommendRepo.findByUserAndGoodsIdNotIn(user, goodsIds).stream().map(FavoriteRecommendDto::new).collect(Collectors.toList());
+        return favoriteRecommendRepo.findTop2ByUserAndGoodsIdNotInOrderByScore(user, goodsIds).stream().map(FavoriteRecommendDto::new).collect(Collectors.toList());
     }
 }

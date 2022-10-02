@@ -18,4 +18,6 @@ public interface FavoriteGoodsRepo extends JpaRepository<FavoriteGoods, Long> {
     @Modifying
     @Query("delete from FavoriteGoods favoriteGoods where favoriteGoods in :favoriteGoodsList")
     void deleteIn(@Param("favoriteGoodsList") List<FavoriteGoods> favoriteGoodsList);
+
+    List<FavoriteGoods> findByUser(User user);
 }

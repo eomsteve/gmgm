@@ -3,8 +3,10 @@ package com.lemonmul.gamulgamul.api.dto.favorite;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class GoodsDto {
     private Long goodsId;
