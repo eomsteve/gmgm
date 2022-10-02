@@ -9,6 +9,10 @@ const AUTH_TOKEN = 'token';
 export type CheckList = {
   checklistId: number;
   regDate: string;
+  itemInfos: {
+    productName: string;
+    status:boolean
+  }[]
 };
 
 /**
@@ -19,7 +23,7 @@ export type CheckList = {
  */
 export const getCheckLists = async () => {
   try {
-    const { data } = await axios.get(API_URL + '/list');
+    const { data } = await axios.get(API_URL + '/list/info');
     console.log('getCheckLists : ', data);
     return data;
   } catch (error) {}

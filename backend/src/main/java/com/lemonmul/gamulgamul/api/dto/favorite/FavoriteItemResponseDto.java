@@ -1,5 +1,6 @@
 package com.lemonmul.gamulgamul.api.dto.favorite;
 
+import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,9 @@ public class FavoriteItemResponseDto {
     private Double priceGapOff;
     private Double priceGapOn;
 
-    public FavoriteItemResponseDto(Goods goods) {
+    public FavoriteItemResponseDto(FavoriteGoods favoriteGoods) {
+        Goods goods = favoriteGoods.getGoods();
+
         this.goodsId = goods.getId();
         this.basicProductId = goods.getProduct().getId();
         this.goodsName = goods.getName();

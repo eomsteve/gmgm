@@ -31,6 +31,7 @@ const CheckLists: FunctionComponent<CheckListsProps> = () => {
               <CheckListItem
                 checklistId={checkList.checklistId}
                 regDate={checkList.regDate}
+                itemInfos={checkList.itemInfos}
               />
             </div>
           );

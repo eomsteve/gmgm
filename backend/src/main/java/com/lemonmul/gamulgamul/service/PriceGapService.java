@@ -35,37 +35,41 @@ public class PriceGapService {
         double priceGapOff, priceGapOn;
 
         List<ProductPrice> todayProductPricesOff = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today, BusinessType.m);
-        List<ProductPrice> aWeekAgoProductPricesOff = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today.minusWeeks(1), BusinessType.m);
+//        List<ProductPrice> aWeekAgoProductPricesOff = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today.minusWeeks(1), BusinessType.m);
+        List<ProductPrice> aWeekAgoProductPricesOff = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today.minusDays(1), BusinessType.m);
         List<ProductPrice> todayProductPricesOn = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today, BusinessType.o);
-        List<ProductPrice> aWeekAgoProductPricesOn = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today.minusWeeks(1), BusinessType.o);
+//        List<ProductPrice> aWeekAgoProductPricesOn = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today.minusWeeks(1), BusinessType.o);
+        List<ProductPrice> aWeekAgoProductPricesOn = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today.minusDays(1), BusinessType.o);
 
         Product product;
         List<Product> products = productRepo.findAll();
         for(int i = 0; i < products.size(); i++) {
             product = products.get(i);
 
-            priceGapOff = aWeekAgoProductPricesOff.get(i).getPrice() - todayProductPricesOff.get(i).getPrice();
+//            priceGapOff = aWeekAgoProductPricesOff.get(i).getPrice() - todayProductPricesOff.get(i).getPrice();
 //            priceGapOn = aWeekAgoProductPricesOn.get(i).getPrice() - todayProductPricesOn.get(i).getPrice();
 
-            product.setPriceGapOff(priceGapOff);
+//            product.setPriceGapOff(priceGapOff);
 //            product.setPriceGapOn(priceGapOn);
         }
 
         List<GoodsPrice> todayGoodsPricesOff = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today, BusinessType.m);
-        List<GoodsPrice> aWeekAgoGoodsPricesOff = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today.minusWeeks(1), BusinessType.m);
+//        List<GoodsPrice> aWeekAgoGoodsPricesOff = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today.minusWeeks(1), BusinessType.m);
+        List<GoodsPrice> aWeekAgoGoodsPricesOff = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today.minusDays(1), BusinessType.m);
         List<GoodsPrice> todayGoodsPricesOn = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today, BusinessType.o);
-        List<GoodsPrice> aWeekAgoGoodsPricesOn = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today.minusWeeks(1), BusinessType.o);
+//        List<GoodsPrice> aWeekAgoGoodsPricesOn = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today.minusWeeks(1), BusinessType.o);
+        List<GoodsPrice> aWeekAgoGoodsPricesOn = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today.minusDays(1), BusinessType.o);
 
         Goods goods;
         List<Goods> goodsList = goodsRepo.findAll();
         for(int i = 0; i < goodsList.size(); i++) {
             goods = goodsList.get(i);
 
-            priceGapOff = aWeekAgoGoodsPricesOff.get(i).getPrice() - todayGoodsPricesOff.get(i).getPrice();
-//            priceGapOn = aWeekAgoGoodsPricesOn.get(i).getPrice() - todayGoodsPricesOn.get(i).getPrice();
+//            priceGapOff = aWeekAgoGoodsPricesOff.get(i).getPrice() - todayGoodsPricesOff.get(i).getPrice();
+            priceGapOn = aWeekAgoGoodsPricesOn.get(i).getPrice() - todayGoodsPricesOn.get(i).getPrice();
 
-            goods.setPriceGapOff(priceGapOff);
-//            goods.setPriceGapOn(priceGapOn);
+//            goods.setPriceGapOff(priceGapOff);
+            goods.setPriceGapOn(priceGapOn);
         }
     }
 }

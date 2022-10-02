@@ -1,6 +1,6 @@
 package com.lemonmul.gamulgamul.api;
 
-import com.lemonmul.gamulgamul.api.dto.LogoutRequestDto;
+import com.lemonmul.gamulgamul.api.dto.user.LogoutRequestDto;
 import com.lemonmul.gamulgamul.api.dto.user.SignupRequestDto;
 import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.security.redis.RedisService;

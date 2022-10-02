@@ -46,7 +46,7 @@ const GoodsScroll: FC<GoodsScrollProps> = props => {
       <div className="my-2 mt-[1vh] text-lg">
         상품
         <span className="ml-2 text-xs text-gray-500">
-          품목을 선택해서 리스트에 추가하세요
+          품목을 선택해서 목록에 추가하세요
         </span>
       </div>
       <div className="flex grid h-1/2 grid-cols-2 flex-wrap content-start overflow-auto scroll-auto">

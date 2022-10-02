@@ -2,14 +2,19 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBasketShopping } from '@fortawesome/free-solid-svg-icons';
+import CheckListPreview from '@components/checkList/UI/CheckListPreview';
 import { ReactComponent as Basket } from '../../assets/icons/basket.svg';
 interface CheckListItemProps {
   checklistId: number;
   regDate: string;
+  itemInfos: {
+    productName: string;
+    status: boolean;
+  }[];
 }
 
 const CheckListItem: FC<CheckListItemProps> = props => {
-  const { checklistId, regDate } = props;
+  const { checklistId, regDate, itemInfos } = props;
   const date = new Date(regDate);
   const navigate = useNavigate();
 
@@ -20,16 +25,27 @@ const CheckListItem: FC<CheckListItemProps> = props => {
     <>
       <div
         onClick={() => navigate(`/checklists/${checklistId}`)}
-        className="checklist-item flex-column m-5 flex h-[130px] w-[90px] items-center justify-center rounded border border-gray-300"
+        className="checklist-item flex-column m-3 flex h-36 justify-center rounded border border-gray-300 py-2"
       >
-        <div className="flex flex-col items-center justify-center ">
-          {/* <div className="text-[#428BC1] text-[2rem]"><FontAwesomeIcon icon={faBasketShopping} /></div> */}
-          <div className="text-[2rem] text-[#428BC1]">
-            <Basket width="2rem" height="2rem" />
+        <div className="grid grid-rows-5">
+          <div className="flex items-center justify-center text-black">
+            <div>
+              <Basket width="1.1rem" height="1.1rem" />
+            </div>
+            <div className="ml-1">{`${
+              date.getMonth() + 1
+            }월 ${date.getDate()}일`}</div>
           </div>
-          <div className="text-[0.8rem] text-black">{`${
-            date.getMonth() + 1
-          }월 ${date.getDate()}일`}</div>
+          {itemInfos.map(itemInfo => {
+            return (
+              <div>
+                <CheckListPreview
+                  status={itemInfo.status}
+                  productName={itemInfo.productName}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </>

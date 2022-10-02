@@ -166,14 +166,11 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
   };
 
   return (
-    <form
-      className="flex min-h-screen flex-col bg-gray-50"
-      onSubmit={handleSubmit}
-    >
+    <form className="flex flex-col" onSubmit={handleSubmit}>
       <div className="container mx-auto flex max-w-sm flex-1 flex-col items-center justify-center px-2">
-        <div className="w-full rounded bg-white px-6 py-8 text-black shadow-md">
-          <h1 className="mb-4 text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
-            Sign up
+        <div className="w-full rounded bg-white px-6 py-8 text-black ">
+          <h1 className="mb-4 text-xl leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
+            회원가입
           </h1>
           <input
             id="FullName"
@@ -185,7 +182,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
                 : `${isName ? 'border-green-600' : 'border-red-500'}`
             }`}
             name="fullname"
-            placeholder="Full Name"
+            placeholder="이름"
             onBlur={() => {
               setIsNameBlur(false);
             }}
@@ -210,7 +207,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
                 : `${isEmail ? 'border-green-600' : 'border-red-500'}`
             }`}
             name="email"
-            placeholder="Email"
+            placeholder="이메일"
             onBlur={() => {
               setIsEmailBlur(false);
             }}
@@ -252,7 +249,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
                 : `${isPassword ? 'border-green-600' : 'border-red-500'}`
             }`}
             name="pwd"
-            placeholder="Password"
+            placeholder="비밀번호"
             required
           />
           {pwd.length > 0 && (
@@ -274,7 +271,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
                 : `${isPasswordConfirm ? 'border-green-600' : 'border-red-500'}`
             }`}
             name="confirm_password"
-            placeholder="Confirm Password"
+            placeholder="비밀번호 확인"
             required
           />
           {passwordConfirm.length > 0 && (
@@ -290,10 +287,10 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
             id="Birth"
             type="date"
             onChange={onChangeDatePicker}
-            data-placeholder="Birthday"
+            data-placeholder="생년월일"
             required
             aria-required="true"
-            className="my-2 block w-full rounded border border-stone-200 p-3 text-gray-400"
+            className="my-2 block w-full rounded border border-stone-200 p-3"
             name="birthday"
             min="1899-12-31"
             max={today()}
@@ -310,10 +307,10 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
                 onChange={onChangeGender}
               />
               <label
-                className="flex cursor-pointer rounded-lg border border-gray-300 bg-white p-3 text-gray-600 hover:bg-gray-50 focus:outline-none peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-stone-700"
+                className="flex cursor-pointer rounded-lg border border-gray-300 bg-white p-3 hover:bg-gray-50 focus:outline-none peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-stone-700"
                 htmlFor="male"
               >
-                Male
+                남자
               </label>
             </div>
             <div>
@@ -329,14 +326,14 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
                 className="flex  cursor-pointer rounded-lg border border-gray-300 bg-white p-3 hover:bg-gray-50 focus:text-gray-600 focus:outline-none peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-stone-700"
                 htmlFor="female"
               >
-                Female
+                여자
               </label>
             </div>
           </div>
           {/* input box end */}
           <button
             type="submit"
-            className={`my-1 w-full rounded ${
+            className={`my-1 w-full rounded-lg ${
               !(
                 isName &&
                 isEmail &&
@@ -347,8 +344,8 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
                 emailCheckState
               )
                 ? 'bg-gray-400'
-                : 'bg-blue-400'
-            } py-3 text-center text-white focus:outline-none`}
+                : 'bg-blue-500'
+            } py-2.5 text-center text-white focus:outline-none`}
             disabled={
               !(
                 isName &&
@@ -361,10 +358,10 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
               )
             }
           >
-            Create Account
+            회원가입하기
           </button>
 
-          <div className="mt-4 text-center text-sm text-[grey]">
+          {/* <div className="mt-4 text-center text-sm text-[grey]">
             By signing up, you agree to the
             <a
               className="border-b border-[grey] text-stone-600 no-underline"
@@ -379,18 +376,14 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
             >
               Privacy Policy
             </a>
-          </div>
+          </div> */}
         </div>
 
-        <div className="mt-6 text-stone-600">
-          Already have an account?
-          <a
-            className="dark:text-primary-500 font-medium text-blue-600 hover:underline"
-            href="../login/"
-          >
-            Log in
+        <div className="mb-6 text-stone-600">
+          이미 회원이신가요?{' '}
+          <a className="text-blue-500" href="../login/">
+            로그인하기
           </a>
-          .
         </div>
       </div>
     </form>

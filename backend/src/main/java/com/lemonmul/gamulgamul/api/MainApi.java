@@ -1,7 +1,7 @@
 package com.lemonmul.gamulgamul.api;
 
-import com.lemonmul.gamulgamul.api.dto.MainPageResponseDto;
-import com.lemonmul.gamulgamul.api.dto.PriceIndexDto;
+import com.lemonmul.gamulgamul.api.dto.main.MainPageResponseDto;
+import com.lemonmul.gamulgamul.api.dto.main.PriceIndexDto;
 import com.lemonmul.gamulgamul.api.dto.checklist.ListDto;
 import com.lemonmul.gamulgamul.entity.News;
 import com.lemonmul.gamulgamul.entity.priceindex.IndexType;

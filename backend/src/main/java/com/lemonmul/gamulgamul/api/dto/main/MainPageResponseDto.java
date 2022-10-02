@@ -1,4 +1,4 @@
-package com.lemonmul.gamulgamul.api.dto;
+package com.lemonmul.gamulgamul.api.dto.main;
 
 import com.lemonmul.gamulgamul.api.dto.checklist.ListDto;
 import com.lemonmul.gamulgamul.entity.News;
