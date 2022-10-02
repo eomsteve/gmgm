@@ -55,13 +55,11 @@ let persistor = persistStore(store);
 
 // console.log(localStorage.getItem('persist:null'));
 
-
-if (localStorage.jwtToken) {
+const isLogin = () => !!localStorage.getItem("jwtToken");
+if (!isLogin()) {
   console.log('add auth token');
-  
   authHeader(localStorage.jwtToken);
   const token = localStorage.jwtToken
-  // console.log(token);
 }
 
 

@@ -54,10 +54,20 @@ export const checkEmailDuplicate = async (email: string) => {
 //   "role" : "u"
 // }
 
+export default function authHeader(token: string) {
+  if (token) {
+    console.log('adding header at token,', token);
+    axios.defaults.headers.common['Authorization'] = `${token}`;
+  } else {
+    delete axios.defaults.headers.common['Authorization'];
+  }
+}
+
 export const logInApi = async (logInForm: LogInUserREQ) => {
   try {
     const { data } = await axios.post(API_URL + '/login', logInForm);
     localStorage.setItem("jwtToken", data.accessToken);
+    authHeader( data.accessToken )
     return {status : true, data : data.accessToken};
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -69,4 +79,18 @@ export const logInApi = async (logInForm: LogInUserREQ) => {
     }
   }
 };
+
+export const logOutApi = async (email : string) =>{
+  try {
+    const { data } = await axios({
+      url: API_URL + `/logout`,
+      method: 'POST',
+      data :{email,
+      }
+    });
+    localStorage.removeItem('jwtToken')
+  } catch (error) {
+    
+  }
+}
 
