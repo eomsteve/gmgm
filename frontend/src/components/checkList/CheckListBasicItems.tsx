@@ -44,8 +44,8 @@ const CheckListBasicItems: FC<CheckListBasicItemsProps> = props => {
             <BasicBanner />
           </div>
         )}
-  {!isEdit && isEmpty && <div>
-      비어있습니다.
+  {!isEdit && isEmpty && <div className="my-10 text-gray-500 text-sm">
+      체크리스트가 비어 있어요.
     </div>}
   {checklistBasicItems.map((products: BasicProduct) => {
           return (

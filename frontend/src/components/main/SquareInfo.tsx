@@ -3,16 +3,17 @@ import { FC } from 'react';
 interface SquareInfoProps {
   bgColor: string;
   textColor: string;
+  gridSize: string;
 }
 
 const SSquareInfo: FC<SquareInfoProps> = props => {
-  const { bgColor, textColor } = props;
+  const { bgColor, textColor, gridSize } = props;
   return (
     <>
       <div
-        className={`${bgColor} ${textColor} m-3 h-[40vw] w-[40vw] rounded-xl p-3`}
+        className={`${bgColor} ${textColor} ${gridSize} h-full w-full rounded-xl p-3`}
       >
-        흰 글씨가 잘 안보일지도...
+        안녕 우리는 Indices
       </div>
     </>
   );
