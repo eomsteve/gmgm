@@ -34,7 +34,15 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
   const [isPasswordBlur, setIsPasswordBlur] = useState<boolean>(true);
   const [isPasswordConfirmBlur, setIsPasswordConfirmBlur] =
     useState<boolean>(true);
+  const today = () =>{
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = ("0" + (1 + date.getMonth())).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
 
+    return year + "-" + month + "-" + day;}
+  console.log(today);
+  
   const onChangeName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
     if (e.target.value.length < 2 || e.target.value.length > 12) {
@@ -285,7 +293,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
             className="my-2 block w-full rounded border border-stone-200 p-3"
             name="birthday"
             min="1899-12-31"
-            max="2022-12-31"
+            max={today()}
           />
           {/* gender selectors */}
           <div className="required mx-auto mb-4 grid max-w-md grid-cols-2 gap-x-3">
