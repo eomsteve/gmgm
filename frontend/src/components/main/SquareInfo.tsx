@@ -4,6 +4,7 @@ interface SquareInfoProps {
   bgColor: string;
   textColor: string;
   gridSize: string;
+  isLogin : boolean;
   cpi ?: {value : number, researchDate:string},
   favoriteIndex?: {value: number, researchDate:string},
   news ?: {id: number, title: string, link: string, pubDate: string},
@@ -11,7 +12,7 @@ interface SquareInfoProps {
 }
 
 const SSquareInfo: FC<SquareInfoProps> = props => {
-  const { bgColor, textColor, gridSize, cpi, favoriteIndex, news, gmgmIndex } = props;
+  const { bgColor, textColor, gridSize, cpi, favoriteIndex, news, gmgmIndex, isLogin } = props;
   return (
     <>
       <div
@@ -21,7 +22,7 @@ const SSquareInfo: FC<SquareInfoProps> = props => {
         <div>{cpi.researchDate}</div></div>}
         { news && <div><div>{news.title}</div>
         <div>{news.pubDate}</div></div>}
-        { favoriteIndex && <div><div>{favoriteIndex.value}</div>
+        { favoriteIndex  && isLogin && <div><div>{favoriteIndex.value}</div>
         <div>{favoriteIndex.researchDate}</div></div>}
         { gmgmIndex && <div><div>{gmgmIndex.value}</div>
         <div>{gmgmIndex.researchDate}</div></div>}
