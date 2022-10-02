@@ -22,7 +22,6 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -62,7 +61,7 @@ public class MainService {
      * 해당 유저의 체크리스트 최대 3개를 반환
      * */
     public List<Checklist> getRecentChecklists(User user){
-        return checklistRepo.findTop3ByUserAndIsDeletedOrderByRegDateDescIdDesc(user, false);
+        return checklistRepo.findTop2ByUserAndIsDeletedOrderByRegDateDescIdDesc(user, false);
     }
 
     /**

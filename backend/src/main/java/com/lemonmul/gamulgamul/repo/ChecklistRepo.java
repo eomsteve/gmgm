@@ -16,5 +16,5 @@ public interface ChecklistRepo extends JpaRepository<Checklist,Long> {
     List<Checklist> findByUserAndIsDeletedOrderByRegDateDescIdDesc(User user, boolean isDeleted);
 
     //최근 체크리스트 3개 조회
-    List<Checklist> findTop3ByUserAndIsDeletedOrderByRegDateDescIdDesc(User user, boolean isDeleted);
+    List<Checklist> findTop2ByUserAndIsDeletedOrderByRegDateDescIdDesc(User user, boolean isDeleted);
 }

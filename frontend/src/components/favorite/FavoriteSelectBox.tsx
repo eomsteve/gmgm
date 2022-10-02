@@ -2,6 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import FavoriteCard from './FavoriteCard';
 import { getFavoriteSelect, getFavoritePageData } from '@apis/favoriteApi';
 import GotoSelectionButton from './GotoSelection';
+import Recommendation from './RecommendComponent';
 import { useNavigate } from 'react-router-dom';
 import type { FavoritePageData, FavoriteItem } from '@apis/favoriteApi';
 interface FavoriteSelectBoxProps {
@@ -79,9 +80,10 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
             navigate('/favorite/selection');
           }}
         >
-          <GotoSelectionButton />
+            <GotoSelectionButton />
         </div>
       </div>
+      <Recommendation/>
     </div>
   );
 };

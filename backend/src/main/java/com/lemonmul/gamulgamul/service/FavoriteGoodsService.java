@@ -1,6 +1,7 @@
 package com.lemonmul.gamulgamul.service;
 
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
+import com.lemonmul.gamulgamul.entity.goods.Goods;
 import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.repo.FavoriteGoodsRepo;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,23 @@ public class FavoriteGoodsService {
     /**
      * 사용자의 즐겨찾기 목록을 받아오는 함수
      */
-    public List<FavoriteGoods> getFavoriteGoods(User user) {
+    public List<FavoriteGoods> existFavoriteGoods(User user) {
         return favoriteGoodsRepo.findByUser(user);
+    }
+
+    /**
+     * 해당 상품을 사용자의 즐겨찾기 목록에 추가하는 함수
+     */
+    @Transactional
+    public void addFavoriteGoods(User user, Goods goods) {
+        favoriteGoodsRepo.save(FavoriteGoods.of(user, goods));
+    }
+
+    /**
+     * 해당 상품을 사용자의 즐겨찾기 목록에서 찾는 함수
+     */
+    @Transactional
+    public boolean existFavoriteGoods(User user, Goods goods) {
+        return favoriteGoodsRepo.findByUserAndGoods(user, goods).isPresent();
     }
 }

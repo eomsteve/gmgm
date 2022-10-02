@@ -4,7 +4,7 @@ interface OnlineCardProps {}
 const OnlineCard: FC<OnlineCardProps> = () => {
   return (
     <>
-      <div className="my-5 w-full">
+      <div className="my-4 w-full">
         <span className="text-lg">
           온라인 최저가
           <span className="ml-2 text-xs text-gray-500">
