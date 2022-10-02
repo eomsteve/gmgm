@@ -38,7 +38,7 @@ const CheckListItem: FC<CheckListItemProps> = props => {
           </div>
           {itemInfos.map(itemInfo => {
             return (
-              <div>
+              <div key={itemInfo.productName}>
                 <CheckListPreview
                   status={itemInfo.status}
                   productName={itemInfo.productName}

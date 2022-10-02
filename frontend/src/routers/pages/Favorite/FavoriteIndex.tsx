@@ -6,14 +6,14 @@ import PriceChart from '@components/favorite/PriceChart';
 import { getFavoriteItems } from '../../APIs/favoriteApi';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@modules/store';
-import { getFavoritePageDataRedux } from '@modules/FavoriteProductList'
+import { getFavoritePageDataRedux } from '@modules/FavoriteProductList';
 import { getFavoriteSelect, getFavoritePageData } from '@apis/favoriteApi';
 import type { FavoritePageData } from '@apis/favoriteApi';
 import FavHeader from '@components/EmptyHeader';
 interface FavoriteIndexPageProps {}
 
 const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) => {
     // console.log(state.persistedReducer.authTokenReducer.authToken);
   });
@@ -38,9 +38,11 @@ const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
             favoriteIndices={favoritePageData?.favoriteIndices}
           />
         )}
+        <hr className="mx-[-5vw] my-6 mt-3 w-screen" />
         {favoritePageData && (
           <SelectBox pageData={favoritePageData.favoriteItems} />
         )}
+        <hr className="mx-[-5vw] my-6 w-screen" />
         {favoritePageData && (
           <PriceChart
             favoriteTotalPrices={favoritePageData.favoriteTotalPrices}
