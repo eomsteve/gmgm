@@ -1,8 +1,8 @@
 package com.lemonmul.gamulgamul.api;
 
+import com.lemonmul.gamulgamul.api.dto.checklist.ListInfoDto;
 import com.lemonmul.gamulgamul.api.dto.main.MainPageResponseDto;
 import com.lemonmul.gamulgamul.api.dto.main.PriceIndexDto;
-import com.lemonmul.gamulgamul.api.dto.checklist.ListDto;
 import com.lemonmul.gamulgamul.entity.News;
 import com.lemonmul.gamulgamul.entity.priceindex.IndexType;
 import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
@@ -41,14 +41,14 @@ public class MainApi {
         PriceIndexDto gmgmIndex = new PriceIndexDto(mainService.getIndex(IndexType.g));
         String userName, email;
         PriceIndexDto favoriteIndex;
-        List<ListDto> checklists;
+        List<ListInfoDto> checklists;
         if (headers.containsKey(JwtProperties.HEADER_STRING)) {
             User user=JwtTokenProvider.getUserFromJwtToken(userService, headers);
             userName=user.getName();
             email=user.getEmail();
             favoriteIndex=new PriceIndexDto(mainService.getFavoriteIndex(user,IndexType.f));
             checklists = mainService.getRecentChecklists(user)
-                    .stream().map(ListDto::new).collect(Collectors.toList());
+                    .stream().map(ListInfoDto::new).collect(Collectors.toList());
             log.info("user {} has made a request", user.getId());
         }else{
             userName="";
