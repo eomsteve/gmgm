@@ -25,7 +25,7 @@ const CheckListItem: FC<CheckListItemProps> = props => {
     <>
       <div
         onClick={() => navigate(`/checklists/${checklistId}`)}
-        className="checklist-item flex-column m-3 flex h-36 justify-center rounded border border-gray-300 p-2"
+        className="checklist-item flex-column m-3 flex h-36 justify-center rounded border border-gray-300 py-2"
       >
         <div className="grid grid-rows-5">
           <div className="flex items-center justify-center text-black">

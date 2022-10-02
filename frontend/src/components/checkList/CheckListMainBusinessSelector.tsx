@@ -57,9 +57,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   // const [checklistBasicItems, setChecklistBasicItems] = useState<BasicProduct[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const { checklistCustomItems, checklistBasicItems } = useSelector(
-
     (state: RootState) => {
-      
       return {
         checklistCustomItems:
           state.persistedReducer.CheckListProductsReducer.checklistCustomItems,
@@ -69,23 +67,22 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
     },
   );
   console.log(checklistCustomItems, checklistBasicItems);
-  
-  
+
   const preventClose = (e: BeforeUnloadEvent) => {
     e.preventDefault();
     e.returnValue = ''; //Chrome에서 동작하도록; deprecated
   };
-  
+
   const basicRef = useRef();
   const customRef = useRef();
   useEffect(() => {
     return () => {
       setIsModified(true);
-      basicRef.current = checklistBasicItems
-      customRef.current =checklistCustomItems
+      basicRef.current = checklistBasicItems;
+      customRef.current = checklistCustomItems;
       console.log('update', basicRef.current, customRef.current);
-    }
-  },[checklistBasicItems, checklistCustomItems])
+    };
+  }, [checklistBasicItems, checklistCustomItems]);
   useEffect(() => {
     (() => {
       window.addEventListener('beforeunload', preventClose);
@@ -116,9 +113,18 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
         console.log('unMounted');
         dispatch(setInitialStateWhenUnMounted());
       } else {
-        console.log('unMounted22',basicRef.current, customRef.current, isModified);
+        console.log(
+          'unMounted22',
+          basicRef.current,
+          customRef.current,
+          isModified,
+        );
         if (basicRef.current !== undefined && customRef.current !== undefined) {
-          updateCheckListStatus(basicRef.current,  customRef.current, checklistId)
+          updateCheckListStatus(
+            basicRef.current,
+            customRef.current,
+            checklistId,
+          );
         }
       }
     };
@@ -138,7 +144,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
     }
   };
 
-
   const navigate = useNavigate();
   const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
@@ -149,9 +154,12 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   return (
     <>
       {isEdit ? (
-        <ChecklistHeader title="장보기 목록 만들기" navigateRouter='/checkLists'/>
+        <ChecklistHeader
+          title="장보기 목록 만들기"
+          navigateRouter="checkLists"
+        />
       ) : (
-        <ChecklistHeader title="장보기 목록" navigateRouter='checkLists'/>
+        <ChecklistHeader title="장보기 목록" navigateRouter="checkLists" />
       )}
 
       <div className="m-5 flex items-center justify-between">

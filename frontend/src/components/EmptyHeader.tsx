@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ReactComponent as Back } from '../assets/icons/back.svg';
 import { useNavigate } from 'react-router-dom';
-import { updateCheckListStatus } from '@apis/checkList.Api'
+import { updateCheckListStatus } from '@apis/checkList.Api';
 
 interface HeaderProps {
   title: string;
@@ -13,15 +13,21 @@ const Header: FC<HeaderProps> = props => {
   const navigate = useNavigate();
   return (
     <>
-      <header className="center grid h-16 grid-cols-8 justify-center border-b p-2">
+      <header className="center sticky top-0 z-40 grid h-16 grid-cols-8 justify-center border-b bg-white p-2">
         <div className="flex items-center justify-center">
           {title == '홈' ? (
             <div></div>
           ) : (
             <div
-              onClick={(navigateRouter !== undefined) ? ()=>{navigate(`/${navigateRouter}`)} : () => {
-                navigate( -1 );
-              }}
+              onClick={
+                navigateRouter !== undefined
+                  ? () => {
+                      navigate(`/${navigateRouter}`);
+                    }
+                  : () => {
+                      navigate(-1);
+                    }
+              }
             >
               <Back width="1.2rem" height="1.2rem" />
             </div>
