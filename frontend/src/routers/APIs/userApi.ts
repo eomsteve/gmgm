@@ -80,7 +80,7 @@ export const logInApi = async (logInForm: LogInUserREQ) => {
   }
 };
 
-export const logOutApi = async (email : string) =>{
+export const logOutApi = async (email?: string) =>{
   try {
     const { data } = await axios({
       url: API_URL + `/logout`,
@@ -89,6 +89,8 @@ export const logOutApi = async (email : string) =>{
       }
     });
     localStorage.removeItem('jwtToken')
+    console.log('logout');
+    
   } catch (error) {
     
   }

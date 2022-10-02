@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
 import Main from './routers/pages/Main';
 import Favorite from './routers/pages/Favorite/Favorite';
@@ -15,33 +15,39 @@ import NavBtn from './routers/NavBtn';
 import SignUp from './routers/pages/user/SignUpPage';
 import LogInPage from './routers/pages/user/LogIn';
 
+// import { useSelector } from '@modules/Auth'
+import { RootState } from '@modules/store'
+import { useSelector } from 'react-redux'
+
+import axios from 'axios';
 interface AppProps {}
 
 const App: React.FunctionComponent<AppProps> = () => {
-  const isLogin = () => !!localStorage.getItem("jwtToken");
-  console.log(isLogin());
-  
+  const { isLogin } = useSelector((state: RootState)=>{
+    return {
+      isLogin : state.persistedReducer.authTokenReducer.isLogin
+    }
+  })
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<NavBtn />}>
           <Route index element={<Main />}></Route>
-          
           <Route path="favorite" element={<Favorite />}>
-            <Route index element={<FavoriteIndexPage />}></Route>
+            <Route index element={isLogin ? <FavoriteIndexPage /> : <LogInPage/>}></Route>
           </Route>
-          <Route path="checkLists" element={<CheckLists />}></Route>
-          <Route path="checkLists/:checklistId" element={<CheckList />}></Route>
-          <Route path="/detail/product/:productId/business/:businessType" element={<DetailPage />}></Route>
+          <Route path="checkLists" element={isLogin ? <CheckLists />  : <LogInPage/>}></Route>
+          <Route path="checkLists/:checklistId" element={isLogin ? <CheckList /> : <LogInPage/>}></Route>
+          <Route path="/detail/product/:productId/business/:businessType" element={isLogin ? <DetailPage />: <LogInPage/>}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
         <Route
           path="/favorite/selection"
-          element={<FavoriteListSelection />}
+          element={isLogin ? <FavoriteListSelection /> : <LogInPage/>}
         ></Route>
         <Route
           path="/checklist/selection"
-          element={<CheckListSelection />}
+          element={isLogin ? <CheckListSelection /> : <LogInPage/>}
         ></Route>
         <Route path="/SignUp" element={<SignUp />}></Route>
         <Route path="/LogIn" element={<LogInPage />}></Route>

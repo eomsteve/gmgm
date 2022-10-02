@@ -29,8 +29,21 @@ const FavoriteCard: FC<FavoriteCardProps> = props => {
             <Equal width="1rem" height="1rem" />
           )}
         </span>
-        <span className="col-span-2 mr-2 flex justify-end">{goodsPrice}</span>
-        <span className="col-span-1 flex justify-center">
+          <div>
+
+          <span className="col-span-1 flex justify-center truncate ">
+            {
+              (priceGap > 0) ? <Up width="1rem" height="2rem" /> : (priceGap < 0) ? <Down width="1rem" height="2rem" /> : <Equal width="1rem" height="2rem" /> 
+            }
+          </span>
+          <span className={`col-span-1 flex justify-center text-sm${(priceGap > 0) ? '' : ''}`} >
+            {(priceGap == 0) ? '': priceGap}
+            </span>
+            </div>
+          <span className="col-span-2 flex justify-end mr-2">
+            {goodsPrice}
+          </span>
+          <span className="col-span-1 flex justify-center">
           <Chart width="1.2rem" height="1.2rem" />
         </span>
       </div>

@@ -9,6 +9,7 @@ import { ReactComponent as Login } from '../../assets/icons/login.svg';
 import { useNavigate } from 'react-router-dom';
 
 const MainGuestCard: FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="center m-5 mx-8 grid grid-cols-6 rounded border border-gray-300 py-4 px-2 lg:py-0 ">
       <div className="flex-rows flex items-center justify-center">
@@ -18,7 +19,7 @@ const MainGuestCard: FC = () => {
       <span className="col-span-3 mx-2 flex items-center p-1"> hello, Guest!</span>
       <div className="flex flex-col item-center -0"
         onClick={()=>{
-          console.log('sign up');
+          navigate('/signup')
         }}>
         <div className="flex items-center justify-center">
           <Signup
@@ -30,7 +31,7 @@ const MainGuestCard: FC = () => {
       </div>
       <div className="flex flex-col item-center -0"
         onClick={()=>{
-          console.log('login');
+          navigate('/login')
         }}>
         <div className="flex items-center justify-center">
           <Login

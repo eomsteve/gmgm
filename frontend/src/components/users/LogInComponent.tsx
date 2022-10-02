@@ -1,18 +1,18 @@
 import { FC } from 'react';
 import { LogInUserREQ, logInApi } from '../../routers/APIs/userApi';
 import { useNavigate } from 'react-router-dom';
-import type { RootState } from '../../modules/store';
+import type { RootState, AppDispatch } from '../../modules/store';
 import { setAuthToken,logInApiRedux } from '@modules/Auth'
 import { useDispatch, useSelector } from 'react-redux';
 
 const LogIn: FC = () => {
   const navigate = useNavigate();
   const authToken = useSelector((state: RootState) => {
-    console.log(state.persistedReducer.authTokenReducer.authToken);
+    console.log(state.persistedReducer.authTokenReducer.accessToken);
   });
-  // console.log(authToken);
+  console.log(authToken);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     console.log('handleSubmit');
     e.preventDefault();
@@ -21,11 +21,12 @@ const LogIn: FC = () => {
       email: logInFormData.get('email') as string,
       pwd: logInFormData.get('password') as string,
     };
-    const logInRes: string | { status: boolean; data: string } = await logInApi(
+    const logInRes: {accessToken : string, refreshToken : string} | string = await dispatch(logInApiRedux(
       logInform,
-    );
-    if (typeof logInRes !== 'string') {
-      dispatch(setAuthToken(logInRes.data));
+    )).unwrap();
+    console.log(logInRes);
+    
+    if (typeof logInRes !== typeof "string") {
       navigate('/');
     } else {
       alert('실패 : 이메일과 비밀번호를 확인해 주세요');
