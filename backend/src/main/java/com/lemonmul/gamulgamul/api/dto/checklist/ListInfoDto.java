@@ -17,7 +17,7 @@ public class ListInfoDto {
         checklistId = checklist.getId();
         regDate=checklist.getRegDate();
 
-        int infoSize=5;
+        int infoSize=4;
         List<ItemDto> basicItems = checklist.getChecklistBasicItems().stream().limit(infoSize).map(ItemDto::new).toList();
         itemInfos.addAll(basicItems);
         if(itemInfos.size()<infoSize){

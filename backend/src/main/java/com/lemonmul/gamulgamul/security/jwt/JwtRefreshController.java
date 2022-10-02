@@ -1,7 +1,7 @@
 package com.lemonmul.gamulgamul.security.jwt;
 
-import com.lemonmul.gamulgamul.api.dto.LoginResponseDto;
-import com.lemonmul.gamulgamul.api.dto.RefreshRequestDto;
+import com.lemonmul.gamulgamul.api.dto.user.LoginResponseDto;
+import com.lemonmul.gamulgamul.api.dto.user.RefreshRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;

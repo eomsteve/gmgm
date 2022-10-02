@@ -1,8 +1,8 @@
 package com.lemonmul.gamulgamul.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lemonmul.gamulgamul.api.dto.LoginRequestDto;
-import com.lemonmul.gamulgamul.api.dto.LoginResponseDto;
+import com.lemonmul.gamulgamul.api.dto.user.LoginRequestDto;
+import com.lemonmul.gamulgamul.api.dto.user.LoginResponseDto;
 import com.lemonmul.gamulgamul.security.auth.PrincipalDetails;
 import com.lemonmul.gamulgamul.security.redis.RedisService;
 import org.springframework.security.authentication.*;

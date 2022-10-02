@@ -1,5 +1,6 @@
 package com.lemonmul.gamulgamul.api.dto.favorite;
 
+import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,18 +12,20 @@ public class FavoriteItemResponseDto {
     private Long goodsId;
     private Long basicProductId;
     private String goodsName;
-    private String img;
+    private String goodsImg;
     private String measure;
     private Double recentPriceOff;
     private Double recentPriceOn;
     private Double priceGapOff;
     private Double priceGapOn;
 
-    public FavoriteItemResponseDto(Goods goods) {
+    public FavoriteItemResponseDto(FavoriteGoods favoriteGoods) {
+        Goods goods = favoriteGoods.getGoods();
+
         this.goodsId = goods.getId();
         this.basicProductId = goods.getProduct().getId();
         this.goodsName = goods.getName();
-        this.img = goods.getImg();
+        this.goodsImg = goods.getImg();
         this.measure = goods.getMeasure();
         this.recentPriceOff = goods.getRecentPriceOff();
         this.recentPriceOn = goods.getRecentPriceOn();
