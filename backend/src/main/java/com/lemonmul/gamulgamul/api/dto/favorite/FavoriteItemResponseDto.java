@@ -12,7 +12,7 @@ public class FavoriteItemResponseDto {
     private Long goodsId;
     private Long basicProductId;
     private String goodsName;
-    private String goodsImg;
+    private String img;
     private String measure;
     private Double recentPriceOff;
     private Double recentPriceOn;
@@ -25,7 +25,7 @@ public class FavoriteItemResponseDto {
         this.goodsId = goods.getId();
         this.basicProductId = goods.getProduct().getId();
         this.goodsName = goods.getName();
-        this.goodsImg = goods.getImg();
+        this.img = goods.getImg();
         this.measure = goods.getMeasure();
         this.recentPriceOff = goods.getRecentPriceOff();
         this.recentPriceOn = goods.getRecentPriceOn();
