@@ -1,4 +1,4 @@
-package com.lemonmul.gamulgamul.api.dto;
+package com.lemonmul.gamulgamul.api.dto.zeppelin;
 
 import lombok.Data;
 

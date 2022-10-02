@@ -1,6 +1,6 @@
 package com.lemonmul.gamulgamul.security.jwt;
 
-import com.lemonmul.gamulgamul.api.dto.LoginResponseDto;
+import com.lemonmul.gamulgamul.api.dto.user.LoginResponseDto;
 import com.lemonmul.gamulgamul.repo.UserRepo;
 import com.lemonmul.gamulgamul.security.auth.PrincipalDetails;
 import com.lemonmul.gamulgamul.security.redis.RedisService;

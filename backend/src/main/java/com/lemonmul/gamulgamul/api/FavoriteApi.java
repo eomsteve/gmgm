@@ -3,8 +3,8 @@ package com.lemonmul.gamulgamul.api;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lemonmul.gamulgamul.api.dto.CategoryDto;
-import com.lemonmul.gamulgamul.api.dto.ParamDto;
-import com.lemonmul.gamulgamul.api.dto.RestResponseDto;
+import com.lemonmul.gamulgamul.api.dto.zeppelin.ParamDto;
+import com.lemonmul.gamulgamul.api.dto.zeppelin.RestResponseDto;
 import com.lemonmul.gamulgamul.api.dto.favorite.*;
 import com.lemonmul.gamulgamul.entity.BusinessType;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
@@ -275,7 +275,7 @@ public class FavoriteApi {
         String code = Objects.requireNonNull(response.getBody()).getBody().getCode();
         log.info("response code: {}", code);
 
-        if(code.equals("SUCCESS")) {
+        if(!code.equals("SUCCESS")) {
             favoriteTotalPriceService.addAll(originFavoriteTotalPrices);
             priceIndexService.addAll(originFavoriteIndices);
             return false;
@@ -289,13 +289,7 @@ public class FavoriteApi {
      */
     private List<FavoriteItemResponseDto> getFavoriteGoods(User user) {
         List<FavoriteGoods> favoriteGoodsList = user.getFavoriteGoods();
-        List<Goods> goodsList = new ArrayList<>();
 
-        // 즐겨찾기 상품에 들어있는 상품들을 가져옴
-        for (FavoriteGoods favoriteGoods : favoriteGoodsList)
-            goodsList.add(favoriteGoods.getGoods());
-
-        // 상품들을 즐겨찾기 리스트에 들어가는 형식에 맞게 변환해서 반환
-        return goodsList.stream().map(FavoriteItemResponseDto::new).collect(Collectors.toList());
+        return favoriteGoodsList.stream().map(FavoriteItemResponseDto::new).collect(Collectors.toList());
     }
 }

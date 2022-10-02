@@ -1,4 +1,4 @@
-package com.lemonmul.gamulgamul.api.dto;
+package com.lemonmul.gamulgamul.api.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
