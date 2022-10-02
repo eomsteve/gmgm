@@ -1,6 +1,6 @@
 package com.lemonmul.gamulgamul.api.dto.main;
 
-import com.lemonmul.gamulgamul.api.dto.checklist.ListDto;
+import com.lemonmul.gamulgamul.api.dto.checklist.ListInfoDto;
 import com.lemonmul.gamulgamul.entity.News;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +20,7 @@ public class MainPageResponseDto {
 
     private PriceIndexDto favoriteIndex;
 
-    private List<ListDto> checklistList;
+    private List<ListInfoDto> checklistList;
 
     private List<News> newsList;
 
