@@ -39,24 +39,26 @@ public class MainApi {
 
         PriceIndexDto countryIndex = new PriceIndexDto(mainService.getIndex(IndexType.c));
         PriceIndexDto gmgmIndex = new PriceIndexDto(mainService.getIndex(IndexType.g));
-        String userName;
+        String userName, email;
         PriceIndexDto favoriteIndex;
         List<ListDto> checklists;
         if (headers.containsKey(JwtProperties.HEADER_STRING)) {
             User user=JwtTokenProvider.getUserFromJwtToken(userService, headers);
             userName=user.getName();
+            email=user.getEmail();
             favoriteIndex=new PriceIndexDto(mainService.getFavoriteIndex(user,IndexType.f));
             checklists = mainService.getRecentChecklists(user)
                     .stream().map(ListDto::new).collect(Collectors.toList());
             log.info("user {} has made a request", user.getId());
         }else{
             userName="";
+            email="";
             favoriteIndex=new PriceIndexDto(PriceIndex.empty(IndexType.f));
             checklists=new ArrayList<>();
             log.info("user is not logged in");
         }
         List<News> news = mainService.getNewsList();
         log.info("[Finished request] GET /main");
-        return new MainPageResponseDto(userName,gmgmIndex,countryIndex,favoriteIndex,checklists,news);
+        return new MainPageResponseDto(userName,email,gmgmIndex,countryIndex,favoriteIndex,checklists,news);
     }
 }

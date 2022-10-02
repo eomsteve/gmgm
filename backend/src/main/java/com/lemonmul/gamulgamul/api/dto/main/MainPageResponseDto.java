@@ -12,6 +12,8 @@ import java.util.List;
 public class MainPageResponseDto {
     private String username;
 
+    private String email;
+
     private PriceIndexDto gmgmIndex;
 
     private PriceIndexDto cpi;
