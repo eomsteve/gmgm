@@ -25,7 +25,7 @@ const SelectedArea: FC<SelectedAreaProps> = props => {
   };
   return (
     <>
-      <div className="flex h-full w-full flex-col bg-blue-200">
+      <div className="flex h-full w-full flex-col bg-[#b3d1e6]">
         <div className="my-3 mx-5 text-lg">
           장보기 목록
           <span className="ml-2 text-xs text-gray-500">

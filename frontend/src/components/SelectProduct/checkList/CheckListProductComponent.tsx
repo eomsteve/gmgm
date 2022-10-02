@@ -41,14 +41,14 @@ const ProductLists: FC<ProductListsProps> = props => {
           {productList.map(product => {
             return (
               <div
-                className="m-2 grid grid-cols-3 items-center rounded-lg border border-gray-300 p-3"
+                className="m-2 grid grid-cols-3 gap-2 items-center rounded-lg border border-gray-300 p-3"
                 onClick={() => addProduct(product)}
                 key={product.basicProductId}
               >
                 <div className="flex h-12 w-12 justify-center">
-                  <img src={product.productImg} alt="" className="bg-white" />
+                  <img src={product.productImg} alt="" className="bg-white rounded-lg" />
                 </div>
-                <div className="col-span-2 col-start-2 pl-2">
+                <div className="col-span-2 col-start-2 pl-2 ps-2">
                   {product.basicProductName}
                 </div>
               </div>
