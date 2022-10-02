@@ -22,10 +22,18 @@ export const atCheckList  = async (productId : string | undefined, businessType 
   }
 };
 
-export const detailSelectBoxChange = async () => {
+export const detailSelectBoxChange = async (goodsId : string | undefined, businessType: string | undefined) => {
   try {
-    
+    if (goodsId && businessType){
+      const { data } = await axios({
+        url : API_URL + `/goods/${goodsId}/business/${businessType}`,
+        method : 'GET',
+      })
+      console.log(data);
+      return data;
+    }
   } catch (error) {
+    console.error(error);
     
   }
 }

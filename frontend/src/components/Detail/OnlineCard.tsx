@@ -11,7 +11,7 @@ const OnlineCard: FC<OnlineCardProps> = () => {
             선택한 상품의 온라인 최저가 구매 링크로 이동합니다.
           </span>
         </span>
-        <div className="m-2 flex grid grid-cols-4 rounded border border-gray-300 p-3">
+        <div className="m-2 grid grid-cols-4 rounded border border-gray-300 p-3">
           <img src="http://placekitten.com/75/75" alt="" />
           <div className="col-span-3 flex flex-col px-3 text-[0.9rem]">
             <p>

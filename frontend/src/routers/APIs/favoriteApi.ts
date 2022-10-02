@@ -18,7 +18,10 @@ export type FavoriteItem = {
   goodsName : string;
   img : string;
   measure : string;
-  priceGap: number;
+  priceGapOff: number;
+  recentPriceOff: number;
+  priceGapOn : number;
+  recentPriceOn : number;
 }
 export interface FavoritePageData {
   businessTypes: BusinessType[];

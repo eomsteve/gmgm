@@ -1,13 +1,18 @@
 import { FC, useState } from 'react';
 import SumPriceChart from '../charts/CalculatorChart';
+import type { GoodsInfo } from './DetailSelect'
+interface CalculatorProps {
+  measure : string;
+  goodsProps : GoodsInfo[];
+}
 
-interface CalculatorProps {}
-
-const Calculator: FC<CalculatorProps> = () => {
+const Calculator: FC<CalculatorProps> = (props) => {
+  const {measure, goodsProps} = props;
+  console.log(goodsProps);
+  
   const [usingCalculator, setUsingCalculator] = useState<boolean>(false);
   const [goodsPrice, setGoodsPrice] = useState<number>();
   const [goodsMeasure, setGoodsMeasure] = useState<number>();
-
   const [calculatorData, setCalculatorData] = useState<number>();
 
   const handlePriceInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +33,7 @@ const Calculator: FC<CalculatorProps> = () => {
   return (
     <>
       <div className="mb-3">
-        <SumPriceChart calculatorData={calculatorData} />
+        <SumPriceChart calculatorData={calculatorData} goodsData={goodsProps} />
       </div>
       <div className="mt-5 flex w-full flex-col">
         <span className="text-lg">
@@ -40,9 +45,9 @@ const Calculator: FC<CalculatorProps> = () => {
         <div className="m-2">
           <form
             onSubmit={calculate}
-            className="flex-rows flex grid grid-cols-5 text-sm"
+            className="flex-rows grid grid-cols-5 text-sm"
           >
-            <div className="col-span-2 flex grid grid-rows-2 flex-col ">
+            <div className="col-span-2 grid grid-rows-2 flex-col ">
               <span className="m-1">상품 가격</span>
               <div className="flex items-center justify-start">
                 <input
@@ -55,7 +60,7 @@ const Calculator: FC<CalculatorProps> = () => {
                 <span className="mx-2 text-sm">원</span>
               </div>
             </div>
-            <div className="col-span-2 flex grid grid-rows-2 flex-col">
+            <div className="col-span-2 grid grid-rows-2 flex-col">
               <span className="m-1">용량</span>
               <div className="flex items-center">
                 <input
@@ -65,7 +70,7 @@ const Calculator: FC<CalculatorProps> = () => {
                   onChange={handleMeasureInput}
                   className="max-w-[60%] rounded border-solid border-gray-300 px-2 py-1 text-xs"
                 />
-                <span className="mx-2">{'용량'}</span>
+                <span className="mx-2">{measure}</span>
               </div>
             </div>
             <button className="my-2 rounded border border-gray-700 p-2 sm:text-[0.9rem]">

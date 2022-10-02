@@ -19,7 +19,8 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
   const [optionState, setOption] = useState<string>('m');
   const [pageData, setPageData] = useState<FavoriteItem[]>(selectBoxPage);
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOption(e.target.value);
+    setOption(()=> e.target.value);
+    
   };
   const navigate = useNavigate();
   return (
@@ -61,13 +62,14 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
       <div className="flex w-full flex-col items-center justify-center p-0">
         {pageData &&
           pageData.map((favoriteItem, index) => {
+            
             return (
               <div key={favoriteItem.goodsId}>
                 <FavoriteCard
                   img={favoriteItem.img}
                   goodsName={favoriteItem.goodsName}
-                  priceGap={favoriteItem.priceGap}
-                  goodsPrice={123}
+                  priceGap={(optionState === 'm') ? favoriteItem.priceGapOff : favoriteItem.priceGapOn }
+                  goodsPrice={(optionState === 'm') ? favoriteItem.recentPriceOff : favoriteItem.recentPriceOn}
                 />
               </div>
             );

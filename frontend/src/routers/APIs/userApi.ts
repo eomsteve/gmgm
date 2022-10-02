@@ -10,7 +10,7 @@ export type SignUpUserREQ = {
   name: string;
   gender: string;
   birthday: string;
-  role: string;
+  role?: string;
 };
 
 export type LogInUserREQ = {
@@ -18,9 +18,10 @@ export type LogInUserREQ = {
   pwd: string;
 };
 export const signUpApi = async (signUpForm: SignUpUserREQ) => {
+  
   try {
     const { data } = await axios.post(API_URL + '/signup', signUpForm);
-    
+    console.log(data);
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -31,7 +32,18 @@ export const signUpApi = async (signUpForm: SignUpUserREQ) => {
       return 'unexpected error occurred';
     }
   }
+
 };
+
+export const checkEmailDuplicate = async (email: string) => {
+  try {
+    const { data } = await axios.get(API_URL + `/check/${email}`)
+    return data;
+  } catch (error) {
+    
+  }
+
+}
 
 // {
 //   "email": "sheom@email.com",
@@ -57,3 +69,4 @@ export const logInApi = async (logInForm: LogInUserREQ) => {
     }
   }
 };
+
