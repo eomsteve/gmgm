@@ -149,9 +149,9 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   return (
     <>
       {isEdit ? (
-        <ChecklistHeader title="장보기 목록 만들기" />
+        <ChecklistHeader title="장보기 목록 만들기" navigateRouter='/checkLists'/>
       ) : (
-        <ChecklistHeader title="장보기 목록" />
+        <ChecklistHeader title="장보기 목록" navigateRouter='checkLists'/>
       )}
 
       <div className="m-5 flex items-center justify-between">

@@ -4,21 +4,23 @@ import FavoriteIndexCart from '@components/charts/FavoriteIndexChart';
 import SelectBox from '@components/favorite/FavoriteSelectBox';
 import PriceChart from '@components/favorite/PriceChart';
 import { getFavoriteItems } from '../../APIs/favoriteApi';
-import { useSelector } from 'react-redux';
-import type { RootState } from '../../../modules/store';
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState, AppDispatch } from '@modules/store';
+import { getFavoritePageDataRedux } from '@modules/FavoriteProductList'
 import { getFavoriteSelect, getFavoritePageData } from '@apis/favoriteApi';
 import type { FavoritePageData } from '@apis/favoriteApi';
 import FavHeader from '@components/EmptyHeader';
 interface FavoriteIndexPageProps {}
 
 const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
+  const dispatch = useDispatch<AppDispatch>()
   const data = useSelector((state: RootState) => {
     // console.log(state.persistedReducer.authTokenReducer.authToken);
   });
   const [favoritePageData, setFavoritePageData] = useState<FavoritePageData>();
   useEffect(() => {
     const getPageData = async () => {
-      const data = await getFavoritePageData();
+      const data = await dispatch(getFavoritePageDataRedux()).unwrap();
       console.log(data);
       if (typeof data !== 'undefined') {
         setFavoritePageData(data);
@@ -28,7 +30,7 @@ const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
   }, []);
   return (
     <>
-      <FavHeader title={'즐겨찾기'} />
+      <FavHeader title={'즐겨찾기'} navigateRouter={''} />
       <main className="flex w-full flex-col justify-center bg-[white] p-5">
         {favoritePageData && (
           <FavoriteIndexCart

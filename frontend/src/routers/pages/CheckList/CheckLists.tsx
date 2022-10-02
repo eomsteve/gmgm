@@ -18,7 +18,7 @@ const CheckLists: FunctionComponent<CheckListsProps> = () => {
   }, []);
   return (
     <>
-      <ChecklistHeader title="장보기 내역" />
+      <ChecklistHeader title="장보기 내역" navigateRouter='' />
       <main
         className="grid w-full
     grid-cols-3 content-start bg-[white] p-5"

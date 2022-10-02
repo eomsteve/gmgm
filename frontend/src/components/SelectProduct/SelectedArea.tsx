@@ -1,12 +1,14 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeGoods } from '@modules/FavoriteProductList';
-import type { RootState } from '@modules/store';
+import { useNavigate } from 'react-router-dom'
+import { removeGoods,updateFavoriteItems } from '@modules/FavoriteProductList';
+import type { RootState, AppDispatch} from '@modules/store';
 interface SelectedAreaProps {
   
 }
  
 const SelectedArea: FC<SelectedAreaProps> = () => {
+  const navigate = useNavigate();
   const {goods} = useSelector((state : RootState) => {
     
     console.log(state);
@@ -14,10 +16,24 @@ const SelectedArea: FC<SelectedAreaProps> = () => {
       goods : state.persistedReducer.favoriteProductListReducer.goods
     })
   });
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const removeList = (goodsItem : { goodsId : number })=>{
     dispatch(removeGoods(goodsItem))
   }
+
+  const updateItem = async ()=>{
+    const goodsList = goods.map((item : { goodsId : number})=>{
+      return item.goodsId
+    })
+    console.log(goodsList);
+    const data = await dispatch(updateFavoriteItems(goodsList)).unwrap();
+    console.log(data);
+    if(data){
+      navigate('/favorite')
+    }
+  }
+
+
   return (<>
   <div className="flex h-full w-full flex-col bg-[#b3d1e6]">
     <div className="my-3 mx-5 text-lg">
@@ -35,7 +51,7 @@ const SelectedArea: FC<SelectedAreaProps> = () => {
           )
         })}
     </div>
-    <span className="relate bottom-0 right-0 m-3 w-auto self-end rounded-full border border-gray-600 bg-white px-3 py-1">
+    <span onClick={()=>{updateItem()}} className="relate bottom-0 right-0 m-3 w-auto self-end rounded-full border border-gray-600 bg-white px-3 py-1">
       다음 &gt;
     </span>
   </div>

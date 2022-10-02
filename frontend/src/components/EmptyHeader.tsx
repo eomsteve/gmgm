@@ -5,10 +5,11 @@ import { updateCheckListStatus } from '@apis/checkList.Api'
 
 interface HeaderProps {
   title: string;
+  navigateRouter?: string;
 }
 
 const Header: FC<HeaderProps> = props => {
-  const { title } = props;
+  const { title, navigateRouter } = props;
   const navigate = useNavigate();
   return (
     <>
@@ -18,7 +19,7 @@ const Header: FC<HeaderProps> = props => {
             <div></div>
           ) : (
             <div
-              onClick={(title == '장보기 리스트') ? ()=>{navigate('/checkLists')} : () => {
+              onClick={(navigateRouter !== undefined) ? ()=>{navigate(`/${navigateRouter}`)} : () => {
                 navigate( -1 );
               }}
             >
