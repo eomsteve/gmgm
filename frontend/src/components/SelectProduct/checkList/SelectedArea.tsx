@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeBasicProducts } from '@modules/CheckListProductList';
 import type { BasicProduct } from '@modules/CheckListProductList';
 import type { RootState } from '@modules/store';
+import { ReactComponent as Delete} from '@src/assets/icons/itemDelete.svg'
 interface SelectedAreaProps {
   isEdit: boolean;
   checklistId: string;
@@ -37,13 +38,13 @@ const SelectedArea: FC<SelectedAreaProps> = props => {
             checklistBasicItems.map((x: BasicProduct) => {
               return (
                 <span
-                  className="m-1 rounded-full bg-white px-2 py-1 text-sm"
+                  className="m-1 rounded-full bg-white px-2 py-1 text-sm flex items-center"
                   key={x.basicProductId}
                   onClick={() => {
                     removeList(x);
                   }}
                 >
-                  {x.basicProductName}
+                  <span>{x.basicProductName}</span><span className="pl-1.5"><Delete width='0.5rem' height='0.5rem'/></span>
                 </span>
               );
             })}

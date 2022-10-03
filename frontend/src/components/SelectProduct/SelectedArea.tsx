@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { removeGoods, updateFavoriteItems } from '@modules/FavoriteProductList';
 import type { RootState, AppDispatch } from '@modules/store';
+import { ReactComponent as Delete} from '@src/assets/icons/itemDelete.svg'
 interface SelectedAreaProps {}
 
 const SelectedArea: FC<SelectedAreaProps> = () => {
@@ -45,13 +46,13 @@ const SelectedArea: FC<SelectedAreaProps> = () => {
               (x: { goodsId: number; goodsName: string }, idx: number) => {
                 return (
                   <span
-                    className="m-1 rounded-full bg-white px-2 py-1 text-sm"
+                    className="m-1 rounded-full bg-white px-2 py-1 text-sm flex items-center"
                     key={idx}
                     onClick={() => {
                       removeList(x);
                     }}
                   >
-                    {`${x.goodsName} X`}
+                    <span>{x.goodsName}</span><span className="pl-1.5"><Delete width='0.5rem' height='0.5rem'/></span>
                   </span>
                 );
               },
