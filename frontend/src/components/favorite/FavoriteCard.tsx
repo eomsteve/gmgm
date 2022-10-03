@@ -20,15 +20,6 @@ const FavoriteCard: FC<FavoriteCardProps> = props => {
         </div>
         <span className="col-span-6 ml-3 truncate p-1"> {goodsName}</span>
 
-        <span className="col-span-1 flex justify-center truncate ">
-          {priceGap > 0 ? (
-            <Up width="1rem" height="1rem" />
-          ) : priceGap < 0 ? (
-            <Down width="1rem" height="1rem" />
-          ) : (
-            <Equal width="1rem" height="1rem" />
-          )}
-        </span>
           <div>
 
           <span className="col-span-1 flex justify-center truncate ">
@@ -43,7 +34,7 @@ const FavoriteCard: FC<FavoriteCardProps> = props => {
           <span className="col-span-2 flex justify-end mr-2">
             {goodsPrice}
           </span>
-          <span className="col-span-1 flex justify-center">
+          <span className="col-span-1 flex justify-center cursor-pointer">
           <Chart width="1.2rem" height="1.2rem" />
         </span>
       </div>

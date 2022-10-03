@@ -75,7 +75,7 @@ export const favoriteGoodsSlice = createSlice({
       if (isDuplicate) {
         console.log('중복');
       } else {
-        state.goods.push({
+        state.goods.unshift({
           goodsId: action.payload.goodsId,
           goodsName: action.payload.goodsName,
         });

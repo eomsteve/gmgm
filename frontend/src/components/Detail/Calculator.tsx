@@ -3,11 +3,15 @@ import SumPriceChart from '../charts/CalculatorChart';
 import type { GoodsInfo } from './DetailSelect';
 interface CalculatorProps {
   measure: string;
-  goodsProps: GoodsInfo[];
+  goodsProps?: GoodsInfo;
+  productPrices: {price: number}[];
+  researchDates: {researchDate: string }[];
+  unit : number;
+  productName : string
 }
 
 const Calculator: FC<CalculatorProps> = props => {
-  const { measure, goodsProps } = props;
+  const { measure, goodsProps, productPrices, researchDates, unit, productName } = props;
   console.log(goodsProps);
 
   const [usingCalculator, setUsingCalculator] = useState<boolean>(false);
@@ -33,7 +37,7 @@ const Calculator: FC<CalculatorProps> = props => {
   return (
     <>
       <div className="mb-3">
-        <SumPriceChart calculatorData={calculatorData} goodsData={goodsProps} />
+        <SumPriceChart calculatorData={calculatorData} productPrices={productPrices} researchDates={researchDates} goodsData={goodsProps}  unit={unit} productName={productName}/>
       </div>
       <hr className="mx-[-1.25rem] my-1 mt-5 w-screen" />
       <div className="mt-4 mb-3 flex w-full flex-col">

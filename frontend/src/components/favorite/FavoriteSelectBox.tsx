@@ -6,7 +6,7 @@ import Recommendation from './RecommendComponent';
 import { useNavigate } from 'react-router-dom';
 import type { FavoritePageData, FavoriteItem } from '@apis/favoriteApi';
 interface FavoriteSelectBoxProps {
-  pageData: FavoriteItem[];
+  pageData: FavoritePageData;
 }
 
 const businessData: { [key: string]: string } = {
@@ -18,7 +18,7 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
   const selectBoxPage = props.pageData;
   const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
-  const [pageData, setPageData] = useState<FavoriteItem[]>(selectBoxPage);
+  const [pageData, setPageData] = useState<FavoriteItem[]>(selectBoxPage.favoriteItems);
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOption(()=> e.target.value);
     
@@ -60,7 +60,7 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
           </option>
         ))}
       </select>
-      <div className="flex w-full flex-col items-center justify-center p-0">
+      <div className="flex w-full flex-col items-center justify-center  p-1">
         {pageData &&
           pageData.map((favoriteItem, index) => {
             
@@ -83,7 +83,7 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
             <GotoSelectionButton />
         </div>
       </div>
-      <Recommendation/>
+      {<Recommendation favoriteRecommends={selectBoxPage.favoriteRecommends}/>}
     </div>
   );
 };
