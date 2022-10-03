@@ -34,18 +34,17 @@ const Main: FunctionComponent<MainProps> = () => {
   return (
     <>
       <HeaderComponent title="홈" />
-      <main className="mx-0 flex h-[90vh] w-full flex-col bg-[white]">
+      <main className="mx-0 flex w-full flex-col bg-[white]">
         {isLogin ? loadData && <MainUserCard username={loadData.username} email={"email1@xx.xx"}/>
         :<MainGuestCard />}
-        {loadData && <div className="mx-8 grid grid-cols-2 gap-2 grid-rows-5">
+        {loadData && <div className="mx-8 grid grid-cols-2 gap-2 grid-rows-4">
           <EmptySquare bgColor="bg-deepsky" textColor="text-white" gridSize="row-span-2" cpi={loadData.cpi} isLogin={isLogin}/>
           <EmptySquare bgColor="bg-lightsky" textColor="text-gray-500" gridSize="row-span-1" news={loadData.newsList[0]} isLogin={isLogin}/>
           <EmptySquare bgColor="bg-lemon" textColor="text-gray-500" gridSize="row-span-1"news={loadData.newsList[1]} isLogin={isLogin}/>
           <EmptySquare bgColor="bg-peach" textColor="text-white" gridSize="row-span-2" favoriteIndex={loadData.favoriteIndex} isLogin={isLogin}/>
           <EmptySquare bgColor="bg-rouge" textColor="text-white" gridSize="row-span-2" gmgmIndex={loadData.gmgmIndex} isLogin={isLogin}/>
-          {isLogin ? <MainChecklist/> : <div>로그인이 필요한 서비스 입니다</div>}
         </div>}
-       
+        {isLogin ? loadData && loadData.checklistList && <MainChecklist checkLists={loadData.checklistList}/> : <div>로그인이 필요한 서비스 입니다</div>}
       </main>
     </>
   );
