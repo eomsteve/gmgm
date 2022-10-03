@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -61,5 +63,21 @@ public class MainServiceTest {
             System.out.println(news.getTitle());
         }
         System.out.println("=============뉴스 Test 종료=============");
+    }
+
+    @Test
+    public void removeHTMLtag(){
+        String title="[코인시황] 비트코인 8월 PCE <b>물가</b> 상승에도 1만9000달러 유지\n" +
+                "한총리 &quot;홍익인간 정신으로 새시대&quot;…&apos;연대·재도약·상생&apos; 강조";
+        System.out.println(title.replaceAll("<.*?>", "").replaceAll("&.*?;",""));
+    }
+
+    @Test
+    public void dateTimeFormatter(){
+        System.out.println(LocalDateTime.of(2022,12,25,10,20)
+                .format(DateTimeFormatter.ofPattern("yyyy년 M월 d일 기준")));
+        System.out.println(LocalDateTime.of(2022,12,5,10,7)
+                .format(DateTimeFormatter.ofPattern("yyyy년 M월 d일 h시 m분")));
+
     }
 }

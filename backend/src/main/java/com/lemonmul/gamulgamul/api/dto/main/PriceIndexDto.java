@@ -4,14 +4,15 @@ import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Data
 public class PriceIndexDto {
     private double value;
-    private LocalDate researchDate;
+    private String researchDate;
 
     public PriceIndexDto(PriceIndex index) {
         value=index.getValue();
-        researchDate=index.getResearchDate();
+        researchDate=index.getResearchDate().format(DateTimeFormatter.ofPattern("yyyy년 M월 d일 기준"));
     }
 }

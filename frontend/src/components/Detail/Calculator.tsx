@@ -35,7 +35,7 @@ const Calculator: FC<CalculatorProps> = props => {
       <div className="mb-3">
         <SumPriceChart calculatorData={calculatorData} goodsData={goodsProps} />
       </div>
-      <hr className="mx-[-5vw] my-1 mt-5 w-screen" />
+      <hr className="mx-[-1.25rem] my-1 mt-5 w-screen" />
       <div className="mt-4 mb-3 flex w-full flex-col">
         <span className="text-lg">
           계산기

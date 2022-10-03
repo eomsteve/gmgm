@@ -85,7 +85,7 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
       {productData && (
         <Calculator measure={productData.measure} goodsProps={goodsInfo} />
       )}
-      <hr className="mx-[-5vw] my-1 w-screen" />
+      <hr className="mx-[-1.25rem] my-1 w-screen" />
       <OnlineCard />
     </>
   );
