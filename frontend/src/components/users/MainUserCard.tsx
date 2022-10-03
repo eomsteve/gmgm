@@ -21,8 +21,8 @@ const MainUserCard: FC<{username?: string, email: string}> = (props) => {
         {/* <FontAwesomeIcon  icon={faUser} className=" text-[1.6rem] flex justify-center Heart text-[#428BC1] p-[0.3rem]" /> */}
         <User width="1.6rem" height="1.6rem" />
       </div>
-      <span className="col-span-4 mx-2 flex items-center p-1"> {username}</span>
-      <div className="flex flex-col item-center cursor-pointer"
+      <span className="col-span-4 mx-2 flex items-center p-1">{username} 님, 안녕하세요!</span>
+      <div className="flex flex-col item-center-0"
         onClick={()=>{
           dispatch(logOutApiRedux(email));
           navigate('/')

@@ -24,7 +24,7 @@ public class News {
     private LocalDateTime pubDate;
 
     private News(String title, String link, LocalDateTime pubDate) {
-        this.title = title;
+        this.title = title.replaceAll("<.*?>", "").replaceAll("&.*?;","");
         this.link = link;
         this.pubDate = pubDate;
     }

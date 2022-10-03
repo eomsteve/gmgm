@@ -211,11 +211,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
           checklistId={checklistId}
         />
 
-        {isEdit ? (
-          <div className="m-3 w-[86vw] border-t-2 border-dashed border-gray-300"></div>
-        ) : (
-          <br />
-        )}
+        {isEdit ? <hr className="my-6 mx-[-1.25rem] mt-4 w-screen" /> : <br />}
         <span>가격 정보를 볼 수 없어요 😥</span>
         <CheckListCustomItems
           BusinessType={optionState}

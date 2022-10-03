@@ -2,6 +2,7 @@ package com.lemonmul.gamulgamul.api;
 
 import com.lemonmul.gamulgamul.api.dto.checklist.ListInfoDto;
 import com.lemonmul.gamulgamul.api.dto.main.MainPageResponseDto;
+import com.lemonmul.gamulgamul.api.dto.main.NewsDto;
 import com.lemonmul.gamulgamul.api.dto.main.PriceIndexDto;
 import com.lemonmul.gamulgamul.entity.News;
 import com.lemonmul.gamulgamul.entity.priceindex.IndexType;
@@ -57,7 +58,7 @@ public class MainApi {
             checklists=new ArrayList<>();
             log.info("user is not logged in");
         }
-        List<News> news = mainService.getNewsList();
+        List<NewsDto> news = mainService.getNewsList().stream().map(NewsDto::new).toList();
         log.info("[Finished request] GET /main");
         return new MainPageResponseDto(userName,email,gmgmIndex,countryIndex,favoriteIndex,checklists,news);
     }

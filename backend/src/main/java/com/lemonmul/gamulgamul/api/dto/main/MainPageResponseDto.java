@@ -22,6 +22,6 @@ public class MainPageResponseDto {
 
     private List<ListInfoDto> checklistList;
 
-    private List<News> newsList;
+    private List<NewsDto> newsList;
 
 }
