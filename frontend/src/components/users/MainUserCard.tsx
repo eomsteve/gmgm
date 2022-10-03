@@ -22,7 +22,7 @@ const MainUserCard: FC<{username?: string, email: string}> = (props) => {
         <User width="1.6rem" height="1.6rem" />
       </div>
       <span className="col-span-4 mx-2 flex items-center p-1"> {username}</span>
-      <div className="flex flex-col item-center-0"
+      <div className="flex flex-col item-center cursor-pointer"
         onClick={()=>{
           dispatch(logOutApiRedux(email));
           navigate('/')

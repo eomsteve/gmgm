@@ -17,7 +17,7 @@ const MainGuestCard: FC = () => {
         <User width="1.6rem" height="1.6rem" />
       </div>
       <span className="col-span-3 mx-2 flex items-center p-1"> hello, Guest!</span>
-      <div className="flex flex-col item-center -0"
+      <div className="flex flex-col item-center -0 cursor-pointer"
         onClick={()=>{
           navigate('/signup')
         }}>
@@ -29,7 +29,7 @@ const MainGuestCard: FC = () => {
         </div>
         <span className="text-xs text-center">회원가입</span>
       </div>
-      <div className="flex flex-col item-center -0"
+      <div className="flex flex-col item-center -0 cursor-pointer"
         onClick={()=>{
           navigate('/login')
         }}>

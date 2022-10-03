@@ -40,9 +40,9 @@ const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
         )}
         <hr className="mx-[-5vw] my-6 mt-3 w-screen" />
         {favoritePageData && (
-          <SelectBox pageData={favoritePageData.favoriteItems} />
+          <SelectBox pageData={favoritePageData} />
         )}
-        <hr className="mx-[-5vw] my-6 w-screen" />
+        <hr className="mx-[-5vw] mb-6 w-screen" />
         {favoritePageData && (
           <PriceChart
             favoriteTotalPrices={favoritePageData.favoriteTotalPrices}

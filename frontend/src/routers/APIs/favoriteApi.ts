@@ -32,6 +32,7 @@ export interface FavoritePageData {
     totalPrices : {price : number}[],
     researchDates : {researchDate : string}[]
   };
+  favoriteRecommends: {goodsId : number, goodsName : string, img:string}[]
 }
 export const getFavoritePageData = async () => {
   try {
