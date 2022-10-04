@@ -13,6 +13,6 @@ public class PriceIndexDto {
 
     public PriceIndexDto(PriceIndex index) {
         value=index.getValue();
-        researchDate=index.getResearchDate().format(DateTimeFormatter.ofPattern("yyyy년 M월 d일 기준"));
+        researchDate=index.getResearchDate().format(DateTimeFormatter.ofPattern("yyyy년 M월 기준"));
     }
 }
