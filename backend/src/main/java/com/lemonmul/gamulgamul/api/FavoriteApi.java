@@ -265,7 +265,7 @@ public class FavoriteApi {
      * 해당 상품을 사용자의 즐겨찾기 목록에 추가 v2
      */
     @PostMapping("/goods/{goodsId}/v2")
-    public FavoriteItemResponseDto addFavoriteGoodsV2(@PathVariable Long goodsId, @RequestHeader HttpHeaders headers) throws Exception {
+    public AddFavoriteGoodsResponseDto addFavoriteGoodsV2(@PathVariable Long goodsId, @RequestHeader HttpHeaders headers) throws Exception {
         log.info("[Starting request] POST /add/{goodsId}");
 
         User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
@@ -280,9 +280,13 @@ public class FavoriteApi {
         List<FavoriteItemResponseDto> newFavoriteGoodsList = favoriteGoodsService.existFavoriteGoods(user).stream().map(FavoriteItemResponseDto::new).toList();
         log.info("newFavoriteGoodsList size: {}", newFavoriteGoodsList.size());
 
+        List<Long> goodsIds = newFavoriteGoodsList.stream().map(FavoriteItemResponseDto::getGoodsId).toList();
+
+        List<FavoriteRecommendDto> favoriteRecommends = favoriteRecommendService.getFavoriteRecommends(user, goodsIds);
+
         if(favoriteCalc(user)) {
             log.info("[Finished request] POST /add/{goodsId}");
-            return new FavoriteItemResponseDto(goods);
+            return new AddFavoriteGoodsResponseDto(new FavoriteItemResponseDto(goods), favoriteRecommends);
         } else {
             throw new Exception();
         }
