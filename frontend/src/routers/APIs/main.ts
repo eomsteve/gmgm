@@ -2,7 +2,10 @@ import axios from 'axios';
 
 const API_URL = 'https://j7d108.p.ssafy.io/api/main';
 export interface MainData {
-  checklistList?: {checklistId : number, regDate:string}[],
+  checklistList?: {checklistId : number, regDate:string, itemInfos: {
+    productName: string;
+    status: boolean;
+  }[];}[],
   cpi : {value : number, researchDate:string},
   favoriteIndex?: {value: number, researchDate:string},
   newsList : {id: number, title: string, link: string, pubDate: string}[],
