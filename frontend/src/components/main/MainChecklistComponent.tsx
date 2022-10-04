@@ -8,6 +8,10 @@ import CheckListItem from '@components/checkList/CheckListItem';
 interface checkListItem {
   checklistId: number;
   regDate: string;
+  itemInfos: {
+    productName: string;
+    status: boolean;
+  }[];
 }
 interface checkListItems {
   checkLists: checkListItem[];
@@ -24,14 +28,14 @@ const MainChecklist: FC<checkListItems> = props => {
       <div className="text-lg pt-8 pl-[2rem]">
         최근 장보기 내역
       </div>
-      <main className="grid w-full grid-cols-3 content-start bg-[white] px-5 mb-[4rem]">
+      <main className="grid w-full grid-cols-3 content-start bg-[white] px-5 mb-[5rem]">
         {checkLists.map(checkList => {
           return (
             <div key={checkList.checklistId}>
               <CheckListItem
                 checklistId={checkList.checklistId}
                 regDate={checkList.regDate}
-                // itemInfos={checkList.itemInfos}
+                itemInfos={checkList.itemInfos}
               />
             </div>
           );

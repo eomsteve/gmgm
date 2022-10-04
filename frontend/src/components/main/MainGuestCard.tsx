@@ -16,8 +16,8 @@ const MainGuestCard: FC = () => {
         {/* <FontAwesomeIcon  icon={faUser} className=" text-[1.6rem] flex justify-center Heart text-[#428BC1] p-[0.3rem]" /> */}
         <User width="1.6rem" height="1.6rem" />
       </div>
-      <span className="col-span-3 mx-2 flex items-center p-1"> hello, Guest!</span>
-      <div className="flex flex-col item-center -0 cursor-pointer"
+      <span className="col-span-3 mx-2 flex items-center p-1">안녕하세요!</span>
+      <div className="flex flex-col item-center -0"
         onClick={()=>{
           navigate('/signup')
         }}>
