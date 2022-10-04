@@ -125,7 +125,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
           const custom = customRef.current;
           const unMountUpdateStatus= async(basic : BasicProduct[], custom : CustomProduct[], CheckListId?: string) => {
             await updateCheckListStatus(basic, custom, checklistId)
-            // navigate('/checklists')
+            dispatch(setInitialStateWhenUnMounted());
           }
           unMountUpdateStatus(basic,custom,checklistId)
         }

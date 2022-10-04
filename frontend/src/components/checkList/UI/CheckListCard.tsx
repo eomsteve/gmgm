@@ -89,7 +89,7 @@ const CheckListCard: FC<CheckListProps> = props => {
         >
           <span> {customProductName || basicProductName}</span>
         </label>
-        <div>
+        { basicProductName && <div>
           <span className="col-span-1 flex justify-center truncate ">
             {priceGap &&priceGap > 0 ? (
               <Up width="1rem" height="2rem" />
@@ -106,7 +106,7 @@ const CheckListCard: FC<CheckListProps> = props => {
           >
             {priceGap == 0 ? '' : priceGap}
           </span>
-        </div>
+        </div>}
         <span className="col-span-3 mr-2 flex justify-end">{recentPrice}</span>
         <div className="flex items-center justify-center">
           {basicProductName &&
