@@ -129,7 +129,7 @@ public class MainService {
             String dateStr = itemDto.getPubDate();
 
             LocalDateTime dateTime = LocalDateTime.parse(dateStr, DateTimeFormatter.RFC_1123_DATE_TIME);
-            newsList.add(News.of(itemDto.getTitle(), itemDto.getLink(), dateTime.minusHours(9)));
+            newsList.add(News.of(itemDto.getTitle(), itemDto.getLink(), dateTime.plusHours(9)));
         }
         newsRepo.saveAll(newsList);
     }
