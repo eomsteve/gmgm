@@ -10,6 +10,10 @@ interface MyKnownError {
 }
 
 export interface BasicProduct {
+  priceGapOn: number;
+  priceGapOff: number;
+  recentPriceOn: number;
+  recentPriceOff: number;
   id: number;
   basicProductId: number;
   basicProductName: string;
@@ -25,7 +29,7 @@ export interface CustomProduct {
 
 interface Initial {
   empty?: boolean;
-  basicEmpty?:boolean;
+  basicEmpty?: boolean;
   customEmpty?: boolean;
   checklistBasicItems: BasicProduct[];
   checklistCustomItems: CustomProduct[];
@@ -48,7 +52,7 @@ export const getCheckLists = createAsyncThunk<
   }
 >('getList', async (checklistId, thunkAPI) => {
   try {
-    const { data } = await axios.get(API_URL + `/${checklistId}`);
+    const { data } = await axios.get(API_URL + `/info/${checklistId}`);
     console.log('get CheckList by id at redux: ', data);
     return data;
   } catch (error) {
@@ -56,21 +60,24 @@ export const getCheckLists = createAsyncThunk<
   }
 });
 
-export const updateCheckListStatus = createAsyncThunk('updateCheckLists', async (checklistId, thunkAPI) => {
-  try {
-    const { data } = await axios({
-      url : API_URL + `/status/${checklistId}`,
-      method : 'put',
-      data: {
-        initialState
-      }
-    });
-    console.log(data);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-})
+export const updateCheckListStatus = createAsyncThunk(
+  'updateCheckLists',
+  async (checklistId, thunkAPI) => {
+    try {
+      const { data } = await axios({
+        url: API_URL + `/status/${checklistId}`,
+        method: 'put',
+        data: {
+          initialState,
+        },
+      });
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
 
 export const checkListProductsSlice = createSlice({
   name: 'checklistProducts',
@@ -87,6 +94,10 @@ export const checkListProductsSlice = createSlice({
           id: -1,
           basicProductId: action.payload.basicProductId,
           basicProductName: action.payload.basicProductName,
+          recentPriceOff: 0,
+          recentPriceOn: 0,
+          priceGapOff: 0,
+          priceGapOn: 0,
           status: false,
         });
       }

@@ -13,6 +13,9 @@ import type {
   CustomProduct,
   BasicProduct,
 } from '@modules/CheckListProductList';
+import { ReactComponent as Equal } from '@src/assets/icons/equals.svg';
+import { ReactComponent as Down } from '@src/assets/icons/down.svg';
+import { ReactComponent as Up } from '@src/assets/icons/up.svg';
 
 import { ReactComponent as Chart } from '../../../assets/icons/chart.svg';
 import { ReactComponent as Delete } from '../../../assets/icons/delete.svg';
@@ -24,6 +27,10 @@ interface CheckListProps {
   status: boolean;
   productId?: number;
   businessType: string;
+  recentPrice?: number;
+
+  priceGap?: number;
+  checklistId?: string;
 }
 const CheckListCard: FC<CheckListProps> = props => {
   const {
@@ -33,6 +40,9 @@ const CheckListCard: FC<CheckListProps> = props => {
     status,
     businessType,
     productId,
+    priceGap,
+    recentPrice,
+    checklistId
   } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -60,34 +70,44 @@ const CheckListCard: FC<CheckListProps> = props => {
     setIsChecked(status);
   }, []);
 
-
   return (
     <>
-      <div className="center container m-2 grid w-[86vw] grid-cols-6 items-center rounded border border-gray-300 py-2 px-2 lg:py-0 ">
+      <div className="center container m-2 grid w-[86vw] grid-cols-12 items-center rounded border border-gray-300 py-2 px-2 lg:py-0 ">
         <input
           disabled={isEdit}
           onChange={handleCheckState}
-          className="ml-4 h-[20px] w-[20px]"
+          className="col-span-2 ml-4 h-[20px] w-[20px]"
           checked={isChecked}
           type="checkbox"
           id={customProductName || basicProductName}
         />
         <label
-          className={`col-span-3 flex items-center p-1 ${
+          className={`col-span-5 flex items-center p-1 ${
             !isChecked ? '' : 'text-gray-500 line-through'
           }`}
           htmlFor={customProductName || basicProductName}
         >
           <span> {customProductName || basicProductName}</span>
         </label>
-        <div
-          onClick={() => {
-            navigate('/');
-          }}
-          className="flex items-center justify-center"
-        >
-          {basicProductName && <span> 추세 </span>}
+        <div>
+          <span className="col-span-1 flex justify-center truncate ">
+            {priceGap &&priceGap > 0 ? (
+              <Up width="1rem" height="2rem" />
+            ) :priceGap && priceGap < 0 ? (
+              <Down width="1rem" height="2rem" />
+            ) : (
+              <Equal width="1rem" height="2rem" />
+            )}
+          </span>
+          <span
+            className={`col-span-1 flex justify-center text-sm${
+              priceGap && priceGap > 0 ? '' : ''
+            }`}
+          >
+            {priceGap == 0 ? '' : priceGap}
+          </span>
         </div>
+        <span className="col-span-3 mr-2 flex justify-end">{recentPrice}</span>
         <div className="flex items-center justify-center">
           {basicProductName &&
             (isEdit ? (
@@ -102,7 +122,9 @@ const CheckListCard: FC<CheckListProps> = props => {
               <span
                 onClick={() => {
                   navigate(
-                    `/detail/product/${productId}/business/${businessType}`,
+                    `/detail/product/${productId}/business/${businessType}`,{
+                      state: { isEdit, from : 'checkList', checklistId },
+                    }
                   );
                 }}
               >

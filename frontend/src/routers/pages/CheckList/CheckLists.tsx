@@ -14,7 +14,10 @@ const CheckLists: FunctionComponent<CheckListsProps> = () => {
       const data = await getCheckLists();
       setCheckListItems(data);
     };
-    getCheckListsData();
+    setTimeout(()=> getCheckListsData(), 100)
+    return (()=>{
+      
+    })
   }, []);
   return (
     <>

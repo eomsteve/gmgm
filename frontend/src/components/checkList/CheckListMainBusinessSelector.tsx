@@ -45,16 +45,14 @@ const businessData: { [key: string]: string } = {
   o: '온라인',
 };
 
-const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
+const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const { checklistId } = useParams();
   const location = useLocation();
-  const params = location.state as { isEdit: boolean; checklistId: string };
+  let params = location.state as { isEdit: boolean; checklistId: string };
   const [customEmpty, setCustomEmpty] = useState<boolean>();
   const [basicEmpty, setBasicEmpty] = useState<boolean>();
   const [isEdit, setIsEdit] = useState(false);
   const [isModified, setIsModified] = useState<boolean>(false);
-  // const [checklistCustomItems, setChecklistCustomItems] = useState<CustomProduct[]>([]);
-  // const [checklistBasicItems, setChecklistBasicItems] = useState<BasicProduct[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const { checklistCustomItems, checklistBasicItems } = useSelector(
     (state: RootState) => {
@@ -101,10 +99,13 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       }
     };
     if (params && params.isEdit) {
+      console.log(params, params.isEdit);
+      
       console.log('이전 페이지에서 오신듯함 ㅎ');
       setIsEdit(() => params.isEdit);
       // console.log(checklistBasicItems);
     } else {
+      setIsEdit(()=>false)
       fetchData(checklistId);
     }
     return () => {
@@ -120,11 +121,13 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
           isModified,
         );
         if (basicRef.current !== undefined && customRef.current !== undefined) {
-          updateCheckListStatus(
-            basicRef.current,
-            customRef.current,
-            checklistId,
-          );
+          const basic = basicRef.current;
+          const custom = customRef.current;
+          const unMountUpdateStatus= async(basic : BasicProduct[], custom : CustomProduct[], CheckListId?: string) => {
+            await updateCheckListStatus(basic, custom, checklistId)
+            // navigate('/checklists')
+          }
+          unMountUpdateStatus(basic,custom,checklistId)
         }
       }
     };
@@ -143,7 +146,10 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       setIsEdit(() => !isEdit);
     }
   };
-
+  const deleteItem = async (checklistId ?: string) => {
+    await deleteCheckList(checklistId);
+    navigate('/checklists');
+  }
   const navigate = useNavigate();
   const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
@@ -176,27 +182,28 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
           ))}
         </select>
         {!!isEdit ? (
-          <div onClick={() => saveCheckList()}>
+          <div onClick={() => {
+            saveCheckList()
+            }}>
             <ConfirmButton />
           </div>
         ) : (
           <div className="m-3 grid grid-cols-2 items-center justify-center">
-            <span className="text-sm" onClick={() => setIsEdit(() => !isEdit)}>
-              <span className="grid grid-cols-2">
-                <Edit width="1rem" height="1rem" />
-                수정
-              </span>
-            </span>
             <span
               onClick={() => {
-                deleteCheckList(checklistId);
-                navigate(-1);
+                return deleteItem(checklistId);
               }}
               className="text-sm"
             >
               <span className="ml-2 grid grid-cols-2">
                 <Delete width="1rem" height="1rem" />
                 삭제
+              </span>
+            </span>
+            <span className=" ml-2 text-sm" onClick={() => setIsEdit(() => !isEdit)}>
+              <span className="grid grid-cols-2">
+                <Edit width="1rem" height="1rem" />
+                수정
               </span>
             </span>
           </div>

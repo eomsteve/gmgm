@@ -71,7 +71,7 @@ export const getCheckList = async (checkListId?: string) => {
 export const updateCheckLists = async ( checklistBasicItems : BasicProduct[], checklistCustomItems : CustomProduct[], checkListId?: string ) => {
   try {
     const { data } = await axios({
-      url: API_URL + `/${checkListId}`,
+      url: API_URL + `/info/${checkListId}`,
       method: 'put',
       data: {
         checklistBasicItems,
