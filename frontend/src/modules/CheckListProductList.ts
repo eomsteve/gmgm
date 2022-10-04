@@ -83,7 +83,7 @@ export const checkListProductsSlice = createSlice({
       if (isDuplicate) {
         console.log('중복');
       } else {
-        state.checklistBasicItems.push({
+        state.checklistBasicItems.unshift({
           id: -1,
           basicProductId: action.payload.basicProductId,
           basicProductName: action.payload.basicProductName,

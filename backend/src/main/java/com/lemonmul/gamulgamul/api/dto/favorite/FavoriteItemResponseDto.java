@@ -19,6 +19,18 @@ public class FavoriteItemResponseDto {
     private Double priceGapOff;
     private Double priceGapOn;
 
+    public FavoriteItemResponseDto(Goods goods) {
+        this.goodsId = goods.getId();
+        this.basicProductId = goods.getProduct().getId();
+        this.goodsName = goods.getName();
+        this.img = goods.getImg();
+        this.measure = goods.getMeasure();
+        this.recentPriceOff = goods.getRecentPriceOff();
+        this.recentPriceOn = goods.getRecentPriceOn();
+        this.priceGapOff = goods.getPriceGapOff();
+        this.priceGapOn = goods.getPriceGapOn();
+    }
+
     public FavoriteItemResponseDto(FavoriteGoods favoriteGoods) {
         Goods goods = favoriteGoods.getGoods();
 

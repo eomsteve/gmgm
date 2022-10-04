@@ -4,9 +4,12 @@ import { getFavoriteSelect, getFavoritePageData } from '@apis/favoriteApi';
 import GotoSelectionButton from './GotoSelection';
 import Recommendation from './RecommendComponent';
 import { useNavigate } from 'react-router-dom';
+import type { RootState, AppDispatch } from '@modules/store';
+import { useSelector, useDispatch } from 'react-redux';
+
 import type { FavoritePageData, FavoriteItem } from '@apis/favoriteApi';
 interface FavoriteSelectBoxProps {
-  pageData: FavoriteItem[];
+  pageData: FavoritePageData;
 }
 
 const businessData: { [key: string]: string } = {
@@ -14,16 +17,41 @@ const businessData: { [key: string]: string } = {
   o: '온라인',
 };
 
+interface Recommend {
+  goodsId: number;
+  goodsName: string;
+  img: string;
+}
+
 const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
-  const selectBoxPage = props.pageData;
+  const { pageData } = props;
+  console.log("selectPage :" ,pageData);
+
   const optionList = ['m', 'o'];
+  // const data = useSelector((state: RootState) => {
+  //   const goodsItemList =
+  //     state.persistedReducer.favoriteProductListReducer.goods;
+  //   console.log(
+  //     'favorite product :',
+  //     state.persistedReducer.favoriteProductListReducer.goods,
+  //   );
+  //   return goodsItemList;
+  // });
   const [optionState, setOption] = useState<string>('m');
-  const [pageData, setPageData] = useState<FavoriteItem[]>(selectBoxPage);
+  // const [favoritePageData, setPageData] = useState<FavoriteItem[]>(selectBoxPage.favoriteItems);
+  // const [recommendData, setRecommendData] = useState<Recommend[]>(
+  //   selectBoxPage.favoriteRecommends,
+  // );
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOption(()=> e.target.value);
-    
+    setOption(() => e.target.value);
   };
   const navigate = useNavigate();
+  // useEffect(() => {
+  //   console.log('hello');
+  //   setPageData(data);
+  //   // setRecommendData(()=>data.favoriteRecommends)
+  // }, [data]);
+
   return (
     <div className="mb-5">
       <span className="text-lg">
@@ -60,17 +88,24 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
           </option>
         ))}
       </select>
-      <div className="flex w-full flex-col items-center justify-center p-0">
+      <div className="flex w-full flex-col items-center justify-center bg-gradient-to-t from-blur p-1">
         {pageData &&
-          pageData.map((favoriteItem, index) => {
-            
+          pageData.favoriteItems.map((favoriteItem, index) => {
             return (
               <div key={favoriteItem.goodsId}>
                 <FavoriteCard
                   img={favoriteItem.img}
                   goodsName={favoriteItem.goodsName}
-                  priceGap={(optionState === 'm') ? favoriteItem.priceGapOff : favoriteItem.priceGapOn }
-                  goodsPrice={(optionState === 'm') ? favoriteItem.recentPriceOff : favoriteItem.recentPriceOn}
+                  priceGap={
+                    optionState === 'm'
+                      ? favoriteItem.priceGapOff
+                      : favoriteItem.priceGapOn
+                  }
+                  goodsPrice={
+                    optionState === 'm'
+                      ? favoriteItem.recentPriceOff
+                      : favoriteItem.recentPriceOn
+                  }
                 />
               </div>
             );
@@ -80,10 +115,10 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
             navigate('/favorite/selection');
           }}
         >
-            <GotoSelectionButton />
+          <GotoSelectionButton />
         </div>
       </div>
-      <Recommendation/>
+      {<Recommendation favoriteRecommends={pageData.favoriteRecommends} />}
     </div>
   );
 };

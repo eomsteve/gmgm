@@ -19,8 +19,8 @@ interface ProductData {
   unit: number;
   measure: string;
   goodsInfos: { goodsId: number; goodsName: string }[];
-  productPrices?: [];
-  researchDates?: [];
+  productPrices: { price: number }[];
+  researchDates: { researchDate: string }[];
 }
 
 interface DetailSelectBoxProps {}
@@ -42,18 +42,18 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
   const navigate = useNavigate();
   const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
-  const [goodsInfo, setGoodsInfo] = useState<GoodsInfo[]>([]);
+  const [goodsInfo, setGoodsInfo] = useState<GoodsInfo>();
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
     console.log(e.target.value);
     const getGoodsDetails = async (goodsId?: string, businessType?: string) => {
       const data = await detailSelectBoxChange(goodsId, businessType);
       setGoodsInfo(() => data);
       console.log(goodsInfo);
-
       return data;
     };
     getGoodsDetails(e.target.value, businessType);
   };
+  console.log();
 
   return (
     <>
@@ -83,10 +83,17 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
         </select>
       </div>
       {productData && (
-        <Calculator measure={productData.measure} goodsProps={goodsInfo} />
+        <Calculator
+          measure={productData.measure}
+          goodsProps={goodsInfo}
+          productPrices={productData.productPrices}
+          researchDates={productData.researchDates}
+          unit={productData.unit}
+          productName={productData.basicProductName}
+        />
       )}
       <hr className="mx-[-1.25rem] my-1 w-screen" />
-      <OnlineCard />
+      {goodsInfo && <OnlineCard goodsProps={goodsInfo} />}
     </>
   );
 };

@@ -54,19 +54,6 @@ public class SecurityConfig {
     }
 
     @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return web ->
-            web.ignoring()
-                    .antMatchers(
-                            "/user/signup",
-                            "/user/check/**",
-                            "/user/logout",
-                            "/main",
-                            "/refresh"
-                    );
-    }
-
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http

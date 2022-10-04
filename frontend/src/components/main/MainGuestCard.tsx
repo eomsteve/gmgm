@@ -29,7 +29,7 @@ const MainGuestCard: FC = () => {
         </div>
         <span className="text-xs text-center">회원가입</span>
       </div>
-      <div className="flex flex-col item-center -0"
+      <div className="flex flex-col item-center -0 cursor-pointer"
         onClick={()=>{
           navigate('/login')
         }}>

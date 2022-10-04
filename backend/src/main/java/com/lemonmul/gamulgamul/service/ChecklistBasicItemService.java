@@ -56,7 +56,7 @@ public class ChecklistBasicItemService {
         for (ChecklistBasicItem basicItem : basicItems) {
             BasicItemDto itemDto = checklistBasicItem.stream()
                     .filter(i -> basicItem.getId().equals(i.getId())).findAny()
-                    .orElseThrow();
+                    .orElseThrow(() -> new IllegalArgumentException("해당 항목이 존재하지 않습니다."));
             basicItem.setStatus(itemDto.isStatus());
         }
     }
