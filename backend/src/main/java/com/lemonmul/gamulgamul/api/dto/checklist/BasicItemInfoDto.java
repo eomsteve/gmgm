@@ -21,6 +21,7 @@ public class BasicItemInfoDto {
         basicProductId =item.getProduct().getId();
         basicProductName =item.getProduct().getName();
         status=item.isStatus();
+        //todo 한번에 불러오게 바꾸기
         recentPriceOff=item.getProduct().getRecentPriceOff();
         recentPriceOn=item.getProduct().getRecentPriceOn();
         priceGapOff=item.getProduct().getPriceGapOff();

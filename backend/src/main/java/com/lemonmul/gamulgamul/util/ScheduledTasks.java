@@ -21,9 +21,9 @@ public class ScheduledTasks {
 
     /**
      * Naver News API 검색 스케줄링
-     *  한시간마다 갱신
+     *  30분마다 갱신
      * */
-    @Scheduled(cron = "0 */5 * * * *")
+    @Scheduled(cron = "0 */30 * * * *")
     public void renewNews(){
         final long startTime = System.currentTimeMillis();
         log.info("[Starting request] request to Naver API");
