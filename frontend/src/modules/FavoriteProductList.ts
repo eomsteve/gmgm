@@ -20,6 +20,7 @@ interface FetchItems {
 interface SelectedGoods {
   goodsId: number;
   goodsName: string;
+  img?:string;
 }
 interface MyKnownError {
   errorMessage: string;
@@ -63,6 +64,22 @@ export const updateFavoriteItems = createAsyncThunk('updateFavoriteItem', async 
   }
 })
 
+export const updateRecommendItem = createAsyncThunk('updateRecommendItem', async (goodsId: number, thunkAPI)=>{
+  try {
+    const { data } = await axios({
+      url : API_URL + `/goods/${goodsId}/v2`,
+      method:'POST',
+      data : {
+        goodsId,
+      }
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    
+  }
+})
+
 export const favoriteGoodsSlice = createSlice({
   name: 'favoriteGoods',
   initialState,
@@ -94,13 +111,17 @@ export const favoriteGoodsSlice = createSlice({
     builder.addCase(getFavoritePageDataRedux.fulfilled, (state, action) => {
       // console.log(current(state), action.payload);
       const fetchList = action.payload.favoriteItems.map((item: FetchItems) => {
-        return { goodsId: item.goodsId, goodsName : item.goodsName };
+        return item;
       });
       console.log(fetchList);
-      state.goods = fetchList;
+      // state.goods = fetchList;
     });
     builder.addCase(updateFavoriteItems.fulfilled, (state, action) => {
       console.log(current(state), action.payload);
+    });
+    builder.addCase(updateRecommendItem.fulfilled, (state, action) => {
+      console.log('updateRecommendItem :',current(state), action.payload);
+      state.goods.push(action.payload);
     })
   },
 });

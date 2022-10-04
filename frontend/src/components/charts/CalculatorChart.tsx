@@ -43,6 +43,7 @@ export const options = {
       },
     },
     y: {
+      min : 10,
       grid: {
         display: true,
       },
@@ -54,7 +55,7 @@ interface SumPriceChartProps {
   productName : string;
   productPrices: {price: number}[];
   researchDates: {researchDate: string }[];
-  calculatorData?: number;
+  calculatorData?: {calPrice: number, calMeasure:number};
   goodsData?:GoodsInfo;
   unit : number;
 }
@@ -69,18 +70,24 @@ const SumPriceChart: FunctionComponent<SumPriceChartProps> = props => {
   const labels = researchDates.map((data) => {
     return data.researchDate
   })
-  const productData = productPrices.map((data)=>{
-    return (data.price)
+  const productData = calculatorData ?  productPrices.map((data)=>{
+    return (data.price * (calculatorData.calMeasure / unit)) 
+  }): productPrices.map((data)=>{
+    return (data.price) 
   })
   const calData =calculatorData ? labels.map(() => {
-    return (calculatorData / unit)}) : labels.map(() => {
+    return (calculatorData.calPrice)}) : labels.map(() => {
       return (calculatorData);
   });
-  const goodsChartData = goodsData ? goodsData.goodsPrices.map((data) => {
-    return (data.price / unit);
+  const goodsChartData = calculatorData ? goodsData ? goodsData.goodsPrices.map((data) => {
+    return (data.price * (calculatorData.calMeasure / unit));
   }) : labels.map(() => {
     return undefined;
-  });
+  }) : goodsData ? goodsData.goodsPrices.map((data) => {
+    return (data.price);
+  }) : labels.map(() => {
+    return undefined;
+  })
 
   if (calculatorData) {
     const calData = labels.map(() => {
