@@ -11,6 +11,7 @@ import com.lemonmul.gamulgamul.repo.ChecklistRepo;
 import com.lemonmul.gamulgamul.repo.NewsRepo;
 import com.lemonmul.gamulgamul.repo.PriceIndexRepo;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -30,6 +31,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MainService {
 
     private final PriceIndexRepo priceIndexRepo;
@@ -127,9 +129,12 @@ public class MainService {
         for (ItemDto item : items) {
             itemDto = item;
             String dateStr = itemDto.getPubDate();
+            log.debug("itemDto pubDate: {}",dateStr);
 
             LocalDateTime dateTime = LocalDateTime.parse(dateStr, DateTimeFormatter.RFC_1123_DATE_TIME);
-            newsList.add(News.of(itemDto.getTitle(), itemDto.getLink(), dateTime.minusHours(9)));
+            log.debug("parsed pubDate: {}",dateTime);
+            log.debug("minusHours(9): {}", dateTime.minusHours(9));
+            newsList.add(News.of(itemDto.getTitle(), itemDto.getLink(), dateTime));
         }
         newsRepo.saveAll(newsList);
     }

@@ -75,7 +75,7 @@ public class MainServiceTest {
     @Test
     public void dateTimeFormatter(){
         System.out.println(LocalDateTime.of(2022,12,25,10,20)
-                .format(DateTimeFormatter.ofPattern("yyyy년 M월 d일 기준")));
+                .format(DateTimeFormatter.ofPattern("yyyy년 M월 기준")));
         System.out.println(LocalDateTime.of(2022,12,5,10,7)
                 .format(DateTimeFormatter.ofPattern("yyyy년 M월 d일 h시 m분")));
 
