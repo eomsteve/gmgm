@@ -4,6 +4,9 @@ import { getFavoriteSelect, getFavoritePageData } from '@apis/favoriteApi';
 import GotoSelectionButton from './GotoSelection';
 import Recommendation from './RecommendComponent';
 import { useNavigate } from 'react-router-dom';
+import type { RootState, AppDispatch } from '@modules/store';
+import { useSelector, useDispatch } from 'react-redux';
+
 import type { FavoritePageData, FavoriteItem } from '@apis/favoriteApi';
 interface FavoriteSelectBoxProps {
   pageData: FavoritePageData;
@@ -16,6 +19,8 @@ const businessData: { [key: string]: string } = {
 
 const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
   const selectBoxPage = props.pageData;
+  console.log("selectPage :" ,selectBoxPage.favoriteItems);
+  
   const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
   const [pageData, setPageData] = useState<FavoriteItem[]>(selectBoxPage.favoriteItems);
@@ -24,6 +29,12 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
     
   };
   const navigate = useNavigate();
+  const data = useSelector((state: RootState) => {
+    const goodsItemList = state.persistedReducer.favoriteProductListReducer.goods
+    console.log('favorite product :',state.persistedReducer.favoriteProductListReducer.goods);
+    return goodsItemList
+  });
+
   return (
     <div className="mb-5">
       <span className="text-lg">

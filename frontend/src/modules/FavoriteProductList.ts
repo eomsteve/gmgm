@@ -20,6 +20,7 @@ interface FetchItems {
 interface SelectedGoods {
   goodsId: number;
   goodsName: string;
+  img?:string;
 }
 interface MyKnownError {
   errorMessage: string;
@@ -54,6 +55,22 @@ export const updateFavoriteItems = createAsyncThunk('updateFavoriteItem', async 
       method: 'post',
       data:{
         goodsIds : goodsIdList
+      }
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    
+  }
+})
+
+export const updateRecommendItem = createAsyncThunk('updateRecommendItem', async (goodsId: number, thunkAPI)=>{
+  try {
+    const { data } = await axios({
+      url : API_URL + `/goods/${goodsId}`,
+      method:'POST',
+      data : {
+        goodsId,
       }
     });
     console.log(data);
@@ -101,6 +118,10 @@ export const favoriteGoodsSlice = createSlice({
     });
     builder.addCase(updateFavoriteItems.fulfilled, (state, action) => {
       console.log(current(state), action.payload);
+    });
+    builder.addCase(updateRecommendItem.fulfilled, (state, action) => {
+      console.log('updateRecommendItem :',current(state), action.payload);
+      state.goods = action.payload
     })
   },
 });

@@ -14,9 +14,7 @@ interface FavoriteIndexPageProps {}
 
 const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const data = useSelector((state: RootState) => {
-    // console.log(state.persistedReducer.authTokenReducer.authToken);
-  });
+
   const [favoritePageData, setFavoritePageData] = useState<FavoritePageData>();
   useEffect(() => {
     const getPageData = async () => {
@@ -28,6 +26,8 @@ const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
     };
     getPageData();
   }, []);
+  console.log('favoriteIndex');
+  
   return (
     <>
       <FavHeader title={'즐겨찾기'} navigateRouter={''} />
