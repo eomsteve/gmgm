@@ -16,7 +16,7 @@ public class PriceDto {
     }
 
     public PriceDto(GoodsPrice price) {
-        this.price=price.getPrice();
+        this.price=price.getUnitPrice();
     }
 
     public PriceDto(FavoriteTotalPrice price) {
