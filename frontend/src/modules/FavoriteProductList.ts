@@ -67,7 +67,7 @@ export const updateFavoriteItems = createAsyncThunk('updateFavoriteItem', async 
 export const updateRecommendItem = createAsyncThunk('updateRecommendItem', async (goodsId: number, thunkAPI)=>{
   try {
     const { data } = await axios({
-      url : API_URL + `/goods/${goodsId}`,
+      url : API_URL + `/goods/${goodsId}/v2`,
       method:'POST',
       data : {
         goodsId,
@@ -111,7 +111,7 @@ export const favoriteGoodsSlice = createSlice({
     builder.addCase(getFavoritePageDataRedux.fulfilled, (state, action) => {
       // console.log(current(state), action.payload);
       const fetchList = action.payload.favoriteItems.map((item: FetchItems) => {
-        return { goodsId: item.goodsId, goodsName : item.goodsName };
+        return item;
       });
       console.log(fetchList);
       state.goods = fetchList;
@@ -121,7 +121,7 @@ export const favoriteGoodsSlice = createSlice({
     });
     builder.addCase(updateRecommendItem.fulfilled, (state, action) => {
       console.log('updateRecommendItem :',current(state), action.payload);
-      state.goods = action.payload
+      state.goods.push(action.payload);
     })
   },
 });
