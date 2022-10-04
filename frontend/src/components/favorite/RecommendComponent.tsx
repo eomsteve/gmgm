@@ -27,6 +27,7 @@ const Recommend: FC<RecommendProps> = props => {
       <div className="grid grid-cols-2 border m-3 w-[85vw]  text-center text-align-center">
         {favoriteRecommends.map((goods) => {
           return  <div
+          key={goods.goodsId}
           onClick={() => updateItems(goods.goodsId)}
           ><GoodsCard goodsId={goods.goodsId} goodsName={goods.goodsName} goodsImg={goods.img} /></div>
         })}

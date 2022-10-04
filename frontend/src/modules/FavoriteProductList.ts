@@ -114,7 +114,7 @@ export const favoriteGoodsSlice = createSlice({
         return item;
       });
       console.log(fetchList);
-      state.goods = fetchList;
+      // state.goods = fetchList;
     });
     builder.addCase(updateFavoriteItems.fulfilled, (state, action) => {
       console.log(current(state), action.payload);

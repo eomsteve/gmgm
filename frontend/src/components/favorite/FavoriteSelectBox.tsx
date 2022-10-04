@@ -24,33 +24,33 @@ interface Recommend {
 }
 
 const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
-  const selectBoxPage = props.pageData;
-  // console.log("selectPage :" ,selectBoxPage.favoriteItems);
+  const { pageData } = props;
+  console.log("selectPage :" ,pageData);
 
   const optionList = ['m', 'o'];
-  const data = useSelector((state: RootState) => {
-    const goodsItemList =
-      state.persistedReducer.favoriteProductListReducer.goods;
-    console.log(
-      'favorite product :',
-      state.persistedReducer.favoriteProductListReducer.goods,
-    );
-    return goodsItemList;
-  });
+  // const data = useSelector((state: RootState) => {
+  //   const goodsItemList =
+  //     state.persistedReducer.favoriteProductListReducer.goods;
+  //   console.log(
+  //     'favorite product :',
+  //     state.persistedReducer.favoriteProductListReducer.goods,
+  //   );
+  //   return goodsItemList;
+  // });
   const [optionState, setOption] = useState<string>('m');
-  const [pageData, setPageData] = useState<FavoriteItem[]>(data);
-  const [recommendData, setRecommendData] = useState<Recommend[]>(
-    selectBoxPage.favoriteRecommends,
-  );
+  // const [favoritePageData, setPageData] = useState<FavoriteItem[]>(selectBoxPage.favoriteItems);
+  // const [recommendData, setRecommendData] = useState<Recommend[]>(
+  //   selectBoxPage.favoriteRecommends,
+  // );
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOption(() => e.target.value);
   };
   const navigate = useNavigate();
-  useEffect(() => {
-    console.log('hello');
-    setPageData(data);
-    // setRecommendData(()=>data.favoriteRecommends)
-  }, [data]);
+  // useEffect(() => {
+  //   console.log('hello');
+  //   setPageData(data);
+  //   // setRecommendData(()=>data.favoriteRecommends)
+  // }, [data]);
 
   return (
     <div className="mb-5">
@@ -88,9 +88,9 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
           </option>
         ))}
       </select>
-      <div className="flex w-full flex-col items-center justify-center  p-1">
+      <div className="flex w-full flex-col items-center justify-center bg-gradient-to-t from-blur p-1">
         {pageData &&
-          pageData.map((favoriteItem, index) => {
+          pageData.favoriteItems.map((favoriteItem, index) => {
             return (
               <div key={favoriteItem.goodsId}>
                 <FavoriteCard
@@ -118,7 +118,7 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
           <GotoSelectionButton />
         </div>
       </div>
-      {<Recommendation favoriteRecommends={recommendData} />}
+      {<Recommendation favoriteRecommends={pageData.favoriteRecommends} />}
     </div>
   );
 };

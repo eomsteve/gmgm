@@ -14,19 +14,25 @@ interface FavoriteIndexPageProps {}
 
 const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
-
+  const checkListItemRedux = useSelector((state: RootState) =>{
+    return state.persistedReducer.favoriteProductListReducer.goods;
+  })
   const [favoritePageData, setFavoritePageData] = useState<FavoritePageData>();
   useEffect(() => {
     const getPageData = async () => {
       const data = await dispatch(getFavoritePageDataRedux()).unwrap();
-      console.log(data);
+      console.log("index : ",data);
       if (typeof data !== 'undefined') {
         setFavoritePageData(data);
       }
     };
     getPageData();
-  }, []);
-  console.log('favoriteIndex');
+  }, [checkListItemRedux]);
+
+  useEffect(() => {
+    console.log('updateeeeee');
+    // window.location.reload();
+  },[checkListItemRedux])
   
   return (
     <>
