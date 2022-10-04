@@ -262,6 +262,33 @@ public class FavoriteApi {
     }
 
     /**
+     * 해당 상품을 사용자의 즐겨찾기 목록에 추가 v2
+     */
+    @PostMapping("/goods/{goodsId}/v2")
+    public FavoriteItemResponseDto addFavoriteGoodsV2(@PathVariable Long goodsId, @RequestHeader HttpHeaders headers) throws Exception {
+        log.info("[Starting request] POST /add/{goodsId}");
+
+        User user = JwtTokenProvider.getUserFromJwtToken(userService, headers);
+        Goods goods = goodsService.getGoodsById(goodsId);
+        log.info("userId: {}", user.getId());
+        log.info("goodsId: {}", goodsId);
+
+        if(favoriteGoodsService.existFavoriteGoods(user, goods))
+            throw new IllegalArgumentException();
+
+        favoriteGoodsService.addFavoriteGoods(user, goods);
+        List<FavoriteItemResponseDto> newFavoriteGoodsList = favoriteGoodsService.existFavoriteGoods(user).stream().map(FavoriteItemResponseDto::new).toList();
+        log.info("newFavoriteGoodsList size: {}", newFavoriteGoodsList.size());
+
+        if(favoriteCalc(user)) {
+            log.info("[Finished request] POST /add/{goodsId}");
+            return new FavoriteItemResponseDto(goods);
+        } else {
+            throw new Exception();
+        }
+    }
+
+    /**
      * 즐겨찾기 총합과 지수 계산을 spark에 요청하는 함수
      */
     private boolean favoriteCalc(User user) throws JsonProcessingException {
