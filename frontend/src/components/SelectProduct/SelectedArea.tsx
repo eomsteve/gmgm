@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { removeGoods, updateFavoriteItems } from '@modules/FavoriteProductList';
 import type { RootState, AppDispatch } from '@modules/store';
-import { ReactComponent as Delete} from '@src/assets/icons/itemDelete.svg'
+import { ReactComponent as Delete } from '@src/assets/icons/itemDelete.svg';
 interface SelectedAreaProps {}
 
 const SelectedArea: FC<SelectedAreaProps> = () => {
@@ -36,8 +36,13 @@ const SelectedArea: FC<SelectedAreaProps> = () => {
       <div className="flex h-full w-full flex-col bg-[#b3d1e6]">
         <div className="my-3 mx-5 text-lg">
           즐겨찾기 목록
-          <span className="ml-2 text-xs text-gray-500">
-            상품을 선택하면 목록에서 제거할 수 있어요.
+          <span
+            onClick={() => {
+              updateItem();
+            }}
+            className="absolute right-5 rounded-full border border-gray-600 bg-white px-3 py-0.5"
+          >
+            다음 &gt;
           </span>
         </div>
         <div className="flex h-full flex-wrap content-start items-start overflow-auto scroll-auto p-3">
@@ -46,26 +51,21 @@ const SelectedArea: FC<SelectedAreaProps> = () => {
               (x: { goodsId: number; goodsName: string }, idx: number) => {
                 return (
                   <span
-                    className="m-1 rounded-full bg-white px-2 py-1 text-sm flex items-center"
+                    className="m-1 flex items-center rounded-full bg-white px-2 py-1 text-sm"
                     key={idx}
                     onClick={() => {
                       removeList(x);
                     }}
                   >
-                    <span>{x.goodsName}</span><span className="pl-1.5"><Delete width='0.5rem' height='0.5rem'/></span>
+                    <span>{x.goodsName}</span>
+                    <span className="pl-1.5">
+                      <Delete width="0.5rem" height="0.5rem" />
+                    </span>
                   </span>
                 );
               },
             )}
         </div>
-        <span
-          onClick={() => {
-            updateItem();
-          }}
-          className="relate bottom-0 right-0 m-3 w-auto self-end rounded-full border border-gray-600 bg-white px-3 py-1"
-        >
-          다음 &gt;
-        </span>
       </div>
     </>
   );
