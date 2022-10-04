@@ -5,6 +5,7 @@ import { faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as User } from '../../assets/icons/user.svg';
 import { ReactComponent as Logout } from '../../assets/icons/logout.svg';
 import {logOutApi} from '@apis/userApi'
+import { clearAllGoodsList } from '@modules/FavoriteProductList'
 import { useNavigate } from 'react-router-dom';
 import type { MainData } from '@apis/main'
 import type { RootState, AppDispatch } from '@src/modules/store';
@@ -24,6 +25,7 @@ const MainUserCard: FC<{username?: string, email: string}> = (props) => {
       <span className="col-span-4 mx-2 flex items-center p-1">{username} 님, 안녕하세요!</span>
       <div className="flex flex-col item-center-0"
         onClick={()=>{
+          dispatch(clearAllGoodsList())
           dispatch(logOutApiRedux(email));
           navigate('/')
         }}>

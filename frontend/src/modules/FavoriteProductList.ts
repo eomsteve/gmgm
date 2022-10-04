@@ -9,9 +9,9 @@ interface FetchItems {
   basicProductId: number;
   goodsId: number;
   goodsName: string;
-  img:string;
+  img: string;
   measure: string;
-  priceGapOff:number;
+  priceGapOff: number;
   priceGapOn: number;
   recentPriceOff: number;
   recentPriceOn: number;
@@ -20,7 +20,7 @@ interface FetchItems {
 interface SelectedGoods {
   goodsId: number;
   goodsName: string;
-  img?:string;
+  img?: string;
 }
 interface MyKnownError {
   errorMessage: string;
@@ -47,38 +47,53 @@ export const getFavoritePageDataRedux = createAsyncThunk(
     } catch (error) {}
   },
 );
+export const getFavoriteItemStoreReduxLogin = createAsyncThunk(
+  'getFavoriteItemStoreReduxLogin',
+  async () => {
+    try {
+      const { data } = await axios({
+        url: API_URL + '/',
+        method: 'GET',
+      });
+      console.log(data);
+      return data.favoriteItems;
+    } catch (error) {}
+  },
+);
 
-export const updateFavoriteItems = createAsyncThunk('updateFavoriteItem', async (goodsIdList : number[], thunkAPI) => {
-  try {
-    const { data } = await axios({
-      url: API_URL + '/',
-      method: 'post',
-      data:{
-        goodsIds : goodsIdList
-      }
-    });
-    console.log(data);
-    return data;
-  } catch (error) {
-    
-  }
-})
+export const updateFavoriteItems = createAsyncThunk(
+  'updateFavoriteItem',
+  async (goodsIdList: number[], thunkAPI) => {
+    try {
+      const { data } = await axios({
+        url: API_URL + '/',
+        method: 'post',
+        data: {
+          goodsIds: goodsIdList,
+        },
+      });
+      console.log(data);
+      return data;
+    } catch (error) {}
+  },
+);
 
-export const updateRecommendItem = createAsyncThunk('updateRecommendItem', async (goodsId: number, thunkAPI)=>{
-  try {
-    const { data } = await axios({
-      url : API_URL + `/goods/${goodsId}/v2`,
-      method:'POST',
-      data : {
-        goodsId,
-      }
-    });
-    console.log(data);
-    return data;
-  } catch (error) {
-    
-  }
-})
+export const updateRecommendItem = createAsyncThunk(
+  'updateRecommendItem',
+  async (goodsId: number, thunkAPI) => {
+    try {
+      const { data } = await axios({
+        url: API_URL + `/goods/${goodsId}`,
+        method: 'POST',
+        data: {
+          goodsId,
+        },
+      });
+      console.log(data);
+      return data;
+    } catch (error) {}
+  },
+);
 
 export const favoriteGoodsSlice = createSlice({
   name: 'favoriteGoods',
@@ -106,9 +121,9 @@ export const favoriteGoodsSlice = createSlice({
       );
       state.goods = data;
     },
-    clearAllGoodsList : (state) => {
-      state.goods= [];
-    }
+    clearAllGoodsList: state => {
+      state.goods = [];
+    },
   },
   extraReducers: builder => {
     builder.addCase(getFavoritePageDataRedux.fulfilled, (state, action) => {
@@ -123,11 +138,23 @@ export const favoriteGoodsSlice = createSlice({
       console.log(current(state), action.payload);
     });
     builder.addCase(updateRecommendItem.fulfilled, (state, action) => {
-      console.log('updateRecommendItem :',current(state), action.payload);
-      state.goods.push(action.payload);
-    })
+      console.log('updateRecommendItem :', current(state), action.payload);
+      state.goods = action.payload;
+    });
+    builder.addCase(
+      getFavoriteItemStoreReduxLogin.fulfilled,
+      (state, action) => {
+        console.log(
+          'login and update favorite items :',
+          current(state),
+          action.payload,
+        );
+        state.goods = action.payload
+      },
+    );
   },
 });
 
-export const { addGoods, removeGoods, clearAllGoodsList } = favoriteGoodsSlice.actions;
+export const { addGoods, removeGoods, clearAllGoodsList } =
+  favoriteGoodsSlice.actions;
 export default favoriteGoodsSlice.reducer;

@@ -1,13 +1,7 @@
 import { FC, useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import BasicBanner from './UI/BasicBanner';
-import CustomBanner from './UI/CustomBanner';
-import GotoCheckListSelection from './UI/GotoCheckListSelection';
-import CheckListCard from './UI/CheckListCard';
-import CustomInput from './UI/InputCustom';
 import ConfirmButton from './UI/ConFirmButton';
 import {
-  getCheckList,
   updateCheckLists,
   deleteCheckList,
   updateCheckListStatus,
@@ -16,8 +10,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   setInitialState,
   setInitialStateWhenUnMounted,
-  updateCustomProductStatus,
-  updateBasicProductsStatus,
   getCheckLists,
 } from '@modules/CheckListProductList';
 import type {
@@ -25,16 +17,12 @@ import type {
   BasicProduct,
 } from '@modules/CheckListProductList';
 import type { RootState, AppDispatch } from '@modules/store';
-import { logInApi } from '@src/routers/APIs/userApi';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 // 리덕스
 import ChecklistHeader from '@components/EmptyHeader';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 
 import BasicProductCheckList from './CheckListBasicItems';
-import CustomProductCheckList from './CheckListCustomItems';
 import CheckListCustomItems from './CheckListCustomItems';
 interface CheckListSelectBoxProps {
   optionList: string[];
@@ -125,7 +113,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
           const custom = customRef.current;
           const unMountUpdateStatus= async(basic : BasicProduct[], custom : CustomProduct[], CheckListId?: string) => {
             await updateCheckListStatus(basic, custom, checklistId)
-            // dispatch(setInitialStateWhenUnMounted());
           }
           unMountUpdateStatus(basic,custom,checklistId)
         }

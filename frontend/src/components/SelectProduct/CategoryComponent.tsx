@@ -42,7 +42,7 @@ const CategorySlider: FC<CategorySliderProps> = () => {
     categoryLoad();
   }, []);
 
-  console.log(data);
+  // console.log(data);
   let [ProductList, setProductList] = useState<Product[]>([]);
   const settings = {
     className: 'center',
