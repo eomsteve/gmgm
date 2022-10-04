@@ -33,7 +33,6 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException {
 
-        // TODO: 강의 듣고 예외처리 다시 해야함
         if (!request.getMethod().equals("POST")) {
             request.setAttribute("exception", "AuthenticationServiceException");
             throw new AuthenticationServiceException("msg");
