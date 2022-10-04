@@ -187,6 +187,36 @@ public class ChecklistApi {
     }
 
     /**
+     * 체크리스트 수정 v2
+     */
+    @PutMapping("/info/{checklistId}")
+    public ChecklistInfoDto modifyChecklistInfo(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId,
+                                        @RequestBody RequestDto requestDto){
+        log.info("[Starting request] PUT /checklist/info/{}",checklistId);
+
+        User user = getUserFromJwtToken(userService, headers);
+        log.info("userId: {}",user.getId());
+
+        Checklist checklist = checklistService.checklist(checklistId);
+        checkOwnership(user,checklist);
+
+        List<BasicItemDto> basicItem = requestDto.getChecklistBasicItems();
+        List<CustomItemDto> customItem = requestDto.getChecklistCustomItems();
+        log.info("basicItem size: {}, customItem size: {}",basicItem.size(),customItem.size());
+
+        basicItemService.updateItems(checklist, basicItem);
+        customItemService.updateItems(checklist, customItem);
+
+        Checklist updatedChecklist = checklistService.checklist(checklistId);
+        int basicItemSize = updatedChecklist.getChecklistBasicItems().size();
+        int customItemSize = updatedChecklist.getChecklistCustomItems().size();
+        log.info("(updated) basicItem size: {}, customItem size: {}", basicItemSize, customItemSize);
+
+        log.info("[Finished request] PUT /checklist/info/{}",checklistId);
+        return new ChecklistInfoDto(updatedChecklist);
+    }
+
+    /**
      * 체크리스트 체크 여부 수정
      */
     @PutMapping("/status/{checklistId}")
