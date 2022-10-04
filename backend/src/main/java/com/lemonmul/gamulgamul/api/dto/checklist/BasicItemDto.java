@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class BasicItemDto {
+public class BasicItemDto implements Comparable<BasicItemDto>{
     private Long id;
     private Long basicProductId;
     private String basicProductName;
@@ -18,5 +18,10 @@ public class BasicItemDto {
         basicProductId =checklistBasicItem.getProduct().getId();
         basicProductName =checklistBasicItem.getProduct().getName();
         status=checklistBasicItem.isStatus();
+    }
+
+    @Override
+    public int compareTo(BasicItemDto o) {
+        return (int) (o.getId()-this.getId());
     }
 }
