@@ -26,32 +26,27 @@ interface ProductData {
 interface DetailSelectBoxProps {}
 const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
   const { productId, businessType, goodsId } = useParams();
-  const [goodsData, setGoodsData]  = useState<GoodsInfo>();
+  const [goodsData, setGoodsData] = useState<GoodsInfo>();
   const [productData, setProductData] = useState<ProductData>();
   useEffect(() => {
     // get data
     console.log('productId, businessType', productId, businessType, goodsId);
 
-    if(goodsId === undefined){
-
+    if (goodsId === undefined) {
       const getData = async () => {
         const data = await atCheckList(productId, businessType);
         setProductData(() => data);
         console.log(data);
-        
       };
       getData();
-    }else{
-
-      const getDataFromFavorite = async () =>{
+    } else {
+      const getDataFromFavorite = async () => {
         const data = await fromFavorite(productId, businessType, goodsId);
-        setProductData(()=> data.product)
-        setGoodsData(()=> data.goods)
-        
-      }
+        setProductData(() => data.product);
+        setGoodsData(() => data.goods);
+      };
       getDataFromFavorite();
     }
-
   }, []);
   const [goodsInfo, setGoodsInfo] = useState<GoodsInfo>();
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -86,17 +81,25 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
             </option>
           )}
           {productData && goodsData && (
-            <option value={goodsData.goodsName}>
-              {goodsData.goodsName}
-            </option>
+            <option value={goodsData.goodsName}>{goodsData.goodsName}</option>
           )}
-          {productData && goodsData &&
+          {productData &&
+            goodsData &&
             productData.goodsInfos.map(goods => {
-              if( goods.goodsName != goodsData.goodsName ){
-              return <option value={goods.goodsId} key={goods.goodsId}>
-                {goods.goodsName}
-              </option>
+              if (goods.goodsName != goodsData.goodsName) {
+                return (
+                  <option value={goods.goodsId} key={goods.goodsId}>
+                    {goods.goodsName}
+                  </option>
+                );
               }
+            })}
+          {productData &&
+            !goodsData &&
+            productData.goodsInfos.map(goods => {
+              return (<option value={goods.goodsId} key={goods.goodsId}>
+                {goods.goodsName}
+              </option>)
             })}
         </select>
       </div>
