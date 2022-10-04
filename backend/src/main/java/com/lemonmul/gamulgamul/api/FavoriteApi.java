@@ -168,12 +168,11 @@ public class FavoriteApi {
         log.info("newFavoriteGoodsList size: {}", newFavoriteGoodsList.size());
 
         // 즐겨찾기 총합, 지수 계산
-        if(favoriteCalc(user)) {
-            log.info("[Finished request] POST /favorite");
-            return newFavoriteGoodsList;
-        } else {
+        if(!favoriteCalc(user, newFavoriteGoodsList.size()))
             throw new Exception();
-        }
+
+        log.info("[Finished request] POST /favorite");
+        return newFavoriteGoodsList;
     }
 
     /**
@@ -226,12 +225,11 @@ public class FavoriteApi {
         log.info("newFavoriteGoodsList size: {}", newFavoriteGoodsList.size());
 
         // 즐겨찾기 총합, 지수 계산
-        if(favoriteCalc(user)) {
-            log.info("[Finished request] POST /favorite");
-            return newFavoriteGoodsList;
-        } else {
+        if(!favoriteCalc(user, newFavoriteGoodsList.size()))
             throw new Exception();
-        }
+
+        log.info("[Finished request] POST /favorite");
+        return newFavoriteGoodsList;
     }
 
     /**
@@ -253,7 +251,7 @@ public class FavoriteApi {
         List<FavoriteItemResponseDto> newFavoriteGoodsList = favoriteGoodsService.existFavoriteGoods(user).stream().map(FavoriteItemResponseDto::new).collect(Collectors.toList());
         log.info("newFavoriteGoodsList size: {}", newFavoriteGoodsList.size());
 
-        if(favoriteCalc(user)) {
+        if(favoriteCalc(user, newFavoriteGoodsList.size())) {
             log.info("[Finished request] POST /add/{goodsId}");
             return newFavoriteGoodsList;
         } else {
@@ -284,7 +282,7 @@ public class FavoriteApi {
 
         List<FavoriteRecommendDto> favoriteRecommends = favoriteRecommendService.getFavoriteRecommends(user, goodsIds);
 
-        if(favoriteCalc(user)) {
+        if(favoriteCalc(user, newFavoriteGoodsList.size())) {
             log.info("[Finished request] POST /add/{goodsId}");
             return new AddFavoriteGoodsResponseDto(new FavoriteItemResponseDto(goods), favoriteRecommends);
         } else {
@@ -295,7 +293,7 @@ public class FavoriteApi {
     /**
      * 즐겨찾기 총합과 지수 계산을 spark에 요청하는 함수
      */
-    private boolean favoriteCalc(User user) throws JsonProcessingException {
+    private boolean favoriteCalc(User user, int size) throws JsonProcessingException {
         LocalDate today = LocalDate.now();
 
         // 기존 즐겨찾기 총합과 지수 백업
@@ -305,6 +303,9 @@ public class FavoriteApi {
         // 기존 즐겨찾기 총합과 지수 삭제
         favoriteTotalPriceService.deleteFavoriteTotalPrice(user);
         priceIndexService.deleteFavoriteIndex(user);
+
+        if(size == 0)
+            return true;
 
         // API 요청에 사용하는 객체
         RestTemplate restTemplate = new RestTemplate();
