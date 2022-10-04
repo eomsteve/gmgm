@@ -108,6 +108,6 @@ public class DetailApi {
     private void checkGoodsInProduct(Long goodsId, ProductDto productDto) {
         productDto.getGoodsInfos().stream()
                 .filter(g->goodsId.equals(g.getGoodsId())).findAny()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품이 품목에 포함되어있지 않습니다."));
     }
 }

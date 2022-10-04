@@ -20,6 +20,7 @@ public class ProductService {
      * 품목 조회
      */
     public Product product(Long productId){
-        return productRepo.findById(productId).orElseThrow(IllegalArgumentException::new);
+        return productRepo.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 품목입니다."));
     }
 }

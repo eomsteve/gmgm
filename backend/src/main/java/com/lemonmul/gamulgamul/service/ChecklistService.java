@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +38,7 @@ public class ChecklistService {
      */
     public Checklist checklist(Long checklistId){
         return checklistRepo.findByIdAndIsDeleted(checklistId,false)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 장보기 목록입니다."));
     }
 
     /**
@@ -47,7 +46,8 @@ public class ChecklistService {
      */
     @Transactional
     public void deleteChecklist(Long checklistId){
-        Checklist checklist = checklistRepo.findById(checklistId).orElseThrow(IllegalArgumentException::new);
+        Checklist checklist = checklistRepo.findById(checklistId)
+                .orElseThrow(() -> new IllegalArgumentException("이미 삭제된 장보기 목록입니다."));
         checklist.setIsDeleted(true);
     }
 

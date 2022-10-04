@@ -20,7 +20,8 @@ public class GoodsService {
      * 상품 id로 상품을 받아오는 함수
      */
     public Goods getGoodsById(Long goodsId) {
-        return goodsRepo.findById(goodsId).orElseThrow(IllegalArgumentException::new);
+        return goodsRepo.findById(goodsId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
     }
 
     /**
