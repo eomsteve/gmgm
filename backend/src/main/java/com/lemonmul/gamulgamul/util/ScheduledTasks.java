@@ -32,12 +32,12 @@ public class ScheduledTasks {
         log.info("[Finished request]: {} millis", (endTime - startTime));
     }
 
-    @Scheduled(cron = "0 0 0 * * *")
-    public void renewPriceGap() {
-        priceGapService.renewPriceGap();
-    }
+//    @Scheduled(cron = "0 0 0 * * *")
+//    public void renewPriceGap() {
+//        priceGapService.renewPriceGap();
+//    }
 
-    @Scheduled(cron = "0 30 23 * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     public void addNewData() {
         addNewDataService.addNewData();
     }
