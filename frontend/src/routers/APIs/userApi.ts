@@ -89,8 +89,8 @@ export const logOutApi = async (email?: string) =>{
       }
     });
     localStorage.removeItem('jwtToken')
+    localStorage.clear()
     console.log('logout');
-    
   } catch (error) {
     
   }

@@ -106,6 +106,9 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
                       ? favoriteItem.recentPriceOff
                       : favoriteItem.recentPriceOn
                   }
+                  productId={favoriteItem.basicProductId}
+                  goodsId={favoriteItem.goodsId}
+                  businessType={optionState}
                 />
               </div>
             );

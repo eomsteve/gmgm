@@ -27,13 +27,13 @@ export const options = {
   plugins: {
     legend: {
       position: 'top' as const,
-      align: 'start' as const,
+      align: 'center' as const,
     },
     title: {
       display: false,
       text: '지수 그래프',
       position: 'top' as const,
-      align: 'start' as const,
+      align: 'center' as const,
     },
   },
   scales: {
@@ -57,7 +57,7 @@ interface FavoriteIndexChartProps {
     values: { value: number }[];
     researchDates: { researchDate: string }[];
   };
-  favoriteIndices: {
+  favoriteIndices?: {
     values: { value: number }[];
     researchDates: { researchDate: string }[];
   };
@@ -67,15 +67,15 @@ const FavoriteIndexChart: FunctionComponent<
   FavoriteIndexChartProps
 > = props => {
   const { countryIndices, favoriteIndices } = props;
-  const labels = favoriteIndices.researchDates.map(data => {
+  const labels = countryIndices.researchDates.map(data => {
     return data.researchDate;
   });
   const countryValues = countryIndices.values.map(data => {
     return data.value;
   });
-  const favoriteValues = favoriteIndices.values.map(data => {
-    return data.value;
-  });
+  const favoriteValues = favoriteIndices ? favoriteIndices.values.map(data => {
+    return data.value ;
+  }) : undefined;
   const data = {
     labels,
     datasets: [

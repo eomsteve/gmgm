@@ -6,10 +6,12 @@ import { updateCheckListStatus } from '@apis/checkList.Api';
 interface HeaderProps {
   title: string;
   navigateRouter?: string;
+  isDetail? : boolean;
+  detailParams? : { from:string ,isEdit: boolean, checklistId?: string };
 }
 
 const Header: FC<HeaderProps> = props => {
-  const { title, navigateRouter } = props;
+  const { title, navigateRouter, isDetail, detailParams } = props;
   const navigate = useNavigate();
   return (
     <>
@@ -22,13 +24,15 @@ const Header: FC<HeaderProps> = props => {
               onClick={
                 navigateRouter !== undefined
                   ? () => {
-                      navigate(`/${navigateRouter}`);
+                    navigate(`/${navigateRouter}`);
                     }
-                  : () => {
-                      navigate(-1);
-                    }
-              }
-            >
+                  : detailParams ? () => {
+                      (isDetail && !detailParams.from) ? navigate(`/checklists/${detailParams?.checklistId}`, {
+                        state : { isEdit : detailParams?.isEdit ,
+                                  checklistId : detailParams?.checklistId}
+                      }) : navigate(-1) 
+                    } : () => navigate(-1) 
+                  }>
               <Back width="1.2rem" height="1.2rem" />
             </div>
           )}

@@ -6,7 +6,7 @@ import PriceChart from '@components/favorite/PriceChart';
 import { getFavoriteItems } from '../../APIs/favoriteApi';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@modules/store';
-import { getFavoritePageDataRedux } from '@modules/FavoriteProductList';
+import { getFavoritePageDataRedux, clearAllGoodsList } from '@modules/FavoriteProductList';
 import { getFavoriteSelect, getFavoritePageData } from '@apis/favoriteApi';
 import type { FavoritePageData } from '@apis/favoriteApi';
 import FavHeader from '@components/EmptyHeader';

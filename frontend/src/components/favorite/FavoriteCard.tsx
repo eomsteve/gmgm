@@ -9,9 +9,13 @@ interface FavoriteCardProps {
   goodsName: string;
   priceGap: number;
   goodsPrice: number;
+  productId : number;
+  goodsId : number;
+  businessType : string;
 }
 const FavoriteCard: FC<FavoriteCardProps> = props => {
-  const { img, goodsName, priceGap, goodsPrice } = props;
+  const { img, goodsName, priceGap, goodsPrice, productId, goodsId, businessType } = props;
+  const navigate = useNavigate();
   return (
     <>
       <div className="m-3 my-1 grid w-[86vw] grid-cols-12 items-center rounded border border-gray-300 p-2">
@@ -34,7 +38,13 @@ const FavoriteCard: FC<FavoriteCardProps> = props => {
           <span className="col-span-2 flex justify-end mr-2">
             {goodsPrice}
           </span>
-          <span className="col-span-1 flex justify-center cursor-pointer">
+          <span
+            onClick={() => {
+              navigate(`/detail/product/${productId}/goods/${goodsId}/business/${businessType}`, {
+                state : { from : 'fav'}
+              })
+            }}
+          className="col-span-1 flex justify-center cursor-pointer">
           <Chart width="1.2rem" height="1.2rem" />
         </span>
       </div>

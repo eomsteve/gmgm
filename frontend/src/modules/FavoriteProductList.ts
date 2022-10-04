@@ -106,6 +106,9 @@ export const favoriteGoodsSlice = createSlice({
       );
       state.goods = data;
     },
+    clearAllGoodsList : (state) => {
+      state.goods= [];
+    }
   },
   extraReducers: builder => {
     builder.addCase(getFavoritePageDataRedux.fulfilled, (state, action) => {
@@ -126,5 +129,5 @@ export const favoriteGoodsSlice = createSlice({
   },
 });
 
-export const { addGoods, removeGoods } = favoriteGoodsSlice.actions;
+export const { addGoods, removeGoods, clearAllGoodsList } = favoriteGoodsSlice.actions;
 export default favoriteGoodsSlice.reducer;

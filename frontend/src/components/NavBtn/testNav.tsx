@@ -21,29 +21,29 @@ const FabButton: FC<FabButtonProps> = () => {
         </div>
 
         <ul className="fab-options">
-          <li
-            onClick={() => {
+          <li>
+            <span onClick={() => {
               onClickHandle();
-            }}
-          >
-            <span className="fab-label">장보기 목록 만들기</span>
-            <div className="fab-icon-holder">
-              <i className="fas fa-video">
+            }} className="fab-label cursor-pointer">장보기 목록 만들기</span>
+            <div  onClick={() => {
+              onClickHandle();
+            }} className="fab-icon-holder cursor-pointer">
+              <i className="fas fa-video ">
                 <CheckList width="70%" height="70%" />
               </i>
             </div>
           </li>
-          <li onClick={() => navigate('/favorite')}>
-            <span className="fab-label">즐겨찾기</span>
-            <div className="fab-icon-holder">
+          <li >
+            <span onClick={() => navigate('/favorite')} className="fab-label cursor-pointer">즐겨찾기</span>
+            <div onClick={() => navigate('/favorite')} className="fab-icon-holder cursor-pointer">
               <i className="fas fa-comments">
                 <Favorite width="90%" height="90%" />
               </i>
             </div>
           </li>
-          <li onClick={() => navigate('/')}>
-            <span className="fab-label">홈</span>
-            <div className="fab-icon-holder ">
+          <li >
+            <span onClick={() => navigate('/')} className="fab-label cursor-pointer">홈</span>
+            <div onClick={() => navigate('/')} className="fab-icon-holder cursor-pointer">
               <i className="">
                 <Home width="70%" height="70%" />
               </i>
