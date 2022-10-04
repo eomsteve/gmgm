@@ -14,20 +14,26 @@ interface FavoriteIndexPageProps {}
 
 const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const data = useSelector((state: RootState) => {
-    // console.log(state.persistedReducer.authTokenReducer.authToken);
-  });
+  const checkListItemRedux = useSelector((state: RootState) =>{
+    return state.persistedReducer.favoriteProductListReducer.goods;
+  })
   const [favoritePageData, setFavoritePageData] = useState<FavoritePageData>();
   useEffect(() => {
     const getPageData = async () => {
       const data = await dispatch(getFavoritePageDataRedux()).unwrap();
-      console.log(data);
+      console.log("index : ",data);
       if (typeof data !== 'undefined') {
         setFavoritePageData(data);
       }
     };
     getPageData();
-  }, []);
+  }, [checkListItemRedux]);
+
+  useEffect(() => {
+    console.log('updateeeeee');
+    // window.location.reload();
+  },[checkListItemRedux])
+  
   return (
     <>
       <FavHeader title={'즐겨찾기'} navigateRouter={''} />

@@ -10,29 +10,37 @@ interface CalculatorProps {
   productName : string
 }
 
+interface CalculatorInput {
+  calPrice: number;
+  calMeasure: number;
+}
+
 const Calculator: FC<CalculatorProps> = props => {
   const { measure, goodsProps, productPrices, researchDates, unit, productName } = props;
   console.log(goodsProps);
 
   const [usingCalculator, setUsingCalculator] = useState<boolean>(false);
-  const [goodsPrice, setGoodsPrice] = useState<number>();
-  const [goodsMeasure, setGoodsMeasure] = useState<number>();
-  const [calculatorData, setCalculatorData] = useState<number>();
+  const [calPrice, setCalPrice] = useState<number>();
+  const [calMeasure, setCalMeasure] = useState<number>();
+  const [calculatorData, setCalculatorData] = useState<CalculatorInput>();
 
   const handlePriceInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const event = e.target.value;
-    return setGoodsPrice(Number(event));
+    return setCalPrice(Number(event));
   };
   const handleMeasureInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const event = e.target.value;
-    return setGoodsMeasure(Number(event));
+    return setCalMeasure(Number(event));
   };
 
   const calculate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setUsingCalculator(true);
-    console.log(goodsPrice, goodsMeasure);
-    return setCalculatorData(goodsPrice);
+    if (calPrice && calMeasure){
+      return setCalculatorData({calPrice, calMeasure});
+    }else{
+      return setCalculatorData(undefined)
+    }
   };
   return (
     <>
@@ -55,8 +63,8 @@ const Calculator: FC<CalculatorProps> = props => {
             <span className="m-1 text-center">상품 가격</span>
             <input
               type="number"
-              name="goodsPrice"
-              id="goodsPrice"
+              name="calPrice"
+              id="calPrice"
               onChange={handlePriceInput}
               className="col-span-2 my-1 rounded border-solid border-gray-300 py-1 px-2 text-xs"
             />
@@ -64,8 +72,8 @@ const Calculator: FC<CalculatorProps> = props => {
             <span className="m-1 text-center">상품 용량</span>
             <input
               type="number"
-              name="measure"
-              id="measure"
+              name="calMeasure"
+              id="calMeasure"
               onChange={handleMeasureInput}
               className="col-span-2 my-1 rounded border-solid border-gray-300 px-2 py-1 text-xs"
             />
