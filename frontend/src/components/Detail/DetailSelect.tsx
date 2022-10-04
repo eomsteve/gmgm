@@ -19,8 +19,8 @@ interface ProductData {
   unit: number;
   measure: string;
   goodsInfos: { goodsId: number; goodsName: string }[];
-  productPrices:{price: number}[];
-  researchDates: {researchDate: string}[];
+  productPrices: { price: number }[];
+  researchDates: { researchDate: string }[];
 }
 
 interface DetailSelectBoxProps {}
@@ -54,7 +54,7 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
     getGoodsDetails(e.target.value, businessType);
   };
   console.log();
-  
+
   return (
     <>
       <span className="text-lg">
@@ -83,10 +83,17 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
         </select>
       </div>
       {productData && (
-        <Calculator measure={productData.measure} goodsProps={goodsInfo} productPrices={productData.productPrices} researchDates={productData.researchDates} unit={productData.unit} productName={productData.basicProductName}/>
+        <Calculator
+          measure={productData.measure}
+          goodsProps={goodsInfo}
+          productPrices={productData.productPrices}
+          researchDates={productData.researchDates}
+          unit={productData.unit}
+          productName={productData.basicProductName}
+        />
       )}
-      <hr className="mx-[-5vw] my-1 w-screen" />
-      {goodsInfo && <OnlineCard goodsProps={goodsInfo}/>}
+      <hr className="mx-[-1.25rem] my-1 w-screen" />
+      {goodsInfo && <OnlineCard goodsProps={goodsInfo} />}
     </>
   );
 };

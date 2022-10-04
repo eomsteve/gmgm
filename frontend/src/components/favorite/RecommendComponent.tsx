@@ -5,7 +5,7 @@ import type { AppDispatch} from '@modules/store'
 import { useDispatch } from 'react-redux';
 import { updateRecommendItem } from '@modules/FavoriteProductList'
 interface RecommendProps {
-  favoriteRecommends: {goodsId : number, goodsName : string, img:string}[]
+  favoriteRecommends: { goodsId: number; goodsName: string; img: string }[];
 }
 
 const Recommend: FC<RecommendProps> = props => {
@@ -24,7 +24,7 @@ const Recommend: FC<RecommendProps> = props => {
             다음 상품들도 좋아하실 것 같아요.
           </span>
         </div>
-      <div className="grid grid-cols-2 border m-3 w-[85vw]  text-center text-align-center">
+      <div className="grid grid-cols-2 text-center text-align-center">
         {favoriteRecommends.map((goods) => {
           return  <div
           key={goods.goodsId}
