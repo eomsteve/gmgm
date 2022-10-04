@@ -55,8 +55,8 @@ public class ChecklistCustomItemService {
         List<ChecklistCustomItem> customItems = itemRepo.findByChecklist(checklist);
         for (ChecklistCustomItem customItem : customItems) {
             CustomItemDto itemDto = checklistCustomItem.stream()
-                    .filter(i -> i.getId().equals(customItem.getId())).findAny()
-                    .orElseThrow();
+                    .filter(i -> customItem.getId().equals(i.getId())).findAny()
+                    .orElseThrow(() -> new IllegalArgumentException("해당 항목이 존재하지 않습니다."));
             customItem.setStatus(itemDto.isStatus());
         }
     }

@@ -25,7 +25,7 @@ public class ExControllerAdvice {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message("잘못된 입력값입니다.")
+                .message(e.getMessage())
                 .build();
     }
 
