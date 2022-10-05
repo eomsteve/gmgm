@@ -40,8 +40,13 @@ public class ChecklistBasicItemService {
         itemRepo.deleteAllById(deleteIds);
 
         //체크리스트에 새로 추가된 아이템들의 품목들
-        List<Long> productIds = itemDto.stream().filter(i -> i.getId() < 0).toList()
-                .stream().map(BasicItemDto::getBasicProductId).collect(Collectors.toList());
+        List<Long> productIds = new ArrayList<>();
+        for (int i=itemDto.size()-1;i>=0;i--) {
+            BasicItemDto dto = itemDto.get(i);
+            if(dto.getId()<0){
+                productIds.add(dto.getBasicProductId());
+            }
+        }
         List<Product> products = productRepo.findByIdIn(productIds);
         List<ChecklistBasicItem> updatedItems=new ArrayList<>();
         for (Product product : products) {
