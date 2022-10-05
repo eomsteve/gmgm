@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { LogInUserREQ, logInApi } from '../../routers/APIs/userApi';
 import { useNavigate } from 'react-router-dom';
 import type { RootState, AppDispatch } from '../../modules/store';
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const LogIn: FC = () => {
   const navigate = useNavigate();
+  const [landingImg, setLandingImg] = useState<boolean>(false);
   const authToken = useSelector((state: RootState) => {
     console.log(state.persistedReducer.authTokenReducer.accessToken);
   });
@@ -29,7 +30,10 @@ const LogIn: FC = () => {
     
     if (typeof logInRes !== typeof "string") {
       dispatch(getFavoriteItemStoreReduxLogin())
-      navigate('/');
+      setLandingImg(true);
+      setTimeout(()=>{
+        navigate('/');
+      },3000)
     } else {
       alert('실패 : 이메일과 비밀번호를 확인해 주세요');
     }

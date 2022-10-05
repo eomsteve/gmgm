@@ -212,12 +212,12 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
             <ConfirmButton />
           </div>
         ) : (
-          <div className="m-3 grid grid-cols-2 items-center justify-center">
+          <div className="m-3 flex items-center justify-center">
             <span
               onClick={() => {
                 displayMsg();
               }}
-              className="text-sm"
+              className="text-sm flex"
             >
               <span className="ml-2 grid grid-cols-2">
                 <Delete width="1rem" height="1rem" />

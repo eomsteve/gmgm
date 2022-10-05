@@ -30,7 +30,6 @@ const Main: FunctionComponent<MainProps> = () => {
     loadPage(token);
   },[]);
 
-  const isLoginState = () => !!localStorage.getItem("jwtToken");
   return (
     <>
       <HeaderComponent title="홈" />

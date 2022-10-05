@@ -10,14 +10,19 @@ import { getFavoritePageDataRedux, clearAllGoodsList } from '@modules/FavoritePr
 import { getFavoriteSelect, getFavoritePageData } from '@apis/favoriteApi';
 import type { FavoritePageData } from '@apis/favoriteApi';
 import FavHeader from '@components/EmptyHeader';
+import SpinnerPage from '@pages/Spinner'
 interface FavoriteIndexPageProps {}
 
 const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
   const goodsRef = useRef();
-  const checkListItemRedux = useSelector((state: RootState) =>{
-    return state.persistedReducer.favoriteProductListReducer.goods;
+  const {checkListItemRedux, isLoading} = useSelector((state: RootState) =>{
+    console.log(state);
+    
+    return { checkListItemRedux : state.persistedReducer.favoriteProductListReducer.goods, isLoading : state.persistedReducer.favoriteProductListReducer.isLoading}
   })
+  console.log("isLoading : ", isLoading);
+  
   const [favoritePageData, setFavoritePageData] = useState<FavoritePageData>();
   useEffect(() => {
     const getPageData = async () => {
@@ -38,8 +43,10 @@ const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
   
   return (
     <>
+    {isLoading && <SpinnerPage />}
       <FavHeader title={'즐겨찾기'} navigateRouter={''} />
       <main className="flex w-full flex-col justify-center bg-[white] p-5">
+        
         {favoritePageData && (
           <FavoriteIndexCart
             countryIndices={favoritePageData?.countryIndices}
