@@ -82,7 +82,7 @@ const CheckListCard: FC<CheckListProps> = props => {
           id={customProductName || basicProductName}
         />
         <label
-          className={`col-span-5 flex items-center p-1 ${
+          className={`${customProductName ? 'col-span-6' : 'col-span-5'} flex items-center p-1 ${
             !isChecked ? '' : 'text-gray-500 line-through'
           }`}
           htmlFor={customProductName || basicProductName}

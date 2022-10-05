@@ -4,7 +4,7 @@ import { signUpApi, checkEmailDuplicate } from '@apis/userApi';
 
 import axios from 'axios';
 
-interface SignUpProps {}
+interface SignUpProps { }
 
 const SignUp: FunctionComponent<SignUpProps> = () => {
   const [name, setName] = useState<string>('');
@@ -34,15 +34,16 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
   const [isPasswordBlur, setIsPasswordBlur] = useState<boolean>(true);
   const [isPasswordConfirmBlur, setIsPasswordConfirmBlur] =
     useState<boolean>(true);
-  const today = () =>{
+  const today = () => {
     const date = new Date();
     const year = date.getFullYear();
     const month = ("0" + (1 + date.getMonth())).slice(-2);
     const day = ("0" + date.getDate()).slice(-2);
 
-    return year + "-" + month + "-" + day;}
+    return year + "-" + month + "-" + day;
+  }
   console.log(today);
-  
+
   const onChangeName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
     if (e.target.value.length < 2 || e.target.value.length > 12) {
@@ -169,6 +170,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
     <form className="flex flex-col" onSubmit={handleSubmit}>
       <div className="container mx-auto flex max-w-sm flex-1 flex-col items-center justify-center px-2">
         <div className="w-full rounded bg-white px-6 py-8 text-black ">
+          <div className='pb-6'><img src="https://j7d108.p.ssafy.io/resource/logo.png" alt="" className='w-14 h-14' /></div>
           <h1 className="mb-4 text-xl leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
             회원가입
           </h1>
@@ -176,11 +178,10 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
             id="FullName"
             onChange={onChangeName}
             type="text"
-            className={`my-2 block w-full rounded border p-3  ${
-              isNameBlur
+            className={`my-2 block w-full rounded border p-3  ${isNameBlur
                 ? 'border-stone-200'
                 : `${isName ? 'border-green-600' : 'border-red-500'}`
-            }`}
+              }`}
             name="fullname"
             placeholder="이름"
             onBlur={() => {
@@ -190,9 +191,8 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
           />
           {name.length > 0 && (
             <span
-              className={`text-[0.7rem] ${
-                isName ? 'text-blue-400' : 'text-gray-500'
-              }`}
+              className={`text-[0.7rem] ${isName ? 'text-blue-400' : 'text-gray-500'
+                }`}
             >
               {nameMessage}
             </span>
@@ -201,11 +201,10 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
             id="Email"
             onChange={onChangeEmail}
             type="text"
-            className={`my-2 block w-full rounded border p-3  ${
-              isEmailBlur
+            className={`my-2 block w-full rounded border p-3  ${isEmailBlur
                 ? 'border-stone-200'
                 : `${isEmail ? 'border-green-600' : 'border-red-500'}`
-            }`}
+              }`}
             name="email"
             placeholder="이메일"
             onBlur={() => {
@@ -216,11 +215,10 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
           <div className="flex justify-between">
             {email.length > 0 && (
               <span
-                className={`text-[0.7rem] ${
-                  isEmail && !emailDuplicate && emailCheckState
+                className={`text-[0.7rem] ${isEmail && !emailDuplicate && emailCheckState
                     ? 'text-blue-400'
                     : 'text-gray-500'
-                }`}
+                  }`}
               >
                 {emailMessage}{' '}
               </span>
@@ -243,20 +241,18 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
             id="Password1"
             onChange={onChangePassword}
             type="password"
-            className={`my-2 block w-full rounded border p-3  ${
-              isPasswordBlur
+            className={`my-2 block w-full rounded border p-3  ${isPasswordBlur
                 ? 'border-stone-200'
                 : `${isPassword ? 'border-green-600' : 'border-red-500'}`
-            }`}
+              }`}
             name="pwd"
             placeholder="비밀번호"
             required
           />
           {pwd.length > 0 && (
             <span
-              className={`text-[0.7rem] ${
-                isPassword ? 'text-blue-400' : 'text-gray-500'
-              }`}
+              className={`text-[0.7rem] ${isPassword ? 'text-blue-400' : 'text-gray-500'
+                }`}
             >
               {passwordMessage}
             </span>
@@ -265,20 +261,18 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
             id="Password2"
             onChange={onChangePasswordConfirm}
             type="password"
-            className={`my-2 block w-full rounded border p-3  ${
-              isPasswordConfirmBlur
+            className={`my-2 block w-full rounded border p-3  ${isPasswordConfirmBlur
                 ? 'border-stone-200'
                 : `${isPasswordConfirm ? 'border-green-600' : 'border-red-500'}`
-            }`}
+              }`}
             name="confirm_password"
             placeholder="비밀번호 확인"
             required
           />
           {passwordConfirm.length > 0 && (
             <span
-              className={`text-[0.7rem] ${
-                isPasswordConfirm ? 'text-blue-400' : 'text-gray-500'
-              }`}
+              className={`text-[0.7rem] ${isPasswordConfirm ? 'text-blue-400' : 'text-gray-500'
+                }`}
             >
               {passwordConfirmMessage}
             </span>
@@ -333,8 +327,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
           {/* input box end */}
           <button
             type="submit"
-            className={`my-1 w-full rounded-lg ${
-              !(
+            className={`my-1 w-full rounded-lg ${!(
                 isName &&
                 isEmail &&
                 isPassword &&
@@ -345,7 +338,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
               )
                 ? 'bg-gray-400'
                 : 'bg-blue-500'
-            } py-2.5 text-center text-white focus:outline-none`}
+              } py-2.5 text-center text-white focus:outline-none`}
             disabled={
               !(
                 isName &&

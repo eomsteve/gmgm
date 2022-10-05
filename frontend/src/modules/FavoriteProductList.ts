@@ -28,10 +28,12 @@ interface MyKnownError {
 
 interface Initial {
   goods: SelectedGoods[];
+  isLoading: boolean;
 }
 
 const initialState: Initial = {
   goods: [],
+  isLoading : false
 };
 
 export const getFavoritePageDataRedux = createAsyncThunk(
@@ -133,14 +135,27 @@ export const favoriteGoodsSlice = createSlice({
       });
       console.log(fetchList);
       // state.goods = fetchList;
+      state.isLoading = false;
     });
     builder.addCase(updateFavoriteItems.fulfilled, (state, action) => {
+      state.isLoading = false;
       console.log(current(state), action.payload);
     });
-    builder.addCase(updateRecommendItem.fulfilled, (state, action) => {
-      console.log('updateRecommendItem :', current(state), action.payload);
-      state.goods = action.payload;
+    builder.addCase(updateFavoriteItems.pending, (state, action) => {
+      console.log(current(state), action.payload);
+      state.isLoading = true;
+      console.log("updateFavoriteItems pending : ", state.isLoading);
+      
     });
+    builder.addCase(updateRecommendItem.fulfilled, (state, action) => {
+      state.goods = action.payload;
+      state.isLoading = false;
+      console.log('updateRecommendItem :', current(state), action.payload);
+    });
+    builder.addCase(updateRecommendItem.pending,(state) =>{
+      state.isLoading = true;
+      console.log("updateRecommendItem pending :", state.isLoading);      
+    })
     builder.addCase(
       getFavoriteItemStoreReduxLogin.fulfilled,
       (state, action) => {

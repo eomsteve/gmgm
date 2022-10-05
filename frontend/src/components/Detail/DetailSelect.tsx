@@ -77,7 +77,7 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
         >
           {productData && !goodsId && (
             <option value={productData.basicProductName}>
-              {productData.basicProductName}
+              {productData.basicProductName}류
             </option>
           )}
           {productData && goodsData && (
