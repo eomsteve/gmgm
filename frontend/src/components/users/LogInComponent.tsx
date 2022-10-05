@@ -1,10 +1,11 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { LogInUserREQ, logInApi } from '../../routers/APIs/userApi';
 import { useNavigate } from 'react-router-dom';
 import type { RootState, AppDispatch } from '../../modules/store';
 import { setAuthToken,logInApiRedux } from '@modules/Auth'
 import { clearAllGoodsList, getFavoriteItemStoreReduxLogin } from '@modules/FavoriteProductList'
 import { useDispatch, useSelector } from 'react-redux';
+import LandingPage from './LandingPage'
 
 const LogIn: FC = () => {
   const navigate = useNavigate();
@@ -33,12 +34,14 @@ const LogIn: FC = () => {
       setLandingImg(true);
       setTimeout(()=>{
         navigate('/');
-      },3000)
+      },2000)
     } else {
       alert('실패 : 이메일과 비밀번호를 확인해 주세요');
     }
   };
   return (
+    <>
+    {landingImg && <LandingPage /> }
     <section className="flex min-h-[80vh] flex-col dark:bg-gray-900">
       <div className="container mx-auto flex max-w-sm flex-1 flex-col items-center justify-center px-2 md:h-screen lg:py-0">
         <div className="w-full rounded-lg bg-white dark:border dark:border-gray-700 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0">
@@ -124,6 +127,7 @@ const LogIn: FC = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
