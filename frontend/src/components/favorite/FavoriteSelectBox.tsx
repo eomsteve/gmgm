@@ -119,7 +119,7 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
         </div>
 
       <div className="flex w-full flex-col items-center justify-center bg-gradient-to-t from-blur p-1">
-        {pageData &&
+        {(pageData.favoriteItems.length) ?
           pageData.favoriteItems.map((favoriteItem, index) => {
             return (
               <div key={favoriteItem.goodsId}>
@@ -142,7 +142,15 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
                 />
               </div>
             );
-          })}
+          })
+          : 
+          <div
+            className="my-3 mx-5 flex text-gray-500
+            w-[86vw] flex-col items-center justify-center 
+          rounded border border-gray-300 py-5 px-2 lg:py-0">
+            <h3>즐겨찾기에 상품을 추가하세요</h3>
+          </div>
+        }
         <div
           onClick={() => {
             navigate('/favorite/selection');
