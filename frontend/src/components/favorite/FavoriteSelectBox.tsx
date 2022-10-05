@@ -8,6 +8,11 @@ import type { RootState, AppDispatch } from '@modules/store';
 import { useSelector, useDispatch } from 'react-redux';
 
 import type { FavoritePageData, FavoriteItem } from '@apis/favoriteApi';
+
+
+import './toggle_favorite.css';
+
+
 interface FavoriteSelectBoxProps {
   pageData: FavoritePageData;
 }
@@ -42,9 +47,25 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
   // const [recommendData, setRecommendData] = useState<Recommend[]>(
   //   selectBoxPage.favoriteRecommends,
   // );
-  const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOption(() => e.target.value);
+  // const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   setOption(() => e.target.value);
+  // };
+
+  const [checkedOffline, setCheckedOffline] = useState<boolean>(true);
+  const [checkedOnline, setCheckedOnline] = useState<boolean>(false);
+  const handleSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('클릭 전 optionState 는',optionState)
+    setCheckedOffline( checkedOffline===true ? false : true)
+    setCheckedOnline( checkedOnline===true ? false : true)
+    setOption(()=>e.target.value);
+    // setTimeout(()=>{console.log('클릭 후 optionState 는',optionState)}, 3000)
+    console.log('클릭 후 optionState 는',optionState)
+    
   };
+
+
+
+
   const navigate = useNavigate();
   // useEffect(() => {
   //   console.log('hello');
@@ -60,7 +81,7 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
           즐겨 사는 상품 정보를 한 눈에 볼 수 있어요.
         </span>
       </span>
-      <select
+      {/* <select
         onChange={handleSelection}
         // 여기 props 로 받아와야함.
         // defaultValue="m"
@@ -87,7 +108,16 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
             {businessData[option]}
           </option>
         ))}
-      </select>
+      </select> */}
+
+        <div className="favorite-toggle" >
+          <input type="radio" id="favorite-toggle-offline" onChange={handleSelection}   name="toggle" value="m" checked={checkedOffline}/>
+          <label className="radio-button" id="pricing-toggle-offline-radio" htmlFor="favorite-toggle-offline"> 오프라인</label>
+        
+          <input type="radio"  id="favorite-toggle-online"  onChange={handleSelection}   name="toggle" value="o" checked={checkedOnline} />
+          <label className="radio-button" id="pricing-toggle-online-radio" htmlFor="favorite-toggle-online"> 온라인</label>
+        </div>
+
       <div className="flex w-full flex-col items-center justify-center bg-gradient-to-t from-blur p-1">
         {pageData &&
           pageData.favoriteItems.map((favoriteItem, index) => {
