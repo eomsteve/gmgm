@@ -68,7 +68,7 @@ const SumPriceChart: FunctionComponent<SumPriceChartProps> = props => {
     labels,
     datasets: [
       {
-        label: 'prices',
+        label: '총 변동',
         //라벨의 길이만큼 data 넣기,, 빈 데이터는??
         data: totalPrices,
         borderColor: 'rgb(255, 99, 132)',

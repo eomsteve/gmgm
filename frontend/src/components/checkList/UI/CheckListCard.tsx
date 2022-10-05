@@ -76,20 +76,20 @@ const CheckListCard: FC<CheckListProps> = props => {
         <input
           disabled={isEdit}
           onChange={handleCheckState}
-          className="col-span-2 ml-4 h-[20px] w-[20px]"
+          className={`${isEdit ? 'bg-gray-300': ''} col-span-2 ml-4 h-[20px] w-[20px]`}
           checked={isChecked}
           type="checkbox"
           id={customProductName || basicProductName}
         />
         <label
-          className={`${customProductName ? 'col-span-6' : 'col-span-5'} flex items-center p-1 ${
+          className={`${isEdit ? 'col-span-8 ' : 'col-span-5'} flex items-center p-1 ${
             !isChecked ? '' : 'text-gray-500 line-through'
           }`}
           htmlFor={customProductName || basicProductName}
         >
           <span> {customProductName || basicProductName}</span>
         </label>
-        { basicProductName && <div>
+        { isEdit ? '': basicProductName && <div>
           <span className="col-span-1 flex justify-center truncate ">
             {priceGap &&priceGap > 0 ? (
               <Up width="1rem" height="2rem" />
@@ -107,7 +107,7 @@ const CheckListCard: FC<CheckListProps> = props => {
             {priceGap == 0 ? '' : priceGap}
           </span>
         </div>}
-        <span className="col-span-3 mr-2 flex justify-end">{recentPrice}</span>
+        {!isEdit && <span className="col-span-3 mr-2 flex justify-end">{recentPrice}</span>}
         <div className="flex items-center justify-center">
           {basicProductName &&
             (isEdit ? (
