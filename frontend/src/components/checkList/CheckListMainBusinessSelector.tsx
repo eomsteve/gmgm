@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useCallback, useRef } from 'react';
+import { FC, useState, useEffect, useCallback, useRef , CSSProperties} from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import ConfirmButton from './UI/ConFirmButton';
 import {
@@ -30,7 +30,10 @@ import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 
 import BasicProductCheckList from './CheckListBasicItems';
 import CheckListCustomItems from './CheckListCustomItems';
-import { data } from '../charts/TestChart';
+
+// CSS
+import './toggle.css';
+
 interface CheckListSelectBoxProps {
   optionList: string[];
 }
@@ -39,6 +42,79 @@ const businessData: { [key: string]: string } = {
   m: '대형마트',
   o: '온라인',
 };
+
+
+const pricing_toggle : CSSProperties = {
+  backgroundColor: '#3FAED7',
+  padding: '14px 5px',
+  borderRadius: '30px',
+  display: 'inline-block'
+};
+
+const input_display : CSSProperties = {
+  display: 'none',
+  backgroundColor: '#3FAED7',
+  color: 'white',
+  padding: '10px 20px',
+  borderRadius: '30px',
+  cursor: 'pointer',
+  userSelect: 'none'
+};
+// .pricing-toggle [name="pricing"] {
+//   display: none
+// }
+
+const label : CSSProperties = {
+  backgroundColor: '#3FAED7',
+  color: 'white',
+  padding: '10px 20px',
+  borderRadius: '30px',
+  cursor: 'pointer',
+  userSelect: 'none'
+};
+
+// .pricing-toggle input[type="radio"]+label {
+//   background-color: #3FAED7;
+//   color: white;
+//   padding: 10px 20px;
+//   border-radius: 30px;
+//   cursor: pointer;
+//   user-select: none;
+// }
+
+// .pricing-toggle input[type="radio"]:checked+label {
+//   background-color: white;
+//   color: #00008B;
+// }
+
+
+// .pricing-toggle {
+//   background-color: #3FAED7;
+//   padding: 14px 5px;
+//   border-radius: 30px;
+//   display: inline-block
+// }
+
+// .pricing-toggle [name="pricing"] {
+//   display: none
+// }
+
+// .pricing-toggle input[type="radio"]+label {
+//   background-color: #3FAED7;
+//   color: white;
+//   padding: 10px 20px;
+//   border-radius: 30px;
+//   cursor: pointer;
+//   user-select: none;
+// }
+
+// .pricing-toggle input[type="radio"]:checked+label {
+//   background-color: white;
+//   color: #00008B;
+// }
+
+
+
 
 const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const { checklistId } = useParams();
@@ -153,9 +229,18 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const navigate = useNavigate();
   const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
-
-  const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOption(e.target.value);
+  
+  
+  const [checkedOffline, setCheckedOffline] = useState<boolean>(true);
+  const [checkedOnline, setCheckedOnline] = useState<boolean>(false);
+  const handleSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('클릭 전 optionState 는',optionState)
+    setCheckedOffline( checkedOffline===true ? false : true)
+    setCheckedOnline( checkedOnline===true ? false : true)
+    setOption(()=>e.target.value);
+    // setTimeout(()=>{console.log('클릭 후 optionState 는',optionState)}, 3000)
+    console.log('클릭 후 optionState 는',optionState)
+    
   };
   const CustomMsg = () => {
     return (
@@ -191,7 +276,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
       )}
 
       <div className="m-5 flex items-center justify-between">
-        <select
+        {/* <select
           onChange={handleSelection}
           name="selectBox"
           className="form-select form-select-sm m-3 block w-[100px] max-w-[25vw] rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-2 py-1 text-xs font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
@@ -202,7 +287,19 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
               {businessData[option]}
             </option>
           ))}
-        </select>
+        </select> */}
+
+
+        <div className="pricing-toggle" >
+          <input type="radio" id="pricing-toggle-offline" onChange={handleSelection}   name="toggle" value="m" checked={checkedOffline}/>
+          <label className="radio-button" id="pricing-toggle-offline-radio" htmlFor="pricing-toggle-offline"> 오프라인</label>
+        
+          <input type="radio"  id="pricing-toggle-online"  onChange={handleSelection}   name="toggle" value="o" checked={checkedOnline} />
+          <label className="radio-button" id="pricing-toggle-online-radio" htmlFor="pricing-toggle-online"> 온라인</label>
+        </div>
+  
+
+
         {!!isEdit ? (
           <div
             onClick={() => {
