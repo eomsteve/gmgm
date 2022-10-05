@@ -285,8 +285,30 @@ public class ChecklistApi {
 
         checklistService.deleteChecklist(checklistId);
 
-        log.info("[Finished request] DELETE /checklist/{}",checklistId);
+        log.info("[Finished request] DELETE /checklist/empty/{}",checklistId);
         return new ResponseDto(checklistId);
+    }
+
+    /**
+     * 빈 체크리스트 삭제
+     */
+    @DeleteMapping("/empty/{checklistId}")
+    public void deleteEmptyChecklist(@RequestHeader HttpHeaders headers, @PathVariable Long checklistId){
+        log.info("[Starting request] DELETE /checklist/{}",checklistId);
+
+        User user = getUserFromJwtToken(userService,headers);
+        log.info("userId: {}",user.getId());
+
+        Checklist checklist = checklistService.checklist(checklistId);
+        //빈 리스트인지 확인
+        if(checklist.getChecklistBasicItems().size()+checklist.getChecklistCustomItems().size()>0){
+            throw new IllegalArgumentException("빈 장보기 목록만 삭제할 수 있습니다.");
+        }
+        checkOwnership(user, checklist);
+
+        checklistService.deleteEmptyChecklist(checklistId);
+
+        log.info("[Finished request] DELETE /checklist/empty/{}",checklistId);
     }
 
     /**
@@ -294,7 +316,7 @@ public class ChecklistApi {
      */
     private void checkOwnership(User user, Checklist checklist) {
         if(!checklist.getUser().equals(user)){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(user.getName()+"님의 장보기 목록이 아닙니다.");
         }
     }
 
