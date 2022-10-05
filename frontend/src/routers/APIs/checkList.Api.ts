@@ -133,3 +133,20 @@ export const deleteCheckList = async (checkListId?: string) => {
     
   }
 }
+
+
+export const deleteEmptyCheckList = async (checkListId?: string) => {
+  console.log(checkListId);
+  
+  try {
+    const data = await axios({
+      url : API_URL + `/empty/${checkListId}`,
+      method : 'delete'
+    });
+    console.log('삭제됨');
+    
+  } catch (error) {
+    console.error(error);
+    
+  }
+}

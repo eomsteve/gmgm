@@ -44,7 +44,7 @@ export const getFavoritePageDataRedux = createAsyncThunk(
         url: API_URL + '/',
         method: 'GET',
       });
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (error) {}
   },
@@ -133,7 +133,7 @@ export const favoriteGoodsSlice = createSlice({
       const fetchList = action.payload.favoriteItems.map((item: FetchItems) => {
         return item;
       });
-      console.log(fetchList);
+      // console.log(fetchList);
       // state.goods = fetchList;
       state.isLoading = false;
     });

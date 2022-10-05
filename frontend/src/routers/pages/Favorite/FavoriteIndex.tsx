@@ -1,13 +1,10 @@
 import React, { FunctionComponent, useEffect, useState, useRef } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import FavoriteIndexCart from '@components/charts/FavoriteIndexChart';
 import SelectBox from '@components/favorite/FavoriteSelectBox';
 import PriceChart from '@components/favorite/PriceChart';
-import { getFavoriteItems } from '../../APIs/favoriteApi';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@modules/store';
-import { getFavoritePageDataRedux, clearAllGoodsList } from '@modules/FavoriteProductList';
-import { getFavoriteSelect, getFavoritePageData } from '@apis/favoriteApi';
+import { getFavoritePageDataRedux } from '@modules/FavoriteProductList';
 import type { FavoritePageData } from '@apis/favoriteApi';
 import FavHeader from '@components/EmptyHeader';
 import SpinnerPage from '@pages/Spinner'
@@ -17,17 +14,17 @@ const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
   const goodsRef = useRef();
   const {checkListItemRedux, isLoading} = useSelector((state: RootState) =>{
-    console.log(state);
+    // console.log(state);
     
     return { checkListItemRedux : state.persistedReducer.favoriteProductListReducer.goods, isLoading : state.persistedReducer.favoriteProductListReducer.isLoading}
   })
-  console.log("isLoading : ", isLoading);
+  // console.log("isLoading : ", isLoading);
   
   const [favoritePageData, setFavoritePageData] = useState<FavoritePageData>();
   useEffect(() => {
     const getPageData = async () => {
       const data = await dispatch(getFavoritePageDataRedux()).unwrap();
-      console.log("index : ",data);
+      // console.log("index : ",data);
       if (typeof data !== 'undefined') {
         setFavoritePageData(data);
       }
@@ -35,7 +32,7 @@ const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
     getPageData();
     return (()=>{
       goodsRef.current = checkListItemRedux
-      console.log("fav unmount : ",goodsRef.current);
+      // console.log("fav unmount : ",goodsRef.current);
       
     })
   }, [checkListItemRedux]);

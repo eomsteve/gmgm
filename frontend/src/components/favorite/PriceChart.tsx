@@ -10,7 +10,7 @@ interface PriceChartProps {
 
 const PriceChart: FunctionComponent<PriceChartProps> = props => {
   const { favoriteTotalPrices } = props;
-  console.log(favoriteTotalPrices.totalPrices.at(-1)?.price);
+  // console.log(favoriteTotalPrices.totalPrices.at(-1)?.price);
 
   return (
     <>
@@ -22,7 +22,7 @@ const PriceChart: FunctionComponent<PriceChartProps> = props => {
           </span>
         </div>
         <span className="flex justify-end">
-          현재 가격 총합 {favoriteTotalPrices.totalPrices.at(-1)?.price}원
+          현재 가격 총합 {favoriteTotalPrices.totalPrices.at(-1)?.price.toLocaleString()}원
         </span>
         <SumPriceChart favoriteTotalPrices={favoriteTotalPrices} />
       </div>

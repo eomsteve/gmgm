@@ -22,7 +22,7 @@ export const loadMain  = async (jwtToken : string | null) => {
           Authorization : jwtToken
         },
       })
-      console.log(data);
+      // console.log(data);
     return data;
     }else{
       const {data} = await axios({
