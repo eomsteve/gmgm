@@ -28,6 +28,9 @@ import type { RootState, AppDispatch } from '@modules/store';
 import { logInApi } from '@src/routers/APIs/userApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import type { CloseButtonProps } from 'react-toastify';
 // 리덕스
 import ChecklistHeader from '@components/EmptyHeader';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
@@ -151,6 +154,22 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOption(e.target.value);
   };
+  // const customMsg = ({ closeToast } : CloseButtonProps) => (
+  //   <div>
+  //     <p>정말로 삭제하시겠습니까?</p>
+  //     <button>네</button>
+  //     <button onClick={closeToast}>아니오</button>
+  //   </div>
+  // )
+  const notify = () => toast.error(`정말로 삭제하시겠습니까?`, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    })
   return (
     <>
       {isEdit ? (
@@ -189,8 +208,9 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
             </span>
             <span
               onClick={() => {
-                deleteCheckList(checklistId);
-                navigate(-1);
+                notify()
+                // deleteCheckList(checklistId);
+                // navigate(-1);
               }}
               className="text-sm"
             >
@@ -199,6 +219,15 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
                 삭제
               </span>
             </span>
+            <ToastContainer position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover/>
           </div>
         )}
       </div>
