@@ -51,4 +51,10 @@ public class ChecklistService {
         checklist.setIsDeleted(true);
     }
 
+    /**
+     * 빈 체크리스트 삭제
+     */
+    public void deleteEmptyChecklist(Long checklistId){
+        checklistRepo.deleteById(checklistId);
+    }
 }
