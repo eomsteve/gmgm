@@ -30,6 +30,7 @@ import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 
 import BasicProductCheckList from './CheckListBasicItems';
 import CheckListCustomItems from './CheckListCustomItems';
+import { data } from '../charts/TestChart';
 interface CheckListSelectBoxProps {
   optionList: string[];
 }
@@ -94,12 +95,12 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     };
     if (params && params.isEdit) {
       console.log(params, params.isEdit);
-      
+
       console.log('이전 페이지에서 오신듯함 ㅎ');
       setIsEdit(() => params.isEdit);
       // console.log(checklistBasicItems);
     } else {
-      setIsEdit(()=>false)
+      setIsEdit(() => false);
       fetchData(checklistId);
     }
     return () => {
@@ -117,10 +118,14 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
         if (basicRef.current !== undefined && customRef.current !== undefined) {
           const basic = basicRef.current;
           const custom = customRef.current;
-          const unMountUpdateStatus= async(basic : BasicProduct[], custom : CustomProduct[], CheckListId?: string) => {
-            await updateCheckListStatus(basic, custom, checklistId)
-          }
-          unMountUpdateStatus(basic,custom,checklistId)
+          const unMountUpdateStatus = async (
+            basic: BasicProduct[],
+            custom: CustomProduct[],
+            CheckListId?: string,
+          ) => {
+            await updateCheckListStatus(basic, custom, checklistId);
+          };
+          unMountUpdateStatus(basic, custom, checklistId);
         }
       }
     };
@@ -134,15 +139,17 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
         checklistId,
       ).then(data => {
         console.log(data);
+        setBasicEmpty(()=>data.basicEmpty)
+        setCustomEmpty(()=>data.customEmpty);
         dispatch(setInitialState(data));
       });
       setIsEdit(() => !isEdit);
     }
   };
-  const deleteItem = async (checklistId ?: string) => {
+  const deleteItem = async (checklistId?: string) => {
     await deleteCheckList(checklistId);
     navigate('/checklists');
-  }
+  };
   const navigate = useNavigate();
   const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
@@ -150,22 +157,28 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOption(e.target.value);
   };
-  const customMsg = ({ closeToast } : CloseButtonProps) => (
-    <div>
-      <p>정말로 삭제하시겠습니까?</p>
-      <button>네</button>
-      <button onClick={closeToast}>아니오</button>
-    </div>
-  )
-  const notify = () => toast.error(`정말로 삭제하시겠습니까?`, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    })
+  const CustomMsg = () => {
+    return (
+      <div>
+        <p>정말로 삭제하시겠습니까?</p>
+        <div className="flex justify-around ">
+          <button
+            className="m-1 w-[50%] p-1 border-solid border-2 rounded-md hover:bg-red-400"
+            onClick={() => {
+              deleteItem(checklistId);
+            }}
+          >
+            네
+          </button>
+          <button className="m-1 w-[50%] p-1 border-solid border-2 rounded-md hover:bg-slate-400">아니오</button>
+        </div>
+      </div>
+    );
+  };
+
+  const displayMsg = () => {
+    toast.error(<CustomMsg />);
+  };
   return (
     <>
       {isEdit ? (
@@ -191,37 +204,41 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
           ))}
         </select>
         {!!isEdit ? (
-          <div onClick={() => {
-            saveCheckList()
-            }}>
+          <div
+            onClick={() => {
+              saveCheckList();
+            }}
+          >
             <ConfirmButton />
           </div>
         ) : (
-          <div className="m-3 grid grid-cols-2 items-center justify-center">
+          <div className="m-3 flex items-center justify-center">
             <span
               onClick={() => {
-                notify()
-                // deleteCheckList(checklistId);
-                // navigate(-1);
-                return deleteItem(checklistId);
+                displayMsg();
               }}
-              className="text-sm"
+              className="text-sm flex"
             >
               <span className="ml-2 grid grid-cols-2">
                 <Delete width="1rem" height="1rem" />
                 삭제
               </span>
             </span>
-            <ToastContainer position="top-center"
+            <ToastContainer
+              position="top-center"
               autoClose={5000}
               hideProgressBar={false}
               newestOnTop={false}
-              closeOnClick
               rtl={false}
               pauseOnFocusLoss
               draggable
-              pauseOnHover/>
-            <span className=" ml-2 text-sm" onClick={() => setIsEdit(() => !isEdit)}>
+              limit={1}
+              pauseOnHover
+            />
+            <span
+              className=" ml-2 text-sm"
+              onClick={() => setIsEdit(() => !isEdit)}
+            >
               <span className="grid grid-cols-2">
                 <Edit width="1rem" height="1rem" />
                 수정
