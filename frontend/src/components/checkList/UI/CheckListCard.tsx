@@ -107,7 +107,7 @@ const CheckListCard: FC<CheckListProps> = props => {
             {priceGap == 0 ? '' : priceGap}
           </span>
         </div>}
-        {!isEdit && <span className="col-span-3 mr-2 flex justify-end">{recentPrice}</span>}
+        {!isEdit &&recentPrice && <span className="col-span-3 mr-2 flex justify-end">{Math.round(recentPrice).toLocaleString()}</span>}
         <div className="flex items-center justify-center">
           {basicProductName &&
             (isEdit ? (

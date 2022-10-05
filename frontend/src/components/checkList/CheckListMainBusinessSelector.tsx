@@ -1,10 +1,11 @@
-import { FC, useState, useEffect, useCallback, useRef , CSSProperties} from 'react';
+import { FC, useState, useEffect,  useRef , CSSProperties} from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import ConfirmButton from './UI/ConFirmButton';
 import {
   updateCheckLists,
   deleteCheckList,
   updateCheckListStatus,
+  deleteEmptyCheckList
 } from '@apis/checkList.Api';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -17,12 +18,8 @@ import type {
   BasicProduct,
 } from '@modules/CheckListProductList';
 import type { RootState, AppDispatch } from '@modules/store';
-import { logInApi } from '@src/routers/APIs/userApi';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import type { CloseButtonProps } from 'react-toastify';
 // 리덕스
 import ChecklistHeader from '@components/EmptyHeader';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
@@ -37,22 +34,6 @@ import './toggle.css';
 interface CheckListSelectBoxProps {
   optionList: string[];
 }
-
-const businessData: { [key: string]: string } = {
-  m: '대형마트',
-  o: '온라인',
-};
-
-
-const label : CSSProperties = {
-  backgroundColor: '#3FAED7',
-  color: 'white',
-  padding: '10px 20px',
-  borderRadius: '30px',
-  cursor: 'pointer',
-  userSelect: 'none'
-};
-
 
 
 
@@ -76,7 +57,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
       };
     },
   );
-  console.log(checklistCustomItems, checklistBasicItems);
 
   const preventClose = (e: BeforeUnloadEvent) => {
     e.preventDefault();
@@ -85,6 +65,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
 
   const basicRef = useRef();
   const customRef = useRef();
+  const dataRef = useRef();
   useEffect(() => {
     return () => {
       setIsModified(true);
@@ -109,6 +90,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
         setBasicEmpty(() => data.basicEmpty);
         console.log(data);
       }
+      return data;
     };
     if (params && params.isEdit) {
       console.log(params, params.isEdit);
@@ -122,6 +104,14 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     }
     return () => {
       window.removeEventListener('beforeunload', preventClose);
+      const data = fetchData(checklistId).then((data)=>{
+        console.log(data);
+        if(data.empty){
+          deleteEmptyCheckList(checklistId)
+        }
+      })
+      
+      
       if (isEdit) {
         console.log('unMounted');
         dispatch(setInitialStateWhenUnMounted());
@@ -172,15 +162,9 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const [optionState, setOption] = useState<string>('m');
   
   
-  const [checkedOffline, setCheckedOffline] = useState<boolean>(true);
-  const [checkedOnline, setCheckedOnline] = useState<boolean>(false);
   const handleSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('클릭 전 optionState 는',optionState)
-    setCheckedOffline( checkedOffline===true ? false : true)
-    setCheckedOnline( checkedOnline===true ? false : true)
-    setOption(()=>e.target.value);
-    // setTimeout(()=>{console.log('클릭 후 optionState 는',optionState)}, 3000)
-    console.log('클릭 후 optionState 는',optionState)
+
+    setOption(()=> (optionState == 'm') ? 'o': 'm');
     
   };
   const CustomMsg = () => {
@@ -216,28 +200,17 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
         <ChecklistHeader title="장보기 목록" navigateRouter="checkLists" />
       )}
 
-      <div className="m-5 flex items-center justify-between">
-        {/* <select
+       <div className={`m-5 flex items-center ${isEdit ?' justify-end ':' justify-between '}`}>
+       {!isEdit &&  <div className="switch-button m-3 ml-[3vw] ">
+        <input
           onChange={handleSelection}
-          name="selectBox"
-          className="form-select form-select-sm m-3 block w-[100px] max-w-[25vw] rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-2 py-1 text-xs font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
-          aria-label=".form-select-sm example"
-        >
-          {optionList.map((option, index) => (
-            <option value={option} key={index}>
-              {businessData[option]}
-            </option>
-          ))}
-        </select> */}
-
-
-        <div className="pricing-toggle" >
-          <input type="radio" id="pricing-toggle-offline" onChange={handleSelection}   name="toggle" value="m" checked={checkedOffline}/>
-          <label className="radio-button" id="pricing-toggle-offline-radio" htmlFor="pricing-toggle-offline"> 오프라인</label>
-        
-          <input type="radio"  id="pricing-toggle-online"  onChange={handleSelection}   name="toggle" value="o" checked={checkedOnline} />
-          <label className="radio-button" id="pricing-toggle-online-radio" htmlFor="pricing-toggle-online"> 온라인</label>
-        </div>
+          className="switch-button-checkbox "
+          type="checkbox"
+        ></input>
+        <label className="switch-button-label" htmlFor="">
+          <span className="switch-button-label-span">오프라인</span>
+        </label>
+      </div>}
   
 
 

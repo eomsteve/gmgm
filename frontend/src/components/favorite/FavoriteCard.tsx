@@ -36,7 +36,7 @@ const FavoriteCard: FC<FavoriteCardProps> = props => {
             </span>
             </div>
           <span className="col-span-2 flex justify-end mr-2">
-            {goodsPrice}
+            {goodsPrice.toLocaleString()}
           </span>
           <span
             onClick={() => {

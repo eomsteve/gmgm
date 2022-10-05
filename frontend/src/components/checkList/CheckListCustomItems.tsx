@@ -41,14 +41,17 @@ const CheckListCustomItems: FC<CheckListCustomItemsProps> = props => {
       >
         {isEdit && isEmpty && <CustomBanner />}
       </div>
-      {checklistCustomItems.map((product: CustomProduct) => {
+      {checklistCustomItems.map((product: CustomProduct, index : number) => {
         return (
+          <div key={index}>
+
           <CheckListCard
             customProductName={product.customProductName}
             isEdit={isEdit}
             status={product.status}
             businessType={BusinessType}
-          />
+            />
+            </div>
         );
       })}
       {!isEdit && isEmpty && <div className="my-10 text-gray-500 text-sm">

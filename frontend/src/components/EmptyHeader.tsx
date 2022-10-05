@@ -27,10 +27,11 @@ const Header: FC<HeaderProps> = props => {
                     navigate(`/${navigateRouter}`);
                     }
                   : detailParams ? () => {
-                      (isDetail && !detailParams.from) ? navigate(`/checklists/${detailParams?.checklistId}`, {
-                        state : { isEdit : detailParams?.isEdit ,
+                      (isDetail && !!detailParams.from) ? navigate(`/checklists/${detailParams?.checklistId}`, {
+                        state : { isEdit : false ,
                                   checklistId : detailParams?.checklistId}
                       }) : navigate(-1) 
+                      
                     } : () => navigate(-1) 
                   }>
               <Back width="1.2rem" height="1.2rem" />
