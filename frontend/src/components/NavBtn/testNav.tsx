@@ -5,7 +5,7 @@ import { ReactComponent as Home } from '@src/assets/icons/home.svg';
 import { ReactComponent as CheckList } from '@src/assets/icons/checklist.svg';
 import { ReactComponent as Favorite } from '@src/assets/icons/favorite.svg';
 import { addCheckList } from '@apis/checkList.Api';
-interface FabButtonProps {}
+interface FabButtonProps { }
 
 const FabButton: FC<FabButtonProps> = () => {
   const navigate = useNavigate();
@@ -23,18 +23,18 @@ const FabButton: FC<FabButtonProps> = () => {
         <ul className="fab-options">
           <li>
             <span onClick={() => {
-              onClickHandle();
-            }} className="fab-label cursor-pointer">장보기 목록 만들기</span>
-            <div  onClick={() => {
-              onClickHandle();
+              navigate(`/checklists`)
+            }} className="fab-label w-20 text-center cursor-pointer">장보기 내역</span>
+            <div onClick={() => {
+              navigate(`/checklists`)
             }} className="fab-icon-holder cursor-pointer">
               <i className="fas fa-video ">
                 <CheckList width="70%" height="70%" />
               </i>
             </div>
           </li>
-          <li >
-            <span onClick={() => navigate('/favorite')} className="fab-label cursor-pointer">즐겨찾기</span>
+          <li className=''>
+            <span onClick={() => navigate('/favorite')} className="fab-label w-20 text-center cursor-pointer">즐겨찾기</span>
             <div onClick={() => navigate('/favorite')} className="fab-icon-holder cursor-pointer">
               <i className="fas fa-comments">
                 <Favorite width="90%" height="90%" />
@@ -42,7 +42,7 @@ const FabButton: FC<FabButtonProps> = () => {
             </div>
           </li>
           <li >
-            <span onClick={() => navigate('/')} className="fab-label cursor-pointer">홈</span>
+            <span onClick={() => navigate('/')} className="fab-label w-20 text-center cursor-pointer">홈</span>
             <div onClick={() => navigate('/')} className="fab-icon-holder cursor-pointer">
               <i className="">
                 <Home width="70%" height="70%" />
