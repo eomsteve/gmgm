@@ -9,7 +9,7 @@ const CheckListPreview: FC<CheckListPreviewProps> = props => {
   const { status, productName } = props;
   return (
     <>
-      <div className="m-1 flex w-20 items-center text-xs">
+      <div className="m-1 flex w-[20vw] items-center text-xs">
         <input
           type="checkbox"
           checked={status}

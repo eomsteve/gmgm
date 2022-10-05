@@ -15,7 +15,7 @@
 .card .front, .card .back {
   position: absolute;
   top: calc(50% - 50px);
-  height: 100%;
+  height: 60%;
   width: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;

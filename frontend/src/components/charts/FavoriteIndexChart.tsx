@@ -80,7 +80,7 @@ const FavoriteIndexChart: FunctionComponent<
     labels,
     datasets: [
       {
-        label: '국가 지수',
+        label: '소비자물가 지수',
         //라벨의 길이만큼 data 넣기,, 빈 데이터는??
         data: countryValues,
         borderColor: 'rgb(255, 99, 132)',

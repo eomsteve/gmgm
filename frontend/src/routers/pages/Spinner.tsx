@@ -8,7 +8,7 @@ interface SpinnerPageProps {
  
 const SpinnerPage: FC<SpinnerPageProps> = () => {
   return (<>
-    <main className="fixed h-screen w-full flex justify-center items-center bg-opacity-25 bg-slate-500">
+    <main className="fixed z-[999] h-screen w-full flex justify-center items-center bg-opacity-25 bg-slate-500">
     <Grid
   height="80"
   width="80"
