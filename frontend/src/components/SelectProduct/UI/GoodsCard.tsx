@@ -15,7 +15,7 @@ const GoodsCard: FC<GoodsItem> = props => {
       <div className="flex h-12 w-12 justify-center">
         <img className="rounded-lg" src={goodsImg} />
       </div>
-      <div className="col-span-2 p-2"> {goodsName} </div>
+      <div className="col-span-2 p-2 pr-1"> {goodsName} </div>
     </div>
     );
 };

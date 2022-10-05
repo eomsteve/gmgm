@@ -44,26 +44,6 @@ const businessData: { [key: string]: string } = {
 };
 
 
-const pricing_toggle : CSSProperties = {
-  backgroundColor: '#3FAED7',
-  padding: '14px 5px',
-  borderRadius: '30px',
-  display: 'inline-block'
-};
-
-const input_display : CSSProperties = {
-  display: 'none',
-  backgroundColor: '#3FAED7',
-  color: 'white',
-  padding: '10px 20px',
-  borderRadius: '30px',
-  cursor: 'pointer',
-  userSelect: 'none'
-};
-// .pricing-toggle [name="pricing"] {
-//   display: none
-// }
-
 const label : CSSProperties = {
   backgroundColor: '#3FAED7',
   color: 'white',
@@ -73,45 +53,6 @@ const label : CSSProperties = {
   userSelect: 'none'
 };
 
-// .pricing-toggle input[type="radio"]+label {
-//   background-color: #3FAED7;
-//   color: white;
-//   padding: 10px 20px;
-//   border-radius: 30px;
-//   cursor: pointer;
-//   user-select: none;
-// }
-
-// .pricing-toggle input[type="radio"]:checked+label {
-//   background-color: white;
-//   color: #00008B;
-// }
-
-
-// .pricing-toggle {
-//   background-color: #3FAED7;
-//   padding: 14px 5px;
-//   border-radius: 30px;
-//   display: inline-block
-// }
-
-// .pricing-toggle [name="pricing"] {
-//   display: none
-// }
-
-// .pricing-toggle input[type="radio"]+label {
-//   background-color: #3FAED7;
-//   color: white;
-//   padding: 10px 20px;
-//   border-radius: 30px;
-//   cursor: pointer;
-//   user-select: none;
-// }
-
-// .pricing-toggle input[type="radio"]:checked+label {
-//   background-color: white;
-//   color: #00008B;
-// }
 
 
 
