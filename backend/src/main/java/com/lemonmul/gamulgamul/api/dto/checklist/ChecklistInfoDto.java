@@ -18,7 +18,8 @@ public class ChecklistInfoDto {
 
     public ChecklistInfoDto(Checklist checklist) {
         checklistBasicItems =checklist.getChecklistBasicItems()
-                .stream().map(BasicItemInfoDto::new).collect(Collectors.toList());
+                .stream().map(BasicItemInfoDto::new)
+                .sorted(BasicItemInfoDto::compareTo).collect(Collectors.toList());
         checklistCustomItems =checklist.getChecklistCustomItems()
                 .stream().map(CustomItemDto::new).collect(Collectors.toList());
         basicEmpty=checklistBasicItems.size()<=0;

@@ -3,6 +3,7 @@ import { LogInUserREQ, logInApi } from '../../routers/APIs/userApi';
 import { useNavigate } from 'react-router-dom';
 import type { RootState, AppDispatch } from '../../modules/store';
 import { setAuthToken,logInApiRedux } from '@modules/Auth'
+import { clearAllGoodsList, getFavoriteItemStoreReduxLogin } from '@modules/FavoriteProductList'
 import { useDispatch, useSelector } from 'react-redux';
 
 const LogIn: FC = () => {
@@ -27,6 +28,7 @@ const LogIn: FC = () => {
     console.log(logInRes);
     
     if (typeof logInRes !== typeof "string") {
+      dispatch(getFavoriteItemStoreReduxLogin())
       navigate('/');
     } else {
       alert('실패 : 이메일과 비밀번호를 확인해 주세요');

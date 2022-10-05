@@ -28,15 +28,15 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
   console.log("selectPage :" ,pageData);
 
   const optionList = ['m', 'o'];
-  // const data = useSelector((state: RootState) => {
-  //   const goodsItemList =
-  //     state.persistedReducer.favoriteProductListReducer.goods;
-  //   console.log(
-  //     'favorite product :',
-  //     state.persistedReducer.favoriteProductListReducer.goods,
-  //   );
-  //   return goodsItemList;
-  // });
+  const data = useSelector((state: RootState) => {
+    const goodsItemList =
+      state.persistedReducer.favoriteProductListReducer.goods;
+    console.log(
+      'favorite product :',
+      state.persistedReducer.favoriteProductListReducer.goods,
+    );
+    return goodsItemList;
+  });
   const [optionState, setOption] = useState<string>('m');
   // const [favoritePageData, setPageData] = useState<FavoriteItem[]>(selectBoxPage.favoriteItems);
   // const [recommendData, setRecommendData] = useState<Recommend[]>(
@@ -106,6 +106,9 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
                       ? favoriteItem.recentPriceOff
                       : favoriteItem.recentPriceOn
                   }
+                  productId={favoriteItem.basicProductId}
+                  goodsId={favoriteItem.goodsId}
+                  businessType={optionState}
                 />
               </div>
             );

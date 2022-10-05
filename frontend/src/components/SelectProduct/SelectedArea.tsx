@@ -30,6 +30,8 @@ const SelectedArea: FC<SelectedAreaProps> = () => {
       navigate('/favorite');
     }
   };
+  console.log(goods);
+  
 
   return (
     <>

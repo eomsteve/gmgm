@@ -12,6 +12,7 @@ import com.lemonmul.gamulgamul.entity.user.Gender;
 import com.lemonmul.gamulgamul.entity.user.Role;
 import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.repo.*;
+import com.lemonmul.gamulgamul.service.AddNewDataService;
 import com.lemonmul.gamulgamul.service.PriceGapService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,9 @@ class DBMakeTest {
     PriceGapService priceGapService;
 
     @Autowired
+    AddNewDataService addNewDataService;
+
+    @Autowired
     EntityManager em;
 
     @Autowired
@@ -72,7 +76,8 @@ class DBMakeTest {
 //        createFavoriteGoodsTable();
 //        createFavoriteTotalPriceTable();
 
-        priceGapService.renewPriceGap();
+//        priceGapService.renewPriceGap();
+        addNewDataService.addNewData();
     }
 
     private void createCategoryTable() {

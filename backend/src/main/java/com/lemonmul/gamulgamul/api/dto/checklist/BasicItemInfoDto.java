@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class BasicItemInfoDto {
+public class BasicItemInfoDto implements Comparable<BasicItemInfoDto>{
     private Long id;
     private Long basicProductId;
     private String basicProductName;
@@ -21,9 +21,15 @@ public class BasicItemInfoDto {
         basicProductId =item.getProduct().getId();
         basicProductName =item.getProduct().getName();
         status=item.isStatus();
+        //todo 한번에 불러오게 바꾸기
         recentPriceOff=item.getProduct().getRecentPriceOff();
         recentPriceOn=item.getProduct().getRecentPriceOn();
         priceGapOff=item.getProduct().getPriceGapOff();
         priceGapOn=item.getProduct().getPriceGapOn();
+    }
+
+    @Override
+    public int compareTo(BasicItemInfoDto o) {
+        return (int) (o.getId()-this.getId());
     }
 }

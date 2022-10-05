@@ -24,7 +24,7 @@ const OnlineCard: FC<OnlineCardProps> = (props) => {
             </p>
             <p>온라인 최저가는</p>
             <p>
-              <span className="text-[1.2rem]">{goodsProps.cheapPrice}</span> 입니다.
+              <span className="text-[1.2rem]">{goodsProps.cheapPrice}</span> 원 입니다.
             </p>
           </div>
         </div>

@@ -35,8 +35,8 @@ const Calculator: FC<CalculatorProps> = props => {
 
   const calculate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setUsingCalculator(true);
     if (calPrice && calMeasure){
+      setUsingCalculator(true);
       return setCalculatorData({calPrice, calMeasure});
     }else{
       return setCalculatorData(undefined)
@@ -82,7 +82,7 @@ const Calculator: FC<CalculatorProps> = props => {
               계산하기
             </button>
           </form>
-          {usingCalculator && (
+          {usingCalculator && calPrice && calMeasure && (
             <div className="mt-5 text-center">
               가격이 계산되었습니다. 그래프를 확인해주세요.
             </div>

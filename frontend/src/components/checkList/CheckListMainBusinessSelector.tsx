@@ -1,13 +1,7 @@
 import { FC, useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import BasicBanner from './UI/BasicBanner';
-import CustomBanner from './UI/CustomBanner';
-import GotoCheckListSelection from './UI/GotoCheckListSelection';
-import CheckListCard from './UI/CheckListCard';
-import CustomInput from './UI/InputCustom';
 import ConfirmButton from './UI/ConFirmButton';
 import {
-  getCheckList,
   updateCheckLists,
   deleteCheckList,
   updateCheckListStatus,
@@ -16,8 +10,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   setInitialState,
   setInitialStateWhenUnMounted,
-  updateCustomProductStatus,
-  updateBasicProductsStatus,
   getCheckLists,
 } from '@modules/CheckListProductList';
 import type {
@@ -37,7 +29,6 @@ import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 
 import BasicProductCheckList from './CheckListBasicItems';
-import CustomProductCheckList from './CheckListCustomItems';
 import CheckListCustomItems from './CheckListCustomItems';
 interface CheckListSelectBoxProps {
   optionList: string[];
@@ -48,16 +39,14 @@ const businessData: { [key: string]: string } = {
   o: '온라인',
 };
 
-const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
+const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const { checklistId } = useParams();
   const location = useLocation();
-  const params = location.state as { isEdit: boolean; checklistId: string };
+  let params = location.state as { isEdit: boolean; checklistId: string };
   const [customEmpty, setCustomEmpty] = useState<boolean>();
   const [basicEmpty, setBasicEmpty] = useState<boolean>();
   const [isEdit, setIsEdit] = useState(false);
   const [isModified, setIsModified] = useState<boolean>(false);
-  // const [checklistCustomItems, setChecklistCustomItems] = useState<CustomProduct[]>([]);
-  // const [checklistBasicItems, setChecklistBasicItems] = useState<BasicProduct[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const { checklistCustomItems, checklistBasicItems } = useSelector(
     (state: RootState) => {
@@ -104,10 +93,13 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       }
     };
     if (params && params.isEdit) {
+      console.log(params, params.isEdit);
+      
       console.log('이전 페이지에서 오신듯함 ㅎ');
       setIsEdit(() => params.isEdit);
       // console.log(checklistBasicItems);
     } else {
+      setIsEdit(()=>false)
       fetchData(checklistId);
     }
     return () => {
@@ -123,11 +115,12 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
           isModified,
         );
         if (basicRef.current !== undefined && customRef.current !== undefined) {
-          updateCheckListStatus(
-            basicRef.current,
-            customRef.current,
-            checklistId,
-          );
+          const basic = basicRef.current;
+          const custom = customRef.current;
+          const unMountUpdateStatus= async(basic : BasicProduct[], custom : CustomProduct[], CheckListId?: string) => {
+            await updateCheckListStatus(basic, custom, checklistId)
+          }
+          unMountUpdateStatus(basic,custom,checklistId)
         }
       }
     };
@@ -146,7 +139,10 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
       setIsEdit(() => !isEdit);
     }
   };
-
+  const deleteItem = async (checklistId ?: string) => {
+    await deleteCheckList(checklistId);
+    navigate('/checklists');
+  }
   const navigate = useNavigate();
   const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
@@ -154,13 +150,13 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOption(e.target.value);
   };
-  // const customMsg = ({ closeToast } : CloseButtonProps) => (
-  //   <div>
-  //     <p>정말로 삭제하시겠습니까?</p>
-  //     <button>네</button>
-  //     <button onClick={closeToast}>아니오</button>
-  //   </div>
-  // )
+  const customMsg = ({ closeToast } : CloseButtonProps) => (
+    <div>
+      <p>정말로 삭제하시겠습니까?</p>
+      <button>네</button>
+      <button onClick={closeToast}>아니오</button>
+    </div>
+  )
   const notify = () => toast.error(`정말로 삭제하시겠습니까?`, {
     position: "top-center",
     autoClose: 5000,
@@ -195,22 +191,19 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
           ))}
         </select>
         {!!isEdit ? (
-          <div onClick={() => saveCheckList()}>
+          <div onClick={() => {
+            saveCheckList()
+            }}>
             <ConfirmButton />
           </div>
         ) : (
           <div className="m-3 grid grid-cols-2 items-center justify-center">
-            <span className="text-sm" onClick={() => setIsEdit(() => !isEdit)}>
-              <span className="grid grid-cols-2">
-                <Edit width="1rem" height="1rem" />
-                수정
-              </span>
-            </span>
             <span
               onClick={() => {
                 notify()
                 // deleteCheckList(checklistId);
                 // navigate(-1);
+                return deleteItem(checklistId);
               }}
               className="text-sm"
             >
@@ -228,6 +221,12 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = props => {
               pauseOnFocusLoss
               draggable
               pauseOnHover/>
+            <span className=" ml-2 text-sm" onClick={() => setIsEdit(() => !isEdit)}>
+              <span className="grid grid-cols-2">
+                <Edit width="1rem" height="1rem" />
+                수정
+              </span>
+            </span>
           </div>
         )}
       </div>

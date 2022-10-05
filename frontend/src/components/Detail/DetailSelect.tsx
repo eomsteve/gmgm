@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Calculator from './Calculator';
-import { atCheckList, detailSelectBoxChange } from '@apis/detail';
+import { atCheckList, detailSelectBoxChange, fromFavorite } from '@apis/detail';
 import OnlineCard from './OnlineCard';
 
 export interface GoodsInfo {
@@ -25,23 +25,29 @@ interface ProductData {
 
 interface DetailSelectBoxProps {}
 const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
-  const { productId, businessType } = useParams();
+  const { productId, businessType, goodsId } = useParams();
+  const [goodsData, setGoodsData] = useState<GoodsInfo>();
   const [productData, setProductData] = useState<ProductData>();
   useEffect(() => {
     // get data
-    console.log('productId, businessType', productId, businessType);
+    console.log('productId, businessType', productId, businessType, goodsId);
 
-    const getData = async () => {
-      const data = await atCheckList(productId, businessType);
-      setProductData(() => data);
-      console.log(data);
-    };
-
-    getData();
+    if (goodsId === undefined) {
+      const getData = async () => {
+        const data = await atCheckList(productId, businessType);
+        setProductData(() => data);
+        console.log(data);
+      };
+      getData();
+    } else {
+      const getDataFromFavorite = async () => {
+        const data = await fromFavorite(productId, businessType, goodsId);
+        setProductData(() => data.product);
+        setGoodsData(() => data.goods);
+      };
+      getDataFromFavorite();
+    }
   }, []);
-  const navigate = useNavigate();
-  const optionList = ['m', 'o'];
-  const [optionState, setOption] = useState<string>('m');
   const [goodsInfo, setGoodsInfo] = useState<GoodsInfo>();
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
     console.log(e.target.value);
@@ -69,23 +75,38 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
           className="form-select form-select-sm m-2 block rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat px-3 py-1 text-xs font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
           aria-label=".form-select-sm example"
         >
-          {productData && (
+          {productData && !goodsId && (
             <option value={productData.basicProductName}>
               {productData.basicProductName}
             </option>
           )}
+          {productData && goodsData && (
+            <option value={goodsData.goodsName}>{goodsData.goodsName}</option>
+          )}
           {productData &&
-            productData.goodsInfos.map(goods => (
-              <option value={goods.goodsId} key={goods.goodsId}>
+            goodsData &&
+            productData.goodsInfos.map(goods => {
+              if (goods.goodsName != goodsData.goodsName) {
+                return (
+                  <option value={goods.goodsId} key={goods.goodsId}>
+                    {goods.goodsName}
+                  </option>
+                );
+              }
+            })}
+          {productData &&
+            !goodsData &&
+            productData.goodsInfos.map(goods => {
+              return (<option value={goods.goodsId} key={goods.goodsId}>
                 {goods.goodsName}
-              </option>
-            ))}
+              </option>)
+            })}
         </select>
       </div>
       {productData && (
         <Calculator
           measure={productData.measure}
-          goodsProps={goodsInfo}
+          goodsProps={goodsInfo ? goodsInfo : goodsData}
           productPrices={productData.productPrices}
           researchDates={productData.researchDates}
           unit={productData.unit}
@@ -94,6 +115,7 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
       )}
       <hr className="mx-[-1.25rem] my-1 w-screen" />
       {goodsInfo && <OnlineCard goodsProps={goodsInfo} />}
+      {goodsData && !goodsInfo && <OnlineCard goodsProps={goodsData} />}
     </>
   );
 };

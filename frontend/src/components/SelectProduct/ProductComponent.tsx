@@ -58,7 +58,6 @@ const ProductLists: FC<ProductListsProps> = props => {
     }
     
     loadGoodsData(productId)
-    // axios 통신을 누를때마다 합니다? 그래서 useState에 값을 저장하고 반영해서 반복문 돌림
   },[]);
 
   return (

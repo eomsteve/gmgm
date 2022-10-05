@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import FavoriteIndexCart from '@components/charts/FavoriteIndexChart';
 import SelectBox from '@components/favorite/FavoriteSelectBox';
@@ -6,7 +6,7 @@ import PriceChart from '@components/favorite/PriceChart';
 import { getFavoriteItems } from '../../APIs/favoriteApi';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@modules/store';
-import { getFavoritePageDataRedux } from '@modules/FavoriteProductList';
+import { getFavoritePageDataRedux, clearAllGoodsList } from '@modules/FavoriteProductList';
 import { getFavoriteSelect, getFavoritePageData } from '@apis/favoriteApi';
 import type { FavoritePageData } from '@apis/favoriteApi';
 import FavHeader from '@components/EmptyHeader';
@@ -14,6 +14,7 @@ interface FavoriteIndexPageProps {}
 
 const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const goodsRef = useRef();
   const checkListItemRedux = useSelector((state: RootState) =>{
     return state.persistedReducer.favoriteProductListReducer.goods;
   })
@@ -27,12 +28,13 @@ const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
       }
     };
     getPageData();
+    return (()=>{
+      goodsRef.current = checkListItemRedux
+      console.log("fav unmount : ",goodsRef.current);
+      
+    })
   }, [checkListItemRedux]);
 
-  useEffect(() => {
-    console.log('updateeeeee');
-    // window.location.reload();
-  },[checkListItemRedux])
   
   return (
     <>

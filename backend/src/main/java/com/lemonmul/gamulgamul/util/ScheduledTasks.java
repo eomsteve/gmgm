@@ -21,9 +21,9 @@ public class ScheduledTasks {
 
     /**
      * Naver News API 검색 스케줄링
-     *  한시간마다 갱신
+     *  30분마다 갱신
      * */
-    @Scheduled(cron = "0 */5 * * * *")
+    @Scheduled(cron = "0 */30 * * * *")
     public void renewNews(){
         final long startTime = System.currentTimeMillis();
         log.info("[Starting request] request to Naver API");
@@ -32,12 +32,12 @@ public class ScheduledTasks {
         log.info("[Finished request]: {} millis", (endTime - startTime));
     }
 
-    @Scheduled(cron = "0 0 0 * * *")
-    public void renewPriceGap() {
-        priceGapService.renewPriceGap();
-    }
+//    @Scheduled(cron = "0 0 0 * * *")
+//    public void renewPriceGap() {
+//        priceGapService.renewPriceGap();
+//    }
 
-    @Scheduled(cron = "0 30 23 * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     public void addNewData() {
         addNewDataService.addNewData();
     }
