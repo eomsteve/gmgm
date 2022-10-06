@@ -54,6 +54,7 @@ public class ChecklistService {
     /**
      * 빈 체크리스트 삭제
      */
+    @Transactional
     public void deleteEmptyChecklist(Long checklistId){
         checklistRepo.deleteById(checklistId);
     }
