@@ -2,14 +2,9 @@ package com.lemonmul.gamulgamul;
 
 import com.lemonmul.gamulgamul.entity.*;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
-import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.goods.Goods;
-import com.lemonmul.gamulgamul.entity.goods.GoodsPrice;
-import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
 import com.lemonmul.gamulgamul.entity.product.Product;
 import com.lemonmul.gamulgamul.entity.product.ProductPrice;
-import com.lemonmul.gamulgamul.entity.user.Gender;
-import com.lemonmul.gamulgamul.entity.user.Role;
 import com.lemonmul.gamulgamul.entity.user.User;
 import com.lemonmul.gamulgamul.repo.*;
 import com.lemonmul.gamulgamul.service.AddNewDataService;
@@ -23,10 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @SpringBootTest
 @Transactional
@@ -77,7 +69,8 @@ class DBMakeTest {
 //        createFavoriteTotalPriceTable();
 
 //        priceGapService.renewPriceGap();
-        addNewDataService.addNewData();
+//        addNewDataService.addNewDataAM();
+        addNewDataService.addNewDataPM();
     }
 
     private void createCategoryTable() {

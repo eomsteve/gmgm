@@ -8,8 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -38,7 +36,12 @@ public class ScheduledTasks {
 //    }
 
     @Scheduled(cron = "0 0 0 * * *")
-    public void addNewData() {
-        addNewDataService.addNewData();
+    public void addNewDataAM() {
+        addNewDataService.addNewDataAM();
+    }
+
+    @Scheduled(cron = "0 0 9 * * *")
+    public void addNewDataPM() {
+        addNewDataService.addNewDataPM();
     }
 }
