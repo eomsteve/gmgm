@@ -22,7 +22,7 @@ const PriceChart: FunctionComponent<PriceChartProps> = props => {
           </span>
         </div>
         {price && <span className="flex justify-end">
-          현재 가격의 총합 : {Math.round(price).toLocaleString()}
+          현재 가격의 총합 : {`${Math.round(price).toLocaleString()} 원`}
         </span>}
         <SumPriceChart favoriteTotalPrices={favoriteTotalPrices} />
       </div>
