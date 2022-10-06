@@ -66,19 +66,23 @@ public class ChecklistApi {
         log.info("checklists size: {}",checklists.size());
 
         //빈 체크리스트 삭제
+        boolean isDeleted=false;
         List<Long> deleteIds=new ArrayList<>();
         for (Checklist checklist : checklists) {
             int size = checklist.getChecklistBasicItems().size() + checklist.getChecklistCustomItems().size();
             if(size<=0){
                 deleteIds.add(checklist.getId());
+                isDeleted=true;
             }
         }
-        checklistService.deleteEmptyChecklists(deleteIds);
+        if(isDeleted) {
+            checklistService.deleteEmptyChecklists(deleteIds);
+            checklists=checklistService.checklistList(user);
+        }
 
-        List<Checklist> updatedChecklists = checklistService.checklistList(user);
 
         log.info("[Finished request] GET /checklist/list/info");
-        return updatedChecklists.stream().map(ListInfoDto::new).collect(Collectors.toList());
+        return checklists.stream().map(ListInfoDto::new).collect(Collectors.toList());
     }
 
     /**
