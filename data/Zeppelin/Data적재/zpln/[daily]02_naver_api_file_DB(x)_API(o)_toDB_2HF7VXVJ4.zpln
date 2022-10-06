@@ -1,0 +1,642 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md # 1. DB(x) & API(o) 인, 데이터 넣기\nautomation으로 가져온 것 DB에 넣기 전, 전처리\n+ 처음 DB에 넣는 경우,  2021년 09월07일부터 ~ 측정일까지 채워넣어서, DB에 넣기\n    +  ONLINE DATA \n    + 처음 넣는 데이터들 ",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T04:04:54+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>1. DB(x) &amp; API(o) 인, 데이터 넣기</h1>\n<p>automation으로 가져온 것 DB에 넣기 전, 전처리</p>\n<ul>\n<li>처음 DB에 넣는 경우,  2021년 09월07일부터 ~ 측정일까지 채워넣어서, DB에 넣기\n<ul>\n<li>ONLINE DATA</li>\n<li>처음 넣는 데이터들</li>\n</ul>\n</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290391745_1650555365",
+      "id": "paragraph_1664253390158_1474014374",
+      "dateCreated": "2022-09-27T14:53:11+0000",
+      "dateStarted": "2022-09-28T04:04:54+0000",
+      "dateFinished": "2022-09-28T04:04:54+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:56274"
+    },
+    {
+      "text": "%spark.conf\n\nSPARK_HOME  /usr/local/spark\nPYSPARK_PYTHON /usr/bin/python3\nspark.pyspark.python  /usr/bin/python3\n\n# set driver memory to 8g\nspark.driver.memory 8g\n\n# set executor number to be 3\nspark.executor.instances  3\n\n# set executor memory 4g\nspark.executor.memory  2g\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T04:04:56+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290391746_690559648",
+      "id": "paragraph_1664253372491_282134331",
+      "dateCreated": "2022-09-27T14:53:11+0000",
+      "dateStarted": "2022-09-28T04:04:56+0000",
+      "dateFinished": "2022-09-28T04:04:56+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:56275"
+    },
+    {
+      "text": "%md\n## [1] 처음 DB에 넣는 데이터인지 확인(전체 goods_id에 대해서 진행)",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T04:05:02+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>[1] 처음 DB에 넣는 데이터인지 확인(전체 goods_id에 대해서 진행)</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290391746_1591474591",
+      "id": "paragraph_1664255742584_160044425",
+      "dateCreated": "2022-09-27T14:53:11+0000",
+      "dateStarted": "2022-09-28T04:05:02+0000",
+      "dateFinished": "2022-09-28T04:05:02+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:56276"
+    },
+    {
+      "text": "%md\n### (1) 데이터 채울 때, 사용할 함수\n1. row 방향 날짜 데이터(일단위아님)를, 일데이터 주기로 바꾸기\n+ column\n    + goods_id, unit_price,  price, research_date, business로 구성되어 있음\n+ 제약사항\n    + business 값이 모두 같은 경우에만 정상작동함 ",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T04:05:24+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(1) 데이터 채울 때, 사용할 함수</h3>\n<ol>\n<li>row 방향 날짜 데이터(일단위아님)를, 일데이터 주기로 바꾸기</li>\n</ol>\n<ul>\n<li>column\n<ul>\n<li>goods_id, unit_price,  price, research_date, business로 구성되어 있음</li>\n</ul>\n</li>\n<li>제약사항\n<ul>\n<li>business 값이 모두 같은 경우에만 정상작동함</li>\n</ul>\n</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290391746_726796760",
+      "id": "paragraph_1664257637251_546559557",
+      "dateCreated": "2022-09-27T14:53:11+0000",
+      "dateStarted": "2022-09-28T04:05:24+0000",
+      "dateFinished": "2022-09-28T04:05:24+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:56277"
+    },
+    {
+      "text": "%pyspark\n# 함수 정의\n\nimport datetime\nimport numpy as np\nimport pandas as pd\n\n# row 형식으로 된, 일데이터 주기가 아닌 데이터를, 일데이터 형식으로 바꾸기\ndef inserting_date(start_date, end_date, input_df, business): # Pandas DF를 이용\n    print('debug1')\n    \n    #---------------------------------------------------------------------------------------------------------------------------------#\n    #                 1. 초기작업 : 결과 df 생성, 초기값들 설정\n    #---------------------------------------------------------------------------------------------------------------------------------#\n\n    \n    # 초기 설정 값\n    start_goods_id = min((input_df['goods_id']))\n    # print('d1')\n    end_goods_id = max((input_df['goods_id']))\n    # print('d2')\n    cur_goods_id = start_goods_id - 1\n    # print('d3')\n    cur_research_date = start_date\n    # print('debug2')\n    \n    \n    # goods_id, research_date 기준으로 sorting 시키기\n    input_df = input_df.reset_index(drop=True)\n    input_df = input_df.sort_values(['goods_id','research_date'])\n    # 추후에 삭제할 행\n    input_df.loc[len(input_df)] = [end_goods_id+1, 0, 0 ,start_date.strftime(\"%Y-%m-%d\"), business]\n    print('debug3')\n    \n    # result\n    result_df = pd.DataFrame(columns=input_df.columns)\n    inserting_length = 0\n    \n    \n    \n    input_df_length = 0\n    # input_df의 끝까지 가지 않은 경우, 계속하기\n    ## 1. goods_id 가 달라지는 경우, research_date가 일치하면, input_df_length를 1 늘리기\n    while input_df_length < len(input_df): # dummy row까지 쭉 진행,\n    \n        next_goods_id, next_unit_price, next_price, next_research_date, next_business = input_df.loc[input_df_length]   # input_df의 다음(목표) row\n        # inserting_research_date = cur_research_date                                                    # input_df의 현재 row\n    \n        \n        # goods_id가 같은 경우\n        if next_goods_id == cur_goods_id:\n            ## input_df의 next row에 도달한 경우, 도달한 값 넣어주기\n    \n    \n\n            # print('debug 3')\n            ## 현재 inserting 날짜가, next_research_date에 도달하기 전까지 , 계속 row 삽입하기\n            while next_research_date != inserting_research_date.strftime(\"%Y-%m-%d\"):\n                # print(inserting_research_date.strftime(\"%Y-%m-%d\"), '--------------------')\n                result_df.loc[inserting_length] = cur_goods_id, cur_unit_price, cur_price, inserting_research_date.strftime(\"%Y-%m-%d\"),  cur_business\n                \n                \n                cur_research_date = inserting_research_date                        # cur_research_date 업데이트\n                \n\n                inserting_research_date +=  datetime.timedelta(days=1) # inserting할 날짜 늘리기\n                inserting_length += 1   # result_df 길이 추가\n                \n            cur_goods_id = next_goods_id                                       # cur_goods_id 업데이트\n            cur_unit_price = next_unit_price\n            cur_price = next_price                                             # cur_price 업데이트\n            cur_business = next_business                                       # cur_business 업데이트\n            input_df_length += 1\n                \n    \n           \n    \n    \n        # 새로운 goods_id를 넣는 경우, 새로 진행\n        elif next_goods_id != cur_goods_id:\n            print(cur_goods_id) if cur_goods_id % 10 ==0\n            # print(result_df)\n            \n            ## end_date 까지 row 채워주기\n            if cur_goods_id != start_goods_id - 1:  # 처음 시작하는 경우가 아니라면,\n                while end_date + datetime.timedelta(days=1) > inserting_research_date:\n                    result_df.loc[inserting_length] = cur_goods_id, cur_unit_price,cur_price, inserting_research_date.strftime(\"%Y-%m-%d\"),  cur_business\n                    inserting_research_date +=  datetime.timedelta(days=1) # inserting할 날짜 늘리기\n                    inserting_length += 1   # result_df 길이 추가\n            \n            ## input_df의 마지막까지 진행됐다면 while문 break해서 끝내기\n            if input_df_length == len(input_df) - 1:\n                print('here')\n                break\n            \n            ## inserting_research_date 초기화\n            inserting_research_date = start_date\n            \n            ## 만약 첫 row가 start_date일이 아니면, 채워주기\n            inserting_unit_price = next_unit_price\n            inserting_price = next_price  # next_price의 가격을 앞에 채워주기\n            ### 다음 row의 날짜에 도달하기 전까지 계속 추가해 주기\n            while next_research_date != inserting_research_date.strftime(\"%Y-%m-%d\"):\n                result_df.loc[inserting_length] = next_goods_id, next_unit_price, inserting_price, inserting_research_date.strftime(\"%Y-%m-%d\"), next_business\n                # print(inserting_research_date.strftime(\"%Y-%m-%d\"),'=========================================')\n                \n                cur_research_date = inserting_research_date                        # cur_research_date 업데이트\n                \n                \n                inserting_research_date +=  datetime.timedelta(days=1) # inserting할 날짜 늘리기\n                inserting_length += 1   # result_df 길이 추가\n            \n            input_df_length += 1    # input_df 길이 추가\n            cur_goods_id = next_goods_id                                       # cur_goods_id 업데이트\n            cur_unit_price = next_unit_price\n            cur_price = next_price                                             # cur_price 업데이트\n            \n            cur_business = next_business                                       # cur_business 업데이트\n            \n    return result_df\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T04:07:29+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Traceback (most recent call last):\n  File \"/tmp/python4075393523375486991/zeppelin_python.py\", line 152, in <module>\n    code = compile('\\n'.join(stmts), '<stdin>', 'exec', ast.PyCF_ONLY_AST, 1)\n  File \"<stdin>\", line 81\n    print(cur_goods_id) if cur_goods_id % 10 ==0\n                                               ^\nSyntaxError: invalid syntax\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290391746_1925364938",
+      "id": "paragraph_1664253381294_764617354",
+      "dateCreated": "2022-09-27T14:53:11+0000",
+      "dateStarted": "2022-09-28T04:07:29+0000",
+      "dateFinished": "2022-09-28T04:07:29+0000",
+      "status": "ERROR",
+      "$$hashKey": "object:56278"
+    },
+    {
+      "text": "%pyspark\n# 2. 사용 예시\nstart_date = datetime.date(2021,9,7)\nend_date = datetime.date(2022,9,30)\ninput_df = pd.read_csv('/DB_data/goods_price_table_0926.csv')\ninput_df1 = input_df[ (input_df['goods_id']>=0) & (input_df['goods_id']<300) & (input_df['business']=='s') ]\ninput_df2 = input_df[ (input_df['goods_id']>=300) & (input_df['business']=='s')  ]",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T14:53:11+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290391746_2056591173",
+      "id": "paragraph_1664257730726_1319077382",
+      "dateCreated": "2022-09-27T14:53:11+0000",
+      "status": "READY",
+      "$$hashKey": "object:56279"
+    },
+    {
+      "text": "%md\n### (2) goods_price table 검색\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T04:06:13+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(2) goods_price table 검색</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290391746_2102073330",
+      "id": "paragraph_1664257630332_576670613",
+      "dateCreated": "2022-09-27T14:53:11+0000",
+      "dateStarted": "2022-09-28T04:06:13+0000",
+      "dateFinished": "2022-09-28T04:06:13+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:56280"
+    },
+    {
+      "text": "%pyspark\nimport pandas as pd\nfrom pyspark.sql.functions import col\nimport datetime\n\n# 1. 결과 df 생성\nresult_df = pd.DataFrame(columns=['goods_id', 'unit_price', 'price', 'research_date', 'business'])\n\n\n# 2. DB 정보 및 Load\nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\n\n## 2-1 goods_price\ngoods_price_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", url) \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", \"select goods_id, unit_price, price, research_date, business from goods_price\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", mysql_password).load()\n    \n## db Data를 pandas로 바꾸기\ngoods_price_mart_sdf = goods_price_sdf.filter(col('business')=='m')\ngoods_price_mart_pdf = goods_price_mart_sdf.toPandas()\ngoods_price_ssm_sdf = goods_price_sdf.filter(col('business')=='s')\ngoods_price_ssm_pdf = goods_price_ssm_sdf.toPandas()\ngoods_price_online_sdf = goods_price_sdf.filter(col('business')=='o')\ngoods_price_online_pdf = goods_price_online_sdf.toPandas()\n\n\n## 기존 DB에 있는 goods_id들\nDB_goods_id_mart = set(goods_price_mart_pdf['goods_id'].unique())\nDB_goods_id_ssm = set(goods_price_ssm_pdf['goods_id'].unique())\nDB_goods_id_online = set(goods_price_online_pdf['goods_id'].unique())\n\n\n\n# goods_price_online_sdf.show()\n\n## 2-2 goods id\ngoods_id_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", url) \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", \"select goods_id from goods\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", mysql_password).load()\n\ngoods_id_pdf = goods_id_sdf.toPandas()\ngoods_id_lst = list(goods_id_pdf['goods_id'])\n\n\n# 3. 날짜 설정\nstart_date = datetime.date(2021,9,7)\nend_date = datetime.datetime.now().date()\n\ntoday = datetime.datetime.now().strftime('%Y%m%d')\nyesterday = datetime.datetime.now() - datetime.timedelta(days=1)\nyesterday = yesterday.strftime('%Y-%m-%d')\nprint(today, yesterday)\n\n\n# 4. 추가할 csv Load\nnew_goods_price_mart_pdf = pd.read_csv(f'/naverapi_data/goods_price_m_{today}.csv')\nnew_goods_price_ssm_pdf = pd.read_csv(f'/naverapi_data/goods_price_s_{today}.csv')\nnew_goods_price_online_pdf = pd.read_csv(f'/naverapi_data/goods_price_o_{today}.csv')\n\nmart_goods_id_set = set(new_goods_price_mart_pdf['goods_id'])\nssm_goods_id_set = set(new_goods_price_ssm_pdf['goods_id'])\nonline_goods_id_set = set(new_goods_price_online_pdf['goods_id'])\n\n\n# 5. 추가할 csv 각각 DB 탐색 => 넣을 데이터가 DB에 없는 경우 파악\nmart_input_df = pd.DataFrame(columns=['goods_id', 'unit_price', 'price', 'research_date', 'business'])\nssm_input_df = pd.DataFrame(columns=['goods_id', 'unit_price', 'price', 'research_date', 'business'])\nonline_input_df = pd.DataFrame(columns=['goods_id', 'unit_price', 'price', 'research_date', 'business'])\n\n\nmart_length = 0\nssm_length = 0\nonline_length = 0\nfor goods_id in goods_id_lst:\n    ## [1] mart\n    ### (1) mart 데이터를 받아 왔는데,\n    if goods_id in mart_goods_id_set:\n        ### (a) mart DB에 없는 경우 => mart_input_df 넣어줘야 함\n        if goods_id not in DB_goods_id_mart:\n            mart_input_df.loc[mart_length] = list(new_goods_price_mart_pdf[new_goods_price_mart_pdf['goods_id']==goods_id].iloc[0].values)\n            mart_length+=1\n\n    ## [2] ssm\n    ### (1) ssm 데이터를 받아 왔는데,\n    if goods_id in ssm_goods_id_set:\n        ### (a) ssm DB에 없는 경우 => ssm_input_df 넣어줘야 함\n        if goods_id not in DB_goods_id_ssm:\n            ssm_input_df.loc[ssm_length] = list(new_goods_price_ssm_pdf[new_goods_price_ssm_pdf['goods_id']==goods_id].iloc[0].values)\n            ssm_length+=1\n\n    ## [3] online\n    ### (1) online 데이터를 받아 왔는데,\n    if goods_id in online_goods_id_set:\n        ### (a) online DB에 없는 경우 => online_input_df 넣어줘야 함\n        if goods_id not in DB_goods_id_online:\n            online_input_df.loc[online_length] = list(new_goods_price_online_pdf[new_goods_price_online_pdf['goods_id']==goods_id].iloc[0].values)\n            online_length+=1\n\n\n\n    \n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T08:29:11+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "20220927 2022-09-26\ndebug1\ndebug3\n330\n331\n333\n334\n457\n335\n336\n453\n337\n338\n339\n340\n451\n452\n443\n341\n423\n424\n425\n343\n344\n427\n447\n444\n445\n346\n446\n347\n448\n348\n426\n428\n429\n430\n431\n349\n350\n432\n433\n434\n351\n435\n436\n437\n353\n354\n465\n466\n355\n463\n464\n356\n357\n358\n359\n360\n361\n362\n363\n364\n365\n366\n367\n368\n370\n371\n373\n467\n375\n376\n377\n378\n380\n381\n382\n383\n384\n462\n385\n438\n386\n387\n388\n389\n390\n391\n392\n393\n394\n395\n396\n397\n439\n398\n403\n405\n406\n407\n408\n409\n410\n411\n412\n458\n415\n416\n417\n419\n440\n441\n442\n461\n420\n421\n449\n450\n454\n455\n456\n468\n469\n460\nhere\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290391746_4591162",
+      "id": "paragraph_1664257750778_1075879161",
+      "dateCreated": "2022-09-27T14:53:11+0000",
+      "status": "READY",
+      "$$hashKey": "object:56281"
+    },
+    {
+      "text": "%pyspark\n# 6. DB에 넣을 DF 생성        \nmart_result_df = inserting_date(start_date, end_date, mart_input_df,'m')\n# ssm_result_df = inserting_date(start_date, end_date, ssm_input_df,'s')\n# online_result_df = inserting_date(start_date, end_date, online_input_df,'o')",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T14:53:11+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290391746_668926619",
+      "id": "paragraph_1664286813984_1458155597",
+      "dateCreated": "2022-09-27T14:53:11+0000",
+      "status": "READY",
+      "$$hashKey": "object:56282"
+    },
+    {
+      "text": "%pyspark\n\n# 6. DB에 넣을 DF 생성        \n# mart_result_df = inserting_date(start_date, end_date, mart_input_df,'m')\nssm_result_df = inserting_date(start_date, end_date, ssm_input_df,'s')\n# online_result_df = inserting_date(start_date, end_date, online_input_df,'o')",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T14:53:11+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "debug1\ndebug3\n1\n2\n453\n451\n452\n24\n443\n423\n424\n38\n427\n42\n447\n444\n55\n445\n446\n448\n84\n85\n426\n428\n429\n430\n433\n434\n103\n104\n435\n436\n437\n465\n466\n137\n140\n463\n164\n166\n168\n172\n186\n190\n196\n467\n205\n213\n214\n216\n227\n228\n438\n254\n267\n272\n274\n298\n458\n441\n461\n324\n325\n449\n450\n454\n455\n456\n468\nhere\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290391746_2078295375",
+      "id": "paragraph_1664286778057_198719004",
+      "dateCreated": "2022-09-27T14:53:11+0000",
+      "status": "READY",
+      "$$hashKey": "object:56283"
+    },
+    {
+      "text": "%pyspark\n# 6. DB에 넣을 DF 생성        \n# mart_result_df = inserting_date(start_date, end_date, mart_input_df,'m')\n# ssm_result_df = inserting_date(start_date, end_date, ssm_input_df,'s')\nonline_result_df1 = inserting_date(start_date, end_date, online_input_df[ (online_input_df['goods_id'] >=0  ) &  (online_input_df['goods_id']<50)  ],'o')\nonline_result_df2 = inserting_date(start_date, end_date, online_input_df[ (online_input_df['goods_id'] >=50 ) &  (online_input_df['goods_id']<100)  ],'o')\nonline_result_df3 = inserting_date(start_date, end_date, online_input_df[ (online_input_df['goods_id'] >=100) &  (online_input_df['goods_id']<150)  ],'o')\nonline_result_df4 = inserting_date(start_date, end_date, online_input_df[ (online_input_df['goods_id'] >=150) &  (online_input_df['goods_id']<200)  ],'o')\nonline_result_df5 = inserting_date(start_date, end_date, online_input_df[ (online_input_df['goods_id'] >=200) &  (online_input_df['goods_id']<250)  ],'o')\nonline_result_df6 = inserting_date(start_date, end_date, online_input_df[ (online_input_df['goods_id'] >=250) &  (online_input_df['goods_id']<300)  ],'o')\nonline_result_df7 = inserting_date(start_date, end_date, online_input_df[ (online_input_df['goods_id'] >=300) &  (online_input_df['goods_id']<350)  ],'o')\nonline_result_df8 = inserting_date(start_date, end_date, online_input_df[ (online_input_df['goods_id'] >=350) &  (online_input_df['goods_id']<400)  ],'o')\nonline_result_df9 = inserting_date(start_date, end_date, online_input_df[ (online_input_df['goods_id'] >=400) &  (online_input_df['goods_id']<500)  ],'o')\nonline_result_df10 = inserting_date(start_date, end_date, online_input_df[ (online_input_df['goods_id'] >=20000)                                     ],'o')\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T14:53:11+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "debug1\ndebug3\nhere\ndebug1\ndebug3\nhere\ndebug1\ndebug3\nhere\ndebug1\ndebug3\nhere\ndebug1\ndebug3\nhere\ndebug1\ndebug3\nhere\ndebug1\ndebug3\nhere\ndebug1\ndebug3\nhere\ndebug1\ndebug3\nhere\ndebug1\ndebug3\nhere\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290391746_1126151631",
+      "id": "paragraph_1664286786223_2079237603",
+      "dateCreated": "2022-09-27T14:53:11+0000",
+      "status": "READY",
+      "$$hashKey": "object:56284"
+    },
+    {
+      "text": "%md\n#### 주의! 아래는 DB에 넣는 부분",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T04:08:42+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h4>주의! 아래는 DB에 넣는 부분</h4>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664294658640_670498182",
+      "id": "paragraph_1664294658640_670498182",
+      "dateCreated": "2022-09-27T16:04:18+0000",
+      "dateStarted": "2022-09-28T04:08:42+0000",
+      "dateFinished": "2022-09-28T04:08:42+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:56285"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col, isnan\nprop = {\"user\": \"ji\", \"password\": mysql_password, \"driver\": \"com.mysql.cj.jdbc.Driver\"} \nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\n\n\n# 7. DB에 넣기 ( DB에는 없고, NAVER API에는 있는 것들 모두 넣기)\nresults = [\nmart_result_df,\nssm_result_df\n]\nfor pdf in results:\n    # print(pdf)\n    sdf = spark.createDataFrame(pdf)\n    sdf = sdf.filter(~isnan(col('price')))\n    sdf.write.jdbc(\\\n    url= url,\\\n    table = \"goods_price\",\\\n    mode=\"append\",\\\n    properties=prop)\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T08:29:17+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1023",
+              "$$hashKey": "object:57243"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1024",
+              "$$hashKey": "object:57244"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664327624663_368169939",
+      "id": "paragraph_1664327624663_368169939",
+      "dateCreated": "2022-09-28T01:13:44+0000",
+      "dateStarted": "2022-09-28T01:14:26+0000",
+      "dateFinished": "2022-09-28T01:14:42+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:56286"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col, isnan\nprop = {\"user\": \"ji\", \"password\": mysql_password, \"driver\": \"com.mysql.cj.jdbc.Driver\"} \nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\n\n\n# 7. DB에 넣기 ( 우선 null인 것들은 모두 제외하고 넣어주기)\nresults = [\n#mart_result_df,\n#ssm_result_df,\nonline_result_df1,\nonline_result_df2,\nonline_result_df3,\nonline_result_df4,\nonline_result_df5,\nonline_result_df6,\nonline_result_df7,\nonline_result_df8,\nonline_result_df9,\nonline_result_df10\n]\nfor pdf in results:\n    # print(pdf)\n    sdf = spark.createDataFrame(pdf)\n    sdf = sdf.filter(~isnan(col('price')))\n    # sdf.write.jdbc(\\\n    # url= url,\\\n    # table = \"goods_price\",\\\n    # mode=\"append\",\\\n    # properties=prop)\n\n    ",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T08:29:27+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1013",
+              "$$hashKey": "object:57296"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1014",
+              "$$hashKey": "object:57297"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1015",
+              "$$hashKey": "object:57298"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1016",
+              "$$hashKey": "object:57299"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1017",
+              "$$hashKey": "object:57300"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1018",
+              "$$hashKey": "object:57301"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1019",
+              "$$hashKey": "object:57302"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1020",
+              "$$hashKey": "object:57303"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1021",
+              "$$hashKey": "object:57304"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1022",
+              "$$hashKey": "object:57305"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290823881_1375192243",
+      "id": "paragraph_1664290823881_1375192243",
+      "dateCreated": "2022-09-27T15:00:23+0000",
+      "dateStarted": "2022-09-27T16:03:29+0000",
+      "dateFinished": "2022-09-27T16:04:09+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:56287"
+    }
+  ],
+  "name": "[daily]02_naver_api_file_DB(x)_API(o)_toDB",
+  "id": "2HF7VXVJ4",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Data적재/[daily]02_naver_api_file_DB(x)_API(o)_toDB"
+}

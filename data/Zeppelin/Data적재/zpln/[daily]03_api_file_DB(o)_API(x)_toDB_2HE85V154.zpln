@@ -1,0 +1,434 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\nnotebook id : 2HE85V154 \n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T02:38:41+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>notebook id : 2HE85V154</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664727571270_452725111",
+      "id": "paragraph_1664727571270_452725111",
+      "dateCreated": "2022-10-02T16:19:31+0000",
+      "dateStarted": "2022-10-04T02:38:41+0000",
+      "dateFinished": "2022-10-04T02:38:41+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:54601"
+    },
+    {
+      "text": "%md # 1. DB(o) & API(x) 인, 데이터 넣기\n+ Null price는 어제 데이터로 처리\n+ Null 처리 후에 해당 notebook 실행",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T02:38:49+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>1. DB(o) &amp; API(x) 인, 데이터 넣기</h1>\n<ul>\n<li>Null price는 어제 데이터로 처리</li>\n<li>Null 처리 후에 해당 notebook 실행</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664331440692_1687129798",
+      "id": "paragraph_1664253390158_1474014374",
+      "dateCreated": "2022-09-28T02:17:20+0000",
+      "dateStarted": "2022-10-04T02:38:49+0000",
+      "dateFinished": "2022-10-04T02:38:49+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:54602"
+    },
+    {
+      "text": "%spark.conf\n\nSPARK_HOME  /usr/local/spark\nPYSPARK_PYTHON /usr/bin/python3\nspark.pyspark.python  /usr/bin/python3\n\n# set driver memory to 8g\nspark.driver.memory 8g\n\n# set executor number to be 3\nspark.executor.instances  3\n\n# set executor memory 4g\nspark.executor.memory  2g\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T02:17:20+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664331440692_1888504369",
+      "id": "paragraph_1664253372491_282134331",
+      "dateCreated": "2022-09-28T02:17:20+0000",
+      "status": "READY",
+      "$$hashKey": "object:54603"
+    },
+    {
+      "text": "%md\n### (1) 무결성 정도 데이터 가져오기",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-02T16:02:45+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(1) 무결성 정도 데이터 가져오기</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664331440692_1864910812",
+      "id": "paragraph_1664255742584_160044425",
+      "dateCreated": "2022-09-28T02:17:20+0000",
+      "dateStarted": "2022-10-02T16:02:45+0000",
+      "dateFinished": "2022-10-02T16:02:45+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:54604"
+    },
+    {
+      "text": "%pyspark\nimport pandas as pd\nimport datetime\n\n# today = datetime.datetime.now().strftime(\"%Y%m%d\")\ntoday = '2022-10-03' # 임시\nDBo_APIx_pdf = pd.read_csv(f'/api_data/integrity/{today}_DBo_APIx.csv')\nDBo_APIx_pdf\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T02:41:13+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "  research_date business                                       goods_id_lst\n0    2022-10-03        m  [20000, 20001, 20002, 20003, 20004, 20005, 200...\n1    2022-10-03        o                                                 []\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664338245202_1301298344",
+      "id": "paragraph_1664338245202_1301298344",
+      "dateCreated": "2022-09-28T04:10:45+0000",
+      "dateStarted": "2022-10-04T02:41:13+0000",
+      "dateFinished": "2022-10-04T02:41:13+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:54605"
+    },
+    {
+      "text": "%md\n### (2) goods_id_lst에 있는 것들만, DB의 goods_price table에 today price를 DB의 어제 값을 넣기",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-02T16:02:49+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(2) goods_id_lst에 있는 것들만, DB의 goods_price table에 today price를 DB의 어제 값을 넣기</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664338447479_744227512",
+      "id": "paragraph_1664338447479_744227512",
+      "dateCreated": "2022-09-28T04:14:07+0000",
+      "dateStarted": "2022-10-02T16:02:49+0000",
+      "dateFinished": "2022-10-02T16:02:49+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:54606"
+    },
+    {
+      "text": "%pyspark\ntoday = ( datetime.datetime.now()  + datetime.timedelta(hours=9) ).strftime(\"%Y-%m-%d\")\nyesterday = ( datetime.datetime.now() - datetime.timedelta(days=1) + datetime.timedelta(hours=9)).strftime(\"%Y-%m-%d\")\nprint(today, yesterday)",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T02:52:16+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "2022-10-04 2022-10-03\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664851366527_1407278346",
+      "id": "paragraph_1664851366527_1407278346",
+      "dateCreated": "2022-10-04T02:42:46+0000",
+      "dateStarted": "2022-10-04T02:52:16+0000",
+      "dateFinished": "2022-10-04T02:52:16+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:54607"
+    },
+    {
+      "text": "%pyspark\n\n# 2HE85V154\n# paragraph_1664338542808_392546995\n# http://3.36.106.26:8081/api/notebook/run/2HE85V154/\n\n\nfrom pyspark.sql.functions import col, lit\nimport pandas as pd\nimport datetime\n\n\n\n# 1. 날짜 설정 /  DB에 넣을 GOODS_ID 정보 Load\n\n\ntoday = ( datetime.datetime.now()  + datetime.timedelta(hours=9) ).strftime(\"%Y-%m-%d\")\nyesterday = ( datetime.datetime.now() - datetime.timedelta(days=1) + datetime.timedelta(hours=9)).strftime(\"%Y-%m-%d\")\n# today = '2022-10-05'  \n# yesterday = '2022-10-04'\n\nDBo_APIx_pdf = pd.read_csv(f'/api_data/integrity/{today}_DBo_APIx.csv')\nprint(f\"{today} 아침에, api로 못 받아온 상품들\")\nprint(DBo_APIx_pdf)\n\n\n\n# 2. goods_id_lst 가져오기\n## 함수정의 : string을 list로 바꾸기 : '[1,2,3]' -> [1,2,3]\ndef str_to_tuple(str_lst):\n    if str_lst !='[]': # 빈 것이 아닌 경우\n        result = str_lst.replace('[','')\n        result = result.replace(']','')\n        result = result.strip().split(',')\n        result = [s.strip() for s in result]\n        # print(result)\n        result = sorted(list(map(int,result)))\n    else:\n        result = []\n    return result\n\n# 3. DB 정보 및 Load / DB에 넣기(주의!!!!!!!!!!!)\nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\nprop = {\"user\": \"ji\", \"password\": mysql_password, \"driver\": \"com.mysql.cj.jdbc.Driver\"} \n\n\n\n\n## 3-1 goods_price\ngoods_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", url) \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", f\"select goods_id from goods\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", mysql_password).load()\n\nmart_goods_price_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", url) \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", f\"select goods_id, unit_price, price, research_date, business from goods_price where research_date='{yesterday}' and business='m' \") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", mysql_password).load()\n\n    \nonline_goods_price_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", url) \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", f\"select goods_id, unit_price, price, research_date, business from goods_price where research_date='{yesterday}' and business='o' \") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", mysql_password).load()\n\nprint(f'전체 {goods_sdf.count()}개 상품 중, 전날 마트 : {mart_goods_price_sdf.count()} 개, 전날 온라인 :  {online_goods_price_sdf.count()} 개가 들어있음')\n    \n\n\n\n## 3-2 lst 가져오기\nm_selected_DBo_APIx_pdf = DBo_APIx_pdf[(DBo_APIx_pdf['business']=='m' )& ( DBo_APIx_pdf['research_date']==today)].reset_index()\n\nif len(m_selected_DBo_APIx_pdf): # m_selected_DBo_APIx_pdf이 존재할 때만, DB에 적재\n    m_goods_lst = m_selected_DBo_APIx_pdf.loc[0,'goods_id_lst']\n    m_goods_lst = str_to_tuple(m_goods_lst)\n    print(f\"{today} 아침에 마트에서 못받아온 데이터들 개수 : {len(m_goods_lst)}, 목록 : {m_goods_lst}\")\n    \n    ### 1. 값 넣을 것들만 filter\n    mart_goods_price_sdf   = mart_goods_price_sdf.filter(col('goods_id').isin(m_goods_lst))\n    \n    ### 2. research_date 바꿔주기\n    mart_goods_price_sdf = mart_goods_price_sdf.withColumn('research_date', lit(f'{today}'))\n    mart_goods_price_sdf.show(n=1000)\n    # mart_goods_price_sdf.filter(col('goods_id')>=20000).show(n=100)\n    \n    ### 3. 저장요청보내기         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n    mart_goods_price_sdf.write.jdbc(url= url,  table = \"goods_price\", mode=\"append\",properties=prop)\n    # mart_goods_price_sdf.filter(col('goods_id')>=20000).write.jdbc(url= url,  table = \"goods_price\", mode=\"append\",properties=prop)\n    print('mart_data 가 들어감')\n\nelse:\n    print('DB에 넣을 mart data가 없습니다')\n\n\n\no_selected_DBo_APIx_pdf = DBo_APIx_pdf[(DBo_APIx_pdf['business']=='o' )& ( DBo_APIx_pdf['research_date']==today)].reset_index()\nif len(o_selected_DBo_APIx_pdf):  # o_selected_DBo_APIx_pdf 가 있는 경우에만 추가\n    o_goods_lst = o_selected_DBo_APIx_pdf.loc[0,'goods_id_lst']\n    o_goods_lst = str_to_tuple(o_goods_lst)\n    print(f\"{today} 아침에 마트에서 못받아온 데이터들 개수 : {len(o_goods_lst)}, 목록 : {o_goods_lst}\")\n    \n    ## 2-2. 값 넣을 것들만 filter\n    online_goods_price_sdf = mart_goods_price_sdf.filter(col('goods_id').isin(o_goods_lst))\n    ## 2-3. research_date 바꿔주기\n    online_goods_price_sdf = online_goods_price_sdf.withColumn('research_date', lit(f'{today}'))\n    online_goods_price_sdf.show(n=1000)\n    \n    ### 3. 저장요청보내기         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n    online_goods_price_sdf.write.jdbc( url= url, table = \"goods_price\", mode=\"append\", properties=prop)\n    print('online_data 가 들어감')\n\nelse:\n    print('DB에 넣을 online data가 없습니다')\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T08:29:59+0000",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "2022-10-06 아침에, api로 못 받아온 상품들\n  research_date business                                       goods_id_lst\n0    2022-10-06        m  [20000, 20001, 20002, 20003, 20004, 20005, 200...\n1    2022-10-06        o                                                 []\n전체 466개 상품 중, 전날 마트 : 466 개, 전날 온라인 :  466 개가 들어있음\n2022-10-06 아침에 마트에서 못받아온 데이터들 개수 : 56, 목록 : [20000, 20001, 20002, 20003, 20004, 20005, 20006, 20007, 20008, 20009, 20010, 20012, 20013, 20014, 20015, 20016, 20017, 20018, 20019, 20020, 20021, 20022, 20023, 20024, 20025, 20026, 20027, 20028, 20029, 20030, 20031, 20032, 20033, 20034, 20035, 20036, 20037, 20038, 20039, 20040, 20041, 20042, 20043, 20044, 20045, 20046, 20047, 20048, 20049, 20050, 20051, 20052, 20053, 20054, 20055, 20056]\n+--------+-----------------+------------------+-------------+--------+\n|goods_id|       unit_price|             price|research_date|business|\n+--------+-----------------+------------------+-------------+--------+\n|   20000|          19980.0|           19980.0|   2022-10-06|       m|\n|   20001|           2000.0|            2000.0|   2022-10-06|       m|\n|   20002|          4173.33|           4173.33|   2022-10-06|       m|\n|   20003|           1088.0|            1088.0|   2022-10-06|       m|\n|   20004|           8560.0|            8560.0|   2022-10-06|       m|\n|   20005|           9220.0|            9220.0|   2022-10-06|       m|\n|   20006|           6990.0|            6990.0|   2022-10-06|       m|\n|   20007|            410.0|             410.0|   2022-10-06|       m|\n|   20008|          26640.0|           26640.0|   2022-10-06|       m|\n|   20009|          33980.0|           33980.0|   2022-10-06|       m|\n|   20010|          10800.0|           10800.0|   2022-10-06|       m|\n|   20012|           8822.5|            8822.5|   2022-10-06|       m|\n|   20013|           2840.0|            2840.0|   2022-10-06|       m|\n|   20014|           6990.0|            6990.0|   2022-10-06|       m|\n|   20015|           7682.0|            7682.0|   2022-10-06|       m|\n|   20016|           6572.5|            6572.5|   2022-10-06|       m|\n|   20017|          17300.0|           17300.0|   2022-10-06|       m|\n|   20018|2361.666666666667|47233.333333333336|   2022-10-06|       m|\n|   20019|           3646.0|            3646.0|   2022-10-06|       m|\n|   20020|           6820.0|            6820.0|   2022-10-06|       m|\n|   20021|           8006.0|            8006.0|   2022-10-06|       m|\n|   20022|            440.0|             440.0|   2022-10-06|       m|\n|   20023|          32195.0|           32195.0|   2022-10-06|       m|\n|   20024|          15514.0|           15514.0|   2022-10-06|       m|\n|   20025|           3506.0|            3506.0|   2022-10-06|       m|\n|   20026|           6006.0|            6006.0|   2022-10-06|       m|\n|   20027|            945.0|             945.0|   2022-10-06|       m|\n|   20028|          11192.5|           11192.5|   2022-10-06|       m|\n|   20029|           3880.0|            3880.0|   2022-10-06|       m|\n|   20030|           8650.0|            8650.0|   2022-10-06|       m|\n|   20031|6653.333333333333| 6653.333333333333|   2022-10-06|       m|\n|   20032|           2170.0|            2170.0|   2022-10-06|       m|\n|   20033|           1372.0|            1372.0|   2022-10-06|       m|\n|   20034|           8762.5|            8762.5|   2022-10-06|       m|\n|   20035|          23900.0|           23900.0|   2022-10-06|       m|\n|   20036|          11776.0|           11776.0|   2022-10-06|       m|\n|   20037|           4980.0|            4980.0|   2022-10-06|       m|\n|   20038|           2562.0|            2562.0|   2022-10-06|       m|\n|   20039|           2812.0|            2812.0|   2022-10-06|       m|\n|   20040|           2952.0|            2952.0|   2022-10-06|       m|\n|   20041|          15300.0|           15300.0|   2022-10-06|       m|\n|   20042|          32390.0|           32390.0|   2022-10-06|       m|\n|   20043|           8456.0|            8456.0|   2022-10-06|       m|\n|   20044|           3218.0|            3218.0|   2022-10-06|       m|\n|   20045|           2316.0|            2316.0|   2022-10-06|       m|\n|   20046|           1366.0|            1366.0|   2022-10-06|       m|\n|   20047|           1352.0|            1352.0|   2022-10-06|       m|\n|   20048|           1524.0|            1524.0|   2022-10-06|       m|\n|   20049|            554.0|             554.0|   2022-10-06|       m|\n|   20050|           3160.0|            3160.0|   2022-10-06|       m|\n|   20051|            990.0|             990.0|   2022-10-06|       m|\n|   20052|            606.0|             606.0|   2022-10-06|       m|\n|   20053|           1510.0|            1510.0|   2022-10-06|       m|\n|   20054|          24100.0|           24100.0|   2022-10-06|       m|\n|   20055|            416.0|             624.0|   2022-10-06|       m|\n|   20056|           1554.0|            1554.0|   2022-10-06|       m|\n+--------+-----------------+------------------+-------------+--------+\n\nmart_data 가 들어감\n2022-10-06 아침에 마트에서 못받아온 데이터들 개수 : 0, 목록 : []\n+--------+----------+-----+-------------+--------+\n|goods_id|unit_price|price|research_date|business|\n+--------+----------+-----+-------------+--------+\n+--------+----------+-----+-------------+--------+\n\nonline_data 가 들어감\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9562",
+              "$$hashKey": "object:55206"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9563",
+              "$$hashKey": "object:55207"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9564",
+              "$$hashKey": "object:55208"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9565",
+              "$$hashKey": "object:55209"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9566",
+              "$$hashKey": "object:55210"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9567",
+              "$$hashKey": "object:55211"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9568",
+              "$$hashKey": "object:55212"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9569",
+              "$$hashKey": "object:55213"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9570",
+              "$$hashKey": "object:55214"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664338542808_392546995",
+      "id": "paragraph_1664338542808_392546995",
+      "dateCreated": "2022-09-28T04:15:42+0000",
+      "dateStarted": "2022-10-06T01:44:24+0000",
+      "dateFinished": "2022-10-06T01:44:25+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:54608"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T02:43:26+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664851406981_1377804315",
+      "id": "paragraph_1664851406981_1377804315",
+      "dateCreated": "2022-10-04T02:43:26+0000",
+      "status": "READY",
+      "$$hashKey": "object:54609"
+    }
+  ],
+  "name": "[daily]03_api_file_DB(o)_API(x)_toDB",
+  "id": "2HE85V154",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Data적재/[daily]03_api_file_DB(o)_API(x)_toDB"
+}
