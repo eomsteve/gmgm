@@ -20,16 +20,19 @@ import type {
 import type { RootState, AppDispatch } from '@modules/store';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import Tooltip from '@components/tooltiptest'
+
+
 // 리덕스
 import ChecklistHeader from '@components/EmptyHeader';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
-
 import BasicProductCheckList from './CheckListBasicItems';
 import CheckListCustomItems from './CheckListCustomItems';
 
 // CSS
 import './toggle.css';
+import { data } from '../charts/TestChart';
 
 interface CheckListSelectBoxProps {
   optionList: string[];
@@ -46,9 +49,12 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const [basicEmpty, setBasicEmpty] = useState<boolean>();
   const [isEdit, setIsEdit] = useState(false);
   const [isModified, setIsModified] = useState<boolean>(false);
+  const [imGoingToSelect, setImGoingToSelect] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const { checklistCustomItems, checklistBasicItems } = useSelector(
     (state: RootState) => {
+      console.log(state);
+      
       return {
         checklistCustomItems:
           state.persistedReducer.CheckListProductsReducer.checklistCustomItems,
@@ -69,6 +75,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   useEffect(() => {
     return () => {
       setIsModified(true);
+      
       basicRef.current = checklistBasicItems;
       customRef.current = checklistCustomItems;
       console.log('update', basicRef.current, customRef.current);
@@ -80,6 +87,8 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     })();
     const fetchData = async (checklistId?: string) => {
       const data = await dispatch(getCheckLists(checklistId)).unwrap();
+      console.log(data);
+      
       if (data.empty) {
         console.log('empty checklist', data.customEmpty);
         setCustomEmpty(() => data.customEmpty);
@@ -94,8 +103,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     };
     if (params && params.isEdit) {
       console.log(params, params.isEdit);
-
-      console.log('이전 페이지에서 오신듯함 ㅎ');
       setIsEdit(() => params.isEdit);
       // console.log(checklistBasicItems);
     } else {
@@ -104,13 +111,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     }
     return () => {
       window.removeEventListener('beforeunload', preventClose);
-      const data = fetchData(checklistId).then((data)=>{
-        console.log(data);
-        if(data.empty){
-          deleteEmptyCheckList(checklistId)
-        }
-      })
-      
+      console.log("unmount is Edit? : ", isEdit);
       
       if (isEdit) {
         console.log('unMounted');
@@ -118,9 +119,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
       } else {
         console.log(
           'unMounted22',
-          basicRef.current,
-          customRef.current,
-          isModified,
         );
         if (basicRef.current !== undefined && customRef.current !== undefined) {
           const basic = basicRef.current;
@@ -158,7 +156,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     navigate('/checklists');
   };
   const navigate = useNavigate();
-  const optionList = ['m', 'o'];
   const [optionState, setOption] = useState<string>('m');
   
   
@@ -200,7 +197,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
         <ChecklistHeader title="장보기 목록" navigateRouter="checkLists" />
       )}
 
-       <div className={`m-5 flex items-center ${isEdit ?' justify-end ':' justify-between '}`}>
+       <div className={`mx-5 my-1 flex items-center ${isEdit ?' justify-end ':' justify-between '}`}>
        {!isEdit &&  <div className="switch-button m-3 ml-[3vw] ">
         <input
           onChange={handleSelection}
@@ -211,7 +208,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
           <span className="switch-button-label-span">오프라인</span>
         </label>
       </div>}
-  
 
 
         {!!isEdit ? (
@@ -258,14 +254,22 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
           </div>
         )}
       </div>
+
       <div className="flex w-full flex-col items-center justify-center p-0">
-        <span>가격 정보를 볼 수 있어요 🥰</span>
+        <div className="flex">
+        <span>가격 정보를 볼 수 있어요 🥰</span><span className="mx-2 absolute right-[1.5rem]"><Tooltip /></span>
+        </div>
+        <div onClick={()=>{
+          setImGoingToSelect(true)
+        }}>
+
         <BasicProductCheckList
           isEdit={isEdit}
           BusinessType={optionState}
           isEmpty={basicEmpty}
           checklistId={checklistId}
-        />
+          />
+          </div>
 
         {isEdit ? <hr className="my-6 mx-[-1.25rem] mt-4 w-screen" /> : <br />}
         <span>가격 정보를 볼 수 없어요 😥</span>

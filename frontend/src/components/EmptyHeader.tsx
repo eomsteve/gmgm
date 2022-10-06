@@ -10,9 +10,13 @@ interface HeaderProps {
   detailParams? : { from:string ,isEdit: boolean, checklistId?: string };
 }
 
+
+
 const Header: FC<HeaderProps> = props => {
   const { title, navigateRouter, isDetail, detailParams } = props;
   const navigate = useNavigate();
+  
+console.log("header:", detailParams);
   return (
     <>
       <header className="center sticky top-0 z-40 grid h-16 grid-cols-8 justify-center border-b bg-white p-2">
@@ -27,7 +31,7 @@ const Header: FC<HeaderProps> = props => {
                     navigate(`/${navigateRouter}`);
                     }
                   : detailParams ? () => {
-                      (isDetail && !!detailParams.from) ? navigate(`/checklists/${detailParams?.checklistId}`, {
+                      (isDetail && detailParams.from=='checkList') ? navigate(`/checklists/${detailParams?.checklistId}`, {
                         state : { isEdit : false ,
                                   checklistId : detailParams?.checklistId}
                       }) : navigate(-1) 

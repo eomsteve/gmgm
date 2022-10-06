@@ -19,7 +19,6 @@ const EmptyCard: FC = () => {
         <div className="my-2 text-[1.5rem]">
           <FontAwesomeIcon icon={faPlus} />
         </div>
-        {/* <div className="text-sm">가격 비교 서비스를 사용할 수 없습니다 😥</div> */}
       </label>
     </>
   );

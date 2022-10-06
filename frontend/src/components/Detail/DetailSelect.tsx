@@ -103,6 +103,7 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
             })}
         </select>
       </div>
+      
       {productData && (
         <Calculator
           measure={productData.measure}

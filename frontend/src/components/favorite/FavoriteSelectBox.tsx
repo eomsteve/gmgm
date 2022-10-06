@@ -4,7 +4,7 @@ import GotoSelectionButton from './GotoSelection';
 import Recommendation from './RecommendComponent';
 import { useNavigate } from 'react-router-dom';
 import type { FavoritePageData } from '@apis/favoriteApi';
-
+import Tooltip from '@components/tooltiptest'
 import './toggle_favorite.css';
 
 interface FavoriteSelectBoxProps {
@@ -32,6 +32,7 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
           즐겨 사는 상품 정보를 한 눈에 볼 수 있어요.
         </span>
       </span>
+      <div className="flex items-center justify-between">
       <div className="switch-button m-3 ml-[3vw] ">
         <input
           onChange={handleSelection}
@@ -41,6 +42,11 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
         <label className="switch-button-label" htmlFor="">
           <span className="switch-button-label-span">오프라인</span>
         </label>
+      </div>
+      <span className="mr-1 z-5">
+      <Tooltip/>
+
+      </span>
       </div>
 
       <div className="from-blur flex w-full flex-col items-center justify-center bg-gradient-to-t p-1">
