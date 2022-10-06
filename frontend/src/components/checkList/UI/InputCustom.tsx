@@ -24,7 +24,7 @@ const CustomInput: FC<CustomInputProps> = () => {
   };
   return (
     <>
-      <div className="center container m-3 flex w-[86vw] items-center justify-center rounded border border-gray-300 border-black p-3 lg:py-0 ">
+      <div className="center container m-3 flex w-[86vw] items-center justify-center rounded border border-gray-300  p-3 lg:py-0 ">
         <input
           value={inputValue}
           onChange={getInputValue}
