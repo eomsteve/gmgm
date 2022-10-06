@@ -37,10 +37,9 @@ export interface FavoritePageData {
 export const getFavoritePageData = async () => {
   try {
     const { data } = await axios.get<FavoritePageData>(API_URL + '/');
-    // console.log(data);
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -61,7 +60,6 @@ export const getFavoriteItems = async (businessType: string) => {
 export const getFavoriteSelect = async () => {
   try {
     const { data } = await axios.get(API_URL + '/select');
-    // console.log(data);
     return data;
   } catch (error) {}
 };
@@ -69,7 +67,6 @@ export const getFavoriteSelect = async () => {
 export const getGoodsDataByProductId = async (productId: number) => {
   try {
     const { data } = await axios.get(API_URL + `/select/product/${productId}`);
-    console.log(data);
     return data;
   } catch (error) {}
 };

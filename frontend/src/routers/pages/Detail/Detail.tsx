@@ -12,7 +12,6 @@ const DetailPage: FC<DetailPageProps> = () => {
     isEdit: boolean;
     checklistId?: string;
   };
-  console.log('detail:', params);
 
   return (
     <>

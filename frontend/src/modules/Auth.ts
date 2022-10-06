@@ -33,7 +33,7 @@ export const logInApiRedux = createAsyncThunk(
         console.error(error.message);
         return 'error';
       } else {
-        console.log(error);
+        console.error(error);
         return 'unexpected error occurred';
       }
     }
@@ -50,7 +50,6 @@ export const logOutApiRedux = createAsyncThunk(
         data: { email },
       });
       localStorage.removeItem('jwtToken');
-      console.log('logout');
       return data;
     } catch (error) {}
   },
@@ -73,7 +72,6 @@ export const userAuthSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(logInApiRedux.fulfilled, (state, action) => {
-        console.log('fullfiled', action.payload);
         if (action.payload != 'error') {
           state.isLogin = true;
           state.accessToken = action.payload.accessToken;

@@ -11,7 +11,6 @@ interface GoodsScrollProps {
 
 const GoodsScroll: FC<GoodsScrollProps> = props => {
   const { goods } = useSelector((state: RootState) => {
-    console.log(state);
     return {
       goods: state.persistedReducer.favoriteProductListReducer.goods,
     };
@@ -21,12 +20,10 @@ const GoodsScroll: FC<GoodsScrollProps> = props => {
 
   const addList = (goodsItem: { goodsId: number; goodsName: string }) => {
     dispatch(addGoods(goodsItem));
-    console.log('굿즈 추가');
   };
 
   const removeList = (goodsItem: { goodsId: number }) => {
     dispatch(removeGoods(goodsItem));
-    console.log('굿즈 삭제');
   };
 
   const { goodsList } = props;

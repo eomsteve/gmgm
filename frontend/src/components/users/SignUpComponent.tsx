@@ -41,7 +41,6 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
 
     return year + "-" + month + "-" + day;
   }
-  console.log(today);
 
   const onChangeName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -135,8 +134,6 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
   const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e.currentTarget);
-    console.log(email, pwd, name, gender, date);
     const isSignUp = signUpApi({
       email,
       pwd,
@@ -145,7 +142,6 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
       birthday: date,
       role: 'u',
     }).then(data => {
-      console.log(data);
       if (data) {
         navigate('/login');
       }

@@ -12,7 +12,6 @@ export const atCheckList = async (
         url: API_URL + `/product/${productId}/business/${businessType}/`,
         method: 'GET',
       });
-      console.log(data);
       return data;
     } else {
       console.error(productId, businessType);
@@ -32,7 +31,6 @@ export const fromFavorite = async (
         `/product/${productId}/goods/${goodsId}/business/${businessType}`,
       method: 'GET',
     });
-    console.log(data);
     return data;
   } catch (error) {}
 };
@@ -47,7 +45,6 @@ export const detailSelectBoxChange = async (
         url: API_URL + `/goods/${goodsId}/business/${businessType}`,
         method: 'GET',
       });
-      console.log(data);
       return data;
     }
   } catch (error) {

@@ -47,7 +47,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { checklistCustomItems, checklistBasicItems } = useSelector(
     (state: RootState) => {
-      console.log(state);
 
       return {
         checklistCustomItems:
@@ -72,7 +71,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
 
       basicRef.current = checklistBasicItems;
       customRef.current = checklistCustomItems;
-      console.log('update', basicRef.current, customRef.current);
     };
   }, [checklistBasicItems, checklistCustomItems]);
   useEffect(() => {
@@ -81,37 +79,29 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     })();
     const fetchData = async (checklistId?: string) => {
       const data = await dispatch(getCheckLists(checklistId)).unwrap();
-      console.log(data);
 
       if (data.empty) {
-        console.log('empty checklist', data.customEmpty);
         setCustomEmpty(() => data.customEmpty);
         setBasicEmpty(() => data.basicEmpty);
         setIsEdit(() => true);
       } else {
         setCustomEmpty(() => data.customEmpty);
         setBasicEmpty(() => data.basicEmpty);
-        console.log(data);
       }
       return data;
     };
     if (params && params.isEdit) {
-      console.log(params, params.isEdit);
       setIsEdit(() => params.isEdit);
-      // console.log(checklistBasicItems);
     } else {
       setIsEdit(() => false);
       fetchData(checklistId);
     }
     return () => {
       window.removeEventListener('beforeunload', preventClose);
-      console.log('unmount is Edit? : ', isEdit);
 
       if (isEdit) {
-        console.log('unMounted');
         dispatch(setInitialStateWhenUnMounted());
       } else {
-        console.log('unMounted22');
         if (basicRef.current !== undefined && customRef.current !== undefined) {
           const basic = basicRef.current;
           const custom = customRef.current;
@@ -135,7 +125,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
         checklistCustomItems,
         checklistId,
       ).then(data => {
-        console.log(data);
         setBasicEmpty(() => data.basicEmpty);
         setCustomEmpty(() => data.customEmpty);
         dispatch(setInitialState(data));

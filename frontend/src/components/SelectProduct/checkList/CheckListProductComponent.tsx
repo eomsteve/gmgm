@@ -15,7 +15,6 @@ interface ProductListsProps {
 const ProductLists: FC<ProductListsProps> = props => {
   const { productList } = props;
   const dispatch = useDispatch();
-  console.log(productList);
   const addProduct = (product: BasicProduct) => {
     dispatch(addBasicProducts(product));
   };
@@ -56,7 +55,6 @@ const ProductLists: FC<ProductListsProps> = props => {
           })}
         </div>
       </div>
-      {/* <SelectedArea /> */}
     </>
   );
 };

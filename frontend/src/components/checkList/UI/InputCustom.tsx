@@ -11,7 +11,6 @@ const CustomInput: FC<CustomInputProps> = () => {
   };
   const handelInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && inputValue !== '') {
-      console.log(inputValue);
       dispatch(
         addCustomProducts({
           id: -1,

@@ -26,7 +26,6 @@ const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
   useEffect(() => {
     const getPageData = async () => {
       const data = await dispatch(getFavoritePageDataRedux()).unwrap();
-      // console.log("index : ",data);
       if (typeof data !== 'undefined') {
         setFavoritePageData(data);
       }

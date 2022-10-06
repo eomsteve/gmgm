@@ -20,7 +20,6 @@ const LogIn: FC = () => {
     };
     const logInRes: { accessToken: string; refreshToken: string } | string =
       await dispatch(logInApiRedux(logInform)).unwrap();
-    console.log(logInRes);
 
     if (typeof logInRes !== typeof 'string') {
       dispatch(getFavoriteItemStoreReduxLogin());

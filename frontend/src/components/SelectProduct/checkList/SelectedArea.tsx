@@ -14,7 +14,6 @@ const SelectedArea: FC<SelectedAreaProps> = props => {
   const { isEdit, checklistId } = props;
   const navigate = useNavigate();
   const { checklistBasicItems } = useSelector((state: RootState) => {
-    console.log(state, checklistId);
     return {
       checklistBasicItems:
         state.persistedReducer.CheckListProductsReducer.checklistBasicItems,

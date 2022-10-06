@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { ReactComponent as Back } from '../assets/icons/back.svg';
 import { useNavigate } from 'react-router-dom';
-import { updateCheckListStatus } from '@apis/checkList.Api';
 
 interface HeaderProps {
   title: string;
@@ -16,7 +15,6 @@ const Header: FC<HeaderProps> = props => {
   const { title, navigateRouter, isDetail, detailParams } = props;
   const navigate = useNavigate();
   
-console.log("header:", detailParams);
   return (
     <>
       <header className="center sticky top-0 z-40 grid h-16 grid-cols-8 justify-center border-b bg-white p-2">

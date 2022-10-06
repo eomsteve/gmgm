@@ -50,7 +50,6 @@ const ProductLists: FC<ProductListsProps> = props => {
   const handle = useCallback((productId: number) => {
     const loadGoodsData = async (productId: number) => {
       const goodsData = await getGoodsDataByProductId(productId);
-      console.log(goodsData);
 
       setGoodsList(goodsData);
     };

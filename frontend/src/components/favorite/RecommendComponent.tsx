@@ -12,7 +12,6 @@ const Recommend: FC<RecommendProps> = props => {
   const dispatch = useDispatch<AppDispatch>();
   const updateItems = async (goodsId: number) => {
     const data = await dispatch(updateRecommendItem(goodsId));
-    console.log(data);
   };
   return (
     <>

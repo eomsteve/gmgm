@@ -26,14 +26,12 @@ export const loadMain = async (jwtToken: string | null) => {
           Authorization: jwtToken,
         },
       });
-      // console.log(data);
       return data;
     } else {
       const { data } = await axios({
         url: API_URL,
         method: 'GET',
       });
-      console.log(data);
       return data;
     }
   } catch (error) {}

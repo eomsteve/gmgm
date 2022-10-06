@@ -13,7 +13,6 @@ interface FavoriteSelectBoxProps {
 
 const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
   const { pageData } = props;
-  console.log('selectPage :', pageData);
 
   const [optionState, setOption] = useState<string>('m');
 

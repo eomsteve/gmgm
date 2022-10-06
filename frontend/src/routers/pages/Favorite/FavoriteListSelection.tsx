@@ -12,7 +12,6 @@ const FavoriteSelectionPage: FC = () => {
       isLoading: state.persistedReducer.favoriteProductListReducer.isLoading,
     };
   });
-  console.log(' category fav isLoading : ', isLoading);
 
   return (
     <>

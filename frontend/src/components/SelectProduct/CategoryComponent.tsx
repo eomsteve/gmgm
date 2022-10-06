@@ -58,7 +58,6 @@ const CategorySlider: FC<CategorySliderProps> = () => {
 
   async function handle(product: Product[]) {
     // onClick시 productlist값을 세팅하면 누를때마다 sublist가 바뀌고 재 랜덜링 될것,
-    console.log(product);
     setProductList(product);
   }
 

@@ -24,7 +24,6 @@ const Calculator: FC<CalculatorProps> = props => {
     unit,
     productName,
   } = props;
-  console.log(goodsProps);
 
   const [usingCalculator, setUsingCalculator] = useState<boolean>(false);
   const [calPrice, setCalPrice] = useState<number>();

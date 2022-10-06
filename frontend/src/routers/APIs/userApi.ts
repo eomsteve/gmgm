@@ -19,14 +19,13 @@ export type LogInUserREQ = {
 export const signUpApi = async (signUpForm: SignUpUserREQ) => {
   try {
     const { data } = await axios.post(API_URL + '/signup', signUpForm);
-    console.log(data);
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.message);
+      console.error(error.message);
       return error.message;
     } else {
-      console.log(error);
+      console.error(error);
       return 'unexpected error occurred';
     }
   }
@@ -50,7 +49,6 @@ export const checkEmailDuplicate = async (email: string) => {
 
 export default function authHeader(token: string) {
   if (token) {
-    console.log('adding header at token,', token);
     axios.defaults.headers.common['Authorization'] = `${token}`;
   } else {
     delete axios.defaults.headers.common['Authorization'];
@@ -65,10 +63,10 @@ export const logInApi = async (logInForm: LogInUserREQ) => {
     return { status: true, data: data.accessToken };
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.message);
+      console.error(error.message);
       return error.message;
     } else {
-      console.log(error);
+      console.error(error);
       return 'unexpected error occurred';
     }
   }
@@ -83,6 +81,5 @@ export const logOutApi = async (email?: string) => {
     });
     localStorage.removeItem('jwtToken');
     // localStorage.clear()
-    console.log('logout');
   } catch (error) {}
 };

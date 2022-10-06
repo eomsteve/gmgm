@@ -52,7 +52,6 @@ export const getCheckLists = createAsyncThunk<
 >('getList', async (checklistId, thunkAPI) => {
   try {
     const { data } = await axios.get(API_URL + `/info/${checklistId}`);
-    console.log('get CheckList by id at redux: ', data);
     return data;
   } catch (error) {
     console.error(error);
@@ -70,10 +69,9 @@ export const updateCheckListStatus = createAsyncThunk(
           initialState,
         },
       });
-      console.log(data);
       return data;
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   },
 );
@@ -87,7 +85,6 @@ export const checkListProductsSlice = createSlice({
         products => products.basicProductId == action.payload.basicProductId,
       );
       if (isDuplicate) {
-        console.log('중복');
       } else {
         state.checklistBasicItems.unshift({
           id: -1,
@@ -108,17 +105,12 @@ export const checkListProductsSlice = createSlice({
       state.checklistBasicItems = data;
     },
     updateBasicProductsStatus: (state, action: PayloadAction<string>) => {
-      console.log('update');
-
       const data = state.checklistBasicItems.find(products => {
-        console.log(products.basicProductName, action.payload);
         return products.basicProductName == action.payload;
       });
-      console.log(current(data));
 
       if (typeof data !== 'undefined') {
         data.status = !data?.status;
-        console.log(current(data));
       } else {
         console.error('error');
       }
@@ -129,7 +121,6 @@ export const checkListProductsSlice = createSlice({
           products.customProductName == action.payload.customProductName,
       );
       if (isDuplicate) {
-        console.log('중복');
       } else {
         state.checklistCustomItems.push({
           id: action.payload.id,
@@ -155,12 +146,6 @@ export const checkListProductsSlice = createSlice({
       }
     },
     setInitialState: (state, action: PayloadAction<Initial>) => {
-      console.log(
-        'set initialState',
-        action.payload.checklistBasicItems,
-        action.payload.checklistCustomItems,
-      );
-
       state.checklistBasicItems = action.payload.checklistBasicItems;
       state.checklistCustomItems = action.payload.checklistCustomItems;
     },
@@ -171,7 +156,6 @@ export const checkListProductsSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(getCheckLists.fulfilled, (state, action) => {
-      console.log(current(state), action.payload);
       state.checklistBasicItems = action.payload.checklistBasicItems;
       state.checklistCustomItems = action.payload.checklistCustomItems;
     });

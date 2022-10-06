@@ -41,7 +41,6 @@ export const getFavoritePageDataRedux = createAsyncThunk(
         url: API_URL + '/',
         method: 'GET',
       });
-      // console.log(data);
       return data;
     } catch (error) {}
   },
@@ -54,7 +53,6 @@ export const getFavoriteItemStoreReduxLogin = createAsyncThunk(
         url: API_URL + '/',
         method: 'GET',
       });
-      console.log(data);
       return data.favoriteItems;
     } catch (error) {}
   },
@@ -71,7 +69,6 @@ export const updateFavoriteItems = createAsyncThunk(
           goodsIds: goodsIdList,
         },
       });
-      console.log(data);
       return data;
     } catch (error) {}
   },
@@ -88,7 +85,6 @@ export const updateRecommendItem = createAsyncThunk(
           goodsId,
         },
       });
-      console.log(data);
       return data;
     } catch (error) {}
   },
@@ -104,7 +100,6 @@ export const favoriteGoodsSlice = createSlice({
           goods.goodsId == action.payload.goodsId,
       );
       if (isDuplicate) {
-        console.log('중복');
       } else {
         state.goods.unshift({
           goodsId: action.payload.goodsId,
@@ -126,40 +121,27 @@ export const favoriteGoodsSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(getFavoritePageDataRedux.fulfilled, (state, action) => {
-      // console.log(current(state), action.payload);
       const fetchList = action.payload.favoriteItems.map((item: FetchItems) => {
         return item;
       });
-      // console.log(fetchList);
-      // state.goods = fetchList;
       state.isLoading = false;
     });
     builder.addCase(updateFavoriteItems.fulfilled, (state, action) => {
       state.isLoading = false;
-      console.log(current(state), action.payload);
     });
     builder.addCase(updateFavoriteItems.pending, (state, action) => {
-      console.log(current(state), action.payload);
       state.isLoading = true;
-      console.log('updateFavoriteItems pending : ', state.isLoading);
     });
     builder.addCase(updateRecommendItem.fulfilled, (state, action) => {
       state.goods = action.payload;
       state.isLoading = false;
-      console.log('updateRecommendItem :', current(state), action.payload);
     });
     builder.addCase(updateRecommendItem.pending, state => {
       state.isLoading = true;
-      console.log('updateRecommendItem pending :', state.isLoading);
     });
     builder.addCase(
       getFavoriteItemStoreReduxLogin.fulfilled,
       (state, action) => {
-        console.log(
-          'login and update favorite items :',
-          current(state),
-          action.payload,
-        );
         state.goods = action.payload;
       },
     );

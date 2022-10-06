@@ -29,7 +29,6 @@ const CheckListBasicItems: FC<CheckListBasicItemsProps> = props => {
       {isEdit && isEmpty && (
         <div
           onClick={() => {
-            console.log(checklistId);
 
             navigate('/checklist/selection', {
               state: { isEdit, checklistId },
@@ -71,7 +70,6 @@ const CheckListBasicItems: FC<CheckListBasicItemsProps> = props => {
       {isEdit && !isEmpty && checklistBasicItems && (
         <div
           onClick={() => {
-            console.log(checklistId);
 
             navigate('/checklist/selection', {
               state: { isEdit, checklistId },

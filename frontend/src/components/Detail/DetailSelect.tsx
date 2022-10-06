@@ -30,13 +30,11 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
   const [productData, setProductData] = useState<ProductData>();
   useEffect(() => {
     // get data
-    console.log('productId, businessType', productId, businessType, goodsId);
 
     if (goodsId === undefined) {
       const getData = async () => {
         const data = await atCheckList(productId, businessType);
         setProductData(() => data);
-        console.log(data);
       };
       getData();
     } else {
@@ -50,16 +48,13 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
   }, []);
   const [goodsInfo, setGoodsInfo] = useState<GoodsInfo>();
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     const getGoodsDetails = async (goodsId?: string, businessType?: string) => {
       const data = await detailSelectBoxChange(goodsId, businessType);
       setGoodsInfo(() => data);
-      console.log(goodsInfo);
       return data;
     };
     getGoodsDetails(e.target.value, businessType);
   };
-  console.log();
 
   return (
     <>
