@@ -1,0 +1,829 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark.conf\n\nSPARK_HOME  /usr/local/spark\nPYSPARK_PYTHON /usr/bin/python3\nspark.pyspark.python  /usr/bin/python3\n\n# set driver memory to 8g\nspark.driver.memory 8g\n\n# set executor number to be 3\nspark.executor.instances  3\n\n# set executor memory 4g\nspark.executor.memory  2g",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T15:11:40+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664246887620_611593526",
+      "id": "paragraph_1664246887620_611593526",
+      "dateCreated": "2022-09-27T02:48:07+0000",
+      "dateStarted": "2022-09-27T15:11:40+0000",
+      "dateFinished": "2022-09-27T15:11:40+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:42476"
+    },
+    {
+      "text": "%MySQL\nTRUNCATE favorite_recommend",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T00:04:49+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "The last packet successfully received from the server was 34,187,974 milliseconds ago. The last packet sent successfully to the server was 34,187,977 milliseconds ago. is longer than the server configured value of 'wait_timeout'. You should consider either expiring and/or testing connection validity before use in your application, increasing the server configured values for client timeouts, or using the Connector/J connection property 'autoReconnect=true' to avoid this problem."
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664290153789_2140948920",
+      "id": "paragraph_1664290153789_2140948920",
+      "dateCreated": "2022-09-27T14:49:13+0000",
+      "dateStarted": "2022-10-06T00:04:49+0000",
+      "dateFinished": "2022-10-06T00:04:49+0000",
+      "status": "ERROR",
+      "$$hashKey": "object:42477"
+    },
+    {
+      "text": "%MySQL\nselect * from favorite_goods",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-02T15:16:59+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "favorite_goods_id": "string",
+                      "user_id": "string",
+                      "goods_id": "string",
+                      "reg_date": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "favorite_goods_id\tuser_id\tgoods_id\treg_date\n17\t129242\t0\t2022-10-02\n18\t129242\t1\t2022-10-02\n19\t129242\t2\t2022-10-02\n21\t129242\t3\t2022-10-02\n428\t131591\t10\t2022-10-02\n430\t131591\t30\t2022-10-02\n431\t131591\t40\t2022-10-02\n432\t131591\t50\t2022-10-02\n445\t131619\t269\t2022-10-02\n446\t131619\t290\t2022-10-02\n447\t131619\t396\t2022-10-02\n448\t131619\t402\t2022-10-02\n453\t131593\t20\t2022-10-02\n454\t131593\t25\t2022-10-02\n455\t131593\t35\t2022-10-02\n456\t131593\t37\t2022-10-02\n457\t131593\t39\t2022-10-02\n458\t131593\t41\t2022-10-02\n459\t131593\t42\t2022-10-02\n460\t131593\t44\t2022-10-02\n461\t131593\t45\t2022-10-02\n462\t131594\t20\t2022-10-02\n463\t131594\t35\t2022-10-02\n464\t131594\t37\t2022-10-02\n465\t131594\t45\t2022-10-02\n466\t131620\t2\t2022-10-02\n467\t131620\t6\t2022-10-02\n468\t131620\t35\t2022-10-02\n469\t131620\t88\t2022-10-02\n471\t131620\t174\t2022-10-02\n473\t131620\t213\t2022-10-02\n475\t131620\t307\t2022-10-02\n476\t131620\t316\t2022-10-02\n478\t131620\t20001\t2022-10-02\n479\t131620\t20007\t2022-10-02\n480\t131620\t20053\t2022-10-02\n481\t131620\t237\t2022-10-02\n482\t131620\t272\t2022-10-02\n483\t131620\t273\t2022-10-02\n484\t131620\t20005\t2022-10-02\n485\t131620\t20006\t2022-10-02\n486\t131591\t0\t2022-10-02\n487\t131591\t1\t2022-10-02\n488\t131591\t21\t2022-10-02\n489\t131591\t83\t2022-10-02\n490\t131591\t84\t2022-10-02\n491\t131591\t220\t2022-10-02\n492\t131591\t225\t2022-10-02\n493\t131591\t240\t2022-10-02\n494\t131591\t362\t2022-10-02\n495\t131591\t20000\t2022-10-02\n496\t131619\t132\t2022-10-02\n497\t131619\t149\t2022-10-02\n499\t131619\t191\t2022-10-02\n500\t131619\t213\t2022-10-02\n501\t131619\t314\t2022-10-02\n502\t131619\t331\t2022-10-02\n503\t131619\t411\t2022-10-02\n517\t129243\t7\t2022-10-02\n518\t129243\t8\t2022-10-02\n519\t129243\t14\t2022-10-02\n520\t129243\t39\t2022-10-02\n521\t129243\t42\t2022-10-02\n522\t129243\t45\t2022-10-02\n523\t129243\t47\t2022-10-02\n524\t129243\t54\t2022-10-02\n525\t129243\t69\t2022-10-02\n526\t129243\t80\t2022-10-02\n527\t129243\t311\t2022-10-02\n528\t129243\t373\t2022-10-02\n542\t131592\t0\t2022-10-02\n543\t131592\t4\t2022-10-02\n544\t131592\t84\t2022-10-02\n545\t131592\t94\t2022-10-02\n546\t131592\t100\t2022-10-02\n547\t131592\t101\t2022-10-02\n548\t131592\t118\t2022-10-02\n549\t131592\t221\t2022-10-02\n550\t131592\t240\t2022-10-02\n551\t131592\t375\t2022-10-02\n552\t131592\t382\t2022-10-02\n553\t131592\t404\t2022-10-02\n555\t131619\t0\t2022-10-02\n556\t131619\t5\t2022-10-02\n557\t131619\t8\t2022-10-02\n558\t131619\t18\t2022-10-02\n559\t131619\t48\t2022-10-02\n560\t131619\t68\t2022-10-02\n561\t131619\t220\t2022-10-02\n562\t131619\t228\t2022-10-02\n563\t131619\t400\t2022-10-02\n564\t131619\t416\t2022-10-02\n565\t131619\t20000\t2022-10-02\n566\t131619\t20001\t2022-10-02\n567\t131619\t20005\t2022-10-02\n568\t131619\t20010\t2022-10-02\n569\t131619\t20050\t2022-10-02\n570\t131619\t20056\t2022-10-02\n571\t131593\t5\t2022-10-02\n572\t131593\t6\t2022-10-02\n573\t131593\t8\t2022-10-02\n574\t131593\t9\t2022-10-02\n575\t131593\t31\t2022-10-02\n576\t131593\t96\t2022-10-02\n577\t131593\t98\t2022-10-02\n578\t131593\t177\t2022-10-02\n579\t131593\t180\t2022-10-02\n580\t131593\t185\t2022-10-02\n581\t131594\t85\t2022-10-02\n582\t131594\t99\t2022-10-02\n583\t131594\t250\t2022-10-02\n584\t131594\t260\t2022-10-02\n585\t131594\t265\t2022-10-02\n586\t131594\t272\t2022-10-02\n587\t131594\t274\t2022-10-02\n588\t131594\t281\t2022-10-02\n589\t131594\t290\t2022-10-02\n590\t131594\t294\t2022-10-02\n591\t131594\t296\t2022-10-02\n592\t131594\t301\t2022-10-02\n593\t131594\t373\t2022-10-02\n594\t131594\t406\t2022-10-02\n595\t131594\t407\t2022-10-02\n596\t131594\t20027\t2022-10-02\n597\t131594\t20028\t2022-10-02\n598\t131594\t20037\t2022-10-02\n599\t131594\t20048\t2022-10-02\n600\t131594\t20056\t2022-10-02\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664291687789_786747103",
+      "id": "paragraph_1664291687789_786747103",
+      "dateCreated": "2022-09-27T15:14:47+0000",
+      "dateStarted": "2022-10-02T15:16:59+0000",
+      "dateFinished": "2022-10-02T15:16:59+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:42478"
+    },
+    {
+      "text": "%pyspark\n# module import\nimport math\nimport requests\n## SQL\nfrom pyspark.sql import SparkSession\nfrom pyspark.sql import SQLContext\nfrom pyspark.sql.functions import mean, col, split, regexp_extract, when, lit, udf, datediff, current_date\n## ML\nfrom pyspark.ml import Pipeline\nfrom pyspark.ml.feature import StringIndexer, VectorAssembler, IndexToString\nfrom pyspark.ml.feature import QuantileDiscretizer\nfrom pyspark.ml.evaluation import MulticlassClassificationEvaluator\nfrom pyspark.ml.recommendation import ALS\n\n\n# select goods_id, user_id, reg_date from favorite_goods\nfav_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\") \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", \"select goods_id, user_id, reg_date from favorite_goods\")\\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", mysql_password).load()\n\n# user_id list who has favorite_goods\nusers_id = fav_sdf.select('user_id').distinct().rdd.map(lambda x : x[0]).collect()\n\n\n# sigmoid function to weight date\ndef sigmoid(x):\n  return 1 / (1 + math.exp(-x))\nsigmoid = udf(sigmoid)\n\n\n# get score by calculate weight by sigmoid function\nfav_sdf = fav_sdf.select(\n    'goods_id',\n    'user_id',\n    sigmoid(datediff(current_date(), col('reg_date'))).cast('float').alias('score')\n    )\n\n\n# ALS training\ntrain, test = fav_sdf.randomSplit([0.75, 0.25], seed=1)\n\nfav_rec = ALS(maxIter=10,\n         regParam=0.01,\n         userCol='user_id',\n         itemCol='goods_id',\n         ratingCol='score', \n         nonnegative=True,\n         coldStartStrategy='drop')\n\nfav_rec_model = fav_rec.fit(train)\nfav_pred_ratings = fav_rec_model.transform(test)\n\n\n# goods recommendation function to user_id, top n\ndef top_fav(user_id, n):\n    \"\"\"\n    특정 user_id가 좋아할 만한 n개의 상품 추천해주는 함수\n    \"\"\"\n \n    # 특정 user_id가 즐겨찾기에 담은 상품의 상품id로 새로운 데이터프레임 생성\n    fav_goods = fav_sdf.filter((fav_sdf['user_id'] == user_id)).select('goods_id')\n\n    # 특정 user_id가 즐겨찾기에 담은 상품들을 'tmp'라는 데이터프레임으로 alias시키기\n    tmp = fav_goods.alias('tmp')\n    tmp = tmp.withColumnRenamed('goods_id', 'tmp_goods_id')\n\n    # sdf 기준으로 tmp 조인시켜서 user_id가 즐겨찾기에 담지 않은 상품 파악 가능\n    fav_total_goods = fav_sdf.join(tmp, fav_sdf['goods_id'] == tmp['tmp_goods_id'],how='left')\n\n    # tmp 데이터프레임의 goods_id 결측치를 갖고 있는 행의 sdf.goods_id 뽑아냄으로써 user_id가 아직 즐겨찾기에 담지 않은 상품 추출\n    fav_remain_goods = fav_total_goods\\\n                       .where(col('tmp_goods_id').isNull())\\\n                       .select('goods_id').distinct()\n\n    # fav_remain_goods 데이터프레임에 특정 user_id값을 동일하게 새로운 변수로 추가해주기\n    fav_remain_goods = fav_remain_goods.withColumn('user_id', lit(int(user_id)))\n\n    # 위에서 만든 ALS 모델을 사용하여 추천 상품 예측 후 n개 만큼 view -> \n    recommender = fav_rec_model.transform(fav_remain_goods)\\\n                           .orderBy('prediction', ascending=False)\\\n                           .limit(n)\n                           \n    goods_table = spark.read.csv('/DB_data/goods_table.csv', header=True, inferSchema=True)\n    goods_table = goods_table.withColumnRenamed('goods_id', 'idx')\n    \n    final_recommendations = goods_table.join(recommender, goods_table['idx']==recommender['goods_id'], how='inner')\n    final_recommendations = final_recommendations.withColumnRenamed('prediction', 'score')\n    final_recommendations = final_recommendations.select(['user_id', 'goods_id', 'score']).orderBy('score', ascending=False)\n    \n    return final_recommendations\n\n\n# favorite_recommend truncate\nrequests.post(\"http://3.36.106.26:8081/api/notebook/run/2HDR64PXZ/paragraph_1664290153789_2140948920\")\n\n\n# favorite_recommend append\nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\nprop = {\"user\": \"ji\", \"password\": mysql_password, \"driver\": \"com.mysql.cj.jdbc.Driver\"} \n\nfor id in users_id:\n    rec_sdf = top_fav(id, 10)\n    # rec_sdf.show()\n    rec_sdf.write.jdbc(\\\n        url= url,\\\n        table = \"favorite_recommend\",\\\n        mode=\"append\",\\\n        properties=prop)",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T08:32:37+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9056",
+              "$$hashKey": "object:42869"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9057",
+              "$$hashKey": "object:42870"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9058",
+              "$$hashKey": "object:42871"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9059",
+              "$$hashKey": "object:42872"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9060",
+              "$$hashKey": "object:42873"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9061",
+              "$$hashKey": "object:42874"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9062",
+              "$$hashKey": "object:42875"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9063",
+              "$$hashKey": "object:42876"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9064",
+              "$$hashKey": "object:42877"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9065",
+              "$$hashKey": "object:42878"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9066",
+              "$$hashKey": "object:42879"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9067",
+              "$$hashKey": "object:42880"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9071",
+              "$$hashKey": "object:42881"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9072",
+              "$$hashKey": "object:42882"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9073",
+              "$$hashKey": "object:42883"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9074",
+              "$$hashKey": "object:42884"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9075",
+              "$$hashKey": "object:42885"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9076",
+              "$$hashKey": "object:42886"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9077",
+              "$$hashKey": "object:42887"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9078",
+              "$$hashKey": "object:42888"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9082",
+              "$$hashKey": "object:42889"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9083",
+              "$$hashKey": "object:42890"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9084",
+              "$$hashKey": "object:42891"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9085",
+              "$$hashKey": "object:42892"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9086",
+              "$$hashKey": "object:42893"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9087",
+              "$$hashKey": "object:42894"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9088",
+              "$$hashKey": "object:42895"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9089",
+              "$$hashKey": "object:42896"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9093",
+              "$$hashKey": "object:42897"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9094",
+              "$$hashKey": "object:42898"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9095",
+              "$$hashKey": "object:42899"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9096",
+              "$$hashKey": "object:42900"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9097",
+              "$$hashKey": "object:42901"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9098",
+              "$$hashKey": "object:42902"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9099",
+              "$$hashKey": "object:42903"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9100",
+              "$$hashKey": "object:42904"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9104",
+              "$$hashKey": "object:42905"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9105",
+              "$$hashKey": "object:42906"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9106",
+              "$$hashKey": "object:42907"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9107",
+              "$$hashKey": "object:42908"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9108",
+              "$$hashKey": "object:42909"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9109",
+              "$$hashKey": "object:42910"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9110",
+              "$$hashKey": "object:42911"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9111",
+              "$$hashKey": "object:42912"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9115",
+              "$$hashKey": "object:42913"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9116",
+              "$$hashKey": "object:42914"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9117",
+              "$$hashKey": "object:42915"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9118",
+              "$$hashKey": "object:42916"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9119",
+              "$$hashKey": "object:42917"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9120",
+              "$$hashKey": "object:42918"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9121",
+              "$$hashKey": "object:42919"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9122",
+              "$$hashKey": "object:42920"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9126",
+              "$$hashKey": "object:42921"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9127",
+              "$$hashKey": "object:42922"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9128",
+              "$$hashKey": "object:42923"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9129",
+              "$$hashKey": "object:42924"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9130",
+              "$$hashKey": "object:42925"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9131",
+              "$$hashKey": "object:42926"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9132",
+              "$$hashKey": "object:42927"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9133",
+              "$$hashKey": "object:42928"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9137",
+              "$$hashKey": "object:42929"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9138",
+              "$$hashKey": "object:42930"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9139",
+              "$$hashKey": "object:42931"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9140",
+              "$$hashKey": "object:42932"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9141",
+              "$$hashKey": "object:42933"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9142",
+              "$$hashKey": "object:42934"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9143",
+              "$$hashKey": "object:42935"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9144",
+              "$$hashKey": "object:42936"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9148",
+              "$$hashKey": "object:42937"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9149",
+              "$$hashKey": "object:42938"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9150",
+              "$$hashKey": "object:42939"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9151",
+              "$$hashKey": "object:42940"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9152",
+              "$$hashKey": "object:42941"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9153",
+              "$$hashKey": "object:42942"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9154",
+              "$$hashKey": "object:42943"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9155",
+              "$$hashKey": "object:42944"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9159",
+              "$$hashKey": "object:42945"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9160",
+              "$$hashKey": "object:42946"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9161",
+              "$$hashKey": "object:42947"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9162",
+              "$$hashKey": "object:42948"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9163",
+              "$$hashKey": "object:42949"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9164",
+              "$$hashKey": "object:42950"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9165",
+              "$$hashKey": "object:42951"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9166",
+              "$$hashKey": "object:42952"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9170",
+              "$$hashKey": "object:42953"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9171",
+              "$$hashKey": "object:42954"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9172",
+              "$$hashKey": "object:42955"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9173",
+              "$$hashKey": "object:42956"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9174",
+              "$$hashKey": "object:42957"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9175",
+              "$$hashKey": "object:42958"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9176",
+              "$$hashKey": "object:42959"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9177",
+              "$$hashKey": "object:42960"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9181",
+              "$$hashKey": "object:42961"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9182",
+              "$$hashKey": "object:42962"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9183",
+              "$$hashKey": "object:42963"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9184",
+              "$$hashKey": "object:42964"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9185",
+              "$$hashKey": "object:42965"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9186",
+              "$$hashKey": "object:42966"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9187",
+              "$$hashKey": "object:42967"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9188",
+              "$$hashKey": "object:42968"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9192",
+              "$$hashKey": "object:42969"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9193",
+              "$$hashKey": "object:42970"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9194",
+              "$$hashKey": "object:42971"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9195",
+              "$$hashKey": "object:42972"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9196",
+              "$$hashKey": "object:42973"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9197",
+              "$$hashKey": "object:42974"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9198",
+              "$$hashKey": "object:42975"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9199",
+              "$$hashKey": "object:42976"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9203",
+              "$$hashKey": "object:42977"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9204",
+              "$$hashKey": "object:42978"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9205",
+              "$$hashKey": "object:42979"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9206",
+              "$$hashKey": "object:42980"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9207",
+              "$$hashKey": "object:42981"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9208",
+              "$$hashKey": "object:42982"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9209",
+              "$$hashKey": "object:42983"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9210",
+              "$$hashKey": "object:42984"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9214",
+              "$$hashKey": "object:42985"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9215",
+              "$$hashKey": "object:42986"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=9216",
+              "$$hashKey": "object:42987"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664289615264_120085320",
+      "id": "paragraph_1664289615264_120085320",
+      "dateCreated": "2022-09-27T14:40:15+0000",
+      "dateStarted": "2022-10-06T00:04:47+0000",
+      "dateFinished": "2022-10-06T00:04:57+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:42479"
+    },
+    {
+      "text": "%pyspark\n# 매일 자동화 실행\nrequests.post(\"http://3.36.106.26:8081/api/notebook/run/2HDR64PXZ/paragraph_1664289615264_120085320\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T15:36:03+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664292902195_1730613959",
+      "id": "paragraph_1664292902195_1730613959",
+      "dateCreated": "2022-09-27T15:35:02+0000",
+      "status": "READY",
+      "$$hashKey": "object:42480"
+    },
+    {
+      "text": "%MySQL\nselect * from favorite_recommend",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-02T15:17:19+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "favorite_recommend_id": "string",
+                      "user_id": "string",
+                      "goods_id": "string",
+                      "score": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "favorite_recommend_id\tuser_id\tgoods_id\tscore\n1\t131619\t3\t0.4654264\n2\t131619\t2\t0.45898882\n3\t131619\t373\t0.43198282\n4\t131619\t35\t0.43061507\n5\t131619\t174\t0.42474902\n6\t131619\t237\t0.42474902\n7\t131619\t273\t0.42474902\n8\t131619\t307\t0.42474902\n9\t131619\t316\t0.42474902\n10\t131619\t20006\t0.42474902\n11\t129242\t220\t0.48224735\n12\t129242\t20001\t0.47737464\n13\t129242\t20005\t0.47737464\n14\t129242\t68\t0.47253573\n15\t129242\t191\t0.47253573\n16\t129242\t314\t0.47253573\n17\t129242\t331\t0.47253573\n18\t129242\t396\t0.47253573\n19\t129242\t400\t0.47253573\n20\t129242\t402\t0.47253573\n21\t129243\t20\t0.391162\n22\t129243\t85\t0.37963068\n23\t129243\t250\t0.37963068\n24\t129243\t260\t0.37963068\n25\t129243\t265\t0.37963068\n26\t129243\t281\t0.37963068\n27\t129243\t294\t0.37963068\n28\t129243\t296\t0.37963068\n29\t129243\t406\t0.37963068\n30\t129243\t407\t0.37963068\n31\t131593\t373\t0.52870697\n32\t131593\t0\t0.4705772\n33\t131593\t85\t0.47034562\n34\t131593\t250\t0.47034562\n35\t131593\t265\t0.47034562\n36\t131593\t294\t0.47034562\n37\t131593\t296\t0.47034562\n38\t131593\t406\t0.47034562\n39\t131593\t407\t0.47034562\n40\t131593\t20037\t0.47034562\n41\t131591\t373\t0.49626213\n42\t131591\t20\t0.4819917\n43\t131591\t85\t0.474271\n44\t131591\t265\t0.474271\n45\t131591\t281\t0.474271\n46\t131591\t296\t0.474271\n47\t131591\t406\t0.474271\n48\t131591\t407\t0.474271\n49\t131591\t20027\t0.474271\n50\t131591\t20028\t0.474271\n51\t131620\t0\t0.5016853\n52\t131620\t5\t0.49831754\n53\t131620\t3\t0.49785426\n54\t131620\t220\t0.48837885\n55\t131620\t18\t0.48304617\n56\t131620\t68\t0.48304617\n57\t131620\t132\t0.48304617\n58\t131620\t191\t0.48304617\n59\t131620\t269\t0.48304617\n60\t131620\t290\t0.48304617\n61\t131592\t85\t0.5450232\n62\t131592\t250\t0.5450232\n63\t131592\t260\t0.5450232\n64\t131592\t265\t0.5450232\n65\t131592\t281\t0.5450232\n66\t131592\t296\t0.5450232\n67\t131592\t406\t0.5450232\n68\t131592\t407\t0.5450232\n69\t131592\t20027\t0.5450232\n70\t131592\t20028\t0.5450232\n71\t131594\t240\t0.38223106\n72\t131594\t4\t0.37459648\n73\t131594\t84\t0.37459648\n74\t131594\t94\t0.37459648\n75\t131594\t100\t0.37459648\n76\t131594\t101\t0.37459648\n77\t131594\t118\t0.37459648\n78\t131594\t221\t0.37459648\n79\t131594\t375\t0.37459648\n80\t131594\t382\t0.37459648\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664291471580_1015843456",
+      "id": "paragraph_1664291471580_1015843456",
+      "dateCreated": "2022-09-27T15:11:11+0000",
+      "dateStarted": "2022-10-02T15:17:19+0000",
+      "dateFinished": "2022-10-02T15:17:19+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:42481"
+    },
+    {
+      "text": "%MySQL\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T15:13:31+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664291611599_536656077",
+      "id": "paragraph_1664291611599_536656077",
+      "dateCreated": "2022-09-27T15:13:31+0000",
+      "status": "READY",
+      "$$hashKey": "object:42482"
+    }
+  ],
+  "name": "[daily]07_favorite_recommend",
+  "id": "2HDR64PXZ",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Data적재/[daily]07_favorite_recommend"
+}
