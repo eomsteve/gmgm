@@ -76,15 +76,22 @@ public class FavoriteApi {
         log.info("favoriteRecommends size: {}", favoriteRecommends.size());
 
         // 즐겨찾기 상품 총합
-        List<FavoriteTotalPrice> favoriteTotalPrices = favoriteTotalPriceService.getFavoriteTotalPrices(user, BusinessType.m, today);
-        FavoriteTotalPriceResponseDto favoriteTotalPriceResponseDto = new FavoriteTotalPriceResponseDto(favoriteTotalPrices);
-        if (favoriteTotalPrices.isEmpty())
+        List<FavoriteTotalPrice> favoriteOffTotalPrices = favoriteTotalPriceService.getFavoriteTotalPrices(user, BusinessType.m, today);
+        FavoriteTotalPriceResponseDto favoriteOffTotalPriceResponseDto = new FavoriteTotalPriceResponseDto(favoriteOffTotalPrices);
+        if (favoriteOffTotalPrices.isEmpty())
             log.info("favoriteTotalPrices is empty");
         else
-            log.info("recent favoriteTotalPrice: {}", favoriteTotalPrices.get(favoriteTotalPrices.size() - 1).getTotalPrice());
+            log.info("recent favoriteTotalPrice: {}", favoriteOffTotalPrices.get(favoriteOffTotalPrices.size() - 1).getTotalPrice());
+
+        List<FavoriteTotalPrice> favoriteOnTotalPrices = favoriteTotalPriceService.getFavoriteTotalPrices(user, BusinessType.o, today);
+        FavoriteTotalPriceResponseDto favoriteOnTotalPriceResponseDto = new FavoriteTotalPriceResponseDto(favoriteOnTotalPrices);
+        if (favoriteOffTotalPrices.isEmpty())
+            log.info("favoriteTotalPrices is empty");
+        else
+            log.info("recent favoriteTotalPrice: {}", favoriteOnTotalPrices.get(favoriteOnTotalPrices.size() - 1).getTotalPrice());
 
         log.info("[Finished request] GET /favorite");
-        return new FavoritePageResponseDto(countryIndexDto, favoriteIndexDto, favoriteItems, favoriteRecommends, favoriteTotalPriceResponseDto);
+        return new FavoritePageResponseDto(countryIndexDto, favoriteIndexDto, favoriteItems, favoriteRecommends, favoriteOffTotalPriceResponseDto, favoriteOnTotalPriceResponseDto);
     }
 
     /**
