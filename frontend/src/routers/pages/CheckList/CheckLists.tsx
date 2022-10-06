@@ -1,7 +1,6 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setInitialStateWhenUnMounted } from '@modules/CheckListProductList'
+import { setInitialStateWhenUnMounted } from '@modules/CheckListProductList';
 import AddCheckList from '@components/checkList/AddCheckList';
 import CheckListItem from '@components/checkList/CheckListItem';
 import { getCheckLists } from '@apis/checkList.Api';
@@ -18,14 +17,12 @@ const CheckLists: FunctionComponent<CheckListsProps> = () => {
       dispatch(setInitialStateWhenUnMounted());
       setCheckListItems(data);
     };
-    setTimeout(()=> getCheckListsData(), 100)
-    return (()=>{
-      
-    })
+    setTimeout(() => getCheckListsData(), 100);
+    return () => {};
   }, []);
   return (
     <>
-      <ChecklistHeader title="장보기 내역" navigateRouter='' />
+      <ChecklistHeader title="장보기 내역" navigateRouter="" />
       <main
         className="grid w-full
     grid-cols-3 content-start bg-[white] p-5"

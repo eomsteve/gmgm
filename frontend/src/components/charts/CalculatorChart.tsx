@@ -65,7 +65,6 @@ const SumPriceChart: FunctionComponent<SumPriceChartProps> = props => {
   const { calculatorData, goodsData,  productPrices, researchDates, unit, productName } = props;
   let calculatorDataset = {};
   let goodsDataset = {};
-  // console.log( goodsData.goodsName );
   const goodsName = goodsData? goodsData.goodsName : "상품을 선택해주세요"
   const labels = researchDates.map((data) => {
     return data.researchDate

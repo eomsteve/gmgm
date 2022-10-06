@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Calculator from './Calculator';
 import { atCheckList, detailSelectBoxChange, fromFavorite } from '@apis/detail';
 import OnlineCard from './OnlineCard';
@@ -30,13 +30,11 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
   const [productData, setProductData] = useState<ProductData>();
   useEffect(() => {
     // get data
-    console.log('productId, businessType', productId, businessType, goodsId);
 
     if (goodsId === undefined) {
       const getData = async () => {
         const data = await atCheckList(productId, businessType);
         setProductData(() => data);
-        console.log(data);
       };
       getData();
     } else {
@@ -50,16 +48,17 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
   }, []);
   const [goodsInfo, setGoodsInfo] = useState<GoodsInfo>();
   const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     const getGoodsDetails = async (goodsId?: string, businessType?: string) => {
       const data = await detailSelectBoxChange(goodsId, businessType);
       setGoodsInfo(() => data);
-      console.log(goodsInfo);
       return data;
     };
+    // console.log(e.target.value, businessType);
     getGoodsDetails(e.target.value, businessType);
+    // if(!Number.isNaN(Number(e.target.value))){
+    //   getGoodsDetails(e.target.value, businessType);
+    // }
   };
-  console.log();
 
   return (
     <>
@@ -76,12 +75,12 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
           aria-label=".form-select-sm example"
         >
           {productData && !goodsId && (
-            <option value={productData.basicProductName}>
+            <option value={productId}>
               {productData.basicProductName}류
             </option>
           )}
           {productData && goodsData && (
-            <option value={goodsData.goodsName}>{goodsData.goodsName}</option>
+            <option value={goodsId}>{goodsData.goodsName}</option>
           )}
           {productData &&
             goodsData &&
@@ -97,13 +96,15 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
           {productData &&
             !goodsData &&
             productData.goodsInfos.map(goods => {
-              return (<option value={goods.goodsId} key={goods.goodsId}>
-                {goods.goodsName}
-              </option>)
+              return (
+                <option value={goods.goodsId} key={goods.goodsId}>
+                  {goods.goodsName}
+                </option>
+              );
             })}
         </select>
       </div>
-      
+
       {productData && (
         <Calculator
           measure={productData.measure}

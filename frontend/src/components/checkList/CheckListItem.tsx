@@ -1,7 +1,5 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBasketShopping } from '@fortawesome/free-solid-svg-icons';
 import CheckListPreview from '@components/checkList/UI/CheckListPreview';
 import { ReactComponent as Basket } from '../../assets/icons/basket.svg';
 interface CheckListItemProps {
@@ -17,10 +15,6 @@ const CheckListItem: FC<CheckListItemProps> = props => {
   const { checklistId, regDate, itemInfos } = props;
   const date = new Date(regDate);
   const navigate = useNavigate();
-
-  // const handleOnClick = (e : React.MouseEvent<HTMLElement>) => {
-
-  // }
   return (
     <>
       <div

@@ -32,7 +32,6 @@ const CategorySlider: FC<CategorySliderProps> = () => {
   const [data, setData] = useState<CategoryLoad[]>([]);
   const location = useLocation();
   const params = location.state as { isEdit: boolean; checklistId: string };
-  console.log(params.checklistId);
 
   useEffect(() => {
     const categoryLoad = async () => {
@@ -42,7 +41,6 @@ const CategorySlider: FC<CategorySliderProps> = () => {
     categoryLoad();
   }, []);
 
-  console.log(data);
   let [ProductList, setProductList] = useState<BasicProduct[]>([]);
   const settings = {
     className: 'center',
@@ -66,7 +64,6 @@ const CategorySlider: FC<CategorySliderProps> = () => {
 
   async function handle(product: BasicProduct[]) {
     // onClick시 productlist값을 세팅하면 누를때마다 sublist가 바뀌고 재 랜덜링 될것,
-    console.log(product);
     setProductList(product);
   }
 

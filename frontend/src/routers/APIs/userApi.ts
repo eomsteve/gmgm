@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import AuthHeader from './authHeader';
 const API_URL = 'https://j7d108.p.ssafy.io/api/user';
 
-
 export type SignUpUserREQ = {
   email: string;
   pwd: string;
@@ -18,32 +17,26 @@ export type LogInUserREQ = {
   pwd: string;
 };
 export const signUpApi = async (signUpForm: SignUpUserREQ) => {
-  
   try {
     const { data } = await axios.post(API_URL + '/signup', signUpForm);
-    console.log(data);
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.message);
+      console.error(error.message);
       return error.message;
     } else {
-      console.log(error);
+      console.error(error);
       return 'unexpected error occurred';
     }
   }
-
 };
 
 export const checkEmailDuplicate = async (email: string) => {
   try {
-    const { data } = await axios.get(API_URL + `/check/${email}`)
+    const { data } = await axios.get(API_URL + `/check/${email}`);
     return data;
-  } catch (error) {
-    
-  }
-
-}
+  } catch (error) {}
+};
 
 // {
 //   "email": "sheom@email.com",
@@ -56,7 +49,6 @@ export const checkEmailDuplicate = async (email: string) => {
 
 export default function authHeader(token: string) {
   if (token) {
-    console.log('adding header at token,', token);
     axios.defaults.headers.common['Authorization'] = `${token}`;
   } else {
     delete axios.defaults.headers.common['Authorization'];
@@ -66,33 +58,28 @@ export default function authHeader(token: string) {
 export const logInApi = async (logInForm: LogInUserREQ) => {
   try {
     const { data } = await axios.post(API_URL + '/login', logInForm);
-    localStorage.setItem("jwtToken", data.accessToken);
-    authHeader( data.accessToken )
-    return {status : true, data : data.accessToken};
+    localStorage.setItem('jwtToken', data.accessToken);
+    authHeader(data.accessToken);
+    return { status: true, data: data.accessToken };
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.message);
+      console.error(error.message);
       return error.message;
     } else {
-      console.log(error);
+      console.error(error);
       return 'unexpected error occurred';
     }
   }
 };
 
-export const logOutApi = async (email?: string) =>{
+export const logOutApi = async (email?: string) => {
   try {
     const { data } = await axios({
       url: API_URL + `/logout`,
       method: 'POST',
-      data :{email,
-      }
+      data: { email },
     });
-    localStorage.removeItem('jwtToken')
+    localStorage.removeItem('jwtToken');
     // localStorage.clear()
-    console.log('logout');
-  } catch (error) {
-    
-  }
-}
-
+  } catch (error) {}
+};

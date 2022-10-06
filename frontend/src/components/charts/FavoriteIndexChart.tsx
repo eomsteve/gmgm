@@ -105,7 +105,7 @@ const FavoriteIndexChart: FunctionComponent<
         <span className="ml-2 text-xs text-gray-500">
           즐겨찾기 목록으로 만들어진 지수를 CPI와 함께 볼 수 있어요.
         </span>
-        <div className="text-sm text-gray-400"> 기준년도 : 2020 년 = 100</div>
+        <div className="text-sm text-end text-gray-400"> 기준년도 : 2020 년 = 100</div>
       </span>
       <div className="flex h-[35vh] w-auto items-center justify-center">
         <Line options={options} data={data} />

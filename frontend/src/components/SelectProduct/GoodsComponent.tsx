@@ -1,13 +1,4 @@
-import {
-  Component,
-  FC,
-  CSSProperties,
-  useState,
-  JSXElementConstructor,
-  ReactElement,
-  ReactFragment,
-  ReactPortal,
-} from 'react';
+import { FC } from 'react';
 import GoodsCard from './UI/GoodsCard';
 
 import type { GoodsItem } from './ProductComponent';
@@ -20,7 +11,6 @@ interface GoodsScrollProps {
 
 const GoodsScroll: FC<GoodsScrollProps> = props => {
   const { goods } = useSelector((state: RootState) => {
-    console.log(state);
     return {
       goods: state.persistedReducer.favoriteProductListReducer.goods,
     };
@@ -30,16 +20,13 @@ const GoodsScroll: FC<GoodsScrollProps> = props => {
 
   const addList = (goodsItem: { goodsId: number; goodsName: string }) => {
     dispatch(addGoods(goodsItem));
-    console.log('굿즈 추가');
   };
 
   const removeList = (goodsItem: { goodsId: number }) => {
     dispatch(removeGoods(goodsItem));
-    console.log('굿즈 삭제');
   };
 
   const { goodsList } = props;
-  // console.log(goodsList);
 
   return (
     <div className="mx-5 h-full">
@@ -49,7 +36,7 @@ const GoodsScroll: FC<GoodsScrollProps> = props => {
           품목을 선택해서 목록에 추가하세요
         </span>
       </div>
-      <div className="flex grid h-1/2 grid-cols-2 flex-wrap content-start overflow-auto scroll-auto">
+      <div className="grid h-1/2 grid-cols-2 flex-wrap content-start overflow-auto scroll-auto">
         {goodsList.map((goods, idx) => {
           return (
             <div
@@ -67,13 +54,6 @@ const GoodsScroll: FC<GoodsScrollProps> = props => {
           );
         })}
 
-        {/* {goods && goods.map((x : { id : number, name : string }, idx : number) =>{
-          return (
-            <div key={idx} onClick={()=>{removeList(x)}}>
-              {x.name}
-            </div>
-          )
-        })} */}
       </div>
     </div>
   );

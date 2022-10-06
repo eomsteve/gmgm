@@ -4,7 +4,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 const EmptyCard: FC = () => {
-  const navigate = useNavigate();
   return (
     <>
       <div
@@ -18,7 +17,6 @@ const EmptyCard: FC = () => {
         <div className="my-2 text-[1.5rem]">
           <FontAwesomeIcon icon={faPlus} />
         </div>
-        {/* <div className="text-sm">가격 비교 서비스를 사용할 수 있습니다 🥰</div> */}
       </div>
     </>
   );

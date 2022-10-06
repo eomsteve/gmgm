@@ -7,43 +7,40 @@ import type { RootState, AppDispatch } from '@modules/store';
 import { getFavoritePageDataRedux } from '@modules/FavoriteProductList';
 import type { FavoritePageData } from '@apis/favoriteApi';
 import FavHeader from '@components/EmptyHeader';
-import SpinnerPage from '@pages/Spinner'
+import SpinnerPage from '@pages/Spinner';
 interface FavoriteIndexPageProps {}
 
 const FavoriteIndexPage: FunctionComponent<FavoriteIndexPageProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
   const goodsRef = useRef();
-  const {checkListItemRedux, isLoading} = useSelector((state: RootState) =>{
-    // console.log(state);
-    
-    return { checkListItemRedux : state.persistedReducer.favoriteProductListReducer.goods, isLoading : state.persistedReducer.favoriteProductListReducer.isLoading}
-  })
-  // console.log("isLoading : ", isLoading);
-  
+  const { checkListItemRedux, isLoading } = useSelector((state: RootState) => {
+
+    return {
+      checkListItemRedux:
+        state.persistedReducer.favoriteProductListReducer.goods,
+      isLoading: state.persistedReducer.favoriteProductListReducer.isLoading,
+    };
+  });
+
   const [favoritePageData, setFavoritePageData] = useState<FavoritePageData>();
   useEffect(() => {
     const getPageData = async () => {
       const data = await dispatch(getFavoritePageDataRedux()).unwrap();
-      // console.log("index : ",data);
       if (typeof data !== 'undefined') {
         setFavoritePageData(data);
       }
     };
     getPageData();
-    return (()=>{
-      goodsRef.current = checkListItemRedux
-      // console.log("fav unmount : ",goodsRef.current);
-      
-    })
+    return () => {
+      goodsRef.current = checkListItemRedux;
+    };
   }, [checkListItemRedux]);
 
-  
   return (
     <>
-    {isLoading && <SpinnerPage />}
+      {isLoading && <SpinnerPage />}
       <FavHeader title={'즐겨찾기'} navigateRouter={''} />
       <main className="flex w-full flex-col justify-center bg-[white] p-5">
-        
         {favoritePageData && (
           <FavoriteIndexCart
             countryIndices={favoritePageData?.countryIndices}
