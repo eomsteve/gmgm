@@ -21,9 +21,6 @@
   backface-visibility: hidden;
 }
 
-.card .front {
-  /* left: 0; */
-}
 
 .card .back {
   transform: rotateY(180deg);

@@ -30,7 +30,6 @@ const GoodsScroll: FC<GoodsScrollProps> = props => {
   };
 
   const { goodsList } = props;
-  // console.log(goodsList);
 
   return (
     <div className="mx-5 h-full">
@@ -40,7 +39,7 @@ const GoodsScroll: FC<GoodsScrollProps> = props => {
           품목을 선택해서 목록에 추가하세요
         </span>
       </div>
-      <div className="flex grid h-1/2 grid-cols-2 flex-wrap content-start overflow-auto scroll-auto">
+      <div className="grid h-1/2 grid-cols-2 flex-wrap content-start overflow-auto scroll-auto">
         {goodsList.map((goods, idx) => {
           return (
             <div
@@ -58,13 +57,6 @@ const GoodsScroll: FC<GoodsScrollProps> = props => {
           );
         })}
 
-        {/* {goods && goods.map((x : { id : number, name : string }, idx : number) =>{
-          return (
-            <div key={idx} onClick={()=>{removeList(x)}}>
-              {x.name}
-            </div>
-          )
-        })} */}
       </div>
     </div>
   );
