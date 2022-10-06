@@ -41,6 +41,7 @@ public class AddNewDataService {
 
         List<String> urls = new ArrayList<>() {
             {
+                add("http://3.36.106.26:8081/api/notebook/run/2HDSZ79TY/paragraph_1665044750036_1658200450");
                 add("http://3.36.106.26:8081/api/notebook/run/2HG5D6PU3/paragraph_1664718865164_853671905");
                 add("http://3.36.106.26:8081/api/notebook/run/2HGSN9FKX/paragraph_1663724866932_1303867911");
                 add("http://3.36.106.26:8081/api/notebook/run/2HDBP6HA6/paragraph_1664257750778_1075879161");
@@ -58,7 +59,7 @@ public class AddNewDataService {
             url = urls.get(i);
             response = restTemplate.postForEntity(url, requestMessage, RestResponseDto.class);
             String code = Objects.requireNonNull(response.getBody()).getBody().getCode();
-            log.info("response{} code: {}", i, code);
+            log.info("response{} code: {}", i + 1, code);
 
             if(code.equals("ERROR")) {
                 log.info("error occurred while using zeppelin");
@@ -79,6 +80,7 @@ public class AddNewDataService {
 
         List<String> urls = new ArrayList<>() {
             {
+                add("http://3.36.106.26:8081/api/notebook/run/2HDSZ79TY/paragraph_1665044750036_1658200450");
                 add("http://3.36.106.26:8081/api/notebook/run/2HG5D6PU3/paragraph_1664718865164_853671905");
                 add("http://3.36.106.26:8081/api/notebook/run/2HDHVH62E/paragraph_1664863840860_1055396381");
                 add("http://3.36.106.26:8081/api/notebook/run/2HGTXCVUK/paragraph_1664889296623_1087566984");
@@ -91,7 +93,7 @@ public class AddNewDataService {
             url = urls.get(i);
             response = restTemplate.postForEntity(url, requestMessage, RestResponseDto.class);
             String code = Objects.requireNonNull(response.getBody()).getBody().getCode();
-            log.info("response{} code: {}", i, code);
+            log.info("response{} code: {}", i + 1, code);
 
             if(code.equals("ERROR")) {
                 log.info("error occurred while using zeppelin");
