@@ -55,7 +55,7 @@ const Calculator: FC<CalculatorProps> = props => {
         {goodsProps && <div className="text-[#ff6384]">{`${goodsProps.goodsName} : ${Math.round(goodsProps.goodsPrices[goodsProps.goodsPrices.length - 1].price)} 원`}</div>}
         {usingCalculator && calPrice && calMeasure && (
           <div className="mt-1 text-[#ff630d]">
-              <span>{`계산 결과 : ${calPrice / calMeasure * unit} 원`}</span>
+              <span>{`계산 결과 : ${Math.round(calPrice / calMeasure * unit)} 원`}</span>
             </div>
           )}
           </div>
