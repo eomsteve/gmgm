@@ -68,9 +68,10 @@ class DBMakeTest {
 //        createFavoriteGoodsTable();
 //        createFavoriteTotalPriceTable();
 
-//        priceGapService.renewPriceGap();
 //        addNewDataService.addNewDataAM();
-        addNewDataService.addNewDataPM();
+//        addNewDataService.addNewDataPM();
+//        addNewDataService.updateRecentPrice();
+        addNewDataService.updatePriceGap();
     }
 
     private void createCategoryTable() {
