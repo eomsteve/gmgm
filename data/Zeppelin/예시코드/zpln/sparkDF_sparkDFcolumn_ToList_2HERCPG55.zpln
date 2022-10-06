@@ -1,0 +1,333 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n### (1) sparkDF의 column 값을 python list로 바꾸기 - 방법 1\n+ https://www.geeksforgeeks.org/converting-a-pyspark-dataframe-column-to-a-python-list/",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T04:43:33+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(1) sparkDF의 column 값을 python list로 바꾸기 - 방법 1</h3>\n<ul>\n<li><a href=\"https://www.geeksforgeeks.org/converting-a-pyspark-dataframe-column-to-a-python-list/\">https://www.geeksforgeeks.org/converting-a-pyspark-dataframe-column-to-a-python-list/</a></li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664519420616_549101154",
+      "id": "paragraph_1664519420616_549101154",
+      "dateCreated": "2022-09-30T06:30:20+0000",
+      "dateStarted": "2022-10-04T04:43:33+0000",
+      "dateFinished": "2022-10-04T04:43:33+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:137755"
+    },
+    {
+      "text": "%pyspark\n### 1개 column 변환\nthird_sdf_product_rename.select('product_name').distinct().rdd.flatMap(lambda x: x).collect()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T06:38:42+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "['배추', '멜론', '호두', '깻잎', '시금치', '오이', '아몬드', '방울토마토', '딸기', '양배추', '호박', '건블루베리', '버섯', '망고', '감자', '당근', '고구마', '고추', '수박', '땅콩', '찹쌀', '배', '콩', '단감', '건포도', '고춧가루', '토마토', '양파', '사과', '파', '레몬', '생강', '파인애플', '포도', '파프리카', '팥', '바나나', '상추', '열무', '녹두', '참다래', '쌀', '깐마늘', '피망', '참깨', '참외', '오렌지', '체리', '복숭아', '무', '감귤']\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=557",
+              "$$hashKey": "object:137989"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=558",
+              "$$hashKey": "object:137990"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=559",
+              "$$hashKey": "object:137991"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=560",
+              "$$hashKey": "object:137992"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=561",
+              "$$hashKey": "object:137993"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=562",
+              "$$hashKey": "object:137994"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=563",
+              "$$hashKey": "object:137995"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=564",
+              "$$hashKey": "object:137996"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=565",
+              "$$hashKey": "object:137997"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=566",
+              "$$hashKey": "object:137998"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=567",
+              "$$hashKey": "object:137999"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664519407509_1664568438",
+      "id": "paragraph_1664519407509_1664568438",
+      "dateCreated": "2022-09-30T06:30:07+0000",
+      "dateStarted": "2022-09-30T06:38:42+0000",
+      "dateFinished": "2022-09-30T06:38:44+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:137756"
+    },
+    {
+      "text": "%pyspark\n### 여러 colunmn 한번에 하기\ndataframe.select(['student Name',\n                        'student Name',\n                        'college']).\n      rdd.flatMap(lambda x: x).collect())\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T06:38:32+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664519898996_1273016308",
+      "id": "paragraph_1664519898996_1273016308",
+      "dateCreated": "2022-09-30T06:38:18+0000",
+      "status": "READY",
+      "$$hashKey": "object:137757"
+    },
+    {
+      "text": "%md\n### 방법 2",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T04:43:44+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>방법 2</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664858617308_430027569",
+      "id": "paragraph_1664858617308_430027569",
+      "dateCreated": "2022-10-04T04:43:37+0000",
+      "dateStarted": "2022-10-04T04:43:44+0000",
+      "dateFinished": "2022-10-04T04:43:44+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:137758"
+    },
+    {
+      "text": "%pyspark\nfull_favorite_goods_sdf.select('user_id').distinct().show()\ndistinct_ids = [x.user_id for x in full_favorite_goods_sdf.select('user_id').distinct().collect()]\nprint(distinct_ids)",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T04:55:40+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+\n|user_id|\n+-------+\n| 131619|\n| 129242|\n| 129243|\n| 131593|\n| 131591|\n| 131622|\n| 131620|\n| 131621|\n| 131592|\n| 131594|\n+-------+\n\n[131619, 129242, 129243, 131593, 131591, 131622, 131620, 131621, 131592, 131594]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=4117",
+              "$$hashKey": "object:138185"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=4118",
+              "$$hashKey": "object:138186"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=4119",
+              "$$hashKey": "object:138187"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=4120",
+              "$$hashKey": "object:138188"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664858593605_889355020",
+      "id": "paragraph_1664858593605_889355020",
+      "dateCreated": "2022-10-04T04:43:13+0000",
+      "dateStarted": "2022-10-04T04:55:40+0000",
+      "dateFinished": "2022-10-04T04:55:40+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:137759"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T04:55:13+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664859313855_672144953",
+      "id": "paragraph_1664859313855_672144953",
+      "dateCreated": "2022-10-04T04:55:13+0000",
+      "status": "READY",
+      "$$hashKey": "object:137760"
+    }
+  ],
+  "name": "sparkDF_sparkDFcolumn_ToList",
+  "id": "2HERCPG55",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/예시코드/sparkDF_sparkDFcolumn_ToList"
+}

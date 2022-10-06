@@ -1,0 +1,245 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n### (1) agg 와 alias 이용\n+ agg 쓰면 문자열 가능 / col도 가능!",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T07:25:37+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(1) agg 와 alias 이용</h3>\n<ul>\n<li>agg 쓰면 문자열 가능 / col도 가능!</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664348351023_2069711338",
+      "id": "paragraph_1664348351023_2069711338",
+      "dateCreated": "2022-09-28T06:59:11+0000",
+      "dateStarted": "2022-09-28T07:25:37+0000",
+      "dateFinished": "2022-09-28T07:25:37+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:134790"
+    },
+    {
+      "text": "%pyspark\n# 1. 문자열\nfrom pyspark.sql.functions import max, avg, sum, min\nsdf.groupBy('Pclass').agg(max('Age'), min('Age'), sum('Age'), avg('Age')).show() # select max(age), min(age), sum(age), avg(age) from sdf group by pclass\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T07:26:27+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664349946677_448289960",
+      "id": "paragraph_1664349946677_448289960",
+      "dateCreated": "2022-09-28T07:25:46+0000",
+      "status": "READY",
+      "$$hashKey": "object:134791"
+    },
+    {
+      "text": "%pyspark\r\n# 2. col \r\nfrom pyspark.sql.functions import max, avg, sum, min\r\nproduct_price_sdf = goods_price_sdf.groupBy('goods_id', 'research_date', 'business').agg( avg(col('price')).alias('price') , avg(col('unit_price')).alias('unit_price'))\r\nproduct_price_sdf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T14:02:18+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+-------------+--------+------------------+------------------+\n|goods_id|research_date|business|             price|        unit_price|\n+--------+-------------+--------+------------------+------------------+\n|   20020|   2022-10-04|       m|            6820.0|            6820.0|\n|   20018|   2022-10-04|       m|           44420.0|            2221.0|\n|   20056|   2022-10-04|       m|            1598.0|            1598.0|\n|   20051|   2022-10-04|       m|             990.0|             990.0|\n|   20008|   2022-10-04|       o|           12900.0|           12900.0|\n|   20039|   2022-10-04|       m|            2812.0|            2812.0|\n|   20048|   2022-10-04|       o|            1500.0|            1500.0|\n|   20055|   2022-10-04|       m| 621.3333333333334|414.22333333333336|\n|   20012|   2022-10-04|       m| 8746.666666666666| 8746.666666666666|\n|   20012|   2022-10-04|       o|           14900.0|           14900.0|\n|   20024|   2022-10-04|       o|            5000.0|            5000.0|\n|   20052|   2022-10-04|       m| 623.3333333333334| 623.3333333333334|\n|   20026|   2022-10-04|       o|            3900.0|            3900.0|\n|   20036|   2022-10-04|       m|12308.666666666666|12308.666666666666|\n|   20047|   2022-10-04|       m|            1352.0|            1352.0|\n|   20021|   2022-10-04|       m|            8006.0|            8006.0|\n|   20006|   2022-10-04|       o|            3500.0|            3500.0|\n|   20029|   2022-10-04|       m|            3740.0|            3740.0|\n|   20017|   2022-10-04|       m|           17300.0|           17300.0|\n|   20033|   2022-10-04|       m|1369.3333333333333|1369.3333333333333|\n+--------+-------------+--------+------------------+------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=6581",
+              "$$hashKey": "object:135038"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=6582",
+              "$$hashKey": "object:135039"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664348292678_306033728",
+      "id": "paragraph_1664348292678_306033728",
+      "dateCreated": "2022-09-28T06:58:12+0000",
+      "dateStarted": "2022-10-04T14:02:18+0000",
+      "dateFinished": "2022-10-04T14:02:19+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:134792"
+    },
+    {
+      "text": "%pyspark\n# 3. round\nfrom pyspark.sql.functions import col, avg, round\nproduct_price_sdf = goods_price_sdf.groupBy('goods_id','research_date','business').agg( round( avg(col('unit_price')) ,2).alias('unit_price')  ,  round(  avg(col('price')), 2) .alias('price')  )\nproduct_price_sdf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T14:02:08+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+-------------+--------+----------+--------+\n|goods_id|research_date|business|unit_price|   price|\n+--------+-------------+--------+----------+--------+\n|   20020|   2022-10-04|       m|    6820.0|  6820.0|\n|   20018|   2022-10-04|       m|    2221.0| 44420.0|\n|   20056|   2022-10-04|       m|    1598.0|  1598.0|\n|   20051|   2022-10-04|       m|     990.0|   990.0|\n|   20008|   2022-10-04|       o|   12900.0| 12900.0|\n|   20039|   2022-10-04|       m|    2812.0|  2812.0|\n|   20048|   2022-10-04|       o|    1500.0|  1500.0|\n|   20055|   2022-10-04|       m|    414.22|  621.33|\n|   20012|   2022-10-04|       m|   8746.67| 8746.67|\n|   20012|   2022-10-04|       o|   14900.0| 14900.0|\n|   20024|   2022-10-04|       o|    5000.0|  5000.0|\n|   20052|   2022-10-04|       m|    623.33|  623.33|\n|   20026|   2022-10-04|       o|    3900.0|  3900.0|\n|   20036|   2022-10-04|       m|  12308.67|12308.67|\n|   20047|   2022-10-04|       m|    1352.0|  1352.0|\n|   20021|   2022-10-04|       m|    8006.0|  8006.0|\n|   20006|   2022-10-04|       o|    3500.0|  3500.0|\n|   20029|   2022-10-04|       m|    3740.0|  3740.0|\n|   20017|   2022-10-04|       m|   17300.0| 17300.0|\n|   20033|   2022-10-04|       m|   1369.33| 1369.33|\n+--------+-------------+--------+----------+--------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=6579",
+              "$$hashKey": "object:135101"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=6580",
+              "$$hashKey": "object:135102"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664350013617_2049615198",
+      "id": "paragraph_1664350013617_2049615198",
+      "dateCreated": "2022-09-28T07:26:53+0000",
+      "dateStarted": "2022-10-04T14:02:08+0000",
+      "dateFinished": "2022-10-04T14:02:08+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:134793"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T14:02:02+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664892122198_500469994",
+      "id": "paragraph_1664892122198_500469994",
+      "dateCreated": "2022-10-04T14:02:02+0000",
+      "status": "READY",
+      "$$hashKey": "object:134794"
+    }
+  ],
+  "name": "sparkDF_groupBy",
+  "id": "2HDT5RSVV",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/예시코드/sparkDF_groupBy"
+}

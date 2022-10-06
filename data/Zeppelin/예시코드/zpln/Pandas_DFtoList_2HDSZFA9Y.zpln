@@ -1,0 +1,90 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "# DF의 1개 row를 list로 만들기\nlist(new_goods_price_mart_pdf[new_goods_price_mart_pdf['goods_id']==1].iloc[0].values)",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T16:05:51+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "<console>:1: \u001b[31merror: \u001b[0millegal start of definition\n       # DF의 1개 row를 list로 만들기\n       ^\n<console>:1: \u001b[31merror: \u001b[0mInvalid literal number\n       # DF의 1개 row를 list로 만들기\n             ^\n<console>:2: \u001b[31merror: \u001b[0midentifier expected but symbol literal found.\n       list(new_goods_price_mart_pdf[new_goods_price_mart_pdf['goods_id']==1].iloc[0].values)\n                                                              ^\n<console>:2: \u001b[31merror: \u001b[0munclosed character literal (or use \" for string literal \"goods_id\")\n       list(new_goods_price_mart_pdf[new_goods_price_mart_pdf['goods_id']==1].iloc[0].values)\n                                                                       ^\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664294734520_2145797750",
+      "id": "paragraph_1664294734520_2145797750",
+      "dateCreated": "2022-09-27T16:05:34+0000",
+      "dateStarted": "2022-09-27T16:05:51+0000",
+      "dateFinished": "2022-09-27T16:05:51+0000",
+      "status": "ERROR",
+      "focus": true,
+      "$$hashKey": "object:124286"
+    },
+    {
+      "user": "anonymous",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664294751102_1345278842",
+      "id": "paragraph_1664294751102_1345278842",
+      "dateCreated": "2022-09-27T16:05:51+0000",
+      "status": "READY",
+      "$$hashKey": "object:124287"
+    }
+  ],
+  "name": "Pandas_DFtoList",
+  "id": "2HDSZFA9Y",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/예시코드/Pandas_DFtoList"
+}

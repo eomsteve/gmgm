@@ -1,0 +1,358 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n### (1) 지우기",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T14:27:41+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(1) 지우기</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664893631289_77502124",
+      "id": "paragraph_1664893631289_77502124",
+      "dateCreated": "2022-10-04T14:27:11+0000",
+      "dateStarted": "2022-10-04T14:27:41+0000",
+      "dateFinished": "2022-10-04T14:27:41+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:117079"
+    },
+    {
+      "text": "%MySQL\n-- delete from goods_price\n-- where research_date = '2022-10-04' and business='m' and goods_id >=20000",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T14:40:51+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : 142\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664893661939_1784052271",
+      "id": "paragraph_1664893661939_1784052271",
+      "dateCreated": "2022-10-04T14:27:41+0000",
+      "dateStarted": "2022-10-04T14:40:44+0000",
+      "dateFinished": "2022-10-04T14:40:44+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:117080"
+    },
+    {
+      "text": "%MySQL\nselect * from product_price\nwhere research_date = '2022-10-04'\norder by product_id",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T14:28:28+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "product_price_id": "string",
+                      "product_id": "string",
+                      "unit_price": "string",
+                      "price": "string",
+                      "research_date": "string",
+                      "date_type": "string",
+                      "business": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "product_price_id\tproduct_id\tunit_price\tprice\tresearch_date\tdate_type\tbusiness\n150356\t0\t223.03\t2180.0\t2022-10-04\td\tm\n150517\t0\t178.24\t1790.0\t2022-10-04\td\to\n150365\t1\t734.48\t6390.0\t2022-10-04\td\tm\n150485\t1\t314.94\t2740.0\t2022-10-04\td\to\n150422\t2\t81.87\t6140.0\t2022-10-04\td\tm\n150585\t2\t81.8\t6135.0\t2022-10-04\td\to\n150319\t3\t193.57\t5660.0\t2022-10-04\td\tm\n150478\t3\t80.95\t2460.0\t2022-10-04\td\to\n150315\t4\t73.33\t550.0\t2022-10-04\td\tm\n150496\t4\t73.33\t550.0\t2022-10-04\td\to\n150294\t5\t162.87\t5483.33\t2022-10-04\td\tm\n150495\t5\t114.66\t4506.67\t2022-10-04\td\to\n150333\t6\t67.83\t2652.0\t2022-10-04\td\tm\n150514\t6\t63.48\t2450.0\t2022-10-04\td\to\n150347\t7\t305.58\t3013.33\t2022-10-04\td\tm\n150522\t7\t190.0\t1760.0\t2022-10-04\td\to\n150314\t8\t206.42\t5800.0\t2022-10-04\td\tm\n150505\t8\t176.49\t5483.33\t2022-10-04\td\to\n150290\t9\t116.48\t5343.33\t2022-10-04\td\tm\n150489\t9\t94.1\t4326.67\t2022-10-04\td\to\n150369\t10\t364.15\t4127.5\t2022-10-04\td\tm\n150524\t10\t188.16\t1570.0\t2022-10-04\td\to\n150288\t11\t1228.83\t5623.33\t2022-10-04\td\tm\n150513\t11\t621.76\t2850.0\t2022-10-04\td\to\n150372\t12\t1903.67\t12930.0\t2022-10-04\td\tm\n150506\t12\t611.67\t3450.0\t2022-10-04\td\to\n150303\t13\t396.31\t3108.0\t2022-10-04\td\tm\n150515\t13\t205.97\t1682.0\t2022-10-04\td\to\n150317\t14\t2780.0\t13900.0\t2022-10-04\td\tm\n150520\t14\t2413.0\t12065.0\t2022-10-04\td\to\n150331\t15\t1134.75\t5912.5\t2022-10-04\td\tm\n150476\t15\t649.58\t2997.5\t2022-10-04\td\to\n150349\t16\t719.78\t6960.0\t2022-10-04\td\tm\n150463\t16\t379.26\t3590.0\t2022-10-04\td\to\n150342\t17\t835.15\t3005.0\t2022-10-04\td\tm\n150465\t17\t739.05\t2662.5\t2022-10-04\td\to\n150306\t18\t1141.95\t3353.33\t2022-10-04\td\tm\n150469\t18\t896.72\t2583.33\t2022-10-04\td\to\n150328\t19\t882.0\t4410.0\t2022-10-04\td\tm\n150458\t19\t467.0\t2335.0\t2022-10-04\td\to\n150299\t20\t212.25\t2122.5\t2022-10-04\td\tm\n150510\t20\t136.75\t1367.5\t2022-10-04\td\to\n150366\t21\t328.67\t3286.67\t2022-10-04\td\tm\n150492\t21\t233.33\t2333.33\t2022-10-04\td\to\n150300\t22\t245.47\t3212.0\t2022-10-04\td\tm\n150488\t22\t182.13\t2332.0\t2022-10-04\td\to\n150302\t23\t611.8\t3984.0\t2022-10-04\td\tm\n150459\t23\t307.0\t1734.0\t2022-10-04\td\to\n150354\t24\t790.0\t7556.67\t2022-10-04\td\tm\n150479\t24\t631.74\t6101.67\t2022-10-04\td\to\n150437\t25\t414.17\t3062.5\t2022-10-04\td\tm\n150580\t25\t311.81\t2232.5\t2022-10-04\td\to\n150417\t26\t718.0\t3590.0\t2022-10-04\td\tm\n150547\t26\t288.67\t1443.33\t2022-10-04\td\to\n150407\t27\t1272.33\t5485.0\t2022-10-04\td\tm\n150556\t27\t771.46\t3260.0\t2022-10-04\td\to\n150375\t28\t190.45\t5930.0\t2022-10-04\td\tm\n150530\t28\t140.39\t4390.0\t2022-10-04\td\to\n150318\t29\t319.9\t3280.0\t2022-10-04\td\tm\n150472\t29\t193.44\t2003.33\t2022-10-04\td\to\n150382\t30\t470.0\t2350.0\t2022-10-04\td\tm\n150601\t30\t340.0\t1700.0\t2022-10-04\td\to\n150360\t31\t382.85\t7320.0\t2022-10-04\td\tm\n150508\t31\t281.93\t5150.0\t2022-10-04\td\to\n150357\t32\t981.24\t9254.0\t2022-10-04\td\tm\n150502\t32\t650.78\t6220.0\t2022-10-04\td\to\n150374\t33\t781.0\t3772.86\t2022-10-04\td\tm\n150521\t33\t732.71\t3624.29\t2022-10-04\td\to\n150370\t34\t114.02\t3660.0\t2022-10-04\td\tm\n150464\t34\t87.75\t2834.0\t2022-10-04\td\to\n150388\t35\t392.23\t2315.0\t2022-10-04\td\tm\n150594\t35\t257.54\t1535.0\t2022-10-04\td\to\n150335\t36\t1455.0\t7652.0\t2022-10-04\td\tm\n150487\t36\t725.52\t3838.0\t2022-10-04\td\to\n150387\t37\t611.9\t2570.0\t2022-10-04\td\tm\n150602\t37\t438.1\t1840.0\t2022-10-04\td\to\n150381\t38\t540.71\t2017.5\t2022-10-04\td\tm\n150592\t38\t1696.03\t4000.0\t2022-10-04\td\to\n150425\t39\t89.09\t1650.0\t2022-10-04\td\tm\n150578\t39\t63.49\t1158.0\t2022-10-04\td\to\n150441\t40\t739.49\t5760.0\t2022-10-04\td\tm\n150563\t40\t2715.67\t9910.0\t2022-10-04\td\to\n150416\t41\t1341.74\t3823.75\t2022-10-04\td\tm\n150471\t41\t819.21\t2336.25\t2022-10-04\td\to\n150292\t42\t1500.23\t1263.33\t2022-10-04\td\tm\n150499\t42\t4410.15\t4605.0\t2022-10-04\td\to\n150321\t43\t1669.48\t4102.5\t2022-10-04\td\tm\n150494\t43\t686.55\t1862.5\t2022-10-04\td\to\n150362\t44\t553.93\t2447.5\t2022-10-04\td\tm\n150529\t44\t184.24\t715.0\t2022-10-04\td\to\n150293\t45\t1185.67\t7996.0\t2022-10-04\td\tm\n150451\t45\t722.83\t5662.0\t2022-10-04\td\to\n150295\t46\t2483.25\t4091.5\t2022-10-04\td\tm\n150504\t46\t2188.75\t3682.5\t2022-10-04\td\to\n150345\t47\t121.61\t7568.6\t2022-10-04\td\tm\n150477\t47\t67.87\t4358.0\t2022-10-04\td\to\n150323\t48\t185.6\t9280.0\t2022-10-04\td\tm\n150466\t48\t95.67\t4783.33\t2022-10-04\td\to\n150359\t49\t3940.3\t15888.0\t2022-10-04\td\tm\n150509\t49\t1928.09\t7832.0\t2022-10-04\td\to\n150409\t50\t8400.0\t4200.0\t2022-10-04\td\tm\n150606\t50\t8000.0\t4000.0\t2022-10-04\td\to\n150304\t51\t4159.0\t19726.0\t2022-10-04\td\tm\n150483\t51\t2398.0\t10920.0\t2022-10-04\td\to\n150355\t53\t1030.28\t9848.38\t2022-10-04\td\tm\n150470\t53\t811.5\t7792.5\t2022-10-04\td\to\n150325\t54\t1402.5\t5610.0\t2022-10-04\td\tm\n150452\t54\t1402.5\t5610.0\t2022-10-04\td\to\n150338\t55\t1756.96\t6619.5\t2022-10-04\td\tm\n150453\t55\t1488.96\t5547.5\t2022-10-04\td\to\n150344\t56\t563.77\t6456.25\t2022-10-04\td\tm\n150474\t56\t303.32\t3766.25\t2022-10-04\td\to\n150327\t57\t1153.33\t5766.67\t2022-10-04\td\tm\n150473\t57\t497.33\t2486.67\t2022-10-04\td\to\n150334\t58\t271.68\t11147.5\t2022-10-04\td\tm\n150475\t58\t135.04\t5817.5\t2022-10-04\td\to\n150289\t59\t1079.89\t6948.57\t2022-10-04\td\tm\n150482\t59\t693.97\t4394.29\t2022-10-04\td\to\n150378\t60\t322.48\t6748.0\t2022-10-04\td\tm\n150526\t60\t215.09\t4582.0\t2022-10-04\td\to\n150410\t61\t1154.52\t6950.0\t2022-10-04\td\tm\n150531\t61\t713.04\t4166.67\t2022-10-04\td\to\n150406\t62\t877.78\t7900.0\t2022-10-04\td\tm\n150561\t62\t442.22\t3980.0\t2022-10-04\td\to\n150449\t63\t438.03\t16480.0\t2022-10-04\td\tm\n150566\t63\t190.04\t7912.0\t2022-10-04\td\to\n150386\t64\t922.7\t23103.33\t2022-10-04\td\tm\n150481\t64\t306.09\t7470.0\t2022-10-04\td\to\n150435\t65\t621.0\t9900.0\t2022-10-04\td\tm\n150549\t65\t442.25\t8470.0\t2022-10-04\td\to\n150434\t66\t1431.11\t11240.0\t2022-10-04\td\tm\n150575\t66\t849.17\t6410.0\t2022-10-04\td\to\n150411\t67\t130.77\t5771.0\t2022-10-04\td\tm\n150567\t67\t66.72\t3678.0\t2022-10-04\td\to\n150421\t68\t729.0\t27260.0\t2022-10-04\td\tm\n150609\t68\t557.42\t20512.0\t2022-10-04\td\to\n150424\t69\t887.69\t5380.0\t2022-10-04\td\tm\n150554\t69\t649.62\t3860.0\t2022-10-04\td\to\n150431\t70\t189.28\t6814.0\t2022-10-04\td\tm\n150581\t70\t110.56\t3980.0\t2022-10-04\td\to\n150429\t71\t2612.72\t9128.67\t2022-10-04\td\tm\n150593\t71\t2027.22\t7276.67\t2022-10-04\td\to\n150450\t73\t78.34\t7666.67\t2022-10-04\td\tm\n150542\t73\t47.96\t4750.0\t2022-10-04\td\to\n150414\t74\t853.92\t14050.0\t2022-10-04\td\tm\n150532\t74\t548.87\t10505.0\t2022-10-04\td\to\n150394\t75\t1060.0\t25440.0\t2022-10-04\td\tm\n150535\t75\t645.42\t15490.0\t2022-10-04\td\to\n150376\t76\t7780.0\t7780.0\t2022-10-04\td\tm\n150545\t76\t6220.0\t6220.0\t2022-10-04\td\to\n150353\t77\t10480.0\t10480.0\t2022-10-04\td\tm\n150455\t77\t5000.0\t5000.0\t2022-10-04\td\to\n150445\t78\t446.46\t6230.0\t2022-10-04\td\tm\n150574\t78\t412.61\t5700.0\t2022-10-04\td\to\n150301\t79\t1151.68\t4713.33\t2022-10-04\td\tm\n150484\t79\t617.4\t2540.0\t2022-10-04\td\to\n150439\t80\t670.0\t2680.0\t2022-10-04\td\tm\n150587\t80\t670.0\t2680.0\t2022-10-04\td\to\n150399\t81\t10220.0\t10220.0\t2022-10-04\td\tm\n150603\t81\t7385.0\t7385.0\t2022-10-04\td\to\n150436\t82\t9340.0\t9340.0\t2022-10-04\td\tm\n150534\t82\t8610.0\t8610.0\t2022-10-04\td\to\n150396\t83\t208.8\t7155.0\t2022-10-04\td\tm\n150548\t83\t150.55\t5215.0\t2022-10-04\td\to\n150430\t84\t1117.5\t2235.0\t2022-10-04\td\tm\n150564\t84\t870.0\t1740.0\t2022-10-04\td\to\n150308\t85\t78.69\t3480.0\t2022-10-04\td\tm\n150501\t85\t57.47\t2263.33\t2022-10-04\td\to\n150361\t86\t248.67\t8906.67\t2022-10-04\td\tm\n150511\t86\t122.07\t4376.67\t2022-10-04\td\to\n150312\t87\t3093.75\t24750.0\t2022-10-04\td\tm\n150516\t87\t1581.88\t12655.0\t2022-10-04\td\to\n150332\t88\t318.38\t2984.0\t2022-10-04\td\tm\n150457\t88\t275.16\t2578.0\t2022-10-04\td\to\n150320\t89\t271.88\t9937.14\t2022-10-04\td\tm\n150462\t89\t147.59\t5555.71\t2022-10-04\td\to\n150305\t90\t438.16\t12304.0\t2022-10-04\td\tm\n150454\t90\t285.66\t7740.0\t2022-10-04\td\to\n150307\t91\t225.0\t1631.0\t2022-10-04\td\tm\n150493\t91\t225.0\t1631.0\t2022-10-04\td\to\n150310\t92\t386.5\t5143.5\t2022-10-04\td\tm\n150467\t92\t386.5\t5143.5\t2022-10-04\td\to\n150291\t93\t714.84\t7980.0\t2022-10-04\td\tm\n150527\t93\t855.84\t9390.0\t2022-10-04\td\to\n150322\t94\t151.78\t2420.0\t2022-10-04\td\tm\n150460\t94\t94.19\t1520.0\t2022-10-04\td\to\n150350\t95\t59.75\t610.0\t2022-10-04\td\tm\n150461\t95\t56.16\t493.25\t2022-10-04\td\to\n150297\t96\t380.33\t1369.0\t2022-10-04\td\tm\n150486\t96\t380.33\t1369.0\t2022-10-04\td\to\n150358\t97\t559.33\t3397.5\t2022-10-04\td\tm\n150500\t97\t5031.05\t13772.5\t2022-10-04\td\to\n150313\t98\t261.91\t2246.67\t2022-10-04\td\tm\n150456\t98\t180.04\t1496.67\t2022-10-04\td\to\n150373\t99\t225.0\t3375.0\t2022-10-04\td\tm\n150490\t99\t149.67\t2245.0\t2022-10-04\td\to\n150336\t100\t70.88\t6350.0\t2022-10-04\td\tm\n150528\t100\t59.48\t5390.0\t2022-10-04\td\to\n150343\t101\t3062.76\t8652.2\t2022-10-04\td\tm\n150468\t101\t440.15\t1311.4\t2022-10-04\td\to\n150330\t102\t150.82\t18330.0\t2022-10-04\td\tm\n150480\t102\t110.52\t13040.0\t2022-10-04\td\to\n150316\t103\t178.71\t3216.67\t2022-10-04\td\tm\n150523\t103\t152.04\t2736.67\t2022-10-04\td\to\n150440\t104\t464.0\t2320.0\t2022-10-04\td\tm\n150614\t104\t464.0\t2320.0\t2022-10-04\td\to\n150348\t105\t402.13\t6460.0\t2022-10-04\td\tm\n150491\t105\t337.13\t5476.0\t2022-10-04\td\to\n150309\t106\t1913.93\t7384.0\t2022-10-04\td\tm\n150498\t106\t1427.01\t5780.0\t2022-10-04\td\to\n150326\t107\t1456.67\t1456.67\t2022-10-04\td\tm\n150497\t107\t1142.0\t1142.0\t2022-10-04\td\to\n150364\t108\t1443.91\t7496.67\t2022-10-04\td\tm\n150507\t108\t1081.11\t5755.0\t2022-10-04\td\to\n150337\t109\t243.36\t4083.33\t2022-10-04\td\tm\n150512\t109\t141.17\t2238.33\t2022-10-04\td\to\n150352\t110\t233.87\t2930.0\t2022-10-04\td\tm\n150519\t110\t206.71\t2115.0\t2022-10-04\td\to\n150324\t111\t134.14\t3646.67\t2022-10-04\td\tm\n150525\t111\t57.08\t1440.0\t2022-10-04\td\to\n150404\t112\t1488.89\t13400.0\t2022-10-04\td\tm\n150518\t112\t1334.45\t12010.0\t2022-10-04\td\to\n150368\t113\t5450.0\t5450.0\t2022-10-04\td\tm\n150503\t113\t4696.0\t4696.0\t2022-10-04\td\to\n150393\t1000\t10514.0\t10514.0\t2022-10-04\td\tm\n150599\t1000\t7800.0\t7800.0\t2022-10-04\td\to\n150438\t1001\t1598.0\t1598.0\t2022-10-04\td\tm\n150540\t1001\t1400.0\t1400.0\t2022-10-04\td\to\n150442\t1002\t3506.0\t3506.0\t2022-10-04\td\tm\n150569\t1002\t1760.0\t1760.0\t2022-10-04\td\to\n150408\t1003\t13946.0\t13946.0\t2022-10-04\td\tm\n150536\t1003\t13500.0\t13500.0\t2022-10-04\td\to\n150423\t1004\t15300.0\t15300.0\t2022-10-04\td\tm\n150557\t1004\t6590.0\t6590.0\t2022-10-04\td\to\n150395\t1005\t1554.0\t1554.0\t2022-10-04\td\tm\n150600\t1005\t7430.0\t7430.0\t2022-10-04\td\to\n150385\t1006\t8650.0\t8650.0\t2022-10-04\td\tm\n150555\t1006\t5400.0\t5400.0\t2022-10-04\td\to\n150298\t1007\t945.0\t945.0\t2022-10-04\td\tm\n150586\t1007\t996.0\t996.0\t2022-10-04\td\to\n150432\t1008\t4580.0\t4580.0\t2022-10-04\td\tm\n150595\t1008\t2900.0\t2900.0\t2022-10-04\td\to\n150412\t1009\t1604.0\t1604.0\t2022-10-04\td\tm\n150568\t1009\t1500.0\t1500.0\t2022-10-04\td\to\n150346\t1010\t4173.33\t4173.33\t2022-10-04\td\tm\n150543\t1010\t2430.0\t2430.0\t2022-10-04\td\to\n150397\t1011\t2812.0\t2812.0\t2022-10-04\td\tm\n150591\t1011\t2730.0\t2730.0\t2022-10-04\td\to\n150446\t1012\t544.22\t612.67\t2022-10-04\td\tm\n150577\t1012\t1866.67\t1920.0\t2022-10-04\td\to\n150428\t1013\t6990.0\t6990.0\t2022-10-04\td\tm\n150546\t1013\t3500.0\t3500.0\t2022-10-04\td\to\n150443\t1014\t440.0\t440.0\t2022-10-04\td\tm\n150539\t1014\t150.0\t150.0\t2022-10-04\td\to\n150380\t1015\t6066.0\t6066.0\t2022-10-04\td\tm\n150579\t1015\t3900.0\t3900.0\t2022-10-04\td\to\n150403\t1016\t6572.5\t6572.5\t2022-10-04\td\tm\n150550\t1016\t3300.0\t3300.0\t2022-10-04\td\to\n150427\t1017\t1768.0\t1768.0\t2022-10-04\td\tm\n150558\t1017\t1050.0\t1050.0\t2022-10-04\td\to\n150367\t1018\t23900.0\t23900.0\t2022-10-04\td\tm\n150560\t1018\t22500.0\t22500.0\t2022-10-04\td\to\n150398\t1019\t2075.0\t2075.0\t2022-10-04\td\tm\n150583\t1019\t860.0\t860.0\t2022-10-04\td\to\n150418\t1020\t3646.0\t3646.0\t2022-10-04\td\tm\n150613\t1020\t4230.0\t4230.0\t2022-10-04\td\to\n150390\t1021\t26640.0\t26640.0\t2022-10-04\td\tm\n150596\t1021\t12900.0\t12900.0\t2022-10-04\td\to\n150444\t1022\t6820.0\t6820.0\t2022-10-04\td\tm\n150551\t1022\t4000.0\t4000.0\t2022-10-04\td\to\n150341\t1023\t8560.0\t8560.0\t2022-10-04\td\tm\n150612\t1023\t7900.0\t7900.0\t2022-10-04\td\to\n150363\t1024\t1088.0\t1088.0\t2022-10-04\td\tm\n150572\t1024\t800.0\t800.0\t2022-10-04\td\to\n150448\t1025\t32195.0\t32195.0\t2022-10-04\td\tm\n150589\t1025\t19900.0\t19900.0\t2022-10-04\td\to\n150405\t1026\t7806.0\t7806.0\t2022-10-04\td\tm\n150538\t1026\t6210.0\t6210.0\t2022-10-04\td\to\n150389\t1027\t2562.0\t2562.0\t2022-10-04\td\tm\n150559\t1027\t1900.0\t1900.0\t2022-10-04\td\to\n150351\t1028\t19980.0\t19980.0\t2022-10-04\td\tm\n150562\t1028\t20350.0\t20350.0\t2022-10-04\td\to\n150379\t1029\t2850.0\t2850.0\t2022-10-04\td\tm\n150570\t1029\t100.0\t100.0\t2022-10-04\td\to\n150377\t1030\t9220.0\t9220.0\t2022-10-04\td\tm\n150541\t1030\t6900.0\t6900.0\t2022-10-04\td\to\n150402\t1031\t8562.5\t8562.5\t2022-10-04\td\tm\n150552\t1031\t4800.0\t4800.0\t2022-10-04\td\to\n150340\t1032\t6990.0\t6990.0\t2022-10-04\td\tm\n150588\t1032\t2500.0\t2500.0\t2022-10-04\td\to\n150447\t1033\t7682.0\t7682.0\t2022-10-04\td\tm\n150590\t1033\t9900.0\t9900.0\t2022-10-04\td\to\n150415\t1034\t2210.0\t2210.0\t2022-10-04\td\tm\n150537\t1034\t4260.0\t4260.0\t2022-10-04\td\to\n150391\t1035\t8006.0\t8006.0\t2022-10-04\td\tm\n150610\t1035\t3200.0\t3200.0\t2022-10-04\td\to\n150329\t1036\t410.0\t410.0\t2022-10-04\td\tm\n150598\t1036\t1000.0\t1000.0\t2022-10-04\td\to\n150401\t1037\t1364.0\t1364.0\t2022-10-04\td\tm\n150607\t1037\t780.0\t780.0\t2022-10-04\td\to\n150383\t1038\t2952.0\t2952.0\t2022-10-04\td\tm\n150544\t1038\t1820.0\t1820.0\t2022-10-04\td\to\n150426\t1039\t17300.0\t17300.0\t2022-10-04\td\tm\n150565\t1039\t9660.0\t9660.0\t2022-10-04\td\to\n150400\t1040\t8595.0\t8595.0\t2022-10-04\td\tm\n150608\t1040\t14900.0\t14900.0\t2022-10-04\td\to\n150413\t1041\t2221.0\t44420.0\t2022-10-04\td\tm\n150553\t1041\t1345.0\t26900.0\t2022-10-04\td\to\n150392\t1042\t15514.0\t15514.0\t2022-10-04\td\tm\n150597\t1042\t5000.0\t5000.0\t2022-10-04\td\to\n150384\t1043\t1352.0\t1352.0\t2022-10-04\td\tm\n150582\t1043\t5400.0\t5400.0\t2022-10-04\td\to\n150433\t1044\t24100.0\t24100.0\t2022-10-04\td\tm\n150605\t1044\t15000.0\t15000.0\t2022-10-04\td\to\n150287\t1045\t32390.0\t32390.0\t2022-10-04\td\tm\n150573\t1045\t7110.0\t7110.0\t2022-10-04\td\to\n150296\t1046\t10800.0\t10800.0\t2022-10-04\td\tm\n150533\t1046\t10900.0\t10900.0\t2022-10-04\td\to\n150339\t1047\t2840.0\t2840.0\t2022-10-04\td\tm\n150584\t1047\t2180.0\t2180.0\t2022-10-04\td\to\n150371\t1048\t33980.0\t33980.0\t2022-10-04\td\tm\n150571\t1048\t28360.0\t28360.0\t2022-10-04\td\to\n150420\t1049\t6653.33\t6653.33\t2022-10-04\td\tm\n150576\t1049\t4500.0\t4500.0\t2022-10-04\td\to\n150419\t1050\t3540.0\t3540.0\t2022-10-04\td\tm\n150611\t1050\t980.0\t980.0\t2022-10-04\td\to\n150311\t1051\t2000.0\t2000.0\t2022-10-04\td\tm\n150604\t1051\t12100.0\t12100.0\t2022-10-04\td\to\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664893688368_997228757",
+      "id": "paragraph_1664893688368_997228757",
+      "dateCreated": "2022-10-04T14:28:08+0000",
+      "dateStarted": "2022-10-04T14:28:28+0000",
+      "dateFinished": "2022-10-04T14:28:28+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:117081"
+    },
+    {
+      "text": "%MySQL\n-- business m 이 올바르게 들어갔는지 확인하는 곳\nselect goods_id, count(*) as nums from goods_price\nwhere research_date = '2022-10-04' and business='m'\ngroup by goods_id\norder by nums desc",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T14:40:52+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "goods_id": "string",
+                      "nums": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "goods_id\tnums\n0\t1\n1\t1\n2\t1\n3\t1\n4\t1\n5\t1\n6\t1\n7\t1\n8\t1\n9\t1\n10\t1\n11\t1\n12\t1\n13\t1\n14\t1\n15\t1\n16\t1\n17\t1\n18\t1\n19\t1\n20\t1\n21\t1\n22\t1\n23\t1\n24\t1\n25\t1\n26\t1\n27\t1\n28\t1\n29\t1\n30\t1\n31\t1\n32\t1\n33\t1\n34\t1\n35\t1\n36\t1\n37\t1\n38\t1\n39\t1\n40\t1\n41\t1\n42\t1\n43\t1\n44\t1\n45\t1\n46\t1\n47\t1\n48\t1\n49\t1\n50\t1\n51\t1\n52\t1\n53\t1\n54\t1\n55\t1\n56\t1\n57\t1\n58\t1\n59\t1\n60\t1\n61\t1\n62\t1\n63\t1\n64\t1\n65\t1\n66\t1\n67\t1\n68\t1\n69\t1\n70\t1\n71\t1\n72\t1\n73\t1\n74\t1\n75\t1\n76\t1\n77\t1\n78\t1\n79\t1\n80\t1\n81\t1\n82\t1\n83\t1\n84\t1\n85\t1\n86\t1\n87\t1\n88\t1\n89\t1\n90\t1\n91\t1\n92\t1\n93\t1\n94\t1\n95\t1\n96\t1\n97\t1\n98\t1\n99\t1\n100\t1\n101\t1\n102\t1\n103\t1\n104\t1\n105\t1\n106\t1\n107\t1\n108\t1\n109\t1\n110\t1\n111\t1\n112\t1\n113\t1\n114\t1\n115\t1\n116\t1\n117\t1\n118\t1\n119\t1\n120\t1\n121\t1\n122\t1\n123\t1\n124\t1\n125\t1\n126\t1\n127\t1\n128\t1\n129\t1\n130\t1\n131\t1\n132\t1\n133\t1\n134\t1\n135\t1\n136\t1\n137\t1\n138\t1\n139\t1\n140\t1\n141\t1\n142\t1\n143\t1\n144\t1\n145\t1\n146\t1\n147\t1\n148\t1\n149\t1\n150\t1\n151\t1\n152\t1\n153\t1\n154\t1\n155\t1\n156\t1\n157\t1\n158\t1\n159\t1\n160\t1\n161\t1\n162\t1\n163\t1\n164\t1\n165\t1\n166\t1\n167\t1\n168\t1\n169\t1\n170\t1\n171\t1\n172\t1\n173\t1\n174\t1\n175\t1\n176\t1\n177\t1\n178\t1\n179\t1\n180\t1\n181\t1\n182\t1\n183\t1\n184\t1\n185\t1\n186\t1\n187\t1\n188\t1\n189\t1\n190\t1\n191\t1\n192\t1\n193\t1\n194\t1\n195\t1\n196\t1\n197\t1\n198\t1\n199\t1\n200\t1\n201\t1\n202\t1\n203\t1\n204\t1\n205\t1\n206\t1\n207\t1\n208\t1\n209\t1\n210\t1\n211\t1\n212\t1\n213\t1\n214\t1\n215\t1\n216\t1\n217\t1\n218\t1\n219\t1\n220\t1\n221\t1\n222\t1\n223\t1\n224\t1\n225\t1\n226\t1\n227\t1\n228\t1\n229\t1\n230\t1\n231\t1\n232\t1\n233\t1\n234\t1\n235\t1\n236\t1\n237\t1\n238\t1\n239\t1\n240\t1\n241\t1\n242\t1\n243\t1\n244\t1\n245\t1\n246\t1\n247\t1\n248\t1\n249\t1\n250\t1\n251\t1\n252\t1\n253\t1\n254\t1\n255\t1\n256\t1\n257\t1\n258\t1\n259\t1\n260\t1\n261\t1\n262\t1\n263\t1\n264\t1\n265\t1\n266\t1\n267\t1\n268\t1\n269\t1\n270\t1\n271\t1\n272\t1\n273\t1\n274\t1\n275\t1\n276\t1\n277\t1\n278\t1\n279\t1\n280\t1\n281\t1\n282\t1\n283\t1\n284\t1\n285\t1\n286\t1\n287\t1\n288\t1\n289\t1\n290\t1\n291\t1\n292\t1\n293\t1\n294\t1\n295\t1\n296\t1\n297\t1\n298\t1\n299\t1\n300\t1\n301\t1\n302\t1\n303\t1\n304\t1\n305\t1\n306\t1\n307\t1\n308\t1\n309\t1\n310\t1\n311\t1\n312\t1\n313\t1\n314\t1\n315\t1\n316\t1\n317\t1\n318\t1\n319\t1\n320\t1\n321\t1\n322\t1\n323\t1\n324\t1\n325\t1\n326\t1\n327\t1\n328\t1\n329\t1\n330\t1\n331\t1\n332\t1\n333\t1\n334\t1\n335\t1\n336\t1\n337\t1\n338\t1\n339\t1\n340\t1\n341\t1\n342\t1\n343\t1\n344\t1\n345\t1\n346\t1\n347\t1\n348\t1\n349\t1\n356\t1\n357\t1\n358\t1\n359\t1\n360\t1\n362\t1\n363\t1\n364\t1\n365\t1\n366\t1\n367\t1\n368\t1\n369\t1\n370\t1\n371\t1\n372\t1\n373\t1\n374\t1\n375\t1\n376\t1\n377\t1\n378\t1\n379\t1\n380\t1\n381\t1\n382\t1\n383\t1\n384\t1\n385\t1\n386\t1\n387\t1\n388\t1\n389\t1\n390\t1\n391\t1\n392\t1\n393\t1\n394\t1\n395\t1\n396\t1\n397\t1\n398\t1\n399\t1\n400\t1\n401\t1\n402\t1\n403\t1\n404\t1\n405\t1\n406\t1\n407\t1\n408\t1\n409\t1\n410\t1\n411\t1\n412\t1\n413\t1\n414\t1\n415\t1\n416\t1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664893697063_434147443",
+      "id": "paragraph_1664893697063_434147443",
+      "dateCreated": "2022-10-04T14:28:17+0000",
+      "dateStarted": "2022-10-04T14:40:52+0000",
+      "dateFinished": "2022-10-04T14:40:53+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:117082"
+    },
+    {
+      "text": "%MySQL\nselect * from goods_price\nwhere research_date = '2022-10-04' and business='m' and goods_id >=20000\norder by goods_id",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T08:56:09+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "goods_price_id": "string",
+                      "goods_id": "string",
+                      "unit_price": "string",
+                      "price": "string",
+                      "research_date": "string",
+                      "business": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "goods_price_id\tgoods_id\tunit_price\tprice\tresearch_date\tbusiness\n373581\t20000\t19980.0\t19980.0\t2022-10-04\tm\n373582\t20001\t2000.0\t2000.0\t2022-10-04\tm\n373583\t20002\t4173.33\t4173.33\t2022-10-04\tm\n373584\t20003\t1088.0\t1088.0\t2022-10-04\tm\n373585\t20004\t8560.0\t8560.0\t2022-10-04\tm\n373594\t20005\t9220.0\t9220.0\t2022-10-04\tm\n373595\t20006\t6990.0\t6990.0\t2022-10-04\tm\n373586\t20007\t410.0\t410.0\t2022-10-04\tm\n373596\t20008\t26640.0\t26640.0\t2022-10-04\tm\n373587\t20009\t33980.0\t33980.0\t2022-10-04\tm\n373588\t20010\t10800.0\t10800.0\t2022-10-04\tm\n373597\t20012\t8595.0\t8595.0\t2022-10-04\tm\n373589\t20013\t2840.0\t2840.0\t2022-10-04\tm\n373590\t20014\t6990.0\t6990.0\t2022-10-04\tm\n373598\t20015\t7682.0\t7682.0\t2022-10-04\tm\n373599\t20016\t6572.5\t6572.5\t2022-10-04\tm\n373600\t20017\t17300.0\t17300.0\t2022-10-04\tm\n373601\t20018\t2221.0\t44420.0\t2022-10-04\tm\n373602\t20019\t3646.0\t3646.0\t2022-10-04\tm\n373603\t20020\t6820.0\t6820.0\t2022-10-04\tm\n373604\t20021\t8006.0\t8006.0\t2022-10-04\tm\n373605\t20022\t440.0\t440.0\t2022-10-04\tm\n373606\t20023\t32195.0\t32195.0\t2022-10-04\tm\n373607\t20024\t15514.0\t15514.0\t2022-10-04\tm\n373608\t20025\t3506.0\t3506.0\t2022-10-04\tm\n373609\t20026\t6066.0\t6066.0\t2022-10-04\tm\n373591\t20027\t945.0\t945.0\t2022-10-04\tm\n373610\t20028\t10514.0\t10514.0\t2022-10-04\tm\n373611\t20029\t3540.0\t3540.0\t2022-10-04\tm\n373612\t20030\t8650.0\t8650.0\t2022-10-04\tm\n373613\t20031\t6653.33\t6653.33\t2022-10-04\tm\n373614\t20032\t2170.0\t2170.0\t2022-10-04\tm\n373615\t20033\t1364.0\t1364.0\t2022-10-04\tm\n373616\t20034\t8562.5\t8562.5\t2022-10-04\tm\n373592\t20035\t23900.0\t23900.0\t2022-10-04\tm\n373617\t20036\t13946.0\t13946.0\t2022-10-04\tm\n373618\t20037\t4580.0\t4580.0\t2022-10-04\tm\n373619\t20038\t2562.0\t2562.0\t2022-10-04\tm\n373620\t20039\t2812.0\t2812.0\t2022-10-04\tm\n373621\t20040\t2952.0\t2952.0\t2022-10-04\tm\n373622\t20041\t15300.0\t15300.0\t2022-10-04\tm\n373593\t20042\t32390.0\t32390.0\t2022-10-04\tm\n373623\t20043\t7806.0\t7806.0\t2022-10-04\tm\n373624\t20044\t2850.0\t2850.0\t2022-10-04\tm\n373625\t20045\t2210.0\t2210.0\t2022-10-04\tm\n373626\t20046\t1366.0\t1366.0\t2022-10-04\tm\n373627\t20047\t1352.0\t1352.0\t2022-10-04\tm\n373628\t20048\t1604.0\t1604.0\t2022-10-04\tm\n373629\t20049\t564.0\t564.0\t2022-10-04\tm\n373630\t20050\t3160.0\t3160.0\t2022-10-04\tm\n373631\t20051\t990.0\t990.0\t2022-10-04\tm\n373632\t20052\t658.0\t658.0\t2022-10-04\tm\n373633\t20053\t1554.0\t1554.0\t2022-10-04\tm\n373634\t20054\t24100.0\t24100.0\t2022-10-04\tm\n373635\t20055\t410.67\t616.0\t2022-10-04\tm\n373636\t20056\t1598.0\t1598.0\t2022-10-04\tm\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664893731284_1785100329",
+      "id": "paragraph_1664893731284_1785100329",
+      "dateCreated": "2022-10-04T14:28:51+0000",
+      "dateStarted": "2022-10-04T14:42:21+0000",
+      "dateFinished": "2022-10-04T14:42:21+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:117083"
+    },
+    {
+      "text": "%MySQL\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T14:36:21+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664894181171_1665811904",
+      "id": "paragraph_1664894181171_1665811904",
+      "dateCreated": "2022-10-04T14:36:21+0000",
+      "status": "READY",
+      "$$hashKey": "object:117084"
+    }
+  ],
+  "name": "MySQL_DB지우고추가하기",
+  "id": "2HGDTNUA4",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/예시코드/MySQL_DB지우고추가하기"
+}

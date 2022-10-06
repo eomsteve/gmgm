@@ -1,0 +1,275 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n### (1) 읽기\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T06:34:21+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(1) 읽기</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664346848981_1768384170",
+      "id": "paragraph_1664346848981_1768384170",
+      "dateCreated": "2022-09-28T06:34:08+0000",
+      "dateStarted": "2022-09-28T06:34:21+0000",
+      "dateFinished": "2022-09-28T06:34:21+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:132148"
+    },
+    {
+      "text": "%pyspark\r\n\r\nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\r\n\r\n# 1. table 가져오기 : dbtable에 table 이름\r\ncategory_sdf = spark.read.format(\"jdbc\")\\\r\n    .option(\"url\", url ) \\\r\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\r\n    .option(\"dbtable\", \"category\") \\\r\n    .option(\"user\", \"ji\")\\\r\n    .option(\"password\", mysql_password).load()\r\n    \r\n\r\n# 2. 쿼리로 가져오기! dbtable 대신 query 옵션 이용하면 됨!\r\ncategory_sdf = spark.read.format(\"jdbc\")\\\r\n    .option(\"url\", url) \\\r\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\r\n    .option(\"query\", \"select * from category where category_id=0\")\\\r\n    .option(\"user\", \"ji\")\\\r\n    .option(\"password\", mysql_password).load()\r\ncategory_sdf.show() ",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T08:59:45+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664346811960_1385653330",
+      "id": "paragraph_1664346811960_1385653330",
+      "dateCreated": "2022-09-28T06:33:31+0000",
+      "status": "READY",
+      "$$hashKey": "object:132149"
+    },
+    {
+      "text": "%md\n### (2) 쓰기\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T06:34:30+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(2) 쓰기</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664346863526_1471256104",
+      "id": "paragraph_1664346863526_1471256104",
+      "dateCreated": "2022-09-28T06:34:23+0000",
+      "dateStarted": "2022-09-28T06:34:30+0000",
+      "dateFinished": "2022-09-28T06:34:30+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:132150"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col\n# 4 - 2 : MySQL에 데이터 넣기 : 성공 (https://ko.n4zc.com/article/sa4p4m6e.html)\nprop = {\"user\": \"ji\", \"password\": mysql_password, \"driver\": \"com.mysql.cj.jdbc.Driver\"} \nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\n\n# category_sdf = spark.read.csv('/DB_data/category_table.csv', header=True, inferSchema=True)\ncategory_sdf.select(\"category_id\",\"img\",\"name\").write.jdbc(\\\n    url= url,\\\n    table = \"category\",\\\n    mode=\"append\",\\\n    properties=prop)",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T08:59:50+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664346870469_1671818862",
+      "id": "paragraph_1664346870469_1671818862",
+      "dateCreated": "2022-09-28T06:34:30+0000",
+      "status": "READY",
+      "$$hashKey": "object:132151"
+    },
+    {
+      "text": "%md\n### (3) update\n+ pyspark에서 MySQL paragraph로 post 요청 보내서 진행\n+ 요청 주소\n    + url = \"http://3.36.106.26:8081/api/notebook/run/notebookID/paragraphID\" \n+ 파라미터\n    + json={\"params\": {\"cheap_url\": cheap_url, \"goods_id\": str(goods_id)}} ",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T06:44:47+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(3) update</h3>\n<ul>\n<li>pyspark에서 MySQL paragraph로 post 요청 보내서 진행</li>\n<li>요청 주소\n<ul>\n<li>url = &ldquo;<a href=\"http://3.36.106.26:8081/api/notebook/run/notebookID/paragraphID\">http://3.36.106.26:8081/api/notebook/run/notebookID/paragraphID</a>&rdquo;</li>\n</ul>\n</li>\n<li>파라미터\n<ul>\n<li>json={&ldquo;params&rdquo;: {&ldquo;cheap_url&rdquo;: cheap_url, &ldquo;goods_id&rdquo;: str(goods_id)}}</li>\n</ul>\n</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664346885732_1515621064",
+      "id": "paragraph_1664346885732_1515621064",
+      "dateCreated": "2022-09-28T06:34:45+0000",
+      "dateStarted": "2022-09-28T06:44:47+0000",
+      "dateFinished": "2022-09-28T06:44:47+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:132152"
+    },
+    {
+      "text": "%MySQL\nUPDATE goods SET cheap_url = '${cheap_url}' WHERE goods_id = CAST('${goods_id}' AS UNSIGNED);",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T06:42:59+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664346901602_597877783",
+      "id": "paragraph_1664346901602_597877783",
+      "dateCreated": "2022-09-28T06:35:01+0000",
+      "status": "READY",
+      "$$hashKey": "object:132153"
+    },
+    {
+      "text": "%pyspark\n# automatical run paragraph to update sql goods table cheap_url column\nimport requests\nurl = \"http://3.36.106.26:8081/api/notebook/run/2HD9NBXQX/paragraph_1664176216600_9409959\"\n\nfor name in g_name:\n    goods_id, cheap_url = get_goods_cheap_url(name)\n    req = requests.post(url, json={\"params\": {\"cheap_url\": cheap_url, \"goods_id\": str(goods_id)}})",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T06:43:33+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664347406836_1505929157",
+      "id": "paragraph_1664347406836_1505929157",
+      "dateCreated": "2022-09-28T06:43:26+0000",
+      "status": "READY",
+      "$$hashKey": "object:132154"
+    }
+  ],
+  "name": "spark_jdbc",
+  "id": "2HE92AYJ3",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/예시코드/spark_jdbc"
+}

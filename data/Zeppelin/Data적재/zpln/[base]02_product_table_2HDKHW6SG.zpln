@@ -1,0 +1,295 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark.conf\n\nSPARK_HOME  /usr/local/spark\nPYSPARK_PYTHON /usr/bin/python3\nspark.pyspark.python  /usr/bin/python3\n\n# set driver memory to 8g\nspark.driver.memory 6g\n\n# set executor number to be 3\nspark.executor.instances  4\n\n# set executor memory 4g\nspark.executor.memory  2g",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T08:45:51+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664181935641_736909061",
+      "id": "paragraph_1664181935641_736909061",
+      "dateCreated": "2022-09-26T08:45:35+0000",
+      "status": "READY",
+      "focus": true,
+      "$$hashKey": "object:56161"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col\n# MySQL에 데이터 넣기 : 성공 (https://ko.n4zc.com/article/sa4p4m6e.html)\nprop = {\"user\": \"ji\", \"password\": \"cvgkbhs234r#8tdx\", \"driver\": \"com.mysql.cj.jdbc.Driver\"} \nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\n\n    \n# # product table 읽기\nproduct_sdf = spark.read.csv('/DB_data/20221001_product_table.csv', header=True, inferSchema=True)\n\n# product table 쓰기\nproduct_sdf.write.jdbc(\\\n    url= url,\\\n    table = \"product\",\\\n    mode=\"append\",\\\n    properties=prop)\n\n\n  \n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-01T15:16:13+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=895",
+              "$$hashKey": "object:56321"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=896",
+              "$$hashKey": "object:56322"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=897",
+              "$$hashKey": "object:56323"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664181961015_2011570687",
+      "id": "paragraph_1664181961015_2011570687",
+      "dateCreated": "2022-09-26T08:46:01+0000",
+      "dateStarted": "2022-10-01T15:16:13+0000",
+      "dateFinished": "2022-10-01T15:16:13+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:56162"
+    },
+    {
+      "text": "%MySQL\nselect * from product",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-01T15:16:22+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "goods_id0",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "product_id1",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "name2",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "img3",
+                        "visible": true,
+                        "width": 316,
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "measure4",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "cheap_url5",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1,
+                      "paginationPageSize": 250
+                    }
+                  },
+                  "tableColumnTypeState": {
+                    "names": {
+                      "product_id": "string",
+                      "category_id": "string",
+                      "name": "string",
+                      "unit": "string",
+                      "measure": "string",
+                      "weight": "string",
+                      "img": "string",
+                      "recent_price_off": "string",
+                      "recent_price_on": "string",
+                      "price_gap_off": "string",
+                      "price_gap_on": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "product_id\tcategory_id\tname\tunit\tmeasure\tweight\timg\trecent_price_off\trecent_price_on\tprice_gap_off\tprice_gap_on\n0\t0\t감자칩\t10\tg\t11.333\thttps://shopping-phinf.pstatic.net/main_1002230/10022307872.20210218122657.jpg\t0.0\t0.0\t0.0\t0.0\n1\t0\t껌\t10\tg\t0.367\thttps://shopping-phinf.pstatic.net/main_3321305/33213055631.20220630153947.jpg\t0.0\t0.0\t0.0\t0.0\n2\t0\t모나카류아이스크림\t10\tml\t21.667\thttps://shopping-phinf.pstatic.net/main_8688896/8688896328.20150720131827.jpg\t0.0\t0.0\t0.0\t0.0\n3\t0\t비스킷\t10\tg\t4.167\thttps://shopping-phinf.pstatic.net/main_2128737/21287370904.20210225154358.jpg\t0.0\t0.0\t0.0\t0.0\n4\t0\t빙과류\t10\tml\t22.167\thttps://shopping-phinf.pstatic.net/main_3444971/34449713956.20220903093306.jpg\t0.0\t0.0\t0.0\t0.0\n5\t0\t사탕\t10\tg\t2.0\thttps://shopping-phinf.pstatic.net/main_3186070/31860708090.2.jpg\t0.0\t0.0\t0.0\t0.0\n6\t0\t아이스크림\t10\tml\t23.333\thttps://shopping-phinf.pstatic.net/main_1860015/18600156488.10.jpg\t0.0\t0.0\t0.0\t0.0\n7\t0\t에너지바\t10\tg\t16.667\thttps://shopping-phinf.pstatic.net/main_2502634/25026346516.20201128202940.jpg\t0.0\t0.0\t0.0\t0.0\n8\t0\t초코바\t10\tg\t4.833\thttps://shopping-phinf.pstatic.net/main_5726084/5726084041.20160927101747.jpg\t0.0\t0.0\t0.0\t0.0\n9\t0\t초코파이\t10\tg\t3.167\thttps://shopping-phinf.pstatic.net/main_3116162/31161626095.jpg\t0.0\t0.0\t0.0\t0.0\n10\t0\t초콜릿\t10\tg\t10.5\thttps://shopping-phinf.pstatic.net/main_2904607/29046073565.1.jpg\t0.0\t0.0\t0.0\t0.0\n11\t1\t간장\t100\tml\t3.0\thttps://shopping-phinf.pstatic.net/main_3022393/30223935686.20211220023511.jpg\t0.0\t0.0\t0.0\t0.0\n12\t1\t고추장\t100\tg\t1.333\thttps://j7d108.p.ssafy.io/resource/logo.png\t0.0\t0.0\t0.0\t0.0\n13\t1\t국수\t100\tg\t5.333\thttps://shopping-phinf.pstatic.net/main_7656742/7656742475.20180629113449.jpg\t0.0\t0.0\t0.0\t0.0\n14\t1\t꿀\t100\tg\t0.833\thttps://shopping-phinf.pstatic.net/main_8577008/8577008841.20150605153543.jpg\t0.0\t0.0\t0.0\t0.0\n15\t1\t당면\t100\tg\t1.0\thttps://shopping-phinf.pstatic.net/main_2979148/29791484167.jpg\t0.0\t0.0\t0.0\t0.0\n16\t1\t된장\t100\tg\t1.5\thttps://shopping-phinf.pstatic.net/main_2332332/23323323947.20220306011559.jpg\t0.0\t0.0\t0.0\t0.0\n17\t1\t두부\t100\tg\t4.5\thttps://shopping-phinf.pstatic.net/main_3169337/31693372969.20220409171037.jpg\t0.0\t0.0\t0.0\t0.0\n18\t1\t드레싱\t100\tg\t0.55\thttps://shopping-phinf.pstatic.net/main_7139355/7139355600.20201224103614.jpg\t0.0\t0.0\t0.0\t0.0\n19\t1\t마요네즈\t100\tg\t0.75\thttps://shopping-phinf.pstatic.net/main_2515407/25154070522.20201209144122.jpg\t0.0\t0.0\t0.0\t0.0\n20\t1\t밀가루\t100\tg\t2.667\thttps://shopping-phinf.pstatic.net/main_7802517/7802517521.20200101134922.jpg\t0.0\t0.0\t0.0\t0.0\n21\t1\t부침가루\t100\tg\t1.667\thttps://shopping-phinf.pstatic.net/main_8344370/83443709746.1.jpg\t0.0\t0.0\t0.0\t0.0\n22\t1\t설탕\t100\tg\t1.5\thttps://shopping-phinf.pstatic.net/main_8418316/84183160376.jpg\t0.0\t0.0\t0.0\t0.0\n23\t1\t소금\t100\tg\t2.083\thttps://shopping-phinf.pstatic.net/main_1327190/13271900045.20180425120811.jpg\t0.0\t0.0\t0.0\t0.0\n24\t1\t식용유\t100\tml\t3.0\thttps://shopping-phinf.pstatic.net/main_8358679/83586797221.jpg\t0.0\t0.0\t0.0\t0.0\n25\t1\t식초\t100\tml\t0.583\thttps://shopping-phinf.pstatic.net/main_1736894/17368944722.20190207170338.jpg\t0.0\t0.0\t0.0\t0.0\n26\t1\t쌈장\t100\tg\t0.633\thttps://shopping-phinf.pstatic.net/main_2252721/22527211869.20211229095747.jpg\t0.0\t0.0\t0.0\t0.0\n27\t1\t잼\t100\tg\t0.917\thttps://shopping-phinf.pstatic.net/main_3284789/32847893610.20220609164947.jpg\t0.0\t0.0\t0.0\t0.0\n28\t1\t참기름\t10\tml\t2.0\thttps://shopping-phinf.pstatic.net/main_7602618/7602618844.20200430154051.jpg\t0.0\t0.0\t0.0\t0.0\n29\t1\t카레\t10\tg\t5.833\thttps://shopping-phinf.pstatic.net/main_5717851/5717851168.20160628182911.jpg\t0.0\t0.0\t0.0\t0.0\n30\t1\t케첩\t100\tg\t1.5\thttps://shopping-phinf.pstatic.net/main_5670323/5670323122.20180222154705.jpg\t0.0\t0.0\t0.0\t0.0\n31\t1\t혼합조미료\t10\tg\t1.833\thttps://shopping-phinf.pstatic.net/main_3046169/30461693646.jpg\t0.0\t0.0\t0.0\t0.0\n32\t2\t냉동만두\t100\tg\t2.667\thttps://shopping-phinf.pstatic.net/main_3309757/33097574055.1.jpg\t0.0\t0.0\t0.0\t0.0\n33\t2\t라면\t1\t개\t5.333\thttps://shopping-phinf.pstatic.net/main_1229305/12293059859.1.jpg\t0.0\t0.0\t0.0\t0.0\n34\t2\t빵\t10\tg\t40.0\thttps://shopping-phinf.pstatic.net/main_3089373/30893730829.jpg\t0.0\t0.0\t0.0\t0.0\n35\t2\t스프\t10\tg\t1.833\thttps://shopping-phinf.pstatic.net/main_8273718/82737184604.4.jpg\t0.0\t0.0\t0.0\t0.0\n36\t2\t시리얼\t100\tg\t3.0\thttps://shopping-phinf.pstatic.net/main_2988265/29882657350.7.jpg\t0.0\t0.0\t0.0\t0.0\n37\t2\t식빵\t100\tg\t2.667\thttps://shopping-phinf.pstatic.net/main_3274136/32741361457.jpg\t0.0\t0.0\t0.0\t0.0\n38\t2\t즉석국\t10\tg\t9.833\thttps://shopping-phinf.pstatic.net/main_5717566/5717566484.20180906140059.jpg\t0.0\t0.0\t0.0\t0.0\n39\t2\t즉석덮밥\t10\tg\t33.333\thttps://shopping-phinf.pstatic.net/main_1185155/11851558331.20170711095806.jpg\t0.0\t0.0\t0.0\t0.0\n40\t2\t즉석밥\t100\tg\t23.0\thttps://shopping-phinf.pstatic.net/main_5641041/5641041847.20210611153512.jpg\t0.0\t0.0\t0.0\t0.0\n41\t2\t즉석죽\t100\tg\t3.717\thttps://shopping-phinf.pstatic.net/main_5681681/5681681155.20191024151513.jpg\t0.0\t0.0\t0.0\t0.0\n42\t2\t컵라면\t100\tg\t2.333\thttps://shopping-phinf.pstatic.net/main_5648381/5648381071.20201203163932.jpg\t0.0\t0.0\t0.0\t0.0\n43\t2\t컵밥\t100\tg\t5.833\thttps://shopping-phinf.pstatic.net/main_1008164/10081647411.jpg\t0.0\t0.0\t0.0\t0.0\n44\t2\t탕\t100\tg\t5.0\thttps://shopping-phinf.pstatic.net/main_1077636/10776362971.20200511124826.jpg\t0.0\t0.0\t0.0\t0.0\n45\t3\t건전지\t1\t개\t2.333\thttps://shopping-phinf.pstatic.net/main_1491352/14913528033.2.jpg\t0.0\t0.0\t0.0\t0.0\n46\t3\t고무장갑\t1\t개\t1.05\thttps://shopping-phinf.pstatic.net/main_3454037/34540376193.jpg\t0.0\t0.0\t0.0\t0.0\n47\t3\t구강청결제\t10\tml\t4.167\thttps://shopping-phinf.pstatic.net/main_9524563/9524563061.20200729113333.jpg\t0.0\t0.0\t0.0\t0.0\n48\t3\t랩\t1\tm\t1.5\thttps://shopping-phinf.pstatic.net/main_3004227/30042271288.1044.jpg\t0.0\t0.0\t0.0\t0.0\n49\t3\t로션\t100\tml\t1.667\thttps://shopping-phinf.pstatic.net/main_3327130/33271309553.jpg\t0.0\t0.0\t0.0\t0.0\n50\t3\t마스크\t10\t개\t15.833\thttps://shopping-phinf.pstatic.net/main_2383966/23839668525.20200820172546.jpg\t0.0\t0.0\t0.0\t0.0\n51\t3\t면도날\t1\t개\t0.5\thttps://shopping-phinf.pstatic.net/main_2277966/22779660605.1.jpg\t0.0\t0.0\t0.0\t0.0\n52\t3\t물휴지\t10\t매\t5.0\thttps://j7d108.p.ssafy.io/resource/logo.png\t0.0\t0.0\t0.0\t0.0\n53\t3\t바디워시\t100\tml\t1.667\thttps://shopping-phinf.pstatic.net/main_8187814/81878148919.5.jpg\t0.0\t0.0\t0.0\t0.0\n54\t3\t부탄가스\t1\t개\t0.867\thttps://shopping-phinf.pstatic.net/main_8256812/82568127975.jpg\t0.0\t0.0\t0.0\t0.0\n55\t3\t비누\t1\t개\t1.167\thttps://shopping-phinf.pstatic.net/main_2142965/21429651189.20220629163408.jpg\t0.0\t0.0\t0.0\t0.0\n56\t3\t살균소독제\t100\tml\t0.917\thttps://shopping-phinf.pstatic.net/main_8253310/82533101365.3.jpg\t0.0\t0.0\t0.0\t0.0\n57\t3\t살충제\t100\tml\t0.252\thttps://shopping-phinf.pstatic.net/main_1436704/14367040846.20180523182412.jpg\t0.0\t0.0\t0.0\t0.0\n58\t3\t생리대\t1\t개\t6.667\thttps://shopping-phinf.pstatic.net/main_2942089/29420890628.jpg\t0.0\t0.0\t0.0\t0.0\n59\t3\t샴푸\t100\tml\t2.167\thttps://shopping-phinf.pstatic.net/main_2696569/26965694522.20210429170417.jpg\t0.0\t0.0\t0.0\t0.0\n60\t3\t섬유유연제\t100\tml\t3.0\thttps://shopping-phinf.pstatic.net/main_3007707/30077070555.jpg\t0.0\t0.0\t0.0\t0.0\n61\t3\t섬유탈취제\t100\tml\t0.533\thttps://shopping-phinf.pstatic.net/main_2442902/24429020522.20201012140732.jpg\t0.0\t0.0\t0.0\t0.0\n62\t3\t세정제\t100\tml\t0.5\thttps://shopping-phinf.pstatic.net/main_8316574/83165743350.1.jpg\t0.0\t0.0\t0.0\t0.0\n63\t3\t세탁세제(가루형)\t100\tg\t1.333\thttps://shopping-phinf.pstatic.net/main_8456853/84568539355.jpg\t0.0\t0.0\t0.0\t0.0\n64\t3\t세탁세제(액체형)\t100\tml\t4.667\thttps://shopping-phinf.pstatic.net/main_8060196/80601960117.8.jpg\t0.0\t0.0\t0.0\t0.0\n65\t3\t습기제거제\t1\t개\t0.5\thttps://shopping-phinf.pstatic.net/main_8475969/84759698045.jpg\t0.0\t0.0\t0.0\t0.0\n66\t3\t염색약\t10\tg\t10.0\thttps://j7d108.p.ssafy.io/resource/logo.png\t0.0\t0.0\t0.0\t0.0\n67\t3\t위생백\t1\t매\t4.333\thttps://shopping-phinf.pstatic.net/main_8459264/84592641698.jpg\t0.0\t0.0\t0.0\t0.0\n68\t3\t종이기저귀\t1\t개\t300.0\thttps://shopping-phinf.pstatic.net/main_2882787/28827875589.20210913164029.jpg\t0.0\t0.0\t0.0\t0.0\n69\t3\t주방세제\t100\tml\t1.167\thttps://shopping-phinf.pstatic.net/main_8256136/82561364633.jpg\t0.0\t0.0\t0.0\t0.0\n70\t3\t치약\t10\tg\t6.667\thttps://shopping-phinf.pstatic.net/main_1708656/17086566557.20190118135839.jpg\t0.0\t0.0\t0.0\t0.0\n71\t3\t칫솔\t1\t개\t1.167\thttps://shopping-phinf.pstatic.net/main_8263852/82638522797.2.jpg\t0.0\t0.0\t0.0\t0.0\n72\t3\t코로나 자가검사 키트\t1\t개\t0.833\thttps://j7d108.p.ssafy.io/resource/logo.png\t0.0\t0.0\t0.0\t0.0\n73\t3\t키친타월\t10\t매\t2.333\thttps://shopping-phinf.pstatic.net/main_2808095/28080953525.20210720160734.jpg\t0.0\t0.0\t0.0\t0.0\n74\t3\t표백제\t100\tg\t0.5\thttps://shopping-phinf.pstatic.net/main_3323128/33231289618.20220701163828.jpg\t0.0\t0.0\t0.0\t0.0\n75\t3\t화장지\t1\t롤\t5.5\thttps://shopping-phinf.pstatic.net/main_6904472/6904472308.20200430122917.jpg\t0.0\t0.0\t0.0\t0.0\n76\t4\t갈치\t100\tg\t1.833\thttps://j7d108.p.ssafy.io/resource/logo.png\t0.0\t0.0\t0.0\t0.0\n77\t4\t고등어\t1\t마리\t1.5\thttps://shopping-phinf.pstatic.net/main_2358154/23581548094.jpg\t0.0\t0.0\t0.0\t0.0\n78\t4\t맛김\t1\t팩\t7.667\thttps://shopping-phinf.pstatic.net/main_2864772/28647720777.jpg\t0.0\t0.0\t0.0\t0.0\n79\t4\t맛살\t100\tg\t1.0\thttps://shopping-phinf.pstatic.net/main_2191834/21918340052.20220505014416.jpg\t0.0\t0.0\t0.0\t0.0\n80\t4\t어묵\t100\tg\t1.667\thttps://shopping-phinf.pstatic.net/main_3354176/33541765632.20220717100204.jpg\t0.0\t0.0\t0.0\t0.0\n81\t4\t오징어\t1\t마리\t0.75\thttps://shopping-phinf.pstatic.net/main_2595056/25950566305.4.jpg\t0.0\t0.0\t0.0\t0.0\n82\t4\t조기\t1\t마리\t1.0\thttps://shopping-phinf.pstatic.net/main_8392702/83927023573.jpg\t0.0\t0.0\t0.0\t0.0\n83\t4\t참치캔\t10\tg\t16.667\thttps://shopping-phinf.pstatic.net/main_8300091/83000917110.jpg\t0.0\t0.0\t0.0\t0.0\n84\t5\t마가린\t100\tg\t0.333\thttps://shopping-phinf.pstatic.net/main_2933726/29337260901.20220519034049.jpg\t0.0\t0.0\t0.0\t0.0\n85\t5\t발효유\t10\tg\t81.667\thttps://shopping-phinf.pstatic.net/main_1868318/18683185129.20220307025724.jpg\t0.0\t0.0\t0.0\t0.0\n86\t5\t버터\t10\tg\t8.167\thttps://shopping-phinf.pstatic.net/main_1292630/12926300446.20220722161104.jpg\t0.0\t0.0\t0.0\t0.0\n87\t5\t분유\t100\tg\t40.0\thttps://shopping-phinf.pstatic.net/main_1036732/10367321125.20160922143744.jpg\t0.0\t0.0\t0.0\t0.0\n88\t5\t우유\t100\tml\t11.667\thttps://shopping-phinf.pstatic.net/main_2620458/26204581528.20210302120301.jpg\t0.0\t0.0\t0.0\t0.0\n89\t5\t치즈\t10\tg\t28.5\thttps://shopping-phinf.pstatic.net/main_3319553/33195538303.20220629175711.jpg\t0.0\t0.0\t0.0\t0.0\n90\t6\t두유\t100\tml\t14.5\thttps://shopping-phinf.pstatic.net/main_3386813/33868138267.jpg\t0.0\t0.0\t0.0\t0.0\n91\t6\t막걸리\t100\tml\t0.417\thttps://j7d108.p.ssafy.io/resource/logo.png\t0.0\t0.0\t0.0\t0.0\n92\t6\t맥주\t100\tml\t13.0\thttps://j7d108.p.ssafy.io/resource/logo.png\t0.0\t0.0\t0.0\t0.0\n93\t6\t비타민음료\t100\tml\t2.833\thttps://shopping-phinf.pstatic.net/main_3379799/33797993392.jpg\t0.0\t0.0\t0.0\t0.0\n94\t6\t사이다\t100\tml\t10.833\thttps://shopping-phinf.pstatic.net/main_8310204/83102045573.7.jpg\t0.0\t0.0\t0.0\t0.0\n95\t6\t생수\t100\tml\t271.667\thttps://shopping-phinf.pstatic.net/main_8292084/82920847039.6.jpg\t0.0\t0.0\t0.0\t0.0\n96\t6\t소주\t100\tml\t4.167\thttps://j7d108.p.ssafy.io/resource/logo.png\t0.0\t0.0\t0.0\t0.0\n97\t6\t에너지음료\t100\tml\t6.667\thttps://shopping-phinf.pstatic.net/main_6716449/6716449850.20200506154940.jpg\t0.0\t0.0\t0.0\t0.0\n98\t6\t이온음료\t100\tml\t7.5\thttps://shopping-phinf.pstatic.net/main_2220709/22207097674.20200316141830.jpg\t0.0\t0.0\t0.0\t0.0\n99\t6\t주스\t100\tml\t10.833\thttps://shopping-phinf.pstatic.net/main_8397289/83972894876.jpg\t0.0\t0.0\t0.0\t0.0\n100\t6\t차\t1\t개\t5.5\thttps://shopping-phinf.pstatic.net/main_1674470/16744704121.20181224142702.jpg\t0.0\t0.0\t0.0\t0.0\n101\t6\t캔커피\t100\tml\t2.5\thttps://shopping-phinf.pstatic.net/main_5674292/5674292124.20191231184421.jpg\t0.0\t0.0\t0.0\t0.0\n102\t6\t커피믹스\t1\t개\t3.0\thttps://shopping-phinf.pstatic.net/main_5664975/5664975783.20151012112442.jpg\t0.0\t0.0\t0.0\t0.0\n103\t6\t콜라\t100\tml\t15.5\thttps://shopping-phinf.pstatic.net/main_5641060/5641060940.20120211201824.jpg\t0.0\t0.0\t0.0\t0.0\n104\t6\t포도주\t100\tml\t1.667\thttps://j7d108.p.ssafy.io/resource/logo.png\t0.0\t0.0\t0.0\t0.0\n105\t7\t계란\t1\t개\t19.167\thttps://shopping-phinf.pstatic.net/main_8254064/82540649129.2.jpg\t0.0\t0.0\t0.0\t0.0\n106\t7\t닭고기\t100\tg\t11.667\thttps://shopping-phinf.pstatic.net/main_3362910/33629101854.jpg\t0.0\t0.0\t0.0\t0.0\n107\t7\t돼지고기\t100\tg\t13.833\thttps://shopping-phinf.pstatic.net/main_3472840/34728400057.jpg\t0.0\t0.0\t0.0\t0.0\n108\t7\t소시지\t100\tg\t3.667\thttps://shopping-phinf.pstatic.net/main_8261158/82611583001.jpg\t0.0\t0.0\t0.0\t0.0\n109\t7\t햄\t10\tg\t5.667\thttps://shopping-phinf.pstatic.net/main_2890442/28904426228.20220103024203.jpg\t0.0\t0.0\t0.0\t0.0\n110\t0\t봉지류과자\t10\tg\t9.333\thttps://shopping-phinf.pstatic.net/main_5715102/5715102162.20220805140656.jpg\t0.0\t0.0\t0.0\t0.0\n111\t0\t캬라멜\t10\tg\t3.333\thttps://shopping-phinf.pstatic.net/main_9572582/9572582438.10.jpg\t0.0\t0.0\t0.0\t0.0\n112\t1\t김치\t100\tg\t4.0\thttps://shopping-phinf.pstatic.net/main_3365377/33653771317.jpg\t0.0\t0.0\t0.0\t0.0\n113\t7\t소고기\t100\tg\t5.167\thttps://shopping-phinf.pstatic.net/main_3441389/34413899709.jpg\t0.0\t0.0\t0.0\t0.0\n1000\t9\t멜론\t1\t개\t0.333\thttps://shopping-phinf.pstatic.net/main_8316376/83163762067.10.jpg\t0.0\t0.0\t0.0\t0.0\n1001\t10\t호두\t100\tg\t0.417\thttps://shopping-phinf.pstatic.net/main_8110700/81107005213.3.jpg\t0.0\t0.0\t0.0\t0.0\n1002\t9\t깻잎\t100\tg\t1.167\thttps://shopping-phinf.pstatic.net/main_8252051/82520518492.jpg\t0.0\t0.0\t0.0\t0.0\n1003\t9\t시금치\t1\tkg\t0.233\thttps://shopping-phinf.pstatic.net/main_8277788/82777884726.jpg\t0.0\t0.0\t0.0\t0.0\n1004\t9\t오이\t10\t개\t0.202\thttps://shopping-phinf.pstatic.net/main_3155089/31550890788.1.jpg\t0.0\t0.0\t0.0\t0.0\n1005\t10\t아몬드\t100\tg\t1.0\thttps://shopping-phinf.pstatic.net/main_3266195/32661955619.20220530155250.jpg\t0.0\t0.0\t0.0\t0.0\n1006\t9\t방울토마토\t1\tkg\t0.917\thttps://shopping-phinf.pstatic.net/main_8432909/84329099811.4.jpg\t0.0\t0.0\t0.0\t0.0\n1007\t9\t딸기\t100\tg\t8.0\thttps://shopping-phinf.pstatic.net/main_8291443/82914431966.jpg\t0.0\t0.0\t0.0\t0.0\n1008\t9\t양배추\t1\t포기\t0.3\thttps://shopping-phinf.pstatic.net/main_1185661/11856619822.jpg\t0.0\t0.0\t0.0\t0.0\n1009\t9\t호박\t1\t개\t1.667\thttps://shopping-phinf.pstatic.net/main_8262536/82625361864.jpg\t0.0\t0.0\t0.0\t0.0\n1010\t11\t건블루베리\t100\tg\t0.533\thttps://shopping-phinf.pstatic.net/main_3365379/33653790267.jpg\t0.0\t0.0\t0.0\t0.0\n1011\t9\t얼갈이배추\t1\tkg\t0.217\thttps://shopping-phinf.pstatic.net/main_8284625/82846258196.1.jpg\t0.0\t0.0\t0.0\t0.0\n1012\t9\t버섯\t100\tg\t6.75\thttps://shopping-phinf.pstatic.net/main_8314714/83147143125.1.jpg\t0.0\t0.0\t0.0\t0.0\n1013\t11\t망고\t1\t개\t0.217\thttps://shopping-phinf.pstatic.net/main_8346618/83466180771.2.jpg\t0.0\t0.0\t0.0\t0.0\n1014\t9\t감자\t100\tg\t3.833\thttps://shopping-phinf.pstatic.net/main_3493560/34935609742.jpg\t0.0\t0.0\t0.0\t0.0\n1015\t9\t당근\t1\tkg\t0.633\thttps://shopping-phinf.pstatic.net/main_8293143/82931438615.jpg\t0.0\t0.0\t0.0\t0.0\n1016\t9\t고구마\t1\tkg\t0.3\thttps://shopping-phinf.pstatic.net/main_1133076/11330763953.4.jpg\t0.0\t0.0\t0.0\t0.0\n1017\t9\t고추\t100\tg\t1.4500000000000002\thttps://shopping-phinf.pstatic.net/main_3479692/34796926104.jpg\t0.0\t0.0\t0.0\t0.0\n1018\t9\t수박\t1\t개\t0.817\thttps://shopping-phinf.pstatic.net/main_2193442/21934424847.jpg\t0.0\t0.0\t0.0\t0.0\n1019\t10\t땅콩\t100\tg\t0.517\thttps://shopping-phinf.pstatic.net/main_3365385/33653852258.jpg\t0.0\t0.0\t0.0\t0.0\n1020\t8\t찹쌀\t1\tkg\t0.117\thttps://shopping-phinf.pstatic.net/main_1023062/10230629966.4.jpg\t0.0\t0.0\t0.0\t0.0\n1021\t11\t배\t10\t개\t0.067\thttps://shopping-phinf.pstatic.net/main_3291084/32910841659.jpg\t0.0\t0.0\t0.0\t0.0\n1022\t8\t콩\t500\tg\t0.2\thttps://shopping-phinf.pstatic.net/main_1018310/10183102055.7.jpg\t0.0\t0.0\t0.0\t0.0\n1023\t11\t단감\t10\t개\t0.517\thttps://shopping-phinf.pstatic.net/main_8220292/82202925253.jpg\t0.0\t0.0\t0.0\t0.0\n1024\t11\t건포도\t100\tg\t0.2\thttps://shopping-phinf.pstatic.net/main_9581051/9581051461.jpg\t0.0\t0.0\t0.0\t0.0\n1025\t9\t고춧가루\t1\tkg\t0.233\thttps://shopping-phinf.pstatic.net/main_8349457/83494571511.2.jpg\t0.0\t0.0\t0.0\t0.0\n1026\t9\t토마토\t1\tkg\t0.5\thttps://shopping-phinf.pstatic.net/main_8432909/84329099811.4.jpg\t0.0\t0.0\t0.0\t0.0\n1027\t9\t양파\t1\tkg\t0.917\thttps://shopping-phinf.pstatic.net/main_8328972/83289723745.jpg\t0.0\t0.0\t0.0\t0.0\n1028\t11\t사과\t10\t개\t0.4\thttps://shopping-phinf.pstatic.net/main_8407743/84077433562.jpg\t0.0\t0.0\t0.0\t0.0\n1029\t9\t파\t1\tkg\t0.433\thttps://shopping-phinf.pstatic.net/main_8267106/82671062730.2.jpg\t0.0\t0.0\t0.0\t0.0\n1030\t11\t레몬\t10\t개\t0.067\thttps://shopping-phinf.pstatic.net/main_8174067/81740677006.jpg\t0.0\t0.0\t0.0\t0.0\n1031\t9\t생강\t1\tkg\t0.067\thttps://shopping-phinf.pstatic.net/main_7130268/7130268252.13.jpg\t0.0\t0.0\t0.0\t0.0\n1032\t11\t파인애플\t1\t개\t1.033\thttps://shopping-phinf.pstatic.net/main_8422931/84229316082.jpg\t0.0\t0.0\t0.0\t0.0\n1033\t11\t포도\t1\tkg\t0.933\thttps://shopping-phinf.pstatic.net/main_8216823/82168233467.jpg\t0.0\t0.0\t0.0\t0.0\n1034\t9\t파프리카\t200\tg\t1.0\thttps://shopping-phinf.pstatic.net/main_8228963/82289636499.jpg\t0.0\t0.0\t0.0\t0.0\n1035\t8\t팥\t500\tg\t0.167\thttps://shopping-phinf.pstatic.net/main_1279308/12793081088.2.jpg\t0.0\t0.0\t0.0\t0.0\n1036\t11\t바나나\t100\tg\t2.0\thttps://shopping-phinf.pstatic.net/main_1669042/16690429189.1.jpg\t0.0\t0.0\t0.0\t0.0\n1037\t9\t상추\t100\tg\t1.333\thttps://shopping-phinf.pstatic.net/main_2613254/26132545573.jpg\t0.0\t0.0\t0.0\t0.0\n1038\t9\t열무\t1\tkg\t0.267\thttps://shopping-phinf.pstatic.net/main_3342456/33424566233.jpg\t0.0\t0.0\t0.0\t0.0\n1039\t8\t녹두\t500\tg\t0.167\thttps://shopping-phinf.pstatic.net/main_6545946/6545946164.14.jpg\t0.0\t0.0\t0.0\t0.0\n1040\t11\t참다래\t10\t개\t0.383\thttps://shopping-phinf.pstatic.net/main_3192737/31927379507.jpg\t0.0\t0.0\t0.0\t0.0\n1041\t8\t쌀\t1\tkg\t1.35\thttps://shopping-phinf.pstatic.net/main_1666995/16669957087.20181219095952.jpg\t0.0\t0.0\t0.0\t0.0\n1042\t9\t깐마늘\t1\tkg\t0.433\thttps://shopping-phinf.pstatic.net/main_9655310/9655310778.7.jpg\t0.0\t0.0\t0.0\t0.0\n1043\t9\t피망\t100\tg\t0.383\thttps://shopping-phinf.pstatic.net/main_3489920/34899200561.jpg\t0.0\t0.0\t0.0\t0.0\n1044\t10\t참깨\t500\tg\t0.25\thttps://shopping-phinf.pstatic.net/main_8288158/82881580367.6.jpg\t0.0\t0.0\t0.0\t0.0\n1045\t9\t참외\t10\t개\t3.883\thttps://shopping-phinf.pstatic.net/main_8395656/83956567803.jpg\t0.0\t0.0\t0.0\t0.0\n1046\t11\t오렌지\t10\t개\t0.65\thttps://shopping-phinf.pstatic.net/main_8010961/80109615031.8.jpg\t0.0\t0.0\t0.0\t0.0\n1047\t11\t체리\t100\tg\t1.183\thttps://shopping-phinf.pstatic.net/main_2277068/22770681934.jpg\t0.0\t0.0\t0.0\t0.0\n1048\t11\t복숭아\t10\t개\t0.6\thttps://shopping-phinf.pstatic.net/main_3370498/33704984885.jpg\t0.0\t0.0\t0.0\t0.0\n1049\t9\t배추\t1\t포기\t0.633\thttps://shopping-phinf.pstatic.net/main_8380868/83808686011.jpg\t0.0\t0.0\t0.0\t0.0\n1050\t9\t무\t1\t개\t0.75\thttps://shopping-phinf.pstatic.net/main_8261293/82612935637.jpg\t0.0\t0.0\t0.0\t0.0\n1051\t11\t감귤\t10\t개\t2.167\thttps://shopping-phinf.pstatic.net/main_8444747/84447478791.jpg\t0.0\t0.0\t0.0\t0.0\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664182291420_507062802",
+      "id": "paragraph_1664182291420_507062802",
+      "dateCreated": "2022-09-26T08:51:31+0000",
+      "dateStarted": "2022-10-01T15:16:22+0000",
+      "dateFinished": "2022-10-01T15:16:22+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:56163"
+    },
+    {
+      "text": "%MySQL",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-01T15:16:09+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664182509931_367967748",
+      "id": "paragraph_1664182509931_367967748",
+      "dateCreated": "2022-09-26T08:55:09+0000",
+      "status": "READY",
+      "$$hashKey": "object:56164"
+    }
+  ],
+  "name": "[base]02_product_table",
+  "id": "2HDKHW6SG",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Data적재/[base]02_product_table"
+}
