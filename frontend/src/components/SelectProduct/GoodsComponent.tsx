@@ -1,13 +1,4 @@
-import {
-  Component,
-  FC,
-  CSSProperties,
-  useState,
-  JSXElementConstructor,
-  ReactElement,
-  ReactFragment,
-  ReactPortal,
-} from 'react';
+import { FC } from 'react';
 import GoodsCard from './UI/GoodsCard';
 
 import type { GoodsItem } from './ProductComponent';

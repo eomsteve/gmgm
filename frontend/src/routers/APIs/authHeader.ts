@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export default function authHeader(token: string | null) {
   if (token != null) {

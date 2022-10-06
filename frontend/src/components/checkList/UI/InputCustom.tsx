@@ -1,4 +1,4 @@
-import { Component, FC, CSSProperties, useState, useEffect } from 'react';
+import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCustomProducts } from '@modules/CheckListProductList';
 interface CustomInputProps {}
@@ -7,7 +7,6 @@ const CustomInput: FC<CustomInputProps> = () => {
   const [inputValue, setInputValue] = useState('');
   const dispatch = useDispatch();
   const getInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target.value);
     setInputValue(() => e.target.value);
   };
   const handelInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -22,7 +21,6 @@ const CustomInput: FC<CustomInputProps> = () => {
       );
       setInputValue('');
     }
-    // dispatch(addCustomProducts)
   };
   return (
     <>

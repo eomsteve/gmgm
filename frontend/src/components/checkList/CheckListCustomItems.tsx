@@ -1,11 +1,7 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState } from 'react';
 import type { CustomProduct } from '@modules/CheckListProductList';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  setInitialState,
-  setInitialStateWhenUnMounted,
-} from '@modules/CheckListProductList';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import type { RootState } from '@modules/store';
 import CheckListCard from './UI/CheckListCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -41,24 +37,25 @@ const CheckListCustomItems: FC<CheckListCustomItemsProps> = props => {
           setNotModified(false);
         }}
       >
-        {isEdit && (isEmpty && notModified) && <CustomBanner />}
+        {isEdit && isEmpty && notModified && <CustomBanner />}
       </div>
-      {checklistCustomItems.map((product: CustomProduct, index : number) => {
+      {checklistCustomItems.map((product: CustomProduct, index: number) => {
         return (
           <div key={index}>
-
-          <CheckListCard
-            customProductName={product.customProductName}
-            isEdit={isEdit}
-            status={product.status}
-            businessType={BusinessType}
+            <CheckListCard
+              customProductName={product.customProductName}
+              isEdit={isEdit}
+              status={product.status}
+              businessType={BusinessType}
             />
-            </div>
+          </div>
         );
       })}
-      {!isEdit && isEmpty && <div className="my-10 text-gray-500 text-sm">
-      체크리스트가 비어 있어요.
-    </div>}
+      {!isEdit && isEmpty && (
+        <div className="my-10 text-sm text-gray-500">
+          체크리스트가 비어 있어요.
+        </div>
+      )}
       {isEdit && !isEmpty && (
         <div
           onClick={() => {

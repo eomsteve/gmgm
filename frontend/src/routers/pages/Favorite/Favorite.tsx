@@ -1,13 +1,10 @@
-import React, { FunctionComponent } from 'react';
-import { useNavigate, Link, Outlet } from 'react-router-dom';
-
+import { FunctionComponent } from 'react';
+import {  Outlet } from 'react-router-dom';
 
 interface FavoritePageProps {}
 
 const FavoritePage: FunctionComponent<FavoritePageProps> = () => {
-  return (
-    <Outlet />
-  );
+  return <Outlet />;
 };
 
 export default FavoritePage;

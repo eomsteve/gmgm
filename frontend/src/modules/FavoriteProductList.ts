@@ -1,8 +1,5 @@
 import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
-import { stat } from 'fs/promises';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RootState, AppDispatch } from './store';
-import type { FavoritePageData } from '@apis/favoriteApi';
 import axios from 'axios';
 const API_URL = 'https://j7d108.p.ssafy.io/api/favorite';
 interface FetchItems {
@@ -33,7 +30,7 @@ interface Initial {
 
 const initialState: Initial = {
   goods: [],
-  isLoading : false
+  isLoading: false,
 };
 
 export const getFavoritePageDataRedux = createAsyncThunk(
@@ -144,18 +141,17 @@ export const favoriteGoodsSlice = createSlice({
     builder.addCase(updateFavoriteItems.pending, (state, action) => {
       console.log(current(state), action.payload);
       state.isLoading = true;
-      console.log("updateFavoriteItems pending : ", state.isLoading);
-      
+      console.log('updateFavoriteItems pending : ', state.isLoading);
     });
     builder.addCase(updateRecommendItem.fulfilled, (state, action) => {
       state.goods = action.payload;
       state.isLoading = false;
       console.log('updateRecommendItem :', current(state), action.payload);
     });
-    builder.addCase(updateRecommendItem.pending,(state) =>{
+    builder.addCase(updateRecommendItem.pending, state => {
       state.isLoading = true;
-      console.log("updateRecommendItem pending :", state.isLoading);      
-    })
+      console.log('updateRecommendItem pending :', state.isLoading);
+    });
     builder.addCase(
       getFavoriteItemStoreReduxLogin.fulfilled,
       (state, action) => {
@@ -164,7 +160,7 @@ export const favoriteGoodsSlice = createSlice({
           current(state),
           action.payload,
         );
-        state.goods = action.payload
+        state.goods = action.payload;
       },
     );
   },

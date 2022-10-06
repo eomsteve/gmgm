@@ -1,7 +1,5 @@
 import { FC } from 'react';
-
 import { ReactComponent as GoToCheck } from '../../assets/icons/gotocheck.svg';
-
 import { useNavigate } from 'react-router-dom';
 import CheckListItem from '@components/checkList/CheckListItem';
 
@@ -18,17 +16,15 @@ interface checkListItems {
 }
 
 const MainChecklist: FC<checkListItems> = props => {
-  const {checkLists} = props
+  const { checkLists } = props;
   const navigate = useNavigate();
   const onClickHandle = async () => {
     navigate(`/checkLists`);
   };
   return (
     <>
-      <div className="text-lg pt-8 pl-[2rem]">
-        최근 장보기 내역
-      </div>
-      <main className="grid w-full grid-cols-3 content-start bg-[white] px-5 mb-[5rem]">
+      <div className="pt-8 pl-[2rem] text-lg">최근 장보기 내역</div>
+      <main className="mb-[5rem] grid w-full grid-cols-3 content-start bg-[white] px-5">
         {checkLists.map(checkList => {
           return (
             <div key={checkList.checklistId}>
@@ -50,9 +46,7 @@ const MainChecklist: FC<checkListItems> = props => {
             <div>
               <GoToCheck width="2.5rem" height="2.5rem" />
             </div>
-            <span className="text-md">
-              더보기
-            </span>
+            <span className="text-md">더보기</span>
           </div>
         </div>
       </main>

@@ -1,15 +1,11 @@
-import { useEffect, FC, CSSProperties, useState, useCallback } from 'react';
-import SubText from '../UI/ProductPicker';
-import type { RootState } from '@modules/store';
-import { useSelector, useDispatch } from 'react-redux';
-import SelectedArea from './SelectedArea';
+import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   addBasicProducts,
   removeBasicProducts,
 } from '@modules/CheckListProductList';
 import type {
   BasicProduct,
-  CustomProduct,
 } from '@modules/CheckListProductList';
 
 interface ProductListsProps {
@@ -41,14 +37,18 @@ const ProductLists: FC<ProductListsProps> = props => {
           {productList.map(product => {
             return (
               <div
-                className="m-2 grid grid-cols-3 gap-2 items-center rounded-lg border border-gray-300 p-3"
+                className="m-2 grid grid-cols-3 items-center gap-2 rounded-lg border border-gray-300 p-3"
                 onClick={() => addProduct(product)}
                 key={product.basicProductId}
               >
                 <div className="flex h-12 w-12 justify-center">
-                  <img src={product.productImg} alt="" className="bg-white rounded-lg" />
+                  <img
+                    src={product.productImg}
+                    alt=""
+                    className="rounded-lg bg-white"
+                  />
                 </div>
-                <div className="col-span-2 col-start-2 pl-2 ps-2">
+                <div className="ps-2 col-span-2 col-start-2 pl-2">
                   {product.basicProductName}
                 </div>
               </div>

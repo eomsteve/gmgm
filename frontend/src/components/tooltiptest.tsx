@@ -5,8 +5,7 @@ import { ReactComponent as Equal } from '@src/assets/icons/equals.svg';
 import { ReactComponent as Down } from '@src/assets/icons/down.svg';
 import { ReactComponent as Up } from '@src/assets/icons/up.svg';
 import { ReactComponent as TooltipQuestion } from '@src/assets/icons/tooltip-question-v2.svg';
-interface TooltipProps {
-}
+interface TooltipProps {}
 const TooltipComponent: FC<TooltipProps> = () => {
   return (
     <>
@@ -35,7 +34,6 @@ const TooltipComponent: FC<TooltipProps> = () => {
       >
         <TooltipQuestion width="1.2rem" height="1.2rem" color="black" />
       </Tooltip>
-      
     </>
   );
 };

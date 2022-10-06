@@ -1,11 +1,7 @@
 import { FC } from 'react';
 import type { BasicProduct } from '@modules/CheckListProductList';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  setInitialState,
-  setInitialStateWhenUnMounted,
-} from '@modules/CheckListProductList';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import type { RootState } from '@modules/store';
 import CheckListCard from './UI/CheckListCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -82,7 +78,7 @@ const CheckListBasicItems: FC<CheckListBasicItemsProps> = props => {
             });
           }}
         >
-          <div className="flex justify-center m-0 text-[1.5rem]">
+          <div className="m-0 flex justify-center text-[1.5rem]">
             <FontAwesomeIcon icon={faPlus} />
           </div>
         </div>

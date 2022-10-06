@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { removeGoods, updateFavoriteItems } from '@modules/FavoriteProductList';
@@ -31,7 +31,6 @@ const SelectedArea: FC<SelectedAreaProps> = () => {
     }
   };
   console.log(goods);
-  
 
   return (
     <>

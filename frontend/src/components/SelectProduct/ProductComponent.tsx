@@ -4,27 +4,26 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import SubText from './UI/ProductPicker';
 import Goods from './GoodsComponent';
-import './UI/product-slick.css'
-import type { Product } from './CategoryComponent'
-import { getGoodsDataByProductId } from '@routers/APIs/favoriteApi'
-
+import './UI/product-slick.css';
+import type { Product } from './CategoryComponent';
+import { getGoodsDataByProductId } from '@routers/APIs/favoriteApi';
 
 interface ProductListsProps {
   productList: Product[];
 }
 type GoodsPrice = {
-  price : number;
-  researchDate : string;
-}
+  price: number;
+  researchDate: string;
+};
 export type GoodsItem = {
-  goodsId : number;
-  goodsName : string;
-  goodsImg? : string;
-  capacity? : string;
-  measure? : string;
-  ea? : string;
-  goodsPrice? : GoodsPrice[];
-}
+  goodsId: number;
+  goodsName: string;
+  goodsImg?: string;
+  capacity?: string;
+  measure?: string;
+  ea?: string;
+  goodsPrice?: GoodsPrice[];
+};
 
 interface NextArrowProps {
   style?: CSSProperties;
@@ -44,21 +43,20 @@ const ProductLists: FC<ProductListsProps> = props => {
     slidesPerRow: 4,
     arrows: false,
   };
-  useEffect(()=>{
-    setGoodsList([])
-  },[productList])
+  useEffect(() => {
+    setGoodsList([]);
+  }, [productList]);
 
-
-  const handle= useCallback((productId: number) => {
-    const loadGoodsData = async(productId : number) => {
-      const goodsData  = await getGoodsDataByProductId(productId);
+  const handle = useCallback((productId: number) => {
+    const loadGoodsData = async (productId: number) => {
+      const goodsData = await getGoodsDataByProductId(productId);
       console.log(goodsData);
-      
+
       setGoodsList(goodsData);
-    }
-    
-    loadGoodsData(productId)
-  },[]);
+    };
+
+    loadGoodsData(productId);
+  }, []);
 
   return (
     <>
@@ -72,8 +70,14 @@ const ProductLists: FC<ProductListsProps> = props => {
         <Slider {...settings}>
           {productList.map(product => {
             return (
-              <div onClick={() => handle(product.basicProductId)} key={product.basicProductId}>
-                <SubText basicProductId={product.basicProductId} basicProductName={product.basicProductName} />
+              <div
+                onClick={() => handle(product.basicProductId)}
+                key={product.basicProductId}
+              >
+                <SubText
+                  basicProductId={product.basicProductId}
+                  basicProductName={product.basicProductName}
+                />
               </div>
             );
           })}

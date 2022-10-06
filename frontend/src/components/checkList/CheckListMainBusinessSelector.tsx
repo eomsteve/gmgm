@@ -1,4 +1,4 @@
-import { FC, useState, useEffect,  useRef } from 'react';
+import { FC, useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import ConfirmButton from './UI/ConFirmButton';
 import {
@@ -19,8 +19,7 @@ import type {
 import type { RootState, AppDispatch } from '@modules/store';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import Tooltip from '@components/tooltiptest'
-
+import Tooltip from '@components/tooltiptest';
 
 // 리덕스
 import ChecklistHeader from '@components/EmptyHeader';
@@ -36,9 +35,6 @@ interface CheckListSelectBoxProps {
   optionList: string[];
 }
 
-
-
-
 const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const { checklistId } = useParams();
   const location = useLocation();
@@ -52,7 +48,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const { checklistCustomItems, checklistBasicItems } = useSelector(
     (state: RootState) => {
       console.log(state);
-      
+
       return {
         checklistCustomItems:
           state.persistedReducer.CheckListProductsReducer.checklistCustomItems,
@@ -73,7 +69,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   useEffect(() => {
     return () => {
       setIsModified(true);
-      
+
       basicRef.current = checklistBasicItems;
       customRef.current = checklistCustomItems;
       console.log('update', basicRef.current, customRef.current);
@@ -86,7 +82,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     const fetchData = async (checklistId?: string) => {
       const data = await dispatch(getCheckLists(checklistId)).unwrap();
       console.log(data);
-      
+
       if (data.empty) {
         console.log('empty checklist', data.customEmpty);
         setCustomEmpty(() => data.customEmpty);
@@ -109,15 +105,13 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     }
     return () => {
       window.removeEventListener('beforeunload', preventClose);
-      console.log("unmount is Edit? : ", isEdit);
-      
+      console.log('unmount is Edit? : ', isEdit);
+
       if (isEdit) {
         console.log('unMounted');
         dispatch(setInitialStateWhenUnMounted());
       } else {
-        console.log(
-          'unMounted22',
-        );
+        console.log('unMounted22');
         if (basicRef.current !== undefined && customRef.current !== undefined) {
           const basic = basicRef.current;
           const custom = customRef.current;
@@ -142,8 +136,8 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
         checklistId,
       ).then(data => {
         console.log(data);
-        setBasicEmpty(()=>data.basicEmpty)
-        setCustomEmpty(()=>data.customEmpty);
+        setBasicEmpty(() => data.basicEmpty);
+        setCustomEmpty(() => data.customEmpty);
         dispatch(setInitialState(data));
       });
       setIsEdit(() => !isEdit);
@@ -155,12 +149,9 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   };
   const navigate = useNavigate();
   const [optionState, setOption] = useState<string>('m');
-  
-  
-  const handleSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    setOption(()=> (optionState == 'm') ? 'o': 'm');
-    
+  const handleSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOption(() => (optionState == 'm' ? 'o' : 'm'));
   };
   const CustomMsg = () => {
     return (
@@ -168,14 +159,16 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
         <p>정말로 삭제하시겠습니까?</p>
         <div className="flex justify-around ">
           <button
-            className="m-1 w-[50%] p-1 border-solid border-2 rounded-md hover:bg-red-400"
+            className="m-1 w-[50%] rounded-md border-2 border-solid p-1 hover:bg-red-400"
             onClick={() => {
               deleteItem(checklistId);
             }}
           >
             네
           </button>
-          <button className="m-1 w-[50%] p-1 border-solid border-2 rounded-md hover:bg-slate-400">아니오</button>
+          <button className="m-1 w-[50%] rounded-md border-2 border-solid p-1 hover:bg-slate-400">
+            아니오
+          </button>
         </div>
       </div>
     );
@@ -195,22 +188,28 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
         <ChecklistHeader title="장보기 목록" navigateRouter="checkLists" />
       )}
 
-       <div className={`mx-5 my-1 flex items-center ${isEdit ?' justify-end ':' justify-between '}`}>
-       {!isEdit && <div className="flex items-center">
-        <div className="switch-button m-3 ml-[3vw] ">
-        <input
-          onChange={handleSelection}
-          className="switch-button-checkbox "
-          type="checkbox"
-        ></input>
-        <label className="switch-button-label" htmlFor="">
-          <span className="switch-button-label-span">오프라인</span>
-        </label>
-          
-      </div>
-      <span className=" right-[1.5rem]"><Tooltip /></span>
-       </div>  
-      }
+      <div
+        className={`mx-5 my-1 flex items-center ${
+          isEdit ? ' justify-end ' : ' justify-between '
+        }`}
+      >
+        {!isEdit && (
+          <div className="flex items-center">
+            <div className="switch-button m-3 ml-[3vw] ">
+              <input
+                onChange={handleSelection}
+                className="switch-button-checkbox "
+                type="checkbox"
+              ></input>
+              <label className="switch-button-label" htmlFor="">
+                <span className="switch-button-label-span">오프라인</span>
+              </label>
+            </div>
+            <span className=" right-[1.5rem]">
+              <Tooltip />
+            </span>
+          </div>
+        )}
 
         {!!isEdit ? (
           <div
@@ -226,7 +225,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
               onClick={() => {
                 displayMsg();
               }}
-              className="text-sm flex"
+              className="flex text-sm"
             >
               <span className="ml-2 grid grid-cols-2">
                 <Delete width="1rem" height="1rem" />
@@ -259,19 +258,20 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
 
       <div className="flex w-full flex-col items-center justify-center p-0">
         <div className="flex">
-        <span>가격 정보를 볼 수 있어요 🥰</span>
+          <span>가격 정보를 볼 수 있어요 🥰</span>
         </div>
-        <div onClick={()=>{
-          setImGoingToSelect(true)
-        }}>
-
-        <BasicProductCheckList
-          isEdit={isEdit}
-          BusinessType={optionState}
-          isEmpty={basicEmpty}
-          checklistId={checklistId}
+        <div
+          onClick={() => {
+            setImGoingToSelect(true);
+          }}
+        >
+          <BasicProductCheckList
+            isEdit={isEdit}
+            BusinessType={optionState}
+            isEmpty={basicEmpty}
+            checklistId={checklistId}
           />
-          </div>
+        </div>
 
         {isEdit ? <hr className="my-6 mx-[-1.25rem] mt-4 w-screen" /> : <br />}
         <span>가격 정보를 볼 수 없어요 😥</span>

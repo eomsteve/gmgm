@@ -2,7 +2,6 @@ import React, { useState, useCallback, FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUpApi, checkEmailDuplicate } from '@apis/userApi';
 
-import axios from 'axios';
 
 interface SignUpProps { }
 
@@ -353,23 +352,6 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
           >
             회원가입하기
           </button>
-
-          {/* <div className="mt-4 text-center text-sm text-[grey]">
-            By signing up, you agree to the
-            <a
-              className="border-b border-[grey] text-stone-600 no-underline"
-              href="#"
-            >
-              Terms of Service
-            </a>{' '}
-            and
-            <a
-              className="border-b border-stone-600 text-stone-600 no-underline"
-              href="#"
-            >
-              Privacy Policy
-            </a>
-          </div> */}
         </div>
 
         <div className="mb-6 text-stone-600">

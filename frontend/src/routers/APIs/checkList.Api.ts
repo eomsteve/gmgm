@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import type {CustomProduct, BasicProduct } from '@modules/CheckListProductList'
+import type {
+  CustomProduct,
+  BasicProduct,
+} from '@modules/CheckListProductList';
 import type { RootState } from '@modules/store';
 import { logInApi } from './userApi';
 const API_URL = 'https://j7d108.p.ssafy.io/api/checklist';
@@ -11,8 +14,8 @@ export type CheckList = {
   regDate: string;
   itemInfos: {
     productName: string;
-    status:boolean
-  }[]
+    status: boolean;
+  }[];
 };
 
 /**
@@ -55,8 +58,8 @@ export const checkListSelection = async () => {};
 
 /**
  * * 체크리스트 조회, 수정페이지
- * @param checkListId 
- * @returns 
+ * @param checkListId
+ * @returns
  */
 export const getCheckList = async (checkListId?: string) => {
   try {
@@ -68,7 +71,11 @@ export const getCheckList = async (checkListId?: string) => {
   }
 };
 
-export const updateCheckLists = async ( checklistBasicItems : BasicProduct[], checklistCustomItems : CustomProduct[], checkListId?: string ) => {
+export const updateCheckLists = async (
+  checklistBasicItems: BasicProduct[],
+  checklistCustomItems: CustomProduct[],
+  checkListId?: string,
+) => {
   try {
     const { data } = await axios({
       url: API_URL + `/info/${checkListId}`,
@@ -77,35 +84,35 @@ export const updateCheckLists = async ( checklistBasicItems : BasicProduct[], ch
         checklistBasicItems,
         checklistCustomItems,
       },
-  });
-  console.log('updated to:', data)
-  checklistBasicItems = data.checklistBasicItems;
-  return data;
-} catch (error) {
-  
-}
+    });
+    console.log('updated to:', data);
+    checklistBasicItems = data.checklistBasicItems;
+    return data;
+  } catch (error) {}
 };
 
-export const updateCheckListStatus = async (checklistBasicItems : BasicProduct[], checklistCustomItems : CustomProduct[], checklistId?: string ) => {
-  console.log('????', checklistBasicItems,
-  checklistCustomItems);
-  
+export const updateCheckListStatus = async (
+  checklistBasicItems: BasicProduct[],
+  checklistCustomItems: CustomProduct[],
+  checklistId?: string,
+) => {
+  console.log('????', checklistBasicItems, checklistCustomItems);
+
   try {
     const { data } = await axios({
-      url : API_URL + `/status/${checklistId}`,
-      method : 'put',
+      url: API_URL + `/status/${checklistId}`,
+      method: 'put',
       data: {
         checklistBasicItems,
         checklistCustomItems,
-      }
+      },
     });
     console.log(data);
     return data;
   } catch (error) {
     console.log(error);
   }
-  
-}
+};
 
 export const addCheckList = async () => {
   try {
@@ -115,38 +122,30 @@ export const addCheckList = async () => {
     });
     console.log(data);
     return data;
-  } catch (error) {
-    
-  }
-}
-
+  } catch (error) {}
+};
 
 export const deleteCheckList = async (checkListId?: string) => {
   try {
     const { data } = await axios({
-      url: API_URL +  `/${checkListId}`,
+      url: API_URL + `/${checkListId}`,
       method: 'delete',
     });
     console.log(data);
     return data;
-  } catch (error) {
-    
-  }
-}
-
+  } catch (error) {}
+};
 
 export const deleteEmptyCheckList = async (checkListId?: string) => {
   console.log(checkListId);
-  
+
   try {
     const data = await axios({
-      url : API_URL + `/empty/${checkListId}`,
-      method : 'delete'
+      url: API_URL + `/empty/${checkListId}`,
+      method: 'delete',
     });
     console.log('삭제됨');
-    
   } catch (error) {
     console.error(error);
-    
   }
-}
+};

@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Calculator from './Calculator';
 import { atCheckList, detailSelectBoxChange, fromFavorite } from '@apis/detail';
 import OnlineCard from './OnlineCard';
@@ -97,13 +97,15 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
           {productData &&
             !goodsData &&
             productData.goodsInfos.map(goods => {
-              return (<option value={goods.goodsId} key={goods.goodsId}>
-                {goods.goodsName}
-              </option>)
+              return (
+                <option value={goods.goodsId} key={goods.goodsId}>
+                  {goods.goodsName}
+                </option>
+              );
             })}
         </select>
       </div>
-      
+
       {productData && (
         <Calculator
           measure={productData.measure}
