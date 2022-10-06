@@ -82,12 +82,12 @@ const CheckListCard: FC<CheckListProps> = props => {
           id={customProductName || basicProductName}
         />
         <label
-          className={`${isEdit ? 'col-span-8 ' : 'col-span-4'} flex items-center p-1 ${basicProductName && basicProductName?.length < 5 ? '' : ' truncate'} ${
+          className={`${isEdit ? 'col-span-8 ' : customProductName ? 'col-span-10' : basicProductName?.length === 9 ? ' truncate text-xs col-span-4 ' : ' col-span-4 '} flex items-center p-1 ${
             !isChecked ? '' : 'text-gray-500 line-through'
           }`}
           htmlFor={customProductName || basicProductName}
         >
-          <span> {customProductName || basicProductName}</span>
+           {customProductName || basicProductName}
         </label>
         { isEdit ? '': basicProductName && 
         <div className="col-span-2">

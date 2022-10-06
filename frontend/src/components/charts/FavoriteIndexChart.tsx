@@ -73,9 +73,11 @@ const FavoriteIndexChart: FunctionComponent<
   const countryValues = countryIndices.values.map(data => {
     return data.value;
   });
-  const favoriteValues = favoriteIndices ? favoriteIndices.values.map(data => {
-    return data.value ;
-  }) : undefined;
+  const favoriteValues = favoriteIndices
+    ? favoriteIndices.values.map(data => {
+        return data.value;
+      })
+    : undefined;
   const data = {
     labels,
     datasets: [
@@ -97,15 +99,33 @@ const FavoriteIndexChart: FunctionComponent<
     ],
   };
   return (
-    <div className="mb-5">
+    <div className="mb-2">
       <span className="mb-2 text-lg">
         지수 그래프
         <span className="ml-2 text-xs text-gray-500">
           즐겨찾기 목록으로 만들어진 지수를 CPI와 함께 볼 수 있어요.
         </span>
+        <div className="text-sm text-gray-400"> 기준년도 : 2020 년 = 100</div>
       </span>
       <div className="flex h-[35vh] w-auto items-center justify-center">
         <Line options={options} data={data} />
+      </div>
+      <div className="mt-4 text-sx text-center text-gray-800">{`${countryIndices.researchDates[countryIndices.researchDates.length-1].researchDate} 일 기준`}</div>
+      <div className="mt-2 flex justify-between">
+        <div className="flex-col flex items-center">          
+          <div className="text-[#ff6384]">
+            {`소비자 물가 지수 : ${
+              countryIndices.values[countryIndices.values.length - 1].value
+            }`}
+          </div>
+        </div>
+        <div className="flex-col flex items-center">
+          {favoriteIndices && (
+            <div className="text-[#639DEB]">{`즐겨찾기 지수 : ${
+              favoriteIndices.values[favoriteIndices.values.length - 1].value
+            }`}</div>
+          )}
+        </div>
       </div>
     </div>
   );

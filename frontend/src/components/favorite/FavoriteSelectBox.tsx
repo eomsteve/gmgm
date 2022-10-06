@@ -14,7 +14,7 @@ interface FavoriteSelectBoxProps {
 
 const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
   const { pageData } = props;
-  // console.log('selectPage :', pageData);
+  console.log('selectPage :', pageData);
 
   const [optionState, setOption] = useState<string>('m');
 
@@ -49,7 +49,7 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
       </span>
       </div>
 
-      <div className="from-blur flex w-full flex-col items-center justify-center bg-gradient-to-t p-1">
+      <div className="from-blur flex w-full mb-7 flex-col items-center justify-center bg-gradient-to-t p-1">
         {pageData.favoriteItems.length ? (
           pageData.favoriteItems.map((favoriteItem, index) => {
             return (
