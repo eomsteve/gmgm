@@ -53,7 +53,11 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
       setGoodsInfo(() => data);
       return data;
     };
+    // console.log(e.target.value, businessType);
     getGoodsDetails(e.target.value, businessType);
+    // if(!Number.isNaN(Number(e.target.value))){
+    //   getGoodsDetails(e.target.value, businessType);
+    // }
   };
 
   return (
@@ -71,12 +75,12 @@ const DetailSelectBox: FC<DetailSelectBoxProps> = props => {
           aria-label=".form-select-sm example"
         >
           {productData && !goodsId && (
-            <option value={productData.basicProductName}>
+            <option value={productId}>
               {productData.basicProductName}류
             </option>
           )}
           {productData && goodsData && (
-            <option value={goodsData.goodsName}>{goodsData.goodsName}</option>
+            <option value={goodsId}>{goodsData.goodsName}</option>
           )}
           {productData &&
             goodsData &&
