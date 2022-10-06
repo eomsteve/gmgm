@@ -1,0 +1,350 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n### 2개의 SparkDF row 방향 합치기\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T02:09:07+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>2개의 SparkDF row 방향 합치기</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664503727184_1752611219",
+      "id": "paragraph_1664503727184_1752611219",
+      "dateCreated": "2022-09-30T02:08:47+0000",
+      "dateStarted": "2022-09-30T02:09:07+0000",
+      "dateFinished": "2022-09-30T02:09:07+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:139231"
+    },
+    {
+      "text": "%pyspark\nsdf1 = spark.read.csv('/nongsanmul_data/20211001.csv', inferSchema=True, header=True, encoding='cp949')\nsdf2 = spark.read.csv('/nongsanmul_data/20211101.csv', inferSchema=True, header=True, encoding='cp949')\nsdf1.show()\nsdf2.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T02:07:41+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+------------+-------------+------------------+-----------------+\n|itemname|    kindname|research_date|             price|       unit_price|\n+--------+------------+-------------+------------------+-----------------+\n|      쌀|일반계(20kg)|   2021-10-01|           51840.0|           2592.0|\n|      쌀|일반계(20kg)|   2021-10-05|           51840.0|           2592.0|\n|      쌀|일반계(20kg)|   2021-10-06|           51840.0|           2592.0|\n|      쌀|일반계(20kg)|   2021-10-07|           51840.0|           2592.0|\n|      쌀|일반계(20kg)|   2021-10-08|           51840.0|           2592.0|\n|      쌀|일반계(20kg)|   2021-10-12|49866.666666666664|2493.333333333333|\n|      쌀|일반계(20kg)|   2021-10-13|49866.666666666664|2493.333333333333|\n|      쌀|일반계(20kg)|   2021-10-14|49866.666666666664|2493.333333333333|\n|      쌀|일반계(20kg)|   2021-10-15|49866.666666666664|2493.333333333333|\n|      쌀|일반계(20kg)|   2021-10-18|49866.666666666664|2493.333333333333|\n|      쌀|일반계(20kg)|   2021-10-19|49866.666666666664|2493.333333333333|\n|      쌀|일반계(20kg)|   2021-10-20|49866.666666666664|2493.333333333333|\n|      쌀|일반계(20kg)|   2021-10-21|49866.666666666664|2493.333333333333|\n|      쌀|일반계(20kg)|   2021-10-22|           49850.0|           2492.5|\n|      쌀|일반계(20kg)|   2021-10-25|           49850.0|           2492.5|\n|      쌀|일반계(20kg)|   2021-10-26|              null|             null|\n|      쌀|일반계(20kg)|   2021-10-27|              null|             null|\n|      쌀|일반계(20kg)|   2021-10-28|              null|             null|\n|      쌀|일반계(20kg)|   2021-10-29|              null|             null|\n|    찹쌀| 일반계(1kg)|   2021-10-01|            4992.0|           4992.0|\n+--------+------------+-------------+------------------+-----------------+\nonly showing top 20 rows\n\n+--------+------------+-------------+-------+----------+\n|itemname|    kindname|research_date|  price|unit_price|\n+--------+------------+-------------+-------+----------+\n|      쌀|일반계(20kg)|   2021-11-01|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-02|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-03|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-04|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-05|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-08|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-09|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-10|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-11|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-12|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-15|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-16|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-17|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-18|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-19|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-22|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-23|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-24|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-25|53520.0|    2676.0|\n|      쌀|일반계(20kg)|   2021-11-26|53520.0|    2676.0|\n+--------+------------+-------------+-------+----------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=12",
+              "$$hashKey": "object:139469"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=13",
+              "$$hashKey": "object:139470"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=14",
+              "$$hashKey": "object:139471"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=15",
+              "$$hashKey": "object:139472"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=16",
+              "$$hashKey": "object:139473"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=17",
+              "$$hashKey": "object:139474"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664503531442_1970233036",
+      "id": "paragraph_1664503531442_1970233036",
+      "dateCreated": "2022-09-30T02:05:31+0000",
+      "dateStarted": "2022-09-30T02:07:41+0000",
+      "dateFinished": "2022-09-30T02:07:41+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:139232"
+    },
+    {
+      "text": "%pyspark\nsdf = sdf1.union(sdf2)\nprint(sdf1.count())\nprint(sdf2.count())\nprint(sdf.count())",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T02:26:50+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "919\n1076\n1995\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=78",
+              "$$hashKey": "object:139552"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=79",
+              "$$hashKey": "object:139553"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=80",
+              "$$hashKey": "object:139554"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=81",
+              "$$hashKey": "object:139555"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=82",
+              "$$hashKey": "object:139556"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=83",
+              "$$hashKey": "object:139557"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664503593959_17638927",
+      "id": "paragraph_1664503593959_17638927",
+      "dateCreated": "2022-09-30T02:06:33+0000",
+      "dateStarted": "2022-09-30T02:26:50+0000",
+      "dateFinished": "2022-09-30T02:26:50+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:139233"
+    },
+    {
+      "text": "%md\n### (2) 여러개 한번에 union하기",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T02:29:44+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(2) 여러개 한번에 union하기</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664504973632_2046364003",
+      "id": "paragraph_1664504973632_2046364003",
+      "dateCreated": "2022-09-30T02:29:33+0000",
+      "dateStarted": "2022-09-30T02:29:44+0000",
+      "dateFinished": "2022-09-30T02:29:44+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:139234"
+    },
+    {
+      "text": "%pyspark\nfrom functools import reduce  # For Python 3.x\nfrom pyspark.sql import DataFrame\n\ndef unionAll(*dfs):\n    return reduce(DataFrame.unionAll, dfs)\n\n\nunionAll(sdf1, sdf1, sdf1).count()\n# unionAll(sdf1, sdf1, sdf1).show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T02:30:38+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "2757\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=90",
+              "$$hashKey": "object:139681"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=91",
+              "$$hashKey": "object:139682"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664504957264_37494326",
+      "id": "paragraph_1664504957264_37494326",
+      "dateCreated": "2022-09-30T02:29:17+0000",
+      "dateStarted": "2022-09-30T02:30:38+0000",
+      "dateFinished": "2022-09-30T02:30:38+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:139235"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T02:30:34+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664505034954_160265555",
+      "id": "paragraph_1664505034954_160265555",
+      "dateCreated": "2022-09-30T02:30:34+0000",
+      "status": "READY",
+      "$$hashKey": "object:139236"
+    }
+  ],
+  "name": "sparkDF_union",
+  "id": "2HENPMS2V",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/예시코드/sparkDF_union"
+}

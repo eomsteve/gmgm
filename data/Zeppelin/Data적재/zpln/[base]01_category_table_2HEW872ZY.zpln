@@ -1,0 +1,81 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark.conf\n\nSPARK_HOME  /usr/local/spark\nPYSPARK_PYTHON /usr/bin/python3\nspark.pyspark.python  /usr/bin/python3\n\n# set driver memory to 8g\nspark.driver.memory 6g\n\n# set executor number to be 3\nspark.executor.instances  4\n\n# set executor memory 4g\nspark.executor.memory  2g\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T08:44:14+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664181806970_1175812278",
+      "id": "paragraph_1664181806970_1175812278",
+      "dateCreated": "2022-09-26T08:43:26+0000",
+      "status": "READY",
+      "focus": true,
+      "$$hashKey": "object:55084"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col\n# MySQL에 데이터 넣기 : 성공 (https://ko.n4zc.com/article/sa4p4m6e.html)\nprop = {\"user\": \"ji\", \"password\": \"cvgkbhs234r#8tdx\", \"driver\": \"com.mysql.cj.jdbc.Driver\"} \nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\n\n# 저장소에서 읽기\ncategory_sdf = spark.read.csv('/DB_data/category_table.csv', header=True, inferSchema=True)\n\n# DB에 쓰기\ncategory_sdf.write.jdbc(\\\n    url= url,\\\n    table = \"category\",\\\n    mode=\"append\",\\\n    properties=prop)\n    ",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T08:54:14+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664181859698_2070607371",
+      "id": "paragraph_1664181859698_2070607371",
+      "dateCreated": "2022-09-26T08:44:19+0000",
+      "status": "READY",
+      "$$hashKey": "object:55085"
+    }
+  ],
+  "name": "[base]01_category_table",
+  "id": "2HEW872ZY",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Data적재/[base]01_category_table"
+}

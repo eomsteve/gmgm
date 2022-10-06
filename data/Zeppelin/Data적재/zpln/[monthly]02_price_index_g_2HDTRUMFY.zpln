@@ -1,0 +1,1801 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark.conf\n\nSPARK_HOME  /usr/local/spark\nPYSPARK_PYTHON /usr/bin/python3\nspark.pyspark.python  /usr/bin/python3\n\n# set driver memory to 8g\nspark.driver.memory 8g\n\n# set executor number to be 3\nspark.executor.instances  3\n\n# set executor memory 4g\nspark.executor.memory  2g\n\n# Any other spark properties can be set here. Here's avaliable spark configruation you can set. (http://spark.apache.org/docs/latest/configuration.html)",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T01:02:26+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1663807113982_656286853",
+      "id": "paragraph_1663565906832_1968683296",
+      "dateCreated": "2022-09-22T00:38:33+0000",
+      "dateStarted": "2022-09-26T01:02:26+0000",
+      "dateFinished": "2022-09-26T01:02:26+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:11976"
+    },
+    {
+      "text": "%pyspark\npp_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\") \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", \"select product_id, unit_price, research_date from product_price where date_type='m' order by product_id, research_date\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", \"cvgkbhs234r#8tdx\").load()\n    \npp_sdf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T01:11:31+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------+----------+-------------+\n|product_id|unit_price|research_date|\n+----------+----------+-------------+\n|         0|     183.4|   2012-01-01|\n|         0|     183.6|   2012-02-01|\n|         0|     183.6|   2012-03-01|\n|         0|     183.6|   2012-04-01|\n|         0|     183.4|   2012-05-01|\n|         0|     183.8|   2012-06-01|\n|         0|     182.8|   2012-07-01|\n|         0|     184.0|   2012-08-01|\n|         0|     186.8|   2012-09-01|\n|         0|     187.2|   2012-10-01|\n|         0|     186.6|   2012-11-01|\n|         0|     186.2|   2012-12-01|\n|         0|     185.8|   2013-01-01|\n|         0|     185.2|   2013-02-01|\n|         0|     183.8|   2013-03-01|\n|         0|     187.4|   2013-04-01|\n|         0|     185.6|   2013-05-01|\n|         0|     190.4|   2013-06-01|\n|         0|     187.6|   2013-07-01|\n|         0|     186.4|   2013-08-01|\n+----------+----------+-------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=8",
+              "$$hashKey": "object:13047"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664154459068_484789258",
+      "id": "paragraph_1664154459068_484789258",
+      "dateCreated": "2022-09-26T01:07:39+0000",
+      "dateStarted": "2022-09-26T01:11:31+0000",
+      "dateFinished": "2022-09-26T01:11:31+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11977"
+    },
+    {
+      "text": "%MySQL\nshow tables;",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T01:12:36+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Tables_in_spark_test": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "Tables_in_spark_test\nTest_category\nWines\ncategory\ncategory2\nchecklist\nchecklist_basic_item\nchecklist_custom_item\nfavorite_goods\nfavorite_total_price\ngoods\ngoods_price\nhibernate_sequence\nprice_index\nproduct\nproduct_price\nusers\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1663807113983_967872582",
+      "id": "paragraph_1663577244684_1602251142",
+      "dateCreated": "2022-09-22T00:38:33+0000",
+      "dateStarted": "2022-09-22T00:44:36+0000",
+      "dateFinished": "2022-09-22T00:44:36+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11978"
+    },
+    {
+      "text": "%MySQL\nselect * from product",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-22T00:45:32+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "product_id": "string",
+                      "img": "string",
+                      "measure": "string",
+                      "name": "string",
+                      "unit": "string",
+                      "weight": "string",
+                      "category_id": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "product_id\timg\tmeasure\tname\tunit\tweight\tcategory_id\n0\t감자칩_img\tg\t감자칩\t10\t11.333\t0\n1\t껌_img\tg\t껌\t10\t0.367\t0\n2\t모나카류아이스크림_img\tml\t모나카류아이스크림\t10\t21.667\t0\n3\t비스킷_img\tg\t비스킷\t10\t4.167\t0\n4\t빙과류_img\tml\t빙과류\t10\t22.167\t0\n5\t사탕_img\tg\t사탕\t10\t2.0\t0\n6\t아이스크림_img\tml\t아이스크림\t10\t23.333\t0\n7\t에너지바_img\tg\t에너지바\t10\t16.667\t0\n8\t초코바_img\tg\t초코바\t10\t4.833\t0\n9\t초코파이_img\tg\t초코파이\t10\t3.167\t0\n10\t초콜릿_img\tg\t초콜릿\t10\t10.5\t0\n11\t간장_img\tml\t간장\t100\t3.0\t1\n12\t고추장_img\tg\t고추장\t100\t1.333\t1\n13\t국수_img\tg\t국수\t100\t5.333\t1\n14\t꿀_img\tg\t꿀\t100\t0.833\t1\n15\t당면_img\tg\t당면\t100\t1.0\t1\n16\t된장_img\tg\t된장\t100\t1.5\t1\n17\t두부_img\tg\t두부\t100\t4.5\t1\n18\t드레싱_img\tg\t드레싱\t100\t0.55\t1\n19\t마요네즈_img\tg\t마요네즈\t100\t0.75\t1\n20\t밀가루_img\tg\t밀가루\t100\t2.667\t1\n21\t부침가루_img\tg\t부침가루\t100\t1.667\t1\n22\t설탕_img\tg\t설탕\t100\t1.5\t1\n23\t소금_img\tg\t소금\t100\t2.083\t1\n24\t식용유_img\tml\t식용유\t100\t3.0\t1\n25\t식초_img\tml\t식초\t100\t0.583\t1\n26\t쌈장_img\tg\t쌈장\t100\t0.633\t1\n27\t잼_img\tg\t잼\t100\t0.917\t1\n28\t참기름_img\tml\t참기름\t10\t2.0\t1\n29\t카레_img\tg\t카레\t10\t5.833\t1\n30\t케첩_img\tg\t케첩\t100\t1.5\t1\n31\t혼합조미료_img\tg\t혼합조미료\t10\t1.833\t1\n32\t냉동만두_img\tg\t냉동만두\t100\t2.667\t2\n33\t라면_img\t개\t라면\t1\t5.333\t2\n34\t빵_img\tg\t빵\t10\t40.0\t2\n35\t스프_img\tg\t스프\t10\t1.833\t2\n36\t시리얼_img\tg\t시리얼\t100\t3.0\t2\n37\t식빵_img\tg\t식빵\t100\t2.667\t2\n38\t즉석국_img\tg\t즉석국\t10\t9.833\t2\n39\t즉석덮밥_img\tg\t즉석덮밥\t10\t33.333\t2\n40\t즉석밥_img\tg\t즉석밥\t100\t23.0\t2\n41\t즉석죽_img\tg\t즉석죽\t100\t3.717\t2\n42\t컵라면_img\tg\t컵라면\t100\t2.333\t2\n43\t컵밥_img\tg\t컵밥\t100\t5.833\t2\n44\t탕_img\tg\t탕\t100\t5.0\t2\n45\t건전지_img\t개\t건전지\t1\t2.333\t3\n46\t고무장갑_img\t개\t고무장갑\t1\t1.05\t3\n47\t구강청결제_img\tml\t구강청결제\t10\t4.167\t3\n48\t랩_img\tm\t랩\t1\t1.5\t3\n49\t로션_img\tml\t로션\t100\t1.667\t3\n50\t마스크_img\t개\t마스크\t10\t15.833\t3\n51\t면도날_img\t개\t면도날\t1\t0.5\t3\n52\t물휴지_img\t매\t물휴지\t10\t5.0\t3\n53\t바디워시_img\tml\t바디워시\t100\t1.667\t3\n54\t부탄가스_img\t개\t부탄가스\t1\t0.867\t3\n55\t비누_img\t개\t비누\t1\t1.167\t3\n56\t살균소독제_img\tml\t살균소독제\t100\t0.917\t3\n57\t살충제_img\tml\t살충제\t100\t0.252\t3\n58\t생리대_img\t개\t생리대\t1\t6.667\t3\n59\t샴푸_img\tml\t샴푸\t100\t2.167\t3\n60\t섬유유연제_img\tml\t섬유유연제\t100\t3.0\t3\n61\t섬유탈취제_img\tml\t섬유탈취제\t100\t0.533\t3\n62\t세정제_img\tml\t세정제\t100\t0.5\t3\n63\t세탁세제(가루형)_img\tg\t세탁세제(가루형)\t100\t1.333\t3\n64\t세탁세제(액체형)_img\tml\t세탁세제(액체형)\t100\t4.667\t3\n65\t습기제거제_img\t개\t습기제거제\t1\t0.5\t3\n66\t염색약_img\tg\t염색약\t10\t10.0\t3\n67\t위생백_img\t매\t위생백\t1\t4.333\t3\n68\t종이기저귀_img\t개\t종이기저귀\t1\t300.0\t3\n69\t주방세제_img\tml\t주방세제\t100\t1.167\t3\n70\t치약_img\tg\t치약\t10\t6.667\t3\n71\t칫솔_img\t개\t칫솔\t1\t1.167\t3\n72\t코로나 자가검사 키트_img\t개\t코로나 자가검사 키트\t1\t0.833\t3\n73\t키친타월_img\t매\t키친타월\t10\t2.333\t3\n74\t표백제_img\tg\t표백제\t100\t0.5\t3\n75\t화장지_img\t롤\t화장지\t1\t5.5\t3\n76\t갈치_img\tg\t갈치\t100\t1.833\t4\n77\t고등어_img\t마리\t고등어\t1\t1.5\t4\n78\t맛김_img\t팩\t맛김\t1\t7.667\t4\n79\t맛살_img\tg\t맛살\t100\t1.0\t4\n80\t어묵_img\tg\t어묵\t100\t1.667\t4\n81\t오징어_img\t마리\t오징어\t1\t0.75\t4\n82\t조기_img\t마리\t조기\t1\t1.0\t4\n83\t참치캔_img\tg\t참치캔\t10\t16.667\t4\n84\t마가린_img\tg\t마가린\t100\t0.333\t5\n85\t발효유_img\tg\t발효유\t10\t81.667\t5\n86\t버터_img\tg\t버터\t10\t8.167\t5\n87\t분유_img\tg\t분유\t100\t40.0\t5\n88\t우유_img\tml\t우유\t100\t11.667\t5\n89\t치즈_img\tg\t치즈\t10\t28.5\t5\n90\t두유_img\tml\t두유\t100\t14.5\t6\n91\t막걸리_img\tml\t막걸리\t100\t0.417\t6\n92\t맥주_img\tml\t맥주\t100\t13.0\t6\n93\t비타민음료_img\tml\t비타민음료\t100\t2.833\t6\n94\t사이다_img\tml\t사이다\t100\t10.833\t6\n95\t생수_img\tml\t생수\t100\t271.667\t6\n96\t소주_img\tml\t소주\t100\t4.167\t6\n97\t에너지음료_img\tml\t에너지음료\t100\t6.667\t6\n98\t이온음료_img\tml\t이온음료\t100\t7.5\t6\n99\t주스_img\tml\t주스\t100\t10.833\t6\n100\t차_img\t개\t차\t1\t5.5\t6\n101\t캔커피_img\tml\t캔커피\t100\t2.5\t6\n102\t커피믹스_img\t개\t커피믹스\t1\t3.0\t6\n103\t콜라_img\tml\t콜라\t100\t15.5\t6\n104\t포도주_img\tml\t포도주\t100\t1.667\t6\n105\t계란_img\t개\t계란\t1\t19.167\t7\n106\t닭고기_img\tg\t닭고기\t100\t11.667\t7\n107\t돼지고기_img\tg\t돼지고기\t100\t13.833\t7\n108\t소시지_img\tg\t소시지\t100\t3.667\t7\n109\t햄_img\tg\t햄\t10\t5.667\t7\n1000\t쌀_img\tkg\t쌀\t1\t1.35\t8\n1001\t찹쌀_img\tkg\t찹쌀\t1\t0.117\t8\n1002\t콩_img\tg\t콩\t500\t0.2\t8\n1003\t팥_img\tg\t팥\t500\t0.167\t8\n1004\t녹두_img\tg\t녹두\t500\t0.167\t8\n1005\t고구마_img\tkg\t고구마\t1\t0.3\t9\n1006\t감자_img\tg\t감자\t100\t3.833\t9\n1007\t양배추_img\t포기\t양배추\t1\t0.3\t9\n1008\t시금치_img\tkg\t시금치\t1\t0.233\t9\n1009\t상추_img\tg\t상추\t100\t1.333\t9\n1010\t얼갈이배추_img\tkg\t얼갈이배추\t1\t0.217\t9\n1011\t수박_img\t개\t수박\t1\t0.817\t9\n1012\t참외_img\t개\t참외\t10\t3.883\t9\n1013\t오이_img\t개\t오이\t10\t0.202\t9\n1014\t호박_img\t개\t호박\t1\t1.667\t9\n1015\t토마토_img\tkg\t토마토\t1\t0.5\t9\n1016\t딸기_img\tg\t딸기\t100\t8.0\t9\n1017\t당근_img\tkg\t당근\t1\t0.633\t9\n1018\t열무_img\tkg\t열무\t1\t0.267\t9\n1019\t풋고추_img\tg\t풋고추\t100\t0.767\t9\n1020\t붉은고추_img\tg\t붉은고추\t100\t0.683\t9\n1021\t양파_img\tkg\t양파\t1\t0.917\t9\n1022\t파_img\tkg\t파\t1\t0.433\t9\n1023\t생강_img\tkg\t생강\t1\t0.067\t9\n1024\t고춧가루_img\tkg\t고춧가루\t1\t0.233\t9\n1025\t깻잎_img\tg\t깻잎\t100\t1.167\t9\n1026\t피망_img\tg\t피망\t100\t0.383\t9\n1027\t파프리카_img\tg\t파프리카\t200\t1.0\t9\n1028\t멜론_img\t개\t멜론\t1\t0.333\t9\n1029\t깐마늘(국산)_img\tkg\t깐마늘\t1\t0.433\t9\n1030\t방울토마토_img\tkg\t방울토마토\t1\t0.917\t9\n1031\t참깨_img\tg\t참깨\t500\t0.25\t10\n1032\t땅콩_img\tg\t땅콩\t100\t0.517\t10\n1033\t느타리버섯_img\tg\t느타리버섯\t100\t1.5\t9\n1034\t팽이버섯_img\tg\t팽이버섯\t150\t1.5\t9\n1035\t새송이버섯_img\tg\t새송이버섯\t100\t3.0\t9\n1036\t호두_img\tg\t호두\t100\t0.417\t10\n1037\t아몬드_img\tg\t아몬드\t100\t1.0\t10\n1038\t사과_img\t개\t사과\t10\t0.4\t11\n1039\t배_img\t개\t배\t10\t0.067\t11\n1040\t복숭아_img\t개\t복숭아\t10\t0.6\t11\n1041\t포도_img\tkg\t포도\t1\t0.933\t11\n1042\t단감_img\t개\t단감\t10\t0.517\t11\n1043\t바나나_img\tg\t바나나\t100\t2.0\t11\n1044\t참다래_img\t개\t참다래\t10\t0.383\t11\n1045\t파인애플_img\t개\t파인애플\t1\t1.033\t11\n1046\t오렌지_img\t개\t오렌지\t10\t0.65\t11\n1047\t레몬_img\t개\t레몬\t10\t0.067\t11\n1048\t체리_img\tg\t체리\t100\t1.183\t11\n1049\t건포도_img\tg\t건포도\t100\t0.2\t11\n1050\t건블루베리_img\tg\t건블루베리\t100\t0.533\t11\n1051\t망고_img\t개\t망고\t1\t0.217\t11\n1052\t배추_img\t포기\t배추\t1\t0.633\t9\n1053\t무_img\t개\t무\t1\t0.75\t9\n1054\t감귤_img\t개\t감귤\t10\t2.167\t11\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1663807513318_2011122838",
+      "id": "paragraph_1663807513318_2011122838",
+      "dateCreated": "2022-09-22T00:45:13+0000",
+      "dateStarted": "2022-09-22T00:45:31+0000",
+      "dateFinished": "2022-09-22T00:45:31+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11979"
+    },
+    {
+      "text": "%md\n# 가물가물 지수 만들기",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-22T02:26:56+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>가물가물 지수 만들기</h1>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1663813585750_71557005",
+      "id": "paragraph_1663813585750_71557005",
+      "dateCreated": "2022-09-22T02:26:25+0000",
+      "dateStarted": "2022-09-22T02:26:56+0000",
+      "dateFinished": "2022-09-22T02:26:56+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11980"
+    },
+    {
+      "text": "%pyspark\nimport pickle\nwith open('/DB_data/productName_productId.pickle', 'rb') as f:\n    product_id = pickle.load(f)\nproduct_id",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T01:29:53+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "{'감자칩': 0, '껌': 1, '모나카류아이스크림': 2, '비스킷': 3, '빙과류': 4, '사탕': 5, '아이스크림': 6, '에너지바': 7, '초코바': 8, '초코파이': 9, '초콜릿': 10, '간장': 11, '고추장': 12, '국수': 13, '꿀': 14, '당면': 15, '된장': 16, '두부': 17, '드레싱': 18, '마요네즈': 19, '밀가루': 20, '부침가루': 21, '설탕': 22, '소금': 23, '식용유': 24, '식초': 25, '쌈장': 26, '잼': 27, '참기름': 28, '카레': 29, '케첩': 30, '혼합조미료': 31, '냉동만두': 32, '라면': 33, '빵': 34, '스프': 35, '시리얼': 36, '식빵': 37, '즉석국': 38, '즉석덮밥': 39, '즉석밥': 40, '즉석죽': 41, '컵라면': 42, '컵밥': 43, '탕': 44, '건전지': 45, '고무장갑': 46, '구강청결제': 47, '랩': 48, '로션': 49, '마스크': 50, '면도날': 51, '물휴지': 52, '바디워시': 53, '부탄가스': 54, '비누': 55, '살균소독제': 56, '살충제': 57, '생리대': 58, '샴푸': 59, '섬유유연제': 60, '섬유탈취제': 61, '세정제': 62, '세탁세제(가루형)': 63, '세탁세제(액체형)': 64, '습기제거제': 65, '염색약': 66, '위생백': 67, '종이기저귀': 68, '주방세제': 69, '치약': 70, '칫솔': 71, '코로나 자가검사 키트': 72, '키친타월': 73, '표백제': 74, '화장지': 75, '갈치': 76, '고등어': 77, '맛김': 78, '맛살': 79, '어묵': 80, '오징어': 81, '조기': 82, '참치캔': 83, '마가린': 84, '발효유': 85, '버터': 86, '분유': 87, '우유': 88, '치즈': 89, '두유': 90, '막걸리': 91, '맥주': 92, '비타민음료': 93, '사이다': 94, '생수': 95, '소주': 96, '에너지음료': 97, '이온음료': 98, '주스': 99, '차': 100, '캔커피': 101, '커피믹스': 102, '콜라': 103, '포도주': 104, '계란': 105, '닭고기': 106, '돼지고기': 107, '소시지': 108, '햄': 109, '쌀': 1000, '찹쌀': 1001, '콩': 1002, '팥': 1003, '녹두': 1004, '고구마': 1005, '감자': 1006, '양배추': 1007, '시금치': 1008, '상추': 1009, '얼갈이배추': 1010, '수박': 1011, '참외': 1012, '오이': 1013, '호박': 1014, '토마토': 1015, '딸기': 1016, '당근': 1017, '열무': 1018, '풋고추': 1019, '붉은고추': 1020, '양파': 1021, '파': 1022, '생강': 1023, '고춧가루': 1024, '깻잎': 1025, '피망': 1026, '파프리카': 1027, '멜론': 1028, '깐마늘': 1029, '방울토마토': 1030, '참깨': 1031, '땅콩': 1032, '느타리버섯': 1033, '팽이버섯': 1034, '새송이버섯': 1035, '호두': 1036, '아몬드': 1037, '사과': 1038, '배': 1039, '복숭아': 1040, '포도': 1041, '단감': 1042, '바나나': 1043, '참다래': 1044, '파인애플': 1045, '오렌지': 1046, '레몬': 1047, '체리': 1048, '건포도': 1049, '건블루베리': 1050, '망고': 1051, '배추': 1052, '무': 1053, '감귤': 1054, '봉지류과자': 110, '캬라멜': 111, '김치': 112, '소고기': 113}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1663814335254_986673927",
+      "id": "paragraph_1663814335254_986673927",
+      "dateCreated": "2022-09-22T02:38:55+0000",
+      "dateStarted": "2022-09-26T01:29:53+0000",
+      "dateFinished": "2022-09-26T01:29:53+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11981"
+    },
+    {
+      "text": "%md\n## 가물가물 지수 품목 리스트\n'라면','시리얼','식빵','즉석밥','컵라면','탕',\n'계란','닭고기','돼지고기','소고기','소시지','햄',\n'갈치','고등어','어묵','오징어','조기','참치캔',\n'발효유','우유','치즈',\n'고추장','된장','두부','밀가루','설탕','소금','식용유','참기름',\n'감자칩','비스킷','빙과류','사탕','초코파이','초콜릿',\n'맥주','비타민음료','생수','소주','이온음료','주스','커피믹스','콜라',\n'고무장갑','면도날','바디워시','비누','생리대','샴푸','섬유유연제','세탁세제(액체형)','위생백','치약','칫솔','키친타월','화장지',\n'쌀','찹쌀','콩',\n'감자','고구마','고춧가루','깐마늘','깻잎','느타리버섯','당근','딸기','무','배추','수박','시금치','양배추','양파','오이','토마토','파','파프리카','풋고추','호박',\n'땅콩','참깨',\n'감귤','레몬','바나나','배','사과','오렌지','파인애플','포도'",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-22T02:48:33+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>가물가물 지수 품목 리스트</h2>\n<p>&lsquo;라면&rsquo;,&lsquo;시리얼&rsquo;,&lsquo;식빵&rsquo;,&lsquo;즉석밥&rsquo;,&lsquo;컵라면&rsquo;,&lsquo;탕&rsquo;,<br />\n&lsquo;계란&rsquo;,&lsquo;닭고기&rsquo;,&lsquo;돼지고기&rsquo;,&lsquo;소고기&rsquo;,&lsquo;소시지&rsquo;,&lsquo;햄&rsquo;,<br />\n&lsquo;갈치&rsquo;,&lsquo;고등어&rsquo;,&lsquo;어묵&rsquo;,&lsquo;오징어&rsquo;,&lsquo;조기&rsquo;,&lsquo;참치캔&rsquo;,<br />\n&lsquo;발효유&rsquo;,&lsquo;우유&rsquo;,&lsquo;치즈&rsquo;,<br />\n&lsquo;고추장&rsquo;,&lsquo;된장&rsquo;,&lsquo;두부&rsquo;,&lsquo;밀가루&rsquo;,&lsquo;설탕&rsquo;,&lsquo;소금&rsquo;,&lsquo;식용유&rsquo;,&lsquo;참기름&rsquo;,<br />\n&lsquo;감자칩&rsquo;,&lsquo;비스킷&rsquo;,&lsquo;빙과류&rsquo;,&lsquo;사탕&rsquo;,&lsquo;초코파이&rsquo;,&lsquo;초콜릿&rsquo;,<br />\n&lsquo;맥주&rsquo;,&lsquo;비타민음료&rsquo;,&lsquo;생수&rsquo;,&lsquo;소주&rsquo;,&lsquo;이온음료&rsquo;,&lsquo;주스&rsquo;,&lsquo;커피믹스&rsquo;,&lsquo;콜라&rsquo;,<br />\n&lsquo;고무장갑&rsquo;,&lsquo;면도날&rsquo;,&lsquo;바디워시&rsquo;,&lsquo;비누&rsquo;,&lsquo;생리대&rsquo;,&lsquo;샴푸&rsquo;,&lsquo;섬유유연제&rsquo;,&lsquo;세탁세제(액체형)&rsquo;,&lsquo;위생백&rsquo;,&lsquo;치약&rsquo;,&lsquo;칫솔&rsquo;,&lsquo;키친타월&rsquo;,&lsquo;화장지&rsquo;,<br />\n&lsquo;쌀&rsquo;,&lsquo;찹쌀&rsquo;,&lsquo;콩&rsquo;,<br />\n&lsquo;감자&rsquo;,&lsquo;고구마&rsquo;,&lsquo;고춧가루&rsquo;,&lsquo;깐마늘&rsquo;,&lsquo;깻잎&rsquo;,&lsquo;느타리버섯&rsquo;,&lsquo;당근&rsquo;,&lsquo;딸기&rsquo;,&lsquo;무&rsquo;,&lsquo;배추&rsquo;,&lsquo;수박&rsquo;,&lsquo;시금치&rsquo;,&lsquo;양배추&rsquo;,&lsquo;양파&rsquo;,&lsquo;오이&rsquo;,&lsquo;토마토&rsquo;,&lsquo;파&rsquo;,&lsquo;파프리카&rsquo;,&lsquo;풋고추&rsquo;,&lsquo;호박&rsquo;,<br />\n&lsquo;땅콩&rsquo;,&lsquo;참깨&rsquo;,<br />\n&lsquo;감귤&rsquo;,&lsquo;레몬&rsquo;,&lsquo;바나나&rsquo;,&lsquo;배&rsquo;,&lsquo;사과&rsquo;,&lsquo;오렌지&rsquo;,&lsquo;파인애플&rsquo;,&lsquo;포도&rsquo;</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1663813702099_1756269125",
+      "id": "paragraph_1663813702099_1756269125",
+      "dateCreated": "2022-09-22T02:28:22+0000",
+      "dateStarted": "2022-09-22T02:48:33+0000",
+      "dateFinished": "2022-09-22T02:48:33+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11982"
+    },
+    {
+      "text": "%pyspark\nproduct_id['쌀']",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T01:29:57+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "1000\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664155768865_2063890167",
+      "id": "paragraph_1664155768865_2063890167",
+      "dateCreated": "2022-09-26T01:29:28+0000",
+      "dateStarted": "2022-09-26T01:29:57+0000",
+      "dateFinished": "2022-09-26T01:29:57+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11983"
+    },
+    {
+      "text": "%pyspark\ngmgm_p_name = ['라면','시리얼','식빵','즉석밥','컵라면','탕',\n'계란','닭고기','돼지고기','소고기','소시지','햄',\n'갈치','고등어','어묵','오징어','조기','참치캔',\n'발효유','우유','치즈',\n'고추장','된장','두부','밀가루','설탕','소금','식용유','참기름',\n'감자칩','비스킷','빙과류','사탕','초코파이','초콜릿',\n'맥주','비타민음료','생수','소주','이온음료','주스','커피믹스','콜라',\n'고무장갑','면도날','바디워시','비누','생리대','샴푸','섬유유연제','세탁세제(액체형)','위생백','치약','칫솔','키친타월','화장지',\n'쌀','찹쌀','콩',\n'감자','고구마','고춧가루','깐마늘','깻잎','느타리버섯','당근','딸기','무','배추','수박','시금치','양배추','양파','오이','토마토','파','파프리카','풋고추','호박',\n'땅콩','참깨',\n'감귤','레몬','바나나','배','사과','오렌지','파인애플','포도']\ngmgm_p_id = [product_id[name] for name in gmgm_p_name]\ngmgm_p_id = tuple(gmgm_p_id)\ngmgm_p_id",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T01:33:00+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(33, 36, 37, 40, 42, 44, 105, 106, 107, 113, 108, 109, 76, 77, 80, 81, 82, 83, 85, 88, 89, 12, 16, 17, 20, 22, 23, 24, 28, 0, 3, 4, 5, 9, 10, 92, 93, 95, 96, 98, 99, 102, 103, 46, 51, 53, 55, 58, 59, 60, 64, 67, 70, 71, 73, 75, 1000, 1001, 1002, 1006, 1005, 1024, 1029, 1025, 1033, 1017, 1016, 1053, 1052, 1011, 1008, 1007, 1021, 1013, 1015, 1022, 1027, 1019, 1014, 1032, 1031, 1054, 1047, 1043, 1039, 1038, 1046, 1045, 1041)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1663813701524_2134431865",
+      "id": "paragraph_1663813701524_2134431865",
+      "dateCreated": "2022-09-22T02:28:21+0000",
+      "dateStarted": "2022-09-26T01:33:00+0000",
+      "dateFinished": "2022-09-26T01:33:00+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11984"
+    },
+    {
+      "text": "%pyspark\nlen(['라면','시리얼','식빵','즉석밥','컵라면','탕',\n'계란','닭고기','돼지고기','소고기','소시지','햄',\n'갈치','고등어','어묵','오징어','조기','참치캔',\n'발효유','우유','치즈',\n'고추장','된장','두부','밀가루','설탕','소금','식용유','참기름',\n'감자칩','비스킷','빙과류','사탕','초코파이','초콜릿',\n'맥주','비타민음료','생수','소주','이온음료','주스','커피믹스','콜라',\n'고무장갑','면도날','바디워시','비누','생리대','샴푸','섬유유연제','세탁세제(액체형)','위생백','치약','칫솔','키친타월','화장지',\n'쌀','찹쌀','콩',\n'감자','고구마','고춧가루','깐마늘','깻잎','느타리버섯','당근','딸기','무','배추','수박','시금치','양배추','양파','오이','토마토','파','파프리카','풋고추','호박',\n'땅콩','참깨',\n'감귤','레몬','바나나','배','사과','오렌지','파인애플','포도'])",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T06:10:48+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "89\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664863831870_380985511",
+      "id": "paragraph_1664863831870_380985511",
+      "dateCreated": "2022-10-04T06:10:31+0000",
+      "dateStarted": "2022-10-04T06:10:48+0000",
+      "dateFinished": "2022-10-04T06:10:48+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11985"
+    },
+    {
+      "text": "%pyspark\ngmgm_pp_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\") \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", f\"select product_id, unit_price, research_date from product_price where date_type='m' and product_id in {gmgm_p_id} order by product_id, research_date\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", \"cvgkbhs234r#8tdx\").load()\n    \ngmgm_pp_sdf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T01:33:02+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------+----------+-------------+\n|product_id|unit_price|research_date|\n+----------+----------+-------------+\n|         0|     183.4|   2012-01-01|\n|         0|     183.6|   2012-02-01|\n|         0|     183.6|   2012-03-01|\n|         0|     183.6|   2012-04-01|\n|         0|     183.4|   2012-05-01|\n|         0|     183.8|   2012-06-01|\n|         0|     182.8|   2012-07-01|\n|         0|     184.0|   2012-08-01|\n|         0|     186.8|   2012-09-01|\n|         0|     187.2|   2012-10-01|\n|         0|     186.6|   2012-11-01|\n|         0|     186.2|   2012-12-01|\n|         0|     185.8|   2013-01-01|\n|         0|     185.2|   2013-02-01|\n|         0|     183.8|   2013-03-01|\n|         0|     187.4|   2013-04-01|\n|         0|     185.6|   2013-05-01|\n|         0|     190.4|   2013-06-01|\n|         0|     187.6|   2013-07-01|\n|         0|     186.4|   2013-08-01|\n+----------+----------+-------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=12",
+              "$$hashKey": "object:13589"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664155113295_844146605",
+      "id": "paragraph_1664155113295_844146605",
+      "dateCreated": "2022-09-26T01:18:33+0000",
+      "dateStarted": "2022-09-26T01:33:02+0000",
+      "dateFinished": "2022-09-26T01:33:02+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11986"
+    },
+    {
+      "text": "%md\n### 지수 = ∑(각 품목 가중치 * 해당 년월 가격 / 202001 가격 ) * 100",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-22T02:58:10+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>지수 = ∑(각 품목 가중치 * 해당 년월 가격 / 202001 가격 ) * 100</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1663815356968_919570919",
+      "id": "paragraph_1663815356968_919570919",
+      "dateCreated": "2022-09-22T02:55:56+0000",
+      "dateStarted": "2022-09-22T02:58:10+0000",
+      "dateFinished": "2022-09-22T02:58:10+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11987"
+    },
+    {
+      "text": "%pyspark\ngmgm_p_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\") \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", f\"select product_id, weight from product\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", \"cvgkbhs234r#8tdx\").load()\n    \ngmgm_p_sdf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T01:37:15+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------+------+\n|product_id|weight|\n+----------+------+\n|         0|11.333|\n|         1| 0.367|\n|         2|21.667|\n|         3| 4.167|\n|         4|22.167|\n|         5|   2.0|\n|         6|23.333|\n|         7|16.667|\n|         8| 4.833|\n|         9| 3.167|\n|        10|  10.5|\n|        11|   3.0|\n|        12| 1.333|\n|        13| 5.333|\n|        14| 0.833|\n|        15|   1.0|\n|        16|   1.5|\n|        17|   4.5|\n|        18|  0.55|\n|        19|  0.75|\n+----------+------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=13",
+              "$$hashKey": "object:13693"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664156020689_1040483176",
+      "id": "paragraph_1664156020689_1040483176",
+      "dateCreated": "2022-09-26T01:33:40+0000",
+      "dateStarted": "2022-09-26T01:37:15+0000",
+      "dateFinished": "2022-09-26T01:37:15+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11988"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col, sum, lit, round\nimport numpy as np\n\nprice_weight_sdf = gmgm_pp_sdf.join(gmgm_p_sdf, gmgm_pp_sdf['product_id'] == gmgm_p_sdf['product_id'], how='left')\nprice_weight_sdf = price_weight_sdf.withColumn('price*weight', price_weight_sdf['unit_price']*price_weight_sdf['weight'])\nprice_weight_sdf.show()\n\nindex_sdf = price_weight_sdf.groupBy('research_date').agg(sum(col('price*weight')).alias('sum_value'))\nindex_sdf = index_sdf.withColumn('value', round(index_sdf['sum_value']/index_sdf.filter(col('research_date')=='2020-01-01').first()[1]*100, 2))      # index 계산시 주석 풀고, 이용하기\nindex_sdf.show()\n\nindex_sdf = index_sdf.withColumn('index_type',lit('g'))\nindex_sdf = index_sdf.select('research_date','value','index_type').sort(col('research_date').asc())\nindex_sdf.show(n=1000)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T02:14:45+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------+----------+-------------+----------+------+------------------+\n|product_id|unit_price|research_date|product_id|weight|      price*weight|\n+----------+----------+-------------+----------+------+------------------+\n|         0|     183.4|   2012-01-01|         0|11.333|         2078.4722|\n|         0|     183.6|   2012-02-01|         0|11.333|         2080.7388|\n|         0|     183.6|   2012-03-01|         0|11.333|         2080.7388|\n|         0|     183.6|   2012-04-01|         0|11.333|         2080.7388|\n|         0|     183.4|   2012-05-01|         0|11.333|         2078.4722|\n|         0|     183.8|   2012-06-01|         0|11.333|         2083.0054|\n|         0|     182.8|   2012-07-01|         0|11.333|2071.6724000000004|\n|         0|     184.0|   2012-08-01|         0|11.333|          2085.272|\n|         0|     186.8|   2012-09-01|         0|11.333|2117.0044000000003|\n|         0|     187.2|   2012-10-01|         0|11.333|         2121.5376|\n|         0|     186.6|   2012-11-01|         0|11.333|         2114.7378|\n|         0|     186.2|   2012-12-01|         0|11.333|         2110.2046|\n|         0|     185.8|   2013-01-01|         0|11.333|         2105.6714|\n|         0|     185.2|   2013-02-01|         0|11.333|         2098.8716|\n|         0|     183.8|   2013-03-01|         0|11.333|         2083.0054|\n|         0|     187.4|   2013-04-01|         0|11.333|         2123.8042|\n|         0|     185.6|   2013-05-01|         0|11.333|         2103.4048|\n|         0|     190.4|   2013-06-01|         0|11.333|2157.8032000000003|\n|         0|     187.6|   2013-07-01|         0|11.333|         2126.0708|\n|         0|     186.4|   2013-08-01|         0|11.333|         2112.4712|\n+----------+----------+-------------+----------+------+------------------+\nonly showing top 20 rows\n\n+-------------+------------------+------+\n|research_date|         sum_value| value|\n+-------------+------------------+------+\n|   2016-03-01|        362688.294|103.87|\n|   2019-11-01|      336906.53821| 96.48|\n|   2014-08-01|      351555.73749|100.68|\n|   2018-09-01| 380807.1773299999|109.06|\n|   2018-11-01|      359792.24267|103.04|\n|   2015-04-01| 352043.9677000001|100.82|\n|   2012-09-01|      365376.62385|104.64|\n|   2015-08-01| 356979.4652399999|102.23|\n|   2016-01-01| 362690.5768600001|103.87|\n|   2014-11-01|345122.25668999995| 98.84|\n|   2022-05-01|398616.61035000015|114.16|\n|   2014-09-01| 350720.9365200001|100.44|\n|   2021-11-01| 376967.5329499999|107.96|\n|   2016-08-01| 337794.4089900001| 96.74|\n|   2022-02-01|391934.29571999976|112.24|\n|   2013-08-01|      363933.68759|104.22|\n|   2019-02-01|372851.36195999995|106.78|\n|   2019-10-01|344164.55893999996| 98.56|\n|   2018-02-01|365850.85652000015|104.77|\n|   2012-10-01|      362783.88112|103.89|\n+-------------+------------------+------+\nonly showing top 20 rows\n\n+-------------+------+----------+\n|research_date| value|index_type|\n+-------------+------+----------+\n|   2012-01-01|102.78|         g|\n|   2012-02-01|103.81|         g|\n|   2012-03-01|104.57|         g|\n|   2012-04-01|101.91|         g|\n|   2012-05-01|102.13|         g|\n|   2012-06-01|101.54|         g|\n|   2012-07-01| 100.6|         g|\n|   2012-08-01|102.77|         g|\n|   2012-09-01|104.64|         g|\n|   2012-10-01|103.89|         g|\n|   2012-11-01|101.97|         g|\n|   2012-12-01|101.68|         g|\n|   2013-01-01| 103.9|         g|\n|   2013-02-01|105.35|         g|\n|   2013-03-01|102.67|         g|\n|   2013-04-01|102.28|         g|\n|   2013-05-01|101.34|         g|\n|   2013-06-01| 100.9|         g|\n|   2013-07-01|102.06|         g|\n|   2013-08-01|104.22|         g|\n|   2013-09-01|103.24|         g|\n|   2013-10-01|  99.9|         g|\n|   2013-11-01| 98.33|         g|\n|   2013-12-01| 100.9|         g|\n|   2014-01-01|101.61|         g|\n|   2014-02-01|102.61|         g|\n|   2014-03-01|101.26|         g|\n|   2014-04-01|100.48|         g|\n|   2014-05-01|100.31|         g|\n|   2014-06-01| 99.39|         g|\n|   2014-07-01|100.52|         g|\n|   2014-08-01|100.68|         g|\n|   2014-09-01|100.44|         g|\n|   2014-10-01| 98.92|         g|\n|   2014-11-01| 98.84|         g|\n|   2014-12-01|101.83|         g|\n|   2015-01-01|103.43|         g|\n|   2015-02-01|104.28|         g|\n|   2015-03-01|101.01|         g|\n|   2015-04-01|100.82|         g|\n|   2015-05-01|101.69|         g|\n|   2015-06-01|100.85|         g|\n|   2015-07-01|101.64|         g|\n|   2015-08-01|102.23|         g|\n|   2015-09-01|101.19|         g|\n|   2015-10-01| 99.81|         g|\n|   2015-11-01| 98.65|         g|\n|   2015-12-01|103.29|         g|\n|   2016-01-01|103.87|         g|\n|   2016-02-01|105.64|         g|\n|   2016-03-01|103.87|         g|\n|   2016-04-01| 98.36|         g|\n|   2016-05-01| 96.37|         g|\n|   2016-06-01| 95.85|         g|\n|   2016-07-01| 95.35|         g|\n|   2016-08-01| 96.74|         g|\n|   2016-09-01| 99.25|         g|\n|   2016-10-01| 97.35|         g|\n|   2016-11-01|  97.3|         g|\n|   2016-12-01|100.29|         g|\n|   2017-01-01|101.63|         g|\n|   2017-02-01|103.67|         g|\n|   2017-03-01|102.48|         g|\n|   2017-04-01| 99.86|         g|\n|   2017-05-01| 98.78|         g|\n|   2017-06-01| 98.14|         g|\n|   2017-07-01| 98.31|         g|\n|   2017-08-01|100.06|         g|\n|   2017-09-01|100.16|         g|\n|   2017-10-01|  99.1|         g|\n|   2017-11-01| 98.68|         g|\n|   2017-12-01| 98.82|         g|\n|   2018-01-01|100.01|         g|\n|   2018-02-01|104.77|         g|\n|   2018-03-01|101.87|         g|\n|   2018-04-01|102.45|         g|\n|   2018-05-01|102.14|         g|\n|   2018-06-01|100.54|         g|\n|   2018-07-01|101.48|         g|\n|   2018-08-01| 106.1|         g|\n|   2018-09-01|109.06|         g|\n|   2018-10-01| 106.2|         g|\n|   2018-11-01|103.04|         g|\n|   2018-12-01| 105.4|         g|\n|   2019-01-01|105.97|         g|\n|   2019-02-01|106.78|         g|\n|   2019-03-01| 104.7|         g|\n|   2019-04-01|105.87|         g|\n|   2019-05-01|  99.4|         g|\n|   2019-06-01|  99.3|         g|\n|   2019-07-01|100.07|         g|\n|   2019-08-01| 98.32|         g|\n|   2019-09-01| 99.76|         g|\n|   2019-10-01| 98.56|         g|\n|   2019-11-01| 96.48|         g|\n|   2019-12-01| 98.98|         g|\n|   2020-01-01| 100.0|         g|\n|   2020-02-01|100.61|         g|\n|   2020-03-01|102.54|         g|\n|   2020-04-01|100.38|         g|\n|   2020-05-01| 99.63|         g|\n|   2020-06-01| 99.93|         g|\n|   2020-07-01|102.95|         g|\n|   2020-08-01|105.53|         g|\n|   2020-09-01|109.14|         g|\n|   2020-10-01|104.77|         g|\n|   2020-11-01|102.12|         g|\n|   2020-12-01|104.09|         g|\n|   2021-01-01|105.74|         g|\n|   2021-02-01|107.62|         g|\n|   2021-03-01|107.08|         g|\n|   2021-04-01|105.77|         g|\n|   2021-05-01|105.25|         g|\n|   2021-06-01|104.67|         g|\n|   2021-07-01|109.15|         g|\n|   2021-08-01|110.43|         g|\n|   2021-09-01|110.21|         g|\n|   2021-10-01| 107.2|         g|\n|   2021-11-01|107.96|         g|\n|   2021-12-01|108.98|         g|\n|   2022-01-01|115.43|         g|\n|   2022-02-01|112.24|         g|\n|   2022-03-01|109.84|         g|\n|   2022-04-01|111.95|         g|\n|   2022-05-01|114.16|         g|\n|   2022-06-01|115.23|         g|\n|   2022-07-01| 111.8|         g|\n|   2022-08-01|113.78|         g|\n|   2022-09-01|115.42|         g|\n|   2022-10-01| 40.35|         g|\n|   2022-11-01| 40.35|         g|\n|   2022-12-01| 40.35|         g|\n+-------------+------+----------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=172",
+              "$$hashKey": "object:13751"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=173",
+              "$$hashKey": "object:13752"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=175",
+              "$$hashKey": "object:13753"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=176",
+              "$$hashKey": "object:13754"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=177",
+              "$$hashKey": "object:13755"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=179",
+              "$$hashKey": "object:13756"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=180",
+              "$$hashKey": "object:13757"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=181",
+              "$$hashKey": "object:13758"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=182",
+              "$$hashKey": "object:13759"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=184",
+              "$$hashKey": "object:13760"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=185",
+              "$$hashKey": "object:13761"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=186",
+              "$$hashKey": "object:13762"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=187",
+              "$$hashKey": "object:13763"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=189",
+              "$$hashKey": "object:13764"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=190",
+              "$$hashKey": "object:13765"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664156239840_237022904",
+      "id": "paragraph_1664156239840_237022904",
+      "dateCreated": "2022-09-26T01:37:19+0000",
+      "dateStarted": "2022-09-26T02:14:45+0000",
+      "dateFinished": "2022-09-26T02:14:46+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11989"
+    },
+    {
+      "text": "%pyspark\nindex_sdf.dtypes",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T02:15:05+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[('research_date', 'date'), ('value', 'double'), ('index_type', 'string')]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664157609809_1795942234",
+      "id": "paragraph_1664157609809_1795942234",
+      "dateCreated": "2022-09-26T02:00:09+0000",
+      "dateStarted": "2022-09-26T02:15:05+0000",
+      "dateFinished": "2022-09-26T02:15:05+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11990"
+    },
+    {
+      "text": "%pyspark\nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\nprop = {\"user\": \"ji\", \"password\": \"cvgkbhs234r#8tdx\", \"driver\": \"com.mysql.cj.jdbc.Driver\"} \n\nindex_sdf.write.jdbc(\\\n    url= url,\\\n    table = \"price_index\",\\\n    mode=\"append\",\\\n    properties=prop)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T02:15:08+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=200",
+              "$$hashKey": "object:13921"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=201",
+              "$$hashKey": "object:13922"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=203",
+              "$$hashKey": "object:13923"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=204",
+              "$$hashKey": "object:13924"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=205",
+              "$$hashKey": "object:13925"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=206",
+              "$$hashKey": "object:13926"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664156549797_233709456",
+      "id": "paragraph_1664156549797_233709456",
+      "dateCreated": "2022-09-26T01:42:29+0000",
+      "dateStarted": "2022-09-26T02:15:08+0000",
+      "dateFinished": "2022-09-26T02:15:08+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11991"
+    },
+    {
+      "text": "%MySQL\nselect * from price_index",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T02:15:11+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "price_index_id": "string",
+                      "user_id": "string",
+                      "research_date": "string",
+                      "value": "string",
+                      "index_type": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "price_index_id\tuser_id\tresearch_date\tvalue\tindex_type\n502\tnull\t2012-01-01\t102.78\tg\n503\tnull\t2012-02-01\t103.81\tg\n504\tnull\t2012-03-01\t104.57\tg\n505\tnull\t2012-04-01\t101.91\tg\n506\tnull\t2012-05-01\t102.13\tg\n507\tnull\t2012-06-01\t101.54\tg\n508\tnull\t2012-07-01\t100.6\tg\n509\tnull\t2012-08-01\t102.77\tg\n510\tnull\t2012-09-01\t104.64\tg\n511\tnull\t2012-10-01\t103.89\tg\n512\tnull\t2012-11-01\t101.97\tg\n513\tnull\t2012-12-01\t101.68\tg\n514\tnull\t2013-01-01\t103.9\tg\n515\tnull\t2013-02-01\t105.35\tg\n516\tnull\t2013-03-01\t102.67\tg\n517\tnull\t2013-04-01\t102.28\tg\n518\tnull\t2013-05-01\t101.34\tg\n519\tnull\t2013-06-01\t100.9\tg\n520\tnull\t2013-07-01\t102.06\tg\n521\tnull\t2013-08-01\t104.22\tg\n522\tnull\t2013-09-01\t103.24\tg\n523\tnull\t2013-10-01\t99.9\tg\n524\tnull\t2013-11-01\t98.33\tg\n525\tnull\t2013-12-01\t100.9\tg\n526\tnull\t2014-01-01\t101.61\tg\n527\tnull\t2014-02-01\t102.61\tg\n528\tnull\t2014-03-01\t101.26\tg\n529\tnull\t2014-04-01\t100.48\tg\n530\tnull\t2014-05-01\t100.31\tg\n531\tnull\t2014-06-01\t99.39\tg\n532\tnull\t2014-07-01\t100.52\tg\n533\tnull\t2014-08-01\t100.68\tg\n534\tnull\t2014-09-01\t100.44\tg\n535\tnull\t2014-10-01\t98.92\tg\n536\tnull\t2014-11-01\t98.84\tg\n537\tnull\t2014-12-01\t101.83\tg\n538\tnull\t2015-01-01\t103.43\tg\n539\tnull\t2015-02-01\t104.28\tg\n540\tnull\t2015-03-01\t101.01\tg\n541\tnull\t2015-04-01\t100.82\tg\n542\tnull\t2015-05-01\t101.69\tg\n543\tnull\t2015-06-01\t100.85\tg\n544\tnull\t2015-07-01\t101.64\tg\n545\tnull\t2015-08-01\t102.23\tg\n546\tnull\t2015-09-01\t101.19\tg\n547\tnull\t2015-10-01\t99.81\tg\n548\tnull\t2015-11-01\t98.65\tg\n549\tnull\t2015-12-01\t103.29\tg\n550\tnull\t2016-01-01\t103.87\tg\n551\tnull\t2016-02-01\t105.64\tg\n552\tnull\t2016-03-01\t103.87\tg\n553\tnull\t2016-04-01\t98.36\tg\n554\tnull\t2016-05-01\t96.37\tg\n555\tnull\t2016-06-01\t95.85\tg\n556\tnull\t2016-07-01\t95.35\tg\n557\tnull\t2016-08-01\t96.74\tg\n558\tnull\t2016-09-01\t99.25\tg\n559\tnull\t2016-10-01\t97.35\tg\n560\tnull\t2016-11-01\t97.3\tg\n561\tnull\t2016-12-01\t100.29\tg\n562\tnull\t2017-01-01\t101.63\tg\n563\tnull\t2017-02-01\t103.67\tg\n564\tnull\t2017-03-01\t102.48\tg\n565\tnull\t2017-04-01\t99.86\tg\n566\tnull\t2017-05-01\t98.78\tg\n567\tnull\t2017-06-01\t98.14\tg\n568\tnull\t2017-07-01\t98.31\tg\n569\tnull\t2017-08-01\t100.06\tg\n570\tnull\t2017-09-01\t100.16\tg\n571\tnull\t2017-10-01\t99.1\tg\n572\tnull\t2017-11-01\t98.68\tg\n573\tnull\t2017-12-01\t98.82\tg\n574\tnull\t2018-01-01\t100.01\tg\n575\tnull\t2018-02-01\t104.77\tg\n576\tnull\t2018-03-01\t101.87\tg\n577\tnull\t2018-04-01\t102.45\tg\n578\tnull\t2018-05-01\t102.14\tg\n579\tnull\t2018-06-01\t100.54\tg\n580\tnull\t2018-07-01\t101.48\tg\n581\tnull\t2018-08-01\t106.1\tg\n582\tnull\t2018-09-01\t109.06\tg\n583\tnull\t2018-10-01\t106.2\tg\n584\tnull\t2018-11-01\t103.04\tg\n585\tnull\t2018-12-01\t105.4\tg\n586\tnull\t2019-01-01\t105.97\tg\n587\tnull\t2019-02-01\t106.78\tg\n588\tnull\t2019-03-01\t104.7\tg\n589\tnull\t2019-04-01\t105.87\tg\n590\tnull\t2019-05-01\t99.4\tg\n591\tnull\t2019-06-01\t99.3\tg\n592\tnull\t2019-07-01\t100.07\tg\n593\tnull\t2019-08-01\t98.32\tg\n594\tnull\t2019-09-01\t99.76\tg\n595\tnull\t2019-10-01\t98.56\tg\n596\tnull\t2019-11-01\t96.48\tg\n597\tnull\t2019-12-01\t98.98\tg\n598\tnull\t2020-01-01\t100.0\tg\n599\tnull\t2020-02-01\t100.61\tg\n600\tnull\t2020-03-01\t102.54\tg\n601\tnull\t2020-04-01\t100.38\tg\n602\tnull\t2020-05-01\t99.63\tg\n603\tnull\t2020-06-01\t99.93\tg\n604\tnull\t2020-07-01\t102.95\tg\n605\tnull\t2020-08-01\t105.53\tg\n606\tnull\t2020-09-01\t109.14\tg\n607\tnull\t2020-10-01\t104.77\tg\n608\tnull\t2020-11-01\t102.12\tg\n609\tnull\t2020-12-01\t104.09\tg\n610\tnull\t2021-01-01\t105.74\tg\n611\tnull\t2021-02-01\t107.62\tg\n612\tnull\t2021-03-01\t107.08\tg\n613\tnull\t2021-04-01\t105.77\tg\n614\tnull\t2021-05-01\t105.25\tg\n615\tnull\t2021-06-01\t104.67\tg\n616\tnull\t2021-07-01\t109.15\tg\n617\tnull\t2021-08-01\t110.43\tg\n618\tnull\t2021-09-01\t110.21\tg\n619\tnull\t2021-10-01\t107.2\tg\n620\tnull\t2021-11-01\t107.96\tg\n621\tnull\t2021-12-01\t108.98\tg\n622\tnull\t2022-01-01\t115.43\tg\n623\tnull\t2022-02-01\t112.24\tg\n624\tnull\t2022-03-01\t109.84\tg\n625\tnull\t2022-04-01\t111.95\tg\n626\tnull\t2022-05-01\t114.16\tg\n627\tnull\t2022-06-01\t115.23\tg\n628\tnull\t2022-07-01\t111.8\tg\n629\tnull\t2022-08-01\t113.78\tg\n630\tnull\t2022-09-01\t115.42\tg\n631\tnull\t2022-10-01\t40.35\tg\n632\tnull\t2022-11-01\t40.35\tg\n633\tnull\t2022-12-01\t40.35\tg\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664157718477_698498176",
+      "id": "paragraph_1664157718477_698498176",
+      "dateCreated": "2022-09-26T02:01:58+0000",
+      "dateStarted": "2022-09-26T02:15:11+0000",
+      "dateFinished": "2022-09-26T02:15:11+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11992"
+    },
+    {
+      "text": "%md\n# DB price_index table에 가물가물지수 넣는 자동화",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T05:49:09+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>DB price_index table에 가물가물지수 넣는 자동화</h1>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664172240045_2070356220",
+      "id": "paragraph_1664172240045_2070356220",
+      "dateCreated": "2022-09-26T06:04:00+0000",
+      "dateStarted": "2022-09-27T05:49:09+0000",
+      "dateFinished": "2022-09-27T05:49:09+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11993"
+    },
+    {
+      "text": "%pyspark\n\nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\nprop = {\"user\": \"ji\", \"password\": \"cvgkbhs234r#8tdx\", \"driver\": \"com.mysql.cj.jdbc.Driver\"} \n\n# productName_productId pickle load\nimport pickle\nwith open('/DB_data/productName_productId.pickle', 'rb') as f:\n    product_id = pickle.load(f)\n\n# gmgm product name list define\ngmgm_p_name = ['라면','시리얼','식빵','즉석밥','컵라면','탕',\n'계란','닭고기','돼지고기','소고기','소시지','햄',\n'갈치','고등어','어묵','오징어','조기','참치캔',\n'발효유','우유','치즈',\n'고추장','된장','두부','밀가루','설탕','소금','식용유','참기름',\n'감자칩','비스킷','빙과류','사탕','초코파이','초콜릿',\n'맥주','비타민음료','생수','소주','이온음료','주스','커피믹스','콜라',\n'고무장갑','면도날','바디워시','비누','생리대','샴푸','섬유유연제','세탁세제(액체형)','위생백','치약','칫솔','키친타월','화장지',\n'쌀','찹쌀','콩',\n'감자','고구마','고춧가루','깐마늘','깻잎','느타리버섯','당근','딸기','무','배추','수박','시금치','양배추','양파','오이','토마토','파','파프리카','풋고추','호박',\n'땅콩','참깨',\n'감귤','레몬','바나나','배','사과','오렌지','파인애플','포도']\n\n# gmgm product id define\ngmgm_p_id = [product_id[name] for name in gmgm_p_name]\ngmgm_p_id = tuple(gmgm_p_id)\n\n# product_price table select product_id, unit_price, research_date from product_price where date_type='m' and product_id in {gmgm_p_id}\ngmgm_pp_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", url) \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", f\"select product_id, unit_price, research_date from product_price where date_type='m' and product_id in {gmgm_p_id} order by product_id, research_date\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", \"cvgkbhs234r#8tdx\").load()\n    \n# product table select product_id, weight to calculate gmgm index\ngmgm_p_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", url) \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", f\"select product_id, weight from product\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", \"cvgkbhs234r#8tdx\").load()\n\n# calculate gmgm index\nfrom pyspark.sql.functions import col, sum, lit, round\nimport numpy as np\n\nprice_weight_sdf = gmgm_pp_sdf.join(gmgm_p_sdf, gmgm_pp_sdf['product_id'] == gmgm_p_sdf['product_id'], how='left')\nprice_weight_sdf = price_weight_sdf.withColumn('price*weight', price_weight_sdf['unit_price']*price_weight_sdf['weight'])\n// price_weight_sdf.show()\n\nindex_sdf = price_weight_sdf.groupBy('research_date').agg(sum(col('price*weight')).alias('sum_value'))\nindex_sdf = index_sdf.withColumn('value', round(index_sdf['sum_value']/index_sdf.filter(col('research_date')=='2020-01-01').first()[1]*100, 2))\n// index_sdf.show()\n\nindex_sdf = index_sdf.withColumn('index_type',lit('g'))\nindex_sdf = index_sdf.select('research_date','value','index_type').sort(col('research_date').asc())\n\n# price_index table append \nindex_sdf.write.jdbc(\\\n    url= url,\\\n    table = \"price_index\",\\\n    mode=\"append\",\\\n    properties=prop)",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T06:01:14+0000",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664172237093_2086170843",
+      "id": "paragraph_1664172237093_2086170843",
+      "dateCreated": "2022-09-26T06:03:57+0000",
+      "status": "READY",
+      "$$hashKey": "object:11994"
+    },
+    {
+      "text": "%pyspark\nimport requests\nrequests.post(\"http://3.36.106.26:8081/api/notebook/run/2HDTRUMFY/paragraph_1664172237093_2086170843\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T06:02:35+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664181870047_420788866",
+      "id": "paragraph_1664181870047_420788866",
+      "dateCreated": "2022-09-26T08:44:30+0000",
+      "status": "READY",
+      "$$hashKey": "object:11995"
+    },
+    {
+      "text": "%md\n# 매달 DB price_index table 가물가물 지수 업데이트\n1. 해당 월 1일~31일까지 product_price의 date_type='d'인 unit_price 가져오기\n2. research_date=해당년월, date_type='m'인 값 넣어주기\n3. 가물가물 지수 계산에 필요한 품목들 확인하기\n4. 2020-01-01 기준으로 가물가물 지수 계산하기",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T08:52:36+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>매달 DB price_index table 가물가물 지수 업데이트</h1>\n<ol>\n<li>해당 월 1일~31일까지 product_price의 date_type=&rsquo;d&rsquo;인 unit_price 가져오기</li>\n<li>research_date=해당년월, date_type=&rsquo;m&rsquo;인 값 넣어주기</li>\n<li>가물가물 지수 계산에 필요한 품목들 확인하기</li>\n<li>2020-01-01 기준으로 가물가물 지수 계산하기</li>\n</ol>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664258481658_1566948971",
+      "id": "paragraph_1664258481658_1566948971",
+      "dateCreated": "2022-09-27T06:01:21+0000",
+      "dateStarted": "2022-09-27T08:52:36+0000",
+      "dateFinished": "2022-09-27T08:52:36+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11996"
+    },
+    {
+      "text": "%pyspark\npp_2209 = spark.read.csv('/DB_data/product_daily_price_table.csv', header=True, inferSchema=True)\npp_2209 = pp_2209.select('product_id','unit_price','research_date').filter('research_date between \"2022-09-01\" and \"2022-09-30\"')\npp_2209.show(1000)",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T08:40:59+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------+------------------+-------------+\n|product_id|        unit_price|research_date|\n+----------+------------------+-------------+\n|         0|             176.5|   2022-09-01|\n|         0|            202.75|   2022-09-01|\n|         0|             176.5|   2022-09-02|\n|         0|            202.75|   2022-09-02|\n|         0|             176.5|   2022-09-03|\n|         0|            202.75|   2022-09-03|\n|         0|             176.5|   2022-09-04|\n|         0|            202.75|   2022-09-04|\n|         0|             176.5|   2022-09-05|\n|         0|            202.75|   2022-09-05|\n|         0|             176.5|   2022-09-06|\n|         0|            202.75|   2022-09-06|\n|         0|             176.5|   2022-09-07|\n|         0|            202.75|   2022-09-07|\n|         0|             176.5|   2022-09-08|\n|         0|            202.75|   2022-09-08|\n|         0|             176.5|   2022-09-09|\n|         0|            202.75|   2022-09-09|\n|         0|             176.5|   2022-09-10|\n|         0|            202.75|   2022-09-10|\n|         0|             176.5|   2022-09-11|\n|         0|            202.75|   2022-09-11|\n|         0|             176.5|   2022-09-12|\n|         0|            202.75|   2022-09-12|\n|         0|             176.5|   2022-09-13|\n|         0|            202.75|   2022-09-13|\n|         0|             176.5|   2022-09-14|\n|         0|            202.75|   2022-09-14|\n|         0|             176.5|   2022-09-15|\n|         0|            202.75|   2022-09-15|\n|         0|             176.5|   2022-09-16|\n|         0|            202.75|   2022-09-16|\n|         0|             176.5|   2022-09-17|\n|         0|            202.75|   2022-09-17|\n|         0|             176.5|   2022-09-18|\n|         0|            202.75|   2022-09-18|\n|         0|             176.5|   2022-09-19|\n|         0|            202.75|   2022-09-19|\n|         0|             176.5|   2022-09-20|\n|         0|            202.75|   2022-09-20|\n|         0|             176.5|   2022-09-21|\n|         0|            202.75|   2022-09-21|\n|         0|             176.5|   2022-09-22|\n|         0|            202.75|   2022-09-22|\n|         0|             176.5|   2022-09-23|\n|         0|            202.75|   2022-09-23|\n|         0|             176.5|   2022-09-24|\n|         0|            202.75|   2022-09-24|\n|         0|             176.5|   2022-09-25|\n|         0|            202.75|   2022-09-25|\n|         0|             176.5|   2022-09-26|\n|         0|            202.75|   2022-09-26|\n|         0|             176.5|   2022-09-27|\n|         0|            202.75|   2022-09-27|\n|         0|             176.5|   2022-09-28|\n|         0|            202.75|   2022-09-28|\n|         0|             176.5|   2022-09-29|\n|         0|            202.75|   2022-09-29|\n|         0|             176.5|   2022-09-30|\n|         0|            202.75|   2022-09-30|\n|         1|             433.5|   2022-09-01|\n|         1|             509.0|   2022-09-01|\n|         1|             433.5|   2022-09-02|\n|         1|             509.0|   2022-09-02|\n|         1|             433.5|   2022-09-03|\n|         1|             509.0|   2022-09-03|\n|         1|             433.5|   2022-09-04|\n|         1|             509.0|   2022-09-04|\n|         1|             433.5|   2022-09-05|\n|         1|             509.0|   2022-09-05|\n|         1|             433.5|   2022-09-06|\n|         1|             509.0|   2022-09-06|\n|         1|             433.5|   2022-09-07|\n|         1|             509.0|   2022-09-07|\n|         1|             433.5|   2022-09-08|\n|         1|             509.0|   2022-09-08|\n|         1|             433.5|   2022-09-09|\n|         1|             509.0|   2022-09-09|\n|         1|             433.5|   2022-09-10|\n|         1|             509.0|   2022-09-10|\n|         1|             433.5|   2022-09-11|\n|         1|             509.0|   2022-09-11|\n|         1|             433.5|   2022-09-12|\n|         1|             509.0|   2022-09-12|\n|         1|             433.5|   2022-09-13|\n|         1|             509.0|   2022-09-13|\n|         1|             433.5|   2022-09-14|\n|         1|             509.0|   2022-09-14|\n|         1|             433.5|   2022-09-15|\n|         1|             509.0|   2022-09-15|\n|         1|             433.5|   2022-09-16|\n|         1|             509.0|   2022-09-16|\n|         1|             433.5|   2022-09-17|\n|         1|             509.0|   2022-09-17|\n|         1|             433.5|   2022-09-18|\n|         1|             509.0|   2022-09-18|\n|         1|             433.5|   2022-09-19|\n|         1|             509.0|   2022-09-19|\n|         1|             433.5|   2022-09-20|\n|         1|             509.0|   2022-09-20|\n|         1|             433.5|   2022-09-21|\n|         1|             509.0|   2022-09-21|\n|         1|             433.5|   2022-09-22|\n|         1|             509.0|   2022-09-22|\n|         1|             433.5|   2022-09-23|\n|         1|             509.0|   2022-09-23|\n|         1|             433.5|   2022-09-24|\n|         1|             509.0|   2022-09-24|\n|         1|             433.5|   2022-09-25|\n|         1|             509.0|   2022-09-25|\n|         1|             433.5|   2022-09-26|\n|         1|             509.0|   2022-09-26|\n|         1|             433.5|   2022-09-27|\n|         1|             509.0|   2022-09-27|\n|         1|             433.5|   2022-09-28|\n|         1|             509.0|   2022-09-28|\n|         1|             433.5|   2022-09-29|\n|         1|             509.0|   2022-09-29|\n|         1|             433.5|   2022-09-30|\n|         1|             509.0|   2022-09-30|\n|         2|             63.25|   2022-09-01|\n|         2|             63.25|   2022-09-02|\n|         2|             63.25|   2022-09-03|\n|         2|             63.25|   2022-09-04|\n|         2|             63.25|   2022-09-05|\n|         2|             63.25|   2022-09-06|\n|         2|             63.25|   2022-09-07|\n|         2|             63.25|   2022-09-08|\n|         2|             63.25|   2022-09-09|\n|         2|             63.25|   2022-09-10|\n|         2|             63.25|   2022-09-11|\n|         2|             63.25|   2022-09-12|\n|         2|             63.25|   2022-09-13|\n|         2|             63.25|   2022-09-14|\n|         2|             63.25|   2022-09-15|\n|         2|             63.25|   2022-09-16|\n|         2|             63.25|   2022-09-17|\n|         2|             63.25|   2022-09-18|\n|         2|             63.25|   2022-09-19|\n|         2|             63.25|   2022-09-20|\n|         2|             63.25|   2022-09-21|\n|         2|             63.25|   2022-09-22|\n|         2|             63.25|   2022-09-23|\n|         2|             63.25|   2022-09-24|\n|         2|             63.25|   2022-09-25|\n|         2|             63.25|   2022-09-26|\n|         2|             63.25|   2022-09-27|\n|         2|             63.25|   2022-09-28|\n|         2|             63.25|   2022-09-29|\n|         2|             63.25|   2022-09-30|\n|         3|             122.5|   2022-09-01|\n|         3|139.83333333333334|   2022-09-01|\n|         3|             122.5|   2022-09-02|\n|         3|139.83333333333334|   2022-09-02|\n|         3|             122.5|   2022-09-03|\n|         3|139.83333333333334|   2022-09-03|\n|         3|             122.5|   2022-09-04|\n|         3|139.83333333333334|   2022-09-04|\n|         3|             122.5|   2022-09-05|\n|         3|139.83333333333334|   2022-09-05|\n|         3|             122.5|   2022-09-06|\n|         3|139.83333333333334|   2022-09-06|\n|         3|             122.5|   2022-09-07|\n|         3|139.83333333333334|   2022-09-07|\n|         3|             122.5|   2022-09-08|\n|         3|139.83333333333334|   2022-09-08|\n|         3|             122.5|   2022-09-09|\n|         3|139.83333333333334|   2022-09-09|\n|         3|             122.5|   2022-09-10|\n|         3|139.83333333333334|   2022-09-10|\n|         3|             122.5|   2022-09-11|\n|         3|139.83333333333334|   2022-09-11|\n|         3|             122.5|   2022-09-12|\n|         3|139.83333333333334|   2022-09-12|\n|         3|             122.5|   2022-09-13|\n|         3|139.83333333333334|   2022-09-13|\n|         3|             122.5|   2022-09-14|\n|         3|139.83333333333334|   2022-09-14|\n|         3|             122.5|   2022-09-15|\n|         3|139.83333333333334|   2022-09-15|\n|         3|             122.5|   2022-09-16|\n|         3|139.83333333333334|   2022-09-16|\n|         3|             122.5|   2022-09-17|\n|         3|139.83333333333334|   2022-09-17|\n|         3|             122.5|   2022-09-18|\n|         3|139.83333333333334|   2022-09-18|\n|         3|             122.5|   2022-09-19|\n|         3|139.83333333333334|   2022-09-19|\n|         3|             122.5|   2022-09-20|\n|         3|139.83333333333334|   2022-09-20|\n|         3|             122.5|   2022-09-21|\n|         3|139.83333333333334|   2022-09-21|\n|         3|             122.5|   2022-09-22|\n|         3|139.83333333333334|   2022-09-22|\n|         3|             122.5|   2022-09-23|\n|         3|139.83333333333334|   2022-09-23|\n|         3|             122.5|   2022-09-24|\n|         3|139.83333333333334|   2022-09-24|\n|         3|             122.5|   2022-09-25|\n|         3|139.83333333333334|   2022-09-25|\n|         3|             122.5|   2022-09-26|\n|         3|139.83333333333334|   2022-09-26|\n|         3|             122.5|   2022-09-27|\n|         3|139.83333333333334|   2022-09-27|\n|         3|             122.5|   2022-09-28|\n|         3|139.83333333333334|   2022-09-28|\n|         3|             122.5|   2022-09-29|\n|         3|139.83333333333334|   2022-09-29|\n|         3|             122.5|   2022-09-30|\n|         3|139.83333333333334|   2022-09-30|\n|         4|             64.75|   2022-09-01|\n|         4| 78.91666666666667|   2022-09-01|\n|         4|             64.75|   2022-09-02|\n|         4| 78.91666666666667|   2022-09-02|\n|         4|             64.75|   2022-09-03|\n|         4| 78.91666666666667|   2022-09-03|\n|         4|             64.75|   2022-09-04|\n|         4| 78.91666666666667|   2022-09-04|\n|         4|             64.75|   2022-09-05|\n|         4| 78.91666666666667|   2022-09-05|\n|         4|             64.75|   2022-09-06|\n|         4| 78.91666666666667|   2022-09-06|\n|         4|             64.75|   2022-09-07|\n|         4| 78.91666666666667|   2022-09-07|\n|         4|             64.75|   2022-09-08|\n|         4| 78.91666666666667|   2022-09-08|\n|         4|             64.75|   2022-09-09|\n|         4| 78.91666666666667|   2022-09-09|\n|         4|             64.75|   2022-09-10|\n|         4| 78.91666666666667|   2022-09-10|\n|         4|             64.75|   2022-09-11|\n|         4| 78.91666666666667|   2022-09-11|\n|         4|             64.75|   2022-09-12|\n|         4| 78.91666666666667|   2022-09-12|\n|         4|             64.75|   2022-09-13|\n|         4| 78.91666666666667|   2022-09-13|\n|         4|             64.75|   2022-09-14|\n|         4| 78.91666666666667|   2022-09-14|\n|         4|             64.75|   2022-09-15|\n|         4| 78.91666666666667|   2022-09-15|\n|         4|             64.75|   2022-09-16|\n|         4| 78.91666666666667|   2022-09-16|\n|         4|             64.75|   2022-09-17|\n|         4| 78.91666666666667|   2022-09-17|\n|         4|             64.75|   2022-09-18|\n|         4| 78.91666666666667|   2022-09-18|\n|         4|             64.75|   2022-09-19|\n|         4| 78.91666666666667|   2022-09-19|\n|         4|             64.75|   2022-09-20|\n|         4| 78.91666666666667|   2022-09-20|\n|         4|             64.75|   2022-09-21|\n|         4| 78.91666666666667|   2022-09-21|\n|         4|             64.75|   2022-09-22|\n|         4| 78.91666666666667|   2022-09-22|\n|         4|             64.75|   2022-09-23|\n|         4| 78.91666666666667|   2022-09-23|\n|         4|             64.75|   2022-09-24|\n|         4| 78.91666666666667|   2022-09-24|\n|         4|             64.75|   2022-09-25|\n|         4| 78.91666666666667|   2022-09-25|\n|         4|             64.75|   2022-09-26|\n|         4| 78.91666666666667|   2022-09-26|\n|         4|             64.75|   2022-09-27|\n|         4| 78.91666666666667|   2022-09-27|\n|         4|             64.75|   2022-09-28|\n|         4| 78.91666666666667|   2022-09-28|\n|         4|             64.75|   2022-09-29|\n|         4| 78.91666666666667|   2022-09-29|\n|         4|             64.75|   2022-09-30|\n|         4| 78.91666666666667|   2022-09-30|\n|         5|168.16500000000002|   2022-09-01|\n|         5|             181.5|   2022-09-01|\n|         5|168.16500000000002|   2022-09-02|\n|         5|             181.5|   2022-09-02|\n|         5|168.16500000000002|   2022-09-03|\n|         5|             181.5|   2022-09-03|\n|         5|168.16500000000002|   2022-09-04|\n|         5|             181.5|   2022-09-04|\n|         5|168.16500000000002|   2022-09-05|\n|         5|             181.5|   2022-09-05|\n|         5|168.16500000000002|   2022-09-06|\n|         5|             181.5|   2022-09-06|\n|         5|168.16500000000002|   2022-09-07|\n|         5|             181.5|   2022-09-07|\n|         5|168.16500000000002|   2022-09-08|\n|         5|             181.5|   2022-09-08|\n|         5|168.16500000000002|   2022-09-09|\n|         5|             181.5|   2022-09-09|\n|         5|168.16500000000002|   2022-09-10|\n|         5|             181.5|   2022-09-10|\n|         5|168.16500000000002|   2022-09-11|\n|         5|             181.5|   2022-09-11|\n|         5|168.16500000000002|   2022-09-12|\n|         5|             181.5|   2022-09-12|\n|         5|168.16500000000002|   2022-09-13|\n|         5|             181.5|   2022-09-13|\n|         5|168.16500000000002|   2022-09-14|\n|         5|             181.5|   2022-09-14|\n|         5|168.16500000000002|   2022-09-15|\n|         5|             181.5|   2022-09-15|\n|         5|168.16500000000002|   2022-09-16|\n|         5|             181.5|   2022-09-16|\n|         5|168.16500000000002|   2022-09-17|\n|         5|             181.5|   2022-09-17|\n|         5|168.16500000000002|   2022-09-18|\n|         5|             181.5|   2022-09-18|\n|         5|168.16500000000002|   2022-09-19|\n|         5|             181.5|   2022-09-19|\n|         5|168.16500000000002|   2022-09-20|\n|         5|             181.5|   2022-09-20|\n|         5|168.16500000000002|   2022-09-21|\n|         5|             181.5|   2022-09-21|\n|         5|168.16500000000002|   2022-09-22|\n|         5|             181.5|   2022-09-22|\n|         5|168.16500000000002|   2022-09-23|\n|         5|             181.5|   2022-09-23|\n|         5|168.16500000000002|   2022-09-24|\n|         5|             181.5|   2022-09-24|\n|         5|168.16500000000002|   2022-09-25|\n|         5|             181.5|   2022-09-25|\n|         5|168.16500000000002|   2022-09-26|\n|         5|             181.5|   2022-09-26|\n|         5|168.16500000000002|   2022-09-27|\n|         5|             181.5|   2022-09-27|\n|         5|168.16500000000002|   2022-09-28|\n|         5|             181.5|   2022-09-28|\n|         5|168.16500000000002|   2022-09-29|\n|         5|             181.5|   2022-09-29|\n|         5|168.16500000000002|   2022-09-30|\n|         5|             181.5|   2022-09-30|\n|         6|              71.0|   2022-09-01|\n|         6|              91.0|   2022-09-01|\n|         6|              71.0|   2022-09-02|\n|         6|              91.0|   2022-09-02|\n|         6|              71.0|   2022-09-03|\n|         6|              91.0|   2022-09-03|\n|         6|              71.0|   2022-09-04|\n|         6|              91.0|   2022-09-04|\n|         6|              71.0|   2022-09-05|\n|         6|              91.0|   2022-09-05|\n|         6|              71.0|   2022-09-06|\n|         6|              91.0|   2022-09-06|\n|         6|              71.0|   2022-09-07|\n|         6|              91.0|   2022-09-07|\n|         6|              71.0|   2022-09-08|\n|         6|              91.0|   2022-09-08|\n|         6|              71.0|   2022-09-09|\n|         6|              91.0|   2022-09-09|\n|         6|              71.0|   2022-09-10|\n|         6|              91.0|   2022-09-10|\n|         6|              71.0|   2022-09-11|\n|         6|              91.0|   2022-09-11|\n|         6|              71.0|   2022-09-12|\n|         6|              91.0|   2022-09-12|\n|         6|              71.0|   2022-09-13|\n|         6|              91.0|   2022-09-13|\n|         6|              71.0|   2022-09-14|\n|         6|              91.0|   2022-09-14|\n|         6|              71.0|   2022-09-15|\n|         6|              91.0|   2022-09-15|\n|         6|              71.0|   2022-09-16|\n|         6|              91.0|   2022-09-16|\n|         6|              71.0|   2022-09-17|\n|         6|              91.0|   2022-09-17|\n|         6|              71.0|   2022-09-18|\n|         6|              91.0|   2022-09-18|\n|         6|              71.0|   2022-09-19|\n|         6|              91.0|   2022-09-19|\n|         6|              71.0|   2022-09-20|\n|         6|              91.0|   2022-09-20|\n|         6|              71.0|   2022-09-21|\n|         6|              91.0|   2022-09-21|\n|         6|              71.0|   2022-09-22|\n|         6|              91.0|   2022-09-22|\n|         6|              71.0|   2022-09-23|\n|         6|              91.0|   2022-09-23|\n|         6|              71.0|   2022-09-24|\n|         6|              91.0|   2022-09-24|\n|         6|              71.0|   2022-09-25|\n|         6|              91.0|   2022-09-25|\n|         6|              71.0|   2022-09-26|\n|         6|              91.0|   2022-09-26|\n|         6|              71.0|   2022-09-27|\n|         6|              91.0|   2022-09-27|\n|         6|              71.0|   2022-09-28|\n|         6|              91.0|   2022-09-28|\n|         6|              71.0|   2022-09-29|\n|         6|              91.0|   2022-09-29|\n|         6|              71.0|   2022-09-30|\n|         6|              91.0|   2022-09-30|\n|         7|             296.0|   2022-09-01|\n|         7|             274.0|   2022-09-01|\n|         7|             296.0|   2022-09-02|\n|         7|             274.0|   2022-09-02|\n|         7|             296.0|   2022-09-03|\n|         7|             274.0|   2022-09-03|\n|         7|             296.0|   2022-09-04|\n|         7|             274.0|   2022-09-04|\n|         7|             296.0|   2022-09-05|\n|         7|             274.0|   2022-09-05|\n|         7|             296.0|   2022-09-06|\n|         7|             274.0|   2022-09-06|\n|         7|             296.0|   2022-09-07|\n|         7|             274.0|   2022-09-07|\n|         7|             296.0|   2022-09-08|\n|         7|             274.0|   2022-09-08|\n|         7|             296.0|   2022-09-09|\n|         7|             274.0|   2022-09-09|\n|         7|             296.0|   2022-09-10|\n|         7|             274.0|   2022-09-10|\n|         7|             296.0|   2022-09-11|\n|         7|             274.0|   2022-09-11|\n|         7|             296.0|   2022-09-12|\n|         7|             274.0|   2022-09-12|\n|         7|             296.0|   2022-09-13|\n|         7|             274.0|   2022-09-13|\n|         7|             296.0|   2022-09-14|\n|         7|             274.0|   2022-09-14|\n|         7|             296.0|   2022-09-15|\n|         7|             274.0|   2022-09-15|\n|         7|             296.0|   2022-09-16|\n|         7|             274.0|   2022-09-16|\n|         7|             296.0|   2022-09-17|\n|         7|             274.0|   2022-09-17|\n|         7|             296.0|   2022-09-18|\n|         7|             274.0|   2022-09-18|\n|         7|             296.0|   2022-09-19|\n|         7|             274.0|   2022-09-19|\n|         7|             296.0|   2022-09-20|\n|         7|             274.0|   2022-09-20|\n|         7|             296.0|   2022-09-21|\n|         7|             274.0|   2022-09-21|\n|         7|             296.0|   2022-09-22|\n|         7|             274.0|   2022-09-22|\n|         7|             296.0|   2022-09-23|\n|         7|             274.0|   2022-09-23|\n|         7|             296.0|   2022-09-24|\n|         7|             274.0|   2022-09-24|\n|         7|             296.0|   2022-09-25|\n|         7|             274.0|   2022-09-25|\n|         7|             296.0|   2022-09-26|\n|         7|             274.0|   2022-09-26|\n|         7|             296.0|   2022-09-27|\n|         7|             274.0|   2022-09-27|\n|         7|             296.0|   2022-09-28|\n|         7|             274.0|   2022-09-28|\n|         7|             296.0|   2022-09-29|\n|         7|             274.0|   2022-09-29|\n|         7|             296.0|   2022-09-30|\n|         7|             274.0|   2022-09-30|\n|         8|197.66666666666666|   2022-09-01|\n|         8|             204.0|   2022-09-01|\n|         8|197.66666666666666|   2022-09-02|\n|         8|             204.0|   2022-09-02|\n|         8|197.66666666666666|   2022-09-03|\n|         8|             204.0|   2022-09-03|\n|         8|197.66666666666666|   2022-09-04|\n|         8|             204.0|   2022-09-04|\n|         8|197.66666666666666|   2022-09-05|\n|         8|             204.0|   2022-09-05|\n|         8|197.66666666666666|   2022-09-06|\n|         8|             204.0|   2022-09-06|\n|         8|197.66666666666666|   2022-09-07|\n|         8|             204.0|   2022-09-07|\n|         8|197.66666666666666|   2022-09-08|\n|         8|             204.0|   2022-09-08|\n|         8|197.66666666666666|   2022-09-09|\n|         8|             204.0|   2022-09-09|\n|         8|197.66666666666666|   2022-09-10|\n|         8|             204.0|   2022-09-10|\n|         8|197.66666666666666|   2022-09-11|\n|         8|             204.0|   2022-09-11|\n|         8|197.66666666666666|   2022-09-12|\n|         8|             204.0|   2022-09-12|\n|         8|197.66666666666666|   2022-09-13|\n|         8|             204.0|   2022-09-13|\n|         8|197.66666666666666|   2022-09-14|\n|         8|             204.0|   2022-09-14|\n|         8|197.66666666666666|   2022-09-15|\n|         8|             204.0|   2022-09-15|\n|         8|197.66666666666666|   2022-09-16|\n|         8|             204.0|   2022-09-16|\n|         8|197.66666666666666|   2022-09-17|\n|         8|             204.0|   2022-09-17|\n|         8|197.66666666666666|   2022-09-18|\n|         8|             204.0|   2022-09-18|\n|         8|197.66666666666666|   2022-09-19|\n|         8|             204.0|   2022-09-19|\n|         8|197.66666666666666|   2022-09-20|\n|         8|             204.0|   2022-09-20|\n|         8|197.66666666666666|   2022-09-21|\n|         8|             204.0|   2022-09-21|\n|         8|197.66666666666666|   2022-09-22|\n|         8|             204.0|   2022-09-22|\n|         8|197.66666666666666|   2022-09-23|\n|         8|             204.0|   2022-09-23|\n|         8|197.66666666666666|   2022-09-24|\n|         8|             204.0|   2022-09-24|\n|         8|197.66666666666666|   2022-09-25|\n|         8|             204.0|   2022-09-25|\n|         8|197.66666666666666|   2022-09-26|\n|         8|             204.0|   2022-09-26|\n|         8|197.66666666666666|   2022-09-27|\n|         8|             204.0|   2022-09-27|\n|         8|197.66666666666666|   2022-09-28|\n|         8|             204.0|   2022-09-28|\n|         8|197.66666666666666|   2022-09-29|\n|         8|             204.0|   2022-09-29|\n|         8|197.66666666666666|   2022-09-30|\n|         8|             204.0|   2022-09-30|\n|         9|              96.5|   2022-09-01|\n|         9|107.83333333333333|   2022-09-01|\n|         9|              96.5|   2022-09-02|\n|         9|107.83333333333333|   2022-09-02|\n|         9|              96.5|   2022-09-03|\n|         9|107.83333333333333|   2022-09-03|\n|         9|              96.5|   2022-09-04|\n|         9|107.83333333333333|   2022-09-04|\n|         9|              96.5|   2022-09-05|\n|         9|107.83333333333333|   2022-09-05|\n|         9|              96.5|   2022-09-06|\n|         9|107.83333333333333|   2022-09-06|\n|         9|              96.5|   2022-09-07|\n|         9|107.83333333333333|   2022-09-07|\n|         9|              96.5|   2022-09-08|\n|         9|107.83333333333333|   2022-09-08|\n|         9|              96.5|   2022-09-09|\n|         9|107.83333333333333|   2022-09-09|\n|         9|              96.5|   2022-09-10|\n|         9|107.83333333333333|   2022-09-10|\n|         9|              96.5|   2022-09-11|\n|         9|107.83333333333333|   2022-09-11|\n|         9|              96.5|   2022-09-12|\n|         9|107.83333333333333|   2022-09-12|\n|         9|              96.5|   2022-09-13|\n|         9|107.83333333333333|   2022-09-13|\n|         9|              96.5|   2022-09-14|\n|         9|107.83333333333333|   2022-09-14|\n|         9|              96.5|   2022-09-15|\n|         9|107.83333333333333|   2022-09-15|\n|         9|              96.5|   2022-09-16|\n|         9|107.83333333333333|   2022-09-16|\n|         9|              96.5|   2022-09-17|\n|         9|107.83333333333333|   2022-09-17|\n|         9|              96.5|   2022-09-18|\n|         9|107.83333333333333|   2022-09-18|\n|         9|              96.5|   2022-09-19|\n|         9|107.83333333333333|   2022-09-19|\n|         9|              96.5|   2022-09-20|\n|         9|107.83333333333333|   2022-09-20|\n|         9|              96.5|   2022-09-21|\n|         9|107.83333333333333|   2022-09-21|\n|         9|              96.5|   2022-09-22|\n|         9|107.83333333333333|   2022-09-22|\n|         9|              96.5|   2022-09-23|\n|         9|107.83333333333333|   2022-09-23|\n|         9|              96.5|   2022-09-24|\n|         9|107.83333333333333|   2022-09-24|\n|         9|              96.5|   2022-09-25|\n|         9|107.83333333333333|   2022-09-25|\n|         9|              96.5|   2022-09-26|\n|         9|107.83333333333333|   2022-09-26|\n|         9|              96.5|   2022-09-27|\n|         9|107.83333333333333|   2022-09-27|\n|         9|              96.5|   2022-09-28|\n|         9|107.83333333333333|   2022-09-28|\n|         9|              96.5|   2022-09-29|\n|         9|107.83333333333333|   2022-09-29|\n|         9|              96.5|   2022-09-30|\n|         9|107.83333333333333|   2022-09-30|\n|        10|239.66666666666666|   2022-09-01|\n|        10|             256.7|   2022-09-01|\n|        10|239.66666666666666|   2022-09-02|\n|        10|             256.7|   2022-09-02|\n|        10|239.66666666666666|   2022-09-03|\n|        10|             256.7|   2022-09-03|\n|        10|239.66666666666666|   2022-09-04|\n|        10|             256.7|   2022-09-04|\n|        10|239.66666666666666|   2022-09-05|\n|        10|             256.7|   2022-09-05|\n|        10|239.66666666666666|   2022-09-06|\n|        10|             256.7|   2022-09-06|\n|        10|239.66666666666666|   2022-09-07|\n|        10|             256.7|   2022-09-07|\n|        10|239.66666666666666|   2022-09-08|\n|        10|             256.7|   2022-09-08|\n|        10|239.66666666666666|   2022-09-09|\n|        10|             256.7|   2022-09-09|\n|        10|239.66666666666666|   2022-09-10|\n|        10|             256.7|   2022-09-10|\n|        10|239.66666666666666|   2022-09-11|\n|        10|             256.7|   2022-09-11|\n|        10|239.66666666666666|   2022-09-12|\n|        10|             256.7|   2022-09-12|\n|        10|239.66666666666666|   2022-09-13|\n|        10|             256.7|   2022-09-13|\n|        10|239.66666666666666|   2022-09-14|\n|        10|             256.7|   2022-09-14|\n|        10|239.66666666666666|   2022-09-15|\n|        10|             256.7|   2022-09-15|\n|        10|239.66666666666666|   2022-09-16|\n|        10|             256.7|   2022-09-16|\n|        10|239.66666666666666|   2022-09-17|\n|        10|             256.7|   2022-09-17|\n|        10|239.66666666666666|   2022-09-18|\n|        10|             256.7|   2022-09-18|\n|        10|239.66666666666666|   2022-09-19|\n|        10|             256.7|   2022-09-19|\n|        10|239.66666666666666|   2022-09-20|\n|        10|             256.7|   2022-09-20|\n|        10|239.66666666666666|   2022-09-21|\n|        10|             256.7|   2022-09-21|\n|        10|239.66666666666666|   2022-09-22|\n|        10|             256.7|   2022-09-22|\n|        10|239.66666666666666|   2022-09-23|\n|        10|             256.7|   2022-09-23|\n|        10|239.66666666666666|   2022-09-24|\n|        10|             256.7|   2022-09-24|\n|        10|239.66666666666666|   2022-09-25|\n|        10|             256.7|   2022-09-25|\n|        10|239.66666666666666|   2022-09-26|\n|        10|             256.7|   2022-09-26|\n|        10|239.66666666666666|   2022-09-27|\n|        10|             256.7|   2022-09-27|\n|        10|239.66666666666666|   2022-09-28|\n|        10|             256.7|   2022-09-28|\n|        10|239.66666666666666|   2022-09-29|\n|        10|             256.7|   2022-09-29|\n|        10|239.66666666666666|   2022-09-30|\n|        10|             256.7|   2022-09-30|\n|        11|             687.0|   2022-09-01|\n|        11|             704.0|   2022-09-01|\n|        11|             687.0|   2022-09-02|\n|        11|             704.0|   2022-09-02|\n|        11|             687.0|   2022-09-03|\n|        11|             704.0|   2022-09-03|\n|        11|             687.0|   2022-09-04|\n|        11|             704.0|   2022-09-04|\n|        11|             687.0|   2022-09-05|\n|        11|             704.0|   2022-09-05|\n|        11|             687.0|   2022-09-06|\n|        11|             704.0|   2022-09-06|\n|        11|             687.0|   2022-09-07|\n|        11|             704.0|   2022-09-07|\n|        11|             687.0|   2022-09-08|\n|        11|             704.0|   2022-09-08|\n|        11|             687.0|   2022-09-09|\n|        11|             704.0|   2022-09-09|\n|        11|             687.0|   2022-09-10|\n|        11|             704.0|   2022-09-10|\n|        11|             687.0|   2022-09-11|\n|        11|             704.0|   2022-09-11|\n|        11|             687.0|   2022-09-12|\n|        11|             704.0|   2022-09-12|\n|        11|             687.0|   2022-09-13|\n|        11|             704.0|   2022-09-13|\n|        11|             687.0|   2022-09-14|\n|        11|             704.0|   2022-09-14|\n|        11|             687.0|   2022-09-15|\n|        11|             704.0|   2022-09-15|\n|        11|             687.0|   2022-09-16|\n|        11|             704.0|   2022-09-16|\n|        11|             687.0|   2022-09-17|\n|        11|             704.0|   2022-09-17|\n|        11|             687.0|   2022-09-18|\n|        11|             704.0|   2022-09-18|\n|        11|             687.0|   2022-09-19|\n|        11|             704.0|   2022-09-19|\n|        11|             687.0|   2022-09-20|\n|        11|             704.0|   2022-09-20|\n|        11|             687.0|   2022-09-21|\n|        11|             704.0|   2022-09-21|\n|        11|             687.0|   2022-09-22|\n|        11|             704.0|   2022-09-22|\n|        11|             687.0|   2022-09-23|\n|        11|             704.0|   2022-09-23|\n|        11|             687.0|   2022-09-24|\n|        11|             704.0|   2022-09-24|\n|        11|             687.0|   2022-09-25|\n|        11|             704.0|   2022-09-25|\n|        11|             687.0|   2022-09-26|\n|        11|             704.0|   2022-09-26|\n|        11|             687.0|   2022-09-27|\n|        11|             704.0|   2022-09-27|\n|        11|             687.0|   2022-09-28|\n|        11|             704.0|   2022-09-28|\n|        11|             687.0|   2022-09-29|\n|        11|             704.0|   2022-09-29|\n|        11|             687.0|   2022-09-30|\n|        11|             704.0|   2022-09-30|\n|        12|            1141.0|   2022-09-01|\n|        12|             756.5|   2022-09-01|\n|        12|            1141.0|   2022-09-02|\n|        12|             756.5|   2022-09-02|\n|        12|            1141.0|   2022-09-03|\n|        12|             756.5|   2022-09-03|\n|        12|            1141.0|   2022-09-04|\n|        12|             756.5|   2022-09-04|\n|        12|            1141.0|   2022-09-05|\n|        12|             756.5|   2022-09-05|\n|        12|            1141.0|   2022-09-06|\n|        12|             756.5|   2022-09-06|\n|        12|            1141.0|   2022-09-07|\n|        12|             756.5|   2022-09-07|\n|        12|            1141.0|   2022-09-08|\n|        12|             756.5|   2022-09-08|\n|        12|            1141.0|   2022-09-09|\n|        12|             756.5|   2022-09-09|\n|        12|            1141.0|   2022-09-10|\n|        12|             756.5|   2022-09-10|\n|        12|            1141.0|   2022-09-11|\n|        12|             756.5|   2022-09-11|\n|        12|            1141.0|   2022-09-12|\n|        12|             756.5|   2022-09-12|\n|        12|            1141.0|   2022-09-13|\n|        12|             756.5|   2022-09-13|\n|        12|            1141.0|   2022-09-14|\n|        12|             756.5|   2022-09-14|\n|        12|            1141.0|   2022-09-15|\n|        12|             756.5|   2022-09-15|\n|        12|            1141.0|   2022-09-16|\n|        12|             756.5|   2022-09-16|\n|        12|            1141.0|   2022-09-17|\n|        12|             756.5|   2022-09-17|\n|        12|            1141.0|   2022-09-18|\n|        12|             756.5|   2022-09-18|\n|        12|            1141.0|   2022-09-19|\n|        12|             756.5|   2022-09-19|\n|        12|            1141.0|   2022-09-20|\n|        12|             756.5|   2022-09-20|\n|        12|            1141.0|   2022-09-21|\n|        12|             756.5|   2022-09-21|\n|        12|            1141.0|   2022-09-22|\n|        12|             756.5|   2022-09-22|\n|        12|            1141.0|   2022-09-23|\n|        12|             756.5|   2022-09-23|\n|        12|            1141.0|   2022-09-24|\n|        12|             756.5|   2022-09-24|\n|        12|            1141.0|   2022-09-25|\n|        12|             756.5|   2022-09-25|\n|        12|            1141.0|   2022-09-26|\n|        12|             756.5|   2022-09-26|\n|        12|            1141.0|   2022-09-27|\n|        12|             756.5|   2022-09-27|\n|        12|            1141.0|   2022-09-28|\n|        12|             756.5|   2022-09-28|\n|        12|            1141.0|   2022-09-29|\n|        12|             756.5|   2022-09-29|\n|        12|            1141.0|   2022-09-30|\n|        12|             756.5|   2022-09-30|\n|        13|            337.75|   2022-09-01|\n|        13|             431.5|   2022-09-01|\n|        13|            337.75|   2022-09-02|\n|        13|             431.5|   2022-09-02|\n|        13|            337.75|   2022-09-03|\n|        13|             431.5|   2022-09-03|\n|        13|            337.75|   2022-09-04|\n|        13|             431.5|   2022-09-04|\n|        13|            337.75|   2022-09-05|\n|        13|             431.5|   2022-09-05|\n|        13|            337.75|   2022-09-06|\n|        13|             431.5|   2022-09-06|\n|        13|            337.75|   2022-09-07|\n|        13|             431.5|   2022-09-07|\n|        13|            337.75|   2022-09-08|\n|        13|             431.5|   2022-09-08|\n|        13|            337.75|   2022-09-09|\n|        13|             431.5|   2022-09-09|\n|        13|            337.75|   2022-09-10|\n|        13|             431.5|   2022-09-10|\n|        13|            337.75|   2022-09-11|\n|        13|             431.5|   2022-09-11|\n|        13|            337.75|   2022-09-12|\n|        13|             431.5|   2022-09-12|\n|        13|            337.75|   2022-09-13|\n|        13|             431.5|   2022-09-13|\n|        13|            337.75|   2022-09-14|\n|        13|             431.5|   2022-09-14|\n|        13|            337.75|   2022-09-15|\n|        13|             431.5|   2022-09-15|\n|        13|            337.75|   2022-09-16|\n|        13|             431.5|   2022-09-16|\n|        13|            337.75|   2022-09-17|\n|        13|             431.5|   2022-09-17|\n|        13|            337.75|   2022-09-18|\n|        13|             431.5|   2022-09-18|\n|        13|            337.75|   2022-09-19|\n|        13|             431.5|   2022-09-19|\n|        13|            337.75|   2022-09-20|\n|        13|             431.5|   2022-09-20|\n|        13|            337.75|   2022-09-21|\n|        13|             431.5|   2022-09-21|\n|        13|            337.75|   2022-09-22|\n|        13|             431.5|   2022-09-22|\n|        13|            337.75|   2022-09-23|\n|        13|             431.5|   2022-09-23|\n|        13|            337.75|   2022-09-24|\n|        13|             431.5|   2022-09-24|\n|        13|            337.75|   2022-09-25|\n|        13|             431.5|   2022-09-25|\n|        13|            337.75|   2022-09-26|\n|        13|             431.5|   2022-09-26|\n|        13|            337.75|   2022-09-27|\n|        13|             431.5|   2022-09-27|\n|        13|            337.75|   2022-09-28|\n|        13|             431.5|   2022-09-28|\n|        13|            337.75|   2022-09-29|\n|        13|             431.5|   2022-09-29|\n|        13|            337.75|   2022-09-30|\n|        13|             431.5|   2022-09-30|\n|        14|            2867.0|   2022-09-01|\n|        14|            2527.0|   2022-09-01|\n|        14|            2867.0|   2022-09-02|\n|        14|            2527.0|   2022-09-02|\n|        14|            2867.0|   2022-09-03|\n|        14|            2527.0|   2022-09-03|\n|        14|            2867.0|   2022-09-04|\n|        14|            2527.0|   2022-09-04|\n|        14|            2867.0|   2022-09-05|\n|        14|            2527.0|   2022-09-05|\n|        14|            2867.0|   2022-09-06|\n|        14|            2527.0|   2022-09-06|\n|        14|            2867.0|   2022-09-07|\n|        14|            2527.0|   2022-09-07|\n|        14|            2867.0|   2022-09-08|\n|        14|            2527.0|   2022-09-08|\n|        14|            2867.0|   2022-09-09|\n|        14|            2527.0|   2022-09-09|\n|        14|            2867.0|   2022-09-10|\n|        14|            2527.0|   2022-09-10|\n|        14|            2867.0|   2022-09-11|\n|        14|            2527.0|   2022-09-11|\n|        14|            2867.0|   2022-09-12|\n|        14|            2527.0|   2022-09-12|\n|        14|            2867.0|   2022-09-13|\n|        14|            2527.0|   2022-09-13|\n|        14|            2867.0|   2022-09-14|\n|        14|            2527.0|   2022-09-14|\n|        14|            2867.0|   2022-09-15|\n|        14|            2527.0|   2022-09-15|\n|        14|            2867.0|   2022-09-16|\n|        14|            2527.0|   2022-09-16|\n|        14|            2867.0|   2022-09-17|\n|        14|            2527.0|   2022-09-17|\n|        14|            2867.0|   2022-09-18|\n|        14|            2527.0|   2022-09-18|\n|        14|            2867.0|   2022-09-19|\n|        14|            2527.0|   2022-09-19|\n|        14|            2867.0|   2022-09-20|\n|        14|            2527.0|   2022-09-20|\n|        14|            2867.0|   2022-09-21|\n|        14|            2527.0|   2022-09-21|\n|        14|            2867.0|   2022-09-22|\n|        14|            2527.0|   2022-09-22|\n|        14|            2867.0|   2022-09-23|\n|        14|            2527.0|   2022-09-23|\n|        14|            2867.0|   2022-09-24|\n|        14|            2527.0|   2022-09-24|\n|        14|            2867.0|   2022-09-25|\n|        14|            2527.0|   2022-09-25|\n|        14|            2867.0|   2022-09-26|\n|        14|            2527.0|   2022-09-26|\n|        14|            2867.0|   2022-09-27|\n|        14|            2527.0|   2022-09-27|\n|        14|            2867.0|   2022-09-28|\n|        14|            2527.0|   2022-09-28|\n|        14|            2867.0|   2022-09-29|\n|        14|            2527.0|   2022-09-29|\n|        14|            2867.0|   2022-09-30|\n|        14|            2527.0|   2022-09-30|\n|        15|          1178.875|   2022-09-01|\n|        15|1396.6666666666667|   2022-09-01|\n|        15|          1178.875|   2022-09-02|\n|        15|1396.6666666666667|   2022-09-02|\n|        15|          1178.875|   2022-09-03|\n|        15|1396.6666666666667|   2022-09-03|\n|        15|          1178.875|   2022-09-04|\n|        15|1396.6666666666667|   2022-09-04|\n|        15|          1178.875|   2022-09-05|\n|        15|1396.6666666666667|   2022-09-05|\n|        15|          1178.875|   2022-09-06|\n|        15|1396.6666666666667|   2022-09-06|\n|        15|          1178.875|   2022-09-07|\n|        15|1396.6666666666667|   2022-09-07|\n|        15|          1178.875|   2022-09-08|\n|        15|1396.6666666666667|   2022-09-08|\n|        15|          1178.875|   2022-09-09|\n|        15|1396.6666666666667|   2022-09-09|\n|        15|          1178.875|   2022-09-10|\n|        15|1396.6666666666667|   2022-09-10|\n|        15|          1178.875|   2022-09-11|\n|        15|1396.6666666666667|   2022-09-11|\n|        15|          1178.875|   2022-09-12|\n|        15|1396.6666666666667|   2022-09-12|\n|        15|          1178.875|   2022-09-13|\n|        15|1396.6666666666667|   2022-09-13|\n|        15|          1178.875|   2022-09-14|\n|        15|1396.6666666666667|   2022-09-14|\n|        15|          1178.875|   2022-09-15|\n|        15|1396.6666666666667|   2022-09-15|\n|        15|          1178.875|   2022-09-16|\n|        15|1396.6666666666667|   2022-09-16|\n|        15|          1178.875|   2022-09-17|\n|        15|1396.6666666666667|   2022-09-17|\n|        15|          1178.875|   2022-09-18|\n|        15|1396.6666666666667|   2022-09-18|\n|        15|          1178.875|   2022-09-19|\n|        15|1396.6666666666667|   2022-09-19|\n|        15|          1178.875|   2022-09-20|\n|        15|1396.6666666666667|   2022-09-20|\n|        15|          1178.875|   2022-09-21|\n|        15|1396.6666666666667|   2022-09-21|\n|        15|          1178.875|   2022-09-22|\n|        15|1396.6666666666667|   2022-09-22|\n|        15|          1178.875|   2022-09-23|\n|        15|1396.6666666666667|   2022-09-23|\n|        15|          1178.875|   2022-09-24|\n|        15|1396.6666666666667|   2022-09-24|\n|        15|          1178.875|   2022-09-25|\n|        15|1396.6666666666667|   2022-09-25|\n|        15|          1178.875|   2022-09-26|\n|        15|1396.6666666666667|   2022-09-26|\n|        15|          1178.875|   2022-09-27|\n|        15|1396.6666666666667|   2022-09-27|\n|        15|          1178.875|   2022-09-28|\n|        15|1396.6666666666667|   2022-09-28|\n|        15|          1178.875|   2022-09-29|\n|        15|1396.6666666666667|   2022-09-29|\n|        15|          1178.875|   2022-09-30|\n|        15|1396.6666666666667|   2022-09-30|\n|        16| 740.6666666666666|   2022-09-01|\n|        16|             793.0|   2022-09-01|\n|        16| 740.6666666666666|   2022-09-02|\n|        16|             793.0|   2022-09-02|\n|        16| 740.6666666666666|   2022-09-03|\n|        16|             793.0|   2022-09-03|\n|        16| 740.6666666666666|   2022-09-04|\n|        16|             793.0|   2022-09-04|\n|        16| 740.6666666666666|   2022-09-05|\n|        16|             793.0|   2022-09-05|\n|        16| 740.6666666666666|   2022-09-06|\n|        16|             793.0|   2022-09-06|\n|        16| 740.6666666666666|   2022-09-07|\n|        16|             793.0|   2022-09-07|\n|        16| 740.6666666666666|   2022-09-08|\n|        16|             793.0|   2022-09-08|\n|        16| 740.6666666666666|   2022-09-09|\n|        16|             793.0|   2022-09-09|\n|        16| 740.6666666666666|   2022-09-10|\n|        16|             793.0|   2022-09-10|\n|        16| 740.6666666666666|   2022-09-11|\n|        16|             793.0|   2022-09-11|\n|        16| 740.6666666666666|   2022-09-12|\n|        16|             793.0|   2022-09-12|\n|        16| 740.6666666666666|   2022-09-13|\n|        16|             793.0|   2022-09-13|\n|        16| 740.6666666666666|   2022-09-14|\n|        16|             793.0|   2022-09-14|\n|        16| 740.6666666666666|   2022-09-15|\n|        16|             793.0|   2022-09-15|\n|        16| 740.6666666666666|   2022-09-16|\n|        16|             793.0|   2022-09-16|\n|        16| 740.6666666666666|   2022-09-17|\n|        16|             793.0|   2022-09-17|\n|        16| 740.6666666666666|   2022-09-18|\n|        16|             793.0|   2022-09-18|\n|        16| 740.6666666666666|   2022-09-19|\n|        16|             793.0|   2022-09-19|\n|        16| 740.6666666666666|   2022-09-20|\n|        16|             793.0|   2022-09-20|\n|        16| 740.6666666666666|   2022-09-21|\n|        16|             793.0|   2022-09-21|\n|        16| 740.6666666666666|   2022-09-22|\n|        16|             793.0|   2022-09-22|\n|        16| 740.6666666666666|   2022-09-23|\n|        16|             793.0|   2022-09-23|\n|        16| 740.6666666666666|   2022-09-24|\n|        16|             793.0|   2022-09-24|\n|        16| 740.6666666666666|   2022-09-25|\n|        16|             793.0|   2022-09-25|\n|        16| 740.6666666666666|   2022-09-26|\n|        16|             793.0|   2022-09-26|\n|        16| 740.6666666666666|   2022-09-27|\n|        16|             793.0|   2022-09-27|\n|        16| 740.6666666666666|   2022-09-28|\n|        16|             793.0|   2022-09-28|\n|        16| 740.6666666666666|   2022-09-29|\n|        16|             793.0|   2022-09-29|\n|        16| 740.6666666666666|   2022-09-30|\n|        16|             793.0|   2022-09-30|\n|        17|            928.89|   2022-09-01|\n|        17|           616.125|   2022-09-01|\n|        17|            928.89|   2022-09-02|\n|        17|           616.125|   2022-09-02|\n|        17|            928.89|   2022-09-03|\n|        17|           616.125|   2022-09-03|\n|        17|            928.89|   2022-09-04|\n|        17|           616.125|   2022-09-04|\n|        17|            928.89|   2022-09-05|\n|        17|           616.125|   2022-09-05|\n+----------+------------------+-------------+\nonly showing top 1000 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=330",
+              "$$hashKey": "object:14272"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=331",
+              "$$hashKey": "object:14273"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=332",
+              "$$hashKey": "object:14274"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664259702219_1572871008",
+      "id": "paragraph_1664259702219_1572871008",
+      "dateCreated": "2022-09-27T06:21:42+0000",
+      "dateStarted": "2022-09-27T08:40:59+0000",
+      "dateFinished": "2022-09-27T08:40:59+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11997"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import count\n\npp_2209 = pp_2209.groupby('product_id').agg(round((sum(col('unit_price'))/count(col('unit_price'))),2).alias('avg_unit_price')).sort(col('product_id'))\npp_2209 = pp_2209.withColumn('research_date', lit('2022-09-01'))\npp_2209 = pp_2209.withColumn('date_type', lit('m'))\npp_2209.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T08:41:02+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------+--------------+-------------+---------+\n|product_id|avg_unit_price|research_date|date_type|\n+----------+--------------+-------------+---------+\n|         0|        189.63|   2022-09-01|        m|\n|         1|        471.25|   2022-09-01|        m|\n|         2|         63.25|   2022-09-01|        m|\n|         3|        131.17|   2022-09-01|        m|\n|         4|         71.83|   2022-09-01|        m|\n|         5|        174.83|   2022-09-01|        m|\n|         6|          81.0|   2022-09-01|        m|\n|         7|         285.0|   2022-09-01|        m|\n|         8|        200.83|   2022-09-01|        m|\n|         9|        102.17|   2022-09-01|        m|\n|        10|        248.18|   2022-09-01|        m|\n|        11|         695.5|   2022-09-01|        m|\n|        12|        948.75|   2022-09-01|        m|\n|        13|        384.63|   2022-09-01|        m|\n|        14|        2697.0|   2022-09-01|        m|\n|        15|       1287.77|   2022-09-01|        m|\n|        16|        766.83|   2022-09-01|        m|\n|        17|        772.51|   2022-09-01|        m|\n|        18|         912.5|   2022-09-01|        m|\n|        19|         879.0|   2022-09-01|        m|\n+----------+--------------+-------------+---------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=333",
+              "$$hashKey": "object:14340"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=334",
+              "$$hashKey": "object:14341"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664260379674_924525724",
+      "id": "paragraph_1664260379674_924525724",
+      "dateCreated": "2022-09-27T06:32:59+0000",
+      "dateStarted": "2022-09-27T08:41:02+0000",
+      "dateFinished": "2022-09-27T08:41:03+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11998"
+    },
+    {
+      "text": "%pyspark\nimport pickle\nwith open('/DB_data/productName_productId.pickle', 'rb') as f:\n    productId = pickle.load(f)\nproductId.values()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T08:44:16+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "dict_values([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1051, 1052, 1053, 1054, 110, 111, 112, 113])\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664268209857_82192668",
+      "id": "paragraph_1664268209857_82192668",
+      "dateCreated": "2022-09-27T08:43:29+0000",
+      "dateStarted": "2022-09-27T08:44:16+0000",
+      "dateFinished": "2022-09-27T08:44:16+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:11999"
+    },
+    {
+      "text": "%pyspark\npp_2209.select('avg_unit_price').filter('product_id=0').collect()[0][0]",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T08:51:15+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "189.63\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=349",
+              "$$hashKey": "object:14455"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=350",
+              "$$hashKey": "object:14456"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=351",
+              "$$hashKey": "object:14457"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=352",
+              "$$hashKey": "object:14458"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664268508800_1706987452",
+      "id": "paragraph_1664268508800_1706987452",
+      "dateCreated": "2022-09-27T08:48:28+0000",
+      "dateStarted": "2022-09-27T08:51:15+0000",
+      "dateFinished": "2022-09-27T08:51:15+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:12000"
+    },
+    {
+      "text": "%pyspark\n# 220927 17:51 여기서부터 아직 실행 안함. 9월 데이터 잘 채워져 있는 건가? 확인 필요\nimport requests\nurl = \"http://3.36.106.26:8081/api/notebook/run/2HDTRUMFY/paragraph_1664267813555_691361679\"\nfor id in productId.values():\n    unit_price = pp_2209.select('avg_unit_price').filter(f'product_id={id}').collect()[0][0]\n    requests.post(url, json={\"params\": {\"unit_price\": unit_price, \"product_id\": str(id)}})",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T09:16:35+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664268261379_2067092622",
+      "id": "paragraph_1664268261379_2067092622",
+      "dateCreated": "2022-09-27T08:44:21+0000",
+      "status": "READY",
+      "$$hashKey": "object:12001"
+    },
+    {
+      "text": "%MySQL\nupdate product_price set unit_price='${unit_price}' where product_id=cast('${product_id}' as unsigned);",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T08:38:42+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664267813555_691361679",
+      "id": "paragraph_1664267813555_691361679",
+      "dateCreated": "2022-09-27T08:36:53+0000",
+      "status": "READY",
+      "$$hashKey": "object:12002"
+    },
+    {
+      "text": "%MySQL(refreshInterval=5000)\nselect * from product_price where research_date='2022-09-01' and date_type='m'",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T08:39:41+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "product_price_id": "string",
+                      "product_id": "string",
+                      "unit_price": "string",
+                      "price": "string",
+                      "research_date": "string",
+                      "date_type": "string",
+                      "business": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "product_price_id\tproduct_id\tunit_price\tprice\tresearch_date\tdate_type\tbusiness\n566707\t0\t200.8\tnull\t2022-09-01\tm\tnull\n566836\t1\t472.38\tnull\t2022-09-01\tm\tnull\n566965\t2\t71.0\tnull\t2022-09-01\tm\tnull\n567094\t3\t437.75\tnull\t2022-09-01\tm\tnull\n567223\t4\t162.82\tnull\t2022-09-01\tm\tnull\n567352\t5\t438.17\tnull\t2022-09-01\tm\tnull\n567481\t6\t80.0\tnull\t2022-09-01\tm\tnull\n567610\t7\t311.0\tnull\t2022-09-01\tm\tnull\n567739\t8\t209.67\tnull\t2022-09-01\tm\tnull\n567868\t9\t300.14\tnull\t2022-09-01\tm\tnull\n567997\t10\t230.7\tnull\t2022-09-01\tm\tnull\n568126\t11\t692.75\tnull\t2022-09-01\tm\tnull\n568255\t12\t974.0\tnull\t2022-09-01\tm\tnull\n568384\t13\t321.62\tnull\t2022-09-01\tm\tnull\n568513\t14\t1670.4\tnull\t2022-09-01\tm\tnull\n568642\t15\t1200.8\tnull\t2022-09-01\tm\tnull\n568771\t16\t707.25\tnull\t2022-09-01\tm\tnull\n568900\t17\t922.08\tnull\t2022-09-01\tm\tnull\n569029\t18\t1123.5\tnull\t2022-09-01\tm\tnull\n569158\t19\t957.0\tnull\t2022-09-01\tm\tnull\n569287\t20\t173.6\tnull\t2022-09-01\tm\tnull\n569416\t21\t317.0\tnull\t2022-09-01\tm\tnull\n569545\t22\t227.8\tnull\t2022-09-01\tm\tnull\n569674\t23\t371.2\tnull\t2022-09-01\tm\tnull\n569803\t24\t494.8\tnull\t2022-09-01\tm\tnull\n569932\t25\t323.1\tnull\t2022-09-01\tm\tnull\n570061\t26\t712.5\tnull\t2022-09-01\tm\tnull\n570190\t27\t1243.67\tnull\t2022-09-01\tm\tnull\n570319\t28\t238.25\tnull\t2022-09-01\tm\tnull\n570448\t29\t251.5\tnull\t2022-09-01\tm\tnull\n570577\t30\t454.25\tnull\t2022-09-01\tm\tnull\n570706\t31\t373.5\tnull\t2022-09-01\tm\tnull\n570835\t32\t968.94\tnull\t2022-09-01\tm\tnull\n570964\t33\t712.75\tnull\t2022-09-01\tm\tnull\n571093\t34\t135.82\tnull\t2022-09-01\tm\tnull\n571222\t35\t404.8\tnull\t2022-09-01\tm\tnull\n571351\t36\t1160.71\tnull\t2022-09-01\tm\tnull\n571480\t37\t886.57\tnull\t2022-09-01\tm\tnull\n571609\t38\t484.0\tnull\t2022-09-01\tm\tnull\n571738\t39\t98.0\tnull\t2022-09-01\tm\tnull\n571867\t40\t614.81\tnull\t2022-09-01\tm\tnull\n571996\t41\t1010.94\tnull\t2022-09-01\tm\tnull\n572125\t42\t1066.67\tnull\t2022-09-01\tm\tnull\n572254\t43\t1685.2\tnull\t2022-09-01\tm\tnull\n572383\t44\t528.75\tnull\t2022-09-01\tm\tnull\n572512\t45\t1443.86\tnull\t2022-09-01\tm\tnull\n572641\t46\t1963.69\tnull\t2022-09-01\tm\tnull\n572770\t47\t583.0\tnull\t2022-09-01\tm\tnull\n572899\t48\t93.75\tnull\t2022-09-01\tm\tnull\n573028\t49\t13565.6\tnull\t2022-09-01\tm\tnull\n573157\t50\t12000.0\tnull\t2022-09-01\tm\tnull\n573286\t51\t4278.22\tnull\t2022-09-01\tm\tnull\n573415\t52\t376.14\tnull\t2022-09-01\tm\tnull\n573544\t53\t1148.47\tnull\t2022-09-01\tm\tnull\n573673\t54\t1920.25\tnull\t2022-09-01\tm\tnull\n573802\t55\t1407.5\tnull\t2022-09-01\tm\tnull\n573931\t56\t392.77\tnull\t2022-09-01\tm\tnull\n574060\t57\t1236.33\tnull\t2022-09-01\tm\tnull\n574189\t58\t286.4\tnull\t2022-09-01\tm\tnull\n574318\t59\t1254.44\tnull\t2022-09-01\tm\tnull\n574447\t60\t361.22\tnull\t2022-09-01\tm\tnull\n574576\t61\t1407.0\tnull\t2022-09-01\tm\tnull\n574705\t62\t1011.25\tnull\t2022-09-01\tm\tnull\n574834\t63\t304.38\tnull\t2022-09-01\tm\tnull\n574963\t64\t643.25\tnull\t2022-09-01\tm\tnull\n575092\t65\t1933.44\tnull\t2022-09-01\tm\tnull\n575221\t66\t1288.09\tnull\t2022-09-01\tm\tnull\n575350\t67\t108.2\tnull\t2022-09-01\tm\tnull\n575479\t68\t543.6\tnull\t2022-09-01\tm\tnull\n575608\t69\t737.12\tnull\t2022-09-01\tm\tnull\n575737\t70\t290.47\tnull\t2022-09-01\tm\tnull\n575866\t71\t2659.6\tnull\t2022-09-01\tm\tnull\n575995\t72\t5400.0\tnull\t2022-09-01\tm\tnull\n576124\t73\t74.5\tnull\t2022-09-01\tm\tnull\n576253\t74\t940.25\tnull\t2022-09-01\tm\tnull\n576382\t75\t788.4\tnull\t2022-09-01\tm\tnull\n576511\t76\t7739.0\tnull\t2022-09-01\tm\tnull\n576640\t77\t5441.0\tnull\t2022-09-01\tm\tnull\n576769\t78\t481.0\tnull\t2022-09-01\tm\tnull\n576898\t79\t557.11\tnull\t2022-09-01\tm\tnull\n577027\t80\t559.4\tnull\t2022-09-01\tm\tnull\n577156\t81\t3349.0\tnull\t2022-09-01\tm\tnull\n577285\t82\t2329.33\tnull\t2022-09-01\tm\tnull\n577414\t83\t168.55\tnull\t2022-09-01\tm\tnull\n577543\t84\t1326.1\tnull\t2022-09-01\tm\tnull\n577672\t85\t262.59\tnull\t2022-09-01\tm\tnull\n577801\t86\t197.86\tnull\t2022-09-01\tm\tnull\n577930\t87\t3250.07\tnull\t2022-09-01\tm\tnull\n578059\t88\t243.6\tnull\t2022-09-01\tm\tnull\n578188\t89\t181.55\tnull\t2022-09-01\tm\tnull\n578317\t90\t397.0\tnull\t2022-09-01\tm\tnull\n578446\t91\t214.0\tnull\t2022-09-01\tm\tnull\n578575\t92\t499.5\tnull\t2022-09-01\tm\tnull\n578704\t93\t1538.29\tnull\t2022-09-01\tm\tnull\n578833\t94\t165.0\tnull\t2022-09-01\tm\tnull\n578962\t95\t91.94\tnull\t2022-09-01\tm\tnull\n579091\t96\t442.67\tnull\t2022-09-01\tm\tnull\n579220\t97\t579.75\tnull\t2022-09-01\tm\tnull\n579349\t98\t287.6\tnull\t2022-09-01\tm\tnull\n579478\t99\t219.67\tnull\t2022-09-01\tm\tnull\n579607\t100\t72.25\tnull\t2022-09-01\tm\tnull\n579736\t101\t552.0\tnull\t2022-09-01\tm\tnull\n579865\t102\t143.33\tnull\t2022-09-01\tm\tnull\n579994\t103\t165.5\tnull\t2022-09-01\tm\tnull\n580123\t104\t1218.0\tnull\t2022-09-01\tm\tnull\n580252\t105\t528.69\tnull\t2022-09-01\tm\tnull\n580381\t106\t944.58\tnull\t2022-09-01\tm\tnull\n580510\t107\t3760.0\tnull\t2022-09-01\tm\tnull\n580639\t108\t1226.91\tnull\t2022-09-01\tm\tnull\n580768\t109\t259.89\tnull\t2022-09-01\tm\tnull\n580897\t1000\t2422.4\tnull\t2022-09-01\tm\tnull\n581029\t1001\t3889.0\tnull\t2022-09-01\tm\tnull\n581161\t1002\t5486.0\tnull\t2022-09-01\tm\tnull\n581293\t1003\t7582.0\tnull\t2022-09-01\tm\tnull\n581425\t1004\t11166.0\tnull\t2022-09-01\tm\tnull\n581557\t1005\t5729.0\tnull\t2022-09-01\tm\tnull\n581689\t1006\t426.0\tnull\t2022-09-01\tm\tnull\n581821\t1007\t4357.0\tnull\t2022-09-01\tm\tnull\n581953\t1008\t26934.0\tnull\t2022-09-01\tm\tnull\n582085\t1009\t2029.0\tnull\t2022-09-01\tm\tnull\n582217\t1010\t4829.0\tnull\t2022-09-01\tm\tnull\n582349\t1011\t26321.0\tnull\t2022-09-01\tm\tnull\n582481\t1012\t26104.0\tnull\t2022-09-01\tm\tnull\n582613\t1013\t15065.0\tnull\t2022-09-01\tm\tnull\n582745\t1014\t2683.0\tnull\t2022-09-01\tm\tnull\n582877\t1015\t7166.0\tnull\t2022-09-01\tm\tnull\n583009\t1016\t1064.0\tnull\t2022-09-01\tm\tnull\n583141\t1017\t4623.0\tnull\t2022-09-01\tm\tnull\n583273\t1018\t4758.0\tnull\t2022-09-01\tm\tnull\n583405\t1019\t2233.0\tnull\t2022-09-01\tm\tnull\n583537\t1020\t1710.0\tnull\t2022-09-01\tm\tnull\n583669\t1021\t2607.0\tnull\t2022-09-01\tm\tnull\n583801\t1022\t3626.0\tnull\t2022-09-01\tm\tnull\n583933\t1023\t8780.0\tnull\t2022-09-01\tm\tnull\n584065\t1024\t30405.0\tnull\t2022-09-01\tm\tnull\n584197\t1025\t3140.0\tnull\t2022-09-01\tm\tnull\n584329\t1026\t1546.0\tnull\t2022-09-01\tm\tnull\n584461\t1027\t2541.0\tnull\t2022-09-01\tm\tnull\n584593\t1028\t11186.0\tnull\t2022-09-01\tm\tnull\n584725\t1029\t13246.0\tnull\t2022-09-01\tm\tnull\n584857\t1030\t11185.0\tnull\t2022-09-01\tm\tnull\n584989\t1031\t16550.0\tnull\t2022-09-01\tm\tnull\n585249\t1032\t2787.0\tnull\t2022-09-01\tm\tnull\n585250\t1032\t897.0\tnull\t2022-09-01\tm\tnull\n585385\t1033\t661.0\tnull\t2022-09-01\tm\tnull\n585517\t1034\t654.0\tnull\t2022-09-01\tm\tnull\n585649\t1035\t646.0\tnull\t2022-09-01\tm\tnull\n585781\t1036\t1628.0\tnull\t2022-09-01\tm\tnull\n585913\t1037\t1493.0\tnull\t2022-09-01\tm\tnull\n586045\t1038\t22332.0\tnull\t2022-09-01\tm\tnull\n586177\t1039\t29143.0\tnull\t2022-09-01\tm\tnull\n586309\t1040\t22617.0\tnull\t2022-09-01\tm\tnull\n586441\t1041\t8393.0\tnull\t2022-09-01\tm\tnull\n586573\t1042\t11751.0\tnull\t2022-09-01\tm\tnull\n586705\t1043\t297.0\tnull\t2022-09-01\tm\tnull\n586965\t1044\t9323.0\tnull\t2022-09-01\tm\tnull\n586966\t1044\t8834.0\tnull\t2022-09-01\tm\tnull\n587101\t1045\t5202.0\tnull\t2022-09-01\tm\tnull\n587233\t1046\t13779.0\tnull\t2022-09-01\tm\tnull\n587365\t1047\t8100.0\tnull\t2022-09-01\tm\tnull\n587497\t1048\t2831.0\tnull\t2022-09-01\tm\tnull\n587629\t1049\t936.0\tnull\t2022-09-01\tm\tnull\n587761\t1050\t3295.0\tnull\t2022-09-01\tm\tnull\n587893\t1051\t5441.0\tnull\t2022-09-01\tm\tnull\n588025\t1052\t8884.0\tnull\t2022-09-01\tm\tnull\n588157\t1053\t3847.0\tnull\t2022-09-01\tm\tnull\n588289\t1054\t3079.0\tnull\t2022-09-01\tm\tnull\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664267240824_2019831285",
+      "id": "paragraph_1664267240824_2019831285",
+      "dateCreated": "2022-09-27T08:27:20+0000",
+      "dateStarted": "2022-09-27T08:35:49+0000",
+      "dateFinished": "2022-09-27T08:35:50+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:12003"
+    },
+    {
+      "text": "%pyspark\nfrom datetime import datetime\nmonthly_date = z.textbox('monthly_date', '')\n# monthly_date = datetime.strptime(monthly_date, '%Y%m%d').strftime('%Y-%m-%d')\n# monthly_date = '2022-09-01'\nprint(monthly_date)\n\nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\nprop = {\"user\": \"ji\", \"password\": \"cvgkbhs234r#8tdx\", \"driver\": \"com.mysql.cj.jdbc.Driver\"} \n\n# productName_productId pickle load\nimport pickle\nwith open('/DB_data/20221001_productName_productId.pickle', 'rb') as f:\n    product_id = pickle.load(f)\n\n# gmgm product name list define\ngmgm_p_name = ['라면','시리얼','식빵','즉석밥','컵라면','탕',\n'계란','닭고기','돼지고기','소고기','소시지','햄',\n'갈치','고등어','어묵','오징어','조기','참치캔',\n'발효유','우유','치즈',\n'고추장','된장','두부','밀가루','설탕','소금','식용유','참기름',\n'감자칩','비스킷','빙과류','사탕','초코파이','초콜릿',\n'맥주','비타민음료','생수','소주','이온음료','주스','커피믹스','콜라',\n'고무장갑','면도날','바디워시','비누','생리대','샴푸','섬유유연제','세탁세제(액체형)','위생백','치약','칫솔','키친타월','화장지',\n'쌀','찹쌀','콩',\n'감자','고구마','고춧가루','깐마늘','깻잎','버섯','당근','딸기','무','배추','수박','시금치','양배추','양파','오이','토마토','파','파프리카','고추','호박',\n'땅콩','참깨',\n'감귤','레몬','바나나','배','사과','오렌지','파인애플','포도']\n\n# gmgm product id define\ngmgm_p_id = [product_id[name] for name in gmgm_p_name]\ngmgm_p_id = tuple(gmgm_p_id)\n\n# product_price table select product_id, unit_price, research_date from product_price where date_type='m' and product_id in {gmgm_p_id}\ngmgm_pp_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", url) \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", f\"select product_id, unit_price, research_date from product_price where date_type='m' and product_id in {gmgm_p_id} and research_date in ('{monthly_date}', '2020-01-01') order by product_id, research_date\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", \"cvgkbhs234r#8tdx\").load()\ngmgm_pp_sdf.show()\n    \n# product table select product_id, weight to calculate gmgm index\ngmgm_p_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", url) \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", f\"select product_id, weight from product\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", \"cvgkbhs234r#8tdx\").load()\n\n# calculate gmgm index\nfrom pyspark.sql.functions import col, sum, lit, round\nimport numpy as np\n\nprice_weight_sdf = gmgm_pp_sdf.join(gmgm_p_sdf, gmgm_pp_sdf['product_id'] == gmgm_p_sdf['product_id'], how='left')\nprice_weight_sdf = price_weight_sdf.withColumn('price*weight', price_weight_sdf['unit_price']*price_weight_sdf['weight'])\n# price_weight_sdf.show()\n\nindex_sdf = price_weight_sdf.groupBy('research_date').agg(sum(col('price*weight')).alias('sum_value'))\nindex_sdf = index_sdf.withColumn('value', round(index_sdf['sum_value']/index_sdf.filter(col('research_date')=='2020-01-01').first()[1]*100, 2))\n# index_sdf.show()\n\n# index_sdf = index_sdf.withColumn('index_type',lit('g'))\nindex_sdf = index_sdf.select('value').filter(f\"research_date=='{monthly_date}'\")\nupdate_value = index_sdf.collect()[0][0]\nprint(update_value)\n\n# # price_index table update \nimport requests\nurl = \"http://3.36.106.26:8081/api/notebook/run/2HDTRUMFY/paragraph_1664269559282_157825701\"\n\nrequests.post(url, json={\"params\": {\"value\": str(update_value), \"research_date\": monthly_date}})",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-02T17:29:18+0000",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {
+          "monthly_date": "2022-09-01"
+        },
+        "forms": {
+          "monthly_date": {
+            "type": "TextBox",
+            "name": "monthly_date",
+            "displayName": "monthly_date",
+            "defaultValue": "",
+            "hidden": false,
+            "$$hashKey": "object:12653"
+          }
+        }
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "2022-09-01\n+----------+----------+-------------+\n|product_id|unit_price|research_date|\n+----------+----------+-------------+\n|         0|     195.6|   2020-01-01|\n|         0|     200.8|   2022-09-01|\n|         3|     423.5|   2020-01-01|\n|         3|    437.75|   2022-09-01|\n|         4|    155.91|   2020-01-01|\n|         4|    162.82|   2022-09-01|\n|         5|    439.83|   2020-01-01|\n|         5|    438.17|   2022-09-01|\n|         9|    281.14|   2020-01-01|\n|         9|    300.14|   2022-09-01|\n|        10|     220.8|   2020-01-01|\n|        10|     230.7|   2022-09-01|\n|        12|    1104.0|   2020-01-01|\n|        12|     974.0|   2022-09-01|\n|        16|    712.75|   2020-01-01|\n|        16|    707.25|   2022-09-01|\n|        17|    902.31|   2020-01-01|\n|        17|    922.08|   2022-09-01|\n|        20|     159.0|   2020-01-01|\n|        20|     173.6|   2022-09-01|\n+----------+----------+-------------+\nonly showing top 20 rows\n\n115.37\n<Response [200]>\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=2461",
+              "$$hashKey": "object:14704"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=2462",
+              "$$hashKey": "object:14705"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=2463",
+              "$$hashKey": "object:14706"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=2465",
+              "$$hashKey": "object:14707"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=2466",
+              "$$hashKey": "object:14708"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=2467",
+              "$$hashKey": "object:14709"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=2468",
+              "$$hashKey": "object:14710"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=2470",
+              "$$hashKey": "object:14711"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=2471",
+              "$$hashKey": "object:14712"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664172921966_1736694246",
+      "id": "paragraph_1664172921966_1736694246",
+      "dateCreated": "2022-09-26T06:15:21+0000",
+      "dateStarted": "2022-10-02T17:29:18+0000",
+      "dateFinished": "2022-10-02T17:29:19+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:12004"
+    },
+    {
+      "text": "%MySQL\nupdate price_index set value='${value}' where index_type='g' and research_date='${research_date}';",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-02T17:29:19+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {
+          "value": "115.37",
+          "research_date": "2022-09-01"
+        },
+        "forms": {
+          "value": {
+            "type": "TextBox",
+            "name": "value",
+            "displayName": "value",
+            "hidden": false,
+            "$$hashKey": "object:12677"
+          },
+          "research_date": {
+            "type": "TextBox",
+            "name": "research_date",
+            "displayName": "research_date",
+            "hidden": false,
+            "$$hashKey": "object:12678"
+          }
+        }
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : 1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664269559282_157825701",
+      "id": "paragraph_1664269559282_157825701",
+      "dateCreated": "2022-09-27T09:05:59+0000",
+      "dateStarted": "2022-10-02T17:29:19+0000",
+      "dateFinished": "2022-10-02T17:29:19+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:12005"
+    },
+    {
+      "text": "%md\nproduct_id\n- 57(살충제), 34(빵) 있음 \n- 37(식빵), 72(코로나 자가검사 키트), 52(물휴지) 없음",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T02:29:53+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>product_id</p>\n<ul>\n<li>57(살충제), 34(빵) 있음</li>\n<li>37(식빵), 72(코로나 자가검사 키트) 없음</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664159028357_1736339217",
+      "id": "paragraph_1664159028357_1736339217",
+      "dateCreated": "2022-09-26T02:23:48+0000",
+      "dateStarted": "2022-09-26T02:25:11+0000",
+      "dateFinished": "2022-09-26T02:25:11+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:12006"
+    },
+    {
+      "text": "%MySQL\nselect * from price_index where index_type='g'",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-02T17:29:28+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "price_index_id": "string",
+                      "user_id": "string",
+                      "research_date": "string",
+                      "value": "string",
+                      "index_type": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "price_index_id\tuser_id\tresearch_date\tvalue\tindex_type\n502\tnull\t2012-01-01\t102.78\tg\n503\tnull\t2012-02-01\t103.81\tg\n504\tnull\t2012-03-01\t104.57\tg\n505\tnull\t2012-04-01\t101.91\tg\n506\tnull\t2012-05-01\t102.13\tg\n507\tnull\t2012-06-01\t101.54\tg\n508\tnull\t2012-07-01\t100.6\tg\n509\tnull\t2012-08-01\t102.77\tg\n510\tnull\t2012-09-01\t104.64\tg\n511\tnull\t2012-10-01\t103.89\tg\n512\tnull\t2012-11-01\t101.97\tg\n513\tnull\t2012-12-01\t101.68\tg\n514\tnull\t2013-01-01\t103.9\tg\n515\tnull\t2013-02-01\t105.35\tg\n516\tnull\t2013-03-01\t102.67\tg\n517\tnull\t2013-04-01\t102.28\tg\n518\tnull\t2013-05-01\t101.34\tg\n519\tnull\t2013-06-01\t100.9\tg\n520\tnull\t2013-07-01\t102.06\tg\n521\tnull\t2013-08-01\t104.22\tg\n522\tnull\t2013-09-01\t103.24\tg\n523\tnull\t2013-10-01\t99.9\tg\n524\tnull\t2013-11-01\t98.33\tg\n525\tnull\t2013-12-01\t100.9\tg\n526\tnull\t2014-01-01\t101.61\tg\n527\tnull\t2014-02-01\t102.61\tg\n528\tnull\t2014-03-01\t101.26\tg\n529\tnull\t2014-04-01\t100.48\tg\n530\tnull\t2014-05-01\t100.31\tg\n531\tnull\t2014-06-01\t99.39\tg\n532\tnull\t2014-07-01\t100.52\tg\n533\tnull\t2014-08-01\t100.68\tg\n534\tnull\t2014-09-01\t100.44\tg\n535\tnull\t2014-10-01\t98.92\tg\n536\tnull\t2014-11-01\t98.84\tg\n537\tnull\t2014-12-01\t101.83\tg\n538\tnull\t2015-01-01\t103.43\tg\n539\tnull\t2015-02-01\t104.28\tg\n540\tnull\t2015-03-01\t101.01\tg\n541\tnull\t2015-04-01\t100.82\tg\n542\tnull\t2015-05-01\t101.69\tg\n543\tnull\t2015-06-01\t100.85\tg\n544\tnull\t2015-07-01\t101.64\tg\n545\tnull\t2015-08-01\t102.23\tg\n546\tnull\t2015-09-01\t101.19\tg\n547\tnull\t2015-10-01\t99.81\tg\n548\tnull\t2015-11-01\t98.65\tg\n549\tnull\t2015-12-01\t103.29\tg\n550\tnull\t2016-01-01\t103.87\tg\n551\tnull\t2016-02-01\t105.64\tg\n552\tnull\t2016-03-01\t103.87\tg\n553\tnull\t2016-04-01\t98.36\tg\n554\tnull\t2016-05-01\t96.37\tg\n555\tnull\t2016-06-01\t95.85\tg\n556\tnull\t2016-07-01\t95.35\tg\n557\tnull\t2016-08-01\t96.74\tg\n558\tnull\t2016-09-01\t99.25\tg\n559\tnull\t2016-10-01\t97.35\tg\n560\tnull\t2016-11-01\t97.3\tg\n561\tnull\t2016-12-01\t100.29\tg\n562\tnull\t2017-01-01\t101.63\tg\n563\tnull\t2017-02-01\t103.67\tg\n564\tnull\t2017-03-01\t102.48\tg\n565\tnull\t2017-04-01\t99.86\tg\n566\tnull\t2017-05-01\t98.78\tg\n567\tnull\t2017-06-01\t98.14\tg\n568\tnull\t2017-07-01\t98.31\tg\n569\tnull\t2017-08-01\t100.06\tg\n570\tnull\t2017-09-01\t100.16\tg\n571\tnull\t2017-10-01\t99.1\tg\n572\tnull\t2017-11-01\t98.68\tg\n573\tnull\t2017-12-01\t98.82\tg\n574\tnull\t2018-01-01\t100.01\tg\n575\tnull\t2018-02-01\t104.77\tg\n576\tnull\t2018-03-01\t101.87\tg\n577\tnull\t2018-04-01\t102.45\tg\n578\tnull\t2018-05-01\t102.14\tg\n579\tnull\t2018-06-01\t100.54\tg\n580\tnull\t2018-07-01\t101.48\tg\n581\tnull\t2018-08-01\t106.1\tg\n582\tnull\t2018-09-01\t109.06\tg\n583\tnull\t2018-10-01\t106.2\tg\n584\tnull\t2018-11-01\t103.04\tg\n585\tnull\t2018-12-01\t105.4\tg\n586\tnull\t2019-01-01\t105.97\tg\n587\tnull\t2019-02-01\t106.78\tg\n588\tnull\t2019-03-01\t104.7\tg\n589\tnull\t2019-04-01\t105.87\tg\n590\tnull\t2019-05-01\t99.4\tg\n591\tnull\t2019-06-01\t99.3\tg\n592\tnull\t2019-07-01\t100.07\tg\n593\tnull\t2019-08-01\t98.32\tg\n594\tnull\t2019-09-01\t99.76\tg\n595\tnull\t2019-10-01\t98.56\tg\n596\tnull\t2019-11-01\t96.48\tg\n597\tnull\t2019-12-01\t98.98\tg\n598\tnull\t2020-01-01\t100.0\tg\n599\tnull\t2020-02-01\t100.61\tg\n600\tnull\t2020-03-01\t102.54\tg\n601\tnull\t2020-04-01\t100.38\tg\n602\tnull\t2020-05-01\t99.63\tg\n603\tnull\t2020-06-01\t99.93\tg\n604\tnull\t2020-07-01\t102.95\tg\n605\tnull\t2020-08-01\t105.53\tg\n606\tnull\t2020-09-01\t109.14\tg\n607\tnull\t2020-10-01\t104.77\tg\n608\tnull\t2020-11-01\t102.12\tg\n609\tnull\t2020-12-01\t104.09\tg\n610\tnull\t2021-01-01\t105.74\tg\n611\tnull\t2021-02-01\t107.62\tg\n612\tnull\t2021-03-01\t107.08\tg\n613\tnull\t2021-04-01\t105.77\tg\n614\tnull\t2021-05-01\t105.25\tg\n615\tnull\t2021-06-01\t104.67\tg\n616\tnull\t2021-07-01\t109.15\tg\n617\tnull\t2021-08-01\t110.43\tg\n618\tnull\t2021-09-01\t110.21\tg\n619\tnull\t2021-10-01\t107.2\tg\n620\tnull\t2021-11-01\t107.96\tg\n621\tnull\t2021-12-01\t108.98\tg\n622\tnull\t2022-01-01\t115.43\tg\n623\tnull\t2022-02-01\t112.24\tg\n624\tnull\t2022-03-01\t109.84\tg\n625\tnull\t2022-04-01\t111.95\tg\n626\tnull\t2022-05-01\t114.16\tg\n627\tnull\t2022-06-01\t115.23\tg\n628\tnull\t2022-07-01\t111.8\tg\n629\tnull\t2022-08-01\t113.78\tg\n630\tnull\t2022-09-01\t115.37\tg\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664262985055_945323713",
+      "id": "paragraph_1664262985055_945323713",
+      "dateCreated": "2022-09-27T07:16:25+0000",
+      "dateStarted": "2022-10-02T17:29:28+0000",
+      "dateFinished": "2022-10-02T17:29:28+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:12007"
+    },
+    {
+      "text": "",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-22T00:38:33+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1663807113986_484334599",
+      "id": "paragraph_1663555708285_825473631",
+      "dateCreated": "2022-09-22T00:38:33+0000",
+      "status": "READY",
+      "$$hashKey": "object:12008"
+    }
+  ],
+  "name": "[monthly]02_price_index_g",
+  "id": "2HDTRUMFY",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Data적재/[monthly]02_price_index_g"
+}

@@ -1,0 +1,167 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n### (1) like와 같은 의미",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-01T08:34:46+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(1) like와 같은 의미</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664613260783_1939552380",
+      "id": "paragraph_1664613260783_1939552380",
+      "dateCreated": "2022-10-01T08:34:20+0000",
+      "dateStarted": "2022-10-01T08:34:46+0000",
+      "dateFinished": "2022-10-01T08:34:46+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:128698"
+    },
+    {
+      "text": "%pyspark\npdf[pdf['col1'].str.contains('원하는 string')]",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-01T08:35:11+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664613286127_1483740191",
+      "id": "paragraph_1664613286127_1483740191",
+      "dateCreated": "2022-10-01T08:34:46+0000",
+      "status": "READY",
+      "$$hashKey": "object:128699"
+    },
+    {
+      "text": "%pyspark\na = 'asdfb'\na.contains('s')",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-02T12:50:04+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Fail to execute line 3: a.contains('s')\nTraceback (most recent call last):\n  File \"/tmp/python2805284225720256139/zeppelin_python.py\", line 167, in <module>\n    exec(code, _zcUserQueryNameSpace)\n  File \"<stdin>\", line 3, in <module>\nAttributeError: 'str' object has no attribute 'contains'\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664714988375_1518532010",
+      "id": "paragraph_1664714988375_1518532010",
+      "dateCreated": "2022-10-02T12:49:48+0000",
+      "dateStarted": "2022-10-02T12:50:04+0000",
+      "dateFinished": "2022-10-02T12:50:04+0000",
+      "status": "ERROR",
+      "$$hashKey": "object:128700"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-02T12:49:58+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664714998929_141150408",
+      "id": "paragraph_1664714998929_141150408",
+      "dateCreated": "2022-10-02T12:49:58+0000",
+      "status": "READY",
+      "$$hashKey": "object:128701"
+    }
+  ],
+  "name": "Pandas_strcontains",
+  "id": "2HDEKGWV9",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/예시코드/Pandas_strcontains"
+}

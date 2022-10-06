@@ -1,0 +1,147 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n[공식문서](https://zeppelin.apache.org/docs/0.10.1/usage/dynamic_form/intro.html)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T05:09:00+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><a href=\"https://zeppelin.apache.org/docs/0.10.1/usage/dynamic_form/intro.html\">공식문서</a></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664341730019_902528551",
+      "id": "paragraph_1664341730019_902528551",
+      "dateCreated": "2022-09-28T05:08:50+0000",
+      "dateStarted": "2022-09-28T05:09:00+0000",
+      "dateFinished": "2022-09-28T05:09:00+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:130986"
+    },
+    {
+      "text": "%pyspark\n\na = z.textbox('test','1')\na",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T05:08:47+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {
+          "test": "1"
+        },
+        "forms": {
+          "test": {
+            "type": "TextBox",
+            "name": "test",
+            "displayName": "test",
+            "defaultValue": "1",
+            "hidden": false,
+            "$$hashKey": "object:131036"
+          }
+        }
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "'1'\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664341436238_1448057349",
+      "id": "paragraph_1664341436238_1448057349",
+      "dateCreated": "2022-09-28T05:03:56+0000",
+      "dateStarted": "2022-09-28T05:08:37+0000",
+      "dateFinished": "2022-09-28T05:08:37+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:130987"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T05:08:31+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664341711952_1723653489",
+      "id": "paragraph_1664341711952_1723653489",
+      "dateCreated": "2022-09-28T05:08:31+0000",
+      "status": "READY",
+      "$$hashKey": "object:130988"
+    }
+  ],
+  "name": "spark_Dynamic_form",
+  "id": "2HGZENHV9",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/예시코드/spark_Dynamic_form"
+}
