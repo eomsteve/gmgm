@@ -4,17 +4,15 @@ import GotoSelectionButton from './GotoSelection';
 import Recommendation from './RecommendComponent';
 import { useNavigate } from 'react-router-dom';
 import type { FavoritePageData } from '@apis/favoriteApi';
-import Tooltip from '@components/tooltiptest'
+import Tooltip from '@components/tooltiptest';
 import './toggle_favorite.css';
 
 interface FavoriteSelectBoxProps {
   pageData: FavoritePageData;
 }
 
-
 const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
   const { pageData } = props;
-  console.log('selectPage :', pageData);
 
   const [optionState, setOption] = useState<string>('m');
 
@@ -33,23 +31,22 @@ const FavoriteSelectBox: FC<FavoriteSelectBoxProps> = props => {
         </span>
       </span>
       <div className="flex items-center">
-      <div className="switch-button m-3 ml-[3vw] ">
-        <input
-          onChange={handleSelection}
-          className="switch-button-checkbox "
-          type="checkbox"
-        ></input>
-        <label className="switch-button-label" htmlFor="">
-          <span className="switch-button-label-span">오프라인</span>
-        </label>
+        <div className="switch-button m-3 ml-[3vw] ">
+          <input
+            onChange={handleSelection}
+            className="switch-button-checkbox "
+            type="checkbox"
+          ></input>
+          <label className="switch-button-label" htmlFor="">
+            <span className="switch-button-label-span">오프라인</span>
+          </label>
+        </div>
+        <span className="z-5">
+          <Tooltip />
+        </span>
       </div>
-      <span className="z-5">
-      <Tooltip/>
 
-      </span>
-      </div>
-
-      <div className="from-blur flex w-full mb-7 flex-col items-center justify-center bg-gradient-to-t p-1">
+      <div className="from-blur mb-7 flex w-full flex-col items-center justify-center bg-gradient-to-t p-1">
         {pageData.favoriteItems.length ? (
           pageData.favoriteItems.map((favoriteItem, index) => {
             return (

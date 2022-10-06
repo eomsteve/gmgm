@@ -2,7 +2,6 @@ import React, { useState, useCallback, FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUpApi, checkEmailDuplicate } from '@apis/userApi';
 
-import axios from 'axios';
 
 interface SignUpProps { }
 
@@ -42,7 +41,6 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
 
     return year + "-" + month + "-" + day;
   }
-  console.log(today);
 
   const onChangeName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -136,8 +134,6 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
   const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e.currentTarget);
-    console.log(email, pwd, name, gender, date);
     const isSignUp = signUpApi({
       email,
       pwd,
@@ -146,7 +142,6 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
       birthday: date,
       role: 'u',
     }).then(data => {
-      console.log(data);
       if (data) {
         navigate('/login');
       }
@@ -353,23 +348,6 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
           >
             회원가입하기
           </button>
-
-          {/* <div className="mt-4 text-center text-sm text-[grey]">
-            By signing up, you agree to the
-            <a
-              className="border-b border-[grey] text-stone-600 no-underline"
-              href="#"
-            >
-              Terms of Service
-            </a>{' '}
-            and
-            <a
-              className="border-b border-stone-600 text-stone-600 no-underline"
-              href="#"
-            >
-              Privacy Policy
-            </a>
-          </div> */}
         </div>
 
         <div className="mb-6 text-stone-600">

@@ -15,24 +15,19 @@ interface NextArrowProps {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-interface PrevArrowProps {
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-}
-
 export type Product = {
-  basicProductId : number,
-  basicProductName : string,
+  basicProductId: number;
+  basicProductName: string;
   productImg?: string;
-}
+};
 interface CateGoryLoad {
-  categoryId : number;
-  categoryName : string;
-  categoryImg : string;
-  products : Product[];
+  categoryId: number;
+  categoryName: string;
+  categoryImg: string;
+  products: Product[];
 }
 
 const CategorySlider: FC<CategorySliderProps> = () => {
-  //after axios, useEffect
   const [data, setData] = useState<CateGoryLoad[]>([]);
   useEffect(() => {
     const categoryLoad = async () => {
@@ -42,7 +37,6 @@ const CategorySlider: FC<CategorySliderProps> = () => {
     categoryLoad();
   }, []);
 
-  // console.log(data);
   let [ProductList, setProductList] = useState<Product[]>([]);
   const settings = {
     className: 'center',
@@ -53,8 +47,6 @@ const CategorySlider: FC<CategorySliderProps> = () => {
     dots: true,
     slidesPerRow: 3,
     arrows: false,
-    // PrevArrow : <PrevArrow />,
-    // nextArrow: <NextArrow />,
   };
   function NextArrow({ style, onClick }: NextArrowProps) {
     return (
@@ -66,7 +58,6 @@ const CategorySlider: FC<CategorySliderProps> = () => {
 
   async function handle(product: Product[]) {
     // onClick시 productlist값을 세팅하면 누를때마다 sublist가 바뀌고 재 랜덜링 될것,
-    console.log(product);
     setProductList(product);
   }
 
@@ -84,7 +75,6 @@ const CategorySlider: FC<CategorySliderProps> = () => {
             {data &&
               data.map(category => {
                 const categoryItem = category;
-                // console.log(categoryItem.categoryId);
 
                 return (
                   <div

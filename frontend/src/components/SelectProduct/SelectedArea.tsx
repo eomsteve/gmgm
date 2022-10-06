@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { removeGoods, updateFavoriteItems } from '@modules/FavoriteProductList';
@@ -9,7 +9,6 @@ interface SelectedAreaProps {}
 const SelectedArea: FC<SelectedAreaProps> = () => {
   const navigate = useNavigate();
   const { goods } = useSelector((state: RootState) => {
-    console.log(state);
     return {
       goods: state.persistedReducer.favoriteProductListReducer.goods,
     };
@@ -23,15 +22,11 @@ const SelectedArea: FC<SelectedAreaProps> = () => {
     const goodsList = goods.map((item: { goodsId: number }) => {
       return item.goodsId;
     });
-    console.log(goodsList);
     const data = await dispatch(updateFavoriteItems(goodsList)).unwrap();
-    console.log(data);
     if (data) {
       navigate('/favorite');
     }
   };
-  console.log(goods);
-  
 
   return (
     <>

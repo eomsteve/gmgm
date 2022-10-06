@@ -2,7 +2,6 @@ import { FC } from 'react';
 import Category from '@components/SelectProduct/checkList/CheckListCategoryComponent';
 import ChecklistHeader from '@components/EmptyHeader';
 
-
 const CheckListSelectionPage: FC = () => {
   return (
     <>
