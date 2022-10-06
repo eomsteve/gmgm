@@ -49,13 +49,16 @@ const Calculator: FC<CalculatorProps> = props => {
       </div>
       <div className="text-sm">
         <div className="text-[1rem] mb-1">{`${researchDates[researchDates.length - 1].researchDate} 가격 (${unit}${measure})`}</div>
+        <div className="ml-2">
+
         <div className="text-[#639DEB]">{`${productName} : ${Math.round(productPrices[productPrices.length - 1].price)} 원`}</div>
         {goodsProps && <div className="text-[#ff6384]">{`${goodsProps.goodsName} : ${Math.round(goodsProps.goodsPrices[goodsProps.goodsPrices.length - 1].price)} 원`}</div>}
         {usingCalculator && calPrice && calMeasure && (
-            <div className="mt-1 text-[#ff630d]">
+          <div className="mt-1 text-[#ff630d]">
               <span>{`계산 결과 : ${calPrice / calMeasure * unit} 원`}</span>
             </div>
           )}
+          </div>
       </div>
       <hr className="mx-[-1.25rem] my-1 mt-5 w-screen" />
       <div className="mt-4 mb-3 flex w-full flex-col">
