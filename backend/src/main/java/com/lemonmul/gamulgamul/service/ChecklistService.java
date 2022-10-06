@@ -58,4 +58,12 @@ public class ChecklistService {
     public void deleteEmptyChecklist(Long checklistId){
         checklistRepo.deleteById(checklistId);
     }
+
+    /**
+     * 사용자의 빈 체크리스트 전체 삭제
+     */
+    @Transactional
+    public void deleteEmptyChecklists(List<Long> deleteIds){
+        checklistRepo.deleteEmptyByIdIn(deleteIds);
+    }
 }

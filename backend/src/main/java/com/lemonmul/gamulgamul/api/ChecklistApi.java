@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,6 +64,22 @@ public class ChecklistApi {
 
         List<Checklist> checklists = checklistService.checklistList(user);
         log.info("checklists size: {}",checklists.size());
+
+        //빈 체크리스트 삭제
+        boolean isDeleted=false;
+        List<Long> deleteIds=new ArrayList<>();
+        for (Checklist checklist : checklists) {
+            int size = checklist.getChecklistBasicItems().size() + checklist.getChecklistCustomItems().size();
+            if(size<=0){
+                deleteIds.add(checklist.getId());
+                isDeleted=true;
+            }
+        }
+        if(isDeleted) {
+            checklistService.deleteEmptyChecklists(deleteIds);
+            checklists=checklistService.checklistList(user);
+        }
+
 
         log.info("[Finished request] GET /checklist/list/info");
         return checklists.stream().map(ListInfoDto::new).collect(Collectors.toList());
