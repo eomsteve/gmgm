@@ -23,6 +23,7 @@ interface CheckListCustomItemsProps {
 const CheckListCustomItems: FC<CheckListCustomItemsProps> = props => {
   const navigate = useNavigate();
   const [isCustom, setIsCustom] = useState<boolean>();
+  const [notModified, setNotModified] = useState<boolean>(true);
   const { checklistCustomItems } = useSelector((state: RootState) => {
     return {
       checklistCustomItems:
@@ -37,9 +38,10 @@ const CheckListCustomItems: FC<CheckListCustomItemsProps> = props => {
       <div
         onClick={() => {
           setIsCustom(true);
+          setNotModified(false);
         }}
       >
-        {isEdit && isEmpty && <CustomBanner />}
+        {isEdit && (isEmpty && notModified) && <CustomBanner />}
       </div>
       {checklistCustomItems.map((product: CustomProduct, index : number) => {
         return (

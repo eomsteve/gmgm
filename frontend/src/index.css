@@ -24,3 +24,7 @@ input[type='date']:focus::before,
 input[type='date']:valid::before {
   display: none;
 }
+
+#\:r2\: {
+  z-index: 100;
+}

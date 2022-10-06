@@ -82,32 +82,33 @@ const CheckListCard: FC<CheckListProps> = props => {
           id={customProductName || basicProductName}
         />
         <label
-          className={`${isEdit ? 'col-span-8 ' : 'col-span-5'} flex items-center p-1 ${
+          className={`${isEdit ? 'col-span-8 ' : 'col-span-4'} flex items-center p-1 ${
             !isChecked ? '' : 'text-gray-500 line-through'
           }`}
           htmlFor={customProductName || basicProductName}
         >
           <span> {customProductName || basicProductName}</span>
         </label>
-        { isEdit ? '': basicProductName && <div>
-          <span className="col-span-1 flex justify-center truncate ">
+        { isEdit ? '': basicProductName && 
+        <div className="col-span-2">
+          <span className="col-span-2 flex justify-center truncate ">
             {priceGap &&priceGap > 0 ? (
-              <Up width="1rem" height="2rem" />
+              <Up width="1rem" height="1rem" />
             ) :priceGap && priceGap < 0 ? (
-              <Down width="1rem" height="2rem" />
+              <Down width="1rem" height="1rem" />
             ) : (
-              <Equal width="1rem" height="2rem" />
+              <Equal width="1rem" height="1rem" />
             )}
           </span>
           <span
-            className={`col-span-1 flex justify-center text-sm${
+            className={`col-span-4 flex justify-center text-xs ${
               priceGap && priceGap > 0 ? '' : ''
             }`}
           >
-            {priceGap == 0 ? '' : priceGap}
+            {priceGap == undefined ? '' : `${priceGap.toLocaleString()} 원`}
           </span>
         </div>}
-        {!isEdit &&recentPrice && <span className="col-span-3 mr-2 flex justify-end">{Math.round(recentPrice).toLocaleString()}</span>}
+        {!isEdit &&recentPrice && <span className={`col-span-3 mr-2 flex justify-end ${Math.round(recentPrice).toLocaleString().length < 5 ? '' : 'text-sm'}`}>{Math.round(recentPrice).toLocaleString() } 원</span>}
         <div className="flex items-center justify-center">
           {basicProductName &&
             (isEdit ? (

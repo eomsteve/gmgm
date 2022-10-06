@@ -82,7 +82,7 @@ const CheckListBasicItems: FC<CheckListBasicItemsProps> = props => {
             });
           }}
         >
-          <div className="m-0 text-[1.5rem]">
+          <div className="flex justify-center m-0 text-[1.5rem]">
             <FontAwesomeIcon icon={faPlus} />
           </div>
         </div>

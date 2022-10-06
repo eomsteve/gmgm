@@ -22,21 +22,21 @@ const FavoriteCard: FC<FavoriteCardProps> = props => {
         <div className="flex-rows col-span-2 flex h-12 w-12 justify-center">
           <img src={img} />
         </div>
-        <span className="col-span-6 ml-3 truncate p-1"> {goodsName}</span>
+        <span className="col-span-5 ml-3 truncate p-1"> {goodsName}</span>
 
-          <div>
+          <div >
 
           <span className="col-span-1 flex justify-center truncate ">
             {
               (priceGap > 0) ? <Up width="1rem" height="2rem" /> : (priceGap < 0) ? <Down width="1rem" height="2rem" /> : <Equal width="1rem" height="2rem" /> 
             }
           </span>
-          <span className={`col-span-1 flex justify-center text-sm${(priceGap > 0) ? '' : ''}`} >
-            {(priceGap == 0) ? '': priceGap}
+          <span className={`col-span-2 flex justify-center text-[0.7rem] ${(priceGap > 0) ? '' : ''}`} >
+            {priceGap.toLocaleString()} <span>원</span>
             </span>
             </div>
-          <span className="col-span-2 flex justify-end mr-2">
-            {goodsPrice.toLocaleString()}
+          <span className={`col-span-3 flex text-xs justify-end mr-2 ${goodsPrice.toLocaleString().length < 5 ? '' : 'text-sm'}`}>
+            {Math.round(goodsPrice).toLocaleString()} 원
           </span>
           <span
             onClick={() => {
