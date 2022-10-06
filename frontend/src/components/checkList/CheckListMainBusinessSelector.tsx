@@ -1,11 +1,10 @@
-import { FC, useState, useEffect,  useRef , CSSProperties} from 'react';
+import { FC, useState, useEffect,  useRef } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import ConfirmButton from './UI/ConFirmButton';
 import {
   updateCheckLists,
   deleteCheckList,
   updateCheckListStatus,
-  deleteEmptyCheckList
 } from '@apis/checkList.Api';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -32,7 +31,6 @@ import CheckListCustomItems from './CheckListCustomItems';
 
 // CSS
 import './toggle.css';
-import { data } from '../charts/TestChart';
 
 interface CheckListSelectBoxProps {
   optionList: string[];
@@ -198,7 +196,8 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
       )}
 
        <div className={`mx-5 my-1 flex items-center ${isEdit ?' justify-end ':' justify-between '}`}>
-       {!isEdit &&  <div className="switch-button m-3 ml-[3vw] ">
+       {!isEdit && <div className="flex items-center">
+        <div className="switch-button m-3 ml-[3vw] ">
         <input
           onChange={handleSelection}
           className="switch-button-checkbox "
@@ -207,8 +206,11 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
         <label className="switch-button-label" htmlFor="">
           <span className="switch-button-label-span">오프라인</span>
         </label>
-      </div>}
-
+          
+      </div>
+      <span className=" right-[1.5rem]"><Tooltip /></span>
+       </div>  
+      }
 
         {!!isEdit ? (
           <div
@@ -257,7 +259,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
 
       <div className="flex w-full flex-col items-center justify-center p-0">
         <div className="flex">
-        <span>가격 정보를 볼 수 있어요 🥰</span><span className="mx-2 absolute right-[1.5rem]"><Tooltip /></span>
+        <span>가격 정보를 볼 수 있어요 🥰</span>
         </div>
         <div onClick={()=>{
           setImGoingToSelect(true)

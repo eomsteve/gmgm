@@ -5,13 +5,13 @@ import { ReactComponent as Equal } from '@src/assets/icons/equals.svg';
 import { ReactComponent as Down } from '@src/assets/icons/down.svg';
 import { ReactComponent as Up } from '@src/assets/icons/up.svg';
 import { ReactComponent as TooltipQuestion } from '@src/assets/icons/tooltip-question-v2.svg';
-interface TooltipProps {}
-
+interface TooltipProps {
+}
 const TooltipComponent: FC<TooltipProps> = () => {
   return (
     <>
       <Tooltip
-        placement="left"
+        placement="auto"
         trigger="hover"
         style="light"
         content={
