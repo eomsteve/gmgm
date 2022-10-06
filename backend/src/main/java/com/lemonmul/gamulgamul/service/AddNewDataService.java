@@ -32,7 +32,7 @@ public class AddNewDataService {
     private final ProductPriceRepo productPriceRepo;
     private final GoodsPriceRepo goodsPriceRepo;
 
-    public void addNewData() {
+    public void addNewDataAM() {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -41,6 +41,7 @@ public class AddNewDataService {
 
         List<String> urls = new ArrayList<>() {
             {
+                add("http://3.36.106.26:8081/api/notebook/run/2HDSZ79TY/paragraph_1665044750036_1658200450");
                 add("http://3.36.106.26:8081/api/notebook/run/2HG5D6PU3/paragraph_1664718865164_853671905");
                 add("http://3.36.106.26:8081/api/notebook/run/2HGSN9FKX/paragraph_1663724866932_1303867911");
                 add("http://3.36.106.26:8081/api/notebook/run/2HDBP6HA6/paragraph_1664257750778_1075879161");
@@ -58,7 +59,7 @@ public class AddNewDataService {
             url = urls.get(i);
             response = restTemplate.postForEntity(url, requestMessage, RestResponseDto.class);
             String code = Objects.requireNonNull(response.getBody()).getBody().getCode();
-            log.info("response{} code: {}", i, code);
+            log.info("response{} code: {}", i + 1, code);
 
             if(code.equals("ERROR")) {
                 log.info("error occurred while using zeppelin");
@@ -66,6 +67,45 @@ public class AddNewDataService {
             }
         }
 
+        updateRecentPrice();
+        updatePriceGap();
+    }
+
+    public void addNewDataPM() {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        HttpEntity<?> requestMessage = new HttpEntity<>(httpHeaders);
+        HttpEntity<RestResponseDto> response;
+
+        List<String> urls = new ArrayList<>() {
+            {
+                add("http://3.36.106.26:8081/api/notebook/run/2HDSZ79TY/paragraph_1665044750036_1658200450");
+                add("http://3.36.106.26:8081/api/notebook/run/2HG5D6PU3/paragraph_1664718865164_853671905");
+                add("http://3.36.106.26:8081/api/notebook/run/2HDHVH62E/paragraph_1664863840860_1055396381");
+                add("http://3.36.106.26:8081/api/notebook/run/2HGTXCVUK/paragraph_1664889296623_1087566984");
+                add("http://3.36.106.26:8081/api/notebook/run/2HEQFFR9T/paragraph_1664893461293_1891832349");
+            }
+        };
+
+        String url;
+        for(int i = 0; i < urls.size(); i++) {
+            url = urls.get(i);
+            response = restTemplate.postForEntity(url, requestMessage, RestResponseDto.class);
+            String code = Objects.requireNonNull(response.getBody()).getBody().getCode();
+            log.info("response{} code: {}", i + 1, code);
+
+            if(code.equals("ERROR")) {
+                log.info("error occurred while using zeppelin");
+                break;
+            }
+        }
+
+        updateRecentPrice();
+        updatePriceGap();
+    }
+
+    public void updateRecentPrice() {
         LocalDate today = LocalDate.now();
 
         List<ProductPrice> recentProductPricesOff = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today, BusinessType.m);
@@ -85,42 +125,41 @@ public class AddNewDataService {
             goodsList.get(i).setRecentPriceOff(recentGoodsPricesOff.get(i).getPrice());
             goodsList.get(i).setRecentPriceOn(recentGoodsPricesOn.get(i).getPrice());
         }
+    }
 
+    public void updatePriceGap() {
+        LocalDate today = LocalDate.now();
         double priceGapOff, priceGapOn;
 
         List<ProductPrice> todayProductPricesOff = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today, BusinessType.m);
-//        List<ProductPrice> aWeekAgoProductPricesOff = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today.minusWeeks(1), BusinessType.m);
-        List<ProductPrice> aWeekAgoProductPricesOff = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today.minusDays(1), BusinessType.m);
+        List<ProductPrice> twoWeekAgoProductPricesOff = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today.minusWeeks(2), BusinessType.m);
         List<ProductPrice> todayProductPricesOn = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today, BusinessType.o);
-//        List<ProductPrice> aWeekAgoProductPricesOn = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today.minusWeeks(1), BusinessType.o);
-        List<ProductPrice> aWeekAgoProductPricesOn = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today.minusDays(1), BusinessType.o);
+        List<ProductPrice> twoWeekAgoProductPricesOn = productPriceRepo.findByDateTypeAndResearchDateAndBusinessOrderByProduct(DateType.d, today.minusWeeks(2), BusinessType.o);
 
         Product product;
-        products = productRepo.findAll();
+        List<Product> products = productRepo.findAll();
         for(int i = 0; i < products.size(); i++) {
             product = products.get(i);
 
-            priceGapOff = aWeekAgoProductPricesOff.get(i).getPrice() - todayProductPricesOff.get(i).getPrice();
-            priceGapOn = aWeekAgoProductPricesOn.get(i).getPrice() - todayProductPricesOn.get(i).getPrice();
+            priceGapOff = Math.round(todayProductPricesOff.get(i).getPrice() - twoWeekAgoProductPricesOff.get(i).getPrice());
+            priceGapOn = Math.round(todayProductPricesOn.get(i).getPrice() - twoWeekAgoProductPricesOn.get(i).getPrice());
 
             product.setPriceGapOff(priceGapOff);
             product.setPriceGapOn(priceGapOn);
         }
 
         List<GoodsPrice> todayGoodsPricesOff = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today, BusinessType.m);
-//        List<GoodsPrice> aWeekAgoGoodsPricesOff = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today.minusWeeks(1), BusinessType.m);
-        List<GoodsPrice> aWeekAgoGoodsPricesOff = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today.minusDays(1), BusinessType.m);
+        List<GoodsPrice> twoWeekAgoGoodsPricesOff = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today.minusWeeks(2), BusinessType.m);
         List<GoodsPrice> todayGoodsPricesOn = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today, BusinessType.o);
-//        List<GoodsPrice> aWeekAgoGoodsPricesOn = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today.minusWeeks(1), BusinessType.o);
-        List<GoodsPrice> aWeekAgoGoodsPricesOn = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today.minusDays(1), BusinessType.o);
+        List<GoodsPrice> twoWeekAgoGoodsPricesOn = goodsPriceRepo.findByResearchDateAndBusinessOrderByGoods(today.minusWeeks(2), BusinessType.o);
 
         Goods goods;
-        goodsList = goodsRepo.findAll();
+        List<Goods> goodsList = goodsRepo.findAll();
         for(int i = 0; i < goodsList.size(); i++) {
             goods = goodsList.get(i);
 
-            priceGapOff = aWeekAgoGoodsPricesOff.get(i).getPrice() - todayGoodsPricesOff.get(i).getPrice();
-            priceGapOn = aWeekAgoGoodsPricesOn.get(i).getPrice() - todayGoodsPricesOn.get(i).getPrice();
+            priceGapOff = Math.round(todayGoodsPricesOff.get(i).getPrice() - twoWeekAgoGoodsPricesOff.get(i).getPrice());
+            priceGapOn = Math.round(todayGoodsPricesOn.get(i).getPrice() - twoWeekAgoGoodsPricesOn.get(i).getPrice());
 
             goods.setPriceGapOff(priceGapOff);
             goods.setPriceGapOn(priceGapOn);
