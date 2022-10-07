@@ -1,0 +1,266 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n# 1. 농산물 데이터, 저녁에 새로 받아오면, \n+ ~~DBo_APIx , DBo_APIo, DBx_APIo 가져와서, 수정하기~~\n+ ~~DB의 goods_price table 갱신하기~~\n+ **DB의 product_price table 갱신하기** \n+ DB의 favorite_total_price table 갱신하기",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T13:25:46+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>1. 농산물 데이터, 저녁에 새로 받아오면,</h1>\n<ul>\n<li><del>DBo_APIx , DBo_APIo, DBx_APIo 가져와서, 수정하기</del></li>\n<li><del>DB의 goods_price table 갱신하기</del></li>\n<li><strong>DB의 product_price table 갱신하기</strong></li>\n<li>DB의 favorite_total_price table 갱신하기</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664889928672_1161711601",
+      "id": "paragraph_1664889324257_2093073869",
+      "dateCreated": "2022-10-04T13:25:28+0000",
+      "dateStarted": "2022-10-04T13:25:46+0000",
+      "dateFinished": "2022-10-04T13:25:46+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:68471"
+    },
+    {
+      "text": "%md\n## [3]  DB의 product_price table의 해당 일자 농산물 mart data 지우고, 농산물만 groupBy 해서 넣기",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T13:26:51+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>[3]  DB의 product_price table의 해당 일자 농산물 mart data 지우고, 농산물만 groupBy 해서 넣기</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664889928672_1574022590",
+      "id": "paragraph_1664889475982_783739272",
+      "dateCreated": "2022-10-04T13:25:28+0000",
+      "dateStarted": "2022-10-04T13:26:51+0000",
+      "dateFinished": "2022-10-04T13:26:51+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:68472"
+    },
+    {
+      "text": "%pyspark\n\n# 2HEQFFR9T\n# paragraph_1664893461293_1891832349\n# http://3.36.106.26:8081/api/notebook/run/2HEQFFR9T/paragraph_1664893461293_1891832349\n\n\n# 1. 날짜 선정\ntoday = ( datetime.datetime.now()  + datetime.timedelta(hours=9) ).strftime(\"%Y-%m-%d\")\n\n# 2. 새로 가져온 Data 가져오기\n## 2-1 : csv 로드\nnong_goods_price_m_pdf = pd.read_csv(f'/api_data/nong_goods_price_m_{today}.csv')\nnonnull_nong_goods_price_m_pdf = nong_goods_price_m_pdf[nong_goods_price_m_pdf['price'].notnull()]\n\n## 2-2 not null인 것 goods_id 가져오기\nnong_mart_goods_id_lst = list(nonnull_nong_goods_price_m_pdf['goods_id'])\n# print(nong_mart_goods_id_lst)\n\n\n## 3. DB에 갱신할 것 있으면 DB에서 갱신하기\nif len(nong_mart_goods_id_lst) != 0:\n    \n    ## 2. goodsId_productId pickle 가져오기\n    import pickle\n    with open('/DB_data/20221001_goodsId_productId.pickle', 'rb') as fr:\n        goodsId_productId = pickle.load(fr)\n        \n    \n    ## 3. 해당되는 product_id 찾기\n    product_id_lst = [ goodsId_productId[goods_id]  for goods_id in nong_mart_goods_id_lst]\n    print('groupBy할 prouct_id들  :  ',product_id_lst)\n    \n    \n    ## 4. 해당 되는 product_id의 goods_id에 대해서만, groupBy 해서, product_price table 생성\n    \n    ### 4-1. productId_goodsId pickle 가져오기\n    import pickle\n    with open('/DB_data/20221001_productId_goodsId.pickle', 'rb') as fr:\n        productId_goodsId = pickle.load(fr)\n    \n    ### 4-2. 계산해야할 product_id에 해당되는 goods_id 모두 가져와서 groupBy하기\n    will_be_grouped_goods_lst = [ ]\n    for productId in product_id_lst:\n        goodsId_lst = productId_goodsId[productId]\n        will_be_grouped_goods_lst += goodsId_lst\n    print('-'*100)\n    print('groupBy할 goods_id들  :  ', will_be_grouped_goods_lst)\n    will_be_grouped_goods_lst += [999999999999]\n    \n    ### 4-3. (1,)과 같은 형태 방지하기 위해서 길이가 1인경우 99999999999 더미데이터 추가\n    will_be_grouped_goods_tuple = tuple(will_be_grouped_goods_lst) if len(will_be_grouped_goods_lst) >=2 else tuple(will_be_grouped_goods_lst+[999999999999])\n    \n    \n    ### 4-3. today의 will_be_grouped_goods_lst에 해당하는 data만 가져오기\n    url = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\n    goods_price_sdf = spark.read.format(\"jdbc\").option(\"url\", url).option(\"driver\", \"com.mysql.cj.jdbc.Driver\").option(\"query\", f\"select * from goods_price where research_date='{today}' and goods_id in {will_be_grouped_goods_tuple}\").option(\"user\", \"ji\").option(\"password\", mysql_password).load()\n    # goods_price_sdf.show()\n    \n    \n    ### 4-4. product_id column 생성\n    goods_price_pdf = goods_price_sdf.toPandas()\n    goods_price_pdf = goods_price_pdf.reset_index(drop=True)\n    # print(goods_price_pdf)\n    import pickle\n    with open('/DB_data/20221001_goodsId_productId.pickle', 'rb') as fr:\n        goodsId_productId = pickle.load(fr)    \n    product_id_lst = []\n    for i in range(len(goods_price_pdf)):\n        goods_id = goods_price_pdf.loc[i,'goods_id']\n        product_id = goodsId_productId[goods_id]\n        product_id_lst.append(product_id)\n    \n    goods_price_pdf['product_id'] = product_id_lst\n    goods_price_sdf_with_product = spark.createDataFrame(goods_price_pdf)\n    goods_price_sdf_with_product.show()\n    \n    ### 4-5. product_price table 생성\n    from pyspark.sql.functions import col, avg, round, lit\n    product_price_sdf = goods_price_sdf_with_product.groupBy('product_id','research_date','business').agg( round( avg(col('unit_price')) ,2).alias('unit_price')  ,  round(  avg(col('price')), 2) .alias('price')  )\n    product_price_sdf = product_price_sdf.withColumn('date_type',lit('d'))\n    # product_price_sdf.show()\n    product_price_sdf = product_price_sdf.select('product_id','unit_price','price','research_date','date_type','business')\n    print('[아래] DB에 넣을 product_price table --------------------------------------')\n    product_price_sdf.show()\n    \n    \n    \n    ### 4-6. DB에서 해당 product_price 삭제\n    import requests\n    url = \"http://3.36.106.26:8081/api/notebook/run/2HEQFFR9T/paragraph_1664889579484_1213402996\"\n    \n    product_id_lst += [99999999999999]\n    product_id_tuple = tuple(product_id_lst)\n    \n    req = requests.post(url, json={\"params\": {\"product_id_tuple\": str(product_id_tuple) , \"research_date\": today } } )\n    import time\n    time.sleep(1)\n    \n    \n    ### 4-7. DB에 해당 product_price 넣기\n    prop = {\"user\": \"ji\", \"password\": mysql_password, \"driver\": \"com.mysql.cj.jdbc.Driver\"} \n    url = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\n    product_price_sdf.write.jdbc(url= url, table = \"product_price\", mode=\"append\", properties=prop)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T08:34:31+0000",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "groupBy할 prouct_id들  :   [1041, 1020, 1022, 1035, 1039, 1016, 1014, 1008, 1003, 1037, 1011, 1004, 1009, 1026, 1015, 1038, 1017, 1017, 1027, 1029, 1031, 1025, 1002, 1043, 1034, 1000, 1042, 1006, 1044, 1019, 1019, 1012, 1012, 1012, 1001, 1005, 1021, 1033, 1040, 1030, 1013, 1049, 1050]\n----------------------------------------------------------------------------------------------------\ngroupBy할 goods_id들  :   [20018, 20019, 20020, 20021, 20017, 20016, 20022, 20037, 20036, 20033, 20039, 20041, 20048, 20043, 20026, 20040, 20032, 20046, 20032, 20046, 20038, 20044, 20034, 20023, 20025, 20047, 20045, 20028, 20024, 20030, 20054, 20050, 20051, 20050, 20051, 20049, 20052, 20055, 20049, 20052, 20055, 20049, 20052, 20055, 20056, 20053, 20008, 20015, 20012, 20005, 20006, 20031, 20029]\n[아래] DB에 넣을 product_price table --------------------------------------\n+--------+----------+--------+-------------+--------+\n|goods_id|unit_price|   price|research_date|business|\n+--------+----------+--------+-------------+--------+\n|   20020|    6820.0|  6820.0|   2022-10-05|       m|\n|   20005|    9220.0|  9220.0|   2022-10-05|       m|\n|   20053|    1510.0|  1510.0|   2022-10-05|       m|\n|   20006|    6990.0|  6990.0|   2022-10-05|       m|\n|   20022|     440.0|   440.0|   2022-10-05|       m|\n|   20056|    1554.0|  1554.0|   2022-10-05|       m|\n|   20046|    1366.0|  1366.0|   2022-10-05|       m|\n|   20048|    1524.0|  1524.0|   2022-10-05|       m|\n|   20037|    4980.0|  4980.0|   2022-10-05|       m|\n|   20054|   24100.0| 24100.0|   2022-10-05|       m|\n|   20012|    8822.5|  8822.5|   2022-10-05|       m|\n|   20055|     416.0|   624.0|   2022-10-05|       m|\n|   20052|     606.0|   606.0|   2022-10-05|       m|\n|   20028|   11192.5| 11192.5|   2022-10-05|       m|\n|   20018|   2361.67|47233.33|   2022-10-05|       m|\n|   20041|   15300.0| 15300.0|   2022-10-05|       m|\n|   20023|   32195.0| 32195.0|   2022-10-05|       m|\n|   20033|    1372.0|  1372.0|   2022-10-05|       m|\n|   20049|     554.0|   554.0|   2022-10-05|       m|\n|   20032|    2170.0|  2170.0|   2022-10-05|       m|\n+--------+----------+--------+-------------+--------+\nonly showing top 20 rows\n\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "Fail to execute line 86:     product_price_sdf.write.jdbc(url= url, table = \"product_price\", mode=\"append\", properties=prop)\nTraceback (most recent call last):\n  File \"/tmp/python2805284225720256139/zeppelin_python.py\", line 167, in <module>\n    exec(code, _zcUserQueryNameSpace)\n  File \"<stdin>\", line 86, in <module>\n  File \"/usr/local/spark/python/pyspark/sql/readwriter.py\", line 1038, in jdbc\n    self.mode(mode)._jwrite.jdbc(url, table, jprop)\n  File \"/usr/local/spark/python/lib/py4j-0.10.9.5-src.zip/py4j/java_gateway.py\", line 1321, in __call__\n    return_value = get_return_value(\n  File \"/usr/local/spark/python/pyspark/sql/utils.py\", line 117, in deco\n    raise converted from None\npyspark.sql.utils.AnalysisException: Column \"goods_id\" not found in schema Some(StructType(StructField(product_price_id,LongType,false), StructField(product_id,LongType,false), StructField(unit_price,DoubleType,false), StructField(price,DoubleType,true), StructField(research_date,DateType,false), StructField(date_type,StringType,false), StructField(business,StringType,true)))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=8975",
+              "$$hashKey": "object:68733"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=8976",
+              "$$hashKey": "object:68734"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664893461293_1891832349",
+      "id": "paragraph_1664893461293_1891832349",
+      "dateCreated": "2022-10-04T14:24:21+0000",
+      "dateStarted": "2022-10-05T08:45:18+0000",
+      "dateFinished": "2022-10-05T08:45:19+0000",
+      "status": "ERROR",
+      "$$hashKey": "object:68473"
+    },
+    {
+      "text": "%MySQL\ndelete from product_price\nwhere product_id in ${product_id_tuple} and research_date ='${research_date}'\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-05T08:45:18+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "product_price_id": "string",
+                      "product_id": "string",
+                      "unit_price": "string",
+                      "price": "string",
+                      "research_date": "string",
+                      "date_type": "string",
+                      "business": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {
+          "product_id_tuple": "(1041, 1020, 1022, 1035, 1039, 1016, 1014, 1008, 1003, 1037, 1011, 1004, 1009, 1026, 1015, 1038, 1017, 1017, 1027, 1029, 1031, 1025, 1002, 1043, 1034, 1000, 1042, 1006, 1044, 1019, 1019, 1012, 1012, 1012, 1001, 1005, 1021, 1033, 1040, 1030, 1013, 1049, 1050, 99999999999999)",
+          "research_date": "2022-10-05"
+        },
+        "forms": {
+          "product_id_tuple": {
+            "type": "TextBox",
+            "name": "product_id_tuple",
+            "displayName": "product_id_tuple",
+            "hidden": false,
+            "$$hashKey": "object:68556"
+          },
+          "research_date": {
+            "type": "TextBox",
+            "name": "research_date",
+            "displayName": "research_date",
+            "hidden": false,
+            "$$hashKey": "object:68557"
+          }
+        }
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : 78\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664889928672_1601815794",
+      "id": "paragraph_1664889579484_1213402996",
+      "dateCreated": "2022-10-04T13:25:28+0000",
+      "dateStarted": "2022-10-05T08:45:18+0000",
+      "dateFinished": "2022-10-05T08:45:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:68474"
+    }
+  ],
+  "name": "[daily_nong]03_product_price_table_수정",
+  "id": "2HEQFFR9T",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Data적재/[daily_nong]03_product_price_table_수정"
+}

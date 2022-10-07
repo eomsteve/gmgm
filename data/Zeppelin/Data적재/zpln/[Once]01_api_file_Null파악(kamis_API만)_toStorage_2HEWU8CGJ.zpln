@@ -1,0 +1,226 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md # 1. KAMIS API로 가져온 것 DB에 넣기 전, 전처리\n+ 처음 DB에 넣는 경우,  2021년 09월07일부터 ~ 측정일까지 채워넣어서, DB에 넣기\n+ Null price는 어제 데이터로 처리\n+ Null price 목록 따로 파일로 저장해서 기록하기\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-03T06:12:15+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>1. KAMIS API로 가져온 것 DB에 넣기 전, 전처리</h1>\n<ul>\n<li>처음 DB에 넣는 경우,  2021년 09월07일부터 ~ 측정일까지 채워넣어서, DB에 넣기</li>\n<li>Null price는 어제 데이터로 처리</li>\n<li>Null price 목록 따로 파일로 저장해서 기록하기</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664776675184_1092086336",
+      "id": "paragraph_1664253390158_1474014374",
+      "dateCreated": "2022-10-03T05:57:55+0000",
+      "dateStarted": "2022-10-03T06:12:15+0000",
+      "dateFinished": "2022-10-03T06:12:15+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:21896"
+    },
+    {
+      "text": "%spark.conf\n\nSPARK_HOME  /usr/local/spark\nPYSPARK_PYTHON /usr/bin/python3\nspark.pyspark.python  /usr/bin/python3\n\n# set driver memory to 8g\nspark.driver.memory 8g\n\n# set executor number to be 3\nspark.executor.instances  3\n\n# set executor memory 4g\nspark.executor.memory  2g\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-03T05:57:55+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664776675184_430579778",
+      "id": "paragraph_1664253372491_282134331",
+      "dateCreated": "2022-10-03T05:57:55+0000",
+      "status": "READY",
+      "$$hashKey": "object:21897"
+    },
+    {
+      "text": "%md\n## [1] API로 가져온 데이터 null 여부 파악(전체 goods_id에 대해서 진행) - KAMIS API(농산물 대형마트)만 진행하기",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-03T06:13:45+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>[1] API로 가져온 데이터 null 여부 파악(전체 goods_id에 대해서 진행) - KAMIS API(농산물 대형마트)만 진행하기</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664776675184_1832097295",
+      "id": "paragraph_1664255742584_160044425",
+      "dateCreated": "2022-10-03T05:57:55+0000",
+      "dateStarted": "2022-10-03T06:13:45+0000",
+      "dateFinished": "2022-10-03T06:13:45+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:21898"
+    },
+    {
+      "text": "%md\n### (1) goods_id 현황 파악\n\n- DB에는 있고, API(Naver, kamis)에는 없고\n- DB에는 없고, API(Naver, kamis)에는 있고\n- DB에 있고, API(Naver, kamis)에 있고\n\n### (2) 요약\n+ DB의 goods_price table에 이미 goods_id에 대한 price가 1개라도 있다면, DB에는 해당 goods_id에 대한 price 결측치가 없는 것임",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-03T06:11:07+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(1) goods_id 현황 파악</h3>\n<ul>\n<li>DB에는 있고, API(Naver, kamis)에는 없고</li>\n<li>DB에는 없고, API(Naver, kamis)에는 있고</li>\n<li>DB에 있고, API(Naver, kamis)에 있고</li>\n</ul>\n<h3>(2) 요약</h3>\n<ul>\n<li>DB의 goods_price table에 이미 goods_id에 대한 price가 1개라도 있다면, DB에는 해당 goods_id에 대한 price 결측치가 없는 것임</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664776675184_317772358",
+      "id": "paragraph_1664257630332_576670613",
+      "dateCreated": "2022-10-03T05:57:55+0000",
+      "dateStarted": "2022-10-03T06:11:07+0000",
+      "dateFinished": "2022-10-03T06:11:07+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:21899"
+    },
+    {
+      "text": "%pyspark\nimport pandas as pd\nfrom pyspark.sql.functions import col\nimport datetime\n\n# 1. 날짜 설정\nresearch_date = '2022-09-30'\nstore_date = '20220930'\n\n\n# 2. DB 정보 및 Load\nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\n\n## 2-1 goods id\ngoods_id_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", url) \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", \"select goods_id from goods where goods_id>=20000\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", \"cvgkbhs234r#8tdx\").load()\n\ngoods_id_pdf = goods_id_sdf.toPandas()\ngoods_id_set = set(goods_id_pdf['goods_id'])\nprint(f'DB 에 goods_id 개수 : {len(goods_id_set)}')\n\n\n\n## 2-2 goods_price\ngoods_price_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", url) \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", \"select goods_id, unit_price, price, research_date, business from goods_price where goods_id>=20000\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", \"cvgkbhs234r#8tdx\").load()\n    \n## db Data를 pandas로 바꾸기\ngoods_price_mart_sdf = goods_price_sdf.filter( col('business')=='m' )\ngoods_price_mart_pdf = goods_price_mart_sdf.toPandas()\n\n\n## 기존 DB에 있는 goods_id들\nDB_goods_id_mart = set(goods_price_mart_pdf['goods_id'].unique())\nprint(f'DB mart에 goods_id 개수 : {len(DB_goods_id_mart)}')\n\n\n\n\n\n# 3. 추가할 csv Load# 2. DB 정보 및 Load\ngoods_price_m_pdf = pd.read_csv(f'/api_data/nong_goods_price_m_{research_date}.csv')\nmart_goods_id_set = set(goods_price_m_pdf[goods_price_m_pdf['price'].notnull()]['goods_id'])\nprint(f' api  mart 에 goods_id 개수 : {len(goods_price_m_pdf)}')\n\n\n\n# 4.  현재 NULL인 goods_id 찾기\n## 4-1 DB에 없고,  api에도 없는 goods_id\n# no_mart_goods_id   = goods_id_set - mart_goods_id_set\n# print(f'[m] DB에도 없고, 새로 가져온 데이터에도 없는 goods_id 개수 : {len(no_mart_goods_id)}')\n# print('-'*100)\n\n## 4-2 DB에 있고,  api에는 없는 goods_id\nonlyDB_mart_goods_id   = DB_goods_id_mart - mart_goods_id_set\nprint(f'[m] DB에는 있고, 새로 가져온 데이터에 없는 goods_id 개수 : {len(onlyDB_mart_goods_id)}')\nprint('-'*100)\n\n# 4-3. DB에 없고,  api에는 있는 goods_id 찾기\nmart_only_goods_id   = mart_goods_id_set - DB_goods_id_mart\nprint(f'[m] DB에 없고, 새로 가져온 데이터에는 있는 goods_id 개수 : {len(mart_only_goods_id)}')\nprint('-'*100)\n\n\n# 4-4. DB에 있고,  api에도 있는 goods_id 찾기\nboth_mart_goods_id = mart_goods_id_set.intersection(DB_goods_id_mart)\nprint(f'[m] DB에 있고, 새로 가져온 데이터에도 있는 goods_id 개수 : {len(both_mart_goods_id)}')\nprint('-'*100)\n\n\n\n\n# 5. 결과 df 생성\n# DBx_APIx_result_pdf = pd.DataFrame(columns=['research_date', 'business','goods_id_lst'])\nDBo_APIx_result_pdf = pd.DataFrame(columns=['research_date', 'business','goods_id_lst'])\nDBx_APIo_result_pdf = pd.DataFrame(columns=['research_date', 'business','goods_id_lst'])\nDBo_APIo_result_pdf = pd.DataFrame(columns=['research_date', 'business','goods_id_lst'])\n\n\nbusiness = ['m']\ngoods_ids = []\n\n# xx=[\n# no_mart_goods_id\n\n# ]\n\nox=[\nonlyDB_mart_goods_id\n\n]\n\nxo=[\nmart_only_goods_id\n]\n\noo=[\nboth_mart_goods_id\n]\n\nfor i in range(1):\n    # DBx_APIx_result_pdf.loc[i] = [research_date, business[i], sorted(list(xx[i]))]\n    DBo_APIx_result_pdf.loc[i] = [research_date, business[i], sorted(list(ox[i]))]\n    DBx_APIo_result_pdf.loc[i] = [research_date, business[i], sorted(list(xo[i]))]\n    DBo_APIo_result_pdf.loc[i] = [research_date, business[i], sorted(list(oo[i]))]\n\n\n# 6. 결과 df 저장\n# DBx_APIx_result_pdf.to_csv(f'/api_data/integrity/{today}_DBx_APIx.csv', header=True, index=False)\nDBo_APIx_result_pdf.to_csv(f'/api_data/integrity/{store_date}_DBo_APIx.csv', header=True, index=False)\nDBx_APIo_result_pdf.to_csv(f'/api_data/integrity/{store_date}_DBx_APIo.csv', header=True, index=False)\nDBo_APIo_result_pdf.to_csv(f'/api_data/integrity/{store_date}_DBo_APIo.csv', header=True, index=False)\n\n# print(DBx_APIx_result_pdf)\nprint(DBo_APIx_result_pdf)\nprint(DBx_APIo_result_pdf)\nprint(DBo_APIo_result_pdf)",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-03T06:06:32+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "DB 에 goods_id 개수 : 56\nDB mart에 goods_id 개수 : 56\nDB online 에 goods_id 개수 : 56\n api  mart 에 goods_id 개수 : 56\n[m] DB에는 있고, 새로 가져온 데이터에 없는 goods_id 개수 : 14\n----------------------------------------------------------------------------------------------------\n[m] DB에 없고, 새로 가져온 데이터에는 있는 goods_id 개수 : 0\n----------------------------------------------------------------------------------------------------\n[m] DB에 있고, 새로 가져온 데이터에도 있는 goods_id 개수 : 42\n----------------------------------------------------------------------------------------------------\n  research_date business                                       goods_id_lst\n0    2022-09-30        m  [20000, 20001, 20002, 20003, 20004, 20006, 200...\n  research_date business goods_id_lst\n0    2022-09-30        m           []\n  research_date business                                       goods_id_lst\n0    2022-09-30        m  [20005, 20008, 20012, 20015, 20016, 20017, 200...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664776675185_732072793",
+      "id": "paragraph_1664725806458_793397905",
+      "dateCreated": "2022-10-03T05:57:55+0000",
+      "status": "READY",
+      "$$hashKey": "object:21900"
+    }
+  ],
+  "name": "[Once]01_api_file_Null파악(kamis_API만)_toStorage",
+  "id": "2HEWU8CGJ",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Data적재/[Once]01_api_file_Null파악(kamis_API만)_toStorage"
+}

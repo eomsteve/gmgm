@@ -1,0 +1,498 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark.conf\n\nSPARK_HOME  /usr/local/spark\nPYSPARK_PYTHON /usr/bin/python3\nspark.pyspark.python  /usr/bin/python3\n\n# set driver memory to 8g\nspark.driver.memory 6g\n\n# set executor number to be 3\nspark.executor.instances  4\n\n# set executor memory 4g\nspark.executor.memory  2g\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T07:33:17+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664177568958_934932957",
+      "id": "paragraph_1664177568958_934932957",
+      "dateCreated": "2022-09-26T07:32:48+0000",
+      "dateStarted": "2022-09-26T07:33:17+0000",
+      "dateFinished": "2022-09-26T07:33:17+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:86484"
+    },
+    {
+      "text": "%md\n# 1. goodsId_productId_pickle_수정\n+ 탕종숙식빵(420g)(goods_id=94) 의 product를 빵(product_id=34)-> 식빵(product_id=37)으로 수정\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T08:02:15+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>1. goodsId_productId_pickle_수정</h1>\n<ul>\n<li>탕종숙식빵(420g)(goods_id=94) 의 product를 빵(product_id=34)-&gt; 식빵(product_id=37)으로 수정</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664177665935_948944142",
+      "id": "paragraph_1664177665935_948944142",
+      "dateCreated": "2022-09-26T07:34:25+0000",
+      "dateStarted": "2022-09-26T08:02:15+0000",
+      "dateFinished": "2022-09-26T08:02:15+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:86485"
+    },
+    {
+      "text": "%pyspark\nimport pandas as pd\nimport pickle\n# goodsId_productId.pickle 수정\n\n\n# 1. pickle load 후, 데이터 교체\nwith open('/DB_data/goodsId_productId.pickle', 'rb') as fr:\n    goodsId_productId = pickle.load(fr)\nprint('교체 전 식빵의 product_id : ',goodsId_productId[94])\ngoodsId_productId[94] = 37\nprint('교체 후 식빵의 product_id : ',goodsId_productId[94])\n\n# 2. pickle 저장\n\nwith open('/DB_data/goodsId_productId.pickle','wb') as fw:\n    pickle.dump(goodsId_productId, fw)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T08:02:34+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "교체 전 식빵의 product_id :  34\n교체 후 식빵의 product_id :  37\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664177597154_1805800885",
+      "id": "paragraph_1664177597154_1805800885",
+      "dateCreated": "2022-09-26T07:33:17+0000",
+      "dateStarted": "2022-09-26T07:43:23+0000",
+      "dateFinished": "2022-09-26T07:43:23+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:86486"
+    },
+    {
+      "text": "%MySQL\nSELECT * FROM goods_price\nwhere goods_id=94\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T07:38:34+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "goods_price_id": "string",
+                      "goods_id": "string",
+                      "unit_price": "string",
+                      "price": "string",
+                      "research_date": "string",
+                      "business": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "goods_price_id\tgoods_id\tunit_price\tprice\tresearch_date\tbusiness\n119851\t94\t59.0\t2478.0\t2021-09-07\tm\n119853\t94\t59.0\t2478.0\t2021-09-08\tm\n119855\t94\t59.0\t2478.0\t2021-09-09\tm\n119857\t94\t59.0\t2478.0\t2021-09-10\tm\n119859\t94\t59.0\t2478.0\t2021-09-11\tm\n119861\t94\t59.0\t2478.0\t2021-09-12\tm\n119863\t94\t59.0\t2478.0\t2021-09-13\tm\n119865\t94\t59.0\t2478.0\t2021-09-14\tm\n119867\t94\t59.0\t2478.0\t2021-09-15\tm\n119869\t94\t59.0\t2478.0\t2021-09-16\tm\n119871\t94\t59.0\t2478.0\t2021-09-17\tm\n119873\t94\t59.0\t2478.0\t2021-09-18\tm\n119874\t94\t59.0\t2478.0\t2021-09-19\tm\n119876\t94\t59.0\t2478.0\t2021-09-20\tm\n119878\t94\t59.0\t2478.0\t2021-09-21\tm\n119881\t94\t59.0\t2478.0\t2021-09-22\tm\n119883\t94\t59.0\t2478.0\t2021-09-23\tm\n119885\t94\t59.0\t2478.0\t2021-09-24\tm\n119886\t94\t59.0\t2478.0\t2021-09-25\tm\n119887\t94\t59.0\t2478.0\t2021-09-26\tm\n119888\t94\t59.0\t2478.0\t2021-09-27\tm\n119890\t94\t59.0\t2478.0\t2021-09-28\tm\n119892\t94\t59.0\t2478.0\t2021-09-29\tm\n119894\t94\t59.0\t2478.0\t2021-09-30\tm\n119896\t94\t59.0\t2478.0\t2021-10-01\tm\n119898\t94\t59.0\t2478.0\t2021-10-02\tm\n119900\t94\t59.0\t2478.0\t2021-10-03\tm\n119902\t94\t59.0\t2478.0\t2021-10-04\tm\n119904\t94\t59.0\t2478.0\t2021-10-05\tm\n119906\t94\t59.0\t2478.0\t2021-10-06\tm\n119908\t94\t59.0\t2478.0\t2021-10-07\tm\n119910\t94\t59.0\t2478.0\t2021-10-08\tm\n119912\t94\t59.0\t2478.0\t2021-10-09\tm\n119914\t94\t59.0\t2478.0\t2021-10-10\tm\n119916\t94\t59.0\t2478.0\t2021-10-11\tm\n119918\t94\t59.0\t2478.0\t2021-10-12\tm\n119920\t94\t59.0\t2478.0\t2021-10-13\tm\n119922\t94\t59.0\t2478.0\t2021-10-14\tm\n119924\t94\t59.0\t2478.0\t2021-10-15\tm\n119926\t94\t59.0\t2478.0\t2021-10-16\tm\n119928\t94\t59.0\t2478.0\t2021-10-17\tm\n119930\t94\t59.0\t2478.0\t2021-10-18\tm\n119932\t94\t59.0\t2478.0\t2021-10-19\tm\n119934\t94\t59.0\t2478.0\t2021-10-20\tm\n119936\t94\t59.0\t2478.0\t2021-10-21\tm\n119937\t94\t59.0\t2478.0\t2021-10-22\tm\n119939\t94\t59.0\t2478.0\t2021-10-23\tm\n119942\t94\t59.0\t2478.0\t2021-10-24\tm\n119944\t94\t59.0\t2478.0\t2021-10-25\tm\n119945\t94\t59.0\t2478.0\t2021-10-26\tm\n119946\t94\t59.0\t2478.0\t2021-10-27\tm\n119947\t94\t59.0\t2478.0\t2021-10-28\tm\n119948\t94\t59.0\t2478.0\t2021-10-29\tm\n119949\t94\t59.0\t2478.0\t2021-10-30\tm\n119950\t94\t59.0\t2478.0\t2021-10-31\tm\n119951\t94\t59.0\t2478.0\t2021-11-01\tm\n119953\t94\t59.0\t2478.0\t2021-11-02\tm\n119955\t94\t59.0\t2478.0\t2021-11-03\tm\n119957\t94\t59.0\t2478.0\t2021-11-04\tm\n119959\t94\t59.0\t2478.0\t2021-11-05\tm\n119961\t94\t59.0\t2478.0\t2021-11-06\tm\n119963\t94\t59.0\t2478.0\t2021-11-07\tm\n119965\t94\t59.0\t2478.0\t2021-11-08\tm\n119967\t94\t59.0\t2478.0\t2021-11-09\tm\n119969\t94\t59.0\t2478.0\t2021-11-10\tm\n119971\t94\t59.0\t2478.0\t2021-11-11\tm\n119972\t94\t59.0\t2478.0\t2021-11-12\tm\n119975\t94\t59.0\t2478.0\t2021-11-13\tm\n119977\t94\t59.0\t2478.0\t2021-11-14\tm\n119981\t94\t59.0\t2478.0\t2021-11-15\tm\n119983\t94\t59.0\t2478.0\t2021-11-16\tm\n119985\t94\t59.0\t2478.0\t2021-11-17\tm\n119987\t94\t59.0\t2478.0\t2021-11-18\tm\n119989\t94\t59.0\t2478.0\t2021-11-19\tm\n119991\t94\t59.0\t2478.0\t2021-11-20\tm\n119993\t94\t59.0\t2478.0\t2021-11-21\tm\n119995\t94\t59.0\t2478.0\t2021-11-22\tm\n119997\t94\t59.0\t2478.0\t2021-11-23\tm\n119999\t94\t59.0\t2478.0\t2021-11-24\tm\n120001\t94\t59.0\t2478.0\t2021-11-25\tm\n120003\t94\t59.0\t2478.0\t2021-11-26\tm\n120005\t94\t59.0\t2478.0\t2021-11-27\tm\n120007\t94\t59.0\t2478.0\t2021-11-28\tm\n120009\t94\t59.0\t2478.0\t2021-11-29\tm\n120011\t94\t59.0\t2478.0\t2021-11-30\tm\n120014\t94\t59.0\t2478.0\t2021-12-01\tm\n120016\t94\t59.0\t2478.0\t2021-12-02\tm\n120018\t94\t59.0\t2478.0\t2021-12-03\tm\n120020\t94\t59.0\t2478.0\t2021-12-04\tm\n120022\t94\t59.0\t2478.0\t2021-12-05\tm\n120024\t94\t59.0\t2478.0\t2021-12-06\tm\n120025\t94\t59.0\t2478.0\t2021-12-07\tm\n120027\t94\t59.0\t2478.0\t2021-12-08\tm\n120029\t94\t59.0\t2478.0\t2021-12-09\tm\n120032\t94\t59.0\t2478.0\t2021-12-10\tm\n120034\t94\t59.0\t2478.0\t2021-12-11\tm\n120036\t94\t59.0\t2478.0\t2021-12-12\tm\n120038\t94\t59.0\t2478.0\t2021-12-13\tm\n120040\t94\t59.0\t2478.0\t2021-12-14\tm\n120042\t94\t59.0\t2478.0\t2021-12-15\tm\n120044\t94\t59.0\t2478.0\t2021-12-16\tm\n120046\t94\t59.0\t2478.0\t2021-12-17\tm\n120048\t94\t59.0\t2478.0\t2021-12-18\tm\n120050\t94\t59.0\t2478.0\t2021-12-19\tm\n120052\t94\t59.0\t2478.0\t2021-12-20\tm\n120054\t94\t59.0\t2478.0\t2021-12-21\tm\n120056\t94\t59.0\t2478.0\t2021-12-22\tm\n120058\t94\t59.0\t2478.0\t2021-12-23\tm\n120060\t94\t59.0\t2478.0\t2021-12-24\tm\n120062\t94\t59.0\t2478.0\t2021-12-25\tm\n120064\t94\t59.0\t2478.0\t2021-12-26\tm\n120066\t94\t59.0\t2478.0\t2021-12-27\tm\n120068\t94\t59.0\t2478.0\t2021-12-28\tm\n120070\t94\t59.0\t2478.0\t2021-12-29\tm\n120072\t94\t59.0\t2478.0\t2021-12-30\tm\n120074\t94\t59.0\t2478.0\t2021-12-31\tm\n120076\t94\t59.0\t2478.0\t2022-01-01\tm\n120078\t94\t59.0\t2478.0\t2022-01-02\tm\n120080\t94\t59.0\t2478.0\t2022-01-03\tm\n120082\t94\t59.0\t2478.0\t2022-01-04\tm\n120084\t94\t59.0\t2478.0\t2022-01-05\tm\n120086\t94\t59.0\t2478.0\t2022-01-06\tm\n120088\t94\t59.0\t2478.0\t2022-01-07\tm\n120090\t94\t59.0\t2478.0\t2022-01-08\tm\n120092\t94\t59.0\t2478.0\t2022-01-09\tm\n120094\t94\t59.0\t2478.0\t2022-01-10\tm\n120096\t94\t59.0\t2478.0\t2022-01-11\tm\n120098\t94\t59.0\t2478.0\t2022-01-12\tm\n120100\t94\t59.0\t2478.0\t2022-01-13\tm\n120102\t94\t59.0\t2478.0\t2022-01-14\tm\n120104\t94\t59.0\t2478.0\t2022-01-15\tm\n120106\t94\t59.0\t2478.0\t2022-01-16\tm\n120108\t94\t59.0\t2478.0\t2022-01-17\tm\n120110\t94\t59.0\t2478.0\t2022-01-18\tm\n120112\t94\t59.0\t2478.0\t2022-01-19\tm\n120114\t94\t59.0\t2478.0\t2022-01-20\tm\n120116\t94\t59.0\t2478.0\t2022-01-21\tm\n120119\t94\t59.0\t2478.0\t2022-01-22\tm\n120121\t94\t59.0\t2478.0\t2022-01-23\tm\n120125\t94\t59.0\t2478.0\t2022-01-24\tm\n120127\t94\t59.0\t2478.0\t2022-01-25\tm\n120129\t94\t59.0\t2478.0\t2022-01-26\tm\n120131\t94\t59.0\t2478.0\t2022-01-27\tm\n120133\t94\t59.0\t2478.0\t2022-01-28\tm\n120135\t94\t59.0\t2478.0\t2022-01-29\tm\n120137\t94\t59.0\t2478.0\t2022-01-30\tm\n120139\t94\t59.0\t2478.0\t2022-01-31\tm\n120142\t94\t59.0\t2478.0\t2022-02-01\tm\n120144\t94\t59.0\t2478.0\t2022-02-02\tm\n120146\t94\t59.0\t2478.0\t2022-02-03\tm\n120148\t94\t59.0\t2478.0\t2022-02-04\tm\n120150\t94\t59.0\t2478.0\t2022-02-05\tm\n120152\t94\t59.0\t2478.0\t2022-02-06\tm\n120154\t94\t59.0\t2478.0\t2022-02-07\tm\n120156\t94\t59.0\t2478.0\t2022-02-08\tm\n120158\t94\t59.0\t2478.0\t2022-02-09\tm\n120160\t94\t59.0\t2478.0\t2022-02-10\tm\n120162\t94\t59.0\t2478.0\t2022-02-11\tm\n120163\t94\t59.0\t2478.0\t2022-02-12\tm\n120166\t94\t59.0\t2478.0\t2022-02-13\tm\n120168\t94\t59.0\t2478.0\t2022-02-14\tm\n120170\t94\t59.0\t2478.0\t2022-02-15\tm\n120172\t94\t59.0\t2478.0\t2022-02-16\tm\n120174\t94\t59.0\t2478.0\t2022-02-17\tm\n120176\t94\t59.0\t2478.0\t2022-02-18\tm\n120178\t94\t59.0\t2478.0\t2022-02-19\tm\n120180\t94\t59.0\t2478.0\t2022-02-20\tm\n120182\t94\t59.0\t2478.0\t2022-02-21\tm\n120184\t94\t59.0\t2478.0\t2022-02-22\tm\n120186\t94\t59.0\t2478.0\t2022-02-23\tm\n120188\t94\t59.0\t2478.0\t2022-02-24\tm\n120190\t94\t59.0\t2478.0\t2022-02-25\tm\n120192\t94\t59.0\t2478.0\t2022-02-26\tm\n120194\t94\t59.0\t2478.0\t2022-02-27\tm\n120196\t94\t59.0\t2478.0\t2022-02-28\tm\n120198\t94\t59.0\t2478.0\t2022-03-01\tm\n120200\t94\t59.0\t2478.0\t2022-03-02\tm\n120202\t94\t59.0\t2478.0\t2022-03-03\tm\n120204\t94\t59.0\t2478.0\t2022-03-04\tm\n120206\t94\t59.0\t2478.0\t2022-03-05\tm\n120208\t94\t59.0\t2478.0\t2022-03-06\tm\n120210\t94\t59.0\t2478.0\t2022-03-07\tm\n120212\t94\t59.0\t2478.0\t2022-03-08\tm\n120214\t94\t59.0\t2478.0\t2022-03-09\tm\n120216\t94\t59.0\t2478.0\t2022-03-10\tm\n120218\t94\t59.0\t2478.0\t2022-03-11\tm\n120220\t94\t59.0\t2478.0\t2022-03-12\tm\n120222\t94\t59.0\t2478.0\t2022-03-13\tm\n120224\t94\t59.0\t2478.0\t2022-03-14\tm\n120226\t94\t59.0\t2478.0\t2022-03-15\tm\n120228\t94\t59.0\t2478.0\t2022-03-16\tm\n120230\t94\t59.0\t2478.0\t2022-03-17\tm\n120232\t94\t59.0\t2478.0\t2022-03-18\tm\n120234\t94\t59.0\t2478.0\t2022-03-19\tm\n120235\t94\t59.0\t2478.0\t2022-03-20\tm\n120237\t94\t59.0\t2478.0\t2022-03-21\tm\n120240\t94\t59.0\t2478.0\t2022-03-22\tm\n120241\t94\t59.0\t2478.0\t2022-03-23\tm\n120243\t94\t59.0\t2478.0\t2022-03-24\tm\n120245\t94\t59.0\t2478.0\t2022-03-25\tm\n120247\t94\t59.0\t2478.0\t2022-03-26\tm\n120249\t94\t59.0\t2478.0\t2022-03-27\tm\n120251\t94\t59.0\t2478.0\t2022-03-28\tm\n120253\t94\t59.0\t2478.0\t2022-03-29\tm\n120255\t94\t59.0\t2478.0\t2022-03-30\tm\n120257\t94\t59.0\t2478.0\t2022-03-31\tm\n120259\t94\t59.0\t2478.0\t2022-04-01\tm\n120261\t94\t59.0\t2478.0\t2022-04-02\tm\n120264\t94\t59.0\t2478.0\t2022-04-03\tm\n120265\t94\t59.0\t2478.0\t2022-04-04\tm\n120267\t94\t59.0\t2478.0\t2022-04-05\tm\n120270\t94\t59.0\t2478.0\t2022-04-06\tm\n120272\t94\t59.0\t2478.0\t2022-04-07\tm\n120274\t94\t59.0\t2478.0\t2022-04-08\tm\n120276\t94\t59.0\t2478.0\t2022-04-09\tm\n120278\t94\t59.0\t2478.0\t2022-04-10\tm\n120280\t94\t59.0\t2478.0\t2022-04-11\tm\n120281\t94\t59.0\t2478.0\t2022-04-12\tm\n120283\t94\t59.0\t2478.0\t2022-04-13\tm\n120285\t94\t59.0\t2478.0\t2022-04-14\tm\n120287\t94\t59.0\t2478.0\t2022-04-15\tm\n120288\t94\t59.0\t2478.0\t2022-04-16\tm\n120291\t94\t59.0\t2478.0\t2022-04-17\tm\n120293\t94\t59.0\t2478.0\t2022-04-18\tm\n120294\t94\t59.0\t2478.0\t2022-04-19\tm\n120296\t94\t59.0\t2478.0\t2022-04-20\tm\n120298\t94\t59.0\t2478.0\t2022-04-21\tm\n120300\t94\t59.0\t2478.0\t2022-04-22\tm\n120302\t94\t59.0\t2478.0\t2022-04-23\tm\n120304\t94\t59.0\t2478.0\t2022-04-24\tm\n120306\t94\t59.0\t2478.0\t2022-04-25\tm\n120308\t94\t59.0\t2478.0\t2022-04-26\tm\n120310\t94\t59.0\t2478.0\t2022-04-27\tm\n120312\t94\t59.0\t2478.0\t2022-04-28\tm\n120314\t94\t59.0\t2478.0\t2022-04-29\tm\n120316\t94\t59.0\t2478.0\t2022-04-30\tm\n120318\t94\t59.0\t2478.0\t2022-05-01\tm\n120321\t94\t59.0\t2478.0\t2022-05-02\tm\n120323\t94\t59.0\t2478.0\t2022-05-03\tm\n120325\t94\t59.0\t2478.0\t2022-05-04\tm\n120327\t94\t59.0\t2478.0\t2022-05-05\tm\n120329\t94\t59.0\t2478.0\t2022-05-06\tm\n120331\t94\t59.0\t2478.0\t2022-05-07\tm\n120333\t94\t59.0\t2478.0\t2022-05-08\tm\n120335\t94\t59.0\t2478.0\t2022-05-09\tm\n120337\t94\t59.0\t2478.0\t2022-05-10\tm\n120339\t94\t59.0\t2478.0\t2022-05-11\tm\n120341\t94\t59.0\t2478.0\t2022-05-12\tm\n120343\t94\t59.0\t2478.0\t2022-05-13\tm\n120345\t94\t59.0\t2478.0\t2022-05-14\tm\n120347\t94\t59.0\t2478.0\t2022-05-15\tm\n120349\t94\t59.0\t2478.0\t2022-05-16\tm\n120351\t94\t59.0\t2478.0\t2022-05-17\tm\n120353\t94\t59.0\t2478.0\t2022-05-18\tm\n120356\t94\t59.0\t2478.0\t2022-05-19\tm\n120357\t94\t59.0\t2478.0\t2022-05-20\tm\n120360\t94\t59.0\t2478.0\t2022-05-21\tm\n120361\t94\t59.0\t2478.0\t2022-05-22\tm\n120364\t94\t59.0\t2478.0\t2022-05-23\tm\n120366\t94\t59.0\t2478.0\t2022-05-24\tm\n120368\t94\t59.0\t2478.0\t2022-05-25\tm\n120370\t94\t59.0\t2478.0\t2022-05-26\tm\n120372\t94\t59.0\t2478.0\t2022-05-27\tm\n120374\t94\t59.0\t2478.0\t2022-05-28\tm\n120376\t94\t59.0\t2478.0\t2022-05-29\tm\n120378\t94\t59.0\t2478.0\t2022-05-30\tm\n120380\t94\t59.0\t2478.0\t2022-05-31\tm\n120381\t94\t59.0\t2478.0\t2022-06-01\tm\n120384\t94\t59.0\t2478.0\t2022-06-02\tm\n120386\t94\t59.0\t2478.0\t2022-06-03\tm\n120388\t94\t59.0\t2478.0\t2022-06-04\tm\n120390\t94\t59.0\t2478.0\t2022-06-05\tm\n120392\t94\t59.0\t2478.0\t2022-06-06\tm\n120394\t94\t59.0\t2478.0\t2022-06-07\tm\n120395\t94\t59.0\t2478.0\t2022-06-08\tm\n120397\t94\t59.0\t2478.0\t2022-06-09\tm\n120398\t94\t59.0\t2478.0\t2022-06-10\tm\n120399\t94\t59.0\t2478.0\t2022-06-11\tm\n120400\t94\t59.0\t2478.0\t2022-06-12\tm\n120401\t94\t59.0\t2478.0\t2022-06-13\tm\n120402\t94\t59.0\t2478.0\t2022-06-14\tm\n120404\t94\t59.0\t2478.0\t2022-06-15\tm\n120406\t94\t59.0\t2478.0\t2022-06-16\tm\n120408\t94\t59.0\t2478.0\t2022-06-17\tm\n120410\t94\t59.0\t2478.0\t2022-06-18\tm\n120412\t94\t59.0\t2478.0\t2022-06-19\tm\n120414\t94\t59.0\t2478.0\t2022-06-20\tm\n120416\t94\t59.0\t2478.0\t2022-06-21\tm\n120417\t94\t59.0\t2478.0\t2022-06-22\tm\n120419\t94\t59.0\t2478.0\t2022-06-23\tm\n120421\t94\t59.0\t2478.0\t2022-06-24\tm\n120423\t94\t59.0\t2478.0\t2022-06-25\tm\n120425\t94\t59.0\t2478.0\t2022-06-26\tm\n120427\t94\t59.0\t2478.0\t2022-06-27\tm\n120429\t94\t59.0\t2478.0\t2022-06-28\tm\n120431\t94\t59.0\t2478.0\t2022-06-29\tm\n120433\t94\t59.0\t2478.0\t2022-06-30\tm\n120435\t94\t59.0\t2478.0\t2022-07-01\tm\n120438\t94\t59.0\t2478.0\t2022-07-02\tm\n120440\t94\t59.0\t2478.0\t2022-07-03\tm\n120442\t94\t59.0\t2478.0\t2022-07-04\tm\n120444\t94\t59.0\t2478.0\t2022-07-05\tm\n120446\t94\t59.0\t2478.0\t2022-07-06\tm\n120448\t94\t59.0\t2478.0\t2022-07-07\tm\n120450\t94\t59.0\t2478.0\t2022-07-08\tm\n120451\t94\t59.0\t2478.0\t2022-07-09\tm\n120454\t94\t59.0\t2478.0\t2022-07-10\tm\n120456\t94\t59.0\t2478.0\t2022-07-11\tm\n120458\t94\t59.0\t2478.0\t2022-07-12\tm\n120460\t94\t59.0\t2478.0\t2022-07-13\tm\n120462\t94\t59.0\t2478.0\t2022-07-14\tm\n120464\t94\t59.0\t2478.0\t2022-07-15\tm\n120466\t94\t59.0\t2478.0\t2022-07-16\tm\n120468\t94\t59.0\t2478.0\t2022-07-17\tm\n120470\t94\t59.0\t2478.0\t2022-07-18\tm\n120472\t94\t59.0\t2478.0\t2022-07-19\tm\n120474\t94\t59.0\t2478.0\t2022-07-20\tm\n120476\t94\t59.0\t2478.0\t2022-07-21\tm\n120478\t94\t59.0\t2478.0\t2022-07-22\tm\n120480\t94\t59.0\t2478.0\t2022-07-23\tm\n120482\t94\t59.0\t2478.0\t2022-07-24\tm\n120484\t94\t59.0\t2478.0\t2022-07-25\tm\n120486\t94\t59.0\t2478.0\t2022-07-26\tm\n120488\t94\t59.0\t2478.0\t2022-07-27\tm\n120490\t94\t59.0\t2478.0\t2022-07-28\tm\n120492\t94\t59.0\t2478.0\t2022-07-29\tm\n120494\t94\t59.0\t2478.0\t2022-07-30\tm\n120496\t94\t59.0\t2478.0\t2022-07-31\tm\n120498\t94\t59.0\t2478.0\t2022-08-01\tm\n120500\t94\t59.0\t2478.0\t2022-08-02\tm\n120502\t94\t59.0\t2478.0\t2022-08-03\tm\n120504\t94\t59.0\t2478.0\t2022-08-04\tm\n120506\t94\t59.0\t2478.0\t2022-08-05\tm\n120508\t94\t59.0\t2478.0\t2022-08-06\tm\n120510\t94\t59.0\t2478.0\t2022-08-07\tm\n120512\t94\t59.0\t2478.0\t2022-08-08\tm\n120514\t94\t59.0\t2478.0\t2022-08-09\tm\n120516\t94\t59.0\t2478.0\t2022-08-10\tm\n120518\t94\t59.0\t2478.0\t2022-08-11\tm\n120520\t94\t59.0\t2478.0\t2022-08-12\tm\n120521\t94\t59.0\t2478.0\t2022-08-13\tm\n120523\t94\t59.0\t2478.0\t2022-08-14\tm\n120525\t94\t59.0\t2478.0\t2022-08-15\tm\n120527\t94\t59.0\t2478.0\t2022-08-16\tm\n120529\t94\t59.0\t2478.0\t2022-08-17\tm\n120531\t94\t59.0\t2478.0\t2022-08-18\tm\n120533\t94\t59.0\t2478.0\t2022-08-19\tm\n120536\t94\t59.0\t2478.0\t2022-08-20\tm\n120538\t94\t59.0\t2478.0\t2022-08-21\tm\n120540\t94\t59.0\t2478.0\t2022-08-22\tm\n120542\t94\t59.0\t2478.0\t2022-08-23\tm\n120543\t94\t59.0\t2478.0\t2022-08-24\tm\n120545\t94\t59.0\t2478.0\t2022-08-25\tm\n120547\t94\t59.0\t2478.0\t2022-08-26\tm\n120549\t94\t59.0\t2478.0\t2022-08-27\tm\n120552\t94\t59.0\t2478.0\t2022-08-28\tm\n120553\t94\t59.0\t2478.0\t2022-08-29\tm\n120554\t94\t59.0\t2478.0\t2022-08-30\tm\n120556\t94\t59.0\t2478.0\t2022-08-31\tm\n120558\t94\t59.0\t2478.0\t2022-09-01\tm\n120560\t94\t59.0\t2478.0\t2022-09-02\tm\n120562\t94\t59.0\t2478.0\t2022-09-03\tm\n120564\t94\t59.0\t2478.0\t2022-09-04\tm\n120566\t94\t59.0\t2478.0\t2022-09-05\tm\n120568\t94\t59.0\t2478.0\t2022-09-06\tm\n120570\t94\t59.0\t2478.0\t2022-09-07\tm\n120572\t94\t59.0\t2478.0\t2022-09-08\tm\n120574\t94\t59.0\t2478.0\t2022-09-09\tm\n120576\t94\t59.0\t2478.0\t2022-09-10\tm\n120578\t94\t59.0\t2478.0\t2022-09-11\tm\n120580\t94\t59.0\t2478.0\t2022-09-12\tm\n120581\t94\t59.0\t2478.0\t2022-09-13\tm\n120583\t94\t59.0\t2478.0\t2022-09-14\tm\n120585\t94\t59.0\t2478.0\t2022-09-15\tm\n120587\t94\t59.0\t2478.0\t2022-09-16\tm\n120589\t94\t59.0\t2478.0\t2022-09-17\tm\n120591\t94\t59.0\t2478.0\t2022-09-18\tm\n120593\t94\t59.0\t2478.0\t2022-09-19\tm\n120595\t94\t59.0\t2478.0\t2022-09-20\tm\n120598\t94\t59.0\t2478.0\t2022-09-21\tm\n120599\t94\t59.0\t2478.0\t2022-09-22\tm\n120600\t94\t59.0\t2478.0\t2022-09-23\tm\n120602\t94\t59.0\t2478.0\t2022-09-24\tm\n120604\t94\t59.0\t2478.0\t2022-09-25\tm\n120606\t94\t59.0\t2478.0\t2022-09-26\tm\n120608\t94\t59.0\t2478.0\t2022-09-27\tm\n120610\t94\t59.0\t2478.0\t2022-09-28\tm\n120612\t94\t59.0\t2478.0\t2022-09-29\tm\n120614\t94\t59.0\t2478.0\t2022-09-30\tm\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664177700311_1960258108",
+      "id": "paragraph_1664177700311_1960258108",
+      "dateCreated": "2022-09-26T07:35:00+0000",
+      "dateStarted": "2022-09-26T07:38:34+0000",
+      "dateFinished": "2022-09-26T07:38:34+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:86487"
+    },
+    {
+      "text": "%md\n# 2. 식빵의 unit_price를 10배하기\n+ 원래 100g가 단위용량인데, 10g로 계산되었음\n    + 590원 언저리이면, 잘 계산되어 있는 것임",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T08:02:12+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>2. 식빵의 unit_price를 10배하기</h1>\n<ul>\n<li>원래 100g가 단위용량인데, 10g로 계산되었음\n<ul>\n<li>590원 언저리이면, 잘 계산되어 있는 것임</li>\n</ul>\n</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664177730768_2057979216",
+      "id": "paragraph_1664177730768_2057979216",
+      "dateCreated": "2022-09-26T07:35:30+0000",
+      "dateStarted": "2022-09-26T08:02:12+0000",
+      "dateFinished": "2022-09-26T08:02:12+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:86488"
+    },
+    {
+      "text": "%pyspark\n# 식빵의 unit_price를 10배하기\n# 1. data load\nimport pandas as pd\ngoods_daily_price_pdf = pd.read_csv('/DB_data/goods_daily_price_table.csv')\ntargets = goods_daily_price_pdf[goods_daily_price_pdf['goods_id']==94].index  # 식빵이 goods_id=94\ngoods_daily_price_pdf.loc[targets, 'unit_price']*= 10\ngoods_daily_price_pdf[goods_daily_price_pdf['goods_id']==94]\n# goods_daily_price_pdf.to_csv('/DB_data/goods_daily_price_table.csv', header=True, index=False)\ngoods_daily_price_pdf",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T08:02:39+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "        goods_id  unit_price  price research_date business\n0              0       197.0   1300    2021-09-07        s\n1              0       197.0   1300    2021-09-08        s\n2              0       197.0   1300    2021-09-09        s\n3              0       197.0   1300    2021-09-10        s\n4              0       197.0   1300    2021-09-11        s\n...          ...         ...    ...           ...      ...\n314696     20056      1567.0   1567    2022-09-26        m\n314697     20056      1567.0   1567    2022-09-27        m\n314698     20056      1567.0   1567    2022-09-28        m\n314699     20056      1567.0   1567    2022-09-29        m\n314700     20056      1567.0   1567    2022-09-30        m\n\n[314701 rows x 5 columns]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664178003529_2035625959",
+      "id": "paragraph_1664178003529_2035625959",
+      "dateCreated": "2022-09-26T07:40:03+0000",
+      "dateStarted": "2022-09-26T07:59:42+0000",
+      "dateFinished": "2022-09-26T07:59:43+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:86489"
+    },
+    {
+      "text": "%md\n# 3. goods table에 goods_id=94의 product_id를 37로 바꿔주기\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T08:03:19+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>3. goods table에 goods_id=94의 product_id를 37로 바꿔주기</h1>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664179359795_839312816",
+      "id": "paragraph_1664179359795_839312816",
+      "dateCreated": "2022-09-26T08:02:39+0000",
+      "dateStarted": "2022-09-26T08:03:19+0000",
+      "dateFinished": "2022-09-26T08:03:19+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:86490"
+    },
+    {
+      "text": "%pyspark\nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\nprop = {\"user\": \"ji\", \"password\": \"cvgkbhs234r#8tdx\", \"driver\": \"com.mysql.cj.jdbc.Driver\"} \n#-----------------------------------------------------------------------------------------------------------------------------------------------------#\n#                                               1. common\n#-----------------------------------------------------------------------------------------------------------------------------------------------------#\n\n# 1. favorite_goods table (columns : user_id, goods_id) 가져온 후, 해당하는 user_id의 data만 가져오기\ngoods_sdf = spark.read.format(\"jdbc\")\\\n    .option(\"url\", url) \\\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\n    .option(\"query\", f\"select * from goods\") \\\n    .option(\"user\", \"ji\")\\\n    .option(\"password\", \"cvgkbhs234r#8tdx\").load()\ngoods_sdf.show(n=100)\n\n# 2. goods_id = 94의 product_id를 37로 바꾸기\nfrom pyspark.sql.functions import col, when\ngoods_sdf = goods_sdf.withColumn(\"product_id\", when(col('goods_id')==94 , 37).otherwise(col('product_id')))\ngoods_sdf.show(n=100)\n\n\n# 3. csv로 저장하기\n# goods_sdf.write.option(\"header\",'true').option('index','false').csv('/DB_data/goods_table_tmp.csv')\ngoods_pdf = goods_sdf.toPandas()\ngoods_pdf.to_csv('/DB_data/goods_table.csv',header=True, index=False)\ngoods_pdf\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T08:31:47+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+----------+----------------------------------+--------------------+-------+--------------------+\n|goods_id|product_id|                              name|                 img|measure|           cheap_url|\n+--------+----------+----------------------------------+--------------------+-------+--------------------+\n|       0|         0|       오리온 포카칩 오리지널(66g)|https://shopping-...|      g|https://search.sh...|\n|       1|         0|               칩포테이토 오리지날|https://shopping-...|      g|https://search.sh...|\n|       2|         0|           포테토칩 오리지날(125g)|https://shopping-...|      g|https://search.sh...|\n|       3|         1|       롯데 자일리톨 오리지날(87g)|https://shopping-...|      g|https://search.sh...|\n|       4|         1|       롯데 자일리톨 오리지날(97g)|https://shopping-...|      g|https://search.sh...|\n|       5|         3|                      아이비(270g)|https://shopping-...|      g|https://search.sh...|\n|       6|         3|                    참크래커(280g)|https://shopping-...|      g|https://search.sh...|\n|       7|         4|                      돼지바(70ml)|https://shopping-...|     ml|https://search.sh...|\n|       8|         4|                      메로나(75ml)|https://shopping-...|     ml|https://search.sh...|\n|       9|         5|        롯데 목캔디 허브민트(217g)|https://shopping-...|      g|https://search.sh...|\n|      10|         5|         오리온 통아몬드 캔디(90g)|https://shopping-...|      g|https://search.sh...|\n|      11|         6|         롯데 월드콘 바닐라(160ml)|https://shopping-...|     ml|https://search.sh...|\n|      12|         6|     투게더 오리지널 바닐라(900ml)|https://shopping-...|     ml|https://search.sh...|\n|      13|         7|              닥터유 에너지바(40g)|https://shopping-...|      g|https://search.sh...|\n|      14|         7|            닥터유 에너지바(4개입)|https://shopping-...|      g|https://search.sh...|\n|      15|         7|   켈로그 레드베리 에너지바(4개입)|https://shopping-...|      g|https://search.sh...|\n|      16|         8|                     자유시간(36g)|https://shopping-...|      g|https://search.sh...|\n|      17|         8|                   자유시간(5개입)|https://shopping-...|      g|https://search.sh...|\n|      18|         8|             핫브레이크 미니(714g)|https://shopping-...|      g|https://search.sh...|\n|      19|         9|                   몽쉘 크림(384g)|https://shopping-...|      g|https://search.sh...|\n|      20|         9|           오리온 초코파이(18개입)|https://shopping-...|      g|https://search.sh...|\n|      21|        10|               롯데 ABC 초코(187g)|https://shopping-...|      g|https://search.sh...|\n|      22|        10|                롯데 ABC 초코(65g)|https://shopping-...|      g|https://search.sh...|\n|      23|        10|          롯데 빅가나 마일드(110g)|https://shopping-...|      g|https://search.sh...|\n|      24|        11|                      양조간장 501|https://shopping-...|     ml|https://search.sh...|\n|      25|        11|                진간장 금F3(930ml)|https://shopping-...|     ml|https://search.sh...|\n|      26|        12| 순창 오리지널 우리쌀 찰고추장(...|https://j7d108.p....|      g|                    |\n|      27|        12|      해찬들 우리쌀태양초골드(1kg)|https://shopping-...|      g|https://search.sh...|\n|      28|        13|                   백설 소면(900g)|https://shopping-...|      g|https://search.sh...|\n|      29|        13|               옛날국수 소면(900g)|https://shopping-...|      g|https://search.sh...|\n|      30|        14|             동서 아카시아꿀(600g)|https://shopping-...|      g|https://search.sh...|\n|      31|        15|         CJ 100% 국산 햇당면(400g)|https://shopping-...|      g|https://search.sh...|\n|      32|        15|            백설 자른 햇당면(300g)|https://shopping-...|      g|https://search.sh...|\n|      33|        15|               옛날 자른당면(300g)|https://shopping-...|      g|https://search.sh...|\n|      34|        15|                          옛날당면|https://shopping-...|      g|https://search.sh...|\n|      35|        16|            샘표 시골집 토장(900g)|https://shopping-...|      g|https://search.sh...|\n|      36|        16|        순창 재래식안심생된장(1kg)|https://shopping-...|      g|https://search.sh...|\n|      37|        16|           해찬들 재래식 된장(1kg)|https://shopping-...|      g|https://search.sh...|\n|      38|        17|           국산콩두부 부침용(380g)|https://shopping-...|      g|https://search.sh...|\n|      39|        17|           국산콩두부 찌개용(380g)|https://shopping-...|      g|https://search.sh...|\n|      40|        17|           행복한콩 찌개두부(300g)|https://shopping-...|      g|https://search.sh...|\n|      41|        18|              청정원 발사믹 드레싱|https://shopping-...|      g|https://search.sh...|\n|      42|        18|            청정원 오리엔탈 드레싱|https://shopping-...|      g|https://search.sh...|\n|      43|        19|  오뚜기 고소한 골드 마요네즈(5...|https://shopping-...|      g|https://search.sh...|\n|      44|        19|      청정원 고소한 마요네즈(500g)|https://shopping-...|      g|https://search.sh...|\n|      45|        20|     곰표 밀가루 중력다목적용(1kg)|https://shopping-...|      g|https://search.sh...|\n|      46|        20|              백설 중력밀가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      47|        20|                백설 찰밀가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      48|        21|     백설 5가지 재료 부침가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      49|        21|                 백설부침가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      50|        21|              오뚜기 부침가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      51|        22|           백설 자일로스 설탕(1kg)|https://shopping-...|      g|https://search.sh...|\n|      52|        22|                백설 하얀설탕(1kg)|https://shopping-...|      g|https://search.sh...|\n|      53|        22|                큐원 하얀설탕(1kg)|https://shopping-...|      g|https://search.sh...|\n|      54|        22|                   푸드림 하얀설탕|https://shopping-...|      g|https://search.sh...|\n|      55|        23|               백설 구운소금(500g)|https://shopping-...|      g|https://search.sh...|\n|      56|        23|                        백설꽃소금|https://shopping-...|      g|https://search.sh...|\n|      57|        23|          청정원 미원 맛소금(500g)|https://shopping-...|      g|https://search.sh...|\n|      58|        23|청정원 신안섬보배 천일염 가는소...|https://shopping-...|      g|https://search.sh...|\n|      59|        23|                  해표 꽃소금(1kg)|https://shopping-...|      g|https://search.sh...|\n|      60|        24|                맑고신선한옥수수유|https://shopping-...|     ml|https://search.sh...|\n|      61|        24|                 백설 식용유(1.5L)|https://shopping-...|     ml|https://search.sh...|\n|      62|        24|                    백설국내콩기름|https://shopping-...|     ml|https://search.sh...|\n|      63|        24|         오뚜기 콩기름 100%(900ml)|https://shopping-...|     ml|https://search.sh...|\n|      64|        24|    해표 맑고 신선한 식용유(900ml)|https://shopping-...|     ml|https://search.sh...|\n|      65|        25|                     대상 사과식초|https://shopping-...|     ml|https://search.sh...|\n|      66|        25|     백설 건강발효 사과식초(800ml)|https://shopping-...|     ml|https://search.sh...|\n|      67|        25|     백설 건강발효 현미식초(800ml)|https://shopping-...|     ml|https://search.sh...|\n|      68|        25|            오뚜기 사과식초(900ml)|https://shopping-...|     ml|https://search.sh...|\n|      69|        26|   청정원 순창 양념듬뿍 쌈장(500g)|https://shopping-...|      g|https://search.sh...|\n|      70|        26|          해찬들 사계절 쌈장(500g)|https://shopping-...|      g|https://search.sh...|\n|      71|        26|        해표 순창궁 양념쌈장(500g)|https://shopping-...|      g|https://search.sh...|\n|      72|        27|                      딸기잼(500g)|https://shopping-...|      g|https://search.sh...|\n|      73|        27|             복음자리 딸기잼(370g)|https://shopping-...|      g|https://search.sh...|\n|      74|        28|                   백설 진한참기름|https://shopping-...|     ml|https://search.sh...|\n|      75|        28|              오뚜기 참기름(320ml)|https://shopping-...|     ml|https://search.sh...|\n|      76|        28|               참진한 참기름(해표)|https://shopping-...|     ml|https://search.sh...|\n|      77|        29|           오뚜기카레 순한맛(100g)|https://shopping-...|      g|https://search.sh...|\n|      78|        29|   청정원 카레여왕 구운마늘&amp...|https://shopping-...|      g|https://search.sh...|\n|      79|        30|          오뚜기 토마토 케찹(500g)|https://shopping-...|      g|https://search.sh...|\n|      80|        30|     청정원 진한 토마토 케찹(500g)|https://shopping-...|      g|https://search.sh...|\n|      81|        31|          산들애 국내산 해물(250g)|https://shopping-...|      g|https://search.sh...|\n|      82|        31|    청정원 맛선생 국내산해물(250g)|https://shopping-...|      g|https://search.sh...|\n|      83|        32|            CJ 비비고 왕교자(910g)|https://shopping-...|      g|https://search.sh...|\n|      84|        32|                  고향만두(1.08kg)|https://shopping-...|      g|https://search.sh...|\n|      85|        32|             비비고 왕교자(1.05kg)|https://shopping-...|      g|https://search.sh...|\n|      86|        32|        생야채돼지고기물만두(800g)|https://shopping-...|      g|https://search.sh...|\n|      87|        33|                   삼양라면(5개입)|https://shopping-...|     개|https://search.sh...|\n|      88|        33|                     신라면(5개입)|https://shopping-...|     개|https://search.sh...|\n|      89|        33|              진라면 순한맛(5개입)|https://shopping-...|     개|https://search.sh...|\n|      90|        34|       삼립호떡 미니꿀호떡(16개입)|https://shopping-...|      g|https://search.sh...|\n|      91|        34|        샤니 속이알찬 단팥빵(255g)|https://shopping-...|      g|https://search.sh...|\n|      92|        34|          아침엔 우유 토스트(330g)|https://shopping-...|      g|https://search.sh...|\n|      93|        34|                 정통크림빵(3개입)|https://shopping-...|      g|https://search.sh...|\n|      94|        34|                  탕종숙식빵(420g)|https://shopping-...|      g|https://search.sh...|\n|      95|        35|                보노 콘스프(3개입)|https://shopping-...|      g|https://search.sh...|\n|      96|        35|      보노 포르치니버섯스프(3개입)|https://shopping-...|      g|https://search.sh...|\n|      97|        35|              오뚜기 크림스프(80g)|https://shopping-...|      g|https://search.sh...|\n|      98|        35|            청정원 우리쌀 크림스프|https://shopping-...|      g|https://search.sh...|\n|      99|        36|            스페셜K 오리지널(480g)|https://shopping-...|      g|https://search.sh...|\n+--------+----------+----------------------------------+--------------------+-------+--------------------+\nonly showing top 100 rows\n\n+--------+----------+----------------------------------+--------------------+-------+--------------------+\n|goods_id|product_id|                              name|                 img|measure|           cheap_url|\n+--------+----------+----------------------------------+--------------------+-------+--------------------+\n|       0|         0|       오리온 포카칩 오리지널(66g)|https://shopping-...|      g|https://search.sh...|\n|       1|         0|               칩포테이토 오리지날|https://shopping-...|      g|https://search.sh...|\n|       2|         0|           포테토칩 오리지날(125g)|https://shopping-...|      g|https://search.sh...|\n|       3|         1|       롯데 자일리톨 오리지날(87g)|https://shopping-...|      g|https://search.sh...|\n|       4|         1|       롯데 자일리톨 오리지날(97g)|https://shopping-...|      g|https://search.sh...|\n|       5|         3|                      아이비(270g)|https://shopping-...|      g|https://search.sh...|\n|       6|         3|                    참크래커(280g)|https://shopping-...|      g|https://search.sh...|\n|       7|         4|                      돼지바(70ml)|https://shopping-...|     ml|https://search.sh...|\n|       8|         4|                      메로나(75ml)|https://shopping-...|     ml|https://search.sh...|\n|       9|         5|        롯데 목캔디 허브민트(217g)|https://shopping-...|      g|https://search.sh...|\n|      10|         5|         오리온 통아몬드 캔디(90g)|https://shopping-...|      g|https://search.sh...|\n|      11|         6|         롯데 월드콘 바닐라(160ml)|https://shopping-...|     ml|https://search.sh...|\n|      12|         6|     투게더 오리지널 바닐라(900ml)|https://shopping-...|     ml|https://search.sh...|\n|      13|         7|              닥터유 에너지바(40g)|https://shopping-...|      g|https://search.sh...|\n|      14|         7|            닥터유 에너지바(4개입)|https://shopping-...|      g|https://search.sh...|\n|      15|         7|   켈로그 레드베리 에너지바(4개입)|https://shopping-...|      g|https://search.sh...|\n|      16|         8|                     자유시간(36g)|https://shopping-...|      g|https://search.sh...|\n|      17|         8|                   자유시간(5개입)|https://shopping-...|      g|https://search.sh...|\n|      18|         8|             핫브레이크 미니(714g)|https://shopping-...|      g|https://search.sh...|\n|      19|         9|                   몽쉘 크림(384g)|https://shopping-...|      g|https://search.sh...|\n|      20|         9|           오리온 초코파이(18개입)|https://shopping-...|      g|https://search.sh...|\n|      21|        10|               롯데 ABC 초코(187g)|https://shopping-...|      g|https://search.sh...|\n|      22|        10|                롯데 ABC 초코(65g)|https://shopping-...|      g|https://search.sh...|\n|      23|        10|          롯데 빅가나 마일드(110g)|https://shopping-...|      g|https://search.sh...|\n|      24|        11|                      양조간장 501|https://shopping-...|     ml|https://search.sh...|\n|      25|        11|                진간장 금F3(930ml)|https://shopping-...|     ml|https://search.sh...|\n|      26|        12| 순창 오리지널 우리쌀 찰고추장(...|https://j7d108.p....|      g|                    |\n|      27|        12|      해찬들 우리쌀태양초골드(1kg)|https://shopping-...|      g|https://search.sh...|\n|      28|        13|                   백설 소면(900g)|https://shopping-...|      g|https://search.sh...|\n|      29|        13|               옛날국수 소면(900g)|https://shopping-...|      g|https://search.sh...|\n|      30|        14|             동서 아카시아꿀(600g)|https://shopping-...|      g|https://search.sh...|\n|      31|        15|         CJ 100% 국산 햇당면(400g)|https://shopping-...|      g|https://search.sh...|\n|      32|        15|            백설 자른 햇당면(300g)|https://shopping-...|      g|https://search.sh...|\n|      33|        15|               옛날 자른당면(300g)|https://shopping-...|      g|https://search.sh...|\n|      34|        15|                          옛날당면|https://shopping-...|      g|https://search.sh...|\n|      35|        16|            샘표 시골집 토장(900g)|https://shopping-...|      g|https://search.sh...|\n|      36|        16|        순창 재래식안심생된장(1kg)|https://shopping-...|      g|https://search.sh...|\n|      37|        16|           해찬들 재래식 된장(1kg)|https://shopping-...|      g|https://search.sh...|\n|      38|        17|           국산콩두부 부침용(380g)|https://shopping-...|      g|https://search.sh...|\n|      39|        17|           국산콩두부 찌개용(380g)|https://shopping-...|      g|https://search.sh...|\n|      40|        17|           행복한콩 찌개두부(300g)|https://shopping-...|      g|https://search.sh...|\n|      41|        18|              청정원 발사믹 드레싱|https://shopping-...|      g|https://search.sh...|\n|      42|        18|            청정원 오리엔탈 드레싱|https://shopping-...|      g|https://search.sh...|\n|      43|        19|  오뚜기 고소한 골드 마요네즈(5...|https://shopping-...|      g|https://search.sh...|\n|      44|        19|      청정원 고소한 마요네즈(500g)|https://shopping-...|      g|https://search.sh...|\n|      45|        20|     곰표 밀가루 중력다목적용(1kg)|https://shopping-...|      g|https://search.sh...|\n|      46|        20|              백설 중력밀가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      47|        20|                백설 찰밀가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      48|        21|     백설 5가지 재료 부침가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      49|        21|                 백설부침가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      50|        21|              오뚜기 부침가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      51|        22|           백설 자일로스 설탕(1kg)|https://shopping-...|      g|https://search.sh...|\n|      52|        22|                백설 하얀설탕(1kg)|https://shopping-...|      g|https://search.sh...|\n|      53|        22|                큐원 하얀설탕(1kg)|https://shopping-...|      g|https://search.sh...|\n|      54|        22|                   푸드림 하얀설탕|https://shopping-...|      g|https://search.sh...|\n|      55|        23|               백설 구운소금(500g)|https://shopping-...|      g|https://search.sh...|\n|      56|        23|                        백설꽃소금|https://shopping-...|      g|https://search.sh...|\n|      57|        23|          청정원 미원 맛소금(500g)|https://shopping-...|      g|https://search.sh...|\n|      58|        23|청정원 신안섬보배 천일염 가는소...|https://shopping-...|      g|https://search.sh...|\n|      59|        23|                  해표 꽃소금(1kg)|https://shopping-...|      g|https://search.sh...|\n|      60|        24|                맑고신선한옥수수유|https://shopping-...|     ml|https://search.sh...|\n|      61|        24|                 백설 식용유(1.5L)|https://shopping-...|     ml|https://search.sh...|\n|      62|        24|                    백설국내콩기름|https://shopping-...|     ml|https://search.sh...|\n|      63|        24|         오뚜기 콩기름 100%(900ml)|https://shopping-...|     ml|https://search.sh...|\n|      64|        24|    해표 맑고 신선한 식용유(900ml)|https://shopping-...|     ml|https://search.sh...|\n|      65|        25|                     대상 사과식초|https://shopping-...|     ml|https://search.sh...|\n|      66|        25|     백설 건강발효 사과식초(800ml)|https://shopping-...|     ml|https://search.sh...|\n|      67|        25|     백설 건강발효 현미식초(800ml)|https://shopping-...|     ml|https://search.sh...|\n|      68|        25|            오뚜기 사과식초(900ml)|https://shopping-...|     ml|https://search.sh...|\n|      69|        26|   청정원 순창 양념듬뿍 쌈장(500g)|https://shopping-...|      g|https://search.sh...|\n|      70|        26|          해찬들 사계절 쌈장(500g)|https://shopping-...|      g|https://search.sh...|\n|      71|        26|        해표 순창궁 양념쌈장(500g)|https://shopping-...|      g|https://search.sh...|\n|      72|        27|                      딸기잼(500g)|https://shopping-...|      g|https://search.sh...|\n|      73|        27|             복음자리 딸기잼(370g)|https://shopping-...|      g|https://search.sh...|\n|      74|        28|                   백설 진한참기름|https://shopping-...|     ml|https://search.sh...|\n|      75|        28|              오뚜기 참기름(320ml)|https://shopping-...|     ml|https://search.sh...|\n|      76|        28|               참진한 참기름(해표)|https://shopping-...|     ml|https://search.sh...|\n|      77|        29|           오뚜기카레 순한맛(100g)|https://shopping-...|      g|https://search.sh...|\n|      78|        29|   청정원 카레여왕 구운마늘&amp...|https://shopping-...|      g|https://search.sh...|\n|      79|        30|          오뚜기 토마토 케찹(500g)|https://shopping-...|      g|https://search.sh...|\n|      80|        30|     청정원 진한 토마토 케찹(500g)|https://shopping-...|      g|https://search.sh...|\n|      81|        31|          산들애 국내산 해물(250g)|https://shopping-...|      g|https://search.sh...|\n|      82|        31|    청정원 맛선생 국내산해물(250g)|https://shopping-...|      g|https://search.sh...|\n|      83|        32|            CJ 비비고 왕교자(910g)|https://shopping-...|      g|https://search.sh...|\n|      84|        32|                  고향만두(1.08kg)|https://shopping-...|      g|https://search.sh...|\n|      85|        32|             비비고 왕교자(1.05kg)|https://shopping-...|      g|https://search.sh...|\n|      86|        32|        생야채돼지고기물만두(800g)|https://shopping-...|      g|https://search.sh...|\n|      87|        33|                   삼양라면(5개입)|https://shopping-...|     개|https://search.sh...|\n|      88|        33|                     신라면(5개입)|https://shopping-...|     개|https://search.sh...|\n|      89|        33|              진라면 순한맛(5개입)|https://shopping-...|     개|https://search.sh...|\n|      90|        34|       삼립호떡 미니꿀호떡(16개입)|https://shopping-...|      g|https://search.sh...|\n|      91|        34|        샤니 속이알찬 단팥빵(255g)|https://shopping-...|      g|https://search.sh...|\n|      92|        34|          아침엔 우유 토스트(330g)|https://shopping-...|      g|https://search.sh...|\n|      93|        34|                 정통크림빵(3개입)|https://shopping-...|      g|https://search.sh...|\n|      94|        37|                  탕종숙식빵(420g)|https://shopping-...|      g|https://search.sh...|\n|      95|        35|                보노 콘스프(3개입)|https://shopping-...|      g|https://search.sh...|\n|      96|        35|      보노 포르치니버섯스프(3개입)|https://shopping-...|      g|https://search.sh...|\n|      97|        35|              오뚜기 크림스프(80g)|https://shopping-...|      g|https://search.sh...|\n|      98|        35|            청정원 우리쌀 크림스프|https://shopping-...|      g|https://search.sh...|\n|      99|        36|            스페셜K 오리지널(480g)|https://shopping-...|      g|https://search.sh...|\n+--------+----------+----------------------------------+--------------------+-------+--------------------+\nonly showing top 100 rows\n\n     goods_id  ...                                          cheap_url\n0           0  ...  https://search.shopping.naver.com/gate.nhn?id=...\n1           1  ...  https://search.shopping.naver.com/gate.nhn?id=...\n2           2  ...  https://search.shopping.naver.com/gate.nhn?id=...\n3           3  ...  https://search.shopping.naver.com/gate.nhn?id=...\n4           4  ...  https://search.shopping.naver.com/gate.nhn?id=...\n..        ...  ...                                                ...\n522     20052  ...  https://search.shopping.naver.com/gate.nhn?id=...\n523     20053  ...  https://search.shopping.naver.com/gate.nhn?id=...\n524     20054  ...  https://search.shopping.naver.com/gate.nhn?id=...\n525     20055  ...  https://search.shopping.naver.com/gate.nhn?id=...\n526     20056  ...  https://search.shopping.naver.com/gate.nhn?id=...\n\n[527 rows x 6 columns]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=40",
+              "$$hashKey": "object:87169"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=41",
+              "$$hashKey": "object:87170"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=42",
+              "$$hashKey": "object:87171"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664178440652_1856181550",
+      "id": "paragraph_1664178440652_1856181550",
+      "dateCreated": "2022-09-26T07:47:20+0000",
+      "dateStarted": "2022-09-26T08:31:47+0000",
+      "dateFinished": "2022-09-26T08:31:48+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:86491"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T08:21:48+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+----------+----------------------------------+--------------------+-------+--------------------+\n|goods_id|product_id|                              name|                 img|measure|           cheap_url|\n+--------+----------+----------------------------------+--------------------+-------+--------------------+\n|       0|         0|       오리온 포카칩 오리지널(66g)|https://shopping-...|      g|https://search.sh...|\n|       1|         0|               칩포테이토 오리지날|https://shopping-...|      g|https://search.sh...|\n|       2|         0|           포테토칩 오리지날(125g)|https://shopping-...|      g|https://search.sh...|\n|       3|         1|       롯데 자일리톨 오리지날(87g)|https://shopping-...|      g|https://search.sh...|\n|       4|         1|       롯데 자일리톨 오리지날(97g)|https://shopping-...|      g|https://search.sh...|\n|       5|         3|                      아이비(270g)|https://shopping-...|      g|https://search.sh...|\n|       6|         3|                    참크래커(280g)|https://shopping-...|      g|https://search.sh...|\n|       7|         4|                      돼지바(70ml)|https://shopping-...|     ml|https://search.sh...|\n|       8|         4|                      메로나(75ml)|https://shopping-...|     ml|https://search.sh...|\n|       9|         5|        롯데 목캔디 허브민트(217g)|https://shopping-...|      g|https://search.sh...|\n|      10|         5|         오리온 통아몬드 캔디(90g)|https://shopping-...|      g|https://search.sh...|\n|      11|         6|         롯데 월드콘 바닐라(160ml)|https://shopping-...|     ml|https://search.sh...|\n|      12|         6|     투게더 오리지널 바닐라(900ml)|https://shopping-...|     ml|https://search.sh...|\n|      13|         7|              닥터유 에너지바(40g)|https://shopping-...|      g|https://search.sh...|\n|      14|         7|            닥터유 에너지바(4개입)|https://shopping-...|      g|https://search.sh...|\n|      15|         7|   켈로그 레드베리 에너지바(4개입)|https://shopping-...|      g|https://search.sh...|\n|      16|         8|                     자유시간(36g)|https://shopping-...|      g|https://search.sh...|\n|      17|         8|                   자유시간(5개입)|https://shopping-...|      g|https://search.sh...|\n|      18|         8|             핫브레이크 미니(714g)|https://shopping-...|      g|https://search.sh...|\n|      19|         9|                   몽쉘 크림(384g)|https://shopping-...|      g|https://search.sh...|\n|      20|         9|           오리온 초코파이(18개입)|https://shopping-...|      g|https://search.sh...|\n|      21|        10|               롯데 ABC 초코(187g)|https://shopping-...|      g|https://search.sh...|\n|      22|        10|                롯데 ABC 초코(65g)|https://shopping-...|      g|https://search.sh...|\n|      23|        10|          롯데 빅가나 마일드(110g)|https://shopping-...|      g|https://search.sh...|\n|      24|        11|                      양조간장 501|https://shopping-...|     ml|https://search.sh...|\n|      25|        11|                진간장 금F3(930ml)|https://shopping-...|     ml|https://search.sh...|\n|      26|        12| 순창 오리지널 우리쌀 찰고추장(...|https://j7d108.p....|      g|                    |\n|      27|        12|      해찬들 우리쌀태양초골드(1kg)|https://shopping-...|      g|https://search.sh...|\n|      28|        13|                   백설 소면(900g)|https://shopping-...|      g|https://search.sh...|\n|      29|        13|               옛날국수 소면(900g)|https://shopping-...|      g|https://search.sh...|\n|      30|        14|             동서 아카시아꿀(600g)|https://shopping-...|      g|https://search.sh...|\n|      31|        15|         CJ 100% 국산 햇당면(400g)|https://shopping-...|      g|https://search.sh...|\n|      32|        15|            백설 자른 햇당면(300g)|https://shopping-...|      g|https://search.sh...|\n|      33|        15|               옛날 자른당면(300g)|https://shopping-...|      g|https://search.sh...|\n|      34|        15|                          옛날당면|https://shopping-...|      g|https://search.sh...|\n|      35|        16|            샘표 시골집 토장(900g)|https://shopping-...|      g|https://search.sh...|\n|      36|        16|        순창 재래식안심생된장(1kg)|https://shopping-...|      g|https://search.sh...|\n|      37|        16|           해찬들 재래식 된장(1kg)|https://shopping-...|      g|https://search.sh...|\n|      38|        17|           국산콩두부 부침용(380g)|https://shopping-...|      g|https://search.sh...|\n|      39|        17|           국산콩두부 찌개용(380g)|https://shopping-...|      g|https://search.sh...|\n|      40|        17|           행복한콩 찌개두부(300g)|https://shopping-...|      g|https://search.sh...|\n|      41|        18|              청정원 발사믹 드레싱|https://shopping-...|      g|https://search.sh...|\n|      42|        18|            청정원 오리엔탈 드레싱|https://shopping-...|      g|https://search.sh...|\n|      43|        19|  오뚜기 고소한 골드 마요네즈(5...|https://shopping-...|      g|https://search.sh...|\n|      44|        19|      청정원 고소한 마요네즈(500g)|https://shopping-...|      g|https://search.sh...|\n|      45|        20|     곰표 밀가루 중력다목적용(1kg)|https://shopping-...|      g|https://search.sh...|\n|      46|        20|              백설 중력밀가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      47|        20|                백설 찰밀가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      48|        21|     백설 5가지 재료 부침가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      49|        21|                 백설부침가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      50|        21|              오뚜기 부침가루(1kg)|https://shopping-...|      g|https://search.sh...|\n|      51|        22|           백설 자일로스 설탕(1kg)|https://shopping-...|      g|https://search.sh...|\n|      52|        22|                백설 하얀설탕(1kg)|https://shopping-...|      g|https://search.sh...|\n|      53|        22|                큐원 하얀설탕(1kg)|https://shopping-...|      g|https://search.sh...|\n|      54|        22|                   푸드림 하얀설탕|https://shopping-...|      g|https://search.sh...|\n|      55|        23|               백설 구운소금(500g)|https://shopping-...|      g|https://search.sh...|\n|      56|        23|                        백설꽃소금|https://shopping-...|      g|https://search.sh...|\n|      57|        23|          청정원 미원 맛소금(500g)|https://shopping-...|      g|https://search.sh...|\n|      58|        23|청정원 신안섬보배 천일염 가는소...|https://shopping-...|      g|https://search.sh...|\n|      59|        23|                  해표 꽃소금(1kg)|https://shopping-...|      g|https://search.sh...|\n|      60|        24|                맑고신선한옥수수유|https://shopping-...|     ml|https://search.sh...|\n|      61|        24|                 백설 식용유(1.5L)|https://shopping-...|     ml|https://search.sh...|\n|      62|        24|                    백설국내콩기름|https://shopping-...|     ml|https://search.sh...|\n|      63|        24|         오뚜기 콩기름 100%(900ml)|https://shopping-...|     ml|https://search.sh...|\n|      64|        24|    해표 맑고 신선한 식용유(900ml)|https://shopping-...|     ml|https://search.sh...|\n|      65|        25|                     대상 사과식초|https://shopping-...|     ml|https://search.sh...|\n|      66|        25|     백설 건강발효 사과식초(800ml)|https://shopping-...|     ml|https://search.sh...|\n|      67|        25|     백설 건강발효 현미식초(800ml)|https://shopping-...|     ml|https://search.sh...|\n|      68|        25|            오뚜기 사과식초(900ml)|https://shopping-...|     ml|https://search.sh...|\n|      69|        26|   청정원 순창 양념듬뿍 쌈장(500g)|https://shopping-...|      g|https://search.sh...|\n|      70|        26|          해찬들 사계절 쌈장(500g)|https://shopping-...|      g|https://search.sh...|\n|      71|        26|        해표 순창궁 양념쌈장(500g)|https://shopping-...|      g|https://search.sh...|\n|      72|        27|                      딸기잼(500g)|https://shopping-...|      g|https://search.sh...|\n|      73|        27|             복음자리 딸기잼(370g)|https://shopping-...|      g|https://search.sh...|\n|      74|        28|                   백설 진한참기름|https://shopping-...|     ml|https://search.sh...|\n|      75|        28|              오뚜기 참기름(320ml)|https://shopping-...|     ml|https://search.sh...|\n|      76|        28|               참진한 참기름(해표)|https://shopping-...|     ml|https://search.sh...|\n|      77|        29|           오뚜기카레 순한맛(100g)|https://shopping-...|      g|https://search.sh...|\n|      78|        29|   청정원 카레여왕 구운마늘&amp...|https://shopping-...|      g|https://search.sh...|\n|      79|        30|          오뚜기 토마토 케찹(500g)|https://shopping-...|      g|https://search.sh...|\n|      80|        30|     청정원 진한 토마토 케찹(500g)|https://shopping-...|      g|https://search.sh...|\n|      81|        31|          산들애 국내산 해물(250g)|https://shopping-...|      g|https://search.sh...|\n|      82|        31|    청정원 맛선생 국내산해물(250g)|https://shopping-...|      g|https://search.sh...|\n|      83|        32|            CJ 비비고 왕교자(910g)|https://shopping-...|      g|https://search.sh...|\n|      84|        32|                  고향만두(1.08kg)|https://shopping-...|      g|https://search.sh...|\n|      85|        32|             비비고 왕교자(1.05kg)|https://shopping-...|      g|https://search.sh...|\n|      86|        32|        생야채돼지고기물만두(800g)|https://shopping-...|      g|https://search.sh...|\n|      87|        33|                   삼양라면(5개입)|https://shopping-...|     개|https://search.sh...|\n|      88|        33|                     신라면(5개입)|https://shopping-...|     개|https://search.sh...|\n|      89|        33|              진라면 순한맛(5개입)|https://shopping-...|     개|https://search.sh...|\n|      90|        34|       삼립호떡 미니꿀호떡(16개입)|https://shopping-...|      g|https://search.sh...|\n|      91|        34|        샤니 속이알찬 단팥빵(255g)|https://shopping-...|      g|https://search.sh...|\n|      92|        34|          아침엔 우유 토스트(330g)|https://shopping-...|      g|https://search.sh...|\n|      93|        34|                 정통크림빵(3개입)|https://shopping-...|      g|https://search.sh...|\n|      94|        37|                  탕종숙식빵(420g)|https://shopping-...|      g|https://search.sh...|\n|      95|        35|                보노 콘스프(3개입)|https://shopping-...|      g|https://search.sh...|\n|      96|        35|      보노 포르치니버섯스프(3개입)|https://shopping-...|      g|https://search.sh...|\n|      97|        35|              오뚜기 크림스프(80g)|https://shopping-...|      g|https://search.sh...|\n|      98|        35|            청정원 우리쌀 크림스프|https://shopping-...|      g|https://search.sh...|\n|      99|        36|            스페셜K 오리지널(480g)|https://shopping-...|      g|https://search.sh...|\n+--------+----------+----------------------------------+--------------------+-------+--------------------+\nonly showing top 100 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=22",
+              "$$hashKey": "object:87237"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664179550759_1484325251",
+      "id": "paragraph_1664179550759_1484325251",
+      "dateCreated": "2022-09-26T08:05:50+0000",
+      "dateStarted": "2022-09-26T08:21:00+0000",
+      "dateFinished": "2022-09-26T08:21:00+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:86492"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T08:10:38+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664179838956_1044838575",
+      "id": "paragraph_1664179838956_1044838575",
+      "dateCreated": "2022-09-26T08:10:38+0000",
+      "status": "READY",
+      "$$hashKey": "object:86493"
+    }
+  ],
+  "name": "2_goods_id의_product_id_수정_(탕종숙식빵)",
+  "id": "2HEU11UKU",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Preprocessing/2_goods_id의_product_id_수정_(탕종숙식빵)"
+}

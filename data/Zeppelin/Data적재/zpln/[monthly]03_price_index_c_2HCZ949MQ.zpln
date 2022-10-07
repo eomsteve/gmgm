@@ -1,0 +1,318 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark.conf\n\nSPARK_HOME  /usr/local/spark\nPYSPARK_PYTHON /usr/bin/python3\nspark.pyspark.python  /usr/bin/python3\n\n# set driver memory to 8g\nspark.driver.memory 8g\n\n# set executor number to be 3\nspark.executor.instances  3\n\n# set executor memory 4g\nspark.executor.memory  2g\n\n# Any other spark properties can be set here. Here's avaliable spark configruation you can set. (http://spark.apache.org/docs/latest/configuration.html)",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T06:53:42+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664175210604_300471833",
+      "id": "paragraph_1664175210604_300471833",
+      "dateCreated": "2022-09-26T06:53:30+0000",
+      "dateStarted": "2022-09-26T06:53:42+0000",
+      "dateFinished": "2022-09-26T06:53:42+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:19706"
+    },
+    {
+      "text": "%pyspark\ncpi_sdf = spark.read.csv('/DB_data/소비자물가지수.csv', header=True, inferSchema=True)\ncpi_sdf = cpi_sdf.withColumn('index_type', lit('c'))\ncpi_sdf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T07:04:43+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------+------+----------+\n|research_date| value|index_type|\n+-------------+------+----------+\n|   2012-01-01|91.242|         c|\n|   2012-02-01|91.588|         c|\n|   2012-03-01|91.614|         c|\n|   2012-04-01|91.605|         c|\n|   2012-05-01|91.769|         c|\n|   2012-06-01|91.639|         c|\n|   2012-07-01|91.432|         c|\n|   2012-08-01|91.855|         c|\n|   2012-09-01|92.512|         c|\n|   2012-10-01|92.339|         c|\n|   2012-11-01|92.011|         c|\n|   2012-12-01|92.175|         c|\n|   2013-01-01|92.728|         c|\n|   2013-02-01|93.038|         c|\n|   2013-03-01|92.952|         c|\n|   2013-04-01|92.823|         c|\n|   2013-05-01|92.823|         c|\n|   2013-06-01| 92.71|         c|\n|   2013-07-01|92.909|         c|\n|   2013-08-01|93.238|         c|\n+-------------+------+----------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=237",
+              "$$hashKey": "object:19938"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=238",
+              "$$hashKey": "object:19939"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=239",
+              "$$hashKey": "object:19940"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664175222641_1566595158",
+      "id": "paragraph_1664175222641_1566595158",
+      "dateCreated": "2022-09-26T06:53:42+0000",
+      "dateStarted": "2022-09-26T07:04:43+0000",
+      "dateFinished": "2022-09-26T07:04:44+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:19707"
+    },
+    {
+      "text": "%pyspark\nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\nprop = {\"user\": \"ji\", \"password\": \"cvgkbhs234r#8tdx\", \"driver\": \"com.mysql.cj.jdbc.Driver\"} \n\ncpi_sdf.write.jdbc(\\\n    url= url,\\\n    table = \"price_index\",\\\n    mode=\"append\",\\\n    properties=prop)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T07:05:39+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=240",
+              "$$hashKey": "object:19996"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664175304305_1888477435",
+      "id": "paragraph_1664175304305_1888477435",
+      "dateCreated": "2022-09-26T06:55:04+0000",
+      "dateStarted": "2022-09-26T07:05:39+0000",
+      "dateFinished": "2022-09-26T07:05:39+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:19708"
+    },
+    {
+      "text": "%MySQL\nselect * from price_index where index_type='c'",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-05T05:47:12+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "price_index_id": "string",
+                      "user_id": "string",
+                      "research_date": "string",
+                      "value": "string",
+                      "index_type": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "price_index_id\tuser_id\tresearch_date\tvalue\tindex_type\n634\tnull\t2012-01-01\t91.242\tc\n635\tnull\t2012-02-01\t91.588\tc\n636\tnull\t2012-03-01\t91.614\tc\n637\tnull\t2012-04-01\t91.605\tc\n638\tnull\t2012-05-01\t91.769\tc\n639\tnull\t2012-06-01\t91.639\tc\n640\tnull\t2012-07-01\t91.432\tc\n641\tnull\t2012-08-01\t91.855\tc\n642\tnull\t2012-09-01\t92.512\tc\n643\tnull\t2012-10-01\t92.339\tc\n644\tnull\t2012-11-01\t92.011\tc\n645\tnull\t2012-12-01\t92.175\tc\n646\tnull\t2013-01-01\t92.728\tc\n647\tnull\t2013-02-01\t93.038\tc\n648\tnull\t2013-03-01\t92.952\tc\n649\tnull\t2013-04-01\t92.823\tc\n650\tnull\t2013-05-01\t92.823\tc\n651\tnull\t2013-06-01\t92.71\tc\n652\tnull\t2013-07-01\t92.909\tc\n653\tnull\t2013-08-01\t93.238\tc\n654\tnull\t2013-09-01\t93.419\tc\n655\tnull\t2013-10-01\t93.134\tc\n656\tnull\t2013-11-01\t93.116\tc\n657\tnull\t2013-12-01\t93.229\tc\n658\tnull\t2014-01-01\t93.73\tc\n659\tnull\t2014-02-01\t93.98\tc\n660\tnull\t2014-03-01\t94.153\tc\n661\tnull\t2014-04-01\t94.214\tc\n662\tnull\t2014-05-01\t94.369\tc\n663\tnull\t2014-06-01\t94.248\tc\n664\tnull\t2014-07-01\t94.386\tc\n665\tnull\t2014-08-01\t94.551\tc\n666\tnull\t2014-09-01\t94.49\tc\n667\tnull\t2014-10-01\t94.205\tc\n668\tnull\t2014-11-01\t94.015\tc\n669\tnull\t2014-12-01\t94.006\tc\n670\tnull\t2015-01-01\t94.643\tc\n671\tnull\t2015-02-01\t94.587\tc\n672\tnull\t2015-03-01\t94.596\tc\n673\tnull\t2015-04-01\t94.625\tc\n674\tnull\t2015-05-01\t94.89\tc\n675\tnull\t2015-06-01\t94.909\tc\n676\tnull\t2015-07-01\t95.08\tc\n677\tnull\t2015-08-01\t95.213\tc\n678\tnull\t2015-09-01\t94.966\tc\n679\tnull\t2015-10-01\t94.966\tc\n680\tnull\t2015-11-01\t94.786\tc\n681\tnull\t2015-12-01\t95.07\tc\n682\tnull\t2016-01-01\t95.232\tc\n683\tnull\t2016-02-01\t95.64\tc\n684\tnull\t2016-03-01\t95.393\tc\n685\tnull\t2016-04-01\t95.573\tc\n686\tnull\t2016-05-01\t95.63\tc\n687\tnull\t2016-06-01\t95.611\tc\n688\tnull\t2016-07-01\t95.431\tc\n689\tnull\t2016-08-01\t95.677\tc\n690\tnull\t2016-09-01\t96.247\tc\n691\tnull\t2016-10-01\t96.379\tc\n692\tnull\t2016-11-01\t96.237\tc\n693\tnull\t2016-12-01\t96.342\tc\n694\tnull\t2017-01-01\t97.366\tc\n695\tnull\t2017-02-01\t97.632\tc\n696\tnull\t2017-03-01\t97.565\tc\n697\tnull\t2017-04-01\t97.442\tc\n698\tnull\t2017-05-01\t97.546\tc\n699\tnull\t2017-06-01\t97.338\tc\n700\tnull\t2017-07-01\t97.499\tc\n701\tnull\t2017-08-01\t98.058\tc\n702\tnull\t2017-09-01\t98.172\tc\n703\tnull\t2017-10-01\t98.077\tc\n704\tnull\t2017-11-01\t97.347\tc\n705\tnull\t2017-12-01\t97.698\tc\n706\tnull\t2018-01-01\t98.106\tc\n707\tnull\t2018-02-01\t98.855\tc\n708\tnull\t2018-03-01\t98.751\tc\n709\tnull\t2018-04-01\t98.931\tc\n710\tnull\t2018-05-01\t98.979\tc\n711\tnull\t2018-06-01\t98.779\tc\n712\tnull\t2018-07-01\t98.59\tc\n713\tnull\t2018-08-01\t99.462\tc\n714\tnull\t2018-09-01\t100.221\tc\n715\tnull\t2018-10-01\t100.041\tc\n716\tnull\t2018-11-01\t99.33\tc\n717\tnull\t2018-12-01\t98.988\tc\n718\tnull\t2019-01-01\t98.884\tc\n719\tnull\t2019-02-01\t99.311\tc\n720\tnull\t2019-03-01\t99.121\tc\n721\tnull\t2019-04-01\t99.481\tc\n722\tnull\t2019-05-01\t99.652\tc\n723\tnull\t2019-06-01\t99.491\tc\n724\tnull\t2019-07-01\t99.187\tc\n725\tnull\t2019-08-01\t99.425\tc\n726\tnull\t2019-09-01\t99.794\tc\n727\tnull\t2019-10-01\t100.041\tc\n728\tnull\t2019-11-01\t99.481\tc\n729\tnull\t2019-12-01\t99.719\tc\n730\tnull\t2020-01-01\t100.09\tc\n731\tnull\t2020-02-01\t100.16\tc\n732\tnull\t2020-03-01\t99.94\tc\n733\tnull\t2020-04-01\t99.5\tc\n734\tnull\t2020-05-01\t99.44\tc\n735\tnull\t2020-06-01\t99.71\tc\n736\tnull\t2020-07-01\t99.63\tc\n737\tnull\t2020-08-01\t100.19\tc\n738\tnull\t2020-09-01\t100.74\tc\n739\tnull\t2020-10-01\t100.18\tc\n740\tnull\t2020-11-01\t100.09\tc\n741\tnull\t2020-12-01\t100.33\tc\n742\tnull\t2021-01-01\t101.04\tc\n743\tnull\t2021-02-01\t101.58\tc\n744\tnull\t2021-03-01\t101.84\tc\n745\tnull\t2021-04-01\t101.98\tc\n746\tnull\t2021-05-01\t102.05\tc\n747\tnull\t2021-06-01\t102.05\tc\n748\tnull\t2021-07-01\t102.26\tc\n749\tnull\t2021-08-01\t102.75\tc\n750\tnull\t2021-09-01\t103.17\tc\n751\tnull\t2021-10-01\t103.35\tc\n752\tnull\t2021-11-01\t103.87\tc\n753\tnull\t2021-12-01\t104.04\tc\n754\tnull\t2022-01-01\t104.69\tc\n755\tnull\t2022-02-01\t105.3\tc\n756\tnull\t2022-03-01\t106.06\tc\n757\tnull\t2022-04-01\t106.85\tc\n758\tnull\t2022-05-01\t107.56\tc\n759\tnull\t2022-06-01\t108.22\tc\n760\tnull\t2022-07-01\t108.74\tc\n761\tnull\t2022-08-01\t108.62\tc\n47616\tnull\t2022-09-01\t108.93\tc\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664175913928_767467356",
+      "id": "paragraph_1664175913928_767467356",
+      "dateCreated": "2022-09-26T07:05:13+0000",
+      "dateStarted": "2022-10-05T05:47:12+0000",
+      "dateFinished": "2022-10-05T05:47:12+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:19709"
+    },
+    {
+      "text": "%MySQL\n-- 9월달 cpi 알게되면 추가해주기 : 10월 5일에 추가함\ninsert into price_index (research_date, value, index_type) values ('2022-09-01', 108.93, 'c');",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-05T05:47:09+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : 1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664175942232_1467196631",
+      "id": "paragraph_1664175942232_1467196631",
+      "dateCreated": "2022-09-26T07:05:42+0000",
+      "dateStarted": "2022-10-05T05:47:09+0000",
+      "dateFinished": "2022-10-05T05:47:09+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:19710"
+    },
+    {
+      "text": "%MySQL\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-05T05:46:51+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664948811683_1694092983",
+      "id": "paragraph_1664948811683_1694092983",
+      "dateCreated": "2022-10-05T05:46:51+0000",
+      "status": "READY",
+      "$$hashKey": "object:19711"
+    }
+  ],
+  "name": "[monthly]03_price_index_c",
+  "id": "2HCZ949MQ",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Data적재/[monthly]03_price_index_c"
+}

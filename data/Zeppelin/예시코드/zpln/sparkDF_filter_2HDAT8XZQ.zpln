@@ -1,0 +1,181 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md ### (1) isin list",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T04:59:16+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>(1) isin list</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664341145184_780620344",
+      "id": "paragraph_1664341145184_780620344",
+      "dateCreated": "2022-09-28T04:59:05+0000",
+      "dateStarted": "2022-09-28T04:59:16+0000",
+      "dateFinished": "2022-09-28T04:59:16+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:133573"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col\nmart_goods_price_sdf.filter(col('goods_id').isin(m_goods_lst)).show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-28T04:59:42+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+----------+-------+-------------+--------+\n|goods_id|unit_price|  price|research_date|business|\n+--------+----------+-------+-------------+--------+\n|      26|     754.0| 7540.0|   2022-09-26|       m|\n|      30|    2867.0|25803.0|   2022-09-26|       m|\n|      35|     909.0| 8181.0|   2022-09-26|       m|\n|      63|     450.0| 4050.0|   2022-09-26|       m|\n|      76|     361.0|11552.0|   2022-09-26|       m|\n|      90|      87.0| 3480.0|   2022-09-26|       m|\n|      91|     129.0| 3290.0|   2022-09-26|       m|\n|      94|     590.0| 2478.0|   2022-09-26|       m|\n|     131|    1692.0| 4230.0|   2022-09-26|       m|\n|     147|    3580.0|17900.0|   2022-09-26|       m|\n|     156|    1155.5|10400.0|   2022-09-26|       m|\n|     165|    1669.0| 6676.0|   2022-09-26|       m|\n|     184|     540.0|10800.0|   2022-09-26|       m|\n|     188|    1967.0| 5901.0|   2022-09-26|       m|\n|     192|     298.0|11920.0|   2022-09-26|       m|\n|     195|     273.0|10920.0|   2022-09-26|       m|\n|     200|    1238.0| 9904.0|   2022-09-26|       m|\n|     201|    1483.0| 8898.0|   2022-09-26|       m|\n|     218|     610.0| 5978.0|   2022-09-26|       m|\n|     240|     692.0| 2180.0|   2022-09-26|       m|\n+--------+----------+-------+-------------+--------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1369",
+              "$$hashKey": "object:133748"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664341136466_1288453168",
+      "id": "paragraph_1664341136466_1288453168",
+      "dateCreated": "2022-09-28T04:58:56+0000",
+      "dateStarted": "2022-09-28T04:59:26+0000",
+      "dateFinished": "2022-09-28T04:59:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:133574"
+    },
+    {
+      "text": "%md\n### (2) isNotNull()",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-02T16:47:45+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664729251486_1503511549",
+      "id": "paragraph_1664729251486_1503511549",
+      "dateCreated": "2022-10-02T16:47:31+0000",
+      "status": "READY",
+      "$$hashKey": "object:133575"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col\nmart_goods_price_sdf.filter(col('goods_id').isNotNull()).show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-02T16:47:50+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664341166299_1590468479",
+      "id": "paragraph_1664341166299_1590468479",
+      "dateCreated": "2022-09-28T04:59:26+0000",
+      "status": "READY",
+      "$$hashKey": "object:133576"
+    }
+  ],
+  "name": "sparkDF_filter",
+  "id": "2HDAT8XZQ",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/예시코드/sparkDF_filter"
+}

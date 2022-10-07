@@ -1,0 +1,260 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n# 1. 농산물 데이터, 저녁에 새로 받아오면, \n+ **DBo_APIx , DBo_APIo, DBx_APIo 가져와서, 수정하기**\n+ DB의 goods_price table 갱신하기\n+ DB의 product_price table 갱신하기 \n+ DB의 favorite_total_price table 갱신하기\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T13:17:42+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>1. 농산물 데이터, 저녁에 새로 받아오면,</h1>\n<ul>\n<li><strong>DBo_APIx , DBo_APIo, DBx_APIo 가져와서, 수정하기</strong></li>\n<li>DB의 goods_price table 갱신하기</li>\n<li>DB의 product_price table 갱신하기</li>\n<li>DB의 favorite_total_price table 갱신하기</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664863690579_1571202679",
+      "id": "paragraph_1664253390158_1474014374",
+      "dateCreated": "2022-10-04T06:08:10+0000",
+      "dateStarted": "2022-10-04T13:17:42+0000",
+      "dateFinished": "2022-10-04T13:17:42+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:65709"
+    },
+    {
+      "text": "%spark.conf\n\nSPARK_HOME  /usr/local/spark\nPYSPARK_PYTHON /usr/bin/python3\nspark.pyspark.python  /usr/bin/python3\n\n# set driver memory to 8g\nspark.driver.memory 8g\n\n# set executor number to be 3\nspark.executor.instances  3\n\n# set executor memory 4g\nspark.executor.memory  2g\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T06:08:10+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664863690579_1411963671",
+      "id": "paragraph_1664253372491_282134331",
+      "dateCreated": "2022-10-04T06:08:10+0000",
+      "status": "READY",
+      "$$hashKey": "object:65710"
+    },
+    {
+      "text": "%md\n## [1] DBo_APIx , DBo_APIo, DBx_APIo 가져와서, 수정하기\n+ DBo_APIx\n+ DBo_APIo\n+ DBx_APIo : 보류",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T13:17:45+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>[1] DBo_APIx , DBo_APIo, DBx_APIo 가져와서, 수정하기</h2>\n<ul>\n<li>DBo_APIx</li>\n<li>DBo_APIo</li>\n<li>DBx_APIo : 보류</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664863690579_1969851993",
+      "id": "paragraph_1664255742584_160044425",
+      "dateCreated": "2022-10-04T06:08:10+0000",
+      "dateStarted": "2022-10-04T13:17:45+0000",
+      "dateFinished": "2022-10-04T13:17:45+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:65711"
+    },
+    {
+      "text": "%pyspark\n\n# 2HDHVH62E\n# paragraph_1664863840860_1055396381\n# http://3.36.106.26:8081/api/notebook/run/2HDHVH62E/paragraph_1664863840860_1055396381\n\nimport pandas as pd\nimport datetime\n\n# 1. 날짜 선정\ntoday = ( datetime.datetime.now()  + datetime.timedelta(hours=9) ).strftime(\"%Y-%m-%d\")\n\n\n# 2. 함수 선언\ndef str_to_lst(str_lst):\n    \n    if str_lst == '[]':\n        str_lst = []\n\n    else:\n        str_lst = str_lst[1:-1]\n        str_lst = str_lst.split(',')\n        str_lst = list(map(int,str_lst))\n    return str_lst\n\n    \n# 2. 목록 가져오기\nDBo_APIo = pd.read_csv(f'/api_data/integrity/{today}_DBo_APIo.csv')\nDBo_APIx = pd.read_csv(f'/api_data/integrity/{today}_DBo_APIx.csv')\n\n\n# 3. goods_id list 가져오기\n## 3-1 : DBo_APIo 에서는 goods_id를 추가하기\nm_DBo_APIo_index = DBo_APIo[DBo_APIo['business']=='m'].index[0]\nm_DBo_APIo_goods_id_lst = DBo_APIo.loc[m_DBo_APIo_index,'goods_id_lst']\nm_DBo_APIo_goods_id_lst = str_to_lst(m_DBo_APIo_goods_id_lst)   # list화 시키기\n\n\n## 3-2 : DBo_APIx 에서는 goods_id를 제거하기\nm_DBo_APIx_index = DBo_APIx[DBo_APIx['business']=='m'].index[0]\nm_DBo_APIx_goods_id_lst = DBo_APIx.loc[m_DBo_APIx_index,'goods_id_lst']\nm_DBo_APIx_goods_id_lst = str_to_lst(m_DBo_APIx_goods_id_lst)   # list화 시키기\n\n# print(m_DBo_APIo_goods_id_lst,type(m_DBo_APIo_goods_id_lst))\n# print(m_DBo_APIx_goods_id_lst,type(m_DBo_APIx_goods_id_lst))\n\n\n# 4. 새로 가져온 Data 가져오기\n## 4-1 : csv 로드\nnong_goods_price_m_pdf = pd.read_csv(f'/api_data/nong_goods_price_m_{today}.csv')\n\n## 4-2 not null인 것 goods_id 가져오기\nnong_mart_goods_id_lst = list(nong_goods_price_m_pdf[nong_goods_price_m_pdf['price'].notnull()]['goods_id'])\nprint(nong_mart_goods_id_lst)\n\n\n# 5. goods_id list 수정하기\nfor nong_goods_id in nong_mart_goods_id_lst:\n    m_DBo_APIo_goods_id_lst.append(nong_goods_id)\n    m_DBo_APIx_goods_id_lst.remove(nong_goods_id)\n\n\n\n# 6. DBo_APIo , DBo_APIx 저장하기\n## 6-1 : 값 교체\nDBo_APIo.loc[m_DBo_APIo_index,'goods_id_lst']= m_DBo_APIo_goods_id_lst\nDBo_APIx.loc[m_DBo_APIx_index,'goods_id_lst']= m_DBo_APIx_goods_id_lst\n\n## 6-2 : 교체한 값 저장 \nDBo_APIo.to_csv(f'/api_data/integrity/{today}_DBo_APIo.csv', header=True, index=False)\nDBo_APIx.to_csv(f'/api_data/integrity/{today}_DBo_APIx.csv', header=True, index=False)\n\n\n\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-05T08:45:15+0000",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[20018, 20019, 20020, 20021, 20017, 20016, 20022, 20037, 20036, 20033, 20039, 20041, 20048, 20043, 20026, 20040, 20046, 20032, 20038, 20044, 20034, 20023, 20025, 20047, 20045, 20028, 20024, 20030, 20054, 20050, 20051, 20049, 20055, 20052, 20056, 20053, 20008, 20015, 20012, 20005, 20006, 20031, 20029]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664863840860_1055396381",
+      "id": "paragraph_1664863840860_1055396381",
+      "dateCreated": "2022-10-04T06:10:40+0000",
+      "dateStarted": "2022-10-05T08:45:15+0000",
+      "dateFinished": "2022-10-05T08:45:16+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:65712"
+    },
+    {
+      "text": "",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T13:25:07+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>[3]  DB의 product_price table의 해당 일자 농산물 mart data 지우고, 농산물만 groupBy 해서 넣기</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664863690580_1938743247",
+      "id": "paragraph_1664340406758_1140824920",
+      "dateCreated": "2022-10-04T06:08:10+0000",
+      "dateStarted": "2022-10-04T13:13:22+0000",
+      "dateFinished": "2022-10-04T13:13:22+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:65713"
+    },
+    {
+      "text": "%md\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T13:13:22+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664889202551_159820728",
+      "id": "paragraph_1664889202551_159820728",
+      "dateCreated": "2022-10-04T13:13:22+0000",
+      "status": "READY",
+      "$$hashKey": "object:65714"
+    }
+  ],
+  "name": "[daily_nong]01_DBo_APIx_DBo_APIo_DBx_APIo수정",
+  "id": "2HDHVH62E",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Data적재/[daily_nong]01_DBo_APIx_DBo_APIo_DBx_APIo수정"
+}

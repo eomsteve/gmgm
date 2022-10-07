@@ -1,0 +1,287 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n# 1. 농산물 데이터, 저녁에 새로 받아오면, \n+ ~~DBo_APIx , DBo_APIo, DBx_APIo 가져와서, 수정하기~~\n+ **DB의 goods_price table 갱신하기**\n+ DB의 product_price table 갱신하기 \n+ DB의 favorite_total_price table 갱신하기",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T13:17:56+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>1. 농산물 데이터, 저녁에 새로 받아오면,</h1>\n<ul>\n<li><del>DBo_APIx , DBo_APIo, DBx_APIo 가져와서, 수정하기</del></li>\n<li><strong>DB의 goods_price table 갱신하기</strong></li>\n<li>DB의 product_price table 갱신하기</li>\n<li>DB의 favorite_total_price table 갱신하기</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664889324257_2093073869",
+      "id": "paragraph_1664889324257_2093073869",
+      "dateCreated": "2022-10-04T13:15:24+0000",
+      "dateStarted": "2022-10-04T13:17:56+0000",
+      "dateFinished": "2022-10-04T13:17:56+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:67107"
+    },
+    {
+      "text": "%md\n## [2] DB의 goods_price table 갱신하기 ",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T13:18:03+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>[2] DB의 goods_price table 갱신하기</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664889475982_783739272",
+      "id": "paragraph_1664889475982_783739272",
+      "dateCreated": "2022-10-04T13:17:55+0000",
+      "dateStarted": "2022-10-04T13:18:03+0000",
+      "dateFinished": "2022-10-04T13:18:03+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:67108"
+    },
+    {
+      "text": "%pyspark\n\n# 2HGTXCVUK\n# paragraph_1664889296623_1087566984\n# http://3.36.106.26:8081/api/notebook/run/2HGTXCVUK/paragraph_1664889296623_1087566984\n\n\n# 1. 날짜 선정\ntoday = ( datetime.datetime.now()  + datetime.timedelta(hours=9) ).strftime(\"%Y-%m-%d\")\n\n\n# 2. 새로 가져온 Data 가져오기\n## 2-1 : csv 로드\nnong_goods_price_m_pdf = pd.read_csv(f'/api_data/nong_goods_price_m_{today}.csv')\n\n## 2-2 not null인 것 goods_id 가져오기\nnong_mart_goods_id_lst = list(nong_goods_price_m_pdf[nong_goods_price_m_pdf['price'].notnull()]['goods_id'])\nprint(nong_mart_goods_id_lst)\n\n\n## 3. DB에 갱신할 것 있으면 DB에서 갱신하기\nif len(nong_mart_goods_id_lst) != 0:\n    \n    ## 1. (1,)과 같은 형태 방지하기 위해서 길이가 1인경우 99999999999 더미데이터 추가\n    nong_mart_goods_id_tuple = tuple(nong_mart_goods_id_lst) if len(nong_mart_goods_id_lst) >=2 else tuple(nong_mart_goods_id_lst+[999999999999])\n    print(str(nong_mart_goods_id_tuple))\n    \n    ## 2. 해당하는 값들 DB에서 가져와서, 삭제하기\n    import requests\n    url = \"http://3.36.106.26:8081/api/notebook/run/2HGTXCVUK/paragraph_1664889490553_1789455825\"\n    \n    req = requests.post(url, json={\"params\": {\"goods_id_lst\": str(nong_mart_goods_id_tuple) , \"research_date\": today } } )\n    import time\n    time.sleep(1)\n    \n    \n    # 3. goods_price DB에 새로 적재할 sdf 가져오기 : null 아닌 값이 1개이상 존재하는 상황\n    nong_goods_price_m_sdf = spark.createDataFrame(nong_goods_price_m_pdf[nong_goods_price_m_pdf['price'].notnull()])\n    \n    \n    # 4. goods_price DB에 새로 적재해주기\n    prop = {\"user\": \"ji\", \"password\": mysql_password, \"driver\": \"com.mysql.cj.jdbc.Driver\"} \n    url = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\n\n    nong_goods_price_m_sdf.write.jdbc(url= url, table = \"goods_price\", mode=\"append\", properties=prop)\n    ",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T08:34:15+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[20018, 20019, 20020, 20021, 20017, 20016, 20022, 20037, 20036, 20033, 20039, 20041, 20048, 20043, 20026, 20040, 20046, 20032, 20038, 20044, 20034, 20023, 20025, 20047, 20045, 20028, 20024, 20030, 20054, 20050, 20051, 20049, 20055, 20052, 20056, 20053, 20008, 20015, 20012, 20005, 20006, 20031, 20029]\n(20018, 20019, 20020, 20021, 20017, 20016, 20022, 20037, 20036, 20033, 20039, 20041, 20048, 20043, 20026, 20040, 20046, 20032, 20038, 20044, 20034, 20023, 20025, 20047, 20045, 20028, 20024, 20030, 20054, 20050, 20051, 20049, 20055, 20052, 20056, 20053, 20008, 20015, 20012, 20005, 20006, 20031, 20029)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=8974",
+              "$$hashKey": "object:67382"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664889296623_1087566984",
+      "id": "paragraph_1664889296623_1087566984",
+      "dateCreated": "2022-10-04T13:14:56+0000",
+      "dateStarted": "2022-10-05T08:45:16+0000",
+      "dateFinished": "2022-10-05T08:45:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:67109"
+    },
+    {
+      "text": "%MySQL\ndelete from goods_price\nwhere goods_id in ${goods_id_lst} and research_date ='${research_date}'",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-05T08:45:16+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "goods_price_id": "string",
+                      "goods_id": "string",
+                      "unit_price": "string",
+                      "price": "string",
+                      "research_date": "string",
+                      "business": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {
+          "goods_id_lst": "(20018, 20019, 20020, 20021, 20017, 20016, 20022, 20037, 20036, 20033, 20039, 20041, 20048, 20043, 20026, 20040, 20046, 20032, 20038, 20044, 20034, 20023, 20025, 20047, 20045, 20028, 20024, 20030, 20054, 20050, 20051, 20049, 20055, 20052, 20056, 20053, 20008, 20015, 20012, 20005, 20006, 20031, 20029)",
+          "research_date": "2022-10-05"
+        },
+        "forms": {
+          "goods_id_lst": {
+            "type": "TextBox",
+            "name": "goods_id_lst",
+            "displayName": "goods_id_lst",
+            "hidden": false,
+            "$$hashKey": "object:67200"
+          },
+          "research_date": {
+            "type": "TextBox",
+            "name": "research_date",
+            "displayName": "research_date",
+            "hidden": false,
+            "$$hashKey": "object:67201"
+          }
+        }
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Query executed successfully. Affected rows : 86\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664889490553_1789455825",
+      "id": "paragraph_1664889490553_1789455825",
+      "dateCreated": "2022-10-04T13:18:10+0000",
+      "dateStarted": "2022-10-05T08:45:16+0000",
+      "dateFinished": "2022-10-05T08:45:17+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:67110"
+    },
+    {
+      "text": "%MySQL\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-04T13:19:39+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664889579484_1213402996",
+      "id": "paragraph_1664889579484_1213402996",
+      "dateCreated": "2022-10-04T13:19:39+0000",
+      "status": "READY",
+      "$$hashKey": "object:67111"
+    }
+  ],
+  "name": "[daily_nong]02_goods_price_table_수정",
+  "id": "2HGTXCVUK",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Data적재/[daily_nong]02_goods_price_table_수정"
+}

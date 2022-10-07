@@ -1,0 +1,323 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark.conf\n\nSPARK_HOME  /usr/local/spark\nPYSPARK_PYTHON /usr/bin/python3\nspark.pyspark.python  /usr/bin/python3\n\n# set driver memory to 8g\nspark.driver.memory 8g\n\n# set executor number to be 3\nspark.executor.instances  3\n\n# set executor memory 4g\nspark.executor.memory  2g\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T04:26:14+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664176012282_1939326401",
+      "id": "paragraph_1664176012282_1939326401",
+      "dateCreated": "2022-09-26T07:06:52+0000",
+      "dateStarted": "2022-09-27T04:26:14+0000",
+      "dateFinished": "2022-09-27T04:26:14+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:89076"
+    },
+    {
+      "text": "%md\n# 1. [daily] product_daily_price_table 생성하고, price(품목전체평균가격) 넣기\n+ goods_price -> product_price\n+ input columns\n    + goods_id, unit_price, price, research-date, business \n+ 결과 columns\n    + product_id, unit_price, price, research_date, date_type, business ",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T07:45:37+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>1. [daily] product_daily_price_table 생성하고, price(품목전체평균가격) 넣기</h1>\n<ul>\n<li>goods_price -&gt; product_price</li>\n<li>input columns\n<ul>\n<li>goods_id, unit_price, price, research-date, business</li>\n</ul>\n</li>\n<li>결과 columns\n<ul>\n<li>product_id, unit_price, price, research_date, date_type, business</li>\n</ul>\n</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664176269748_224941084",
+      "id": "paragraph_1664176269748_224941084",
+      "dateCreated": "2022-09-26T07:11:09+0000",
+      "dateStarted": "2022-09-26T07:45:37+0000",
+      "dateFinished": "2022-09-26T07:45:37+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:89077"
+    },
+    {
+      "text": "%pyspark\n# product_price table 만들기\n# 10월 2일 수정\n\n# 1. goods_daily_price_pdf load\nimport pandas as pd\n\ngoods_daily_price_pdf = pd.read_csv('/DB_data/20221002_goods_price_table.csv')\ngoods_daily_price_pdf\n\n# 2. product_id, date_type column 넣기\n## 2-1.  { goods_id : product_id } 를 이용해서 product_id 넣기\nimport pickle\nwith open('/DB_data/20221001_goodsId_productId_.pickle', 'rb') as fr:\n    goodsId_productId = pickle.load(fr)\n    \n## 가독성 위해, comprehension 안 쓰고, for문으로 column 데이터 생성\nproduct_id_lst = []\nfor i in range(len(goods_daily_price_pdf)):\n    goods_id = goods_daily_price_pdf.loc[i,'goods_id']\n    product_id = goodsId_productId[goods_id]\n    product_id_lst.append(product_id)\n    \n    \n## 2-2. column 삽입\ngoods_daily_price_pdf.insert(0, 'product_id', product_id_lst)\ngoods_daily_price_pdf.insert(1, 'date_type', 'd')\ngoods_daily_price_pdf\n\n\n# 3. product_price 계산하기\n## 3-1 groupby로 값들 생성\nproduct_daily_price_pdf = goods_daily_price_pdf.groupby(['product_id','research_date','business','date_type']).mean(['price','unit_price'])\n\n## 3-2 groupby 풀고,  column 순서 맞추기\nproduct_daily_price_pdf = product_daily_price_pdf.drop(['goods_id'], axis=1)\nproduct_daily_price_pdf = product_daily_price_pdf.reset_index()\nproduct_daily_price_pdf = product_daily_price_pdf[['product_id','unit_price','price','research_date','date_type','business']]\n\n\n# 4. Ubuntu에 저장\n# product_daily_price_pdf.to_csv('/DB_data/product_daily_price_table.csv', index=False, header=True)\nproduct_daily_price_pdf\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-02T09:44:40+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "        product_id  unit_price    price research_date date_type business\n0                0      175.00   1658.0    2021-09-07         d        m\n1                0      178.24   1790.0    2021-09-07         d        o\n2                0      175.00   1658.0    2021-09-08         d        m\n3                0      178.24   1790.0    2021-09-08         d        o\n4                0      175.00   1658.0    2021-09-09         d        m\n...            ...         ...      ...           ...       ...      ...\n126920        1051     2000.00   2000.0    2022-09-29         d        m\n126921        1051    12100.00  12100.0    2022-09-29         d        o\n126922        1051    12100.00  12100.0    2022-09-30         d        o\n126923        1051    12100.00  12100.0    2022-10-01         d        o\n126924        1051    12100.00  12100.0    2022-10-02         d        o\n\n[126925 rows x 6 columns]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664176021411_1605621054",
+      "id": "paragraph_1664176021411_1605621054",
+      "dateCreated": "2022-09-26T07:07:01+0000",
+      "dateStarted": "2022-10-02T09:44:40+0000",
+      "dateFinished": "2022-10-02T09:44:44+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:89078"
+    },
+    {
+      "text": "%md\n# 2.  [month] product_month_price_table 수정\n+ price column -> unit_price 로 column 명 바꾸기\n+ price(품목전체평균가격) column 넣기\n+ 결과 column\n    + product_id, unit_price, price, research_date, date_type, business \n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-26T07:45:43+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>2.  [month] product_month_price_table 수정</h1>\n<ul>\n<li>price column -&gt; unit_price 로 column 명 바꾸기</li>\n<li>price(품목전체평균가격) column 넣기</li>\n<li>결과 column\n<ul>\n<li>product_id, unit_price, price, research_date, date_type, business</li>\n</ul>\n</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664176849189_418933072",
+      "id": "paragraph_1664176849189_418933072",
+      "dateCreated": "2022-09-26T07:20:49+0000",
+      "dateStarted": "2022-09-26T07:45:43+0000",
+      "dateFinished": "2022-09-26T07:45:43+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:89079"
+    },
+    {
+      "text": "%pyspark\nimport pandas as pd\nimport numpy as np\nproduct_month_price_pdf = pd.read_csv('/DB_data/product_month_price_table.csv')\nproduct_month_price_pdf\nproduct_month_price_sdf = spark.read.csv('/DB_data/product_month_price_table.csv', inferSchema=True, header=True)\nproduct_month_price_sdf.show()\n# product_month_price_pdf.rename(columns={'price':'unit_price'}, inplace=True)\n# product_month_price_pdf.insert(2, 'price',np.nan)\n# product_month_price_pdf.rename(columns={'business_type':'business'}, inplace=True)\n# product_month_price_pdf = product_month_price_pdf[['product_id','unit_price','price','research_date','date_type','business']] \n# product_month_price_pdf.to_csv('/DB_data/product_month_price_table.csv',header=True, index=False)",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T04:28:20+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------+-----------+-----------+-----+-------------+---------+--------+\n|product_id|unit_price1|unit_price2|price|research_date|date_type|business|\n+----------+-----------+-----------+-----+-------------+---------+--------+\n|         0|      183.4|       null| null|   2012-01-01|        m|    null|\n|         0|      183.6|       null| null|   2012-02-01|        m|    null|\n|         0|      183.6|       null| null|   2012-03-01|        m|    null|\n|         0|      183.6|       null| null|   2012-04-01|        m|    null|\n|         0|      183.4|       null| null|   2012-05-01|        m|    null|\n|         0|      183.8|       null| null|   2012-06-01|        m|    null|\n|         0|      182.8|       null| null|   2012-07-01|        m|    null|\n|         0|      184.0|       null| null|   2012-08-01|        m|    null|\n|         0|      186.8|       null| null|   2012-09-01|        m|    null|\n|         0|      187.2|       null| null|   2012-10-01|        m|    null|\n|         0|      186.6|       null| null|   2012-11-01|        m|    null|\n|         0|      186.2|       null| null|   2012-12-01|        m|    null|\n|         0|      185.8|       null| null|   2013-01-01|        m|    null|\n|         0|      185.2|       null| null|   2013-02-01|        m|    null|\n|         0|      183.8|       null| null|   2013-03-01|        m|    null|\n|         0|      187.4|       null| null|   2013-04-01|        m|    null|\n|         0|      185.6|       null| null|   2013-05-01|        m|    null|\n|         0|      190.4|       null| null|   2013-06-01|        m|    null|\n|         0|      187.6|       null| null|   2013-07-01|        m|    null|\n|         0|      186.4|       null| null|   2013-08-01|        m|    null|\n+----------+-----------+-----------+-----+-------------+---------+--------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=0",
+              "$$hashKey": "object:89481"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=1",
+              "$$hashKey": "object:89482"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=2",
+              "$$hashKey": "object:89483"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664252791534_1587879331",
+      "id": "paragraph_1664252791534_1587879331",
+      "dateCreated": "2022-09-27T04:26:31+0000",
+      "dateStarted": "2022-09-27T04:28:20+0000",
+      "dateFinished": "2022-09-27T04:28:25+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:89080"
+    },
+    {
+      "text": "%pyspark\nimport pandas as pd\nimport numpy as np\nproduct_month_price_pdf = pd.read_csv('/DB_data/product_month_price_table.csv')\nproduct_month_price_pdf\n# product_month_price_pdf.rename(columns={'unit_price1':'unit_price'}, inplace=True)\n# product_month_price_pdf.drop('unit_price.1', axis=1, inplace=True)\n# product_month_price_pdf\n# product_month_price_pdf.insert(2, 'price',np.nan)\n# product_month_price_pdf.rename(columns={'business_type':'business'}, inplace=True)\n# product_month_price_pdf = product_month_price_pdf[['product_id','unit_price','price','research_date','date_type','business']] \n# product_month_price_pdf.to_csv('/DB_data/product_month_price_table.csv',header=True, index=False)",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T04:31:21+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "       product_id  unit_price  price research_date date_type  business\n0               0       183.4    NaN    2012-01-01         m       NaN\n1               0       183.6    NaN    2012-02-01         m       NaN\n2               0       183.6    NaN    2012-03-01         m       NaN\n3               0       183.6    NaN    2012-04-01         m       NaN\n4               0       183.4    NaN    2012-05-01         m       NaN\n...           ...         ...    ...           ...       ...       ...\n21709        1054      3079.0    NaN    2022-08-01         m       NaN\n21710        1054      3079.0    NaN    2022-09-01         m       NaN\n21711        1054      3079.0    NaN    2022-10-01         m       NaN\n21712        1054      3079.0    NaN    2022-11-01         m       NaN\n21713        1054      3079.0    NaN    2022-12-01         m       NaN\n\n[21714 rows x 6 columns]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664252936330_469840245",
+      "id": "paragraph_1664252936330_469840245",
+      "dateCreated": "2022-09-27T04:28:56+0000",
+      "dateStarted": "2022-09-27T04:31:21+0000",
+      "dateFinished": "2022-09-27T04:31:21+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:89081"
+    },
+    {
+      "text": "%MySQL\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T05:13:18+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664255598378_626262296",
+      "id": "paragraph_1664255598378_626262296",
+      "dateCreated": "2022-09-27T05:13:18+0000",
+      "status": "READY",
+      "$$hashKey": "object:89082"
+    }
+  ],
+  "name": "3_product_price_table_수정",
+  "id": "2HDAMKJMC",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Preprocessing/3_product_price_table_수정"
+}

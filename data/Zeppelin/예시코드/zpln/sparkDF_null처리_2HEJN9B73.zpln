@@ -1,0 +1,376 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark.conf\n\nSPARK_HOME  /usr/local/spark\nPYSPARK_PYTHON /usr/bin/python3\nspark.pyspark.python  /usr/bin/python3\n\n# set driver memory to 8g\nspark.driver.memory 8g\n\n# set executor number to be 3\nspark.executor.instances  3\n\n# set executor memory 4g\nspark.executor.memory  2g",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T15:59:00+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664294331950_1077771002",
+      "id": "paragraph_1664294331950_1077771002",
+      "dateCreated": "2022-09-27T15:58:51+0000",
+      "dateStarted": "2022-09-27T15:59:00+0000",
+      "dateFinished": "2022-09-27T15:59:00+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:136120"
+    },
+    {
+      "text": "%md\n## [1] null 찾기 함수 차이\n### (1) isnan()\n+ nan(not a number)만 찾음\n+ 값 안들어간 csv를 Pandas로 읽은 후, sparkDF로 변형하면, isnan()으로 처리해줘야 함\n\n### (2) .isNull()\n+ null 만 찾음",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T07:10:27+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>[1] null 찾기 함수 차이</h2>\n<h3>(1) isnan()</h3>\n<ul>\n<li>nan(not a number)만 찾음</li>\n<li>값 안들어간 csv를 Pandas로 읽은 후, sparkDF로 변형하면, isnan()으로 처리해줘야 함</li>\n</ul>\n<h3>(2) .isNull()</h3>\n<ul>\n<li>null 만 찾음</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664294349327_1913053845",
+      "id": "paragraph_1664294349327_1913053845",
+      "dateCreated": "2022-09-27T15:59:09+0000",
+      "dateStarted": "2022-09-30T07:10:27+0000",
+      "dateFinished": "2022-09-30T07:10:27+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:136121"
+    },
+    {
+      "text": "%pyspark\nfrom pyspark.sql.functions import col, isnan\nsdf.filter(isnan(col('Age'))).show()\nsdf.filter(~isnan(col('Age'))).show()\n\nsdf.filter(col('Age').isNull()).show()\nsdf.filter(col('Age').isNotNull()).show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-27T16:01:38+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664294340922_506913068",
+      "id": "paragraph_1664294340922_506913068",
+      "dateCreated": "2022-09-27T15:59:00+0000",
+      "status": "READY",
+      "$$hashKey": "object:136122"
+    },
+    {
+      "text": "%md\n## [2] fillna : null 채우기\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T07:10:36+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>[2] fillna : null 채우기</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664330979990_1472219583",
+      "id": "paragraph_1664330979990_1472219583",
+      "dateCreated": "2022-09-28T02:09:39+0000",
+      "dateStarted": "2022-09-30T07:10:36+0000",
+      "dateFinished": "2022-09-30T07:10:36+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:136123"
+    },
+    {
+      "text": "%pyspark\n# img column의 null을 '-'로 바꾸기\nsdf.fillna({'img':'-'})",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T07:13:46+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664330991477_253021459",
+      "id": "paragraph_1664330991477_253021459",
+      "dateCreated": "2022-09-28T02:09:51+0000",
+      "dateStarted": "2022-09-30T07:13:46+0000",
+      "dateFinished": "2022-09-30T07:13:58+0000",
+      "status": "ABORT",
+      "$$hashKey": "object:136124"
+    },
+    {
+      "text": "%pyspark\n# 평균으로 결측치 채우기\nfrom pyspark.ml.feature import Imputer\n\nimputer = Imputer(\n    inputCols=['Age','Experience', 'Salary'],\n    outputCols=['{}_imputed'.format(c) for c in ['Age','Experience', 'Salary']]\n).setStrategy(\"mean\")  # mean, median, mode\n\nimputer.fit(sdf).transform(sdf).show() ",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T07:13:11+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664521964851_1253184254",
+      "id": "paragraph_1664521964851_1253184254",
+      "dateCreated": "2022-09-30T07:12:44+0000",
+      "status": "READY",
+      "$$hashKey": "object:136125"
+    },
+    {
+      "text": "%md\n## [3] drop : null있는 행 버리기",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T07:10:44+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>[3] drop : null있는 행 버리기</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664520815110_251074731",
+      "id": "paragraph_1664520815110_251074731",
+      "dateCreated": "2022-09-30T06:53:35+0000",
+      "dateStarted": "2022-09-30T07:10:44+0000",
+      "dateFinished": "2022-09-30T07:10:44+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:136126"
+    },
+    {
+      "text": "%pyspark\n# 전체가 null 인 record 삭제\nsdf.dropna(how='all').show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T07:10:57+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664520812357_157854116",
+      "id": "paragraph_1664520812357_157854116",
+      "dateCreated": "2022-09-30T06:53:32+0000",
+      "status": "READY",
+      "$$hashKey": "object:136127"
+    },
+    {
+      "text": "%pyspark\n# row의 non-null 값 개수가 thresh 미만이면 삭제\nsdf.dropna(how='any',thresh=3).show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T07:11:21+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664521870450_1489485887",
+      "id": "paragraph_1664521870450_1489485887",
+      "dateCreated": "2022-09-30T07:11:10+0000",
+      "status": "READY",
+      "$$hashKey": "object:136128"
+    },
+    {
+      "text": "%pyspark\n# subset에 해당하는 column에서만 결측치 처리\nsdf.dropna(how='any', subset=['Experience']).show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-09-30T07:12:11+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664521927148_375275830",
+      "id": "paragraph_1664521927148_375275830",
+      "dateCreated": "2022-09-30T07:12:07+0000",
+      "status": "READY",
+      "$$hashKey": "object:136129"
+    }
+  ],
+  "name": "sparkDF_null처리",
+  "id": "2HEJN9B73",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/예시코드/sparkDF_null처리"
+}

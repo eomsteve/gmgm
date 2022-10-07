@@ -1,0 +1,122 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%pyspark\r\nimport datetime\r\ntoday = '20221004'\r\nprint(today)\r\n\r\nurl = \"jdbc:mysql://j7d108.p.ssafy.io:3306/gamulgamul_test3?useSSL=false&characterEncoding=UTF-8&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul\"\r\n\r\n# 1. 읽기 & Local에 저장\r\n\r\ncategory_sdf = spark.read.format(\"jdbc\")\\\r\n    .option(\"url\", url) \\\r\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\r\n    .option(\"query\", \"select * from category\")\\\r\n    .option(\"user\", \"ji\")\\\r\n    .option(\"password\", mysql_password).load()\r\n\r\ncategory_pdf = category_sdf.toPandas()\r\ncategory_pdf.to_csv(f'/DB_data/{today}_category_table.csv', index=False, header=True)\r\nprint(category_pdf)\r\n\r\n\r\nproduct_sdf = spark.read.format(\"jdbc\")\\\r\n    .option(\"url\", url) \\\r\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\r\n    .option(\"query\", \"select * from product\")\\\r\n    .option(\"user\", \"ji\")\\\r\n    .option(\"password\", mysql_password).load()\r\nproduct_pdf = product_sdf.toPandas()\r\nproduct_pdf.to_csv(f'/DB_data/{today}_product_table.csv' , index=False, header=True)\r\nprint(product_pdf)\r\n\r\n\r\ngoods_sdf = spark.read.format(\"jdbc\")\\\r\n    .option(\"url\", url) \\\r\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\r\n    .option(\"query\", \"select * from goods\")\\\r\n    .option(\"user\", \"ji\")\\\r\n    .option(\"password\", mysql_password).load()\r\ngoods_pdf = goods_sdf.toPandas()  \r\ngoods_pdf.to_csv(f'/DB_data/{today}_goods_table.csv' , index=False, header=True)\r\nprint(goods_pdf)\r\n\r\n\r\nproduct_price_sdf = spark.read.format(\"jdbc\")\\\r\n    .option(\"url\", url) \\\r\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\r\n    .option(\"query\", \"select * from product_price\")\\\r\n    .option(\"user\", \"ji\")\\\r\n    .option(\"password\", mysql_password).load()\r\nproduct_price_pdf = product_price_sdf.toPandas()    \r\nproduct_price_pdf = product_price_pdf.drop('product_price_id', axis=1)\r\nproduct_price_pdf.to_csv(f'/DB_data/{today}_product_price_table.csv' , index=False, header=True)\r\nprint(product_price_pdf)\r\n\r\n\r\ngoods_price_sdf = spark.read.format(\"jdbc\")\\\r\n    .option(\"url\", url) \\\r\n    .option(\"driver\", \"com.mysql.cj.jdbc.Driver\")\\\r\n    .option(\"query\", \"select * from goods_price\")\\\r\n    .option(\"user\", \"ji\")\\\r\n    .option(\"password\", mysql_password).load()\r\ngoods_price_pdf = goods_price_sdf.toPandas()     \r\ngoods_price_pdf = goods_price_pdf.drop('goods_price_id', axis=1)\r\ngoods_price_pdf.to_csv(f'/DB_data/{today}_goods_price_table.csv' , index=False, header=True)\r\nprint(goods_price_pdf)\r\n\r\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T08:31:41+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "20221004\n    category_id    name                                                img\n0             0   과자&빙과       https://j7d108.p.ssafy.io/resource/snack.png\n1             1   기타식자재      https://j7d108.p.ssafy.io/resource/guitar.png\n2             2  라면&간편식     https://j7d108.p.ssafy.io/resource/ramyeon.png\n3             3    생활용품    https://j7d108.p.ssafy.io/resource/supplies.png\n4             4      수산        https://j7d108.p.ssafy.io/resource/fish.png\n5             5     유제품        https://j7d108.p.ssafy.io/resource/milk.png\n6             6      음료      https://j7d108.p.ssafy.io/resource/drinks.png\n7             7      정육        https://j7d108.p.ssafy.io/resource/meat.png\n8             8      곡류       https://j7d108.p.ssafy.io/resource/grain.png\n9             9      채소  https://j7d108.p.ssafy.io/resource/vegetables.png\n10           10     견과류        https://j7d108.p.ssafy.io/resource/nuts.png\n11           11      과일      https://j7d108.p.ssafy.io/resource/fruits.png\n     product_id  category_id  ... price_gap_off  price_gap_on\n0             0            0  ...         547.0           0.0\n1             1            0  ...        2414.0         360.0\n2             2            0  ...           0.0           0.0\n3             3            0  ...        2217.0        -443.0\n4             4            0  ...         111.0           0.0\n..          ...          ...  ...           ...           ...\n159        1047           11  ...           0.0           0.0\n160        1048           11  ...           0.0           0.0\n161        1049            9  ...        -337.0        3400.0\n162        1050            9  ...         797.0           0.0\n163        1051           11  ...           0.0           0.0\n\n[164 rows x 11 columns]\n     goods_id  product_id  ... price_gap_off price_gap_on\n0           0           0  ...         225.0          0.0\n1           1           0  ...         869.0          0.0\n2           2           1  ...        2414.0        360.0\n3           3           3  ...        -584.0          0.0\n4           4           3  ...        7236.0      -1330.0\n..        ...         ...  ...           ...          ...\n461     20052        1012  ...         -62.0          0.0\n462     20053        1005  ...         -12.0          0.0\n463     20054        1044  ...           0.0          0.0\n464     20055        1012  ...          -2.0         60.0\n465     20056        1001  ...         -10.0          0.0\n\n[466 rows x 10 columns]\n        product_id  unit_price     price research_date date_type business\n0                0      183.40       NaN    2012-01-01         m     None\n1                0      183.60       NaN    2012-02-01         m     None\n2                0      183.60       NaN    2012-03-01         m     None\n3                0      183.60       NaN    2012-04-01         m     None\n4                0      183.40       NaN    2012-05-01         m     None\n...            ...         ...       ...           ...       ...      ...\n150195          69      614.66   3641.67    2022-10-06         d        o\n150196          29      189.78   1966.67    2022-10-06         d        o\n150197        1022     4000.00   4000.00    2022-10-06         d        o\n150198          14     2718.00  13590.00    2022-10-06         d        o\n150199        1030     8550.00   8550.00    2022-10-06         d        o\n\n[150200 rows x 6 columns]\n        goods_id  unit_price    price research_date business\n0            314      786.67   9440.0    2022-07-21        o\n1          20000    12800.00  12800.0    2021-09-07        m\n2            314      786.67   9440.0    2022-07-22        o\n3          20000    12800.00  12800.0    2021-09-08        m\n4            314      786.67   9440.0    2022-07-23        o\n...          ...         ...      ...           ...      ...\n368135     20052     1000.00   1000.0    2022-10-06        o\n368136     20053     7430.00   7430.0    2022-10-06        o\n368137     20054    15000.00  15000.0    2022-10-06        o\n368138     20055      360.00    540.0    2022-10-06        o\n368139     20056     1400.00   1400.0    2022-10-06        o\n\n[368140 rows x 5 columns]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=10451",
+              "$$hashKey": "object:28538"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=10452",
+              "$$hashKey": "object:28539"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=10453",
+              "$$hashKey": "object:28540"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=10454",
+              "$$hashKey": "object:28541"
+            },
+            {
+              "jobUrl": "http://ip-172-26-3-19.ap-northeast-2.compute.internal:4040/jobs/job?id=10455",
+              "$$hashKey": "object:28542"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1664731367179_1797125187",
+      "id": "paragraph_1664731367179_1797125187",
+      "dateCreated": "2022-10-02T17:22:47+0000",
+      "dateStarted": "2022-10-06T08:31:41+0000",
+      "dateFinished": "2022-10-06T08:31:50+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:28464"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-10-06T08:30:48+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1665045048206_569986632",
+      "id": "paragraph_1665045048206_569986632",
+      "dateCreated": "2022-10-06T08:30:48+0000",
+      "status": "READY",
+      "$$hashKey": "object:28465"
+    }
+  ],
+  "name": "5개_테이블_로컬에저장",
+  "id": "2HEW4AUXW",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/DB_to_Local/5개_테이블_로컬에저장"
+}

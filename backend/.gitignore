@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 
 application.yml
+JwtProperties.java
 
 ### STS ###
 .apt_generated
@@ -37,3 +38,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Naver Api ###
+application-API-KEY.properties
