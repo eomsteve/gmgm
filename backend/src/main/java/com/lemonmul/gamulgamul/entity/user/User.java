@@ -5,10 +5,7 @@ import com.lemonmul.gamulgamul.entity.favorite.FavoriteGoods;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteRecommend;
 import com.lemonmul.gamulgamul.entity.favorite.FavoriteTotalPrice;
 import com.lemonmul.gamulgamul.entity.priceindex.PriceIndex;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,6 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
 public class User {

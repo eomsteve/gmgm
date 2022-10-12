@@ -1,8 +1,10 @@
 package com.lemonmul.gamulgamul.config;
 
+import com.lemonmul.gamulgamul.repo.UserRepo;
 import com.lemonmul.gamulgamul.security.CustomAuthenticationEntryPoint;
 import com.lemonmul.gamulgamul.security.jwt.JwtAuthenticationFilter;
 import com.lemonmul.gamulgamul.security.jwt.JwtAuthorizationFilter;
+import com.lemonmul.gamulgamul.security.oauth2.*;
 import com.lemonmul.gamulgamul.security.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +29,13 @@ import java.util.Arrays;
 public class SecurityConfig {
 
     @Autowired
+    private UserRepo userRepo;
+
+    @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private AppProperties appProperties;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -54,6 +62,24 @@ public class SecurityConfig {
     }
 
     @Bean
+    public OAuth2AuthorizationRequestBasedOnCookieRepository oAuth2AuthorizationRequestBasedOnCookieRepository() {
+        return new OAuth2AuthorizationRequestBasedOnCookieRepository();
+    }
+
+    @Bean
+    public OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler() {
+        return new OAuth2AuthenticationSuccessHandler(
+                appProperties,
+                oAuth2AuthorizationRequestBasedOnCookieRepository()
+        );
+    }
+
+    @Bean
+    public OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler() {
+        return new OAuth2AuthenticationFailureHandler(oAuth2AuthorizationRequestBasedOnCookieRepository());
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
@@ -73,10 +99,24 @@ public class SecurityConfig {
                 .antMatchers("/user/logout").permitAll()
                 .antMatchers("/main").permitAll()
                 .antMatchers("/refresh").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint());
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                .and()
+                .oauth2Login()
+                .authorizationEndpoint()
+                .baseUri("/oauth2/authorization")
+                .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository())
+                .and()
+                .redirectionEndpoint()
+                .baseUri("/*/oauth2/code/*")
+                .and()
+                .userInfoEndpoint()
+                .userService(new CustomOAuth2UserService(userRepo))
+                .and()
+                .successHandler(oAuth2AuthenticationSuccessHandler())
+                .failureHandler(oAuth2AuthenticationFailureHandler());
 
         return http.build();
     }
