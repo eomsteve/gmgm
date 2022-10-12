@@ -6,8 +6,11 @@ import { logInApiRedux } from '@modules/Auth';
 import { getFavoriteItemStoreReduxLogin } from '@modules/FavoriteProductList';
 import { useDispatch, useSelector } from 'react-redux';
 import LandingPage from './LandingPage';
+import GoogleLogin from "react-google-login";
+
 
 const LogIn: FC = () => {
+  const clientId = "940185446430-v50qqqmsafq7uu6ss9pc5jpjgeuohojl.apps.googleusercontent.com"
   const navigate = useNavigate();
   const [landingImg, setLandingImg] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
@@ -30,6 +33,9 @@ const LogIn: FC = () => {
     } else {
       alert('실패 : 이메일과 비밀번호를 확인해 주세요');
     }
+  };
+  const responseGoogle = (res: any) => {
+    console.log(res);
   };
   return (
     <>
@@ -87,6 +93,12 @@ const LogIn: FC = () => {
                 >
                   로그인하기
                 </button>
+                <GoogleLogin
+        clientId={`${clientId}`}
+        buttonText="구글로 계속하기"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+      />
               </form>
               <div className="pt-4 text-center font-light text-gray-500 dark:text-gray-400">
                 아직 회원이 아니신가요?{' '}
