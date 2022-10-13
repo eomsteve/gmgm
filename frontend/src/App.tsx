@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Main from './routers/pages/Main';
@@ -27,6 +27,9 @@ const App: React.FunctionComponent<AppProps> = () => {
       isLogin: state.persistedReducer.authTokenReducer.isLogin,
     };
   });
+  useEffect(()=>{
+    
+  },[])
   return (
     <BrowserRouter>
       <Routes>

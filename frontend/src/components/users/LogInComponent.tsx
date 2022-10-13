@@ -6,7 +6,8 @@ import { logInApiRedux } from '@modules/Auth';
 import { getFavoriteItemStoreReduxLogin } from '@modules/FavoriteProductList';
 import { useDispatch, useSelector } from 'react-redux';
 import LandingPage from './LandingPage';
-import GoogleLogin from "react-google-login";
+import { GoogleLogin, GoogleOAuthProvider, useGoogleLogin  } from '@react-oauth/google'
+import axios from 'axios';
 
 
 const LogIn: FC = () => {
@@ -93,13 +94,25 @@ const LogIn: FC = () => {
                 >
                   로그인하기
                 </button>
-                <GoogleLogin
-        clientId={`${clientId}`}
-        buttonText="구글로 계속하기"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-      />
+                <GoogleOAuthProvider clientId={clientId}>
+                  <GoogleLogin 
+                  onSuccess={(res)=>{
+                    console.log(res.credential);
+                  }}
+                  onError={()=>{
+                    console.log('failed');
+                    
+                  }}/>
+                </GoogleOAuthProvider>
+                <button onClick={()=> {window.location.href ="https://accounts.google.com/o/oauth2/auth?" +
+  `client_id=${clientId}&`+
+  "redirect_uri=http://localhost:3000/authcode&"+
+  "response_type=token&"+
+  "scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile";}}>
+                  "구글 로그인 마크 2"
+                </button>
               </form>
+
               <div className="pt-4 text-center font-light text-gray-500 dark:text-gray-400">
                 아직 회원이 아니신가요?{' '}
                 <a href="/SignUp" className="font-medium text-blue-500">
