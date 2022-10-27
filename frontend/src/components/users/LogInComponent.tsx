@@ -11,7 +11,6 @@ import axios from 'axios';
 
 
 const LogIn: FC = () => {
-  const clientId = "940185446430-v50qqqmsafq7uu6ss9pc5jpjgeuohojl.apps.googleusercontent.com"
   const navigate = useNavigate();
   const [landingImg, setLandingImg] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
