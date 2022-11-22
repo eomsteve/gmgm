@@ -69,15 +69,16 @@
 
 ## 💜 결과물
 
+### main 
   <img width="300px" src="./images/gmgm_mobile/9.png">
 
-
+### 장보기 리스트
   <img width="300px" src="./images/gmgm_mobile/16.png">
 
-
+### 가격 비교
   <img width="300px" src="./images/gmgm_mobile/19.png">
 
-
+### 즐겨찾기
   <img width="300px" src="./images/gmgm_mobile/10.png">
 
 ## 🛠️ 기술 스택
