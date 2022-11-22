@@ -43,10 +43,10 @@
 ### 와이어 프레임
 
 <figure class="half" style="dispaly:flex ">
-  <img style="width:30vw" src="./images/Wireframe1.jpg">
-  <img style="width:30vw" src="./images/Wireframe2.jpg">
-  <img style="width:30vw" src="./images/Wireframe3.jpg">
-  <img style="width:30vw" src="./images/Wireframe4.jpg">
+  <img  width="30vw" src="./images/Wireframe1.jpg">
+  <img  width="30vw" src="./images/Wireframe2.jpg">
+  <img  width="30vw" src="./images/Wireframe3.jpg">
+  <img  width="30vw" src="./images/Wireframe4.jpg">
 </figure>
 
 ### UI 디자인
