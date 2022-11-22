@@ -42,19 +42,17 @@
 
 ### 와이어 프레임
 
-  <img height="100px" width="300px" src="./images/Wireframe1.jpg">
-  <img height="100px" width="300px" src="./images/Wireframe2.jpg">
-  <img height="100px" width="300px" src="./images/Wireframe3.jpg">
-  <img height="100px" width="300px" src="./images/Wireframe4.jpg">
+  <img width="400px" src="./images/Wireframe1.jpg">
+  <img width="400px" src="./images/Wireframe2.jpg">
+  <img width="400px" src="./images/Wireframe3.jpg">
+  <img width="400px" src="./images/Wireframe4.jpg">
 
 ### UI 디자인
 
-<figure class="half" style="dispaly:flex ">
-  <img style="width:30vw" src="./images/gmgm_mobile/9.png">
-  <img style="width:30vw" src="./images/gmgm_mobile/16.png">
-  <img style="width:30vw" src="./images/gmgm_mobile/19.png">
-  <img style="width:30vw" src="./images/gmgm_mobile/10.png">
-</figure>
+  <img width="300px" src="./images/gmgm_mobile/9.png">
+  <img width="300px" src="./images/gmgm_mobile/16.png">
+  <img width="300px" src="./images/gmgm_mobile/19.png">
+  <img width="300px" src="./images/gmgm_mobile/10.png">
 
 ### ERD
 
