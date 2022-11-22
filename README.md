@@ -42,10 +42,10 @@
 
 ### 와이어 프레임
 
-  <img width="400px" src="./images/Wireframe1.jpg">
-  <img width="400px" src="./images/Wireframe2.jpg">
-  <img width="400px" src="./images/Wireframe3.jpg">
-  <img width="400px" src="./images/Wireframe4.jpg">
+  <img width="300px" src="./images/Wireframe1.jpg">
+  <img width="300px" src="./images/Wireframe2.jpg">
+  <img width="300px" src="./images/Wireframe3.jpg">
+  <img width="300px" src="./images/Wireframe4.jpg">
 
 ### UI 디자인
 
