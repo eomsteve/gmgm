@@ -10,8 +10,6 @@
 
 
 ### 목차
-
-
 - [💶 가물가물](#-가물가물)
     - [목차](#목차)
   - [💡 프로젝트 기획](#-프로젝트-기획)
@@ -25,17 +23,19 @@
     - [장보기 리스트](#장보기-리스트)
     - [즐겨찾기](#즐겨찾기)
     - [가격 비교](#가격-비교)
-  - [🏁 Run](#-run)
-  - [🛠️ 기술 스택](#️-기술-스택)
+  - [🏁Run](#run)
+  - [🛠️기술 스택](#️기술-스택)
     - [Backend](#backend)
     - [Frontend](#frontend)
     - [Data](#data)
     - [Infra](#infra)
     - [시스템 아키텍처](#시스템-아키텍처)
-  - [팀 소개](#팀-소개)
+  - [🍋 팀 소개](#-팀-소개)
     - [Team. lemonmul](#team-lemonmul)
     - [ Team Notion](#-team-notion)
     - [Teammates](#teammates)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ---
 
@@ -99,11 +99,11 @@
   <img width="300px" src="./images/gmgm_mobile/19.png">
 <img width="300px" height="533px" src="./images/detailgif.gif">
  
- ## 🏁 Run
+ ## 🏁Run
 
 [포팅매뉴얼 링크](./exec/%ED%8A%B9%ED%99%94PJT_%EA%B5%AC%EB%AF%B81%EB%B0%98_D108_%ED%8F%AC%ED%8C%85%EB%A7%A4%EB%89%B4%EC%96%BC.pdf)
 
-## 🛠️ 기술 스택
+## 🛠️기술 스택
 
 ### Backend
 ![https://img.shields.io/badge/java-17.0.3.1-blue?style=for-the-badge&logo=java](https://img.shields.io/badge/java-17.0.3.1-blue?style=for-the-badge&logo=java)
@@ -135,7 +135,7 @@
 
 ![img](./images/Systemarchitecture.PNG)
 
-## 팀 소개
+## 🍋 팀 소개
 
 ### Team. lemonmul
 
