@@ -27,7 +27,7 @@
     - [Frontend](#frontend)
     - [Data](#data)
     - [Infra](#infra)
-    - [시스템 아키텍처](#시스템-아키텍처)
+  - [시스템 아키텍처](#시스템-아키텍처)
   - [🍋 팀 소개](#-팀-소개)
     - [Team. lemonmul](#team-lemonmul)
     - [ Team Notion](#-team-notion)
@@ -132,10 +132,9 @@
 ![https://img.shields.io/badge/docker-20.10.20-blue?style=for-the-badge&logo=docker](https://img.shields.io/badge/docker-20.10.20-blue?style=for-the-badge&logo=docker)
 ![https://img.shields.io/badge/jenkins-2.374-orange?style=for-the-badge&logo=jenkins](https://img.shields.io/badge/jenkins-2.374-orange?style=for-the-badge&logo=jenkins)
 
-### 시스템 아키텍처
+## 시스템 아키텍처
 
 ![img](./images/Systemarchitecture.PNG)
-
 ## 🍋 팀 소개
 
 ### Team. lemonmul
