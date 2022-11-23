@@ -71,15 +71,23 @@
 
 ### main 
   <img width="300px" src="./images/gmgm_mobile/9.png">
+  <img width="300px" height="533px" src="./images/maingif.gif">
+ 
 
 ### 장보기 리스트
   <img width="300px" src="./images/gmgm_mobile/16.png">
-
-### 가격 비교
-  <img width="300px" src="./images/gmgm_mobile/19.png">
+  <img width="300px" height="533px" src="./images/maintocheck.gif">
+ 
 
 ### 즐겨찾기
   <img width="300px" src="./images/gmgm_mobile/10.png">
+  <img width="300px" height="533px" src="./images/favOnlineTOoff.gif">
+ 
+### 가격 비교
+  <img width="300px" src="./images/gmgm_mobile/19.png">
+<img width="300px" height="533px" src="./images/detailgif.gif">
+ 
+ 
 
 ## 🛠️ 기술 스택
 
