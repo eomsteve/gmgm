@@ -1,15 +1,13 @@
-
 ![가물가물_웹1.png](./images/Intro.png)
 
 # 💶 가물가물
-
 
 **가물가물(GMGM)** 은 장바구니 목록, 농산물 및 생필품의 가격 추이를 제공하고, 사용자의 즐겨찾기 상품을 바탕으로 지수를 산정하여 보여주는 장바구니 체크리스트 서비스입니다. 장보기 시 편하게 사용할 수 있도록 모바일 서비스로 기획했습니다. 가물가물 프로젝트의 기획 의도는 가격 추이 및 물가지수 계산 서비스 제작과 빅데이터 분산 처리 개발 경험입니다. 사용자의 즐겨찾기 품목을 기반으로 맞춤형 제품 추천을 제공합니다.
 
 **가물가물** : 가**물가**물한 물가를 알 수 있는 **가물가물**!
 
-
 ### 목차
+
 - [💶 가물가물](#-가물가물)
     - [목차](#목차)
   - [💡 프로젝트 기획](#-프로젝트-기획)
@@ -35,10 +33,6 @@
     - [ Team Notion](#-team-notion)
     - [Teammates](#teammates)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
----
-
 ## 💡 프로젝트 기획
 
 ### 기획 배경
@@ -53,16 +47,15 @@
 - 개인화된 물가 지수 제공
 - 물가 관련 기사 조회
 - 즐겨찾기
-    - 상품으로 구독된 상품의 가격 증감 확인
-    - 구독된 상품들을 기반으로 추천
-    - 구독된 상품들의 대체 상품과 비교, 계산을 통한 비교
-    - 오프라인과 온라인 가격 확인
-    - 구독된 상품들을 기반으로 개인화된 물가 지수 확인
+  - 상품으로 구독된 상품의 가격 증감 확인
+  - 구독된 상품들을 기반으로 추천
+  - 구독된 상품들의 대체 상품과 비교, 계산을 통한 비교
+  - 오프라인과 온라인 가격 확인
+  - 구독된 상품들을 기반으로 개인화된 물가 지수 확인
 - 장바구니 (체크리스트)
-    - 가격 비교 가능한 품목 추가
-    - 사용자 정의 항목 추가
-    - 품목의 상품들을 비교
-
+  - 가격 비교 가능한 품목 추가
+  - 사용자 정의 항목 추가
+  - 품목의 상품들을 비교
 
 ### Wire Frame
 
@@ -81,17 +74,20 @@
 
 ## 💜 결과물
 
-### main 
+### main
+
   <img width="300px" src="./images/gmgm_mobile/9.png">
   <img width="300px" height="533px" src="./images/maingif.gif">
- 
+
 
 ### 장보기 리스트
+
   <img width="300px" src="./images/gmgm_mobile/16.png">
   <img width="300px" height="533px" src="./images/maintocheck.gif">
- 
+
 
 ### 즐겨찾기
+
   <img width="300px" src="./images/gmgm_mobile/10.png">
   <img width="300px" height="533px" src="./images/favOnlineTOoff.gif">
  
@@ -106,12 +102,14 @@
 ## 🛠️기술 스택
 
 ### Backend
+
 ![https://img.shields.io/badge/java-17.0.3.1-blue?style=for-the-badge&logo=java](https://img.shields.io/badge/java-17.0.3.1-blue?style=for-the-badge&logo=java)
 ![https://img.shields.io/badge/spring_boot-2.7.3-green?style=for-the-badge&logo=springboot](https://img.shields.io/badge/spring_boot-2.7.3-green?style=for-the-badge&logo=springboot)
 ![https://img.shields.io/badge/spring_data_jpa-2.7.3-green?style=for-the-badge&logo=spring](https://img.shields.io/badge/spring_data_jpa-2.7.3-green?style=for-the-badge&logo=spring)
 ![https://img.shields.io/badge/spring_security-5.7.3-green?style=for-the-badge&logo=springsecurity](https://img.shields.io/badge/spring_security-5.7.3-green?style=for-the-badge&logo=springsecurity)
 
 ### Frontend
+
 ![https://img.shields.io/badge/react-18.2.0-blue?style=for-the-badge&logo=react](https://img.shields.io/badge/react-18.2.0-blue?style=for-the-badge&logo=react)
 ![https://img.shields.io/badge/typescript-4.8.2-blue?style=for-the-badge&logo=typescript](https://img.shields.io/badge/typescript-4.8.2-blue?style=for-the-badge&logo=typescript)
 ![https://img.shields.io/badge/react_redux-8.0.2-orange?style=for-the-badge&logo=redux](https://img.shields.io/badge/react_redux-8.0.2-orange?style=for-the-badge&logo=redux)
@@ -120,17 +118,20 @@
 ![https://img.shields.io/badge/chart.js-3.9.1-orange?style=for-the-badge&logo=chartdotjs](https://img.shields.io/badge/chart.js-3.9.1-orange?style=for-the-badge&logo=chartdotjs)
 
 ### Data
+
 ![https://img.shields.io/badge/python-3.7.15-blue?style=for-the-badge&logo=python](https://img.shields.io/badge/python-3.7.15-blue?style=for-the-badge&logo=python)
 ![https://img.shields.io/badge/Spark-3.2.2-orange?style=for-the-badge&logo=apachespark](https://img.shields.io/badge/Spark-3.2.2-orange?style=for-the-badge&logo=apachespark)
 ![https://img.shields.io/badge/Zeppelin-0.10.1-orange?style=for-the-badge&logo=openzeppelin](https://img.shields.io/badge/Zeppelin-0.10.1-orange?style=for-the-badge&logo=openzeppelin)
 
 ### Infra
+
 ![https://img.shields.io/badge/mysql-8.0.31-blue?style=for-the-badge&logo=mysql](https://img.shields.io/badge/mysql-8.0.31-blue?style=for-the-badge&logo=mysql)
 ![https://img.shields.io/badge/aws-EC2-orange?style=for-the-badge&logo=amazonaws](https://img.shields.io/badge/aws-EC2-orange?style=for-the-badge&logo=amazonaws)
 ![https://img.shields.io/badge/ubuntu-20.04_LTS-orange?style=for-the-badge&logo=ubuntu](https://img.shields.io/badge/ubuntu-20.04_LTS-orange?style=for-the-badge&logo=ubuntu)
 ![https://img.shields.io/badge/NGINX-1.18.0-green?style=for-the-badge&logo=nginx](https://img.shields.io/badge/NGINX-1.18.0-green?style=for-the-badge&logo=nginx)
 ![https://img.shields.io/badge/docker-20.10.20-blue?style=for-the-badge&logo=docker](https://img.shields.io/badge/docker-20.10.20-blue?style=for-the-badge&logo=docker)
 ![https://img.shields.io/badge/jenkins-2.374-orange?style=for-the-badge&logo=jenkins](https://img.shields.io/badge/jenkins-2.374-orange?style=for-the-badge&logo=jenkins)
+
 ### 시스템 아키텍처
 
 ![img](./images/Systemarchitecture.PNG)
@@ -143,10 +144,9 @@
 
 ### ![Notion](./images/notion.png) [Team Notion](https://www.notion.so/39f9e8d9911c4802b6266b3af391d1c0)
 
-
 ### Teammates
 
-| 이름     | 엄성현                                     | 임소연                               | 지승영                                     | 정동규                                   | 전효인                                   | 김효은                                         |
-|:------:|:---------------------------------------:|:---------------------------------:|:---------------------------------------:|:-------------------------------------:|:-------------------------------------:|:-------------------------------------------:|
-| 포지션    | FE                                      | Data                              | Data                                    | BE, Infra                             | BE                                    | BE, 팀장                                      |
+|  이름  |                 엄성현                  |              임소연               |                 지승영                  |                정동규                 |                전효인                 |                   김효은                    |
+| :----: | :-------------------------------------: | :-------------------------------: | :-------------------------------------: | :-----------------------------------: | :-----------------------------------: | :-----------------------------------------: |
+| 포지션 |                   FE                    |               Data                |                  Data                   |               BE, Infra               |                  BE                   |                  BE, 팀장                   |
 | Github | [eomsteve](https://github.com/eomsteve) | [Im-sy](https://github.com/Im-sy) | [jisy2718](https://github.com/jisy2718) | [1217jdk](https://github.com/1217jdk) | [zaq1290](https://github.com/zaq1290) | [Chosephine](https://github.com/Chosephine) |
