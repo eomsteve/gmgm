@@ -40,7 +40,7 @@ const LogIn: FC = () => {
             <div className="space-y-4 p-6 sm:p-8 md:space-y-6">
               <div>
                 <img
-                  src="https://j7d108.p.ssafy.io/resource/logo.png"
+                  src="/logo192.png"
                   alt=""
                   className="h-14 w-14"
                 />
