@@ -165,7 +165,7 @@ const SignUp: FunctionComponent<SignUpProps> = () => {
     <form className="flex flex-col" onSubmit={handleSubmit}>
       <div className="container mx-auto flex max-w-sm flex-1 flex-col items-center justify-center px-2">
         <div className="w-full rounded bg-white px-6 py-8 text-black ">
-          <div className='pb-6'><img src="https://j7d108.p.ssafy.io/resource/logo.png" alt="" className='w-14 h-14' /></div>
+          <div className='pb-6'><img src="/logo192.png" alt="" className='w-14 h-14' /></div>
           <h1 className="mb-4 text-xl leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
             회원가입
           </h1>

@@ -4,7 +4,7 @@ import ConfirmButton from './UI/ConFirmButton';
 import {
   updateCheckLists,
   deleteCheckList,
-  updateCheckListStatus,
+  updateCheckListStatusApi,
 } from '@apis/checkList.Api';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -110,7 +110,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
             custom: CustomProduct[],
             CheckListId?: string,
           ) => {
-            await updateCheckListStatus(basic, custom, checklistId);
+            await updateCheckListStatusApi(basic, custom, checklistId);
           };
           unMountUpdateStatus(basic, custom, checklistId);
         }

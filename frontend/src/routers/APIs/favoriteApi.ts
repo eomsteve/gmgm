@@ -1,6 +1,4 @@
-import axios from 'axios';
-const API_URL = 'https://j7d108.p.ssafy.io/api/favorite';
-const AUTH_TOKEN = 'token';
+import { client } from './client';
 
 type ChartData = {
   values: { value: number }[];
@@ -36,7 +34,7 @@ export interface FavoritePageData {
 }
 export const getFavoritePageData = async () => {
   try {
-    const { data } = await axios.get<FavoritePageData>(API_URL + '/');
+    const { data } = await client.get<FavoritePageData>('/api/favorite');
     return data;
   } catch (error) {
     console.error(error);
@@ -44,29 +42,20 @@ export const getFavoritePageData = async () => {
 };
 
 export const getFavoriteItems = async (businessType: string) => {
-  try {
-    const { data } = await axios.get(
-      API_URL + '/business/' + businessType + '/',
-      {
-        headers: {
-          Authorization: AUTH_TOKEN,
-        },
-      },
-    );
-    return data;
-  } catch (error) {}
+  const { data } = await client.get(
+    '/api/favorite/business/' + businessType + '/',
+  );
+  return data;
 };
 
 export const getFavoriteSelect = async () => {
-  try {
-    const { data } = await axios.get(API_URL + '/select');
-    return data;
-  } catch (error) {}
+  const { data } = await client.get('/api/favorite/select');
+  return data;
 };
 
 export const getGoodsDataByProductId = async (productId: number) => {
-  try {
-    const { data } = await axios.get(API_URL + `/select/product/${productId}`);
-    return data;
-  } catch (error) {}
+  const { data } = await client.get(
+    `/api/favorite/select/product/${productId}`,
+  );
+  return data;
 };

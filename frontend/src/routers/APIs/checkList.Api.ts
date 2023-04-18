@@ -1,10 +1,9 @@
-import axios from 'axios';
+import { client } from './client';
 import type {
   CustomProduct,
   BasicProduct,
 } from '@modules/CheckListProductList';
 
-const API_URL = 'https://j7d108.p.ssafy.io/api/checklist';
 
 export type CheckList = {
   checklistId: number;
@@ -22,10 +21,8 @@ export type CheckList = {
  * @return :
  */
 export const getCheckLists = async () => {
-  try {
-    const { data } = await axios.get(API_URL + '/list/info');
-    return data;
-  } catch (error) {}
+  const { data } = await client.get('/api/checklist/list/info');
+  return data;
 };
 
 /**
@@ -35,9 +32,7 @@ export const getCheckLists = async () => {
  * @return : none;
  */
 export const makeEmptyCheckList = async () => {
-  try {
-    const { data } = await axios.post<string>(API_URL + '/');
-  } catch (error) {}
+  await client.post<string>('/api/checklist/');
 };
 
 /**
@@ -57,12 +52,8 @@ export const checkListSelection = async () => {};
  * @returns
  */
 export const getCheckList = async (checkListId?: string) => {
-  try {
-    const { data } = await axios.get(API_URL + `/${checkListId}`);
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
+  const { data } = await client.get(`/api/checklist/${checkListId}`);
+  return data;
 };
 
 export const updateCheckLists = async (
@@ -70,34 +61,23 @@ export const updateCheckLists = async (
   checklistCustomItems: CustomProduct[],
   checkListId?: string,
 ) => {
-  try {
-    const { data } = await axios({
-      url: API_URL + `/info/${checkListId}`,
-      method: 'put',
-      data: {
-        checklistBasicItems,
-        checklistCustomItems,
-      },
-    });
-    checklistBasicItems = data.checklistBasicItems;
-    return data;
-  } catch (error) {}
+  const { data } = await client.put(`/api/checklist/info/${checkListId}`, {
+    checklistBasicItems,
+    checklistCustomItems,
+  });
+  checklistBasicItems = data.checklistBasicItems;
+  return data;
 };
 
-export const updateCheckListStatus = async (
+export const updateCheckListStatusApi = async (
   checklistBasicItems: BasicProduct[],
   checklistCustomItems: CustomProduct[],
   checklistId?: string,
 ) => {
-
   try {
-    const { data } = await axios({
-      url: API_URL + `/status/${checklistId}`,
-      method: 'put',
-      data: {
-        checklistBasicItems,
-        checklistCustomItems,
-      },
+    const { data } = await client.put(`/api/checklist/status/${checklistId}`, {
+      checklistBasicItems,
+      checklistCustomItems,
     });
     return data;
   } catch (error) {
@@ -106,33 +86,15 @@ export const updateCheckListStatus = async (
 };
 
 export const addCheckList = async () => {
-  try {
-    const { data } = await axios({
-      url: API_URL + `/`,
-      method: 'post',
-    });
-    return data;
-  } catch (error) {}
+  const { data } = await client.post(`/api/checklist/`);
+  return data;
 };
 
 export const deleteCheckList = async (checkListId?: string) => {
-  try {
-    const { data } = await axios({
-      url: API_URL + `/${checkListId}`,
-      method: 'delete',
-    });
-    return data;
-  } catch (error) {}
+  const { data } = await client.delete(`/api/checklist/${checkListId}`);
+  return data;
 };
 
 export const deleteEmptyCheckList = async (checkListId?: string) => {
-
-  try {
-    const data = await axios({
-      url: API_URL + `/empty/${checkListId}`,
-      method: 'delete',
-    });
-  } catch (error) {
-    console.error(error);
-  }
+  await client.delete(`/api/checklist/empty/${checkListId}`);
 };

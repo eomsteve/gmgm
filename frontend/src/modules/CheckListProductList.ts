@@ -1,9 +1,9 @@
-import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice,  createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState, AppDispatch } from './store';
-import axios from 'axios';
+import { getCheckList, updateCheckListStatusApi } from '@src/routers/APIs/checkList.Api';
+import { client } from '@src/routers/APIs/client';
 
-const API_URL = 'https://j7d108.p.ssafy.io/api/checklist';
 interface MyKnownError {
   errorMessage: string;
 }
@@ -50,29 +50,17 @@ export const getCheckLists = createAsyncThunk<
     rejectValue: MyKnownError;
   }
 >('getList', async (checklistId, thunkAPI) => {
-  try {
-    const { data } = await axios.get(API_URL + `/info/${checklistId}`);
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
+  return getCheckList(checklistId);
 });
 
 export const updateCheckListStatus = createAsyncThunk(
   'updateCheckLists',
   async (checklistId, thunkAPI) => {
-    try {
-      const { data } = await axios({
-        url: API_URL + `/status/${checklistId}`,
-        method: 'put',
-        data: {
-          initialState,
-        },
-      });
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
+    const { data } = await client.put(
+      `/api/checklist/status/${checklistId}`,
+      initialState,
+    );
+    return data;
   },
 );
 
@@ -82,7 +70,7 @@ export const checkListProductsSlice = createSlice({
   reducers: {
     addBasicProducts: (state, action: PayloadAction<BasicProduct>) => {
       const isDuplicate = state.checklistBasicItems.find(
-        products => products.basicProductId == action.payload.basicProductId,
+        products => products.basicProductId === action.payload.basicProductId,
       );
       if (isDuplicate) {
       } else {
@@ -100,13 +88,13 @@ export const checkListProductsSlice = createSlice({
     },
     removeBasicProducts: (state, action: PayloadAction<number | undefined>) => {
       const data = state.checklistBasicItems.filter(products => {
-        return products.basicProductId != action.payload;
+        return products.basicProductId !== action.payload;
       });
       state.checklistBasicItems = data;
     },
     updateBasicProductsStatus: (state, action: PayloadAction<string>) => {
       const data = state.checklistBasicItems.find(products => {
-        return products.basicProductName == action.payload;
+        return products.basicProductName === action.payload;
       });
 
       if (typeof data !== 'undefined') {
@@ -118,7 +106,7 @@ export const checkListProductsSlice = createSlice({
     addCustomProducts: (state, action: PayloadAction<CustomProduct>) => {
       const isDuplicate = state.checklistCustomItems.find(
         products =>
-          products.customProductName == action.payload.customProductName,
+          products.customProductName === action.payload.customProductName,
       );
       if (isDuplicate) {
       } else {
@@ -131,13 +119,13 @@ export const checkListProductsSlice = createSlice({
     },
     removeCustomProducts: (state, action: PayloadAction<string>) => {
       const data = state.checklistCustomItems.filter(products => {
-        return products.customProductName != action.payload;
+        return products.customProductName !== action.payload;
       });
       state.checklistCustomItems = data;
     },
     updateCustomProductStatus: (state, action: PayloadAction<string>) => {
       const data = state.checklistCustomItems.find(products => {
-        return products.customProductName == action.payload;
+        return products.customProductName === action.payload;
       });
       if (typeof data !== 'undefined') {
         data.status = !data?.status;
