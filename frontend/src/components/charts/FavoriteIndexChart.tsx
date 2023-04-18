@@ -120,11 +120,11 @@ const FavoriteIndexChart: FunctionComponent<
           </div>
         </div>
         <div className="flex-col flex items-center">
-          {favoriteIndices && (
+          {/* {favoriteIndices?.values && (
             <div className="text-[#639DEB]">{`즐겨찾기 지수 : ${
               favoriteIndices.values[favoriteIndices.values.length - 1].value
             }`}</div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

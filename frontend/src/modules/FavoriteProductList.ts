@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { client } from '@src/routers/APIs/client';
-import axios from 'axios';
-const API_URL = 'https://j7d108.p.ssafy.io/api/favorite';
 interface FetchItems {
   basicProductId: number;
   goodsId: number;
@@ -45,10 +43,7 @@ export const getFavoriteItemStoreReduxLogin = createAsyncThunk(
   'getFavoriteItemStoreReduxLogin',
   async () => {
     try {
-      const { data } = await axios({
-        url: API_URL + '/',
-        method: 'GET',
-      });
+      const { data } = await client.get('/api/favorite');
       return data.favoriteItems;
     } catch (error) {}
   },
@@ -58,12 +53,8 @@ export const updateFavoriteItems = createAsyncThunk(
   'updateFavoriteItem',
   async (goodsIdList: number[], thunkAPI) => {
     try {
-      const { data } = await axios({
-        url: API_URL + '/',
-        method: 'post',
-        data: {
-          goodsIds: goodsIdList,
-        },
+      const { data } = await client.post('/api/favorite', {
+        goodsIds: goodsIdList,
       });
       return data;
     } catch (error) {}
@@ -74,12 +65,8 @@ export const updateRecommendItem = createAsyncThunk(
   'updateRecommendItem',
   async (goodsId: number, thunkAPI) => {
     try {
-      const { data } = await axios({
-        url: API_URL + `/goods/${goodsId}`,
-        method: 'POST',
-        data: {
-          goodsId,
-        },
+      const { data } = await client.post(`/api/favorite/goods/${goodsId}`, {
+        goodsId,
       });
       return data;
     } catch (error) {}
@@ -93,7 +80,7 @@ export const favoriteGoodsSlice = createSlice({
     addGoods: (state, action: PayloadAction<SelectedGoods>) => {
       const isDuplicate = state.goods.find(
         (goods: { goodsId: number; goodsName: string }) =>
-          goods.goodsId === action.payload.goodsId,
+          goods.goodsId == action.payload.goodsId,
       );
       if (isDuplicate) {
       } else {
