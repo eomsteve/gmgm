@@ -17,10 +17,12 @@ const Header: FC<HeaderProps> = props => {
   
   return (
     <>
-      <header className="center sticky top-0 z-40 grid h-16 grid-cols-8 justify-center border-b bg-white p-2">
+      <header className="center sticky top-0 z-40 grid h-16 grid-cols-8 justify-center border-b bg-white p-2 mx-5">
         <div className="flex items-center justify-center">
-          {title == '홈' ? (
-            <div></div>
+          {title === '홈' ? (
+            <div className=''>
+              <img src="/logo192.png" alt="" />
+            </div>
           ) : (
             <div
               onClick={
@@ -29,7 +31,7 @@ const Header: FC<HeaderProps> = props => {
                     navigate(`/${navigateRouter}`);
                     }
                   : detailParams ? () => {
-                      (isDetail && detailParams.from=='checkList') ? navigate(`/checklists/${detailParams?.checklistId}`, {
+                      (isDetail && detailParams.from==='checkList') ? navigate(`/checklists/${detailParams?.checklistId}`, {
                         state : { isEdit : false ,
                                   checklistId : detailParams?.checklistId}
                       }) : navigate(-1) 

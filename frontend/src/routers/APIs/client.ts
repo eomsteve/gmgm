@@ -2,7 +2,6 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
   AxiosError,
-  AxiosInstance,
 } from 'axios';
 
 const BASE_URL = 'http://localhost:8080/';
@@ -17,7 +16,7 @@ const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   /* 토큰이 있을 경우 헤더에 삽입한다. 없을 경우 빈 문자열을 넣는다(null은 안됨) */
   if (!!access_token) {
     config.headers = {
-      Authorization: !!access_token ? `${access_token}` : '',
+      Authorization: !!access_token ? `Bearer ${access_token}` : '',
     };
   }
   return config;

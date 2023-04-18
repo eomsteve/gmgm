@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { client } from '@src/routers/APIs/client';
 import axios from 'axios';
 
 interface UserState {
@@ -20,25 +21,16 @@ export type LogInUserREQ = {
   pwd: string;
 };
 
-const API_URL = 'https://j7d108.p.ssafy.io/api/user';
-export const logInApiRedux = createAsyncThunk(
+export const loginRedux = createAsyncThunk(
   'login',
   async (logInForm: LogInUserREQ) => {
-    try {
-      const { data } = await axios.post(API_URL + '/login', logInForm);
-      localStorage.setItem('jwtToken', data.accessToken);
-      return data;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.message);
-        return 'error';
-      } else {
-        console.error(error);
-        return 'unexpected error occurred';
-      }
-    }
+    const { data } = await client.post('/api/user/login', logInForm);
+    localStorage.setItem('jwtToken', data.accessToken);
+    return data;
   },
 );
+
+const API_URL = 'http://localhost:8080/api/user';
 
 export const logOutApiRedux = createAsyncThunk(
   'logout',
@@ -71,13 +63,9 @@ export const userAuthSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(logInApiRedux.fulfilled, (state, action) => {
-        if (action.payload != 'error') {
+      .addCase(loginRedux.fulfilled, (state, action) => {
+        if (action.payload !== 'error') {
           state.isLogin = true;
-          state.accessToken = action.payload.accessToken;
-          axios.defaults.headers.common[
-            'Authorization'
-          ] = `Bearer ${action.payload.accessToken}`;
         }
       })
       .addCase(logOutApiRedux.fulfilled, (state, action) => {
@@ -87,6 +75,8 @@ export const userAuthSlice = createSlice({
       });
   },
 });
+
+
 
 export const { setAuthToken, removeAuthToken } = userAuthSlice.actions;
 export default userAuthSlice.reducer;

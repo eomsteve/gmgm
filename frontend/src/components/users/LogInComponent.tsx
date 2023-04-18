@@ -1,14 +1,12 @@
 import { FC, useState } from 'react';
-import { LogInUserREQ, logInApi } from '../../routers/APIs/userApi';
-import { useNavigate } from 'react-router-dom';
-import type { RootState, AppDispatch } from '../../modules/store';
-import { logInApiRedux } from '@modules/Auth';
+import { LogInUserREQ  } from '../../routers/APIs/userApi';
+import type {  AppDispatch } from '../../modules/store';
+import { loginRedux } from '@modules/Auth';
 import { getFavoriteItemStoreReduxLogin } from '@modules/FavoriteProductList';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import LandingPage from './LandingPage';
 
 const LogIn: FC = () => {
-  const navigate = useNavigate();
   const [landingImg, setLandingImg] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,14 +17,11 @@ const LogIn: FC = () => {
       pwd: logInFormData.get('password') as string,
     };
     const logInRes: { accessToken: string; refreshToken: string } | string =
-      await dispatch(logInApiRedux(logInform)).unwrap();
+      await dispatch(loginRedux(logInform)).unwrap();
 
     if (typeof logInRes !== typeof 'string') {
       dispatch(getFavoriteItemStoreReduxLogin());
       setLandingImg(true);
-      setTimeout(() => {
-        navigate('/');
-      }, 2000);
     } else {
       alert('실패 : 이메일과 비밀번호를 확인해 주세요');
     }
