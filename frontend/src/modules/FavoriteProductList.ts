@@ -1,5 +1,6 @@
-import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { client } from '@src/routers/APIs/client';
 import axios from 'axios';
 const API_URL = 'https://j7d108.p.ssafy.io/api/favorite';
 interface FetchItems {
@@ -36,13 +37,8 @@ const initialState: Initial = {
 export const getFavoritePageDataRedux = createAsyncThunk(
   'getFavorite',
   async () => {
-    try {
-      const { data } = await axios({
-        url: API_URL + '/',
-        method: 'GET',
-      });
-      return data;
-    } catch (error) {}
+    const { data } = await client.get('/api/favorite');
+    return data;
   },
 );
 export const getFavoriteItemStoreReduxLogin = createAsyncThunk(
@@ -97,7 +93,7 @@ export const favoriteGoodsSlice = createSlice({
     addGoods: (state, action: PayloadAction<SelectedGoods>) => {
       const isDuplicate = state.goods.find(
         (goods: { goodsId: number; goodsName: string }) =>
-          goods.goodsId == action.payload.goodsId,
+          goods.goodsId === action.payload.goodsId,
       );
       if (isDuplicate) {
       } else {
@@ -110,7 +106,7 @@ export const favoriteGoodsSlice = createSlice({
     removeGoods: (state, action: PayloadAction<{ goodsId: number }>) => {
       const data = state.goods.filter(
         (goods: { goodsId: number; goodsName: string }) => {
-          return goods.goodsId != action.payload.goodsId;
+          return goods.goodsId !== action.payload.goodsId;
         },
       );
       state.goods = data;

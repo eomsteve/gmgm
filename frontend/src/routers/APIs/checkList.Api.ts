@@ -52,7 +52,7 @@ export const checkListSelection = async () => {};
  * @returns
  */
 export const getCheckList = async (checkListId?: string) => {
-  const { data } = await client.get(`/api/checklist/${checkListId}`);
+  const { data } = await client.get(`/api/checklist/info/${checkListId}`);
   return data;
 };
 

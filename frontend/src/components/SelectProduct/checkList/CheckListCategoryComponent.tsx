@@ -11,15 +11,6 @@ import type { BasicProduct } from '@modules/CheckListProductList';
 import SelectedArea from './SelectedArea';
 interface CategorySliderProps {}
 
-interface NextArrowProps {
-  style?: CSSProperties;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-}
-
-interface PrevArrowProps {
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-}
-
 interface CategoryLoad {
   categoryId: number;
   categoryName: string;
@@ -54,13 +45,6 @@ const CategorySlider: FC<CategorySliderProps> = () => {
     // PrevArrow : <PrevArrow />,
     // nextArrow: <NextArrow />,
   };
-  function NextArrow({ style, onClick }: NextArrowProps) {
-    return (
-      <span className="next-arrow flex bg-red-200" onClick={onClick}>
-        누르면 넘어감
-      </span>
-    );
-  }
 
   async function handle(product: BasicProduct[]) {
     // onClick시 productlist값을 세팅하면 누를때마다 sublist가 바뀌고 재 랜덜링 될것,

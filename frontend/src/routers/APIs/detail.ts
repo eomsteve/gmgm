@@ -1,22 +1,15 @@
-import axios from 'axios';
-
-const API_URL = 'https://j7d108.p.ssafy.io/api/detail';
+import { client } from './client';
 
 export const atCheckList = async (
   productId: string | undefined,
   businessType: string | undefined,
 ) => {
-  try {
     if (productId && businessType) {
-      const { data } = await axios({
-        url: API_URL + `/product/${productId}/business/${businessType}/`,
-        method: 'GET',
-      });
+      const { data } = await client.get(`/api/detail/product/${productId}/business/${businessType}/`);
       return data;
     } else {
       console.error(productId, businessType);
     }
-  } catch (error) {}
 };
 
 export const fromFavorite = async (
@@ -25,12 +18,7 @@ export const fromFavorite = async (
   goodsId: string | undefined,
 ) => {
   try {
-    const { data } = await axios({
-      url:
-        API_URL +
-        `/product/${productId}/goods/${goodsId}/business/${businessType}`,
-      method: 'GET',
-    });
+    const { data } = await client.get(`/api/detail/product/${productId}/goods/${goodsId}/business/${businessType}`);
     return data;
   } catch (error) {}
 };
@@ -41,10 +29,7 @@ export const detailSelectBoxChange = async (
 ) => {
   try {
     if (goodsId && businessType) {
-      const { data } = await axios({
-        url: API_URL + `/goods/${goodsId}/business/${businessType}`,
-        method: 'GET',
-      });
+      const { data } = await client.get(`/api/detail/goods/${goodsId}/business/${businessType}`);
       return data;
     }
   } catch (error) {
