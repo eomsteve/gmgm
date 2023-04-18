@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import MainUserCard from '../../components/users/MainUserCard';
 import MainGuestCard from '../../components/main/MainGuestCard';
-import { loadMain,loadMainData } from '@apis/main';
+import { loadMainData } from '@apis/main';
 import HeaderComponent from '@components/EmptyHeader';
 import EmptySquare from '@components/main/SquareInfo';
 import MainChecklist from '@components/main/MainChecklistComponent';

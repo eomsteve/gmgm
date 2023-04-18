@@ -22,24 +22,3 @@ export const loadMainData = async () => {
   const { data: MainData } = await client.get('/api/main');
   return MainData;
 };
-
-export const loadMain = async (jwtToken: string | null) => {
-  try {
-    if (jwtToken !== null) {
-      const { data } = await axios({
-        url: API_URL,
-        method: 'GET',
-        headers: {
-          Authorization: jwtToken,
-        },
-      });
-      return data;
-    } else {
-      const { data } = await axios({
-        url: API_URL,
-        method: 'GET',
-      });
-      return data;
-    }
-  } catch (error) {}
-};
