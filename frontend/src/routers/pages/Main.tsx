@@ -21,8 +21,8 @@ const Main: FunctionComponent<MainProps> = () => {
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
     const loadPage = async (token: string | null) => {
-      const loadMainData2 = await loadMainData();
-      setLoadData(loadMainData2);
+      const mainData = await loadMainData();
+      setLoadData(mainData);
     };
     loadPage(token);
   }, []);

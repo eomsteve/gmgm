@@ -1,7 +1,5 @@
-import axios from 'axios';
 import { client } from './client';
 
-const API_URL = 'https://j7d108.p.ssafy.io/api/main';
 export interface MainData {
   checklistList?: {
     checklistId: number;
