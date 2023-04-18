@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import AuthHeader from './authHeader';
 const API_URL = 'https://j7d108.p.ssafy.io/api/user';
 
 export type SignUpUserREQ = {
@@ -38,14 +36,6 @@ export const checkEmailDuplicate = async (email: string) => {
   } catch (error) {}
 };
 
-// {
-//   "email": "sheom@email.com",
-//   "pwd": "123123",
-//   "name": "user",
-//   "gender": "m",
-//   "birthday": "1999-01-01",
-//   "role" : "u"
-// }
 
 export default function authHeader(token: string) {
   if (token) {

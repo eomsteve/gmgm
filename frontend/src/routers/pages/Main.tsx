@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import MainUserCard from '../../components/users/MainUserCard';
 import MainGuestCard from '../../components/main/MainGuestCard';
-import { loadMain } from '@apis/main';
+import { loadMain,loadMainData } from '@apis/main';
 import HeaderComponent from '@components/EmptyHeader';
 import EmptySquare from '@components/main/SquareInfo';
 import MainChecklist from '@components/main/MainChecklistComponent';
@@ -21,8 +21,8 @@ const Main: FunctionComponent<MainProps> = () => {
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
     const loadPage = async (token: string | null) => {
-      const loadMainData = await loadMain(token);
-      setLoadData(loadMainData);
+      const loadMainData2 = await loadMainData();
+      setLoadData(loadMainData2);
     };
     loadPage(token);
   }, []);
