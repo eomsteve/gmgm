@@ -47,7 +47,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { checklistCustomItems, checklistBasicItems } = useSelector(
     (state: RootState) => {
-
       return {
         checklistCustomItems:
           state.persistedReducer.CheckListProductsReducer.checklistCustomItems,
@@ -64,7 +63,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
 
   const basicRef = useRef();
   const customRef = useRef();
-  const dataRef = useRef();
   useEffect(() => {
     return () => {
       setIsModified(true);
@@ -100,6 +98,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
       window.removeEventListener('beforeunload', preventClose);
 
       if (isEdit) {
+        console.log(isEdit);
         dispatch(setInitialStateWhenUnMounted());
       } else {
         if (basicRef.current !== undefined && customRef.current !== undefined) {
@@ -108,9 +107,9 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
           const unMountUpdateStatus = async (
             basic: BasicProduct[],
             custom: CustomProduct[],
-            CheckListId?: string,
+            ChecklistId?: string,
           ) => {
-            await updateCheckListStatusApi(basic, custom, checklistId);
+            await updateCheckListStatusApi(basic, custom, ChecklistId);
           };
           unMountUpdateStatus(basic, custom, checklistId);
         }
@@ -200,10 +199,11 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
           </div>
         )}
 
-        {!!isEdit ? (
+        {isEdit ? (
           <div
             onClick={() => {
               saveCheckList();
+              params.isEdit = true;
             }}
           >
             <ConfirmButton />
@@ -221,17 +221,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
                 삭제
               </span>
             </span>
-            <ToastContainer
-              position="top-center"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              limit={1}
-              pauseOnHover
-            />
             <span
               className=" ml-2 text-sm"
               onClick={() => setIsEdit(() => !isEdit)}
@@ -270,6 +259,17 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
           isEmpty={customEmpty}
         />
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        limit={1}
+        pauseOnHover
+      />
     </>
   );
 };

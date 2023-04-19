@@ -138,6 +138,7 @@ export const checkListProductsSlice = createSlice({
       state.checklistCustomItems = action.payload.checklistCustomItems;
     },
     setInitialStateWhenUnMounted: state => {
+      console.log('setInitialStateWhenUnMounted called')
       state.checklistBasicItems = [];
       state.checklistCustomItems = [];
     },
