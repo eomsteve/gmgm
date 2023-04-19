@@ -12,13 +12,17 @@ const axiosConfig: AxiosRequestConfig = {
 
 export const client = axios.create(axiosConfig);
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
+  const { method, url } = config;
   const access_token = localStorage.getItem('jwtToken');
+  
   /* 토큰이 있을 경우 헤더에 삽입한다. 없을 경우 빈 문자열을 넣는다(null은 안됨) */
   if (!!access_token) {
     config.headers = {
       Authorization: !!access_token ? `${access_token}` : '',
     };
   }
+  console.log(
+    `🙋‍♂REQUEST : ${method?.toUpperCase()} %c${url} `,"color:blue");
   return config;
 };
 
@@ -26,7 +30,7 @@ const onResponse = (response: AxiosResponse): AxiosResponse => {
   const { method, url } = response.config;
   const { status } = response;
   console.log(
-    `response : ${method?.toUpperCase()} ${url} | Response ${status}`,
+    `🚦RESPONSE : ${method?.toUpperCase()} %c${url} %c| Response %c${status}`,"color:blue","color:black","color:green"
   );
   return response;
 };

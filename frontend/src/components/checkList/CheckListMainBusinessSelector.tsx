@@ -42,8 +42,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const [customEmpty, setCustomEmpty] = useState<boolean>();
   const [basicEmpty, setBasicEmpty] = useState<boolean>();
   const [isEdit, setIsEdit] = useState(false);
-  const [isModified, setIsModified] = useState<boolean>(false);
-  const [imGoingToSelect, setImGoingToSelect] = useState<boolean>(false);
+
   const dispatch = useDispatch<AppDispatch>();
   const { checklistCustomItems, checklistBasicItems } = useSelector(
     (state: RootState) => {
@@ -65,8 +64,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const customRef = useRef();
   useEffect(() => {
     return () => {
-      setIsModified(true);
-
       basicRef.current = checklistBasicItems;
       customRef.current = checklistCustomItems;
     };
@@ -141,6 +138,8 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
   const handleSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOption(() => (optionState == 'm' ? 'o' : 'm'));
   };
+
+  //toast component
   const CustomMsg = () => {
     return (
       <div>
@@ -238,11 +237,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
         <div className="flex">
           <span>가격 정보를 볼 수 있어요 🥰</span>
         </div>
-        <div
-          onClick={() => {
-            setImGoingToSelect(true);
-          }}
-        >
+        <div>
           <BasicProductCheckList
             isEdit={isEdit}
             BusinessType={optionState}
@@ -273,5 +268,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     </>
   );
 };
+
+
 
 export default CheckListSelectBox;
