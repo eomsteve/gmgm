@@ -36,9 +36,12 @@ interface CheckListSelectBoxProps {
 }
 
 const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
+  const navigate = useNavigate();
   const { checklistId } = useParams();
   const location = useLocation();
   let params = location.state as { isEdit: boolean; checklistId: string };
+  const [optionState, setOption] = useState<string>('m');
+
   const [customEmpty, setCustomEmpty] = useState<boolean>();
   const [basicEmpty, setBasicEmpty] = useState<boolean>();
   const [isEdit, setIsEdit] = useState(false);
@@ -68,6 +71,7 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
       customRef.current = checklistCustomItems;
     };
   }, [checklistBasicItems, checklistCustomItems]);
+
   useEffect(() => {
     (() => {
       window.addEventListener('beforeunload', preventClose);
@@ -85,12 +89,14 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
       }
       return data;
     };
+    // routing 시 params
     if (params && params.isEdit) {
       setIsEdit(() => params.isEdit);
     } else {
       setIsEdit(() => false);
       fetchData(checklistId);
     }
+    // 페이지 소멸시 행동
     return () => {
       window.removeEventListener('beforeunload', preventClose);
 
@@ -114,9 +120,9 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     };
   }, []);
 
-  const saveCheckList = async () => {
+  const saveCheckList = () => {
     if (typeof checklistId == 'string') {
-      await updateCheckLists(
+      updateCheckLists(
         checklistBasicItems,
         checklistCustomItems,
         checklistId,
@@ -132,8 +138,6 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     await deleteCheckList(checklistId);
     navigate('/checklists');
   };
-  const navigate = useNavigate();
-  const [optionState, setOption] = useState<string>('m');
 
   const handleSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOption(() => (optionState == 'm' ? 'o' : 'm'));
@@ -268,7 +272,5 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
     </>
   );
 };
-
-
 
 export default CheckListSelectBox;
