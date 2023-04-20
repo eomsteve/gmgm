@@ -206,7 +206,9 @@ const CheckListSelectBox: FC<CheckListSelectBoxProps> = () => {
           <div
             onClick={() => {
               saveCheckList();
-              params.isEdit = true;
+              if(params){
+                params.isEdit = true;
+              }
             }}
           >
             <ConfirmButton />
